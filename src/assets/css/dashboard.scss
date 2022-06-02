@@ -1,0 +1,122 @@
+.dashboard-carousel{
+  // background: linear-gradient(to top, #003366 0%, #000000 100%);
+  background-image: url('../img/caoursel-bg.jpg');
+  height: 510px;
+}
+
+.search-classified-text {
+  padding-top: 170px;
+  padding-bottom: 28px;
+  line-height: 22px;
+  position: relative;
+  z-index: 6;
+}
+.home-widgets {
+  border: 1px solid #e6e6e6;
+  padding: 30px 20px;
+  margin-top: 20px;
+}
+
+.home-widgets-title {
+  text-align: center;
+  margin: -48px 0 30px;
+}
+
+.home-widgets-title h3 {
+  display: inline-block;
+  background-color: white;
+  padding: 0 20px;
+  font-size: 24px;
+  margin: 0;
+}
+
+.bg-white{
+  background-color: white !important;
+}
+.home-widgets .or:after {
+  content: 'OR';
+  position: absolute;
+  top: 50%;
+  right: 80px;
+  font-size: 22px;
+  color: #7b8397;
+  background-color: white;
+  font-weight: bold;
+  margin-top: -16px;
+  margin-right: -17px;
+  margin-bottom: 0;
+  margin-left: 0;
+  width: 34px;
+  text-align: center;
+}
+.card-img{
+  background-color: #7b8397;
+  height: 150px;
+  width: 210px;
+}
+.footer {
+  background: #23292f;
+  border-top: 2px solid #181c20;
+  color: #fff;
+  padding: 30px 0 10px;
+  font-size: 12px;
+  line-height: 20px;
+}
+.footer-link{
+  color: #999;
+}
+.browse-listing{
+  list-style: none;
+}
+.browse-listing li a {
+  color: #545454;
+  padding: 4px 10px;
+  font-size: 16px;
+  display: block;
+  text-align: center;
+  transition: box-shadow 0.3s ease-in-out;
+  display: flex;
+  min-height: 120px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  background-color: #fff;
+  border-radius: 6px;
+}
+.carousel-control-prev{
+  left: -40px !important;
+}
+.carousel-control-next{
+  right: -85px !important;
+}
+.carousel-control-prev-icon, .carousel-control-next-icon{
+  height: 30px !important;
+  width: 30px !important;
+  background-color: gray !important;
+}
+.carousel-indicators{
+  bottom: -30px !important;
+}
+.carousel-indicators li {
+    background-color: gray;
+}
+.featured-card{
+  border: 1px solid #EAEDEF;
+  width: 212px;
+  background-color: whitspace-betweene;
+}
+.new-car-list .heading img, .new-car-list .bike-brand {
+  background-color: #fff;
+  border: 1px solid #e6e6e6;
+  box-sizing: content-box;
+  border-radius: 50%;
+  margin-bottom: 10px;
+  padding: 5px;
+}
+.space-between{
+  justify-content: space-around;
+}
+.react-multi-carousel-list{
+  height: 300px !important;
+}

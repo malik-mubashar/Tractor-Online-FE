@@ -1,0 +1,215 @@
+/* Default color & font Variables */
+/* End default color & font Variables */
+.sidemenu-area {
+  background: #2c2f48;
+  position: fixed;
+  height: 100%;
+  width: 220px;
+  -webkit-box-shadow: 0 5px 10px rgba(0, 0, 0, 0.08);
+          box-shadow: 0 5px 10px rgba(0, 0, 0, 0.08);
+  z-index: 1030;
+  left: 0;
+  top: 62px;
+}
+
+.sidemenu-area .sidemenu {
+  padding: 0;
+}
+
+.sidemenu-area .sidemenu .navbar-nav {
+  display: block;
+  width: 100%;
+}
+
+.sidemenu-area .sidemenu .navbar-nav .dropdown-menu .dropdown-item {
+  padding: 8px 1rem;
+  white-space: pre-wrap;
+  font-weight: 300;
+  overflow: hidden;
+  position: relative;
+  color: #797979;
+  border-radius: 0;
+}
+
+.sidemenu-area .sidemenu .navbar-nav .dropdown-menu .dropdown-item .icon {
+  margin-right: 8px;
+  width: 14px;
+  height: 14px;
+  margin-top: -3px;
+}
+
+.sidemenu-area .sidemenu .navbar-nav .dropdown-menu .dropdown-item:hover::before {
+  content: '';
+  position: absolute;
+  right: -18px;
+  background: #2962ff;
+  height: 15px;
+  width: 40px;
+  -webkit-transform: rotate(90deg);
+  transform: rotate(-45deg);
+  bottom: 0;
+}
+
+.sidemenu-area .sidemenu .navbar-nav .dropdown-menu .dropdown-item.drpMenu {
+  color: #2962ff;
+  background-color: #eef5f9;
+}
+
+.sidemenu-area .sidemenu .navbar-nav .dropdown-menu .dropdown-item.drpMenu::before {
+  content: '';
+  position: absolute;
+  right: -18px;
+  background: #2962ff;
+  height: 15px;
+  width: 40px;
+  -webkit-transform: rotate(90deg);
+  transform: rotate(-45deg);
+  bottom: 0;
+}
+
+.sidemenu-area .sidemenu .navbar-nav .nav-link {
+  padding: 10px 15px;
+  font-size: 14px;
+  color: #b4bcc8;
+  white-space: nowrap;
+  border-bottom: 1px solid #34383e;
+  position: relative;
+  overflow: hidden;
+  transition: .0s;
+  -webkit-transition: .0s;
+}
+
+.sidemenu-area .sidemenu .navbar-nav .nav-link .icon {
+  color: #b4bcc8;
+  width: 15px;
+  height: 15px;
+  margin-top: -3px;
+}
+
+.sidemenu-area .sidemenu .navbar-nav .nav-link:hover, .sidemenu-area .sidemenu .navbar-nav .nav-link:focus {
+  background: #fff;
+  color: #2962ff;
+}
+
+.sidemenu-area .sidemenu .navbar-nav .nav-link:hover .icon, .sidemenu-area .sidemenu .navbar-nav .nav-link:focus .icon {
+  color: #2962ff;
+}
+
+.sidemenu-area .sidemenu .navbar-nav .nav-link:hover::before {
+  content: '';
+  position: absolute;
+  right: -18px;
+  background: #2962ff;
+  height: 15px;
+  width: 40px;
+  -webkit-transform: rotate(90deg);
+  transform: rotate(-45deg);
+  bottom: 0;
+}
+
+.sidemenu-area .sidemenu .navbar-nav .nav-link .title {
+  -webkit-transition: .5s;
+  transition: .5s;
+  padding-left: 10px;
+}
+
+.sidemenu-area .sidemenu .navbar-nav .active {
+  background: #fff;
+  color: #2962ff;
+}
+
+.sidemenu-area .sidemenu .navbar-nav .active::before {
+  content: '';
+  position: absolute;
+  right: -18px;
+  background: #2962ff;
+  height: 15px;
+  width: 40px;
+  -webkit-transform: rotate(90deg);
+  transform: rotate(-45deg);
+  bottom: 0;
+}
+
+.sidemenu-area .sidemenu .navbar-nav .active .icon {
+  color: #2962ff;
+}
+
+.sidemenu-area .sidemenu .navbar-nav .dropdown-item:hover, .sidemenu-area .sidemenu .navbar-nav .dropdown-item:focus {
+  background: #eef5f9;
+  color: #2962ff;
+}
+
+.sidemenu-area .sidemenu .navbar-nav .dropdown-title {
+  position: relative;
+  width: 100%;
+}
+
+.sidemenu-area .sidemenu .navbar-nav .dropdown-title .icon.fr {
+  position: absolute;
+  right: 0;
+  padding-right: 0;
+  margin-top: 4px;
+  font-size: 10px !important;
+  transition: all .50s ease-in-out;
+  -webkit-transition: all .50s ease-in-out;
+}
+
+.sidemenu-area .sidemenu .navbar-nav .dropdown-toggle::after {
+  display: none;
+}
+
+.sidemenu-area .sidemenu .navbar-nav .show.dropdown.nav-item .nav-link {
+  background-color: #eef5f9;
+}
+
+.sidemenu-light {
+  background: #fff;
+  border-top: 1px solid #ebebee;
+}
+
+.sidemenu-light .sidemenu .navbar-nav .nav-link {
+  color: #303030;
+  border-bottom: 1px solid #ebebee;
+}
+
+.sidemenu-light .sidemenu .navbar-nav .nav-link .icon {
+  color: #2962ff;
+}
+
+.sidemenu-light .sidemenu .navbar-nav .nav-link:hover, .sidemenu-light .sidemenu .navbar-nav .nav-link:focus {
+  background: #eef5f9;
+  color: #2962ff;
+}
+
+@media only screen and (min-width: 768px) {
+  .sidemenu .dropdown {
+    position: static;
+  }
+  .sidemenu .dropdown .dropdown-menu {
+    transition: all 0.5s;
+    -webkit-transition: all 0.5s;
+    overflow: hidden;
+    transform-origin: top center;
+    -webkit-transform-origin: top center;
+    transform: scale(1, 0);
+    -webkit-transform: scale(1, 0);
+    display: block;
+    width: 200px;
+    left: auto;
+    right: -200px;
+    top: 0;
+    border-radius: 0;
+    border-color: #ebebeb;
+    margin-top: 0;
+    height: 100vh;
+    overflow-y: auto;
+  }
+  .sidemenu .dropdown:hover > .dropdown-menu {
+    transform: scale(1);
+    -webkit-transform: scale(1);
+  }
+  .sidemenu .collapse ul li {
+    position: relative;
+  }
+}
+/*# sourceMappingURL=SideMenu.css.map */
