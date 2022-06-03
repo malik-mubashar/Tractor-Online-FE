@@ -18,7 +18,7 @@ const  Topbar = () => {
             <Nav className="ml-auto right-nav">
             <ul className="navbar-nav mr-auto">
             <li className="nav-item ">
-              <a className="nav-link text-primary" href="/login">Login <span className="sr-only">(current)</span></a>
+              <a className="nav-link text-primary" href="/login/">Login</a>
             </li> 
             <li className="nav-item">
               <a className="nav-link text-primary" href="/signup/">SignUp</a>
