@@ -29,20 +29,25 @@ class User {
 				debugger;
         return {
           error: true,
-          data: JSON.stringify(error),
+          data: error.response.data,
         };
       });
   };
 
-  login = async (email, password) => {
+  login = async (email,password) => {
     return axios({
       method: "post",
-      url: `http://localhost:3000/api/v1/auth/sign_in?email=${email}&password=${password}`,
+      url: `http://localhost:3000/api/v1/auth/sign_in`,
       headers: {
         "Content-Type": "application/json; charset=utf-8",
         "Access-Control-Allow-Origin": "*",
         mode: "no-cors",
-      },
+			},
+			data: {
+				email: email,
+				password: password,
+			}
+			
     })
       .then((result) => {
         return {
@@ -53,7 +58,7 @@ class User {
       .catch((error) => {
         return {
           error: true,
-          data: JSON.stringify(error),
+          data: error.response.data,
         };
       });
   };

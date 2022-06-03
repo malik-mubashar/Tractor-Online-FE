@@ -4,7 +4,7 @@ export const RootContext = React.createContext();
 
 export default ({ children }) => {
 	/*****getting values from local storage if any***************************/
-	const prevUser = JSON.parse(window.localStorage.getItem("user")) || null;
+	const prevUser = JSON.parse(window.localStorage.getItem("currentUser")) || null;
 	// const preActiveRoute = localStorage.getItem("route") || "Campaign";
 	// const brandsStored = JSON.parse(localStorage.getItem("brands")) || null;
 	// const influencerStored =
@@ -23,7 +23,7 @@ export default ({ children }) => {
 	/**********************************************************************/
 
 	/*****setting values from local storage to constants*******************/
-	const [currentUser, setCurrentUser] = useState('prevUser');
+	const [currentUser, setCurrentUser] = useState(prevUser);
 	// const [logoutMessage, setLogoutMessage] = useState("");
 	// const [activeRoute, setActiveRoute] = useState(preActiveRoute);
 	// const [activeCampaign, setActiveCampaign] = useState("");

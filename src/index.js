@@ -5,9 +5,10 @@ import "../node_modules/bootstrap/scss/bootstrap.scss";
 import AppRouter from "./routes/AppRouter";
 import RootContext from "./context/RootContext";
 
+
 ReactDOM.render(
   <RootContext>
-    <BrowserRouter>
+		<BrowserRouter>
       <AppRouter />
     </BrowserRouter>
   </RootContext>,document.querySelector("#root")
