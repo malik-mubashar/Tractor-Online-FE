@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import {Row, Col, Breadcrumb, Image, Media, Button} from 'react-bootstrap';
 import { Link } from "react-router-dom";
 import Navigation from '../components/Navigation/Navigation';
@@ -17,24 +17,26 @@ import postImageOne from '../assets/img/post/post-img.jpg';
 import postImageTwo from '../assets/img/post/post-img2.jpg';
 import postImageThree from '../assets/img/post/post-img3.jpg';
 
-class Profile extends React.Component {
-    state = {
-        sideMenu: true
-    };
+const Profile=()=> {
+    // state = {
+    //     sideMenu: true
+    // };
+		const [sideMenu,setSideMenu]=useState(true)
 
     // Toggle side bar menu
-    _onSideMenu = (active) => {
-        this.setState({sideMenu: active});
+	const onSideMenu = (active) => {
+		debugger;
+		// this.setState({ sideMenu: active });
+		setSideMenu(active);
     }
 
-    render() {
         return (
             <div className="page-wrapper"> 
                 {/* Navigation */}
-                <Navigation onClick={this._onSideMenu} />
+                <Navigation onClick={onSideMenu} />
                 {/* End Navigation */}
                 
-                <div className={`main-content d-flex flex-column ${this.state.sideMenu ? 'hide-sidemenu' : ''}`}>
+                <div className={`main-content d-flex flex-column ${sideMenu ? 'hide-sidemenu' : ''}`}>
                     {/* Breadcrumb */}
                     <div className="main-content-header">
                         <Breadcrumb>
@@ -449,7 +451,7 @@ class Profile extends React.Component {
                 </div>
             </div>
         );
-    }
+  
 }
 
 export default Profile;

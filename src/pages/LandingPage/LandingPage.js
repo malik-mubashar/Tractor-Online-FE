@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext } from "react";
 import { withRouter, Link, NavLink } from "react-router-dom";
 import * as Icon from "react-feather";
 import "../../components/Navigation/Navigation.css";
@@ -15,16 +15,19 @@ import {
   Image,
 } from "react-bootstrap";
 
+
 import Topbar from "./Topbar"
 import ExploreProducts from "./ExploreProducts"
 import Categories from "./Categories"
 import FeaturedProducts from './FeaturedProducts'
 import Footer from './Footer'
+import {RootContext} from "../../context/RootContext";
 
-const LandingPage =()=> {
-
+const LandingPage = () => {
+	const { currentUser } = useContext(RootContext);
+console.log(currentUser)
   return( 
-      <div className="page-wrapper">col-md-6 col-lg-6 col-12 line or
+      <div className="page-wrapper">
         <Topbar />
         <div className='dashboard-carousel'>
           <div className="search-classified-text text-center generic-white">
