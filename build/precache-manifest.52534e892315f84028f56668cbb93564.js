@@ -4,7 +4,7 @@ self.__precacheManifest = [
     "url": "/static/media/1000cc.c804a67b.svg"
   },
   {
-    "revision": "fad4221633271d96c0c4",
+    "revision": "29535e63a67a4d055610",
     "url": "/static/css/main.36c83ac5.chunk.css"
   },
   {
@@ -12,8 +12,8 @@ self.__precacheManifest = [
     "url": "/static/media/caoursel-bg.f2158efa.jpg"
   },
   {
-    "revision": "6bc43e15782a6283334f",
-    "url": "/static/js/1.6bc43e15.chunk.js"
+    "revision": "81eeca2d80542f96f055",
+    "url": "/static/js/1.81eeca2d.chunk.js"
   },
   {
     "revision": "229c360febb4351a89df",
@@ -36,8 +36,8 @@ self.__precacheManifest = [
     "url": "/static/media/revicons.2feb69cc.eot"
   },
   {
-    "revision": "fad4221633271d96c0c4",
-    "url": "/static/js/main.fad42216.chunk.js"
+    "revision": "29535e63a67a4d055610",
+    "url": "/static/js/main.29535e63.chunk.js"
   },
   {
     "revision": "0157b693da53d1a8d5cfe98920f5883e",
@@ -64,11 +64,11 @@ self.__precacheManifest = [
     "url": "/static/media/LineIcons.a0ed6adf.svg"
   },
   {
-    "revision": "6bc43e15782a6283334f",
+    "revision": "81eeca2d80542f96f055",
     "url": "/static/css/1.f7c66365.chunk.css"
   },
   {
-    "revision": "8fb2e64c7ba183dc94a9de03c0e94a61",
+    "revision": "b5fb96e9dd0f0ce08ff2b09f454a3297",
     "url": "/index.html"
   }
 ];
