@@ -62,7 +62,7 @@ class Navigation extends React.Component {
                 <Navbar fixed="top" className="top-menu">
                     <Link to="/dashboard" className={`navbar-brand`}>
                         {/* Large logo */}
-                        <Image src={Logo} alt="Logo" className="logo" /> 
+								<Image src={Logo} alt="Logo" style={{width:"30%"}}className="logo" /> 
                         {/* Small logo */}
                         {/* <Image src={Logo} alt="Small Logo" className="small-logo" />  */}
                     </Link>
