@@ -1,12 +1,17 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { Link, useHistory } from "react-router-dom";
 import { Row, Col, Form, Button, Image } from "react-bootstrap";
 import * as Icon from "react-feather";
 // Logo image file path
 import Logo from "../assets/img/logo.png";
 import { user } from "../API/User/index";
+import {  toast } from 'react-toastify';
+import {RootContext} from "../context/RootContext";
+
 
 const SignUp = () => {
+	const { currentUser,setCurrentUser } = useContext(RootContext);
+
   const [email, setEmail] = useState();
   const [confirmPassword, setConfirmPassword] = useState();
   const [fullName, setFullName] = useState();
@@ -17,20 +22,36 @@ const SignUp = () => {
   let history = useHistory();
 
   const createUserAccount = async (e) => {
-    // e.preventDefault();
-    if (password != confirmPassword) {
-      setError("password not match");
+		// e.preventDefault()
+		if (password != confirmPassword) {
+			setError("password not match");
       return;
     }
 		try {
 			debugger;
 			console.log(email, password, confirmPassword,fullName)
-      const result = await user.signUp(email, password, confirmPassword,fullName);
-      console.log(result);
-      result.error == false
-        ? history.push("/login")
-        : alert("Error user not create");
-    } catch (error) {}
+			const result = await user.signUp(email, password, confirmPassword, fullName);
+			debugger;
+			console.log('signUp result Api', result);
+
+			//success
+			if (result.error === false) {
+				toast.success("Wow so easy registered!")
+				setCurrentUser(result.data)
+				localStorage.setItem("currentUser", JSON.stringify(result.data));
+				history.push("/dashboard")
+			}
+
+			//error
+			if (result.error === true) {
+				console.error(result.data.errors.full_messages)
+				alert("Error user not create");
+			}
+
+		} catch (error) {
+			debugger;
+			console.error(error);
+		}
   };
 
   return (
