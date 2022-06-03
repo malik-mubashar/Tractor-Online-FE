@@ -10,8 +10,7 @@ import {
 const  Topbar = () => {
 
     return (
-      <div className="page-wrapper ">
-        <Navbar fixed="top" className="top-menu">
+        <Navbar fixed="top" className="top-menu landingTopbar">
 
           <Navbar.Collapse id="basic-navbar-nav">
             
@@ -28,7 +27,6 @@ const  Topbar = () => {
             </Nav>
           </Navbar.Collapse>
         </Navbar>
-      </div>
       
     );
   

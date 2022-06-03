@@ -27,7 +27,7 @@ const LandingPage = () => {
 	const { currentUser } = useContext(RootContext);
 console.log(currentUser)
   return( 
-      <div className="page-wrapper">
+      <div className="overflow-x-hidden">
         <Topbar />
         <div className='dashboard-carousel'>
           <div className="search-classified-text text-center generic-white">
@@ -35,13 +35,13 @@ console.log(currentUser)
             <p className="text-white">With thousands of tractors, we have just the right one for you</p>
           </div>
           <Form
-              className="nav-search-form d-sm-flex"
+              className="nav-search-form row"
               // onSubmit={this._handleSubmit}
               // action="/search/"
             >
               <FormControl
                 type="text"
-                className="col-3 ml-auto"
+                className="col-lg-3 col-6  ml-auto"
                 // value={this.state.term}
                 // onChange={(e) => this.setState({ term: e.target.value })}
                 placeholder="Search..."
@@ -58,7 +58,7 @@ console.log(currentUser)
               <div className="home-widgets-title w-full-lg">
                 <h3>Sell Your Tractor on TractorOnline and Get the Best Price</h3>
               </div>
-              <div className="col-6 line or">
+              <div className="col-lg-6 col-12 mt-4 line or">
                 <h2>Post your Ad on TractorOnline</h2>
                 <ul>
                   <li><i className="fa fa-tick"></i>Post your Ad for Free in 3 Easy Steps</li>
@@ -67,7 +67,7 @@ console.log(currentUser)
                 </ul>
                 <a href="#" className="btn btn-danger btn-lg text-white">Post Your Ad</a>
               </div>
-              <div className="col-6">
+              <div className="col-lg-6 col-12 mt-4">
                 <h2>Try TractorOnline Sell It For Me</h2>
                 <ul>
                   <li><i className="fa fa-tick"></i>Dedicated Sales Expert to Sell your Car</li>

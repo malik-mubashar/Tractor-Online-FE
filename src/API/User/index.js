@@ -4,7 +4,7 @@ class User {
   signUp = async (email, password, confirmPassword,fullName) => {
     return axios({
       method: "post",
-      url: `http://localhost:3000/api/v1/auth`,
+      url: `${process.env.REACT_APP_API_LOCAL_PATH}auth`,
       headers: {
         "Content-Type": "application/json; charset=utf-8",
         "Access-Control-Allow-Origin": "*",
@@ -37,7 +37,7 @@ class User {
   login = async (email,password) => {
     return axios({
       method: "post",
-      url: `http://localhost:3000/api/v1/auth/sign_in`,
+      url: `${process.env.REACT_APP_API_LOCAL_PATH}auth/sign_in`,
       headers: {
         "Content-Type": "application/json; charset=utf-8",
         "Access-Control-Allow-Origin": "*",

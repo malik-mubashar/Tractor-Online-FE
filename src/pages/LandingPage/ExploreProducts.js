@@ -9,12 +9,12 @@ export default function ExploreProducts() {
           <h2 className="landing-hading">Explore Products by TractorOnline</h2>
           <div className="row space-between">
             {index.map((option) => (
-              <div className="col-6 p-3" key={option}>
+              <div className="col-md-auto p-3" key={option}>
                 <div className="border p-3">
                   <div className="img"><img alt="TractorOnline Sell It For Me" src="https://wsa2.pakwheels.com/assets/sifm-logo-20640083c4572b654a079a4e97c78cb1.svg" title="TractorOnline Sell It For Me" width="75" /></div>
                   <div className="desc">
-                    <h3 className="landing-hading">TractorOnline Sell It For Me</h3>
-                    <p className="landing-text">Let TractorOnline sell your car Hassle Free for you.</p>
+                    <h3 >TractorOnline Sell It For Me</h3>
+                    <p >Let TractorOnline sell your car Hassle Free for you.</p>
                   </div>
                 </div>
               </div>

@@ -62,7 +62,7 @@ class Navigation extends React.Component {
                 <Navbar fixed="top" className="top-menu">
                     <Link to="/dashboard" className={`navbar-brand`}>
                         {/* Large logo */}
-								<Image src={Logo} alt="Logo" style={{width:"30%"}}className="logo" /> 
+								{/* <Image src={Logo} alt="Logo" style={{width:"30%"}} className="logo" />  */}
                         {/* Small logo */}
                         {/* <Image src={Logo} alt="Small Logo" className="small-logo" />  */}
                     </Link>
@@ -78,50 +78,6 @@ class Navigation extends React.Component {
                     {/* End Burger menu */}
 
                     <Navbar.Collapse id="basic-navbar-nav">
-                        <Nav className="left-nav d-none d-md-block">
-                            <NavDropdown  
-                                title={
-                                    <div className="mega-menu-btn">
-                                        Mega Menu 
-                                        <Icon.ChevronDown 
-                                            className="icon"
-                                        />
-                                    </div>
-                                } 
-                                id="basic-nav-dropdown" className="mega-menu">
-                                    <Container>
-                                        <Row>
-                                            <Col md={6} lg={3}>
-                                                <h5 className="title">Features</h5>
-                                                <NavLink to="/ui-components/alerts" className="dropdown-item">Alerts</NavLink>
-                                                <NavLink to="/ui-components/badges" className="dropdown-item">Badges</NavLink>
-                                                <NavLink to="/ui-components/buttons" className="dropdown-item">Buttons</NavLink>
-                                            </Col>
-
-                                            <Col md={6} lg={3}>
-                                                <h5 className="title">Features</h5>
-                                                <NavLink to="/ui-components/cards" className="dropdown-item">Cards</NavLink>
-                                                <NavLink to="/ui-components/dropdowns" className="dropdown-item">Dropdowns</NavLink>
-                                                <NavLink to="/ui-components/forms" className="dropdown-item">Forms</NavLink>
-                                            </Col>
-
-                                            <Col md={6} lg={3}>
-                                                <h5 className="title">Features</h5>
-                                                <NavLink to="/ui-components/list-groups" className="dropdown-item">List Groups</NavLink>
-                                                <NavLink to="/ui-components/modals" className="dropdown-item">Modals</NavLink>
-                                                <NavLink to="/ui-components/progress-bars" className="dropdown-item">Progress Bars</NavLink>
-                                            </Col>
-
-                                            <Col md={6} lg={3}>
-                                                <h5 className="title">Features</h5>
-                                                <NavLink to="/ui-components/tables" className="dropdown-item">Tables</NavLink>
-                                                <NavLink to="/ui-components/tabs" className="dropdown-item">Tabs</NavLink>
-                                                <NavLink to="/signup" className="dropdown-item" target="_blank">Signup</NavLink>
-                                            </Col>
-                                        </Row>
-                                    </Container>
-                            </NavDropdown>
-                        </Nav>
 
                         <Form className="nav-search-form d-none d-sm-block" onSubmit={this._handleSubmit} action="/search/">
                             <FormControl 
@@ -199,12 +155,7 @@ class Navigation extends React.Component {
                                     </div>
                                 </NavLink>
 
-                                <Link to="/inbox/" className="dropdown-item">
-                                    See all e-mails 
-                                    <Icon.ChevronRight 
-                                        className="icon"
-                                    />
-                                </Link>
+                             
                             </NavDropdown>
 
                             <NavDropdown  
@@ -269,18 +220,13 @@ class Navigation extends React.Component {
                                     </div>
                                 </NavLink>
                                 
-                                <Link to="/notifications/" className="dropdown-item">
-                                    Check all notifications
-                                    <Icon.ChevronRight 
-                                        className="icon"
-                                    />
-                                </Link>
+                                
                             </NavDropdown>
 
                             <NavDropdown  
                                 title={
                                     <div className="menu-profile">
-                                        <span className="name">Aaron Rossi</span> 
+                                        <span className="name">Welcome </span> 
                                         <Image src={profile} alt="Profile Image" roundedCircle /> 
                                     </div>
                                 } 
@@ -291,25 +237,16 @@ class Navigation extends React.Component {
                                     /> 
                                     Profile
                                 </NavLink>
-                                <NavLink to="/inbox/" className="dropdown-item">
-                                    <Icon.Inbox 
-                                        className="icon"
-                                    /> 
-                                    Mailbox
-                                </NavLink>
-                                <NavLink to="/chat/" className="dropdown-item">
-                                    <Icon.HelpCircle 
-                                        className="icon"
-                                    /> 
-                                    Support
-                                </NavLink>
                                 <NavLink to="/profile-settings/" className="dropdown-item">
                                     <Icon.Settings 
                                         className="icon"
                                     /> 
                                     Settings
                                 </NavLink>
-                                <NavLink to="/login/" className="dropdown-item">
+                                
+                                <NavLink to="/login/" className="dropdown-item" onClick={()=>{
+                                    localStorage.setItem("currentUser", null);
+                                }}>
                                     <Icon.LogOut 
                                         className="icon"
                                     />

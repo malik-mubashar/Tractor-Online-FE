@@ -683,7 +683,7 @@ class FeatherIcons extends React.Component {
                                 <Icon.LogOut 
                                     className="icon" 
                                 />
-                                <span>logout</span>
+                                <span >logout</span>
                             </div>
                         </Col>
                         <Col sm={6} md={4} lg={3}>
