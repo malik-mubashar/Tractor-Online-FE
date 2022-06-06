@@ -1,4 +1,6 @@
 import React from "react";
+import SearchListing from "./SearchListing";
+import SideSearch from "./SideSearch";
 
 export default function usedTractor() {
   return (
@@ -26,38 +28,10 @@ export default function usedTractor() {
       </div>
       <div className="row">
 				<div className="col-md-3">
-					accordion
-          {/* <p>
-            <a
-              class="btn btn-primary"
-              data-toggle="collapse"
-              href="#collapseExample"
-              role="button"
-              aria-expanded="false"
-              aria-controls="collapseExample"
-            >
-              Link with href
-            </a>
-            <button
-              class="btn btn-primary"
-              type="button"
-              data-toggle="collapse"
-              data-target="#collapseExample"
-              aria-expanded="false"
-              aria-controls="collapseExample"
-            >
-              Button with data-target
-            </button>
-          </p> */}
+					<SideSearch/>
 				</div>
 				<div className="col-md-9">
-					<div>
-						sorting
-					</div>
-					<div>
-					cards
-
-					</div>
+					<SearchListing/>
 				</div>
 				
       </div>
