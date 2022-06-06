@@ -1,4 +1,7 @@
 import React from "react";
+import { Row, Col, Breadcrumb, Card, Button, ListGroup, ListGroupItem } from 'react-bootstrap';
+// import card_thumb_one from'../../assets/img/product/card_thumb_one'
+
 
 export default function SearchListing() {
   return (
@@ -49,9 +52,21 @@ export default function SearchListing() {
       </div>
 			<div>
 				<ul>
-					<li>
-						card1
-					</li>
+					<>
+					<Col sm={6} lg={4} xl={4}>
+                            <Card className="mb-4">
+                                {/* <Card.Img src={card_thumb_one} className="radius-0" alt="Card Image" /> */}
+                                <Card.Body>
+                                    <Card.Title>Card Heading</Card.Title>
+                                    <Card.Text>
+                                        Some quick example text to build on the card title and make up the bulk of
+                                        the card's content.
+                                    </Card.Text>
+                                    <Button variant="primary">Go somewhere</Button>
+                                </Card.Body>
+                            </Card>
+                        </Col>
+					</>
 				</ul>
 			</div>
     </>
