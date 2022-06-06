@@ -11,7 +11,7 @@ export default function SideSearch() {
   return (
     <>
       <Accordion className="custom-accordion mb-4">
-        <h4 className="heading">SHOW RESULTS BY</h4>
+        <div className="sideSearchHeading">SHOW RESULTS BY</div>
         <AccordionItem>
           <AccordionItemTitle>
             <h3>SEARCH BY KEYWORD</h3>

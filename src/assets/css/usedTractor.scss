@@ -2,10 +2,10 @@
 .pageHeading{
 	color:#233d7b;
 	line-height: 20px;
-	margin-top:10px;
+	margin-top:40px;
 }
-.usedTractorContainer{
-	
+.bread{
+	background-color: transparent !important;
 }
 .searchCounterWrapper{
 	display: flex;
@@ -16,5 +16,24 @@
 .organize-results{
 display: flex;
 overflow: hidden;
-
+}
+.listCard{
+	display: flex !important;
+	box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2) !important;
+  transition: 0.3s !important;
+	background-color: white !important;
+	padding: 15px !important;
+}
+.listCard:hover {
+  box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+}
+.topSorting{
+	background-color: white;
+	margin-bottom: 10px;
+}
+.sideSearchHeading{
+	background-color: #518ecb;
+	color:white;
+	padding: 9px 10px;
+	display:block;
 }
