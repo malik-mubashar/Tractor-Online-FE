@@ -2,6 +2,7 @@ import React from "react";
 import { Route, BrowserRouter, Switch } from "react-router-dom";
 import Dashboard from "../pages/Dashboard/Dashboard";
 import LandingPage from "../pages/LandingPage/LandingPage";
+import UsedTractor from "../pages/usedTractor/UsedTractor";
 
 
 // import Calendar from "../pages/Calendar";
@@ -16,6 +17,7 @@ import FourHandedFourError from "../pages/FourHandedFourError";
 import "../assets/css/style.css";
 import "../assets/css/responsive.css";
 import "../assets/css/dashboard.scss";
+import "../assets/css/usedTractor.scss";
 import ProtectedRoute from "../components/ProtectedRoutes/index";
 import UnProtectedRoute from "../components/UnprotectedRoutes/index";
 import { ToastContainer } from "react-toastify";
@@ -28,7 +30,10 @@ const AppRouter = () => {
 
       <BrowserRouter>
         <Switch>
-          {/* unprotected routes */}
+					{/* unprotected routes */}
+					<UnProtectedRoute exact path="/usedtractor">
+            <UsedTractor />
+          </UnProtectedRoute>
           <UnProtectedRoute exact path="/">
             <LandingPage />
           </UnProtectedRoute>
