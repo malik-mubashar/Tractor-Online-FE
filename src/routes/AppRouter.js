@@ -39,6 +39,9 @@ const AppRouter = () => {
           </UnProtectedRoute>
           <UnProtectedRoute exact path="/login">
             <Login />
+					</UnProtectedRoute>
+					<UnProtectedRoute exact path="/usedtractor">
+            <UsedTractor />
           </UnProtectedRoute>
           <UnProtectedRoute exact path="/signup/">
             <Signup />
