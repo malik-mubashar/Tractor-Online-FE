@@ -139,3 +139,45 @@
 .overflow-x-hidden{
   overflow-x: hidden;
 }
+.dropdown-button{
+  position: relative;
+  cursor: pointer;
+}
+.dropdown-button:hover{
+  .drop-down-items{
+    display: flex;
+  }
+  background-color: #e6f9ff;
+}
+.drop-down-items:hover{
+  display: flex;
+}
+.drop-down-items{
+  position: absolute;
+  background-color: white;
+  display: none;
+  left: 15px;
+  background-color: #e6f9ff;
+}
+.usedCarsWidth{
+  width: 70rem;
+}
+.newCarsWidth{
+  width: 40rem;
+}
+.autoStoreWidth{
+  width: 20rem;
+}
+.dropdown-list a{
+  padding-top: 5px;
+  padding-right: 20px;
+  padding-bottom: 5px;
+  padding-left: 50px;
+  color: #434343;
+}
+.dropdown-link:hover{
+  color: #007399;
+  p{
+    color: #007399;
+  }
+}
