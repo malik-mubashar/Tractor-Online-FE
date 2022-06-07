@@ -1,0 +1,56 @@
+
+.pageHeading{
+	color:#233d7b;
+	line-height: 20px;
+	margin-top:40px;
+}
+.bread{
+	background-color: transparent !important;
+}
+.searchCounterWrapper{
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	margin: 15px 0px 10px;
+}
+.organize-results{
+display: flex;
+overflow: hidden;
+}
+.listCard{
+	display: flex !important;
+	box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2) !important;
+  transition: 0.3s !important;
+	background-color: white !important;
+	padding: 15px !important;
+}
+.listCard:hover {
+  box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+}
+.topSorting{
+	background-color: white;
+	margin-bottom: 10px;
+}
+.sideSearchHeading{
+	background-color: #518ecb;
+	color:white;
+	padding: 9px 10px;
+	display:block;
+}
+a{
+	color: black;
+}
+.pagination{
+	background-color: white;
+	width: auto;
+	height: 50px;
+	span{
+		color: #518ecb;
+    font-size: 19px;
+    margin-left: 250px;
+    margin-top: 10px;
+	}
+}
+.sellAdd{
+	margin-top: 50px;
+}
