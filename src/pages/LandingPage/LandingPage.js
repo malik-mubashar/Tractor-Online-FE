@@ -25,7 +25,7 @@ import {RootContext} from "../../context/RootContext";
 import SearchAble from './searchable';
 import NewCarByMake from "./NewCar";
 import FeaturedNewTractor from "./FeaturedNewTractor";
-
+import SelectSearch from './SelectSearch';
 
 const LandingPage = () => {
 	const { currentUser } = useContext(RootContext);
@@ -39,7 +39,8 @@ console.log(currentUser)
             <p className="text-white">With thousands of tractors, we have just the right one for you</p>
           </div>
           <SearchAble />
-          <Button  className="mt-2 mr-2 d-flex justify-content-center m-auto bg-transparent border border-white">Advanced Filter ></Button>
+          <SelectSearch />
+          <Button  className="mt-2 mr-2 d-flex justify-content-center m-auto bg-transparent border border-white">Advanced Filter</Button>
         </div>
         <div className="bg-white">
           <div className="container-lg py-3">
