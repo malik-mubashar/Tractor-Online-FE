@@ -17,7 +17,7 @@ export default function SearchListing() {
       <Col sm={12} lg={12} xl={12}>
         <div className="topSorting">
           <div class="organize-results">
-            <div class="col-md-8" style={{marginTop:"10px"}} >
+            <div class="col-md-8" style={{ marginTop: "10px" }}>
               <span class="form-horizontal sort-by">
                 <span class="sort-by-text">Sort By: </span>
                 <select
@@ -61,14 +61,17 @@ export default function SearchListing() {
             </div>
           </div>
         </div>
-        <div>
+        <div className="sideSearch">
           <>
             {/* <Card className="mb-4 row">
                     <Card.Img className="radius-0" alt="Card Image" />
                   <div> card body</div>
               </Card> */}
-
-            <div class="listCard mb-3">
+						{
+							[1, 2, 3, 4].map(() => {
+								return (
+									<>
+										  <div class="listCard mb-3">
               <img
                 class="card-img-top"
                 src="https://bsmedia.business-standard.com/_media/bs/img/article/2020-06/01/full/1590987638-6809.png"
@@ -101,7 +104,47 @@ export default function SearchListing() {
                 </div>
               </div>
             </div>
+									</>
+								)
+							})
+							}
+          
           </>
+        </div>
+        <div className="pagination">
+          <span>
+            1&nbsp;2&nbsp;3&nbsp;4&nbsp;&nbsp;...&nbsp;&nbsp;Next
+            &nbsp;&nbsp;Last
+          </span>
+        </div>
+        <div class="sellAdd clearfix text-center p20 mt-70">
+          <img
+            alt="Post an Ad"
+            src="https://wsa4.pakwheels.com/assets/sell-car-bf334aeb9cf3001080a3e887d51a3b32.png"
+            title="Post an Ad"
+          />
+
+          <h3 class="title">
+            Post an ad for <span class="generic-red">FREE</span>
+          </h3>
+          <p class="mt10 mb5 fs16">Sell it faster to thousands of buyers</p>
+          <div>
+            <img
+              alt="Post an Ad Left"
+              src="https://wsa4.pakwheels.com/assets/sell-ad-point-left-fcc7bca4d40628d7945426ecf5a2ef00.png"
+            />
+            <a
+              href="/used-cars/sell"
+              class="btn btn-success sign-in-comp"
+              onclick="trackEvents('Used Cars', 'Add Car', 'From - Search');"
+            >
+              Sell Your Car
+            </a>
+            <img
+              alt="Post an Ad Right"
+              src="https://wsa4.pakwheels.com/assets/sell-ad-point-right-630620add9bbdd27360acdfcf98d0608.png"
+            />
+          </div>
         </div>
       </Col>
     </>

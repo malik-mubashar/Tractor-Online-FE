@@ -63,7 +63,7 @@ export default function SideSearch() {
               <li title="Cars for Sale in Lahore, Pakistan">
                 <label class="filter-check clearfix">
                   <a
-                    href="https://www.pakwheels.com/used-cars/lahore/24858"
+                    href=""
                     title="Cars for Sale in Lahore, Pakistan"
                   >
                     <input type="checkbox" />
@@ -76,7 +76,7 @@ export default function SideSearch() {
               <li title="Cars for Sale in Karachi, Pakistan">
                 <label class="filter-check clearfix">
                   <a
-                    href="https://www.pakwheels.com/used-cars/karachi/24857"
+                    href=""
                     title="Cars for Sale in Karachi, Pakistan"
                   >
                     <input type="checkbox" />
@@ -89,7 +89,7 @@ export default function SideSearch() {
               <li title="Cars for Sale in Islamabad, Pakistan">
                 <label class="filter-check clearfix">
                   <a
-                    href="https://www.pakwheels.com/used-cars/islamabad/24856"
+                    href=""
                     title="Cars for Sale in Islamabad, Pakistan"
                   >
                     <input type="checkbox" />
@@ -102,7 +102,7 @@ export default function SideSearch() {
               <li title="Cars for Sale in Rawalpindi, Pakistan">
                 <label class="filter-check clearfix">
                   <a
-                    href="https://www.pakwheels.com/used-cars/rawalpindi/24831"
+                    href=""
                     title="Cars for Sale in Rawalpindi, Pakistan"
                   >
                     <input type="checkbox" />
@@ -115,7 +115,7 @@ export default function SideSearch() {
               <li title="Cars for Sale in Peshawar, Pakistan">
                 <label class="filter-check clearfix">
                   <a
-                    href="https://www.pakwheels.com/used-cars/peshawar/24821"
+                    href=""
                     title="Cars for Sale in Peshawar, Pakistan"
                   >
                     <input type="checkbox" />
@@ -138,7 +138,7 @@ export default function SideSearch() {
               <li title="Toyota Cars for Sale in Pakistan">
                 <label class="filter-check clearfix">
                   <a
-                    href="https://www.pakwheels.com/used-cars/toyota/33"
+                    href=""
                     title="Toyota Cars for Sale in Pakistan"
                   >
                     <input type="checkbox" />
@@ -151,7 +151,7 @@ export default function SideSearch() {
               <li title="Suzuki Cars for Sale in Pakistan">
                 <label class="filter-check clearfix">
                   <a
-                    href="https://www.pakwheels.com/used-cars/suzuki/32"
+                    href=""
                     title="Suzuki Cars for Sale in Pakistan"
                   >
                     <input type="checkbox" />
@@ -164,7 +164,7 @@ export default function SideSearch() {
               <li title="Honda Cars for Sale in Pakistan">
                 <label class="filter-check clearfix">
                   <a
-                    href="https://www.pakwheels.com/used-cars/honda/14"
+                    href=""
                     title="Honda Cars for Sale in Pakistan"
                   >
                     <input type="checkbox" />
@@ -177,7 +177,7 @@ export default function SideSearch() {
               <li title="Daihatsu Cars for Sale in Pakistan">
                 <label class="filter-check clearfix">
                   <a
-                    href="https://www.pakwheels.com/used-cars/daihatsu/12"
+                    href=""
                     title="Daihatsu Cars for Sale in Pakistan"
                   >
                     <input type="checkbox" />
@@ -190,7 +190,7 @@ export default function SideSearch() {
               <li title="Kia Cars for Sale in Pakistan">
                 <label class="filter-check clearfix">
                   <a
-                    href="https://www.pakwheels.com/used-cars/kia/19"
+                    href=""
                     title="Kia Cars for Sale in Pakistan"
                   >
                     <input type="checkbox" />
@@ -213,8 +213,7 @@ export default function SideSearch() {
               <li title="Cars for Sale in Punjab, Pakistan">
                 <label class="filter-check clearfix">
                   <a
-                    href="/used-cars/search/-/pv_punjab/"
-                    rel="nofollow"
+                    href=""
                     title="Cars for Sale in Punjab, Pakistan"
                   >
                     <input type="checkbox" />
@@ -227,8 +226,7 @@ export default function SideSearch() {
               <li title="Cars for Sale in Sindh, Pakistan">
                 <label class="filter-check clearfix">
                   <a
-                    href="/used-cars/search/-/pv_sindh/"
-                    rel="nofollow"
+                    href="nofollow"
                     title="Cars for Sale in Sindh, Pakistan"
                   >
                     <input type="checkbox" />
@@ -241,8 +239,7 @@ export default function SideSearch() {
               <li title="Cars for Sale in Kpk, Pakistan">
                 <label class="filter-check clearfix">
                   <a
-                    href="/used-cars/search/-/pv_kpk/"
-                    rel="nofollow"
+                    href=""
                     title="Cars for Sale in Kpk, Pakistan"
                   >
                     <input type="checkbox" />
@@ -255,8 +252,7 @@ export default function SideSearch() {
               <li title="Cars for Sale in Balochistan, Pakistan">
                 <label class="filter-check clearfix">
                   <a
-                    href="/used-cars/search/-/pv_balochistan/"
-                    rel="nofollow"
+                    href=""
                     title="Cars for Sale in Balochistan, Pakistan"
                   >
                     <input type="checkbox" />
@@ -269,8 +265,7 @@ export default function SideSearch() {
               <li title="Cars for Sale in Azad Kashmir, Pakistan">
                 <label class="filter-check clearfix">
                   <a
-                    href="/used-cars/search/-/pv_azad-kashmir/"
-                    rel="nofollow"
+                    href=""
                     title="Cars for Sale in Azad Kashmir, Pakistan"
                   >
                     <input type="checkbox" />
@@ -283,7 +278,7 @@ export default function SideSearch() {
               <li title="Cars for Sale in Federally Administered Tribal Areas, Pakistan">
                 <label class="filter-check clearfix">
                   <a
-                    href="/used-cars/search/-/pv_federally-administered-tribal-areas/"
+                    href="/"
                     rel="nofollow"
                     title="Cars for Sale in Federally Administered Tribal Areas, Pakistan"
                   >
