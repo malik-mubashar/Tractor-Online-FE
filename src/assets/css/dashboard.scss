@@ -1,15 +1,28 @@
 .dashboard-carousel{
-  // background: linear-gradient(to top, #003366 0%, #000000 100%);
-  background-image: url('../img/caoursel-bg.jpg');
-  height: 510px;
+  background: linear-gradient(#031b1e, #1b5a4652);
+  height: auto;
+  padding: 40px;
 }
 
 .search-classified-text {
-  padding-top: 170px;
-  padding-bottom: 28px;
+  padding-top: 120px;
   line-height: 22px;
   position: relative;
   z-index: 6;
+  padding-bottom: 30px;
+   
+  h1{
+    font-size: 38px;
+    line-height: normal;
+    font-weight: normal;
+    margin: 0;
+    color: #fff;
+  }
+  p{
+    font-size: 18px;
+    font-weight: 400;
+    margin: 0;
+  }
 }
 .home-widgets {
   border: 1px solid #e6e6e6;
