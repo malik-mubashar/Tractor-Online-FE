@@ -2,6 +2,7 @@ import React from "react";
 import { Route, BrowserRouter, Switch } from "react-router-dom";
 import Dashboard from "../pages/Dashboard/Dashboard";
 import LandingPage from "../pages/LandingPage/LandingPage";
+import UsedTractor from "../pages/usedTractor/UsedTractor";
 
 
 // import Calendar from "../pages/Calendar";
