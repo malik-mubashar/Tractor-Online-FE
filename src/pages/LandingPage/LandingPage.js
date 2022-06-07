@@ -14,6 +14,7 @@ import {
   Button,
   Image,
 } from "react-bootstrap";
+import Tractor from '../../assets/img/tractor.png'
 
 
 import Topbar from "./Topbar"
@@ -25,7 +26,6 @@ import {RootContext} from "../../context/RootContext";
 import SearchAble from './searchable';
 import NewCarByMake from "./NewCar";
 import FeaturedNewTractor from "./FeaturedNewTractor";
-import SelectSearch from './SelectSearch';
 
 const LandingPage = () => {
 	const { currentUser } = useContext(RootContext);
@@ -39,8 +39,7 @@ console.log(currentUser)
             <p className="text-white">With thousands of tractors, we have just the right one for you</p>
           </div>
           <SearchAble />
-          <SelectSearch />
-          <Button  className="mt-2 mr-2 d-flex justify-content-center m-auto bg-transparent border border-white">Advanced Filter</Button>
+          <Button  className="mt-2 mr-2 d-flex justify-content-center m-auto bg-transparent border border-white">{"Advanced Filter >>"}</Button>
         </div>
         <div className="bg-white">
           <div className="container-lg py-3">
@@ -55,7 +54,7 @@ console.log(currentUser)
                   <li><i className="fa fa-tick"></i>Get Genuine offers from Verified Buyers</li>
                   <li><i className="fa fa-tick"></i>Sell your car Fast at the Best Price</li>
                 </ul>
-                <a href="#" className="btn btn-danger btn-lg text-white">Post Your Add</a>
+                <a href={'/'} className="btn btn-danger btn-lg text-white">Post Your Add</a>
               </div>
               <div className="col-lg-6 col-12 mt-4">
                 <h2>Try TractorOnline Sell It For Me</h2>
@@ -64,12 +63,12 @@ console.log(currentUser)
                   <li><i className="fa fa-tick"></i>We Bargain for you and share the Best Offer</li>
                   <li><i className="fa fa-tick"></i>We ensure Safe &amp; Secure Transaction</li>
                 </ul>
-                <a href="#" className="btn btn-info btn-lg text-white">Register Your Tractor</a>
+                <a href={'/'} className="btn btn-info btn-lg text-white">Register Your Tractor</a>
               </div>
             </div>
           </div>
           <div className="d-flex justify-content-center py-3">
-              <img src="https://tpc.googlesyndication.com/simgad/5923361064753698031" border="0" width="75%" height="auto" alt="" class="img_ad" />
+              <Image src={Tractor} border="0" width="75%" height="50%" alt="" class="img_ad" />
         </div>  
         </div>
         

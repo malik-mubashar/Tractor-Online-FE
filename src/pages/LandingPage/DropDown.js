@@ -47,7 +47,7 @@ export default function DropDown({usedCars, newCars, autoStore}) {
               <>
                 <ul class="list-unstyled col-3 border-right">
                   {text.map((option) => (
-                    <li className="dropdown-list">
+                    <li className="dropdown-list" key={option}>
                       <a href="#" className="row pl-3 dropdown-link">
                         <Icon.Link
                           height="20px"
@@ -65,7 +65,7 @@ export default function DropDown({usedCars, newCars, autoStore}) {
                 </ul>
                 <ul class="list-unstyled col-3 border-right">
                   {text.map((option) => (
-                    <li className="dropdown-list">
+                    <li className="dropdown-list" key={option}>
                       <a href="#" className="row pl-3 dropdown-link">
                         <Icon.Link
                           height="20px"
@@ -91,7 +91,7 @@ export default function DropDown({usedCars, newCars, autoStore}) {
                     </a>
                   </li>
                   {cities.map((option) => (
-                    <li>
+                    <li key={option}>
                       <a href="#" className="dropdown-link" title="Used Cars for sale in Karachi">
                         <p class="city-name">{option}</p>
                       </a>
@@ -109,8 +109,8 @@ export default function DropDown({usedCars, newCars, autoStore}) {
                     </a>
                   </li>
                   {model.map((option) => (
-                    <li>
-                      <a href="#" className="dropdown-link" title="Used Cars for sale in Karachi">
+                    <li key={option}>
+                      <a href={'/'} className="dropdown-link" title="Used Cars for sale in Karachi">
                         <p class="city-name">{option}</p>
                       </a>
                     </li>
@@ -126,8 +126,8 @@ export default function DropDown({usedCars, newCars, autoStore}) {
               <>
                 <ul class="list-unstyled col-6 border-right">
                   {text.map((option) => (
-                    <li className="dropdown-list">
-                      <a href="#" className="row pl-3 dropdown-link">
+                    <li className="dropdown-list" key={option}>
+                      <a href={'/'} className="row pl-3 dropdown-link">
                         <Icon.Link
                           height="20px"
                           width="20px"
@@ -152,8 +152,8 @@ export default function DropDown({usedCars, newCars, autoStore}) {
                     </a>
                   </li>
                   {model.map((option) => (
-                    <li>
-                      <a href="#" className="dropdown-link" title="Used Cars for sale in Karachi">
+                    <li key={option}>
+                      <a href={'/'} className="dropdown-link" title="Used Cars for sale in Karachi">
                         <p class="city-name">{option}</p>
                       </a>
                     </li>
@@ -169,7 +169,7 @@ export default function DropDown({usedCars, newCars, autoStore}) {
               <>
                 <ul class="list-unstyled col-12 border-right">
                   {text.map((option) => (
-                    <li className="dropdown-list">
+                    <li className="dropdown-list" key={option}>
                       <a href="#" className="row pl-3 dropdown-link">
                         <Icon.Link
                           height="20px"
