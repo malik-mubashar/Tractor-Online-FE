@@ -6,7 +6,8 @@ import SideSearch from "./SideSearch";
 export default function usedTractor() {
   return (
     <>
-			<div className="container">
+			<div
+				className="container">
 				<img style={{width:"100%"}} alt='add' src={'https://tpc.googlesyndication.com/simgad/5923361064753698031'}/>
         <h1 className="pageHeading">Used Tractor for sale</h1>
         <div className="searchCounterWrapper">
