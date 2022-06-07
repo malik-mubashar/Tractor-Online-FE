@@ -26,6 +26,7 @@ import SearchAble from './searchable';
 import NewCarByMake from "./NewCar";
 import FeaturedNewTractor from "./FeaturedNewTractor";
 import SelectSearch from './SelectSearch';
+import MobileFooter from './MobileFooter';
 
 const LandingPage = () => {
 	const { currentUser } = useContext(RootContext);
@@ -101,6 +102,9 @@ console.log(currentUser)
 
         <div>
           <Footer />
+        </div>
+        <div>
+          <MobileFooter />
         </div>
       </div>
 	)
