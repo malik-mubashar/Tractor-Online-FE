@@ -7,7 +7,7 @@ const NewCarByMake = () =>{
 
     return (<>
           <div class="container-lg mt-5 py-4">
-          <h5>New Tractor by Make</h5>
+          <h5 className="text-center">New Tractor by Make</h5>
             {index2.map((option) => (
               <div class="row" key={option}>
                 <ul class="make-list col-sm-2 list-unstyled new-car-list">
