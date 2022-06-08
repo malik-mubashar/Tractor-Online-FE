@@ -244,6 +244,9 @@
   .carousel-control-next {
     right: -40px !important;
   }
+  .footer-links {
+    border-bottom: 1px solid #375192;
+  }
 }
 
 /* Mobile Landscape Layout: (415px to 767px) */
