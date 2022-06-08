@@ -17,9 +17,6 @@ const LandingPage = () => {
 
   return( 
       <div className="overflow-x-hidden">
-       {!isMobile ? <DeskTopBanner/>
-       : <MobileBanner />
-}
 
         <div className={`container-lg py-4 mt-2 ${isMobile ? "bg-white":""}`}>
           <Categories />
@@ -46,13 +43,6 @@ const LandingPage = () => {
         <NewCarByMake/>
 
         </div> 
-
-        <div>
-          <Footer />
-        </div>
-        <div>
-          {isMobile && <MobileFooter />}
-        </div>
       </div>
 	)
 }

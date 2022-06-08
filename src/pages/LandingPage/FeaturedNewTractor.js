@@ -45,7 +45,7 @@ export default function Categories({title,link}) {
                           <Carousel.Item>
                               <ul className="browse-listing row">
                                 {index.map((option) => (
-                                  <li className="col-sm-2 m-4" key={option}>
+                                  <li className="col-4 col-lg-2 m-4" key={option}>
                                     <div className="featured-card bg-white" key={option}>
                                     <img className="card-img" src="https://cache3.pakwheels.com/ad_pictures/6549/Slide_toyota-prius-s-led-edition-1-8-2013-65495110.jpg" />
                                     <h4 className="mb-0 pl-2">Name</h4>
@@ -59,7 +59,7 @@ export default function Categories({title,link}) {
                           <Carousel.Item>
                               <ul className="browse-listing row">
                                 {index.map((option) => (
-                                  <li className="col-sm-2 m-4" key={option}>
+                                  <li className="col-4 col-lg-2 m-4" key={option}>
                                     <div className="featured-card bg-white" key={option}>
                                     <img className="card-img" src="https://cache3.pakwheels.com/ad_pictures/6549/Slide_toyota-prius-s-led-edition-1-8-2013-65495110.jpg" />
                                     <h4 className="mb-0 pl-2">Name</h4>
@@ -73,7 +73,7 @@ export default function Categories({title,link}) {
                           <Carousel.Item>
                               <ul className="browse-listing row">
                                 {index.map((option) => (
-                                  <li className="col-sm-2 m-4" key={option}>
+                                  <li className="col-4 col-lg-2 m-4" key={option}>
                                     <div className="featured-card bg-white" key={option}>
                                     <img className="card-img" src="https://cache3.pakwheels.com/ad_pictures/6549/Slide_toyota-prius-s-led-edition-1-8-2013-65495110.jpg" />
                                     <h4 className="mb-0 pl-2">Name</h4>
@@ -92,7 +92,7 @@ export default function Categories({title,link}) {
                           <Carousel.Item>
                               <ul className="browse-listing row">
                                 {index.map((option) => (
-                                  <li className="col-sm-2 m-4" key={option}>
+                                  <li className="col-4 col-lg-2 m-4" key={option}>
                                     <div className="featured-card bg-white" key={option}>
                                     <img className="card-img" src="https://cache3.pakwheels.com/ad_pictures/6549/Slide_toyota-prius-s-led-edition-1-8-2013-65495110.jpg" />
                                     <h4 className="mb-0 pl-2">Name</h4>
@@ -106,7 +106,7 @@ export default function Categories({title,link}) {
                           <Carousel.Item>
                               <ul className="browse-listing row">
                                 {index.map((option) => (
-                                  <li className="col-sm-2 m-4" key={option}>
+                                  <li className="col-4 col-lg-2 m-4" key={option}>
                                     <div className="featured-card bg-white" key={option}>
                                     <img className="card-img" src="https://cache3.pakwheels.com/ad_pictures/6549/Slide_toyota-prius-s-led-edition-1-8-2013-65495110.jpg" />
                                     <h4 className="mb-0 pl-2">Name</h4>
@@ -120,7 +120,7 @@ export default function Categories({title,link}) {
                           <Carousel.Item>
                               <ul className="browse-listing row">
                                 {index.map((option) => (
-                                  <li className="col-sm-2 m-4" key={option}>
+                                  <li className="col-4 col-lg-2 m-4" key={option}>
                                     <div className="featured-card bg-white" key={option}>
                                     <img className="card-img" src="https://cache3.pakwheels.com/ad_pictures/6549/Slide_toyota-prius-s-led-edition-1-8-2013-65495110.jpg" />
                                     <h4 className="mb-0 pl-2">Name</h4>
@@ -139,7 +139,7 @@ export default function Categories({title,link}) {
                           <Carousel.Item>
                               <ul className="browse-listing row">
                                 {index.map((option) => (
-                                  <li className="col-sm-2 m-4" key={option}>
+                                  <li className="col-4 col-lg-2 m-4" key={option}>
                                     <div className="featured-card bg-white" key={option}>
                                     <img className="card-img" src="https://cache3.pakwheels.com/ad_pictures/6549/Slide_toyota-prius-s-led-edition-1-8-2013-65495110.jpg" />
                                     <h4 className="mb-0 pl-2">Name</h4>
@@ -153,7 +153,7 @@ export default function Categories({title,link}) {
                           <Carousel.Item>
                               <ul className="browse-listing row">
                                 {index.map((option) => (
-                                  <li className="col-sm-2 m-4" key={option}>
+                                  <li className="col-4 col-lg-2 m-4" key={option}>
                                     <div className="featured-card bg-white" key={option}>
                                     <img className="card-img" src="https://cache3.pakwheels.com/ad_pictures/6549/Slide_toyota-prius-s-led-edition-1-8-2013-65495110.jpg" />
                                     <h4 className="mb-0 pl-2">Name</h4>
@@ -167,7 +167,7 @@ export default function Categories({title,link}) {
                           <Carousel.Item>
                               <ul className="browse-listing row">
                                 {index.map((option) => (
-                                  <li className="col-sm-2 m-4" key={option}>
+                                  <li className="col-4 col-lg-2 m-4" key={option}>
                                     <div className="featured-card bg-white" key={option}>
                                     <img className="card-img" src="https://cache3.pakwheels.com/ad_pictures/6549/Slide_toyota-prius-s-led-edition-1-8-2013-65495110.jpg" />
                                     <h4 className="mb-0 pl-2">Name</h4>
