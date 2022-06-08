@@ -2,6 +2,26 @@ import React from "react";
 import Footer from "../LandingPage/Footer";
 import SearchListing from "./SearchListing";
 import SideSearch from "./SideSearch";
+import {
+  Navbar,
+  Nav,
+  NavDropdown,
+  Container,
+  Row,
+  Col,
+  Form,
+  FormControl,
+  Button,
+  Image,
+} from "react-bootstrap";
+import tractorSVG from "../../assets/svg/tractor-1.svg";
+import Tractor from "../../assets/img/tractor.png";
+import {
+  BrowserView,
+  MobileView,
+  isBrowser,
+  isMobile,
+} from "react-device-detect";
 
 export default function usedTractor() {
   return (
@@ -13,7 +33,7 @@ export default function usedTractor() {
             alt="add"
             src={"https://tpc.googlesyndication.com/simgad/5923361064753698031"}
           />
-          <h1 className="pageHeading">Used Tractor for sale</h1>
+          <h3 className="pageHeading">Used Tractor for sale</h3>
           <div className="searchCounterWrapper">
             <ul className="breadcrumb bread">
               <li>
@@ -45,6 +65,77 @@ export default function usedTractor() {
         </div>
       </section>
       <section>
+        <div class="container">
+          <h2>Used Tractors Price in Pakistan</h2>
+          <table className="table table-bordered bg-white mb-0">
+            <tbody>
+              <tr>
+                <th>Model</th>
+                <th>Price*</th>
+              </tr>
+              <tr>
+                <td className="text-info font-weight-bold">Toyota Corolla</td>
+                <td className="text-success">PKR 1.4 lacs - PKR 86.0 lacs</td>
+              </tr>
+              <tr>
+                <td className="text-info font-weight-bold">Honda Civic</td>
+                <td className="text-success">PKR 0.0 lacs - PKR 78.0 lacs</td>
+              </tr>
+              <tr>
+                <td className="text-info font-weight-bold">Suzuki Mehran</td>
+                <td className="text-success">PKR 1.3 lacs - PKR 14.3 lacs</td>
+              </tr>
+              <tr>
+                <td className="text-info font-weight-bold">Suzuki Cultus</td>
+                <td className="text-success">PKR 2.3 lacs - PKR 30.5 lacs</td>
+              </tr>
+              <tr>
+                <td className="text-info font-weight-bold">Honda City</td>
+                <td className="text-success">PKR 1.7 lacs - PKR 44.0 lacs</td>
+              </tr>
+            </tbody>
+          </table>
+
+          <small>
+            * Used Tractors Prices in Pakistan vary based on the model, variant
+            and the condition of the car.
+          </small>
+
+          <div class="search-detail-text primary-lang">
+            <h2>Tractors for Sale in Pakistan</h2>
+
+            <p>
+              PakWheels is Pakistan’s leading and most trustworthy website when
+              it comes to Used Tractors for sale in Pakistan. We have tens and
+              hundreds of Tractors for Sale listed in each city. Pakwheels makes
+              it easy for you to find the best Tractors for sale in Pakistan at
+              best prices.
+            </p>
+
+            <h2>Used Tractors for Sale in Pakistan</h2>
+
+            <p>
+              There are currently 70,355 available used Tractors for sale in
+              Pakistan. Based on the current listings, Used car prices in
+              Pakistan start from PKR 1,220 and go up to PKR 120,000,000.
+            </p>
+
+            <p>
+              These used Tractors for sale in Pakistan are uploaded by
+              Individuals and Dealers users.
+            </p>
+
+            <p>
+              There are also 168 Certified used Tractors for sale in Pakistan
+              available on PakWheels, PakWheels Certified Tractors are
+              pre-inspected and approved by our automobile experts. You can find
+              used Tractors based on your desired location, price range, car
+              type, model and much more.
+            </p>
+          </div>
+        </div>
+      </section>
+      <section style={{ backgroundColor: "white" }}>
         <div className="container">
           <h2>Browse More Used Tractors</h2>
           <h3>View Tractors By City</h3>
@@ -923,205 +1014,203 @@ export default function usedTractor() {
           <hr className="mt10 mb10 " />
           <h3>View Tractors by Engine Capacity</h3>
           <ul class="list-unstyled nomargin row generic-light-grey fs12">
-            <ul class="list-unstyled nomargin row generic-light-grey fs12">
-              <li class="col-md-3">
-                <a
-                  href="/used-Tractors/family-Tractors/587667"
-                  itemprop="relatedLink"
-                  title="Family Tractors for sale in Pakistan"
-                >
-                  Family Tractors
-                </a>{" "}
-                (37600+)
-              </li>
+            <li class="col-md-3">
+              <a
+                href="/used-Tractors/family-Tractors/587667"
+                itemprop="relatedLink"
+                title="Family Tractors for sale in Pakistan"
+              >
+                Family Tractors
+              </a>{" "}
+              (37600+)
+            </li>
 
-              <li class="col-md-3">
-                <a
-                  href="/used-Tractors/small/266374"
-                  itemprop="relatedLink"
-                  title="Small Tractors for sale in Pakistan"
-                >
-                  Small Tractors for Sale
-                </a>{" "}
-                (24700+)
-              </li>
+            <li class="col-md-3">
+              <a
+                href="/used-Tractors/small/266374"
+                itemprop="relatedLink"
+                title="Small Tractors for sale in Pakistan"
+              >
+                Small Tractors for Sale
+              </a>{" "}
+              (24700+)
+            </li>
 
-              <li class="col-md-3">
-                <a
-                  href="/used-Tractors/old/430603"
-                  itemprop="relatedLink"
-                  title="Old Tractors for sale in Pakistan"
-                >
-                  Old Tractors
-                </a>{" "}
-                (22100+)
-              </li>
+            <li class="col-md-3">
+              <a
+                href="/used-Tractors/old/430603"
+                itemprop="relatedLink"
+                title="Old Tractors for sale in Pakistan"
+              >
+                Old Tractors
+              </a>{" "}
+              (22100+)
+            </li>
 
-              <li class="col-md-3">
-                <a
-                  href="/used-Tractors/big/266260"
-                  itemprop="relatedLink"
-                  title="Big Tractors for sale in Pakistan"
-                >
-                  Big Tractors
-                </a>{" "}
-                (13400+)
-              </li>
+            <li class="col-md-3">
+              <a
+                href="/used-Tractors/big/266260"
+                itemprop="relatedLink"
+                title="Big Tractors for sale in Pakistan"
+              >
+                Big Tractors
+              </a>{" "}
+              (13400+)
+            </li>
 
-              <li class="col-md-3">
-                <a
-                  href="/used-Tractors/low-priced/328875"
-                  itemprop="relatedLink"
-                  title="Low Price Tractors in Pakistan for Sale"
-                >
-                  Low Price Tractors for Sale
-                </a>{" "}
-                (13000+)
-              </li>
+            <li class="col-md-3">
+              <a
+                href="/used-Tractors/low-priced/328875"
+                itemprop="relatedLink"
+                title="Low Price Tractors in Pakistan for Sale"
+              >
+                Low Price Tractors for Sale
+              </a>{" "}
+              (13000+)
+            </li>
 
-              <li class="col-md-3">
-                <a
-                  href="/used-Tractors/low-mileage/485505"
-                  itemprop="relatedLink"
-                  title="Low Mileage Tractors for sale in Pakistan"
-                >
-                  Low Mileage Tractors
-                </a>{" "}
-                (11600+)
-              </li>
+            <li class="col-md-3">
+              <a
+                href="/used-Tractors/low-mileage/485505"
+                itemprop="relatedLink"
+                title="Low Mileage Tractors for sale in Pakistan"
+              >
+                Low Mileage Tractors
+              </a>{" "}
+              (11600+)
+            </li>
 
-              <li class="col-md-3">
-                <a
-                  href="/used-Tractors/luxury/72787"
-                  itemprop="relatedLink"
-                  title="Luxury Tractors for sale in Pakistan"
-                >
-                  Luxury Tractors in Pakistan
-                </a>{" "}
-                (5900+)
-              </li>
+            <li class="col-md-3">
+              <a
+                href="/used-Tractors/luxury/72787"
+                itemprop="relatedLink"
+                title="Luxury Tractors for sale in Pakistan"
+              >
+                Luxury Tractors in Pakistan
+              </a>{" "}
+              (5900+)
+            </li>
 
-              <li class="col-md-3">
-                <a
-                  href="/used-Tractors/cheap/329024"
-                  itemprop="relatedLink"
-                  title="Cheap Tractors for sale in Pakistan"
-                >
-                  Cheap Tractors
-                </a>{" "}
-                (3800+)
-              </li>
+            <li class="col-md-3">
+              <a
+                href="/used-Tractors/cheap/329024"
+                itemprop="relatedLink"
+                title="Cheap Tractors for sale in Pakistan"
+              >
+                Cheap Tractors
+              </a>{" "}
+              (3800+)
+            </li>
 
-              <li class="col-md-3">
-                <a
-                  href="/used-Tractors/carry-daba/270569"
-                  itemprop="relatedLink"
-                  title="Carry Daba in Pakistan"
-                >
-                  Carry Daba in Pakistan
-                </a>{" "}
-                (1900+)
-              </li>
+            <li class="col-md-3">
+              <a
+                href="/used-Tractors/carry-daba/270569"
+                itemprop="relatedLink"
+                title="Carry Daba in Pakistan"
+              >
+                Carry Daba in Pakistan
+              </a>{" "}
+              (1900+)
+            </li>
 
-              <li class="col-md-3">
-                <a
-                  href="/used-Tractors/sports/72786"
-                  itemprop="relatedLink"
-                  title="Sports Tractors - Price in Pakistan, Tractors for sale"
-                >
-                  Sports Tractors
-                </a>{" "}
-                (220+)
-              </li>
+            <li class="col-md-3">
+              <a
+                href="/used-Tractors/sports/72786"
+                itemprop="relatedLink"
+                title="Sports Tractors - Price in Pakistan, Tractors for sale"
+              >
+                Sports Tractors
+              </a>{" "}
+              (220+)
+            </li>
 
-              <li class="col-md-3">
-                <a
-                  href="/used-Tractors/modified/389984"
-                  itemprop="relatedLink"
-                  title="Modified Tractors for sale in Pakistan"
-                >
-                  Modified Tractors
-                </a>{" "}
-                (210+)
-              </li>
+            <li class="col-md-3">
+              <a
+                href="/used-Tractors/modified/389984"
+                itemprop="relatedLink"
+                title="Modified Tractors for sale in Pakistan"
+              >
+                Modified Tractors
+              </a>{" "}
+              (210+)
+            </li>
 
-              <li class="col-md-3">
-                <a
-                  href="/used-Tractors/custom-auction/716218"
-                  itemprop="relatedLink"
-                  title="Custom Auction Tractors for sale in Pakistan"
-                >
-                  Custom Auction Tractors
-                </a>{" "}
-                (110+)
-              </li>
+            <li class="col-md-3">
+              <a
+                href="/used-Tractors/custom-auction/716218"
+                itemprop="relatedLink"
+                title="Custom Auction Tractors for sale in Pakistan"
+              >
+                Custom Auction Tractors
+              </a>{" "}
+              (110+)
+            </li>
 
-              <li class="col-md-3">
-                <a
-                  href="/used-Tractors/duplicate-book/389980"
-                  itemprop="relatedLink"
-                  title="Duplicate Book Tractors for sale in Pakistan"
-                >
-                  Duplicate Book Tractors
-                </a>{" "}
-                (100+)
-              </li>
+            <li class="col-md-3">
+              <a
+                href="/used-Tractors/duplicate-book/389980"
+                itemprop="relatedLink"
+                title="Duplicate Book Tractors for sale in Pakistan"
+              >
+                Duplicate Book Tractors
+              </a>{" "}
+              (100+)
+            </li>
 
-              <li class="col-md-3">
-                <a
-                  href="/used-Tractors/exotic/73686"
-                  itemprop="relatedLink"
-                  title="Exotic Tractors for sale in Pakistan"
-                >
-                  Exotic Tractors
-                </a>{" "}
-                (100+)
-              </li>
+            <li class="col-md-3">
+              <a
+                href="/used-Tractors/exotic/73686"
+                itemprop="relatedLink"
+                title="Exotic Tractors for sale in Pakistan"
+              >
+                Exotic Tractors
+              </a>{" "}
+              (100+)
+            </li>
 
-              <li class="col-md-3">
-                <a
-                  href="/used-Tractors/duplicate-file/716615"
-                  itemprop="relatedLink"
-                  title="Duplicate File Tractors for sale in Pakistan"
-                >
-                  Duplicate File Tractors
-                </a>{" "}
-                (70+)
-              </li>
+            <li class="col-md-3">
+              <a
+                href="/used-Tractors/duplicate-file/716615"
+                itemprop="relatedLink"
+                title="Duplicate File Tractors for sale in Pakistan"
+              >
+                Duplicate File Tractors
+              </a>{" "}
+              (70+)
+            </li>
 
-              <li class="col-md-3">
-                <a
-                  href="/used-Tractors/electric/389926"
-                  itemprop="relatedLink"
-                  title="Electric Tractors in Pakistan"
-                >
-                  Electric Tractors for Sale in Pakistan
-                </a>{" "}
-                (60+)
-              </li>
+            <li class="col-md-3">
+              <a
+                href="/used-Tractors/electric/389926"
+                itemprop="relatedLink"
+                title="Electric Tractors in Pakistan"
+              >
+                Electric Tractors for Sale in Pakistan
+              </a>{" "}
+              (60+)
+            </li>
 
-              <li class="col-md-3">
-                <a
-                  href="/used-Tractors/amnesty-scheme/716454"
-                  itemprop="relatedLink"
-                  title="Amnesty Scheme Tractors for sale in Pakistan"
-                >
-                  Amnesty Scheme Tractors
-                </a>{" "}
-                (50+)
-              </li>
+            <li class="col-md-3">
+              <a
+                href="/used-Tractors/amnesty-scheme/716454"
+                itemprop="relatedLink"
+                title="Amnesty Scheme Tractors for sale in Pakistan"
+              >
+                Amnesty Scheme Tractors
+              </a>{" "}
+              (50+)
+            </li>
 
-              <li class="col-md-3">
-                <a
-                  href="/used-Tractors/army-auction-jeep/430586"
-                  itemprop="relatedLink"
-                  title="Army Jeeps, Army Auction Jeeps for sale in Pakistan"
-                >
-                  Army Jeeps for Sale
-                </a>{" "}
-                (50+)
-              </li>
-            </ul>
+            <li class="col-md-3">
+              <a
+                href="/used-Tractors/army-auction-jeep/430586"
+                itemprop="relatedLink"
+                title="Army Jeeps, Army Auction Jeeps for sale in Pakistan"
+              >
+                Army Jeeps for Sale
+              </a>{" "}
+              (50+)
+            </li>
           </ul>
 
           <hr className="mt10 mb10 " />
@@ -1328,7 +1417,38 @@ export default function usedTractor() {
           </ul>
         </div>
       </section>
-      <section></section>
+      <div className="bloodyButton">
+        {isMobile ? (
+          <a
+            href="/used-cars/sell"
+            className="sell-bar-fixed sell-floating-btn sign-in-comp"
+            target="_blank"
+						onclick="trackEvents('UsedCars','Sellform','From - Search');"
+						style={{width:"50px"}}
+          >
+          
+            <p class="mt-3 text-white"> Sell</p>
+          </a>
+        ) : (
+          <a
+            href="/used-cars/sell"
+            class="sell-bar-fixed sell-floating-btn sign-in-comp"
+            target="_blank"
+            onclick="trackEvents('UsedCars','Sellform','From - Search');"
+          >
+            <span class="sell-icons">
+              <Image
+                src={tractorSVG}
+                height="40px"
+                width="60px"
+                alt="Profile Image"
+                className="d-flex justify-content-center m-auto"
+              />{" "}
+            </span>
+            <p class="mt-3 text-white"> Sell My Tractor</p>
+          </a>
+        )}
+      </div>
       <Footer />
     </>
   );
