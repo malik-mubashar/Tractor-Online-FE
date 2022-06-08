@@ -306,3 +306,33 @@
   flex: auto;
   margin: 0px 1%;
 }
+.mobile-footer{
+  margin-bottom: 70px;
+  color: #233D7A;
+  background-color: #fff;
+}
+.footer-bottom {
+  color: #fff;
+  background-color: #233D7A;
+  padding: 15px 0;
+  font-size: 14px;
+}
+.footer-links {
+  font-size: 14px;
+  padding-bottom: 10px;
+}
+.footer-links a {
+  color: #fff;
+  display: inline-block;
+  padding: 0 4px;
+  margin: 0 4px;
+}
+.mobile-footer .copy {
+  max-width: 262px;
+  margin: 0 auto 15px;
+  padding-top: 10px;
+  font-size: 12px;
+  line-height: 1.5;
+  color: white;
+  text-align: center;
+}
