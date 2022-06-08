@@ -17,6 +17,7 @@ import FourHandedFourError from "../pages/FourHandedFourError";
 import "../assets/css/style.css";
 import "../assets/css/responsive.css";
 import "../assets/css/dashboard.scss";
+import "../assets/css/usedTractor.scss";
 import ProtectedRoute from "../components/ProtectedRoutes/index";
 import UnProtectedRoute from "../components/UnprotectedRoutes/index";
 import { ToastContainer } from "react-toastify";

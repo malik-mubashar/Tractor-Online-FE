@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import {
   Row,
   Col,
@@ -12,6 +12,7 @@ import {
 // import card_thumb_one from '../../assets/img/card-thumb-one.jpg';
 
 export default function SearchListing() {
+  const [gridOrList, setGridOrList] = useState("list");
   return (
     <>
       <Col sm={12} lg={12} xl={12}>
@@ -47,68 +48,84 @@ export default function SearchListing() {
 
             <div class="col-md-4 mt5 text-right">
               <div class="btn-group" data-toggle="buttons-radio">
-                <button type="button" id="list" class="btn btn-sm active">
-                  <span class="generic-dark-grey">
-                    <i class="fa fa-th-list"></i> LIST
-                  </span>
+                <button
+                  onClick={() => setGridOrList("list")}
+                  type="button"
+                  id="list"
+                  class="sortButtonList"
+                >
+                  List
                 </button>
-                <button type="button" id="grid" class="btn btn-sm">
-                  <span class="generic-dark-grey">
-                    <i class="fa fa-th-large"></i> GRID
-                  </span>
+                <button
+                  onClick={() => setGridOrList("grid")}
+                  type="button"
+                  id="grid"
+                  class="sortButtonGrid"
+                >
+                  Grid
                 </button>
               </div>
             </div>
           </div>
         </div>
-        <div className="sideSearch">
+        <div
+          // className="searchList"
+          className={gridOrList === "list" ? "" : "row"}
+        >
           <>
-            {/* <Card className="mb-4 row">
-                    <Card.Img className="radius-0" alt="Card Image" />
-                  <div> card body</div>
-              </Card> */}
-						{
-							[1, 2, 3, 4].map(() => {
-								return (
-									<>
-										  <div class="listCard mb-3">
-              <img
-                class="card-img-top"
-                src="https://bsmedia.business-standard.com/_media/bs/img/article/2020-06/01/full/1590987638-6809.png"
-                alt="Card"
-                style={{ width: "200px", height: "140px" }}
-              />
-              <div style={{ width: "100%" }}>
-                <div
-                  className="d-flex"
-                  style={{ justifyContent: "space-between" }}
-                >
-                  <h5 class="card-title">Toyota Prado TX Limited 2.7 2008</h5>
-                  <h5>PKR 123 lacs</h5>
-                </div>
-                <p class="card-text">Karachi</p>
-                <p>
-                  2008 | 111,123 km | Petrol | 2700cc | Automatic | 4.5 Grade
-                </p>
-                <div
-                  class="card-text d-flex"
-                  style={{ justifyContent: "space-between" }}
-                >
-                  <small class="text-muted">Last updated 3 mins ago</small>
-                  <div className="d-flex">
-                    <button className="btn btn-succcess">asd</button>
-                    <button className="btn btn-succcess">
-                      show phone number
-                    </button>
-                  </div>
-                </div>
-              </div>
-            </div>
-									</>
-								)
-							})
-							}
-          
+            {[1, 2, 3, 4].map(() => {
+              return (
+                <>
+									<div className={`${
+												gridOrList === "list" ? "list" : "col-4"
+											}`}>
+										<div
+											className={`listCard mb-3 ${
+												gridOrList === "list" ? "list" : "d-block"
+											}`}
+										>
+											<img
+												// class="card-img-top"
+												// className={gridOrList==='list'?'list':'grid'}
+												src="https://bsmedia.business-standard.com/_media/bs/img/article/2020-06/01/full/1590987638-6809.png"
+												alt="Card"
+												style={{ width: "200px", height: "140px" }}
+											/>
+											<div style={{ width: "100%" }}>
+												<div
+													className="d-flex"
+													style={{ justifyContent: "space-between" }}
+												>
+													<h5 class="card-title">
+														Toyota Prado TX Limited 2.7 2008
+													</h5>
+													<h5>PKR 123 lacs</h5>
+												</div>
+												<p class="card-text">Karachi</p>
+												<p>
+													2008 | 111,123 km | Petrol | 2700cc | Automatic | 4.5
+													Grade
+												</p>
+												<div
+													class="card-text d-flex"
+													style={{ justifyContent: "space-between" }}
+												>
+													<small class="text-muted">
+														Last updated 3 mins ago
+													</small>
+													<div className="d-flex">
+														<button className="btn btn-succcess">asd</button>
+														<button className="btn btn-succcess">
+															show phone number
+														</button>
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+                </>
+              );
+            })}
           </>
         </div>
         <div className="pagination">
@@ -150,5 +167,3 @@ export default function SearchListing() {
     </>
   );
 }
-
-
