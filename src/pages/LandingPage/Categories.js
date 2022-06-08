@@ -30,7 +30,7 @@ export default function Categories() {
 
     return (
       <div>
-        <h3>Browse Used Tractor</h3>
+        <h6>Browse Used Tractor</h6>
             {/* Tab Demo Three */}
             <Col lg={12}>
               <div className="mb-4">

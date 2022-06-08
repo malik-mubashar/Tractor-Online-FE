@@ -1,7 +1,14 @@
 .dashboard-carousel{
-  background: linear-gradient(#031b1e, #1b5a4652);
+  background: linear-gradient(to top, #660033 0%, #003366 100%);
   height: auto;
   padding: 40px;
+  .btn-info:hover{
+    background-color: white;
+    color: rgb(56, 79, 134);
+    border: none;
+    outline: none;
+  }
+
 }
 
 .search-classified-text {
@@ -279,4 +286,21 @@
   border-radius: 50%;
   background-color: #1877F2;
   border: none;
+}
+.search-success {
+  position: absolute;
+  top: 0;
+  right: 0;
+  background: transparent;
+  border-color: transparent;
+  border-radius: 0px 30px 30px 2px;
+  height: 36px;
+  color: #717171;
+  font-size: 20px;
+  line-height: 20px;
+  padding: 0 15px;
+}
+.mobile-tabs{
+  flex: auto;
+  margin: 0px 1%;
 }

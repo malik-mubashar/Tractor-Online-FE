@@ -6,7 +6,7 @@ export default function ExploreProducts() {
     return (
       <div>
         <div className="container-lg">
-          <h4 className="landing-hading">Explore Products by TractorOnline</h4>
+          <h5 className="landing-hading">Explore Products by TractorOnline</h5>
           <div className="row space-between">
             {index.map((option) => (
               <div className="col-md-auto p-3" key={option}>

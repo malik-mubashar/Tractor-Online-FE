@@ -27,7 +27,7 @@ export default function FeaturedProducts({title,link}) {
     return (
       <div>
       <div className="d-flex justify-content-between">
-      <h4>{title}</h4>
+      <h5>{title}</h5>
       <a className="text-info text-capitalize">{link}</a>
       </div>
         
