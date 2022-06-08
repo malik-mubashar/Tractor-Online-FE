@@ -241,6 +241,9 @@
     right: 0;
     margin: auto;
   }
+  .carousel-control-next {
+    right: -40px !important;
+  }
 }
 
 /* Mobile Landscape Layout: (415px to 767px) */

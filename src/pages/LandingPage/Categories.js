@@ -42,7 +42,7 @@ export default function Categories() {
                           <Carousel.Item>
                               <ul className="browse-listing row">
                                 {index.map((option) => (
-                                  <li className="col-sm-2 mt-4" key={option}>
+                                  <li className="col-4 col-lg-2 mt-4" key={option}>
                                     <a href="#" title="1000cc cars for sale in Pakistan">
                                       <Image src={ThousandCC} alt="Profile Image" />
                                       1000cc cars
@@ -54,7 +54,7 @@ export default function Categories() {
                           <Carousel.Item>
                               <ul className="browse-listing row">
                                 {index.map((option) => (
-                                  <li className="col-sm-2 mt-4" key={option}>
+                                  <li className="col-4 col-lg-2 mt-4" key={option}>
                                     <a href="#" title="1000cc cars for sale in Pakistan">
                                       <Image src={ThirteenHundredCC} alt="Profile Image" />
                                       1300cc cars
@@ -66,7 +66,7 @@ export default function Categories() {
                           <Carousel.Item>
                               <ul className="browse-listing row">
                                 {index.map((option) => (
-                                  <li className="col-sm-2 mt-4" key={option}>
+                                  <li className="col-4 col-lg-2 mt-4" key={option}>
                                     <a href="#" title="1000cc cars for sale in Pakistan">
                                       <Image src={SportsCar} alt="Profile Image" />
                                       Sports Cars
@@ -79,15 +79,41 @@ export default function Categories() {
                       </Tab>
 
                       <Tab eventKey="City" title="City">
-                        <ul className="row list-unstyled">
-                          {city.map((option) => (
-                            <li className="col-sm-2 p-3" key={option}>
-                                <a className="text-dark" href="#">
-                                  {option}
-                                </a>
-                            </li>
-                          ))}
-                        </ul>
+                       <Carousel>
+                          <Carousel.Item>
+                              <ul className="browse-listing row">
+                                {city.map((option) => (
+                                  <li className="col-4 col-lg-2 p-3 text-center" key={option}>
+                                      <a className="text-dark" href="#">
+                                        {option}
+                                      </a>
+                                  </li>
+                                  ))}
+                              </ul>
+                          </Carousel.Item>
+                          <Carousel.Item>
+                              <ul className="browse-listing row">
+                                {city.map((option) => (
+                                  <li className="col-4 col-lg-2 p-3 text-center" key={option}>
+                                      <a className="text-dark" href="#">
+                                        {option}
+                                      </a>
+                                  </li>
+                                  ))}
+                              </ul>
+                          </Carousel.Item>
+                          <Carousel.Item>
+                              <ul className="browse-listing row">
+                                {city.map((option) => (
+                                  <li className="col-4 col-lg-2 p-3 text-center" key={option}>
+                                      <a className="text-dark" href="#">
+                                        {option}
+                                      </a>
+                                  </li>
+                                  ))}
+                              </ul>
+                          </Carousel.Item>
+                        </Carousel>
                       </Tab>
 
                       <Tab eventKey="Make" title="Make">
@@ -95,7 +121,7 @@ export default function Categories() {
                           <Carousel.Item>
                               <ul className="browse-listing row">
                                 {index.map((option) => (
-                                  <li className="col-sm-2 mt-4" key={option}>
+                                  <li className="col-4 col-lg-2 mt-4" key={option}>
                                     <a href="#" title="Toyota for sale in Pakistan">
                                         <img alt="Toyota" src="https://cache4.pakwheels.com/system/car_manufacturers/manufacturers/000/000/042/resized/Tyota.png" />
                                       Toyota
@@ -107,7 +133,7 @@ export default function Categories() {
                           <Carousel.Item>
                               <ul className="browse-listing row">
                                 {index.map((option) => (
-                                  <li className="col-sm-2 mt-4" key={option}>
+                                  <li className="col-4 col-lg-2 mt-4" key={option}>
                                     <a href="#" title="Toyota for sale in Pakistan">
                                         <img alt="Toyota" src="https://cache4.pakwheels.com/system/car_manufacturers/manufacturers/000/000/021/resized/KIA.png" />
                                       KIA
@@ -119,7 +145,7 @@ export default function Categories() {
                           <Carousel.Item>
                               <ul className="browse-listing row">
                                 {index.map((option) => (
-                                  <li className="col-sm-2 mt-4" key={option}>
+                                  <li className="col-4 col-lg-2 mt-4" key={option}>
                                     <a href="#" title="Toyota for sale in Pakistan">
                                         <img alt="Toyota" src="https://cache3.pakwheels.com/system/car_manufacturers/manufacturers/000/000/041/resized/Suzuki.png" />
                                       Suzuki

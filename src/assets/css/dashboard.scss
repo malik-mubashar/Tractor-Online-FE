@@ -108,7 +108,7 @@
   left: -40px !important;
 }
 .carousel-control-next{
-  right: -85px !important;
+  right: -85px;
 }
 .carousel-control-prev-icon, .carousel-control-next-icon{
   height: 30px !important;
@@ -125,6 +125,7 @@
   border: 1px solid #EAEDEF;
   width: 212px;
   background-color: whitspace-betweene;
+  margin: 0px auto;
 }
 .new-car-list .heading img, .new-car-list .bike-brand {
   background-color: #fff;
