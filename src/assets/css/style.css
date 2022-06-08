@@ -2988,6 +2988,14 @@ textarea.form-control {
   min-width: 60px;
   padding-top: 5px;
 }
+.mobileSearcAble{
+  outline: none ;
+  border: none ;
+  border-radius: 0px ;
+  height: 35px !important;
+  min-width: 40px;
+  padding-top: 5px;
+}
 
 .border-right{
   border-right: 1px solid #eaedef;

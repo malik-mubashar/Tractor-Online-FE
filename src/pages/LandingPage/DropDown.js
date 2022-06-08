@@ -4,10 +4,10 @@ import * as Icon from 'react-feather';
 
 export default function DropDown({usedCars, newCars, autoStore}) {
   const [text, setText] = useState([
-    'Find Used Cars for Sale',
-    'Featured Used Cars',
-    'Sell Your Car',
-    'Used Car Dealers',
+    'Find Used Tractor for Sale',
+    'Featured Used Tractor',
+    'Sell Your Tractor',
+    'Used Tractor Dealers',
     'Price Calculator'
   ])
 
@@ -41,6 +41,8 @@ export default function DropDown({usedCars, newCars, autoStore}) {
           {autoStore ? 'Auto Stores' : null}
           <Icon.ChevronDown
               className="icon"
+              height="15px"
+              width="15px"
           />
           <div className={`drop-down-items row py-3 ${usedCars ? "usedCarsWidth" : ""} ${newCars ?  "newCarsWidth" : ""} ${autoStore ? 'autoStoreWidth' : null}`}>
             {usedCars ?
@@ -52,7 +54,7 @@ export default function DropDown({usedCars, newCars, autoStore}) {
                         <Icon.Link
                           height="20px"
                           width="20px"
-                          className="icon"
+                          className="icon mr-2"
                         />
                         <div>
                           <strong>{option}</strong>
@@ -70,7 +72,7 @@ export default function DropDown({usedCars, newCars, autoStore}) {
                         <Icon.Link
                           height="20px"
                           width="20px"
-                          className="icon"
+                          className="icon mr-2"
                         />
                         <div>
                           <strong>{option}</strong>
@@ -131,7 +133,7 @@ export default function DropDown({usedCars, newCars, autoStore}) {
                         <Icon.Link
                           height="20px"
                           width="20px"
-                          className="icon"
+                          className="icon mr-2"
                         />
                         <div>
                           <strong>{option}</strong>
@@ -148,7 +150,7 @@ export default function DropDown({usedCars, newCars, autoStore}) {
                       <Icon.MapPin
                             className="icon mr-2"
                         />
-                      <strong>Popular New Cars</strong>
+                      <strong>Popular New Tractor</strong>
                     </a>
                   </li>
                   {model.map((option) => (
@@ -174,7 +176,7 @@ export default function DropDown({usedCars, newCars, autoStore}) {
                         <Icon.Link
                           height="20px"
                           width="20px"
-                          className="icon"
+                          className="icon mr-2"
                         />
                         <div>
                           <strong>{option}</strong>

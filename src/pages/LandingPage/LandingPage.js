@@ -28,13 +28,19 @@ import NewCarByMake from "./NewCar";
 import FeaturedNewTractor from "./FeaturedNewTractor";
 import SelectSearch from './SelectSearch';
 import MobileFooter from './MobileFooter';
+import { BrowserView, MobileView, isBrowser, isMobile } from 'react-device-detect';
+import Logo from "../../assets/img/tractoronline.png";
+import { useHistory } from "react-router-dom";
+
+
 
 const LandingPage = () => {
 	const { currentUser } = useContext(RootContext);
-console.log(currentUser)
+  const history = useHistory();
+
   return( 
       <div className="overflow-x-hidden">
-        <Topbar />
+       {!isMobile ? <><Topbar />
         <div className='dashboard-carousel'>
           <div className="search-classified-text text-center generic-white">
             <h1 className="text-white">Find Used Tractors in Pakistan</h1>
@@ -72,9 +78,59 @@ console.log(currentUser)
           <div className="d-flex justify-content-center py-3">
               <Image src={Tractor} border="0" width="75%" height="50%" alt="" class="img_ad" />
         </div>  
-        </div>
-        
-        <div className="container-lg py-5 mt-2">
+        </div></>
+       : <div className={`dashboard-carousel ${isMobile ? 'p-3' : null}`}>
+       
+           
+          <Image src={Logo} height="20px" width="100px" alt="Profile Image" className="d-flex justify-content-center m-auto"/>
+          <div className="d-flex mt-2 mb-2 justify-content-between text-align-center align-content-center p-2">   
+              <div className="col-4 p-0 mobile-tabs">
+                <span
+                  onClick={() => history.push("/usedtractor")}
+                  className="btn btn-info rounded p-2 w-100 "
+                >
+                  Used Tractor
+                </span>
+              </div>
+              <div className="col-4 p-0 mobile-tabs">
+                <span
+                  onClick={() => history.push("/new/tractor")}
+                  className="btn btn-info rounded p-2 w-100"
+                >
+                  New Tractor
+                </span> 
+              </div>
+              <div className="col-4 p-0 mobile-tabs" >
+                <span
+                  onClick={() => history.push("/autoparts/")}
+                  className="btn btn-info rounded p-2 w-100"
+                >
+                  Auto Parts
+                </span>  
+              </div>                                   
+                 
+          </div>
+                       
+          <Form className="nav-search-form d-sm-block relative" action="/search/">
+                            <FormControl 
+                                type="text" 
+                                // value={this.state.term}
+                                // onChange={ e => this.setState({term: e.target.value}) }
+                                placeholder="Search..." 
+                                className="rounded"
+                            />
+
+                            <Button className="search-success" type="submit">
+                                <Icon.Search 
+                                    className="icon"
+                                />
+                            </Button>
+                        </Form>
+
+         </div>
+}
+
+        <div className={`container-lg py-5 mt-2 ${isMobile ? "bg-white":""}`}>
           <Categories />
         </div>
         <div className="bg-white">
@@ -104,7 +160,7 @@ console.log(currentUser)
           <Footer />
         </div>
         <div>
-          <MobileFooter />
+          {isMobile && <MobileFooter />}
         </div>
       </div>
 	)

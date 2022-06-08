@@ -47,9 +47,9 @@ const AppRouter = () => {
             <ForgotPassword />
           </UnProtectedRoute>
           {/* unprotected routes */}
-          <ProtectedRoute exact path="/dashboard/">
+          <UnProtectedRoute exact path="/dashboard/">
             <Dashboard />
-          </ProtectedRoute>
+          </UnProtectedRoute>
         
           <ProtectedRoute exact path="/profile/">
             <Profile />
