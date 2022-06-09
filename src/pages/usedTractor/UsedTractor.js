@@ -2,26 +2,9 @@ import React from "react";
 import Footer from "../LandingPage/Footer";
 import SearchListing from "./SearchListing";
 import SideSearch from "./SideSearch";
-import {
-  Navbar,
-  Nav,
-  NavDropdown,
-  Container,
-  Row,
-  Col,
-  Form,
-  FormControl,
-  Button,
-  Image,
-} from "react-bootstrap";
+import { Image } from "react-bootstrap";
 import tractorSVG from "../../assets/svg/tractor-1.svg";
-import Tractor from "../../assets/img/tractor.png";
-import {
-  BrowserView,
-  MobileView,
-  isBrowser,
-  isMobile,
-} from "react-device-detect";
+import { isMobile } from "react-device-detect";
 
 export default function usedTractor() {
   return (
@@ -37,12 +20,12 @@ export default function usedTractor() {
           <div className="searchCounterWrapper">
             <ul className="breadcrumb bread">
               <li>
-                <a>
+                <a href="/">
                   <span itemprop="name">Home /</span>
                 </a>
               </li>
               <li>
-                <a>
+                <a href="/">
                   <span itemprop="name">Used Tractor /</span>
                 </a>
               </li>
@@ -1423,10 +1406,9 @@ export default function usedTractor() {
             href="/used-cars/sell"
             className="sell-bar-fixed sell-floating-btn sign-in-comp"
             target="_blank"
-						onclick="trackEvents('UsedCars','Sellform','From - Search');"
-						style={{width:"50px"}}
+            onclick="trackEvents('UsedCars','Sellform','From - Search');"
+            style={{ width: "50px" }}
           >
-          
             <p class="mt-3 text-white"> Sell</p>
           </a>
         ) : (

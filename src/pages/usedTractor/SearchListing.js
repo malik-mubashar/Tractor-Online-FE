@@ -1,21 +1,6 @@
 import React, { useState } from "react";
-import {
-  Row,
-  Col,
-  Breadcrumb,
-  Card,
-  Button,
-  ListGroup,
-  ListGroupItem,
-} from "react-bootstrap";
-// import card_thumb_one from '../../assets/img/product/card_thumb_one.jpg'
-// import card_thumb_one from '../../assets/img/card-thumb-one.jpg';
-import {
-  BrowserView,
-  MobileView,
-  isBrowser,
-  isMobile,
-} from "react-device-detect";
+import { Col } from "react-bootstrap";
+import { isMobile } from "react-device-detect";
 import * as Icon from "react-feather";
 
 export default function SearchListing() {
@@ -111,7 +96,7 @@ export default function SearchListing() {
                           Grade
                         </p>
                         <div
-                          className={`card-text ${isMobile?'':'d-flex'}`}
+                          className={`card-text ${isMobile ? "" : "d-flex"}`}
                           style={{ justifyContent: "space-between" }}
                         >
                           <small class="text-muted">
