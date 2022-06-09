@@ -22,7 +22,6 @@ import ProtectedRoute from "../components/ProtectedRoutes/index";
 import UnProtectedRoute from "../components/UnprotectedRoutes/index";
 import { ToastContainer } from "react-toastify";
 import 'react-toastify/dist/ReactToastify.css';
-import Footer from "../pages/LandingPage/Footer";
 import Layout from "../layouts/Layouts";
 
 const AppRouter = () => {

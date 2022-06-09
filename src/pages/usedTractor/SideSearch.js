@@ -6,19 +6,7 @@ import {
   AccordionItemBody,
 } from "react-accessible-accordion";
 import "react-accessible-accordion/dist/fancy-example.css";
-import {
-  Navbar,
-  Nav,
-  NavDropdown,
-  Container,
-  Row,
-  Col,
-  Form,
-  FormControl,
-  Button,
-  Image,
-} from "react-bootstrap";
-import * as Icon from "react-feather";
+import { Form, FormControl } from "react-bootstrap";
 import SelectSearch from "./SelectSearch";
 
 export default function SideSearch() {
@@ -298,8 +286,7 @@ export default function SideSearch() {
                   <input
                     class="btn btn-primary refine-go"
                     type="submit"
-										value="Go"
-										
+                    value="Go"
                   />
                 </li>
               </ul>
