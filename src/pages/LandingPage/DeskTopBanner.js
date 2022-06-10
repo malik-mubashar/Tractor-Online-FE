@@ -75,7 +75,7 @@ const DeskTopBanner = () => {
             width="75%"
             height="50%"
             alt=""
-            class="img_ad"
+            className="img_ad"
           />
         </div>
       </div>

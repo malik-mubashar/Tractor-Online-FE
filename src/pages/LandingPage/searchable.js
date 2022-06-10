@@ -94,7 +94,7 @@ const searchAble = () => {
             type="text"
             value={tractorModel}
             onChange={(e) => setTractorModel(e.target.value)}
-            class="ui-autocomplete-input form-control searchAble border-left-radius border-right"
+            className="ui-autocomplete-input form-control searchAble border-left-radius border-right"
             autoComplete="off"
           />
         </li>

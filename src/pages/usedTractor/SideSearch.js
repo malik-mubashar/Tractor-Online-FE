@@ -55,7 +55,7 @@ export default function SideSearch() {
               />
 
               <input
-                class="btn btn-primary refine-go col-2"
+                className="btn btn-primary refine-go col-2"
                 type="submit"
                 value="Go"
               />
@@ -69,53 +69,53 @@ export default function SideSearch() {
             <div className="accordion__arrow"></div>
           </AccordionItemTitle>
           <AccordionItemBody>
-            <ul class="list-unstyled ">
+            <ul className="list-unstyled ">
               <li title="Cars for Sale in Lahore, Pakistan">
-                <label class="filter-check clearfix">
+                <label className="filter-check clearfix">
                   <a href="" title="Cars for Sale in Lahore, Pakistan">
                     <input type="checkbox" />
                     Lahore
-                    <span class="pull-right count">14256</span>
+                    <span className="pull-right count">14256</span>
                   </a>
                 </label>
               </li>
 
               <li title="Cars for Sale in Karachi, Pakistan">
-                <label class="filter-check clearfix">
+                <label className="filter-check clearfix">
                   <a href="" title="Cars for Sale in Karachi, Pakistan">
                     <input type="checkbox" />
                     Karachi
-                    <span class="pull-right count">13189</span>
+                    <span className="pull-right count">13189</span>
                   </a>
                 </label>
               </li>
 
               <li title="Cars for Sale in Islamabad, Pakistan">
-                <label class="filter-check clearfix">
+                <label className="filter-check clearfix">
                   <a href="" title="Cars for Sale in Islamabad, Pakistan">
                     <input type="checkbox" />
                     Islamabad
-                    <span class="pull-right count">10359</span>
+                    <span className="pull-right count">10359</span>
                   </a>
                 </label>
               </li>
 
               <li title="Cars for Sale in Rawalpindi, Pakistan">
-                <label class="filter-check clearfix">
+                <label className="filter-check clearfix">
                   <a href="" title="Cars for Sale in Rawalpindi, Pakistan">
                     <input type="checkbox" />
                     Rawalpindi
-                    <span class="pull-right count">5052</span>
+                    <span className="pull-right count">5052</span>
                   </a>
                 </label>
               </li>
 
               <li title="Cars for Sale in Peshawar, Pakistan">
-                <label class="filter-check clearfix">
+                <label className="filter-check clearfix">
                   <a href="" title="Cars for Sale in Peshawar, Pakistan">
                     <input type="checkbox" />
                     Peshawar
-                    <span class="pull-right count">3661</span>
+                    <span className="pull-right count">3661</span>
                   </a>
                 </label>
               </li>
@@ -129,53 +129,53 @@ export default function SideSearch() {
             <div className="accordion__arrow"></div>
           </AccordionItemTitle>
           <AccordionItemBody>
-            <ul class="list-unstyled ">
+            <ul className="list-unstyled ">
               <li title="Toyota Cars for Sale in Pakistan">
-                <label class="filter-check clearfix">
+                <label className="filter-check clearfix">
                   <a href="" title="Toyota Cars for Sale in Pakistan">
                     <input type="checkbox" />
                     Toyota
-                    <span class="pull-right count">22831</span>
+                    <span className="pull-right count">22831</span>
                   </a>
                 </label>
               </li>
 
               <li title="Suzuki Cars for Sale in Pakistan">
-                <label class="filter-check clearfix">
+                <label className="filter-check clearfix">
                   <a href="" title="Suzuki Cars for Sale in Pakistan">
                     <input type="checkbox" />
                     Suzuki
-                    <span class="pull-right count">19891</span>
+                    <span className="pull-right count">19891</span>
                   </a>
                 </label>
               </li>
 
               <li title="Honda Cars for Sale in Pakistan">
-                <label class="filter-check clearfix">
+                <label className="filter-check clearfix">
                   <a href="" title="Honda Cars for Sale in Pakistan">
                     <input type="checkbox" />
                     Honda
-                    <span class="pull-right count">13885</span>
+                    <span className="pull-right count">13885</span>
                   </a>
                 </label>
               </li>
 
               <li title="Daihatsu Cars for Sale in Pakistan">
-                <label class="filter-check clearfix">
+                <label className="filter-check clearfix">
                   <a href="" title="Daihatsu Cars for Sale in Pakistan">
                     <input type="checkbox" />
                     Daihatsu
-                    <span class="pull-right count">2736</span>
+                    <span className="pull-right count">2736</span>
                   </a>
                 </label>
               </li>
 
               <li title="Kia Cars for Sale in Pakistan">
-                <label class="filter-check clearfix">
+                <label className="filter-check clearfix">
                   <a href="" title="Kia Cars for Sale in Pakistan">
                     <input type="checkbox" />
                     KIA
-                    <span class="pull-right count">1655</span>
+                    <span className="pull-right count">1655</span>
                   </a>
                 </label>
               </li>
@@ -189,59 +189,59 @@ export default function SideSearch() {
             <div className="accordion__arrow"></div>
           </AccordionItemTitle>
           <AccordionItemBody>
-            <ul class="list-unstyled ">
+            <ul className="list-unstyled ">
               <li title="Cars for Sale in Punjab, Pakistan">
-                <label class="filter-check clearfix">
+                <label className="filter-check clearfix">
                   <a href="" title="Cars for Sale in Punjab, Pakistan">
                     <input type="checkbox" />
                     Punjab
-                    <span class="pull-right count">36873</span>
+                    <span className="pull-right count">36873</span>
                   </a>
                 </label>
               </li>
 
               <li title="Cars for Sale in Sindh, Pakistan">
-                <label class="filter-check clearfix">
+                <label className="filter-check clearfix">
                   <a href="nofollow" title="Cars for Sale in Sindh, Pakistan">
                     <input type="checkbox" />
                     Sindh
-                    <span class="pull-right count">14380</span>
+                    <span className="pull-right count">14380</span>
                   </a>
                 </label>
               </li>
 
               <li title="Cars for Sale in Kpk, Pakistan">
-                <label class="filter-check clearfix">
+                <label className="filter-check clearfix">
                   <a href="" title="Cars for Sale in Kpk, Pakistan">
                     <input type="checkbox" />
                     KPK
-                    <span class="pull-right count">6977</span>
+                    <span className="pull-right count">6977</span>
                   </a>
                 </label>
               </li>
 
               <li title="Cars for Sale in Balochistan, Pakistan">
-                <label class="filter-check clearfix">
+                <label className="filter-check clearfix">
                   <a href="" title="Cars for Sale in Balochistan, Pakistan">
                     <input type="checkbox" />
                     Balochistan
-                    <span class="pull-right count">581</span>
+                    <span className="pull-right count">581</span>
                   </a>
                 </label>
               </li>
 
               <li title="Cars for Sale in Azad Kashmir, Pakistan">
-                <label class="filter-check clearfix">
+                <label className="filter-check clearfix">
                   <a href="" title="Cars for Sale in Azad Kashmir, Pakistan">
                     <input type="checkbox" />
                     Azad Kashmir
-                    <span class="pull-right count">497</span>
+                    <span className="pull-right count">497</span>
                   </a>
                 </label>
               </li>
 
               <li title="Cars for Sale in Federally Administered Tribal Areas, Pakistan">
-                <label class="filter-check clearfix">
+                <label className="filter-check clearfix">
                   <a
                     href="/"
                     rel="nofollow"
@@ -249,7 +249,7 @@ export default function SideSearch() {
                   >
                     <input type="checkbox" />
                     Federally Administered Tribal Areas
-                    <span class="pull-right count">8</span>
+                    <span className="pull-right count">8</span>
                   </a>
                 </label>
               </li>
@@ -284,7 +284,7 @@ export default function SideSearch() {
                 </li>
                 <li className="col-2 px-0">
                   <input
-                    class="btn btn-primary refine-go"
+                    className="btn btn-primary refine-go"
                     type="submit"
                     value="Go"
                   />

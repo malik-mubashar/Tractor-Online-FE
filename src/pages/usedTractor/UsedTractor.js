@@ -33,7 +33,7 @@ export default function usedTractor() {
                 <span itemprop="name">Used Tractor For Sale In Pakistan</span>
               </li>
             </ul>
-            <div class="search-pagi-info">
+            <div className="search-pagi-info">
               <b>1&nbsp;-&nbsp;25</b> of <b>69412</b> Results
             </div>
           </div>
@@ -48,7 +48,7 @@ export default function usedTractor() {
         </div>
       </section>
       <section>
-        <div class="container">
+        <div className="container">
           <h2>Used Tractors Price in Pakistan</h2>
           <table className="table table-bordered bg-white mb-0">
             <tbody>
@@ -84,7 +84,7 @@ export default function usedTractor() {
             and the condition of the car.
           </small>
 
-          <div class="search-detail-text primary-lang">
+          <div className="search-detail-text primary-lang">
             <h2>Tractors for Sale in Pakistan</h2>
 
             <p>
@@ -122,8 +122,8 @@ export default function usedTractor() {
         <div className="container">
           <h2>Browse More Used Tractors</h2>
           <h3>View Tractors By City</h3>
-          <ul class="list-unstyled nomargin row generic-light-grey fs12">
-            <li class="col-md-3">
+          <ul className="list-unstyled nomargin row generic-light-grey fs12">
+            <li className="col-md-3">
               <a
                 href="/used-Tractors/karachi/24857?registration_city=sindh"
                 itemprop="relatedLink"
@@ -134,7 +134,7 @@ export default function usedTractor() {
               (11200+)
             </li>
 
-            <li class="col-md-3">
+            <li className="col-md-3">
               <a
                 href="/used-Tractors/lahore/24858?registration_city=sindh"
                 itemprop="relatedLink"
@@ -145,7 +145,7 @@ export default function usedTractor() {
               (750+)
             </li>
 
-            <li class="col-md-3">
+            <li className="col-md-3">
               <a
                 href="/used-Tractors/islamabad/24856?registration_city=sindh"
                 itemprop="relatedLink"
@@ -156,7 +156,7 @@ export default function usedTractor() {
               (720+)
             </li>
 
-            <li class="col-md-3">
+            <li className="col-md-3">
               <a
                 href="/used-Tractors/hyderabad/24771?registration_city=sindh"
                 itemprop="relatedLink"
@@ -167,7 +167,7 @@ export default function usedTractor() {
               (600+)
             </li>
 
-            <li class="col-md-3">
+            <li className="col-md-3">
               <a
                 href="/used-Tractors/quetta/24826?registration_city=sindh"
                 itemprop="relatedLink"
@@ -178,7 +178,7 @@ export default function usedTractor() {
               (400+)
             </li>
 
-            <li class="col-md-3">
+            <li className="col-md-3">
               <a
                 href="/used-Tractors/multan/24810?registration_city=sindh"
                 itemprop="relatedLink"
@@ -189,7 +189,7 @@ export default function usedTractor() {
               (370+)
             </li>
 
-            <li class="col-md-3">
+            <li className="col-md-3">
               <a
                 href="/used-Tractors/rawalpindi/24831?registration_city=sindh"
                 itemprop="relatedLink"
@@ -200,7 +200,7 @@ export default function usedTractor() {
               (280+)
             </li>
 
-            <li class="col-md-3">
+            <li className="col-md-3">
               <a
                 href="/used-Tractors/bahawalpur/24732?registration_city=sindh"
                 itemprop="relatedLink"
@@ -211,7 +211,7 @@ export default function usedTractor() {
               (270+)
             </li>
 
-            <li class="col-md-3">
+            <li className="col-md-3">
               <a
                 href="/used-Tractors/rahim-yar-khan/68120?registration_city=sindh"
                 itemprop="relatedLink"
@@ -222,7 +222,7 @@ export default function usedTractor() {
               (250+)
             </li>
 
-            <li class="col-md-3">
+            <li className="col-md-3">
               <a
                 href="/used-Tractors/peshawar/24821?registration_city=sindh"
                 itemprop="relatedLink"
@@ -233,7 +233,7 @@ export default function usedTractor() {
               (250+)
             </li>
 
-            <li class="col-md-3">
+            <li className="col-md-3">
               <a
                 href="/used-Tractors/faisalabad/24753?registration_city=sindh"
                 itemprop="relatedLink"
@@ -244,7 +244,7 @@ export default function usedTractor() {
               (170+)
             </li>
 
-            <li class="col-md-3">
+            <li className="col-md-3">
               <a
                 href="/used-Tractors/abbottabad/727521?registration_city=sindh"
                 itemprop="relatedLink"
@@ -255,7 +255,7 @@ export default function usedTractor() {
               (120+)
             </li>
 
-            <li class="col-md-3">
+            <li className="col-md-3">
               <a
                 href="/used-Tractors/d-g-khan/68114?registration_city=sindh"
                 itemprop="relatedLink"
@@ -266,7 +266,7 @@ export default function usedTractor() {
               (100+)
             </li>
 
-            <li class="col-md-3">
+            <li className="col-md-3">
               <a
                 href="/used-Tractors/sukkur/24843?registration_city=sindh"
                 itemprop="relatedLink"
@@ -277,7 +277,7 @@ export default function usedTractor() {
               (100+)
             </li>
 
-            <li class="col-md-3">
+            <li className="col-md-3">
               <a
                 href="/used-Tractors/mansehra/752719?registration_city=sindh"
                 itemprop="relatedLink"
@@ -288,7 +288,7 @@ export default function usedTractor() {
               (90+)
             </li>
 
-            <li class="col-md-3">
+            <li className="col-md-3">
               <a
                 href="/used-Tractors/dera-ismail-khan/24749?registration_city=sindh"
                 itemprop="relatedLink"
@@ -299,7 +299,7 @@ export default function usedTractor() {
               (60+)
             </li>
 
-            <li class="col-md-3">
+            <li className="col-md-3">
               <a
                 href="/used-Tractors/sadiqabad/24833?registration_city=sindh"
                 itemprop="relatedLink"
@@ -310,7 +310,7 @@ export default function usedTractor() {
               (50+)
             </li>
 
-            <li class="col-md-3">
+            <li className="col-md-3">
               <a
                 href="/used-Tractors/mirpur-khas/24809?registration_city=sindh"
                 itemprop="relatedLink"
@@ -321,7 +321,7 @@ export default function usedTractor() {
               (40+)
             </li>
 
-            <li class="col-md-3">
+            <li className="col-md-3">
               <a
                 href="/used-Tractors/nawabshah/69292?registration_city=sindh"
                 itemprop="relatedLink"
@@ -332,7 +332,7 @@ export default function usedTractor() {
               (40+)
             </li>
 
-            <li class="col-md-3">
+            <li className="col-md-3">
               <a
                 href="/used-Tractors/khanpur--2/677247?registration_city=sindh"
                 itemprop="relatedLink"
@@ -345,8 +345,8 @@ export default function usedTractor() {
           </ul>
           <hr className="mt10 mb10 " />
           <h3>View car by Manufacturer</h3>
-          <ul class="list-unstyled nomargin row generic-light-grey fs12">
-            <li class="col-md-3">
+          <ul className="list-unstyled nomargin row generic-light-grey fs12">
+            <li className="col-md-3">
               <a
                 href="/used-Tractors/toyota/33"
                 itemprop="relatedLink"
@@ -357,7 +357,7 @@ export default function usedTractor() {
               (23000+)
             </li>
 
-            <li class="col-md-3">
+            <li className="col-md-3">
               <a
                 href="/used-Tractors/suzuki/32"
                 itemprop="relatedLink"
@@ -368,7 +368,7 @@ export default function usedTractor() {
               (20100+)
             </li>
 
-            <li class="col-md-3">
+            <li className="col-md-3">
               <a
                 href="/used-Tractors/honda/14"
                 itemprop="relatedLink"
@@ -379,7 +379,7 @@ export default function usedTractor() {
               (14000+)
             </li>
 
-            <li class="col-md-3">
+            <li className="col-md-3">
               <a
                 href="/used-Tractors/daihatsu/12"
                 itemprop="relatedLink"
@@ -390,7 +390,7 @@ export default function usedTractor() {
               (2700+)
             </li>
 
-            <li class="col-md-3">
+            <li className="col-md-3">
               <a
                 href="/used-Tractors/kia/19"
                 itemprop="relatedLink"
@@ -401,7 +401,7 @@ export default function usedTractor() {
               (1600+)
             </li>
 
-            <li class="col-md-3">
+            <li className="col-md-3">
               <a
                 href="/used-Tractors/nissan/26"
                 itemprop="relatedLink"
@@ -412,7 +412,7 @@ export default function usedTractor() {
               (1500+)
             </li>
 
-            <li class="col-md-3">
+            <li className="col-md-3">
               <a
                 href="/used-Tractors/hyundai/15"
                 itemprop="relatedLink"
@@ -423,7 +423,7 @@ export default function usedTractor() {
               (1100+)
             </li>
 
-            <li class="col-md-3">
+            <li className="col-md-3">
               <a
                 href="/used-Tractors/mitsubishi/25"
                 itemprop="relatedLink"
@@ -434,7 +434,7 @@ export default function usedTractor() {
               (1000+)
             </li>
 
-            <li class="col-md-3">
+            <li className="col-md-3">
               <a
                 href="/used-Tractors/changan/47"
                 itemprop="relatedLink"
@@ -445,7 +445,7 @@ export default function usedTractor() {
               (810+)
             </li>
 
-            <li class="col-md-3">
+            <li className="col-md-3">
               <a
                 href="/used-Tractors/mercedes-benz/23"
                 itemprop="relatedLink"
@@ -456,7 +456,7 @@ export default function usedTractor() {
               (790+)
             </li>
 
-            <li class="col-md-3">
+            <li className="col-md-3">
               <a
                 href="/used-Tractors/mg/121559"
                 itemprop="relatedLink"
@@ -467,7 +467,7 @@ export default function usedTractor() {
               (680+)
             </li>
 
-            <li class="col-md-3">
+            <li className="col-md-3">
               <a
                 href="/used-Tractors/audi/41"
                 itemprop="relatedLink"
@@ -478,7 +478,7 @@ export default function usedTractor() {
               (290+)
             </li>
 
-            <li class="col-md-3">
+            <li className="col-md-3">
               <a
                 href="/used-Tractors/faw/56"
                 itemprop="relatedLink"
@@ -489,7 +489,7 @@ export default function usedTractor() {
               (230+)
             </li>
 
-            <li class="col-md-3">
+            <li className="col-md-3">
               <a
                 href="/used-Tractors/bmw/8"
                 itemprop="relatedLink"
@@ -500,7 +500,7 @@ export default function usedTractor() {
               (230+)
             </li>
 
-            <li class="col-md-3">
+            <li className="col-md-3">
               <a
                 href="/used-Tractors/dfsk/59"
                 itemprop="relatedLink"
@@ -511,7 +511,7 @@ export default function usedTractor() {
               (220+)
             </li>
 
-            <li class="col-md-3">
+            <li className="col-md-3">
               <a
                 href="/used-Tractors/prince/385797"
                 itemprop="relatedLink"
@@ -522,7 +522,7 @@ export default function usedTractor() {
               (200+)
             </li>
 
-            <li class="col-md-3">
+            <li className="col-md-3">
               <a
                 href="/used-Tractors/mazda/22"
                 itemprop="relatedLink"
@@ -533,7 +533,7 @@ export default function usedTractor() {
               (170+)
             </li>
 
-            <li class="col-md-3">
+            <li className="col-md-3">
               <a
                 href="/used-Tractors/proton/27977"
                 itemprop="relatedLink"
@@ -544,7 +544,7 @@ export default function usedTractor() {
               (130+)
             </li>
 
-            <li class="col-md-3">
+            <li className="col-md-3">
               <a
                 href="/used-Tractors/lexus/21"
                 itemprop="relatedLink"
@@ -555,7 +555,7 @@ export default function usedTractor() {
               (120+)
             </li>
 
-            <li class="col-md-3">
+            <li className="col-md-3">
               <a
                 href="/used-Tractors/chevrolet/10"
                 itemprop="relatedLink"
@@ -569,8 +569,8 @@ export default function usedTractor() {
           <hr className="mt10 mb10 " />
           <h3>View Tractors by Model</h3>
 
-          <ul class="list-unstyled nomargin row generic-light-grey fs12">
-            <li class="col-md-3">
+          <ul className="list-unstyled nomargin row generic-light-grey fs12">
+            <li className="col-md-3">
               <a
                 href="/used-Tractors/toyota-corolla/688"
                 itemprop="relatedLink"
@@ -581,7 +581,7 @@ export default function usedTractor() {
               (11100+)
             </li>
 
-            <li class="col-md-3">
+            <li className="col-md-3">
               <a
                 href="/used-Tractors/honda-civic/642"
                 itemprop="relatedLink"
@@ -592,7 +592,7 @@ export default function usedTractor() {
               (7300+)
             </li>
 
-            <li class="col-md-3">
+            <li className="col-md-3">
               <a
                 href="/used-Tractors/suzuki-mehran/661"
                 itemprop="relatedLink"
@@ -603,7 +603,7 @@ export default function usedTractor() {
               (4500+)
             </li>
 
-            <li class="col-md-3">
+            <li className="col-md-3">
               <a
                 href="/used-Tractors/honda-city/664"
                 itemprop="relatedLink"
@@ -614,7 +614,7 @@ export default function usedTractor() {
               (4300+)
             </li>
 
-            <li class="col-md-3">
+            <li className="col-md-3">
               <a
                 href="/used-Tractors/suzuki-cultus/660"
                 itemprop="relatedLink"
@@ -625,7 +625,7 @@ export default function usedTractor() {
               (4300+)
             </li>
 
-            <li class="col-md-3">
+            <li className="col-md-3">
               <a
                 href="/used-Tractors/suzuki-alto/658"
                 itemprop="relatedLink"
@@ -636,7 +636,7 @@ export default function usedTractor() {
               (3400+)
             </li>
 
-            <li class="col-md-3">
+            <li className="col-md-3">
               <a
                 href="/used-Tractors/toyota-vitz/781"
                 itemprop="relatedLink"
@@ -647,7 +647,7 @@ export default function usedTractor() {
               (2000+)
             </li>
 
-            <li class="col-md-3">
+            <li className="col-md-3">
               <a
                 href="/used-Tractors/suzuki-wagon-r/801"
                 itemprop="relatedLink"
@@ -658,7 +658,7 @@ export default function usedTractor() {
               (1600+)
             </li>
 
-            <li class="col-md-3">
+            <li className="col-md-3">
               <a
                 href="/used-Tractors/suzuki-bolan/693"
                 itemprop="relatedLink"
@@ -669,7 +669,7 @@ export default function usedTractor() {
               (1200+)
             </li>
 
-            <li class="col-md-3">
+            <li className="col-md-3">
               <a
                 href="/used-Tractors/toyota-prado/38678"
                 itemprop="relatedLink"
@@ -680,7 +680,7 @@ export default function usedTractor() {
               (1200+)
             </li>
 
-            <li class="col-md-3">
+            <li className="col-md-3">
               <a
                 href="/used-Tractors/suzuki-swift/778"
                 itemprop="relatedLink"
@@ -691,7 +691,7 @@ export default function usedTractor() {
               (1200+)
             </li>
 
-            <li class="col-md-3">
+            <li className="col-md-3">
               <a
                 href="/used-Tractors/toyota-hilux/789"
                 itemprop="relatedLink"
@@ -702,7 +702,7 @@ export default function usedTractor() {
               (1100+)
             </li>
 
-            <li class="col-md-3">
+            <li className="col-md-3">
               <a
                 href="/used-Tractors/toyota-land-cruiser/651"
                 itemprop="relatedLink"
@@ -713,7 +713,7 @@ export default function usedTractor() {
               (970+)
             </li>
 
-            <li class="col-md-3">
+            <li className="col-md-3">
               <a
                 href="/used-Tractors/daihatsu-cuore/665"
                 itemprop="relatedLink"
@@ -724,7 +724,7 @@ export default function usedTractor() {
               (820+)
             </li>
 
-            <li class="col-md-3">
+            <li className="col-md-3">
               <a
                 href="/used-Tractors/honda-vezel/57545"
                 itemprop="relatedLink"
@@ -735,7 +735,7 @@ export default function usedTractor() {
               (780+)
             </li>
 
-            <li class="col-md-3">
+            <li className="col-md-3">
               <a
                 href="/used-Tractors/toyota-passo/803"
                 itemprop="relatedLink"
@@ -746,7 +746,7 @@ export default function usedTractor() {
               (780+)
             </li>
 
-            <li class="col-md-3">
+            <li className="col-md-3">
               <a
                 href="/used-Tractors/kia-sportage/715"
                 itemprop="relatedLink"
@@ -757,7 +757,7 @@ export default function usedTractor() {
               (720+)
             </li>
 
-            <li class="col-md-3">
+            <li className="col-md-3">
               <a
                 href="/used-Tractors/toyota-fortuner/833"
                 itemprop="relatedLink"
@@ -768,7 +768,7 @@ export default function usedTractor() {
               (710+)
             </li>
 
-            <li class="col-md-3">
+            <li className="col-md-3">
               <a
                 href="/used-Tractors/daihatsu-mira/788"
                 itemprop="relatedLink"
@@ -779,7 +779,7 @@ export default function usedTractor() {
               (640+)
             </li>
 
-            <li class="col-md-3">
+            <li className="col-md-3">
               <a
                 href="/used-Tractors/suzuki-khyber/698"
                 itemprop="relatedLink"
@@ -794,8 +794,8 @@ export default function usedTractor() {
           <hr className="mt10 mb10 " />
           <h3>View Tractors by Version</h3>
 
-          <ul class="list-unstyled nomargin row generic-light-grey fs12">
-            <li class="col-md-3">
+          <ul className="list-unstyled nomargin row generic-light-grey fs12">
+            <li className="col-md-3">
               <a
                 href="/used-Tractors/suzuki-alto-vxr/73649"
                 itemprop="relatedLink"
@@ -806,7 +806,7 @@ export default function usedTractor() {
               (4200+)
             </li>
 
-            <li class="col-md-3">
+            <li className="col-md-3">
               <a
                 href="/used-Tractors/toyota-corolla-gli/11052"
                 itemprop="relatedLink"
@@ -817,7 +817,7 @@ export default function usedTractor() {
               (3900+)
             </li>
 
-            <li class="col-md-3">
+            <li className="col-md-3">
               <a
                 href="/used-Tractors/honda-civic-vti-oriel/11049"
                 itemprop="relatedLink"
@@ -828,7 +828,7 @@ export default function usedTractor() {
               (3600+)
             </li>
 
-            <li class="col-md-3">
+            <li className="col-md-3">
               <a
                 href="/used-Tractors/suzuki-mehran-vx/73466"
                 itemprop="relatedLink"
@@ -839,7 +839,7 @@ export default function usedTractor() {
               (3500+)
             </li>
 
-            <li class="col-md-3">
+            <li className="col-md-3">
               <a
                 href="/used-Tractors/toyota-corolla-altis/57921"
                 itemprop="relatedLink"
@@ -850,7 +850,7 @@ export default function usedTractor() {
               (3100+)
             </li>
 
-            <li class="col-md-3">
+            <li className="col-md-3">
               <a
                 href="/used-Tractors/honda-civic-vti/11047"
                 itemprop="relatedLink"
@@ -861,7 +861,7 @@ export default function usedTractor() {
               (2900+)
             </li>
 
-            <li class="col-md-3">
+            <li className="col-md-3">
               <a
                 href="/used-Tractors/toyota-corolla-xli/10936"
                 itemprop="relatedLink"
@@ -872,7 +872,7 @@ export default function usedTractor() {
               (1800+)
             </li>
 
-            <li class="col-md-3">
+            <li className="col-md-3">
               <a
                 href="/used-Tractors/toyota-vitz-f/233972"
                 itemprop="relatedLink"
@@ -883,7 +883,7 @@ export default function usedTractor() {
               (1600+)
             </li>
 
-            <li class="col-md-3">
+            <li className="col-md-3">
               <a
                 href="/used-Tractors/honda-civic-exi/73549"
                 itemprop="relatedLink"
@@ -894,7 +894,7 @@ export default function usedTractor() {
               (1300+)
             </li>
 
-            <li class="col-md-3">
+            <li className="col-md-3">
               <a
                 href="/used-Tractors/toyota-passo-x/73421"
                 itemprop="relatedLink"
@@ -905,7 +905,7 @@ export default function usedTractor() {
               (1100+)
             </li>
 
-            <li class="col-md-3">
+            <li className="col-md-3">
               <a
                 href="/used-Tractors/honda-city-aspire/10993"
                 itemprop="relatedLink"
@@ -916,7 +916,7 @@ export default function usedTractor() {
               (910+)
             </li>
 
-            <li class="col-md-3">
+            <li className="col-md-3">
               <a
                 href="/used-Tractors/honda-city-prosmatec/846738"
                 itemprop="relatedLink"
@@ -927,7 +927,7 @@ export default function usedTractor() {
               (890+)
             </li>
 
-            <li class="col-md-3">
+            <li className="col-md-3">
               <a
                 href="/used-Tractors/toyota-hilux-double-cabin/1194974"
                 itemprop="relatedLink"
@@ -938,7 +938,7 @@ export default function usedTractor() {
               (840+)
             </li>
 
-            <li class="col-md-3">
+            <li className="col-md-3">
               <a
                 href="/used-Tractors/suzuki-swift-dlx/108812"
                 itemprop="relatedLink"
@@ -949,7 +949,7 @@ export default function usedTractor() {
               (750+)
             </li>
 
-            <li class="col-md-3">
+            <li className="col-md-3">
               <a
                 href="/used-Tractors/honda-city-idsi/480516"
                 itemprop="relatedLink"
@@ -960,7 +960,7 @@ export default function usedTractor() {
               (750+)
             </li>
 
-            <li class="col-md-3">
+            <li className="col-md-3">
               <a
                 href="/used-Tractors/suzuki-cultus-vxri/73452"
                 itemprop="relatedLink"
@@ -971,7 +971,7 @@ export default function usedTractor() {
               (700+)
             </li>
 
-            <li class="col-md-3">
+            <li className="col-md-3">
               <a
                 href="/used-Tractors/toyota-corolla-altis-x/679937"
                 itemprop="relatedLink"
@@ -982,7 +982,7 @@ export default function usedTractor() {
               (620+)
             </li>
 
-            <li class="col-md-3">
+            <li className="col-md-3">
               <a
                 href="/used-Tractors/daihatsu-cuore-cx/10816"
                 itemprop="relatedLink"
@@ -996,8 +996,8 @@ export default function usedTractor() {
 
           <hr className="mt10 mb10 " />
           <h3>View Tractors by Engine Capacity</h3>
-          <ul class="list-unstyled nomargin row generic-light-grey fs12">
-            <li class="col-md-3">
+          <ul className="list-unstyled nomargin row generic-light-grey fs12">
+            <li className="col-md-3">
               <a
                 href="/used-Tractors/family-Tractors/587667"
                 itemprop="relatedLink"
@@ -1008,7 +1008,7 @@ export default function usedTractor() {
               (37600+)
             </li>
 
-            <li class="col-md-3">
+            <li className="col-md-3">
               <a
                 href="/used-Tractors/small/266374"
                 itemprop="relatedLink"
@@ -1019,7 +1019,7 @@ export default function usedTractor() {
               (24700+)
             </li>
 
-            <li class="col-md-3">
+            <li className="col-md-3">
               <a
                 href="/used-Tractors/old/430603"
                 itemprop="relatedLink"
@@ -1030,7 +1030,7 @@ export default function usedTractor() {
               (22100+)
             </li>
 
-            <li class="col-md-3">
+            <li className="col-md-3">
               <a
                 href="/used-Tractors/big/266260"
                 itemprop="relatedLink"
@@ -1041,7 +1041,7 @@ export default function usedTractor() {
               (13400+)
             </li>
 
-            <li class="col-md-3">
+            <li className="col-md-3">
               <a
                 href="/used-Tractors/low-priced/328875"
                 itemprop="relatedLink"
@@ -1052,7 +1052,7 @@ export default function usedTractor() {
               (13000+)
             </li>
 
-            <li class="col-md-3">
+            <li className="col-md-3">
               <a
                 href="/used-Tractors/low-mileage/485505"
                 itemprop="relatedLink"
@@ -1063,7 +1063,7 @@ export default function usedTractor() {
               (11600+)
             </li>
 
-            <li class="col-md-3">
+            <li className="col-md-3">
               <a
                 href="/used-Tractors/luxury/72787"
                 itemprop="relatedLink"
@@ -1074,7 +1074,7 @@ export default function usedTractor() {
               (5900+)
             </li>
 
-            <li class="col-md-3">
+            <li className="col-md-3">
               <a
                 href="/used-Tractors/cheap/329024"
                 itemprop="relatedLink"
@@ -1085,7 +1085,7 @@ export default function usedTractor() {
               (3800+)
             </li>
 
-            <li class="col-md-3">
+            <li className="col-md-3">
               <a
                 href="/used-Tractors/carry-daba/270569"
                 itemprop="relatedLink"
@@ -1096,7 +1096,7 @@ export default function usedTractor() {
               (1900+)
             </li>
 
-            <li class="col-md-3">
+            <li className="col-md-3">
               <a
                 href="/used-Tractors/sports/72786"
                 itemprop="relatedLink"
@@ -1107,7 +1107,7 @@ export default function usedTractor() {
               (220+)
             </li>
 
-            <li class="col-md-3">
+            <li className="col-md-3">
               <a
                 href="/used-Tractors/modified/389984"
                 itemprop="relatedLink"
@@ -1118,7 +1118,7 @@ export default function usedTractor() {
               (210+)
             </li>
 
-            <li class="col-md-3">
+            <li className="col-md-3">
               <a
                 href="/used-Tractors/custom-auction/716218"
                 itemprop="relatedLink"
@@ -1129,7 +1129,7 @@ export default function usedTractor() {
               (110+)
             </li>
 
-            <li class="col-md-3">
+            <li className="col-md-3">
               <a
                 href="/used-Tractors/duplicate-book/389980"
                 itemprop="relatedLink"
@@ -1140,7 +1140,7 @@ export default function usedTractor() {
               (100+)
             </li>
 
-            <li class="col-md-3">
+            <li className="col-md-3">
               <a
                 href="/used-Tractors/exotic/73686"
                 itemprop="relatedLink"
@@ -1151,7 +1151,7 @@ export default function usedTractor() {
               (100+)
             </li>
 
-            <li class="col-md-3">
+            <li className="col-md-3">
               <a
                 href="/used-Tractors/duplicate-file/716615"
                 itemprop="relatedLink"
@@ -1162,7 +1162,7 @@ export default function usedTractor() {
               (70+)
             </li>
 
-            <li class="col-md-3">
+            <li className="col-md-3">
               <a
                 href="/used-Tractors/electric/389926"
                 itemprop="relatedLink"
@@ -1173,7 +1173,7 @@ export default function usedTractor() {
               (60+)
             </li>
 
-            <li class="col-md-3">
+            <li className="col-md-3">
               <a
                 href="/used-Tractors/amnesty-scheme/716454"
                 itemprop="relatedLink"
@@ -1184,7 +1184,7 @@ export default function usedTractor() {
               (50+)
             </li>
 
-            <li class="col-md-3">
+            <li className="col-md-3">
               <a
                 href="/used-Tractors/army-auction-jeep/430586"
                 itemprop="relatedLink"
@@ -1199,8 +1199,8 @@ export default function usedTractor() {
           <hr className="mt10 mb10 " />
           <h3>View Tractors by Category</h3>
 
-          <ul class="list-unstyled nomargin row generic-light-grey fs12">
-            <li class="col-md-3">
+          <ul className="list-unstyled nomargin row generic-light-grey fs12">
+            <li className="col-md-3">
               <a
                 href="/used-Tractors/family-Tractors/587667"
                 itemprop="relatedLink"
@@ -1211,7 +1211,7 @@ export default function usedTractor() {
               (37600+)
             </li>
 
-            <li class="col-md-3">
+            <li className="col-md-3">
               <a
                 href="/used-Tractors/small/266374"
                 itemprop="relatedLink"
@@ -1222,7 +1222,7 @@ export default function usedTractor() {
               (24700+)
             </li>
 
-            <li class="col-md-3">
+            <li className="col-md-3">
               <a
                 href="/used-Tractors/old/430603"
                 itemprop="relatedLink"
@@ -1233,7 +1233,7 @@ export default function usedTractor() {
               (22100+)
             </li>
 
-            <li class="col-md-3">
+            <li className="col-md-3">
               <a
                 href="/used-Tractors/big/266260"
                 itemprop="relatedLink"
@@ -1244,7 +1244,7 @@ export default function usedTractor() {
               (13400+)
             </li>
 
-            <li class="col-md-3">
+            <li className="col-md-3">
               <a
                 href="/used-Tractors/low-priced/328875"
                 itemprop="relatedLink"
@@ -1255,7 +1255,7 @@ export default function usedTractor() {
               (13000+)
             </li>
 
-            <li class="col-md-3">
+            <li className="col-md-3">
               <a
                 href="/used-Tractors/low-mileage/485505"
                 itemprop="relatedLink"
@@ -1266,7 +1266,7 @@ export default function usedTractor() {
               (11600+)
             </li>
 
-            <li class="col-md-3">
+            <li className="col-md-3">
               <a
                 href="/used-Tractors/luxury/72787"
                 itemprop="relatedLink"
@@ -1277,7 +1277,7 @@ export default function usedTractor() {
               (5900+)
             </li>
 
-            <li class="col-md-3">
+            <li className="col-md-3">
               <a
                 href="/used-Tractors/cheap/329024"
                 itemprop="relatedLink"
@@ -1288,7 +1288,7 @@ export default function usedTractor() {
               (3800+)
             </li>
 
-            <li class="col-md-3">
+            <li className="col-md-3">
               <a
                 href="/used-Tractors/carry-daba/270569"
                 itemprop="relatedLink"
@@ -1299,7 +1299,7 @@ export default function usedTractor() {
               (1900+)
             </li>
 
-            <li class="col-md-3">
+            <li className="col-md-3">
               <a
                 href="/used-Tractors/sports/72786"
                 itemprop="relatedLink"
@@ -1310,7 +1310,7 @@ export default function usedTractor() {
               (220+)
             </li>
 
-            <li class="col-md-3">
+            <li className="col-md-3">
               <a
                 href="/used-Tractors/modified/389984"
                 itemprop="relatedLink"
@@ -1321,7 +1321,7 @@ export default function usedTractor() {
               (210+)
             </li>
 
-            <li class="col-md-3">
+            <li className="col-md-3">
               <a
                 href="/used-Tractors/custom-auction/716218"
                 itemprop="relatedLink"
@@ -1332,7 +1332,7 @@ export default function usedTractor() {
               (110+)
             </li>
 
-            <li class="col-md-3">
+            <li className="col-md-3">
               <a
                 href="/used-Tractors/duplicate-book/389980"
                 itemprop="relatedLink"
@@ -1343,7 +1343,7 @@ export default function usedTractor() {
               (100+)
             </li>
 
-            <li class="col-md-3">
+            <li className="col-md-3">
               <a
                 href="/used-Tractors/exotic/73686"
                 itemprop="relatedLink"
@@ -1354,7 +1354,7 @@ export default function usedTractor() {
               (100+)
             </li>
 
-            <li class="col-md-3">
+            <li className="col-md-3">
               <a
                 href="/used-Tractors/duplicate-file/716615"
                 itemprop="relatedLink"
@@ -1365,7 +1365,7 @@ export default function usedTractor() {
               (70+)
             </li>
 
-            <li class="col-md-3">
+            <li className="col-md-3">
               <a
                 href="/used-Tractors/electric/389926"
                 itemprop="relatedLink"
@@ -1376,7 +1376,7 @@ export default function usedTractor() {
               (60+)
             </li>
 
-            <li class="col-md-3">
+            <li className="col-md-3">
               <a
                 href="/used-Tractors/amnesty-scheme/716454"
                 itemprop="relatedLink"
@@ -1387,7 +1387,7 @@ export default function usedTractor() {
               (50+)
             </li>
 
-            <li class="col-md-3">
+            <li className="col-md-3">
               <a
                 href="/used-Tractors/army-auction-jeep/430586"
                 itemprop="relatedLink"
@@ -1409,16 +1409,16 @@ export default function usedTractor() {
             onclick="trackEvents('UsedCars','Sellform','From - Search');"
             style={{ width: "50px" }}
           >
-            <p class="mt-3 text-white"> Sell</p>
+            <p className="mt-3 text-white"> Sell</p>
           </a>
         ) : (
           <a
             href="/used-cars/sell"
-            class="sell-bar-fixed sell-floating-btn sign-in-comp"
+            className="sell-bar-fixed sell-floating-btn sign-in-comp"
             target="_blank"
             onclick="trackEvents('UsedCars','Sellform','From - Search');"
           >
-            <span class="sell-icons">
+            <span className="sell-icons">
               <Image
                 src={tractorSVG}
                 height="40px"
@@ -1427,7 +1427,7 @@ export default function usedTractor() {
                 className="d-flex justify-content-center m-auto"
               />{" "}
             </span>
-            <p class="mt-3 text-white"> Sell My Tractor</p>
+            <p className="mt-3 text-white"> Sell My Tractor</p>
           </a>
         )}
       </div>

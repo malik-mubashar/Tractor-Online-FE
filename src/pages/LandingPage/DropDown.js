@@ -71,7 +71,7 @@ export default function DropDown({ usedCars, newCars, autoStore }) {
         >
           {usedCars ? (
             <>
-              <ul class="list-unstyled col-3 p-0 border-right">
+              <ul className="list-unstyled col-3 p-0 border-right">
                 {usedTractors.map((option) => (
                   <li className="dropdown-list" key={option.heading}>
                     <a href="/" className="d-flex pl-1 dropdown-link">
@@ -89,7 +89,7 @@ export default function DropDown({ usedCars, newCars, autoStore }) {
                   </li>
                 ))}
               </ul>
-              <ul class="list-unstyled col-3 p-0 border-right">
+              <ul className="list-unstyled col-3 p-0 border-right">
                 {usedTractorsSecond.map((option) => (
                   <li className="dropdown-list" key={option.heading}>
                     <a href="/" className="d-flex pl-1 dropdown-link">
@@ -107,7 +107,7 @@ export default function DropDown({ usedCars, newCars, autoStore }) {
                   </li>
                 ))}
               </ul>
-              <ul class="list-unstyled col-3 border-right text-center">
+              <ul className="list-unstyled col-3 border-right text-center">
                 <li className="mb-3">
                   <a href="/">
                     <Icon.MapPin className="icon mr-2" />
@@ -121,12 +121,12 @@ export default function DropDown({ usedCars, newCars, autoStore }) {
                       className="dropdown-link"
                       title="Used Cars for sale in Karachi"
                     >
-                      <p class="city-name">{option}</p>
+                      <p className="city-name">{option}</p>
                     </a>
                   </li>
                 ))}
               </ul>
-              <ul class="list-unstyled col-3 border-right text-center">
+              <ul className="list-unstyled col-3 border-right text-center">
                 <li className="mb-3">
                   <a href="/">
                     <Icon.Trello className="icon mr-2" />
@@ -140,7 +140,7 @@ export default function DropDown({ usedCars, newCars, autoStore }) {
                       className="dropdown-link"
                       title="Used Cars for sale in Karachi"
                     >
-                      <p class="city-name">{option}</p>
+                      <p className="city-name">{option}</p>
                     </a>
                   </li>
                 ))}
@@ -150,7 +150,7 @@ export default function DropDown({ usedCars, newCars, autoStore }) {
 
           {newCars ? (
             <>
-              <ul class="list-unstyled col-6 border-right">
+              <ul className="list-unstyled col-6 border-right">
                 {newTractors.map((option) => (
                   <li className="dropdown-list" key={option.heading}>
                     <a href={"/"} className="d-flex pl-1 dropdown-link">
@@ -168,7 +168,7 @@ export default function DropDown({ usedCars, newCars, autoStore }) {
                   </li>
                 ))}
               </ul>
-              <ul class="list-unstyled col-6 border-right text-center">
+              <ul className="list-unstyled col-6 border-right text-center">
                 <li className="mb-3">
                   <a href="/">
                     <Icon.MapPin className="icon mr-2" />
@@ -182,7 +182,7 @@ export default function DropDown({ usedCars, newCars, autoStore }) {
                       className="dropdown-link"
                       title="Used Cars for sale in Karachi"
                     >
-                      <p class="city-name">{option}</p>
+                      <p className="city-name">{option}</p>
                     </a>
                   </li>
                 ))}
@@ -192,7 +192,7 @@ export default function DropDown({ usedCars, newCars, autoStore }) {
 
           {autoStore ? (
             <>
-              <ul class="list-unstyled col-12 border-right">
+              <ul className="list-unstyled col-12 border-right">
                 {autoStoreValues.map((option) => (
                   <li className="dropdown-list" key={option.heading}>
                     <a href="/" className="d-flex pl-1 dropdown-link">

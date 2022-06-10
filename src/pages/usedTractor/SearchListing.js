@@ -9,9 +9,9 @@ export default function SearchListing() {
     <>
       <Col sm={12} lg={12} xl={12}>
         <div className="topSorting">
-          <div class="organize-results">
-            <div class="col-md-8 d-flex" style={{ marginTop: "10px" }}>
-              <span class="sort-by-text mt-2 mr-2">Sort By: </span>
+          <div className="organize-results">
+            <div className="col-md-8 d-flex" style={{ marginTop: "10px" }}>
+              <span className="sort-by-text mt-2 mr-2">Sort By: </span>
               <select
                 className="form-control col-7 mb-2"
                 id="sortby"
@@ -36,13 +36,13 @@ export default function SearchListing() {
             </div>
 
             {!isMobile && (
-              <div class="col-md-4 mt5 text-right">
-                <div class="btn-group" data-toggle="buttons-radio">
+              <div className="col-md-4 mt5 text-right">
+                <div className="btn-group" data-toggle="buttons-radio">
                   <button
                     onClick={() => setGridOrList("list")}
                     type="button"
                     id="list"
-                    class="sortButtonList"
+                    className="sortButtonList"
                   >
                     List
                   </button>
@@ -50,7 +50,7 @@ export default function SearchListing() {
                     onClick={() => setGridOrList("grid")}
                     type="button"
                     id="grid"
-                    class="sortButtonGrid"
+                    className="sortButtonGrid"
                   >
                     Grid
                   </button>
@@ -74,7 +74,7 @@ export default function SearchListing() {
                       } ${isMobile ? "d-block" : null}`}
                     >
                       <img
-                        // class="card-img-top"
+                        // className="card-img-top"
                         // className={gridOrList==='list'?'list':'grid'}
                         src="https://bsmedia.business-standard.com/_media/bs/img/article/2020-06/01/full/1590987638-6809.png"
                         alt="Card"
@@ -85,12 +85,12 @@ export default function SearchListing() {
                           className="d-flex"
                           style={{ justifyContent: "space-between" }}
                         >
-                          <h5 class="card-title">
+                          <h5 className="card-title">
                             Toyota Prado TX Limited 2.7 2008
                           </h5>
                           <h5>PKR 123 lacs</h5>
                         </div>
-                        <p class="card-text">Karachi</p>
+                        <p className="card-text">Karachi</p>
                         <p>
                           2008 | 111,123 km | Petrol | 2700cc | Automatic | 4.5
                           Grade
@@ -99,7 +99,7 @@ export default function SearchListing() {
                           className={`card-text ${isMobile ? "" : "d-flex"}`}
                           style={{ justifyContent: "space-between" }}
                         >
-                          <small class="text-muted">
+                          <small className="text-muted">
                             Last updated 3 mins ago
                           </small>
                           <div className="d-flex">
@@ -132,17 +132,17 @@ export default function SearchListing() {
             &nbsp;&nbsp;Last
           </span>
         </div>
-        <div class="sellAdd clearfix text-center p20 mt-70">
+        <div className="sellAdd clearfix text-center p20 mt-70">
           <img
             alt="Post an Ad"
             src="https://wsa4.pakwheels.com/assets/sell-car-bf334aeb9cf3001080a3e887d51a3b32.png"
             title="Post an Ad"
           />
 
-          <h3 class="title">
-            Post an ad for <span class="generic-red">FREE</span>
+          <h3 className="title">
+            Post an ad for <span className="generic-red">FREE</span>
           </h3>
-          <p class="mt10 mb5 fs16">Sell it faster to thousands of buyers</p>
+          <p className="mt10 mb5 fs16">Sell it faster to thousands of buyers</p>
           <div>
             <img
               alt="Post an Ad Left"
@@ -150,7 +150,7 @@ export default function SearchListing() {
             />
             <a
               href="/used-tractors/sell"
-              class="btn btn-success sign-in-comp"
+              className="btn btn-success sign-in-comp"
               onclick="trackEvents('Used tractors', 'Add Car', 'From - Search');"
             >
               Sell Your Car

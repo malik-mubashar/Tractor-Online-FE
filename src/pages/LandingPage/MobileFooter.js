@@ -9,28 +9,28 @@ import { Image } from "react-bootstrap";
 const MobileFooter = () => {
   return (
     <div className="overflow-x-hidden">
-      <div class="bottom-nav css-de1c49">
-        <button class="generic-link Mui-selected css-4g4bsj">
+      <div className="bottom-nav css-de1c49">
+        <button className="generic-link Mui-selected css-4g4bsj">
           <Image src={HomeSelected} alt="" width="100%" height="18px" />
-          <span class="generic-link Mui-selected css-1lnpzxd">Home</span>
+          <span className="generic-link Mui-selected css-1lnpzxd">Home</span>
         </button>
-        <button class="css-4g4bsj">
+        <button className="css-4g4bsj">
           <Image src={MyAdsSelected} alt="" width="100%" height="18px" />
-          <span class="css-1lnpzxd">My Ads</span>
+          <span className="css-1lnpzxd">My Ads</span>
         </button>
         <div>
-          <button class="bottom-nav-sell-blue">
+          <button className="bottom-nav-sell-blue">
             <Image src={AddSell} alt="" width="100%" height="18px" />
           </button>
-          <div class="sell-text">Sell</div>
+          <div className="sell-text">Sell</div>
         </div>
-        <button class="css-4g4bsj">
+        <button className="css-4g4bsj">
           <Image src={ChatSelected} alt="" width="100%" height="18px" />
-          <span class="css-1lnpzxd">Chat</span>
+          <span className="css-1lnpzxd">Chat</span>
         </button>
-        <button class="css-4g4bsj">
+        <button className="css-4g4bsj">
           <Image src={MoreSelected} alt="" width="100%" height="18px" />
-          <span class="css-1lnpzxd">More</span>
+          <span className="css-1lnpzxd">More</span>
         </button>
       </div>
     </div>
