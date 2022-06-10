@@ -1,16 +1,31 @@
-import React, { useState } from "react";
+import React from "react";
 import * as Icon from "react-feather";
+import Icofont from 'react-icofont';
 
 export default function DropDown({ usedCars, newCars, autoStore }) {
-  const [text, setText] = useState([
-    "Find Used Tractor for Sale",
-    "Featured Used Tractor",
-    "Sell Your Tractor",
-    "Used Tractor Dealers",
-    "Price Calculator",
-  ]);
 
-  const [cities, setCities] = useState([
+  const usedTractors = [
+    { heading: "Find Used Tractor for Sale", subHeading: "Search from over 110k options", icon: 'light-bulb' },
+    { heading: "Featured Used Tractor", subHeading: "View featured tractors by TractorOnline", icon: 'layers' },
+    { heading: "Sell Your Tractor", subHeading: "Post a free ad and sell your tractor quickly", icon: 'grocery' },
+    { heading: "Used Tractor Dealers", subHeading: "Find used tractor dealers near your", icon: 'star' },
+    { heading: "Price Calculator", subHeading: "Calculate the market price of tractors", icon: 'recycle' }
+  ]
+
+  const usedTractorsSecond = [
+    { heading: "TractorOnline Certified Tractors", subHeading: "Tractors with the TractorOnline seal of approval", icon: 'speed-meter' },
+    { heading: "TractorOnline tractor Inspection", subHeading: "Tractor with detailed TractorOnline Inspection reports", icon: 'tick-mark' },
+    { heading: "TractorOnline Sell It For Me", subHeading: "Let TractorOnline sell your tractor hassle free for you", icon: 'site-map' },
+    { heading: "Auction Sheet Verification", subHeading: "Authentic Auction Sheets for your peace of mind", icon: 'data' }
+  ]
+
+  const autoStoreValues = [
+    { heading: "TractorOnline Autostore", subHeading: "Buy Auto Parts & Accessories directly from TractorOnline", icon: 'cart' },
+    { heading: "Find Auto Parts", subHeading: "Find auto parts for your tractor", icon: 'tick-mark' },
+    { heading: "Sell Tractor Parts", subHeading: "Post a free ad and sell your tractor parts quickly", icon: 'tag' },
+  ]
+
+  const cities = [
     "Karachi",
     "Lahore",
     "Islamabad",
@@ -19,9 +34,9 @@ export default function DropDown({ usedCars, newCars, autoStore }) {
     "Faisalabad",
     "Multan",
     "Gujranwala",
-  ]);
+  ]
 
-  const [model, setModel] = useState([
+  const model = [
     "Toyota Corolla",
     "Honda Civic",
     "Honda City",
@@ -30,7 +45,15 @@ export default function DropDown({ usedCars, newCars, autoStore }) {
     "Toyota Vitz",
     "Suzuki Alto",
     "Toyota Prado",
-  ]);
+  ];
+
+  const newTractors = [
+    { heading: "Find New Tractor for Sale", subHeading: "Search from over 110k options", icon: 'light-bulb' },
+    { heading: "Featured New Tractor", subHeading: "View featured tractors by TractorOnline", icon: 'layers' },
+    { heading: "Sell Your Tractor", subHeading: "Post a free ad and sell your car quickly", icon: 'grocery' },
+    { heading: "New Tractor Dealers", subHeading: "Find new car dealers near your", icon: 'star' },
+    { heading: "Price Calculator", subHeading: "Calculate the market price of tractors", icon: 'recycle' }
+  ]
 
   return (
     <div>
@@ -48,35 +71,37 @@ export default function DropDown({ usedCars, newCars, autoStore }) {
         >
           {usedCars ? (
             <>
-              <ul class="list-unstyled col-3 border-right">
-                {text.map((option) => (
-                  <li className="dropdown-list" key={option}>
-                    <a href="#" className="row pl-3 dropdown-link">
-                      <Icon.Link
-                        height="20px"
-                        width="20px"
-                        className="icon mr-2"
+              <ul class="list-unstyled col-3 p-0 border-right">
+                {usedTractors.map((option) => (
+                  <li className="dropdown-list" key={option.heading}>
+                    <a href="/" className="d-flex pl-1 dropdown-link">
+                      <Icofont
+                        icon={option.icon}
+                        height="10px"
+                        width="10px"
+                        className="icofont-2x ml-2 col-2 p-0"
                       />
-                      <div>
-                        <strong>{option}</strong>
-                        <p>Search from over 110k options</p>
+                      <div className="col-10 p-0">
+                        <strong>{option.heading}</strong>
+                        <p>{option.subHeading}</p>
                       </div>
                     </a>
                   </li>
                 ))}
               </ul>
-              <ul class="list-unstyled col-3 border-right">
-                {text.map((option) => (
-                  <li className="dropdown-list" key={option}>
-                    <a href="#" className="row pl-3 dropdown-link">
-                      <Icon.Link
-                        height="20px"
-                        width="20px"
-                        className="icon mr-2"
+              <ul class="list-unstyled col-3 p-0 border-right">
+                {usedTractorsSecond.map((option) => (
+                  <li className="dropdown-list" key={option.heading}>
+                    <a href="/" className="d-flex pl-1 dropdown-link">
+                      <Icofont
+                        icon={option.icon}
+                        height="10px"
+                        width="10px"
+                        className="icofont-2x ml-2 col-2 p-0"
                       />
-                      <div>
-                        <strong>{option}</strong>
-                        <p>Search from over 110k options</p>
+                      <div className="col-10 p-0">
+                        <strong>{option.heading}</strong>
+                        <p>{option.subHeading}</p>
                       </div>
                     </a>
                   </li>
@@ -84,15 +109,15 @@ export default function DropDown({ usedCars, newCars, autoStore }) {
               </ul>
               <ul class="list-unstyled col-3 border-right text-center">
                 <li className="mb-3">
-                  <a>
+                  <a href="/">
                     <Icon.MapPin className="icon mr-2" />
                     <strong>Popular Cities</strong>
                   </a>
                 </li>
                 {cities.map((option) => (
-                  <li key={option}>
+                  <li key={option.heading}>
                     <a
-                      href="#"
+                      href="/"
                       className="dropdown-link"
                       title="Used Cars for sale in Karachi"
                     >
@@ -103,7 +128,7 @@ export default function DropDown({ usedCars, newCars, autoStore }) {
               </ul>
               <ul class="list-unstyled col-3 border-right text-center">
                 <li className="mb-3">
-                  <a>
+                  <a href="/">
                     <Icon.Trello className="icon mr-2" />
                     <strong>Popular Models</strong>
                   </a>
@@ -126,17 +151,18 @@ export default function DropDown({ usedCars, newCars, autoStore }) {
           {newCars ? (
             <>
               <ul class="list-unstyled col-6 border-right">
-                {text.map((option) => (
-                  <li className="dropdown-list" key={option}>
-                    <a href={"/"} className="row pl-3 dropdown-link">
-                      <Icon.Link
-                        height="20px"
-                        width="20px"
-                        className="icon mr-2"
+                {newTractors.map((option) => (
+                  <li className="dropdown-list" key={option.heading}>
+                    <a href={"/"} className="d-flex pl-1 dropdown-link">
+                      <Icofont
+                        icon={option.icon}
+                        height="10px"
+                        width="10px"
+                        className="icofont-2x ml-2 col-2 p-0"
                       />
-                      <div>
-                        <strong>{option}</strong>
-                        <p>Search from over 110k options</p>
+                      <div className="col-10 p-0">
+                        <strong>{option.heading}</strong>
+                        <p>{option.subHeading}</p>
                       </div>
                     </a>
                   </li>
@@ -144,7 +170,7 @@ export default function DropDown({ usedCars, newCars, autoStore }) {
               </ul>
               <ul class="list-unstyled col-6 border-right text-center">
                 <li className="mb-3">
-                  <a>
+                  <a href="/">
                     <Icon.MapPin className="icon mr-2" />
                     <strong>Popular New Tractor</strong>
                   </a>
@@ -167,17 +193,18 @@ export default function DropDown({ usedCars, newCars, autoStore }) {
           {autoStore ? (
             <>
               <ul class="list-unstyled col-12 border-right">
-                {text.map((option) => (
-                  <li className="dropdown-list" key={option}>
-                    <a href="#" className="row pl-3 dropdown-link">
-                      <Icon.Link
-                        height="20px"
-                        width="20px"
-                        className="icon mr-2"
+                {autoStoreValues.map((option) => (
+                  <li className="dropdown-list" key={option.heading}>
+                    <a href="/" className="d-flex pl-1 dropdown-link">
+                      <Icofont
+                        icon={option.icon}
+                        height="10px"
+                        width="10px"
+                        className="icofont-2x ml-2 col-2 p-0"
                       />
-                      <div>
-                        <strong>{option}</strong>
-                        <p>Search from over 110k options</p>
+                      <div className="col-10 p-0">
+                        <strong>{option.heading}</strong>
+                        <p>{option.subHeading}</p>
                       </div>
                     </a>
                   </li>
