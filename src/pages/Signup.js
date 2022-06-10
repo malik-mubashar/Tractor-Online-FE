@@ -105,7 +105,7 @@ const SignUp = () => {
 											<Form.Group>
                         <Form.Label>Full Name</Form.Label>
                         <Form.Control
-                          type="email"
+                          type="text"
                           onChange={(event) => {
                             setFullName(event.target.value);
                           }}
