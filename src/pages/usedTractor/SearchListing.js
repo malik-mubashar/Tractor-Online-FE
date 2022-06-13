@@ -8,6 +8,7 @@ import {
   ListGroup,
   ListGroupItem,
 } from "react-bootstrap";
+
 // import card_thumb_one from '../../assets/img/product/card_thumb_one.jpg'
 // import card_thumb_one from '../../assets/img/card-thumb-one.jpg';
 import {
@@ -17,8 +18,11 @@ import {
   isMobile,
 } from "react-device-detect";
 import * as Icon from "react-feather";
+import { useHistory } from "react-router-dom";
 
 export default function SearchListing() {
+	let history = useHistory();
+
   const [gridOrList, setGridOrList] = useState("list");
   return (
     <>
@@ -100,7 +104,11 @@ export default function SearchListing() {
                           className="d-flex"
                           style={{ justifyContent: "space-between" }}
                         >
-                          <h5 class="card-title">
+													<h5
+														onClick={() => { history.push("/addDetails") }}
+													style={{cursor:"pointer"}}	
+													>
+														
                             Toyota Prado TX Limited 2.7 2008
                           </h5>
                           <h5>PKR 123 lacs</h5>
@@ -111,7 +119,7 @@ export default function SearchListing() {
                           Grade
                         </p>
                         <div
-                          className={`card-text ${isMobile?'':'d-flex'}`}
+                          className={`card-text ${isMobile?'':gridOrList==='list'?'d-flex':''} `}
                           style={{ justifyContent: "space-between" }}
                         >
                           <small class="text-muted">
