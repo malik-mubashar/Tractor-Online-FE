@@ -20,14 +20,14 @@ import "../assets/css/dashboard.scss";
 import "../assets/css/usedTractor.scss";
 import ProtectedRoute from "../components/ProtectedRoutes/index";
 import UnProtectedRoute from "../components/UnprotectedRoutes/index";
-import { ToastContainer } from "react-toastify";
+// import { ToastContainer } from "react-toastify";
 import 'react-toastify/dist/ReactToastify.css';
 import Layout from "../layouts/Layouts";
 
 const AppRouter = () => {
   return (
     <>
-      <ToastContainer />
+      {/* <ToastContainer /> */}
 
       <BrowserRouter>
         <Switch>

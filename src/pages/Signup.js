@@ -5,7 +5,7 @@ import * as Icon from "react-feather";
 // Logo image file path
 import Logo from "../assets/img/logo.png";
 import { user } from "../API/User/index";
-import {  toast } from 'react-toastify';
+// import {  toast } from 'react-toastify';
 import {RootContext} from "../context/RootContext";
 
 
@@ -36,7 +36,7 @@ const SignUp = () => {
 
 			//success
 			if (result.error === false) {
-				toast.success("Wow so easy registered!")
+				// toast.success("Wow so easy registered!")
 				setCurrentUser(result.data)
 				localStorage.setItem("currentUser", JSON.stringify(result.data));
 				history.push("/dashboard")

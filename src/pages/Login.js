@@ -5,7 +5,7 @@ import * as Icon from "react-feather";
 import { user } from "../API/User/index";
 // Logo image file path
 import Logo from "../assets/img/logo.png";
-import { toast } from "react-toastify";
+// import { toast } from "react-toastify";
 import {RootContext} from "../context/RootContext";
 const Login = () => {
 	const { currentUser,setCurrentUser } = useContext(RootContext);
@@ -21,7 +21,7 @@ const Login = () => {
       console.log(result);
    			//success
 				 if (result.error === false) {
-					toast.success("Welocme!")
+					// toast.success("Welocme!")
 					setCurrentUser(result.data)
 					localStorage.setItem("currentUser", JSON.stringify(result.data));
 					history.push("/dashboard")
