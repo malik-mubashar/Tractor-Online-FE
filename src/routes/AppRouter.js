@@ -18,11 +18,13 @@ import "../assets/css/style.css";
 import "../assets/css/responsive.css";
 import "../assets/css/dashboard.scss";
 import "../assets/css/usedTractor.scss";
+import "../assets/css/addDetails.scss";
 import ProtectedRoute from "../components/ProtectedRoutes/index";
 import UnProtectedRoute from "../components/UnprotectedRoutes/index";
 // import { ToastContainer } from "react-toastify";
 import 'react-toastify/dist/ReactToastify.css';
 import Layout from "../layouts/Layouts";
+import AddDetails from "../pages/AddDetails/AddDetails";
 
 const AppRouter = () => {
   return (
@@ -42,6 +44,9 @@ const AppRouter = () => {
 					</UnProtectedRoute>
 					<UnProtectedRoute exact path="/usedtractor">
             <UsedTractor />
+					</UnProtectedRoute>
+					<UnProtectedRoute exact path="/addDetails">
+            <AddDetails />
           </UnProtectedRoute>
           <UnProtectedRoute exact path="/signup/">
             <Signup />
