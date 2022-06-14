@@ -14,7 +14,7 @@
 importScripts("https://storage.googleapis.com/workbox-cdn/releases/3.6.3/workbox-sw.js");
 
 importScripts(
-  "tractoronline.com.pk/precache-manifest.0a819fe9404550e159207255d61fd18d.js"
+  "tractoronline.com.pk/precache-manifest.a154512098c748a16cb35b003142e1bf.js"
 );
 
 workbox.clientsClaim();
