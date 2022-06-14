@@ -1,7 +1,7 @@
 {
   "main.css": "tractoronline.com.pk/static/css/main.7bb3ce23.chunk.css",
-  "main.js": "tractoronline.com.pk/static/js/main.9909fe11.chunk.js",
-  "main.js.map": "tractoronline.com.pk/static/js/main.9909fe11.chunk.js.map",
+  "main.js": "tractoronline.com.pk/static/js/main.dff1d2cf.chunk.js",
+  "main.js.map": "tractoronline.com.pk/static/js/main.dff1d2cf.chunk.js.map",
   "static/css/1.d978b773.chunk.css": "tractoronline.com.pk/static/css/1.d978b773.chunk.css",
   "static/js/1.e14bbef6.chunk.js": "tractoronline.com.pk/static/js/1.e14bbef6.chunk.js",
   "static/js/1.e14bbef6.chunk.js.map": "tractoronline.com.pk/static/js/1.e14bbef6.chunk.js.map",
@@ -44,6 +44,6 @@
   "static/css/main.7bb3ce23.chunk.css.map": "tractoronline.com.pk/static/css/main.7bb3ce23.chunk.css.map",
   "static/css/1.d978b773.chunk.css.map": "tractoronline.com.pk/static/css/1.d978b773.chunk.css.map",
   "index.html": "tractoronline.com.pk/index.html",
-  "precache-manifest.0a819fe9404550e159207255d61fd18d.js": "tractoronline.com.pk/precache-manifest.0a819fe9404550e159207255d61fd18d.js",
+  "precache-manifest.a154512098c748a16cb35b003142e1bf.js": "tractoronline.com.pk/precache-manifest.a154512098c748a16cb35b003142e1bf.js",
   "service-worker.js": "tractoronline.com.pk/service-worker.js"
 }

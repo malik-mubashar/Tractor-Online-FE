@@ -8,7 +8,7 @@ import RootContext from "./context/RootContext";
 
 ReactDOM.render(
   <RootContext>
-		<BrowserRouter>
+		<BrowserRouter basename="/">
       <AppRouter />
     </BrowserRouter>
   </RootContext>,document.querySelector("#root")

@@ -1,11 +1,11 @@
 self.__precacheManifest = [
   {
-    "revision": "9909fe1141a7643d5001",
+    "revision": "dff1d2cf3012d14cf9c2",
     "url": "tractoronline.com.pk/static/css/main.7bb3ce23.chunk.css"
   },
   {
-    "revision": "9909fe1141a7643d5001",
-    "url": "tractoronline.com.pk/static/js/main.9909fe11.chunk.js"
+    "revision": "dff1d2cf3012d14cf9c2",
+    "url": "tractoronline.com.pk/static/js/main.dff1d2cf.chunk.js"
   },
   {
     "revision": "e14bbef69a62dbc0a7e6",
@@ -164,19 +164,19 @@ self.__precacheManifest = [
     "url": "tractoronline.com.pk/static/media/LineIcons.23586afc.eot"
   },
   {
-    "revision": "6106e3e25c6e52ebdceb846dc3f717b0",
-    "url": "tractoronline.com.pk/static/media/LineIcons.6106e3e2.woff"
-  },
-  {
     "revision": "6e9fb56e13ffdf56a053e86545cafe3e",
     "url": "tractoronline.com.pk/static/media/LineIcons.6e9fb56e.ttf"
+  },
+  {
+    "revision": "6106e3e25c6e52ebdceb846dc3f717b0",
+    "url": "tractoronline.com.pk/static/media/LineIcons.6106e3e2.woff"
   },
   {
     "revision": "a0ed6adf3563db2c6d93a0f2d4d2929e",
     "url": "tractoronline.com.pk/static/media/LineIcons.a0ed6adf.svg"
   },
   {
-    "revision": "75d974c9dd3b1496cb66d8a2c82632a8",
+    "revision": "a537a734912bd50fabd42153e6608e81",
     "url": "tractoronline.com.pk/index.html"
   }
 ];
