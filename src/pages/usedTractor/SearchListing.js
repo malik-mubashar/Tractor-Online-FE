@@ -7,6 +7,8 @@ import {
   Button,
   ListGroup,
   ListGroupItem,
+  Modal,
+  Image,
 } from "react-bootstrap";
 
 // import card_thumb_one from '../../assets/img/product/card_thumb_one.jpg'
@@ -19,11 +21,19 @@ import {
 } from "react-device-detect";
 import * as Icon from "react-feather";
 import { useHistory } from "react-router-dom";
+import CustomPopover from "./CustomPopover";
 
 export default function SearchListing() {
-	let history = useHistory();
-
+  const [showNumberWarning, setShowNumberWarning] = useState(true);
+  let history = useHistory();
+  const [openShowPhone, setOpenShowPhone] = useState(false);
   const [gridOrList, setGridOrList] = useState("list");
+  const onShowPhoneModelClose = () => {
+    setOpenShowPhone(false);
+    console.log("ping");
+  };
+  console.log(openShowPhone);
+
   return (
     <>
       <Col sm={12} lg={12} xl={12}>
@@ -104,11 +114,12 @@ export default function SearchListing() {
                           className="d-flex"
                           style={{ justifyContent: "space-between" }}
                         >
-													<h5
-														onClick={() => { history.push("/addDetails") }}
-													style={{cursor:"pointer"}}	
-													>
-														
+                          <h5
+                            onClick={() => {
+                              history.push("/addDetails");
+                            }}
+                            style={{ cursor: "pointer" }}
+                          >
                             Toyota Prado TX Limited 2.7 2008
                           </h5>
                           <h5>PKR 123 lacs</h5>
@@ -119,7 +130,13 @@ export default function SearchListing() {
                           Grade
                         </p>
                         <div
-                          className={`card-text ${isMobile?'':gridOrList==='list'?'d-flex':''} `}
+                          className={`card-text ${
+                            isMobile
+                              ? ""
+                              : gridOrList === "list"
+                              ? "d-flex"
+                              : ""
+                          } `}
                           style={{ justifyContent: "space-between" }}
                         >
                           <small className="text-muted">
@@ -132,13 +149,27 @@ export default function SearchListing() {
                                 className="icon"
                               />
                             </button>
-                            <button className="btn-success" type="submit">
-                              <Icon.PhoneCall
-                                style={{ height: "14px" }}
-                                className="icon"
-                              />
-                              Show Phone Number
-                            </button>
+                            {showNumberWarning ? (
+                              <button
+                                onClick={() => {
+                                  setOpenShowPhone(true);
+                                  setShowNumberWarning(false);
+                                }}
+                                className="btn-success"
+                                type="submit"
+                              >
+                                <Icon.PhoneCall
+                                  style={{ height: "14px" }}
+                                  className="icon"
+                                />
+                                Show Phone Number
+                              </button>
+														) : (
+																<>
+                             
+																	<CustomPopover />
+																	</>
+                            )}
                           </div>
                         </div>
                       </div>
@@ -185,6 +216,65 @@ export default function SearchListing() {
           </div>
         </div>
       </Col>
+
+      {/* Modal */}
+      <Modal show={openShowPhone} onHide={onShowPhoneModelClose}>
+        <Modal.Header closeButton>
+          <Modal.Title id="example-custom-modal-styling-title ">
+            Tips for safe deal
+          </Modal.Title>
+        </Modal.Header>
+
+        <Modal.Body className="justify-content-center mx-auto">
+          <Image
+            src="https://wsa4.pakwheels.com/assets/tips-for-safe-deal-00805d1034ee7600820049c852bd6163.svg"
+            height="40px"
+            width="60px"
+            alt="Profile Image"
+            className="d-flex justify-content-center m-auto"
+          />
+          <p className="">
+            <Image
+              src="https://wsa1.pakwheels.com/assets/tip-for-safe-deal-1-a3f472bbbc5249edca9fd01f449f98c3.svg"
+              height="40px"
+              width="60px"
+              alt="Profile Image"
+              className="mx-auto"
+            />
+            Never make payments in advance.
+          </p>
+          <p className="">
+            <Image
+              src="https://wsa3.pakwheels.com/assets/tip-for-safe-deal-2-b8b8dded80b193b4de603dd617fd42db.svg"
+              height="40px"
+              width="60px"
+              alt="Profile Image"
+              className="mx-auto"
+            />
+            Do not share unnecessary personal information.
+          </p>
+          <p className="">
+            <Image
+              src="https://wsa4.pakwheels.com/assets/tip-for-safe-deal-3-1c4abd79f231a47a7c82cac9fa27e543.svg"
+              height="40px"
+              width="60px"
+              alt="Profile Image"
+              className="mx-auto"
+            />
+            Report suspicious users to Pakwheels.
+          </p>
+          <p className="">
+            <Image
+              src="https://wsa3.pakwheels.com/assets/tip-for-safe-deal-4-fd729119f3d0eab6cf43ca7c7f27b6ce.svg"
+              height="40px"
+              width="60px"
+              alt="Profile Image"
+              className="mx-auto"
+            />
+            Use PakWheels Car Inspection Service to avoid fraud.
+          </p>
+        </Modal.Body>
+      </Modal>
     </>
   );
 }
