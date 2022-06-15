@@ -1,7 +1,9 @@
 import axios from "axios";
 
 class User {
-  signUp = async (email, password, confirmPassword,fullName) => {
+	signUp = async (email, password, confirmPassword, fullName) => {
+		 
+		console.log(process.env.REACT_APP_API_LOCAL_PATH)
     return axios({
       method: "post",
       url: `${process.env.REACT_APP_API_LOCAL_PATH}auth`,
@@ -19,14 +21,14 @@ class User {
 			}
     })
 			.then((result) => {
-				debugger;
+				 
         return {
           error: false,
           data: result.data,
         };
       })
 			.catch((error) => {
-				debugger;
+				 
         return {
           error: true,
           data: error.response.data,
@@ -49,10 +51,12 @@ class User {
 			}
 			
     })
-      .then((result) => {
+			.then((result) => {
+				 
         return {
           error: false,
-          data: result.data,
+					data: result.data,
+					headers:result.headers
         };
       })
       .catch((error) => {

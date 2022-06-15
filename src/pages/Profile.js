@@ -25,7 +25,7 @@ const Profile=()=> {
 
     // Toggle side bar menu
 	const onSideMenu = (active) => {
-		debugger;
+		 
 		// this.setState({ sideMenu: active });
 		setSideMenu(active);
     }
