@@ -9,10 +9,10 @@ import {
   Form,
   FormControl,
   Button,
-  Image,
+  Image
 } from "react-bootstrap";
 // import ImageGallery from "react-image-gallery";
-import Footer from '../LandingPage/Footer'
+import Footer from "../LandingPage/Footer";
 import { isMobile } from "react-device-detect";
 import cellPhoneSvg from "../../assets/svg/cellPhone.svg";
 import mapsBlack from "../../assets/svg/maps-black.svg";
@@ -41,16 +41,16 @@ export default function AddDetails() {
   const images = [
     {
       original: "https://picsum.photos/id/1018/1000/600/",
-      thumbnail: "https://picsum.photos/id/1018/250/150/",
+      thumbnail: "https://picsum.photos/id/1018/250/150/"
     },
     {
       original: "https://picsum.photos/id/1015/1000/600/",
-      thumbnail: "https://picsum.photos/id/1015/250/150/",
+      thumbnail: "https://picsum.photos/id/1015/250/150/"
     },
     {
       original: "https://picsum.photos/id/1019/1000/600/",
-      thumbnail: "https://picsum.photos/id/1019/250/150/",
-    },
+      thumbnail: "https://picsum.photos/id/1019/250/150/"
+    }
   ];
   return (
     //sidebar
@@ -59,12 +59,12 @@ export default function AddDetails() {
         <ul id="scroll-sidebar" className="nav scroll-nav affix-top">
           <li className="active">
             <a href="#scroll_car_info">
-              <i className="fa fa-caret-right"></i>Car Info
+              <i className="fa fa-caret-right"></i>Tractor Info
             </a>
           </li>
           <li className="">
             <a href="#scroll_car_detail">
-              <i className="fa fa-caret-right"></i>Car Details
+              <i className="fa fa-caret-right"></i>Tractor Details
             </a>
           </li>
           <li className="">
@@ -230,12 +230,13 @@ export default function AddDetails() {
                         <strong class="generic-blue show fs24">
                           TractorOnline{" "}
                           <span class="generic-red">
-                            Car Inspection<span></span>
+                            Tractor Inspection<span></span>
                           </span>
                         </strong>
                       </h6>
                       <p class="fs18 mb10">
-                        Inspect the car on 200+ checkpoints
+                        Over 200 checkpoints will be used to inspect the
+                        tractor.{" "}
                       </p>
                       <ul class="list-unstyled list-inline fs16 mb15">
                         <li>
@@ -253,13 +254,13 @@ export default function AddDetails() {
                       </ul>
                       <a
                         href="#"
-												className="btn btn-lg btn-success "
-												style={{color:"white"}}
+                        className="btn btn-lg btn-success "
+                        style={{ color: "white" }}
                         // data-toggle="modal"
                         // data-target="#car_sure_request_confirmation"
                         // onclick="showModal();"
                       >
-                        Schedule Inspection
+                        Inspection Schedule
                       </a>
                       <br />
                       <a
@@ -272,7 +273,7 @@ export default function AddDetails() {
                     </div>
                     <div class="right-img pull-right">
                       <img
-                        alt="Car Inspection Rate"
+                        alt="Tractor Inspection Rate"
                         src="https://wsa2.pakwheels.com/assets/inspection/inspection-car-rate-7b4ede752bdfc0e0cd08c3247e7e37a8.png"
                         width="266"
                       />
@@ -337,7 +338,7 @@ export default function AddDetails() {
                 </div>
                 {/* car features */}
                 <div className="carFeature">
-                  <h5 className="mb-4 mt-3">Car Features</h5>
+                  <h5 className="mb-4 mt-3">Tractor Features</h5>
                   <div className="row mb-2">
                     <div className="col-lg-4 d-flex">
                       <Image
@@ -417,10 +418,10 @@ export default function AddDetails() {
                 </div>
                 {/* Sellers comment */}
                 <div className="sellersComment">
-                  <h5 className="mb-4 mt-3">Car Features</h5>
-                  <p>Alto vxr Model 2021 Dec Registered 2022</p>
-                  <p>Brand New As New As Car</p>
-                  <p>Not A Single Scratch on Car</p>
+                  <h5 className="mb-4 mt-3">Tractor Specifications</h5>
+                  <p>Model 2021 Dec Registered 2022 Mahindra</p>
+                  <p>As new as a tractor, this is a brand new product.</p>
+                  <p>There isn't a scratch on the tract.</p>
                   <p>Orignal Documents</p>
                   <p>Orignal 2 krys</p>
                 </div>
@@ -438,7 +439,7 @@ export default function AddDetails() {
                   Post an ad for <span class="generic-red">FREE</span>
                 </h3>
                 <p class="mt10 mb5 fs16">
-                  Sell it faster to thousands of buyers
+                  Sell it to tens of thousands of people in less time.{" "}
                 </p>
                 <div>
                   <img
@@ -488,13 +489,12 @@ export default function AddDetails() {
                         width="30px"
                         alt="Profile Image"
                         className="d-flex justify-content-center"
-											/>
-											<div>
-                      <span className="ml-1">03090814...</span>
-											<div>Show Phone Number</div>
-											</div>
+                      />
+                      <div>
+                        <span className="ml-1">03090814...</span>
+                        <div>Show Phone Number</div>
+                      </div>
                     </span>
-										
                   </div>
 
                   <div class="btn btn-link-outline btn-lg btn-block sendMessageButton mt-20 d-flex">
@@ -562,40 +562,40 @@ export default function AddDetails() {
               {/* third box */}
               <div className="safetyTipsBox bg-white p-4 mt-5">
                 <div className="tipsInfoBoxHeading mb-2">
-                  Safety tips for transaction
+                  Transactional safety tips{" "}
                 </div>
                 <div className="row">
                   <ol>
-                    <li>Use a safe location to meet seller</li>
-                    <li>Avoid cash transactions</li>
-                    <li>Beware of unrealistic offers</li>
+                    <li>Meet the seller at a secure location.</li>
+                    <li>Cash transactions should be avoided.</li>
+                    <li>Beware of proposals that are too good to be true.</li>
                   </ol>
                 </div>
-							</div>
+              </div>
               <a
                 href="google.com"
                 className="d-flex justify-content-center mb10 mt30 btn btn-link-outline btn-sm btn-block fs14 notifyAsSold mt-3"
-							>
-								<Image
-                    src={tick}
-                    height="20px"
-                    width="40px"
-                    alt="Profile Image"
-                    className=""
-                  />
+              >
+                <Image
+                  src={tick}
+                  height="20px"
+                  width="40px"
+                  alt="Profile Image"
+                  className=""
+                />
                 Notify As Sold
-								</a>
+              </a>
               <a
                 href="google.com.PK"
                 className="d-flex justify-content-center mb10 mt30 btn btn-link-outline btn-sm btn-block fs14 notifyAsSold mt-2"
-							>
-								<Image
-                    src={flag}
-                    height="20px"
-                    width="40px"
-                    alt="Profile Image"
-                    className=""
-                  />
+              >
+                <Image
+                  src={flag}
+                  height="20px"
+                  width="40px"
+                  alt="Profile Image"
+                  className=""
+                />
                 Report This Ad
               </a>
             </div>
@@ -604,13 +604,15 @@ export default function AddDetails() {
             <div>
               <h3>SIMILAR ADS</h3>
             </div>
-            <div className={`${isMobile?'':'d-flex'} mt-2`}>
+            <div className={`${isMobile ? "" : "d-flex"} mt-2`}>
               {[1, 2, 3, 4].map((x) => {
                 return (
                   <>
                     <div className="listCard d-block">
                       <Image
-                        src={'https://images.freeimages.com/images/large-previews/bf5/tractor-1533535.jpg'}
+                        src={
+                          "https://images.freeimages.com/images/large-previews/bf5/tractor-1533535.jpg"
+                        }
                         height="200px"
                         width="150px"
                         alt="Profile Image"
@@ -625,8 +627,8 @@ export default function AddDetails() {
               })}
             </div>
           </div>
-          <div className={`notifyMe mt-4 mb-4 ${isMobile?'':'d-flex'}`}>
-            <div className="col-lg-3" style={{color:"#233d7b"}}>
+          <div className={`notifyMe mt-4 mb-4 ${isMobile ? "" : "d-flex"}`}>
+            <div className="col-lg-3" style={{ color: "#233d7b" }}>
               <Image
                 src={cellPhoneSvg}
                 height="30px"
@@ -636,8 +638,8 @@ export default function AddDetails() {
               />
               Notify Me
               <div>
-                Set your Alerts for Suzuki Alto in Lahore and we will email you
-                relevant ads.
+                Set up a search alert for Mahindra in Lahore, and we'll send you
+                relevant results.
               </div>
             </div>
             <div className="col-lg-3">
@@ -679,8 +681,8 @@ export default function AddDetails() {
             </div>
           </div>
         </div>
-			</div>
-			<Footer/>
+      </div>
+      <Footer />
     </div>
   );
 }

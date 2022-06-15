@@ -4,7 +4,6 @@ import Dashboard from "../pages/Dashboard/Dashboard";
 import LandingPage from "../pages/LandingPage/LandingPage";
 import UsedTractor from "../pages/usedTractor/UsedTractor";
 
-
 // import Calendar from "../pages/Calendar";
 import Search from "../pages/Search";
 
@@ -22,7 +21,7 @@ import "../assets/css/addDetails.scss";
 import ProtectedRoute from "../components/ProtectedRoutes/index";
 import UnProtectedRoute from "../components/UnprotectedRoutes/index";
 // import { ToastContainer } from "react-toastify";
-import 'react-toastify/dist/ReactToastify.css';
+import "react-toastify/dist/ReactToastify.css";
 import Layout from "../layouts/Layouts";
 import AddDetails from "../pages/AddDetails/AddDetails";
 import City from "../pages/City/City";
@@ -36,8 +35,8 @@ const AppRouter = () => {
         <Switch>
           {/* unprotected routes */}
           <UnProtectedRoute exact path="/">
-           <Layout>
-             <LandingPage />
+            <Layout>
+              <LandingPage />
             </Layout>
           </UnProtectedRoute>
           <UnProtectedRoute exact path="/login">
@@ -46,11 +45,15 @@ const AppRouter = () => {
 					<UnProtectedRoute exact path="/city">
             <City />
 					</UnProtectedRoute>
-					<UnProtectedRoute exact path="/usedtractor">
-            <UsedTractor />
-					</UnProtectedRoute>
-					<UnProtectedRoute exact path="/addDetails">
-            <AddDetails />
+          <UnProtectedRoute exact path="/usedtractor">
+            <Layout>
+              <UsedTractor />
+            </Layout>
+          </UnProtectedRoute>
+          <UnProtectedRoute exact path="/addDetails">
+            <Layout>
+              <AddDetails />
+            </Layout>
           </UnProtectedRoute>
           <UnProtectedRoute exact path="/signup/">
             <Signup />
@@ -62,20 +65,18 @@ const AppRouter = () => {
           <UnProtectedRoute exact path="/dashboard/">
             <Dashboard />
           </UnProtectedRoute>
-        
+
           <ProtectedRoute exact path="/profile/">
             <Profile />
           </ProtectedRoute>
           <ProtectedRoute exact path="/profile-settings/">
             <ProfileSettings />
           </ProtectedRoute>
-          
-          
+
           <ProtectedRoute exact path="/search/">
             <Search />
           </ProtectedRoute>
-          
-         
+
           {/* <Route exact path="/calendar/" component={Calendar} /> */}
           <Route component={FourHandedFourError} />
         </Switch>

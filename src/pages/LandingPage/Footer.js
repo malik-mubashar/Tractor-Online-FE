@@ -5,18 +5,18 @@ export default function Footer() {
     desktop: {
       breakpoint: { max: 3000, min: 1024 },
       items: 4,
-      slidesToSlide: 3, // optional, default to 1.
+      slidesToSlide: 3 // optional, default to 1.
     },
     tablet: {
       breakpoint: { max: 1024, min: 464 },
       items: 3,
-      slidesToSlide: 2, // optional, default to 1.FeaturedProducts
+      slidesToSlide: 2 // optional, default to 1.FeaturedProducts
     },
     mobile: {
       breakpoint: { max: 464, min: 0 },
       items: 1,
-      slidesToSlide: 1, // optional, default to 1.
-    },
+      slidesToSlide: 1 // optional, default to 1.
+    }
   };
 
   return (
@@ -32,51 +32,51 @@ export default function Footer() {
                     id="footer-Make"
                   >
                     <li>
-                      <h5 className="text-white">Cars By Make</h5>
+                      <h5 className="text-white">Tractors By Make</h5>
                     </li>
                     <li>
                       <a href="/" className="footer-link">
-                        Toyota Cars for Sale
+                        Toyota Tractors for Sale
                       </a>
                     </li>
                     <li>
                       <a href="/" className="footer-link">
-                        Suzuki Cars for Sale
+                        Suzuki Tractors for Sale
                       </a>
                     </li>
                     <li>
                       <a href="/" className="footer-link">
-                        Honda Cars for Sale
+                        Honda Tractors for Sale
                       </a>
                     </li>
                     <li>
                       <a href="/" className="footer-link">
-                        Daihatsu Cars for Sale
+                        Daihatsu Tractors for Sale
                       </a>
                     </li>
                     <li>
                       <a href="/" className="footer-link">
-                        Mitsubishi Cars for Sale
+                        Mitsubishi Tractors for Sale
                       </a>
                     </li>
                     <li>
                       <a href="/" className="footer-link">
-                        Nissan Cars for Sale
+                        Nissan Tractors for Sale
                       </a>
                     </li>
                     <li>
                       <a href="/" className="footer-link">
-                        Mercedes Cars for Sale
+                        Mercedes Tractors for Sale
                       </a>
                     </li>
                     <li>
                       <a href="/" className="footer-link">
-                        Hyundai Cars for Sale
+                        Hyundai Tractors for Sale
                       </a>
                     </li>
                     <li>
                       <a href="/" className="footer-link">
-                        BMW Cars for Sale
+                        BMW Tractors for Sale
                       </a>
                     </li>
                   </ul>
@@ -87,51 +87,51 @@ export default function Footer() {
                     id="footer-City"
                   >
                     <li>
-                      <h5 className="text-white">Cars By City</h5>
+                      <h5 className="text-white">Tractors By City</h5>
                     </li>
                     <li>
                       <a href="/" className="footer-link">
-                        Cars in Lahore
+                        Tractors in Lahore
                       </a>
                     </li>
                     <li>
                       <a href="/" className="footer-link">
-                        Cars in Karachi
+                        Tractors in Karachi
                       </a>
                     </li>
                     <li>
                       <a href="/" className="footer-link">
-                        Cars in Islamabad
+                        Tractors in Islamabad
                       </a>
                     </li>
                     <li>
                       <a href="/" className="footer-link">
-                        Cars in Rawalpindi
+                        Tractors in Rawalpindi
                       </a>
                     </li>
                     <li>
                       <a href="/" className="footer-link">
-                        Cars in Peshawar
+                        Tractors in Peshawar
                       </a>
                     </li>
                     <li>
                       <a href="/" className="footer-link">
-                        Cars in Faisalabad
+                        Tractors in Faisalabad
                       </a>
                     </li>
                     <li>
                       <a href="/" className="footer-link">
-                        Cars in Multan
+                        Tractors in Multan
                       </a>
                     </li>
                     <li>
                       <a href="/" className="footer-link">
-                        Cars in Gujranwala
+                        Tractors in Gujranwala
                       </a>
                     </li>
                     <li>
                       <a href="/" className="footer-link">
-                        Cars in Sialkot
+                        Tractors in Sialkot
                       </a>
                     </li>
                   </ul>
@@ -143,7 +143,7 @@ export default function Footer() {
                     </li>
                     <li>
                       <a href="/" className="footer-link">
-                        Used Cars
+                        Used Tractors
                       </a>
                     </li>
                     <li>
@@ -153,7 +153,7 @@ export default function Footer() {
                     </li>
                     <li>
                       <a href="/" className="footer-link">
-                        New Cars
+                        New Tractors
                       </a>
                     </li>
                     <li>
@@ -241,7 +241,7 @@ export default function Footer() {
                     </li>
                     <li>
                       <a href="/" className="footer-link">
-                        Sell Your Car
+                        Sell Your Tractor87
                       </a>
                     </li>
                     <li>

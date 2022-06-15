@@ -5,13 +5,14 @@ import MobileBanner from "../pages/LandingPage/MobileBanner";
 import MobileFooter from "../pages/LandingPage/MobileFooter";
 import { isMobile } from "react-device-detect";
 import MobileBannerFooter from "../pages/LandingPage/MobileBannerFooter";
+import Topbar from "../pages/LandingPage/Topbar";
 
 const Layout = (props) => {
   return (
     <>
       <main>
         <div className="">
-          {!isMobile ? <DeskTopBanner /> : <MobileBanner />}
+          {!isMobile ? <Topbar /> : <MobileBanner />}
           {props.children}
           {isMobile ? <MobileBannerFooter /> : <Footer />}
           {isMobile && <MobileFooter />}

@@ -241,9 +241,7 @@
     right: 0;
     margin: auto;
   }
-  .carousel-control-next {
-    right: -40px !important;
-  }
+  
   .footer-links {
     border-bottom: 1px solid #375192;
   }
