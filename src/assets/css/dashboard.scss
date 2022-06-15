@@ -157,15 +157,38 @@
   }
   background-color: #e6f9ff;
 }
+
+
+
+.dropdown-button-category{
+  cursor: pointer;
+  .drop-down-items:hover{
+    display: flex;
+  }
+  .drop-down-items{
+    top: 0px;
+    left: 246px;
+    z-index: 9999;
+  }
+}
+.dropdown-button-category:hover{
+  .drop-down-items{
+    display: flex;
+  }
+  background-color: #e6f9ff;
+}
+
+
+
+
 .drop-down-items:hover{
   display: flex;
 }
 .drop-down-items{
   position: absolute;
-  background-color: white;
+  background-color: #e6f9ff;
   display: none;
   left: 15px;
-  background-color: #e6f9ff;
 }
 .usedCarsWidth{
   width: 70rem;

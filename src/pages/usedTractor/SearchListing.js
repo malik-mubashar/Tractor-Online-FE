@@ -17,7 +17,7 @@ import {
   BrowserView,
   MobileView,
   isBrowser,
-  isMobile,
+  isMobile
 } from "react-device-detect";
 import * as Icon from "react-feather";
 import { useHistory } from "react-router-dom";
@@ -27,6 +27,7 @@ export default function SearchListing() {
   const [showNumberWarning, setShowNumberWarning] = useState(true);
   let history = useHistory();
   const [openShowPhone, setOpenShowPhone] = useState(false);
+
   const [gridOrList, setGridOrList] = useState("list");
   const onShowPhoneModelClose = () => {
     setOpenShowPhone(false);
@@ -196,7 +197,9 @@ export default function SearchListing() {
           <h3 className="title">
             Post an ad for <span className="generic-red">FREE</span>
           </h3>
-          <p className="mt10 mb5 fs16">Sell it faster to thousands of buyers</p>
+          <p className="mt10 mb5 fs16">
+            Sell it to thousands of people in a shorter period of time.
+          </p>
           <div>
             <img
               alt="Post an Ad Left"
@@ -205,9 +208,8 @@ export default function SearchListing() {
             <a
               href="/used-tractors/sell"
               className="btn btn-success sign-in-comp"
-              onclick="trackEvents('Used tractors', 'Add Car', 'From - Search');"
             >
-              Sell Your Car
+              Tractors for Sale{" "}
             </a>
             <img
               alt="Post an Ad Right"

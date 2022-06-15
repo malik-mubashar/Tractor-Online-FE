@@ -1,3 +1,4 @@
+/* eslint-disable jsx-a11y/anchor-is-valid */
 import React from "react";
 import Footer from "../LandingPage/Footer";
 import SearchListing from "./SearchListing";
@@ -5,8 +6,10 @@ import SideSearch from "./SideSearch";
 import { Image } from "react-bootstrap";
 import tractorSVG from "../../assets/svg/tractor-1.svg";
 import { isMobile } from "react-device-detect";
+import { useHistory } from "react-router-dom";
 
 export default function usedTractor() {
+  const history = useHistory();
   return (
     <>
       <section>
@@ -15,18 +18,31 @@ export default function usedTractor() {
             style={{ width: "100%" }}
             alt="add"
             src={"https://tpc.googlesyndication.com/simgad/5923361064753698031"}
+            className="mt-5"
           />
           <h3 className="pageHeading">Used Tractor for sale</h3>
           <div className="searchCounterWrapper">
             <ul className="breadcrumb bread">
               <li>
-                <a href="/">
-                  <span itemprop="name">Home /</span>
+                <a>
+                  <span
+                    onClick={() => history.push("/")}
+                    className="cursor-pointer"
+                    itemprop="name"
+                  >
+                    Home /
+                  </span>
                 </a>
               </li>
               <li>
-                <a href="/">
-                  <span itemprop="name">Used Tractor /</span>
+                <a>
+                  <span
+                    onClick={() => history.push("/usedtractor")}
+                    className="cursor-pointer"
+                    itemprop="name"
+                  >
+                    Used Tractor /
+                  </span>
                 </a>
               </li>
               <li>
@@ -49,7 +65,7 @@ export default function usedTractor() {
       </section>
       <section>
         <div className="container">
-          <h2>Used Tractors Price in Pakistan</h2>
+          <h2>Price of Used Tractors in Pakistan</h2>
           <table className="table table-bordered bg-white mb-0">
             <tbody>
               <tr>
@@ -57,71 +73,75 @@ export default function usedTractor() {
                 <th>Price*</th>
               </tr>
               <tr>
-                <td className="text-info font-weight-bold">Toyota Corolla</td>
+                <td className="text-info font-weight-bold">Belarus</td>
                 <td className="text-success">PKR 1.4 lacs - PKR 86.0 lacs</td>
               </tr>
               <tr>
-                <td className="text-info font-weight-bold">Honda Civic</td>
+                <td className="text-info font-weight-bold">Bull Power / IMT</td>
                 <td className="text-success">PKR 0.0 lacs - PKR 78.0 lacs</td>
               </tr>
               <tr>
-                <td className="text-info font-weight-bold">Suzuki Mehran</td>
+                <td className="text-info font-weight-bold">
+                  Euro Ford Tractor
+                </td>
                 <td className="text-success">PKR 1.3 lacs - PKR 14.3 lacs</td>
               </tr>
               <tr>
-                <td className="text-info font-weight-bold">Suzuki Cultus</td>
+                <td className="text-info font-weight-bold">
+                  Millat Tractors Ltd.
+                </td>
                 <td className="text-success">PKR 2.3 lacs - PKR 30.5 lacs</td>
               </tr>
               <tr>
-                <td className="text-info font-weight-bold">Honda City</td>
+                <td className="text-info font-weight-bold">Belarus</td>
                 <td className="text-success">PKR 1.7 lacs - PKR 44.0 lacs</td>
               </tr>
             </tbody>
           </table>
 
           <small>
-            * Used Tractors Prices in Pakistan vary based on the model, variant
-            and the condition of the car.
+            * The price of a used tractor in Pakistan varies depending on the
+            model, version, and condition of the tractor.
           </small>
 
           <div className="search-detail-text primary-lang">
             <h2>Tractors for Sale in Pakistan</h2>
 
             <p>
-              PakWheels is Pakistan’s leading and most trustworthy website when
-              it comes to Used Tractors for sale in Pakistan. We have tens and
-              hundreds of Tractors for Sale listed in each city. Pakwheels makes
-              it easy for you to find the best Tractors for sale in Pakistan at
-              best prices.
+              When it comes to Used Tractors for Sale in Pakistan, TractorOnline
+              is the most trusted and well-known website in Pakistan. In each
+              city, we have tens of thousands of Tractors for Sale advertised.
+              TractorOnline makes it simple to locate the top Tractors for sale
+              in Pakistan at the lowest possible price.
             </p>
 
             <h2>Used Tractors for Sale in Pakistan</h2>
 
             <p>
-              There are currently 70,355 available used Tractors for sale in
-              Pakistan. Based on the current listings, Used car prices in
-              Pakistan start from PKR 1,220 and go up to PKR 120,000,000.
+              In Pakistan, there are now 70,355 used Tractors for sale. Used
+              tractors prices in Pakistan start at PKR 1,220 and go up to PKR
+              120,000,000, according to current ads.
             </p>
 
             <p>
-              These used Tractors for sale in Pakistan are uploaded by
-              Individuals and Dealers users.
+              Individuals and Dealers have posted these used Tractors for sale
+              in Pakistan.
             </p>
 
             <p>
-              There are also 168 Certified used Tractors for sale in Pakistan
-              available on PakWheels, PakWheels Certified Tractors are
-              pre-inspected and approved by our automobile experts. You can find
-              used Tractors based on your desired location, price range, car
-              type, model and much more.
+              TractorOnline also has 168 Certified used Tractors for sale in
+              Pakistan. TractorOnline Certified Tractors have been thoroughly
+              tested and verified by our team of automotive specialists. You can
+              search for used Tractors by region, price range, car type, model,
+              and other factors.
             </p>
           </div>
         </div>
       </section>
       <section style={{ backgroundColor: "white" }}>
         <div className="container">
-          <h2>Browse More Used Tractors</h2>
-          <h3>View Tractors By City</h3>
+          <h2>More Tractors for Sales</h2>
+          <h5>Tractors in each city can be found here.</h5>
           <ul className="list-unstyled nomargin row generic-light-grey fs12">
             <li className="col-md-3">
               <a
@@ -344,7 +364,7 @@ export default function usedTractor() {
             </li>
           </ul>
           <hr className="mt10 mb10 " />
-          <h3>View car by Manufacturer</h3>
+          <h5>Manufacturers of Tractors</h5>
           <ul className="list-unstyled nomargin row generic-light-grey fs12">
             <li className="col-md-3">
               <a
@@ -396,7 +416,7 @@ export default function usedTractor() {
                 itemprop="relatedLink"
                 title="KIA Tractors for sale in Pakistan"
               >
-                KIA Tractors
+                Belarus Tractors
               </a>{" "}
               (1600+)
             </li>
@@ -471,9 +491,9 @@ export default function usedTractor() {
               <a
                 href="/used-Tractors/audi/41"
                 itemprop="relatedLink"
-                title="Audi for sale in Pakistan - Used Audi Tractors"
+                title="Bull Power / IMT for sale in Pakistan - Used Audi Tractors"
               >
-                Audi Tractors
+                Bull Power / IMT Tractors
               </a>{" "}
               (290+)
             </li>
@@ -482,9 +502,9 @@ export default function usedTractor() {
               <a
                 href="/used-Tractors/faw/56"
                 itemprop="relatedLink"
-                title="FAW Tractors for sale in Pakistan"
+                title="Bull Power / IMT Tractors for sale in Pakistan"
               >
-                FAW Tractors
+                Bull Power / IMT Tractors
               </a>{" "}
               (230+)
             </li>
@@ -495,7 +515,7 @@ export default function usedTractor() {
                 itemprop="relatedLink"
                 title="BMW Tractors for sale in Pakistan"
               >
-                BMW Tractors
+                AL Ghazi Tractors Ltd. Tractors
               </a>{" "}
               (230+)
             </li>
@@ -504,9 +524,9 @@ export default function usedTractor() {
               <a
                 href="/used-Tractors/dfsk/59"
                 itemprop="relatedLink"
-                title="DFSK Tractors for sale in Pakistan"
+                title="AL Ghazi Tractors Ltd.  for sale in Pakistan"
               >
-                DFSK Tractors
+                AL Ghazi Tractors Ltd. Tractors
               </a>{" "}
               (220+)
             </li>
@@ -515,9 +535,9 @@ export default function usedTractor() {
               <a
                 href="/used-Tractors/prince/385797"
                 itemprop="relatedLink"
-                title="Prince Tractors for sale in Pakistan"
+                title="Millat Tractors Ltd. for sale in Pakistan"
               >
-                Prince Tractors
+                Millat Tractors Ltd. Tractors
               </a>{" "}
               (200+)
             </li>
@@ -567,7 +587,7 @@ export default function usedTractor() {
             </li>
           </ul>
           <hr className="mt10 mb10 " />
-          <h3>View Tractors by Model</h3>
+          <h5>Tractors Sorted by Model</h5>
 
           <ul className="list-unstyled nomargin row generic-light-grey fs12">
             <li className="col-md-3">
@@ -717,9 +737,9 @@ export default function usedTractor() {
               <a
                 href="/used-Tractors/daihatsu-cuore/665"
                 itemprop="relatedLink"
-                title="Daihatsu Cuore for sale in Pakistan"
+                title="Euro Ford Tractor for sale in Pakistan"
               >
-                Daihatsu Cuore for sale
+                Euro Ford Tractor for sale
               </a>{" "}
               (820+)
             </li>
@@ -728,9 +748,9 @@ export default function usedTractor() {
               <a
                 href="/used-Tractors/honda-vezel/57545"
                 itemprop="relatedLink"
-                title="Honda Vezel Tractors for sale in Pakistan"
+                title="Euro Ford Tractor Tractors for sale in Pakistan"
               >
-                Honda Vezel for sale
+                Euro Ford Tractor for sale
               </a>{" "}
               (780+)
             </li>
@@ -739,9 +759,9 @@ export default function usedTractor() {
               <a
                 href="/used-Tractors/toyota-passo/803"
                 itemprop="relatedLink"
-                title="Toyota Passo Tractors for sale in Pakistan"
+                title="Belarus Tractors for sale in Pakistan"
               >
-                Toyota Passo for sale
+                Belarus for sale
               </a>{" "}
               (780+)
             </li>
@@ -750,9 +770,9 @@ export default function usedTractor() {
               <a
                 href="/used-Tractors/kia-sportage/715"
                 itemprop="relatedLink"
-                title="KIA Sportage Tractors for sale in Pakistan"
+                title="Belarus Sportage Tractors for sale in Pakistan"
               >
-                KIA Sportage for sale
+                Belarus Sportage for sale
               </a>{" "}
               (720+)
             </li>
@@ -792,7 +812,7 @@ export default function usedTractor() {
           </ul>
 
           <hr className="mt10 mb10 " />
-          <h3>View Tractors by Version</h3>
+          <h5>Tractors Sorted by Version</h5>
 
           <ul className="list-unstyled nomargin row generic-light-grey fs12">
             <li className="col-md-3">
@@ -995,7 +1015,7 @@ export default function usedTractor() {
           </ul>
 
           <hr className="mt10 mb10 " />
-          <h3>View Tractors by Engine Capacity</h3>
+          <h5>Tractors Sorted by Engine Capacity</h5>
           <ul className="list-unstyled nomargin row generic-light-grey fs12">
             <li className="col-md-3">
               <a
@@ -1197,7 +1217,7 @@ export default function usedTractor() {
           </ul>
 
           <hr className="mt10 mb10 " />
-          <h3>View Tractors by Category</h3>
+          <h5>Tractors Sorted by Category</h5>
 
           <ul className="list-unstyled nomargin row generic-light-grey fs12">
             <li className="col-md-3">

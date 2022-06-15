@@ -25,12 +25,12 @@ export default function Categories() {
     "Sahiwal",
     "Attock",
     "Okara",
-    "Sheikhupura",
+    "Sheikhupura"
   ]);
 
   return (
     <div>
-      <h6>Browse Used Tractor</h6>
+      <h2 className="text-center">Examine Used Tractors</h2>
       {/* Tab Demo Three */}
       <Col lg={12}>
         <div className="mb-4">
@@ -45,10 +45,10 @@ export default function Categories() {
                           <li className="col-4 col-lg-2 mt-4" key={option}>
                             <a
                               href="#"
-                              title="1000cc cars for sale in Pakistan"
+                              title="In Pakistan, there is a 1000cc tractor for sale."
                             >
                               <Image src={ThousandCC} alt="Profile Image" />
-                              1000cc cars
+                              Escorts Group
                             </a>
                           </li>
                         ))}
@@ -60,13 +60,13 @@ export default function Categories() {
                           <li className="col-4 col-lg-2 mt-4" key={option}>
                             <a
                               href="#"
-                              title="1000cc cars for sale in Pakistan"
+                              title="In Pakistan, there is a 1000cc tractor for sale."
                             >
                               <Image
                                 src={ThirteenHundredCC}
                                 alt="Profile Image"
                               />
-                              1300cc cars
+                              Sonalika
                             </a>
                           </li>
                         ))}
@@ -78,10 +78,10 @@ export default function Categories() {
                           <li className="col-4 col-lg-2 mt-4" key={option}>
                             <a
                               href="#"
-                              title="1000cc cars for sale in Pakistan"
+                              title="In Pakistan, there is a 1000cc tractor for sale."
                             >
                               <Image src={SportsCar} alt="Profile Image" />
-                              Sports Cars
+                              Case IH
                             </a>
                           </li>
                         ))}
@@ -148,7 +148,7 @@ export default function Categories() {
                                 alt="Toyota"
                                 src="https://cache4.pakwheels.com/system/car_manufacturers/manufacturers/000/000/042/resized/Tyota.png"
                               />
-                              Toyota
+                              Massey Ferguson
                             </a>
                           </li>
                         ))}
@@ -163,7 +163,7 @@ export default function Categories() {
                                 alt="Toyota"
                                 src="https://cache4.pakwheels.com/system/car_manufacturers/manufacturers/000/000/021/resized/KIA.png"
                               />
-                              KIA
+                              John Deere
                             </a>
                           </li>
                         ))}
@@ -178,7 +178,7 @@ export default function Categories() {
                                 alt="Toyota"
                                 src="https://cache3.pakwheels.com/system/car_manufacturers/manufacturers/000/000/041/resized/Suzuki.png"
                               />
-                              Suzuki
+                              Mahindra
                             </a>
                           </li>
                         ))}

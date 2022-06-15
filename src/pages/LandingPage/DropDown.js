@@ -1,29 +1,89 @@
 import React from "react";
 import * as Icon from "react-feather";
-import Icofont from 'react-icofont';
+import Icofont from "react-icofont";
+import { useHistory } from "react-router-dom";
 
-export default function DropDown({ usedCars, newCars, autoStore }) {
+export default function DropDown({ title,usedCars, newCars, autoStore,dropDownIcon }) {
+  const history = useHistory();
 
   const usedTractors = [
-    { heading: "Find Used Tractor for Sale", subHeading: "Search from over 110k options", icon: 'light-bulb' },
-    { heading: "Featured Used Tractor", subHeading: "View featured tractors by TractorOnline", icon: 'layers' },
-    { heading: "Sell Your Tractor", subHeading: "Post a free ad and sell your tractor quickly", icon: 'grocery' },
-    { heading: "Used Tractor Dealers", subHeading: "Find used tractor dealers near your", icon: 'star' },
-    { heading: "Price Calculator", subHeading: "Calculate the market price of tractors", icon: 'recycle' }
-  ]
+    {
+      heading: "Search for a Used Tractor for Sale.",
+      subHeading: "There are over 110k possibilities to choose from.",
+      icon: "light-bulb",
+      url: "/usedtractor"
+    },
+    {
+      heading: "Used Tractor Featured",
+      subHeading: "TractorOnline has a selection of featured tractors.",
+      icon: "layers",
+      url: "/usedtractor"
+    },
+    {
+      heading: "Tractors for Sale",
+      subHeading: "Post a free ad to swiftly sell your tractor.",
+      icon: "grocery",
+      url: "/usedtractor"
+    },
+    {
+      heading: "Dealers of Used Tractors",
+      subHeading: "Locate used tractor dealers in your area.",
+      icon: "star",
+      url: "/usedtractor"
+    },
+    {
+      heading: "Calculator of Prices",
+      subHeading: "Calculate the tractor market price.",
+      icon: "recycle",
+      url: "/usedtractor"
+    }
+  ];
 
   const usedTractorsSecond = [
-    { heading: "TractorOnline Certified Tractors", subHeading: "Tractors with the TractorOnline seal of approval", icon: 'speed-meter' },
-    { heading: "TractorOnline tractor Inspection", subHeading: "Tractor with detailed TractorOnline Inspection reports", icon: 'tick-mark' },
-    { heading: "TractorOnline Sell It For Me", subHeading: "Let TractorOnline sell your tractor hassle free for you", icon: 'site-map' },
-    { heading: "Auction Sheet Verification", subHeading: "Authentic Auction Sheets for your peace of mind", icon: 'data' }
-  ]
+    {
+      heading: "Certified Tractors on TractorOnline.com",
+      subHeading:
+        "Tractors that have received the TractorOnline stamp of approval",
+      icon: "speed-meter"
+    },
+    {
+      heading: "Tractor inspection on TractorOnline",
+      subHeading: "Tractor with inspection reports from TractorOnline",
+      icon: "tick-mark"
+    },
+    {
+      heading: "TractorOnline sell it for me",
+      subHeading:
+        "Allow TractorOnline to handle the sale of your tractor for you.",
+      icon: "site-map"
+    },
+    {
+      heading: "Verification of Bid Sheet",
+      subHeading:
+        "For your piece of mind, we provide authentic auction sheets.",
+      icon: "data"
+    }
+  ];
 
   const autoStoreValues = [
-    { heading: "TractorOnline Autostore", subHeading: "Buy Auto Parts & Accessories directly from TractorOnline", icon: 'cart' },
-    { heading: "Find Auto Parts", subHeading: "Find auto parts for your tractor", icon: 'tick-mark' },
-    { heading: "Sell Tractor Parts", subHeading: "Post a free ad and sell your tractor parts quickly", icon: 'tag' },
-  ]
+    {
+      heading: "Autostore TractorOnline",
+      subHeading:
+        "TractorOnline is your one-stop shop for auto parts and accessories.",
+      icon: "cart"
+    },
+    {
+      heading: "Locate Auto Parts",
+      subHeading: "Tractor parts can be found here.",
+      icon: "tick-mark"
+    },
+    {
+      heading: "Tractor Parts for Sale",
+      subHeading:
+        "Sell your tractor components instantly by placing a free ad.",
+      icon: "tag"
+    }
+  ];
 
   const cities = [
     "Karachi",
@@ -33,8 +93,8 @@ export default function DropDown({ usedCars, newCars, autoStore }) {
     "Peshawar",
     "Faisalabad",
     "Multan",
-    "Gujranwala",
-  ]
+    "Gujranwala"
+  ];
 
   const model = [
     "Toyota Corolla",
@@ -44,24 +104,43 @@ export default function DropDown({ usedCars, newCars, autoStore }) {
     "Suzuki Mehran",
     "Toyota Vitz",
     "Suzuki Alto",
-    "Toyota Prado",
+    "Toyota Prado"
   ];
 
   const newTractors = [
-    { heading: "Find New Tractor for Sale", subHeading: "Search from over 110k options", icon: 'light-bulb' },
-    { heading: "Featured New Tractor", subHeading: "View featured tractors by TractorOnline", icon: 'layers' },
-    { heading: "Sell Your Tractor", subHeading: "Post a free ad and sell your car quickly", icon: 'grocery' },
-    { heading: "New Tractor Dealers", subHeading: "Find new car dealers near your", icon: 'star' },
-    { heading: "Price Calculator", subHeading: "Calculate the market price of tractors", icon: 'recycle' }
-  ]
+    {
+      heading: "Search for a New Tractor for Sale.",
+      subHeading:
+        "Over 110k possibilities are available to you to choose from.",
+      icon: "light-bulb"
+    },
+    {
+      heading: "New Tractor Featured",
+      subHeading: "TractorOnline has some featured tractors.",
+      icon: "layers"
+    },
+    {
+      heading: "Tractors for Sale",
+      subHeading: "Create a free ad to sell your vehicle instantly.",
+      icon: "grocery"
+    },
+    {
+      heading: "Dealers of New Tractors",
+      subHeading: "Locate new auto dealerships in your area.",
+      icon: "star"
+    },
+    {
+      heading: "Calculator for Prices",
+      subHeading: "Determine the market value of tractors.",
+      icon: "recycle"
+    }
+  ];
 
   return (
     <div>
-      <div className="dropdown-button p-2">
-        {usedCars ? "Used Tractors" : null}
-        {newCars ? "New Tractors" : null}
-        {autoStore ? "Auto Stores" : null}
-        <Icon.ChevronDown className="icon" height="15px" width="15px" />
+      <div className={`${!dropDownIcon ? " dropdown-button p-2" : "p-1"}`}>
+        {title}
+        {!dropDownIcon && <Icon.ChevronDown className="icon" height="15px" width="15px" />}
         <div
           className={`drop-down-items row py-3 ${
             usedCars ? "usedCarsWidth" : ""
@@ -71,10 +150,13 @@ export default function DropDown({ usedCars, newCars, autoStore }) {
         >
           {usedCars ? (
             <>
-              <ul className="list-unstyled col-3 p-0 border-right">
+              <ul className="list-unstyled col-4 p-0 border-right">
                 {usedTractors.map((option) => (
                   <li className="dropdown-list" key={option.heading}>
-                    <a href="/" className="d-flex pl-1 dropdown-link">
+                    <a
+                      onClick={() => history.push(option.url)}
+                      className="d-flex pl-1 dropdown-link"
+                    >
                       <Icofont
                         icon={option.icon}
                         height="10px"
@@ -89,7 +171,7 @@ export default function DropDown({ usedCars, newCars, autoStore }) {
                   </li>
                 ))}
               </ul>
-              <ul className="list-unstyled col-3 p-0 border-right">
+              <ul className="list-unstyled col-4 p-0 border-right">
                 {usedTractorsSecond.map((option) => (
                   <li className="dropdown-list" key={option.heading}>
                     <a href="/" className="d-flex pl-1 dropdown-link">
@@ -107,7 +189,7 @@ export default function DropDown({ usedCars, newCars, autoStore }) {
                   </li>
                 ))}
               </ul>
-              <ul className="list-unstyled col-3 border-right text-center">
+              <ul className="list-unstyled col-2 border-right text-center">
                 <li className="mb-3">
                   <a href="/">
                     <Icon.MapPin className="icon mr-2" />
@@ -126,7 +208,7 @@ export default function DropDown({ usedCars, newCars, autoStore }) {
                   </li>
                 ))}
               </ul>
-              <ul className="list-unstyled col-3 border-right text-center">
+              <ul className="list-unstyled col-2  text-center">
                 <li className="mb-3">
                   <a href="/">
                     <Icon.Trello className="icon mr-2" />
@@ -168,7 +250,7 @@ export default function DropDown({ usedCars, newCars, autoStore }) {
                   </li>
                 ))}
               </ul>
-              <ul className="list-unstyled col-6 border-right text-center">
+              <ul className="list-unstyled col-6  text-center">
                 <li className="mb-3">
                   <a href="/">
                     <Icon.MapPin className="icon mr-2" />
@@ -192,7 +274,7 @@ export default function DropDown({ usedCars, newCars, autoStore }) {
 
           {autoStore ? (
             <>
-              <ul className="list-unstyled col-12 border-right">
+              <ul className="list-unstyled col-12 ">
                 {autoStoreValues.map((option) => (
                   <li className="dropdown-list" key={option.heading}>
                     <a href="/" className="d-flex pl-1 dropdown-link">

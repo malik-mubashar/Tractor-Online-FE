@@ -22,13 +22,13 @@ export default function Categories({ title, link }) {
     "Sahiwal",
     "Attock",
     "Okara",
-    "Sheikhupura",
+    "Sheikhupura"
   ]);
 
   return (
     <div>
       <div className="d-flex justify-content-between">
-        <h5>{title}</h5>
+        <h2>{title}</h2>
         <a href="/" className="text-info text-capitalize">
           {link}
         </a>
@@ -53,7 +53,7 @@ export default function Categories({ title, link }) {
                                 className="card-img"
                                 src="https://cache3.pakwheels.com/ad_pictures/6549/Slide_toyota-prius-s-led-edition-1-8-2013-65495110.jpg"
                               />
-                              <h4 className="mb-0 pl-2">Name</h4>
+                              <h4 className="mb-0 pl-2">Kubota</h4>
                               <p className="mb-0 pl-2 text-success">
                                 PKR 100,000
                               </p>
@@ -75,7 +75,7 @@ export default function Categories({ title, link }) {
                                 className="card-img"
                                 src="https://cache3.pakwheels.com/ad_pictures/6549/Slide_toyota-prius-s-led-edition-1-8-2013-65495110.jpg"
                               />
-                              <h4 className="mb-0 pl-2">Name</h4>
+                              <h4 className="mb-0 pl-2">Fendt</h4>
                               <p className="mb-0 pl-2 text-success">
                                 PKR 100,000
                               </p>
@@ -97,7 +97,7 @@ export default function Categories({ title, link }) {
                                 className="card-img"
                                 src="https://cache3.pakwheels.com/ad_pictures/6549/Slide_toyota-prius-s-led-edition-1-8-2013-65495110.jpg"
                               />
-                              <h4 className="mb-0 pl-2">Name</h4>
+                              <h4 className="mb-0 pl-2">Deutz Fahr</h4>
                               <p className="mb-0 pl-2 text-success">
                                 PKR 100,000
                               </p>
@@ -124,7 +124,7 @@ export default function Categories({ title, link }) {
                                 className="card-img"
                                 src="https://cache3.pakwheels.com/ad_pictures/6549/Slide_toyota-prius-s-led-edition-1-8-2013-65495110.jpg"
                               />
-                              <h4 className="mb-0 pl-2">Name</h4>
+                              <h4 className="mb-0 pl-2">Claas</h4>
                               <p className="mb-0 pl-2 text-success">
                                 PKR 100,000
                               </p>
@@ -146,7 +146,9 @@ export default function Categories({ title, link }) {
                                 className="card-img"
                                 src="https://cache3.pakwheels.com/ad_pictures/6549/Slide_toyota-prius-s-led-edition-1-8-2013-65495110.jpg"
                               />
-                              <h4 className="mb-0 pl-2">Name</h4>
+                              <h4 className="mb-0 pl-2">
+                                Sonalika International
+                              </h4>
                               <p className="mb-0 pl-2 text-success">
                                 PKR 100,000
                               </p>
@@ -168,7 +170,7 @@ export default function Categories({ title, link }) {
                                 className="card-img"
                                 src="https://cache3.pakwheels.com/ad_pictures/6549/Slide_toyota-prius-s-led-edition-1-8-2013-65495110.jpg"
                               />
-                              <h4 className="mb-0 pl-2">Name</h4>
+                              <h4 className="mb-0 pl-2">Case IH</h4>
                               <p className="mb-0 pl-2 text-success">
                                 PKR 100,000
                               </p>
@@ -195,7 +197,7 @@ export default function Categories({ title, link }) {
                                 className="card-img"
                                 src="https://cache3.pakwheels.com/ad_pictures/6549/Slide_toyota-prius-s-led-edition-1-8-2013-65495110.jpg"
                               />
-                              <h4 className="mb-0 pl-2">Name</h4>
+                              <h4 className="mb-0 pl-2">Massey Ferguson </h4>
                               <p className="mb-0 pl-2 text-success">
                                 PKR 100,000
                               </p>
@@ -217,7 +219,7 @@ export default function Categories({ title, link }) {
                                 className="card-img"
                                 src="https://cache3.pakwheels.com/ad_pictures/6549/Slide_toyota-prius-s-led-edition-1-8-2013-65495110.jpg"
                               />
-                              <h4 className="mb-0 pl-2">Name</h4>
+                              <h4 className="mb-0 pl-2">John Deere</h4>
                               <p className="mb-0 pl-2 text-success">
                                 PKR 100,000
                               </p>
@@ -239,7 +241,7 @@ export default function Categories({ title, link }) {
                                 className="card-img"
                                 src="https://cache3.pakwheels.com/ad_pictures/6549/Slide_toyota-prius-s-led-edition-1-8-2013-65495110.jpg"
                               />
-                              <h4 className="mb-0 pl-2">Name</h4>
+                              <h4 className="mb-0 pl-2">Mahindra</h4>
                               <p className="mb-0 pl-2 text-success">
                                 PKR 100,000
                               </p>
