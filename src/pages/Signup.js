@@ -28,14 +28,15 @@ const SignUp = () => {
       return;
     }
 		try {
-			debugger;
+			 
 			console.log(email, password, confirmPassword,fullName)
 			const result = await user.signUp(email, password, confirmPassword, fullName);
-			debugger;
+			 
 			console.log('signUp result Api', result);
 
 			//success
 			if (result.error === false) {
+				 
 				// toast.success("Wow so easy registered!")
 				setCurrentUser(result.data)
 				localStorage.setItem("currentUser", JSON.stringify(result.data));
@@ -49,7 +50,7 @@ const SignUp = () => {
 			}
 
 		} catch (error) {
-			debugger;
+			 
 			console.error(error);
 		}
   };

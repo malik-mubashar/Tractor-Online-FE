@@ -14,27 +14,39 @@ const Login = () => {
   const [password, setPassword] = useState();
   let history = useHistory();
   const onLoginHandler = async (e) => {
-    debugger;
+     
     e.preventDefault();
     try {
       const result = await user.login(email, password);
       console.log(result);
    			//success
-				 if (result.error === false) {
-					// toast.success("Welocme!")
-					setCurrentUser(result.data)
-					localStorage.setItem("currentUser", JSON.stringify(result.data));
+			if (result.error === false) {
+				alert('wellcome')
+				setCurrentUser({
+					...result.data,
+				accessToken:result.headers['access-token'],
+				client:result.headers['client'],
+				uid:result.headers['uid']
+			})
+			
+					localStorage.setItem("currentUser", JSON.stringify({
+						...result.data,
+				accessToken:result.headers['access-token'],
+				client:result.headers['client'],
+				uid:result.headers['uid']
+				}));
 					history.push("/dashboard")
 				}
 	
 				//error
-				if (result.error === true) {
+			if (result.error === true) {
+				 
 					console.error(result.data.errors.full_messages)
 					alert("Error user not create");
 				}
 	
 			} catch (error) {
-				debugger;
+				 
 				console.error(error);
 			}
   };
