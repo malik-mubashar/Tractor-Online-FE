@@ -1,14 +1,13 @@
-.dashboard-carousel{
+.dashboard-carousel {
   background: linear-gradient(to top, #660033 0%, #003366 100%);
   height: auto;
   padding: 40px;
-  .btn-info:hover{
+  .btn-info:hover {
     background-color: white;
     color: rgb(56, 79, 134);
     border: none;
     outline: none;
   }
-
 }
 
 .search-classified-text {
@@ -17,15 +16,15 @@
   position: relative;
   z-index: 6;
   padding-bottom: 30px;
-   
-  h1{
+
+  h1 {
     font-size: 38px;
     line-height: normal;
     font-weight: normal;
     margin: 0;
     color: #fff;
   }
-  p{
+  p {
     font-size: 18px;
     font-weight: 400;
     margin: 0;
@@ -50,11 +49,11 @@
   margin: 0;
 }
 
-.bg-white{
+.bg-white {
   background-color: white !important;
 }
 .home-widgets .or:after {
-  content: 'OR';
+  content: "OR";
   position: absolute;
   top: 50%;
   right: 80px;
@@ -69,7 +68,7 @@
   width: 34px;
   text-align: center;
 }
-.card-img{
+.card-img {
   background-color: #7b8397;
   height: 150px;
   width: 210px;
@@ -82,10 +81,10 @@
   font-size: 12px;
   line-height: 20px;
 }
-.footer-link{
+.footer-link {
   color: #999;
 }
-.browse-listing{
+.browse-listing {
   list-style: none;
 }
 .browse-listing li a {
@@ -104,30 +103,32 @@
   background-color: #fff;
   border-radius: 6px;
 }
-.carousel-control-prev{
+.carousel-control-prev {
   left: -40px !important;
 }
-.carousel-control-next{
+.carousel-control-next {
   right: -85px;
 }
-.carousel-control-prev-icon, .carousel-control-next-icon{
+.carousel-control-prev-icon,
+.carousel-control-next-icon {
   height: 30px !important;
   width: 30px !important;
   background-color: gray !important;
 }
-.carousel-indicators{
+.carousel-indicators {
   bottom: -30px !important;
 }
 .carousel-indicators li {
-    background-color: gray;
+  background-color: gray;
 }
-.featured-card{
-  border: 1px solid #EAEDEF;
+.featured-card {
+  border: 1px solid #eaedef;
   width: 212px;
   background-color: whitspace-betweene;
   margin: 0px auto;
 }
-.new-car-list .heading img, .new-car-list .bike-brand {
+.new-car-list .heading img,
+.new-car-list .bike-brand {
   background-color: #fff;
   border: 1px solid #e6e6e6;
   box-sizing: content-box;
@@ -135,84 +136,133 @@
   margin-bottom: 10px;
   padding: 5px;
 }
-.space-between{
+.space-between {
   justify-content: space-around;
 }
-.react-multi-carousel-list{
+.react-multi-carousel-list {
   height: 300px !important;
 }
-.landingTopbar{
+.landingTopbar {
   width: 100vw;
 }
-.overflow-x-hidden{
+.overflow-x-hidden {
   overflow-x: hidden;
 }
-.dropdown-button{
+.dropdown-button {
   position: relative;
   cursor: pointer;
 }
-.dropdown-button:hover{
-  .drop-down-items{
+.dropdown-button:hover {
+  .drop-down-items {
     display: flex;
   }
-  background-color: #e6f9ff;
+  background-color: white;
+  border-radius: 10px;
+  box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
 }
 
-
-
-.dropdown-button-category{
+.dropdown-button-category {
   cursor: pointer;
-  .drop-down-items:hover{
+  .drop-down-items:hover {
     display: flex;
   }
-  .drop-down-items{
+  .drop-down-items {
     top: 0px;
-    left: 246px;
+    left: 215px;
     z-index: 9999;
   }
 }
-.dropdown-button-category:hover{
-  .drop-down-items{
+.dropdown-button-category:hover {
+  .drop-down-items {
     display: flex;
   }
-  background-color: #e6f9ff;
+  background-color: white;
+  
 }
-
-
-
-
-.drop-down-items:hover{
+.category-menu {
+  display: none;
+}
+.category-menu:hover {
+  .category-drop-down {
+    .drop-down-items:hover {
+      display: flex;
+    }
+    display: block;
+  }
+}
+.category-drop-down {
+  position: absolute;
+  display: none;
+  z-index: 9999;
+  width: 200px;
+  color: #47404f;
+  font-size: 0.815rem;
+  font-family: "Roboto", sans-serif;
+}
+.category-drop-down:hover {
   display: flex;
 }
-.drop-down-items{
+
+.drop-down-items:hover {
+  display: flex;
+}
+.drop-down-items {
   position: absolute;
-  background-color: #e6f9ff;
+  background-color: white;
   display: none;
   left: 15px;
 }
-.usedCarsWidth{
+@media screen and (max-width: 992px) {
+  .category-menu {
+    display: inline-block;
+    position: relative;
+    cursor: pointer;
+  }
+  .category {
+    /*display property will be overriden as any class further inside this scope*/
+    display: block;
+  }
+  .category .category-section {
+    display: none;
+  }
+  .category-section-slider {
+    margin-top: 40px;
+  }
+  .category-section-slider img {
+    height: 300px;
+  }
+  .category-hot-product {
+    height: auto;
+    display: block;
+    padding: 20px;
+    justify-content: center;
+    align-items: center;
+    margin: auto;
+  }
+}
+.usedCarsWidth {
   width: 70rem;
 }
-.newCarsWidth{
+.newCarsWidth {
   width: 40rem;
 }
-.autoStoreWidth{
+.autoStoreWidth {
   width: 20rem;
 }
-.dropdown-list a{
+.dropdown-list a {
   padding-top: 5px;
   padding-right: 20px;
   padding-bottom: 5px;
   padding-left: 50px;
   color: #434343;
 }
-.dropdown-link:hover{
+.dropdown-link:hover {
   color: #007399;
-  p{
+  p {
     color: #007399;
   }
 }
-.Select-multi-value-wrapper{
+.Select-multi-value-wrapper {
   margin: 0;
   position: absolute;
   top: 50%;
@@ -220,11 +270,11 @@
   transform: translateY(-50%);
   width: 100%;
 }
-.selectSearchContainer{
-  .Select-control{
-    outline: none ;
-    border: none ;
-    border-radius: 0px ;
+.selectSearchContainer {
+  .Select-control {
+    outline: none;
+    border: none;
+    border-radius: 0px;
     height: 50px !important;
     min-width: 60px;
     padding-top: 5px;
@@ -253,7 +303,7 @@
   color: rgb(25, 118, 210);
 }
 .generic-link {
-  color: #1877F2;
+  color: #1877f2;
 }
 
 .css-4g4bsj {
@@ -275,7 +325,8 @@
   vertical-align: middle;
   appearance: none;
   text-decoration: none;
-  transition: color 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms, padding-top 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
+  transition: color 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms,
+    padding-top 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
   padding: 10px 5px 8px;
   max-width: 168px;
   flex-direction: column;
@@ -296,20 +347,20 @@
 }
 
 .css-w0pj6f {
-    overflow: hidden;
-    pointer-events: none;
-    position: absolute;
-    z-index: 0;
-    inset: 0px;
-    border-radius: inherit;
+  overflow: hidden;
+  pointer-events: none;
+  position: absolute;
+  z-index: 0;
+  inset: 0px;
+  border-radius: inherit;
 }
 
 .bottom-nav-sell-blue {
-  width: 54px!important;
-  height: 54px!important;
-  margin: -19px 0 10px!important;
+  width: 54px !important;
+  height: 54px !important;
+  margin: -19px 0 10px !important;
   border-radius: 50%;
-  background-color: #1877F2;
+  background-color: #1877f2;
   border: none;
 }
 .search-success {
@@ -325,18 +376,18 @@
   line-height: 20px;
   padding: 0 15px;
 }
-.mobile-tabs{
+.mobile-tabs {
   flex: auto;
   margin: 0px 1%;
 }
-.mobile-footer{
+.mobile-footer {
   margin-bottom: 70px;
-  color: #233D7A;
+  color: #233d7a;
   background-color: #fff;
 }
 .footer-bottom {
   color: #fff;
-  background-color: #233D7A;
+  background-color: #233d7a;
   padding: 15px 0;
   font-size: 14px;
 }
@@ -358,4 +409,58 @@
   line-height: 1.5;
   color: white;
   text-align: center;
+}
+
+/* category carousel contols show only on hover*/
+.carousel .carousel-control-prev,
+.carousel .carousel-control-next
+{
+    visibility: hidden;
+    opacity: 1;
+}
+
+.carousel:hover .carousel-control-prev,
+.carousel:hover .carousel-control-next
+{
+    visibility: visible;
+    animation-duration: 1s;
+    transition-timing-function: linear;
+}
+
+.carousel:hover .carousel-control-prev
+{
+    animation-name: FadeInPrev;
+}
+
+.carousel:hover .carousel-control-next
+{
+    animation-name: FadeInNext;
+}
+
+@keyframes FadeInPrev
+{
+    0%
+    {
+        opacity: 0;
+        padding-left: 40px;
+    }
+    100%
+    {
+        opacity: 1;
+        padding-left: 0px;
+    }
+}
+
+@keyframes FadeInNext
+{
+    0%
+    {
+        opacity: 0;
+        padding-right: 40px;
+    }
+    100%
+    {
+        opacity: 1;
+        padding-right: 0px;
+    }
 }
