@@ -15,24 +15,33 @@ const CategoriesNavBar = () => {
 
   return (
     <>
-      <div className="d-flex">
-        <div className="relative bg-white col-2 border-radius p-0">
-          <h3 className="category-title p-2 ">
+      <div className=" row category">
+        <div className=" relative bg-white category-section border-radius p-0 ">
+          <h3 className="category-title border-bottom p-2 m-1 ">
             <Icon.List className="icon" /> Categories
           </h3>
 
           <SideMenue />
         </div>
-        <div className="col-9 ">
-          <div className="col-12 mb-4">
-            <MainCategory src="https://www.nicepng.com/png/full/78-781164_tractor-png-all-tractor-hd-png.png" />
+        <div className="col-lg-9 col-12 p-4 mt-4">
+          <div className="category-menu">
+            <div className="category-title  p-2">
+              <Icon.List className="icon" /> Categories
+              <div className="category-drop-down">
+                <SideMenue />
+              </div>
+            </div>
           </div>
-          <div className="col-12 d-flex category-hot-product  border-radius">
-            <div className="col-4">
-              <h3 className="mt-4 text-white">More Exclusive Deals</h3>
-              <h6 className="text-white mb-4">
-              Combine with your coupon to save even more!
-              </h6>
+          <div className="col-12  mb-4  category-section-slider p-0 border-radius">
+            <MainCategory src="https://static.vecteezy.com/system/resources/previews/003/417/794/non_2x/farming-landing-page-web-banner-background-vector.jpg" />
+          </div>
+          <div className="col-12 category-hot-product  border-radius">
+            <div className="col-lg-4 text-center">
+              <h4 className="mt-4 text-white">More Exclusive Deals</h4>
+              <span className="text-white mb-2">
+                Combine with your coupon to save even more!
+              </span>
+              <br></br>
               <Button
                 variant="success"
                 size="lg"
@@ -42,7 +51,7 @@ const CategoriesNavBar = () => {
                 <Icon.ChevronRight className="icon ml-4 font-weight-bold" />
               </Button>
             </div>
-            <div className="col-8 hot-slider">
+            <div className="col-lg-8 hot-slider">
               <FeaturedProducts />
             </div>
           </div>

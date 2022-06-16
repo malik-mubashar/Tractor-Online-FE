@@ -3109,6 +3109,8 @@ textarea.form-control {
 .category-title {
   font-size: 27px;
   line-height: 27px;
+  cursor: pointer;
+  background-color: white;
   /* color: #222; */
 }
 .category-title .icon {
@@ -3116,21 +3118,36 @@ textarea.form-control {
   margin-right: 5px;
   margin-top: -3px;
 }
-.border-radius{
-  border-radius:4px;
+.border-radius {
+  border-radius: 4px;
 }
-
-
-.categoryNavbar .nav-link:hover{
+.category {
+  display: flex;
+  background-color: white;
+  box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 2px 6px 2px;
+  margin: 4px;
+}
+.category-section {
+  min-width: 200px;
+}
+.categoryNavbar{
+  background-color: white;
+  z-index: 99999;
+}
+.categoryNavbar .nav-link:hover {
   text-decoration: none;
   border-radius: 4px;
-  background-color: #e6f9ff;
-
+  background-color: white;
+  box-shadow: rgba(0, 0, 0, 0.19) 0px 10px 20px, rgba(0, 0, 0, 0.23) 0px 6px 6px;
 }
-.category-hot-product{
+.category-hot-product {
   background: linear-gradient(to top, #660033 0%, #003366 100%);
   height: 200px;
+  display: flex;
 }
-.hot-slider .react-multi-carousel-list{
-  height: 180px !important;
+.hot-slider .react-multi-carousel-list {
+  height: 170px !important;
+}
+.hot-slider .featured-card{
+  width:190px !important;
 }

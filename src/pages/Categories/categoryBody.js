@@ -8,10 +8,10 @@ const Categories = ({ src }) => {
   };
 
   return (
-    <Carousel activeIndex={index} onSelect={handleSelect} controls={false}>
+    <Carousel activeIndex={index} onSelect={handleSelect} >
       <Carousel.Item>
         <img
-          className="d-block w-25 m-auto justify-content-center"
+          className="d-block w-100 m-auto justify-content-center border-radius "
           src={src}
           alt="First slide"
           height={"250px"}
@@ -23,7 +23,7 @@ const Categories = ({ src }) => {
       </Carousel.Item>
       <Carousel.Item>
         <img
-          className="d-block w-25 m-auto justify-content-center"
+          className="d-block w-100 m-auto justify-content-center border-radius"
           src={src}
           alt="Second slide"
           height={"250px"}
@@ -36,7 +36,7 @@ const Categories = ({ src }) => {
       </Carousel.Item>
       <Carousel.Item>
         <img
-          className="d-block w-25 m-auto justify-content-center"
+          className="d-block w-100 m-auto justify-content-center border-radius"
           src={src}
           alt="Third slide"
           height={"250px"}
