@@ -20,16 +20,17 @@ import "../assets/css/usedTractor.scss";
 import "../assets/css/addDetails.scss";
 import ProtectedRoute from "../components/ProtectedRoutes/index";
 import UnProtectedRoute from "../components/UnprotectedRoutes/index";
-// import { ToastContainer } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
+
 import Layout from "../layouts/Layouts";
 import AddDetails from "../pages/AddDetails/AddDetails";
 import City from "../pages/City/City";
+import toast, { Toaster } from 'react-hot-toast';
+
 
 const AppRouter = () => {
   return (
-    <>
-      {/* <ToastContainer /> */}
+		<>
+			<Toaster />
 
       <BrowserRouter>
         <Switch>

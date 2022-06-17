@@ -5,7 +5,6 @@ import * as Icon from "react-feather";
 // Logo image file path
 import Logo from "../assets/img/logo.png";
 import { user } from "../API/User/index";
-// import {  toast } from 'react-toastify';
 import {RootContext} from "../context/RootContext";
 
 

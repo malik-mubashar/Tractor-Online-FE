@@ -1,11 +1,14 @@
 import React, { useEffect } from "react";
 import { Button, Col, Form, Row } from "react-bootstrap";
 import { city } from "../../API/City/CityApis";
+import toast, { Toaster } from 'react-hot-toast';
+
 
 export default function AddAndEditCity({ cityState, setCityState }) {
 
 
-	
+	const notify = () => toast('Here is your toast.');
+
   function handleChange(evt) {
     setCityState({
       ...cityState,
@@ -42,7 +45,7 @@ export default function AddAndEditCity({ cityState, setCityState }) {
               <div className="card-header">
 								<h5 className="card-title">{ cityState.isAddCity?"Add City":"Edit City"}</h5>
               </div>
-
+							{/* <button onClick={notify}>Make me a toast</button> */}
               <Form>
                 <Form.Group controlId="formBasicName">
                   <Form.Label>Name</Form.Label>
