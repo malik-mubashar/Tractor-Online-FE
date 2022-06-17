@@ -1,73 +1,119 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Navigation from "../../components/Navigation/Navigation";
 import * as Icon from "react-feather";
-import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
-import { Dropdown, Table, Badge } from "react-bootstrap";
+import { isMobile } from "react-device-detect";
+import {
+  Dropdown,
+  Table,
+  Badge,
+  Button,
+  FormControl,
+  Form,
+  Pagination,
+} from "react-bootstrap";
 import ViewCity from "./ViewCity";
 import AddAndEditCity from "./AddAndEditCity";
+import { city } from "../../API/City/CityApis";
 
 export default function City() {
+  const [paginationNumbers, setPaginationNumbers] = useState();
+  const [noOfRec, setNoOfRec] = useState(10);
+  const [mainSearchString, setMainSearchString] = useState("");
+  useEffect(() => {
+    getCities(1, "", 10);
+  }, []);
+
+  const getCities = async (page, mainSearch, noOfRec) => {
+     
+    console.log(page);
+    try {
+      const result = await city.getCities(page, mainSearch, noOfRec);
+       
+      if (result.error == false && result.data.status == "success") {
+        setCityState({
+          ...cityState,
+          cities: result.data.data,
+          pagination: result.data.pagination,
+          originalCities: result.data.data,
+        });
+        var temp = [];
+         
+        // console.log(cityState.pagination.page)
+        for (var i = 1; i <= result.data.pagination.pages; i++) {
+           
+          temp.push(i);
+        }
+        setPaginationNumbers(temp);
+      } else {
+        console.error(result.data);
+      }
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  const deleteCity = async (id) => {
+    try {
+       
+      const result = await city.deleteCity(id);
+       
+      console.log(result);
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
   const [sideMenu, setSideMenu] = useState(false);
   function onSideMenu(active) {
     setSideMenu(active);
   }
-  function addCity() {}
+
   const [cityState, setCityState] = useState({
+    isEditCity: false,
     isAddCity: false,
     isViewCity: false,
+    cities: null,
+    originalCities: null,
   });
-  const users = [
-    {
-      id: 1,
-      name: "Aaron Rossi",
-      email: "aaron@GrammarList.com",
-      status: "Pending",
-      badge: "info",
-      url: "#",
-    },
-    {
-      id: 2,
-      name: "Brad Joe",
-      email: "brad.joe@gmail.com",
-      status: "Active",
-      badge: "success",
-      url: "#",
-    },
-    {
-      id: 3,
-      name: "Mitch Petty",
-      email: "mitch.petty@gmail.com",
-      status: "Not Active",
-      badge: "warning",
-      url: "#",
-    },
-    {
-      id: 4,
-      name: "Petty Rossi",
-      email: "petty.rossi@gmail.com",
-      status: "Pending",
-      badge: "info",
-      url: "#",
-    },
-    {
-      id: 5,
-      name: "Philip",
-      email: "phili@gmail.com",
-      status: "Active",
-      badge: "success",
-      url: "#",
-    },
-    {
-      id: 6,
-      name: "Nelms",
-      email: "nelms@gmail.com",
-      status: "Active",
-      badge: "success",
-      url: "#",
-    },
-  ];
-  console.log(cityState);
+
+  const handleSearch = (searchString) => {
+     
+    if (searchString) {
+      const filteredCities = cityState.cities.filter((item) => {
+        return (
+          item.name.toLowerCase().includes(searchString.toLowerCase()) ||
+          (item.comments &&
+            item.comments.toLowerCase().includes(searchString.toLowerCase()))
+        );
+      });
+      setCityState({
+        ...cityState,
+        cities: filteredCities,
+      });
+    } else {
+      setCityState({
+        ...cityState,
+        cities: cityState.originalCities,
+      });
+    }
+     
+  };
+
+  const handleMainSearch = (event) => {
+    setMainSearchString(event.target.value);
+     
+    if (event.keyCode == 13) {
+       
+      getCities(1, event.target.value, noOfRec);
+    }
+    if (event.target.value == "") {
+      getCities(1, event.target.value, noOfRec);
+    }
+  };
+
+  console.log("cityState in index", cityState);
+  console.log("cityState in index", noOfRec);
   return (
     <>
       <>
@@ -76,8 +122,12 @@ export default function City() {
           <div className={`main-content d-flex flex-column`}>
             {cityState.isViewCity ? (
               <ViewCity cityState={cityState} setCityState={setCityState} />
-            ) : cityState.isAddCity === true || cityState.isEditCity === true ? (
-              <AddAndEditCity cityState={cityState} setCityState={setCityState}/>
+            ) : cityState.isAddCity === true ||
+              cityState.isEditCity === true ? (
+              <AddAndEditCity
+                cityState={cityState}
+                setCityState={setCityState}
+              />
             ) : (
               <>
                 <button
@@ -92,27 +142,68 @@ export default function City() {
                 >
                   Add City
                 </button>
+                <div className={`${isMobile ? "" : "d-flex"}`}>
+                  <FormControl
+                    type="text"
+                    onKeyUp={(event) => handleMainSearch(event)}
+                    placeholder="Main Search..."
+                    style={{ marginTop: "-10px" }}
+                  />
+                  <select
+                    onChange={(e) => {
+                       
+                      setNoOfRec(e.target.value);
+                    }}
+                    className={`${
+                      isMobile ? "mt-3" : "adjustNoOfRecSelect"
+                    } form-control col-4 mb-2`}
+                    id="sortby"
+                    name="no of rec per page"
+                    // style={{ marginTop: "-9px" }}
+                  >
+                    <option value="" disabled selected={true}>
+                      No of Records per page
+                    </option>
+                    <option value="15">15</option>
+                    <option value="20">20</option>
+                    <option value="30">30</option>
+                    <option value="40">40</option>
+                    <option value="50">50</option>
+                    <option value="60">60</option>
+                    <option value="70">70</option>
+                    <option value="80">80</option>
+                  </select>
+                </div>
 
                 <div className="card mb-4">
                   <div className="card-body">
                     <div className="card-header d-flex">
-                      <h5 className="card-title w-50 float-left">{"Cites"}</h5>
-                      <Dropdown className="dropdown card-dropdown text-right w-50 float-right">
+                      <h5 className="card-title w-50 float-left">Cites</h5>
+                      <Form className="nav-search-form d-none d-sm-block float-right">
+                        <FormControl
+                          type="text"
+                          onChange={(event) => handleSearch(event.target.value)}
+                          placeholder="Search..."
+                          style={{ marginTop: "-10px" }}
+                        />
+                      </Form>
+
+                      {/* <Dropdown className="dropdown card-dropdown text-right w-50 float-right">
                         <Dropdown.Toggle id="dropdown-basic">
                           <Icon.MoreHorizontal className="icon mt-minus-3" />
                         </Dropdown.Toggle>
                         <Dropdown.Menu>
                           <Link to="/" className="dropdown-item">
-                            Add new user
+                            Add new city
                           </Link>
                           <Link to="/" className="dropdown-item">
-                            View all users
+                            View all cities
                           </Link>
                         </Dropdown.Menu>
-                      </Dropdown>
+                      </Dropdown> */}
                     </div>
 
-                    <div className="height-310">
+                    <div className="">
                       <Table className="m-0" responsive>
                         <thead>
                           <tr>
@@ -123,28 +214,130 @@ export default function City() {
                         </thead>
 
                         <tbody>
-                          {users.map((user, idx) => (
-                            <tr key={idx}>
-                              <td>{user.name}</td>
-                              <td>{user.email}</td>
-                              <td className="text-center">
-                                <Link
-                                  to={user.url}
-                                  className="text-success mr-2"
-                                >
-                                  <Icon.Edit2 className="icon wh-15 mt-minus-3" />
-                                </Link>
-                                <Link
-                                  to={user.url}
-                                  className="text-danger mr-2"
-                                >
-                                  <Icon.X className="icon wh-15 mt-minus-3" />
-                                </Link>
-                              </td>
-                            </tr>
-                          ))}
+                          {cityState.cities &&
+                            cityState.cities.map((city, idx) => (
+                              <tr key={idx}>
+                                <td>{city.name && city.name}</td>
+                                <td>{city.comments && city.comments}</td>
+                                <td className="text-center">
+                                  <Icon.Edit2
+                                    onClick={() => {
+                                       
+                                      setCityState({
+                                        ...cityState,
+                                        isEditCity: true,
+                                        name: city.name,
+                                        comments: city.comments,
+                                        cityId: city.id,
+                                      });
+                                    }}
+                                    className="text-success mr-2 icon wh-15 mt-minus-3"
+                                  />
+                                  <Link
+                                    // to={city.url}
+                                    className="text-danger mr-2"
+                                  >
+                                    <Icon.X
+                                      onClick={() => deleteCity(city.id)}
+                                      className="icon wh-15 mt-minus-3"
+                                    />
+                                  </Link>
+                                </td>
+                              </tr>
+                            ))}
                         </tbody>
                       </Table>
+                    </div>
+                    <div
+                      className={`${isMobile ? "" : "d-flex"}`}
+                      style={{ justifyContent: "space-between" }}
+                    >
+                      {cityState.pagination && (
+                        <>
+                          <Pagination>
+                            <Pagination.First
+                              disabled={
+                                cityState.pagination.page == 1 ? true : false
+                              }
+                              onClick={() => {
+                                getCities(1, mainSearchString, noOfRec);
+                              }}
+                            />
+                            <Pagination.Prev
+                              disabled={
+                                cityState.pagination.page == 1 ? true : false
+                              }
+                              onClick={() => {
+                                getCities(
+                                  cityState.pagination.prev,
+                                  mainSearchString,
+                                  noOfRec
+                                );
+                              }}
+                            />
+                            {paginationNumbers &&
+                              paginationNumbers.map((item) => {
+                                return (
+                                  <Pagination.Item
+                                    disabled={
+                                      cityState.pagination.page == item
+                                        ? true
+                                        : false
+                                    }
+                                    key={item}
+                                    onClick={() => {
+                                      getCities(
+                                        item,
+                                        mainSearchString,
+                                        noOfRec
+                                      );
+                                    }}
+                                    className="paginationButton"
+                                  >
+                                    {item}
+                                  </Pagination.Item>
+                                );
+                              })}
+
+                            <Pagination.Next
+                              disabled={
+                                cityState.pagination.page ==
+                                cityState.pagination.last
+                                  ? true
+                                  : false
+                              }
+                              onClick={() => {
+                                getCities(
+                                  cityState.pagination.next,
+                                  mainSearchString,
+                                  noOfRec
+                                );
+                              }}
+                            />
+                            <Pagination.Last
+                              onClick={() => {
+                                getCities(
+                                  cityState.pagination.last,
+                                  mainSearchString,
+                                  noOfRec
+                                );
+                              }}
+                              disabled={
+                                cityState.pagination.page ==
+                                cityState.pagination.last
+                                  ? true
+                                  : false
+                              }
+                            />
+                          </Pagination>
+
+                          <div style={{ marginTop: "25px" }}>
+                            displaying {cityState.pagination.from} to{" "}
+                            {cityState.pagination.to} of total{" "}
+                            {cityState.pagination.count}
+                          </div>
+                        </>
+                      )}
                     </div>
                   </div>
                 </div>
