@@ -5,49 +5,49 @@ import * as Icon from "react-feather";
 import { user } from "../API/User/index";
 // Logo image file path
 import Logo from "../assets/img/logo.png";
-import {RootContext} from "../context/RootContext";
+import { RootContext } from "../context/RootContext";
 const Login = () => {
-	const { currentUser,setCurrentUser } = useContext(RootContext);
+  const { currentUser, setCurrentUser } = useContext(RootContext);
 
   const [email, setEmail] = useState();
   const [password, setPassword] = useState();
   let history = useHistory();
   const onLoginHandler = async (e) => {
-     
     e.preventDefault();
     try {
       const result = await user.login(email, password);
       console.log(result);
-   			//success
-			if (result.error === false) {
-				alert('wellcome')
-				setCurrentUser({
-					...result.data,
-				accessToken:result.headers['access-token'],
-				client:result.headers['client'],
-				uid:result.headers['uid']
-			})
-			
-					localStorage.setItem("currentUser", JSON.stringify({
-						...result.data,
-				accessToken:result.headers['access-token'],
-				client:result.headers['client'],
-				uid:result.headers['uid']
-				}));
-					history.push("/dashboard")
-				}
-	
-				//error
-			if (result.error === true) {
-				 
-					console.error(result.data.errors.full_messages)
-					alert("Error user not create");
-				}
-	
-			} catch (error) {
-				 
-				console.error(error);
-			}
+      //success
+      if (result.error === false) {
+        alert("wellcome");
+        setCurrentUser({
+          ...result.data,
+          accessToken: result.headers["access-token"],
+          client: result.headers["client"],
+          uid: result.headers["uid"]
+        });
+
+        localStorage.setItem(
+          "currentUser",
+          JSON.stringify({
+            ...result.data,
+            accessToken: result.headers["access-token"],
+            client: result.headers["client"],
+            uid: result.headers["uid"]
+          })
+        );
+        localStorage.setItem("headers", JSON.stringify(result.headers));
+        history.push("/dashboard");
+      }
+
+      //error
+      if (result.error === true) {
+        console.error(result.data.errors.full_messages);
+        alert("Error user not create");
+      }
+    } catch (error) {
+      console.error(error);
+    }
   };
   return (
     <div className="auth-main-content auth-bg-image">
