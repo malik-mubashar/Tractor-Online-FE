@@ -43,9 +43,9 @@ const AppRouter = () => {
           <UnProtectedRoute exact path="/login">
             <Login />
 					</UnProtectedRoute>
-					<UnProtectedRoute exact path="/city">
+					<ProtectedRoute exact path="/city">
             <City />
-					</UnProtectedRoute>
+					</ProtectedRoute>
           <UnProtectedRoute exact path="/usedtractor">
             <Layout>
               <UsedTractor />
