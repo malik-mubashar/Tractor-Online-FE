@@ -9,7 +9,26 @@
     outline: none;
   }
 }
+.paginationButton{
+	padding: 17px !important;
+	border-left: none !important;
+}
+.customPagination a {
+  color: black;
+  float: left;
+  padding: 8px 16px;
+  text-decoration: none;
+}
 
+.customPagination a.active {
+  background-color: #4CAF50;
+  color: white;
+}
+
+.pagination a:hover:not(.active) {background-color: #ddd;}
+.adjustNoOfRecSelect{
+	margin-top: -9px;
+}
 .search-classified-text {
   padding-top: 120px;
   line-height: 22px;
