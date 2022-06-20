@@ -24,11 +24,12 @@ export default function Country() {
     getCountries(1, "", 10);
   }, []);
 
-  const getCountries = async (page, mainSearch, noOfRec) => {
-    console.log(page);
+	const getCountries = async (page, mainSearch, noOfRec) => {
+		const loadingToastId = toast.loading("Loading..!");
     try {
       const result = await country.getCountries(page, mainSearch, noOfRec);
-      if (result.error == false && result.data.status == "success") {
+			if (result.error == false && result.data.status == "success") {
+				toast.dismiss(loadingToastId);
         setCountryState({
           ...countryState,
           countries: result.data.data,
@@ -42,24 +43,29 @@ export default function Country() {
           temp.push(i);
         }
         setPaginationNumbers(temp);
-      } else {
+			} else {
+				toast.dismiss(loadingToastId);
         console.error(result.data);
       }
-    } catch (error) {
+		} catch (error) {
+			toast.dismiss(loadingToastId);
       console.error(error);
     }
   };
 
-  const deleteCountry = async (id) => {
+	const deleteCountry = async (id) => {
+		const loadingToastId = toast.loading("Loading..!");
     try {
 			const result = await country.deleteCountry(id);
-			debugger;
+			 
       if (result.error == false && result.data.notice == "Country was successfully removed.") {
+				toast.dismiss(loadingToastId);
 				toast.success("Successfully deleted!");
+
 				getCountries(1, "", 10);
       }
-      console.log(result);
-    } catch (error) {
+		} catch (error) {
+			toast.dismiss(loadingToastId);
       console.error(error);
     }
   };
@@ -149,8 +155,8 @@ export default function Country() {
                   />
                   <select
                     onChange={(e) => {
-                      setNoOfRec(e.target.value);
-                    }}
+													setNoOfRec(e.target.value);
+													getCountries(1, mainSearchString, e.target.value);                    }}
                     className={`${
                       isMobile ? "mt-3" : "adjustNoOfRecSelect"
                     } form-control col-4 mb-2`}
@@ -205,7 +211,7 @@ export default function Country() {
                                   <Icon.Edit2
                                     style={{ cursor: "pointer" }}
 																		onClick={() => {
-																			debugger;
+																			 
                                       setCountryState({
                                         ...countryState,
                                         isEditCountry: true,

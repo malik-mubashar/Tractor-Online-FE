@@ -26,10 +26,14 @@ export default function City() {
   }, []);
 
   const getCities = async (page, mainSearch, noOfRec) => {
+    const loadingToastId = toast.loading("Loading..!");
+
     console.log(page);
     try {
       const result = await city.getCities(page, mainSearch, noOfRec);
       if (result.error == false && result.data.status == "success") {
+        toast.dismiss(loadingToastId);
+
         setCityState({
           ...cityState,
           cities: result.data.data,
@@ -44,20 +48,27 @@ export default function City() {
         }
         setPaginationNumbers(temp);
       } else {
+        toast.dismiss(loadingToastId);
         console.error(result.data);
       }
     } catch (error) {
+      toast.dismiss(loadingToastId);
       console.error(error);
     }
   };
 
-  const deleteCity = async (id) => {
+	const deleteCity = async (id) => {
+		const loadingToastId = toast.loading("Loading..!");
     try {
-			const result = await city.deleteCity(id);
-			debugger;
-      if (result.error == false && result.data.notice == "City was successfully removed.") {
-				toast.success("Successfully deleted!");
-				getCities(1, "", 10);
+      const result = await city.deleteCity(id);
+      debugger;
+      if (
+        result.error == false &&
+        result.data.notice == "City was successfully removed."
+			) {
+				toast.dismiss(loadingToastId);
+        toast.success("Successfully deleted!");
+        getCities(1, "", 10);
       }
       console.log(result);
     } catch (error) {
@@ -150,6 +161,7 @@ export default function City() {
                   <select
                     onChange={(e) => {
                       setNoOfRec(e.target.value);
+                      getCities(1, mainSearchString, e.target.value);
                     }}
                     className={`${
                       isMobile ? "mt-3" : "adjustNoOfRecSelect"
