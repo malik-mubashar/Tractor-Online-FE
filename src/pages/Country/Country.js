@@ -12,31 +12,30 @@ import {
   Form,
   Pagination,
 } from "react-bootstrap";
-import ViewCity from "./ViewCity";
-import AddAndEditCity from "./AddAndEditCity";
-import { city } from "../../API/City/CityApis";
+import AddAndEditCountry from "./AddAndEditCountry";
+import { country } from "../../API/Country/CountryApis";
 import toast from "react-hot-toast";
 
-export default function City() {
+export default function Country() {
   const [paginationNumbers, setPaginationNumbers] = useState();
   const [noOfRec, setNoOfRec] = useState(10);
   const [mainSearchString, setMainSearchString] = useState("");
   useEffect(() => {
-    getCities(1, "", 10);
+    getCountries(1, "", 10);
   }, []);
 
-  const getCities = async (page, mainSearch, noOfRec) => {
+  const getCountries = async (page, mainSearch, noOfRec) => {
     console.log(page);
     try {
-      const result = await city.getCities(page, mainSearch, noOfRec);
+      const result = await country.getCountries(page, mainSearch, noOfRec);
       if (result.error == false && result.data.status == "success") {
-        setCityState({
-          ...cityState,
-          cities: result.data.data,
+        setCountryState({
+          ...countryState,
+          countries: result.data.data,
           pagination: result.data.pagination,
-          originalCities: result.data.data,
-          isAddCity: false,
-          isEditCity: false,
+          originalCountries: result.data.data,
+          isAddCountry: false,
+          isEditCountry: false,
         });
         var temp = [];
         for (var i = 1; i <= result.data.pagination.pages; i++) {
@@ -51,13 +50,13 @@ export default function City() {
     }
   };
 
-  const deleteCity = async (id) => {
+  const deleteCountry = async (id) => {
     try {
-			const result = await city.deleteCity(id);
+			const result = await country.deleteCountry(id);
 			debugger;
-      if (result.error == false && result.data.notice == "City was successfully removed.") {
+      if (result.error == false && result.data.notice == "Country was successfully removed.") {
 				toast.success("Successfully deleted!");
-				getCities(1, "", 10);
+				getCountries(1, "", 10);
       }
       console.log(result);
     } catch (error) {
@@ -70,31 +69,31 @@ export default function City() {
     setSideMenu(active);
   }
 
-  const [cityState, setCityState] = useState({
-    isEditCity: false,
-    isAddCity: false,
-    isViewCity: false,
-    cities: null,
-    originalCities: null,
+  const [countryState, setCountryState] = useState({
+    isEditCountry: false,
+    isAddCountry: false,
+    isViewCountry: false,
+    countries: null,
+    originalCountries: null,
   });
 
   const handleSearch = (searchString) => {
     if (searchString) {
-      const filteredCities = cityState.cities.filter((item) => {
+      const filteredCountries = countryState.countries.filter((item) => {
         return (
           item.name.toLowerCase().includes(searchString.toLowerCase()) ||
           (item.comments &&
             item.comments.toLowerCase().includes(searchString.toLowerCase()))
         );
       });
-      setCityState({
-        ...cityState,
-        cities: filteredCities,
+      setCountryState({
+        ...countryState,
+        countries: filteredCountries,
       });
     } else {
-      setCityState({
-        ...cityState,
-        cities: cityState.originalCities,
+      setCountryState({
+        ...countryState,
+        countries: countryState.originalcountries,
       });
     }
   };
@@ -102,29 +101,30 @@ export default function City() {
   const handleMainSearch = (event) => {
     setMainSearchString(event.target.value);
     if (event.keyCode == 13) {
-      getCities(1, event.target.value, noOfRec);
+      getCountries(1, event.target.value, noOfRec);
     }
     if (event.target.value == "") {
-      getCities(1, event.target.value, noOfRec);
+      getCountries(1, event.target.value, noOfRec);
     }
   };
 
-  console.log("cityState in index", cityState);
-  console.log("cityState in index", noOfRec);
+  console.log("CountryState in index", countryState);
+  console.log("CountryState in index", noOfRec);
   return (
     <>
       <>
         <Navigation onClick={() => onSideMenu} />
-        <div className="cityPage">
+        <div className="countryPage">
           <div className={`main-content d-flex flex-column`}>
-            {cityState.isViewCity ? (
-              <ViewCity cityState={cityState} setCityState={setCityState} />
-            ) : cityState.isAddCity === true ||
-              cityState.isEditCity === true ? (
-              <AddAndEditCity
-                cityState={cityState}
-                setCityState={setCityState}
-                getCities={getCities}
+						{countryState.isViewCountry ? (
+						<></>
+              // <ViewCountry countryState={countryState} setCountryState={setCountryState} />
+            ) : countryState.isAddCountry === true ||
+              countryState.isEditCountry === true ? (
+              <AddAndEditCountry
+                countryState={countryState}
+                setCountryState={setCountryState}
+                getCountries={getCountries}
               />
             ) : (
               <>
@@ -132,13 +132,13 @@ export default function City() {
                   type="button"
                   className="btn btn-outline-primary col-sm-2 mb-4"
                   onClick={() => {
-                    setCityState({
-                      ...cityState,
-                      isAddCity: true,
+                    setCountryState({
+                      ...countryState,
+                      isAddCountry: true,
                     });
                   }}
                 >
-                  Add City
+                  Add Country
                 </button>
                 <div className={`${isMobile ? "" : "d-flex"}`}>
                   <FormControl
@@ -196,28 +196,29 @@ export default function City() {
                         </thead>
 
                         <tbody>
-                          {cityState.cities &&
-                            cityState.cities.map((city, idx) => (
+                          {countryState.countries &&
+                            countryState.countries.map((country, idx) => (
                               <tr key={idx}>
-                                <td>{city.name && city.name}</td>
-                                <td>{city.comments && city.comments}</td>
+                                <td>{country.name && country.name}</td>
+                                <td>{country.comments && country.comments}</td>
                                 <td className="text-center">
                                   <Icon.Edit2
                                     style={{ cursor: "pointer" }}
-                                    onClick={() => {
-                                      setCityState({
-                                        ...cityState,
-                                        isEditCity: true,
-                                        name: city.name,
-                                        comments: city.comments,
-                                        cityId: city.id,
+																		onClick={() => {
+																			debugger;
+                                      setCountryState({
+                                        ...countryState,
+                                        isEditCountry: true,
+                                        name: country.name,
+                                        comments: country.comments,
+                                        countryId: country.id,
                                       });
                                     }}
                                     className="text-success mr-2 icon wh-15 mt-minus-3"
                                   />
                                   <Link className="text-danger mr-2">
                                     <Icon.X
-                                      onClick={() => deleteCity(city.id)}
+                                      onClick={() => deleteCountry(country.id)}
                                       className="icon wh-15 mt-minus-3"
                                     />
                                   </Link>
@@ -231,24 +232,24 @@ export default function City() {
                       className={`${isMobile ? "" : "d-flex"}`}
                       style={{ justifyContent: "space-between" }}
                     >
-                      {cityState.pagination && (
+                      {countryState.pagination && (
                         <>
                           <Pagination>
                             <Pagination.First
                               disabled={
-                                cityState.pagination.page == 1 ? true : false
+                                countryState.pagination.page == 1 ? true : false
                               }
                               onClick={() => {
-                                getCities(1, mainSearchString, noOfRec);
+                                getCountries(1, mainSearchString, noOfRec);
                               }}
                             />
                             <Pagination.Prev
                               disabled={
-                                cityState.pagination.page == 1 ? true : false
+                                countryState.pagination.page == 1 ? true : false
                               }
                               onClick={() => {
-                                getCities(
-                                  cityState.pagination.prev,
+                                getCountries(
+                                  countryState.pagination.prev,
                                   mainSearchString,
                                   noOfRec
                                 );
@@ -259,13 +260,13 @@ export default function City() {
                                 return (
                                   <Pagination.Item
                                     disabled={
-                                      cityState.pagination.page == item
+                                      countryState.pagination.page == item
                                         ? true
                                         : false
                                     }
                                     key={item}
                                     onClick={() => {
-                                      getCities(
+                                      getCountries(
                                         item,
                                         mainSearchString,
                                         noOfRec
@@ -280,14 +281,14 @@ export default function City() {
 
                             <Pagination.Next
                               disabled={
-                                cityState.pagination.page ==
-                                cityState.pagination.last
+                                countryState.pagination.page ==
+                                countryState.pagination.last
                                   ? true
                                   : false
                               }
                               onClick={() => {
-                                getCities(
-                                  cityState.pagination.next,
+                                getCountries(
+                                  countryState.pagination.next,
                                   mainSearchString,
                                   noOfRec
                                 );
@@ -295,15 +296,15 @@ export default function City() {
                             />
                             <Pagination.Last
                               onClick={() => {
-                                getCities(
-                                  cityState.pagination.last,
+                                getCountries(
+                                  countryState.pagination.last,
                                   mainSearchString,
                                   noOfRec
                                 );
                               }}
                               disabled={
-                                cityState.pagination.page ==
-                                cityState.pagination.last
+                                countryState.pagination.page ==
+                                countryState.pagination.last
                                   ? true
                                   : false
                               }
@@ -311,9 +312,9 @@ export default function City() {
                           </Pagination>
 
                           <div style={{ marginTop: "25px" }}>
-                            displaying {cityState.pagination.from} to{" "}
-                            {cityState.pagination.to} of total{" "}
-                            {cityState.pagination.count}
+                            displaying {countryState.pagination.from} to{" "}
+                            {countryState.pagination.to} of total{" "}
+                            {countryState.pagination.count}
                           </div>
                         </>
                       )}
