@@ -1,10 +1,10 @@
 import React, { useEffect } from "react";
 import { Button, Col, Form, Row } from "react-bootstrap";
-import { city } from "../../API/City/CityApis";
 import toast, { Toaster } from 'react-hot-toast';
+import { country } from "../../API/Country/CountryApis";
 
 
-export default function AddAndEditCity({ cityState, setCityState ,getCities}) {
+export default function AddAndEditCountry({ countryState, setCountryState ,getCountries}) {
 
 
 	const notify = () => {
@@ -13,45 +13,45 @@ export default function AddAndEditCity({ cityState, setCityState ,getCities}) {
 	}
 
   function handleChange(evt) {
-    setCityState({
-      ...cityState,
+    setCountryState({
+      ...countryState,
       [evt.target.name]: evt.target.value,
     });
   }
 
-  const addCity = async (params) => {
-    if (cityState.isAddCity) {
+  const addCountry = async (params) => {
+    if (countryState.isAddCountry) {
       try {
-        const result = await city.addCity(cityState.name, cityState.comments);
+        const result = await country.addCountry(countryState.name, countryState.comments);
 				console.log(result);
 				debugger;
-				toast.success('City created!');
-				setCityState({
-					...cityState,
-					isAddCity:false
+				toast.success('country created!');
+				setCountryState({
+					...countryState,
+					isAddCountry:false
 				})
-				getCities(1, "", 10);
+				getCountries(1, "", 10);
       } catch (error) {
         console.error(error);
       }
-    } else if(cityState.isEditCity) {
+    } else if(countryState.isEditCountry) {
 			try {
 				 
-        const result = await city.updateCity(cityState.name, cityState.comments,cityState.cityId);
+        const result = await country.updateCountry(countryState.name, countryState.comments,countryState.countryId);
 				console.log(result);
-				toast.success('City updated!');
-				setCityState({
-					...cityState,
-					isEditCity:false
+				toast.success('country updated!');
+				setCountryState({
+					...countryState,
+					isEditCountry:false
 				})
-				getCities(1, "", 10);
+				getCountries(1, "", 10);
 				debugger;
       } catch (error) {
         console.error(error);
       }
     }
   };
-  console.log(cityState);
+  console.log(countryState);
   return (
     <div className="mb-4">
       {/* Basic Forms */}
@@ -60,14 +60,14 @@ export default function AddAndEditCity({ cityState, setCityState ,getCities}) {
           <div className="card mb-4">
             <div className="card-body">
               <div className="card-header">
-								<h5 className="card-title">{ cityState.isAddCity?"Add City":"Edit City"}</h5>
+								<h5 className="card-title">{ countryState.isAddCountry?"Add country":"Edit Country"}</h5>
               </div>
 							<button onClick={notify}>Make me a toast</button>
               <Form>
                 <Form.Group controlId="formBasicName">
                   <Form.Label>Name</Form.Label>
 									<Form.Control
-										defaultValue={cityState.name}
+										defaultValue={countryState.name}
                     name="name"
                     type="text"
                     placeholder="Enter Country Name"
@@ -78,7 +78,7 @@ export default function AddAndEditCity({ cityState, setCityState ,getCities}) {
                 <Form.Group controlId="formBasicComments">
                   <Form.Label>Comments</Form.Label>
 									<Form.Control
-										defaultValue={cityState.comments}
+										defaultValue={countryState.comments}
                     name="comments"
                     type="text"
                     placeholder="Comments"
@@ -89,10 +89,10 @@ export default function AddAndEditCity({ cityState, setCityState ,getCities}) {
                   className="mr-3"
                   variant="secondary"
                   onClick={() =>
-                    setCityState({
-                      ...cityState,
-                      isAddCity: false,
-                      isEditCity: false,
+                    setCountryState({
+                      ...countryState,
+                      isAddCountry: false,
+                      isEditCountry: false,
                     })
                   }
                 >
@@ -100,12 +100,12 @@ export default function AddAndEditCity({ cityState, setCityState ,getCities}) {
                 </Button>
                 <Button
                   onClick={() => {
-                    addCity();
+                    addCountry();
                   }}
-                  // variant=`${cityState.isAddCity?'primary':'warning'}`
-                  variant={cityState.isAddCity?'success':'warning'}
+                  // variant=`${countryState.isAddCountry?'primary':'warning'}`
+                  variant={countryState.isAddCountry?'success':'warning'}
                 >
-                   {cityState.isAddCity?'Create':'Update'}
+                   {countryState.isAddCountry?'Create':'Update'}
                 </Button>
               </Form>
             </div>

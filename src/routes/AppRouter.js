@@ -25,6 +25,7 @@ import Layout from "../layouts/Layouts";
 import AddDetails from "../pages/AddDetails/AddDetails";
 import City from "../pages/City/City";
 import toast, { Toaster } from 'react-hot-toast';
+import Country from "../pages/Country/Country";
 
 
 const AppRouter = () => {
@@ -45,6 +46,9 @@ const AppRouter = () => {
 					</UnProtectedRoute>
 					<ProtectedRoute exact path="/city">
             <City />
+					</ProtectedRoute>
+					<ProtectedRoute exact path="/country">
+            <Country />
 					</ProtectedRoute>
           <UnProtectedRoute exact path="/usedtractor">
             <Layout>
