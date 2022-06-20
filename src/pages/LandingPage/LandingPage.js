@@ -32,7 +32,7 @@ const LandingPage = () => {
 
         <div className="container-lg py-4">
           <FeaturedProducts
-            title="Managed By TractoOnline"
+            title="Managed By TractorOnline"
             link="View all TractorOnline-managed properties."
           />
         </div>

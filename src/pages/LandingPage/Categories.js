@@ -40,7 +40,7 @@ export default function Categories() {
                 <Tab eventKey="Category" title="Category">
                   <Carousel>
                     <Carousel.Item>
-                      <ul className="browse-listing row">
+                      <ul className="browse-listing row p-0">
                         {index.map((option) => (
                           <li className="col-4 col-lg-2 mt-4" key={option}>
                             <a
@@ -55,7 +55,7 @@ export default function Categories() {
                       </ul>
                     </Carousel.Item>
                     <Carousel.Item>
-                      <ul className="browse-listing row">
+                      <ul className="browse-listing row p-0">
                         {index.map((option) => (
                           <li className="col-4 col-lg-2 mt-4" key={option}>
                             <a
@@ -73,7 +73,7 @@ export default function Categories() {
                       </ul>
                     </Carousel.Item>
                     <Carousel.Item>
-                      <ul className="browse-listing row">
+                      <ul className="browse-listing row p-0">
                         {index.map((option) => (
                           <li className="col-4 col-lg-2 mt-4" key={option}>
                             <a
@@ -93,7 +93,7 @@ export default function Categories() {
                 <Tab eventKey="City" title="City">
                   <Carousel>
                     <Carousel.Item>
-                      <ul className="browse-listing row">
+                      <ul className="browse-listing row p-0">
                         {city.map((option) => (
                           <li
                             className="col-4 col-lg-2 p-3 text-center"
@@ -107,7 +107,7 @@ export default function Categories() {
                       </ul>
                     </Carousel.Item>
                     <Carousel.Item>
-                      <ul className="browse-listing row">
+                      <ul className="browse-listing row p-0">
                         {city.map((option) => (
                           <li
                             className="col-4 col-lg-2 p-3 text-center"
@@ -121,7 +121,7 @@ export default function Categories() {
                       </ul>
                     </Carousel.Item>
                     <Carousel.Item>
-                      <ul className="browse-listing row">
+                      <ul className="browse-listing row p-0">
                         {city.map((option) => (
                           <li
                             className="col-4 col-lg-2 p-3 text-center"
@@ -140,7 +140,7 @@ export default function Categories() {
                 <Tab eventKey="Make" title="Make">
                   <Carousel>
                     <Carousel.Item>
-                      <ul className="browse-listing row">
+                      <ul className="browse-listing row p-0">
                         {index.map((option) => (
                           <li className="col-4 col-lg-2 mt-4" key={option}>
                             <a href="#" title="Toyota for sale in Pakistan">
@@ -155,7 +155,7 @@ export default function Categories() {
                       </ul>
                     </Carousel.Item>
                     <Carousel.Item>
-                      <ul className="browse-listing row">
+                      <ul className="browse-listing row p-0">
                         {index.map((option) => (
                           <li className="col-4 col-lg-2 mt-4" key={option}>
                             <a href="#" title="Toyota for sale in Pakistan">
@@ -170,7 +170,7 @@ export default function Categories() {
                       </ul>
                     </Carousel.Item>
                     <Carousel.Item>
-                      <ul className="browse-listing row">
+                      <ul className="browse-listing row p-0">
                         {index.map((option) => (
                           <li className="col-4 col-lg-2 mt-4" key={option}>
                             <a href="#" title="Toyota for sale in Pakistan">

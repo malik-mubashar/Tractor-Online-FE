@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import {
   Row,
   Col,
@@ -14,14 +14,18 @@ import Navigation from "../components/Navigation/Navigation";
 import Footer from "./Footer/Footer";
 import { user } from "../API/User/index";
 import user1 from "../assets/img/user/big/1.png";
-import InputGroup from "react-bootstrap/InputGroup";
-import FormControl from "react-bootstrap/FormControl";
+import { RootContext } from "../context/RootContext";
+import { useHistory } from "react-router-dom";
 
 const ProfileSettings = () => {
+  const { currentUser } = useContext(RootContext);
+  const [userPersonalDetail, setUserPersonalDetail] = useState(
+    currentUser.data
+  );
   const [sideMenue, setSideMenu] = useState();
   const [fileDataURL, setFileDataURL] = useState(null);
   const [modalShow, setModalShow] = useState(false);
-  const [updatePassword, setUpdatePAssword] = useState({
+  const [updatePassword, setUpdatePassword] = useState({
     email: null,
     current_password: null,
     new_password: null,
@@ -37,9 +41,13 @@ const ProfileSettings = () => {
     gender: null,
     country: null,
     city: null,
-    user_name: null
+    username: null
   });
+
+  let history = useHistory();
+
   useEffect(() => {
+    handlePersonalDetail();
     let fileReader,
       isCancel = false;
     if (editProfile.image) {
@@ -60,6 +68,31 @@ const ProfileSettings = () => {
     };
   }, [editProfile.image]);
 
+  const handlePersonalDetail = async () => {
+    const result = await user.findUser(currentUser.data.id);
+    setUserPersonalDetail(result.data);
+    setEditProfile({
+      name: result.data.name,
+      image: result.data.image,
+      language:
+        result.data.personal_detail && result.data.personal_detail.language,
+      birthDay: result.data.personal_detail && result.data.personal_detail.dob,
+      phone:
+        result.data.personal_detail && result.data.personal_detail.phone_number,
+      email: result.data.email,
+      gender: result.data.personal_detail && result.data.personal_detail.gender,
+      country:
+        result.data.personal_detail && result.data.personal_detail.country,
+      city: result.data.personal_detail && result.data.personal_detail.city,
+      username:
+        result.data.personal_detail && result.data.personal_detail.username
+    });
+    setUpdatePassword({
+      ...updatePassword,
+      email: result.data.email
+    });
+  };
+
   // Toggle side bar menu
   const onSideMenu = (active) => {
     setSideMenu(active);
@@ -71,7 +104,7 @@ const ProfileSettings = () => {
     });
   };
   const handleUpdatePassword = (value, target) => {
-    setUpdatePAssword({
+    setUpdatePassword({
       ...updatePassword,
       [target]: value
     });
@@ -81,14 +114,20 @@ const ProfileSettings = () => {
     try {
       let formData = new FormData();
       formData.append("user[profile]", editProfile.image);
-      const result = await user.profile(editProfile, formData);
-
-      console.log(result);
+      const result = await user.profile(
+        editProfile,
+        userPersonalDetail.personal_detail ? userPersonalDetail.personal_detail.id : "",
+        formData
+      );
+      if (result.error === false) {
+        history.push("/profile/");
+      }
     } catch (error) {}
   };
   const modalClose = () => {
     setModalShow(!modalShow);
   };
+
 
   return (
     <>
@@ -104,9 +143,12 @@ const ProfileSettings = () => {
           {/* Breadcrumb */}
           <div className="main-content-header">
             <Breadcrumb>
-              <h1>Profile Settings</h1>
+              <h1>Edit Profile</h1>
               <Link to="/dashboard" className="breadcrumb-item">
                 Dashboard
+              </Link>
+              <Link to="/profile" className="breadcrumb-item">
+                Profile
               </Link>
               <Breadcrumb.Item active>Profile Settings</Breadcrumb.Item>
             </Breadcrumb>
@@ -155,6 +197,7 @@ const ProfileSettings = () => {
                       <Form.Control
                         type="text"
                         placeholder=""
+                        value={editProfile.name ? editProfile.name : ""}
                         onChange={(e) => {
                           handleUpdateProfile(e.target.value, "name");
                         }}
@@ -165,8 +208,9 @@ const ProfileSettings = () => {
                       <Form.Control
                         type="text"
                         placeholder=" "
+                        value={editProfile.username}
                         onChange={(e) => {
-                          handleUpdateProfile(e.target.value, "user_name");
+                          handleUpdateProfile(e.target.value, "username");
                         }}
                       />
                     </Form.Group>
@@ -175,20 +219,26 @@ const ProfileSettings = () => {
                       <Form.Control
                         type="text"
                         placeholder=""
-                        onChange={(e) => {
-                          handleUpdateProfile(e.target.value, "email");
-                        }}
+                        disabled={true}
+                        value={editProfile.email}
+                        // onChange={(e) => {
+                        //   handleUpdateProfile(e.target.value, "email");
+                        // }}
                       />
                     </Form.Group>
                   </Form.Row>
 
                   <Form.Row>
-                    <Form.Group as={Col} controlId="exampleForm.ControlSelect1">
+                    <Form.Group as={Col} controlId="ControlSelect1">
                       <Form.Label>Gender</Form.Label>
                       <Form.Control
                         as="select"
+                        value={editProfile.gender ? editProfile.gender : ""}
                         onChange={(e) => {
-                          handleUpdateProfile(e.target.value, "gender");
+                          handleUpdateProfile(
+                            parseInt(e.target.value),
+                            "gender"
+                          );
                         }}
                       >
                         <option value="0">Male</option>
@@ -202,6 +252,7 @@ const ProfileSettings = () => {
                         type="date"
                         name="dob"
                         placeholder="Date of Birth"
+                        value={editProfile.birthDay}
                         onChange={(e) => {
                           handleUpdateProfile(e.target.value, "birthDay");
                         }}
@@ -215,20 +266,26 @@ const ProfileSettings = () => {
                       <Form.Control
                         type="text"
                         placeholder=""
+                        value={editProfile.phone ? editProfile.phone : ""}
                         onChange={(e) => {
                           handleUpdateProfile(e.target.value, "phone");
                         }}
                       />
                     </Form.Group>
-                    <Form.Group as={Col}>
+
+                    <Form.Group as={Col} controlId="formGridLanguage">
                       <Form.Label>Language</Form.Label>
                       <Form.Control
-                        type="text"
-                        placeholder=""
+                        as="select"
+                        value={editProfile.language ? editProfile.language : ""}
                         onChange={(e) => {
                           handleUpdateProfile(e.target.value, "language");
                         }}
-                      />
+                      >
+                        <option>Select Language ....</option>
+                        <option>English</option>
+                        <option>Urdu</option>
+                      </Form.Control>
                     </Form.Group>
                   </Form.Row>
                   <Form.Row>
@@ -236,6 +293,7 @@ const ProfileSettings = () => {
                       <Form.Label>Country</Form.Label>
                       <Form.Control
                         as="select"
+                        value={editProfile.country ? editProfile.country : ""}
                         onChange={(e) => {
                           handleUpdateProfile(e.target.value, "country");
                         }}
@@ -250,6 +308,7 @@ const ProfileSettings = () => {
                       <Form.Label>city</Form.Label>
                       <Form.Control
                         as="select"
+                        value={editProfile.city ? editProfile.city : ""}
                         onChange={(e) => {
                           handleUpdateProfile(e.target.value, "city");
                         }}
@@ -263,7 +322,12 @@ const ProfileSettings = () => {
 
                   <div className="text-center d-flex justify-content-between mt-5">
                     <div>
-                      <Button variant="danger">Cancel</Button>
+                      <Button
+                        variant="danger"
+                        onClick={() => history.push("/profile/")}
+                      >
+                        Cancel
+                      </Button>
                     </div>
                     <div onClick={updateProfile}>
                       <Button variant="success">Save Changes</Button>
@@ -302,8 +366,8 @@ const ProfileSettings = () => {
               <Form.Control
                 type="email"
                 placeholder="Enter email"
-                onChange={(e) => handleUpdatePassword(e.target.value, "email")}
-                required
+                disabled={updatePassword.email}
+                value={updatePassword.email}
               />
             </Form.Group>
             <Form.Group as={Col} controlId="formBasicC_Password">

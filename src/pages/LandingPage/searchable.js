@@ -102,7 +102,7 @@ const searchAble = () => {
           <SelectSearch
             options={countryOptions}
             setValue={setCountry}
-            label="Select Country"
+            label="Select City"
             value={country}
           />
         </li>

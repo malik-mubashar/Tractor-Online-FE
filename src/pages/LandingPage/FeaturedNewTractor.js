@@ -42,9 +42,9 @@ export default function Categories({ title, link }) {
                 <Tab eventKey="Popular" title="Popular">
                   <Carousel>
                     <Carousel.Item>
-                      <ul className="browse-listing row">
+                      <ul className="browse-listing  row p-0">
                         {index.map((option) => (
-                          <li className="col-4 col-lg-2 m-4" key={option}>
+                          <li className=" col-md-3" key={option}>
                             <div
                               className="featured-card bg-white"
                               key={option}
@@ -64,9 +64,9 @@ export default function Categories({ title, link }) {
                       </ul>
                     </Carousel.Item>
                     <Carousel.Item>
-                      <ul className="browse-listing row">
+                      <ul className="browse-listing  row p-0">
                         {index.map((option) => (
-                          <li className="col-4 col-lg-2 m-4" key={option}>
+                          <li className=" col-md-3" key={option}>
                             <div
                               className="featured-card bg-white"
                               key={option}
@@ -86,9 +86,9 @@ export default function Categories({ title, link }) {
                       </ul>
                     </Carousel.Item>
                     <Carousel.Item>
-                      <ul className="browse-listing row">
+                      <ul className="browse-listing  row p-0">
                         {index.map((option) => (
-                          <li className="col-4 col-lg-2 m-4" key={option}>
+                          <li className=" col-md-3" key={option}>
                             <div
                               className="featured-card bg-white"
                               key={option}
@@ -113,9 +113,9 @@ export default function Categories({ title, link }) {
                 <Tab eventKey="Upcoming" title="Upcoming">
                   <Carousel>
                     <Carousel.Item>
-                      <ul className="browse-listing row">
+                      <ul className="browse-listing  row p-0">
                         {index.map((option) => (
-                          <li className="col-4 col-lg-2 m-4" key={option}>
+                          <li className=" col-md-3" key={option}>
                             <div
                               className="featured-card bg-white"
                               key={option}
@@ -135,9 +135,9 @@ export default function Categories({ title, link }) {
                       </ul>
                     </Carousel.Item>
                     <Carousel.Item>
-                      <ul className="browse-listing row">
+                      <ul className="browse-listing  row p-0">
                         {index.map((option) => (
-                          <li className="col-4 col-lg-2 m-4" key={option}>
+                          <li className=" col-md-3" key={option}>
                             <div
                               className="featured-card bg-white"
                               key={option}
@@ -159,9 +159,9 @@ export default function Categories({ title, link }) {
                       </ul>
                     </Carousel.Item>
                     <Carousel.Item>
-                      <ul className="browse-listing row">
+                      <ul className="browse-listing  row p-0">
                         {index.map((option) => (
-                          <li className="col-4 col-lg-2 m-4" key={option}>
+                          <li className=" col-md-3" key={option}>
                             <div
                               className="featured-card bg-white"
                               key={option}
@@ -186,9 +186,9 @@ export default function Categories({ title, link }) {
                 <Tab eventKey="Newly Launched" title="Newly Launched">
                   <Carousel>
                     <Carousel.Item>
-                      <ul className="browse-listing row">
+                      <ul className="browse-listing  row p-0">
                         {index.map((option) => (
-                          <li className="col-4 col-lg-2 m-4" key={option}>
+                          <li className=" col-md-3" key={option}>
                             <div
                               className="featured-card bg-white"
                               key={option}
@@ -208,9 +208,9 @@ export default function Categories({ title, link }) {
                       </ul>
                     </Carousel.Item>
                     <Carousel.Item>
-                      <ul className="browse-listing row">
+                      <ul className="browse-listing  row p-0">
                         {index.map((option) => (
-                          <li className="col-4 col-lg-2 m-4" key={option}>
+                          <li className=" col-md-3" key={option}>
                             <div
                               className="featured-card bg-white"
                               key={option}
@@ -230,9 +230,9 @@ export default function Categories({ title, link }) {
                       </ul>
                     </Carousel.Item>
                     <Carousel.Item>
-                      <ul className="browse-listing row">
+                      <ul className="browse-listing  row p-0">
                         {index.map((option) => (
-                          <li className="col-4 col-lg-2 m-4" key={option}>
+                          <li className=" col-md-3" key={option}>
                             <div
                               className="featured-card bg-white"
                               key={option}
