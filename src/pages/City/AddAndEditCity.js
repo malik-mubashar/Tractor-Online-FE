@@ -4,12 +4,6 @@ import { city } from "../../API/City/CityApis";
 import toast, { Toaster } from "react-hot-toast";
 
 export default function AddAndEditCity({ cityState, setCityState, getCities }) {
-  const notify = () => {
-    toast("Here is your toast.");
-    toast.success("Successfully created!");
-    const iidd = toast.loading("Loading..!");
-    console.log(iidd);
-  };
 
   function handleChange(evt) {
     setCityState({
@@ -72,7 +66,6 @@ export default function AddAndEditCity({ cityState, setCityState, getCities }) {
                   {cityState.isAddCity ? "Add City" : "Edit City"}
                 </h5>
               </div>
-              <button onClick={notify}>Make me a toast</button>
               <Form>
                 <Form.Group controlId="formBasicName">
                   <Form.Label>Name</Form.Label>
