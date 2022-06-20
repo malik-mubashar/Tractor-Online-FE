@@ -5,7 +5,7 @@ Headers = {
   ...Headers,
   "Access-Control-Allow-Origin": "*",
   mode: "no-cors"
-}
+};
 
 class User {
   signUp = async (email, password, confirmPassword, fullName) => {
@@ -66,17 +66,56 @@ class User {
         };
       });
   };
-  profile = async (profile,formData) => {
-    debugger;
+  profile = async (profile, personal_id, formData) => {
+    let personal_detail = personal_id
+      ? {
+          id: personal_id,
+          city: profile.city,
+          country: profile.country,
+          dob: profile.birthDay,
+          gender: profile.gender,
+          username: profile.username,
+          phone_number: profile.phone,
+          language: profile.language
+        }
+      : {
+          city: profile.city,
+          country: profile.country,
+          dob: profile.birthDay,
+          gender: profile.gender,
+          username: profile.username,
+          phone_number: profile.phone,
+          language: profile.language
+        };
+
     return axios({
       method: "patch",
-      url: `http://localhost:4000/api/v1/auth`,
-      headers:Headers,
+      url: `${process.env.REACT_APP_API_LOCAL_PATH}auth`,
+      headers: Headers,
       data: {
-        profile:formData,
-        
+        // profile:formData,
+        name: profile.name,
+        personal_detail_attributes: personal_detail
       }
-      
+    })
+      .then((result) => {
+        return {
+          error: false,
+          data: result.data
+        };
+      })
+      .catch((error) => {
+        return {
+          error: true,
+          data: error.response.data
+        };
+      });
+  };
+  findUser = async (id) => {
+    return axios({
+      method: "get",
+      url: `${process.env.REACT_APP_API_LOCAL_PATH}app_users/${id}`,
+      headers: Headers
     })
       .then((result) => {
         return {
