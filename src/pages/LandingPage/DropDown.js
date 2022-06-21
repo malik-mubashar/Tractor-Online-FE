@@ -1,10 +1,10 @@
 import React from "react";
 import * as Icon from "react-feather";
 import Icofont from "react-icofont";
-import { useHistory } from "react-router-dom";
+import { Link } from "react-router-dom";
+
 
 export default function DropDown({ title,usedCars, newCars, autoStore,dropDownIcon }) {
-  const history = useHistory();
 
   const usedTractors = [
     {
@@ -151,10 +151,10 @@ export default function DropDown({ title,usedCars, newCars, autoStore,dropDownIc
           {usedCars ? (
             <>
               <ul className="list-unstyled col-4 p-0 border-right">
-                {usedTractors.map((option) => (
-                  <li className="dropdown-list" key={option.heading}>
-                    <a
-                      onClick={() => history.push(option.url)}
+                {usedTractors.map((option,i) => (
+                  <li className="dropdown-list" key={i}>
+                    <Link
+                      to="/"
                       className="d-flex pl-1 dropdown-link"
                     >
                       <Icofont
@@ -167,14 +167,14 @@ export default function DropDown({ title,usedCars, newCars, autoStore,dropDownIc
                         <strong>{option.heading}</strong>
                         <p>{option.subHeading}</p>
                       </div>
-                    </a>
+                    </Link>
                   </li>
                 ))}
               </ul>
               <ul className="list-unstyled col-4 p-0 border-right">
-                {usedTractorsSecond.map((option) => (
-                  <li className="dropdown-list" key={option.heading}>
-                    <a href="/" className="d-flex pl-1 dropdown-link">
+                {usedTractorsSecond.map((option,i) => (
+                  <li className="dropdown-list" key={i}>
+                    <Link to="/" className="d-flex pl-1 dropdown-link">
                       <Icofont
                         icon={option.icon}
                         height="10px"
@@ -185,45 +185,45 @@ export default function DropDown({ title,usedCars, newCars, autoStore,dropDownIc
                         <strong>{option.heading}</strong>
                         <p>{option.subHeading}</p>
                       </div>
-                    </a>
+                    </Link>
                   </li>
                 ))}
               </ul>
               <ul className="list-unstyled col-2 border-right text-center">
                 <li className="mb-3">
-                  <a href="/">
+                  <Link to="/">
                     <Icon.MapPin className="icon mr-2" />
                     <strong>Popular Cities</strong>
-                  </a>
+                  </Link>
                 </li>
-                {cities.map((option) => (
-                  <li key={option.heading}>
-                    <a
-                      href="/"
+                {cities.map((option,i) => (
+                  <li key={i}>
+                    <Link
+                      to="/"
                       className="dropdown-link"
                       title="Used Cars for sale in Karachi"
                     >
                       <p className="city-name">{option}</p>
-                    </a>
+                    </Link>
                   </li>
                 ))}
               </ul>
               <ul className="list-unstyled col-2  text-center">
                 <li className="mb-3">
-                  <a href="/">
+                  <Link to="/">
                     <Icon.Trello className="icon mr-2" />
                     <strong>Popular Models</strong>
-                  </a>
+                  </Link>
                 </li>
-                {model.map((option) => (
-                  <li key={option}>
-                    <a
-                      href={"/"}
+                {model.map((option,i) => (
+                  <li key={i}>
+                    <Link
+                      to="/"
                       className="dropdown-link"
                       title="Used Cars for sale in Karachi"
                     >
                       <p className="city-name">{option}</p>
-                    </a>
+                    </Link>
                   </li>
                 ))}
               </ul>
@@ -233,9 +233,9 @@ export default function DropDown({ title,usedCars, newCars, autoStore,dropDownIc
           {newCars ? (
             <>
               <ul className="list-unstyled col-6 border-right">
-                {newTractors.map((option) => (
-                  <li className="dropdown-list" key={option.heading}>
-                    <a href={"/"} className="d-flex pl-1 dropdown-link">
+                {newTractors.map((option,i) => (
+                  <li className="dropdown-list" key={i}>
+                    <Link to="/" className="d-flex pl-1 dropdown-link">
                       <Icofont
                         icon={option.icon}
                         height="10px"
@@ -246,26 +246,26 @@ export default function DropDown({ title,usedCars, newCars, autoStore,dropDownIc
                         <strong>{option.heading}</strong>
                         <p>{option.subHeading}</p>
                       </div>
-                    </a>
+                    </Link>
                   </li>
                 ))}
               </ul>
               <ul className="list-unstyled col-6  text-center">
                 <li className="mb-3">
-                  <a href="/">
+                  <Link to="/">
                     <Icon.MapPin className="icon mr-2" />
                     <strong>Popular New Tractor</strong>
-                  </a>
+                  </Link>
                 </li>
-                {model.map((option) => (
-                  <li key={option}>
-                    <a
-                      href={"/"}
+                {model.map((option,i) => (
+                  <li key={i}>
+                    <Link
+                      to="/"
                       className="dropdown-link"
                       title="Used Cars for sale in Karachi"
                     >
                       <p className="city-name">{option}</p>
-                    </a>
+                    </Link>
                   </li>
                 ))}
               </ul>
@@ -275,9 +275,9 @@ export default function DropDown({ title,usedCars, newCars, autoStore,dropDownIc
           {autoStore ? (
             <>
               <ul className="list-unstyled col-12 ">
-                {autoStoreValues.map((option) => (
-                  <li className="dropdown-list" key={option.heading}>
-                    <a href="/" className="d-flex pl-1 dropdown-link">
+                {autoStoreValues.map((option,i) => (
+                  <li className="dropdown-list" key={i}>
+                    <Link to="/" className="d-flex pl-1 dropdown-link">
                       <Icofont
                         icon={option.icon}
                         height="10px"
@@ -288,7 +288,7 @@ export default function DropDown({ title,usedCars, newCars, autoStore,dropDownIc
                         <strong>{option.heading}</strong>
                         <p>{option.subHeading}</p>
                       </div>
-                    </a>
+                    </Link>
                   </li>
                 ))}
               </ul>

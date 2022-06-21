@@ -3,31 +3,15 @@ import React, { useState, useEffect } from "react";
 import * as Icon from "react-feather";
 import { Button } from "react-bootstrap";
 import SelectSearch from "./SelectSearch";
+import { city } from "../../API/Country/City";
 
 const searchAble = () => {
   const [tractorModel, setTractorModel] = useState("");
   const [country, setCountry] = useState("");
   const [minPrice, setMinPrice] = useState();
+  const [cities, setCities] = useState();
 
   const [maxPrice, setMaxPrice] = useState();
-
-  const countryOptions = [
-    { label: "Melsi", value: "Melsi" },
-    { label: "Pasrur", value: "Pasrur" },
-    { label: "Islamabad", value: "Islamabad" },
-    { label: "Rawalpindi", value: "Rawalpindi" },
-    { label: "Peshawar", value: "Peshawar" },
-    { label: "Abbottabad", value: "Abbottabad" },
-    { label: "Abdul Hakeem", value: "Abdul Hakeem" },
-    { label: "Adda jahan khan", value: "Adda jahan khan" },
-    { label: "dda shaiwala", value: "dda shaiwala" },
-    { label: "Chashma", value: "Chashma" },
-    { label: "Chakwal", value: "Chakwal" },
-    { label: "Daulatpur", value: "Daulatpur" },
-    { label: "Hariwala", value: "Hariwala" },
-    { label: "Jhudo", value: "Jhudo" },
-    { label: "Matli", value: "Matli" },
-  ];
   const [minPriceOptions, setMinPriceOptions] = useState([
     { label: "5 lac", value: "5 lac" },
     { label: "10 lac", value: "10 lac" },
@@ -43,7 +27,7 @@ const searchAble = () => {
     { label: "27 lac", value: "27 lac" },
     { label: "1 lac", value: "1 lac" },
     { label: "2 lac", value: "2 lac" },
-    { label: "3 lac", value: "3 lac" },
+    { label: "3 lac", value: "3 lac" }
   ]);
   const [maxPriceOptions, setMaxPriceOptions] = useState([
     { label: "5 lac", value: "5 lac" },
@@ -60,10 +44,11 @@ const searchAble = () => {
     { label: "27 lac", value: "27 lac" },
     { label: "1 lac", value: "1 lac" },
     { label: "2 lac", value: "2 lac" },
-    { label: "3 lac", value: "3 lac" },
+    { label: "3 lac", value: "3 lac" }
   ]);
 
   useEffect(() => {
+    handleGetAllCity();
     if (minPrice) {
       let temp = maxPriceOptions.filter(function(x) {
         return parseInt(x.label) > parseInt(minPrice);
@@ -79,6 +64,17 @@ const searchAble = () => {
       setMinPriceOptions(temp);
     }
   }, [maxPrice]);
+
+  const handleGetAllCity = async () => {
+    const result = await city.getAllCities();
+    const tempArray = [];
+    result &&
+      result.data &&
+      result.data.data.map((item) =>
+        tempArray.push({ label: item.name, value: item.name })
+      );
+    setCities(tempArray);
+  };
 
   return (
     <>
@@ -100,7 +96,7 @@ const searchAble = () => {
         </li>
         <li className="col-2 px-0">
           <SelectSearch
-            options={countryOptions}
+            options={cities}
             setValue={setCountry}
             label="Select City"
             value={country}

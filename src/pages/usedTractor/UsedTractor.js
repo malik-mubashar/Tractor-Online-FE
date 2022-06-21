@@ -28,7 +28,7 @@ export default function usedTractor() {
                   <span
                     onClick={() => history.push("/")}
                     className="cursor-pointer"
-                    itemprop="name"
+                    itemProp="name"
                   >
                     Home /
                   </span>
@@ -39,14 +39,14 @@ export default function usedTractor() {
                   <span
                     onClick={() => history.push("/usedtractor")}
                     className="cursor-pointer"
-                    itemprop="name"
+                    itemProp="name"
                   >
                     Used Tractor /
                   </span>
                 </a>
               </li>
               <li>
-                <span itemprop="name">Used Tractor For Sale In Pakistan</span>
+                <span itemProp="name">Used Tractor For Sale In Pakistan</span>
               </li>
             </ul>
             <div className="search-pagi-info">
@@ -146,7 +146,7 @@ export default function usedTractor() {
             <li className="col-md-3">
               <a
                 href="/used-Tractors/karachi/24857?registration_city=sindh"
-                itemprop="relatedLink"
+                itemProp="relatedLink"
                 title="Tractors for sale in Karachi"
               >
                 Tractors Karachi
@@ -157,7 +157,7 @@ export default function usedTractor() {
             <li className="col-md-3">
               <a
                 href="/used-Tractors/lahore/24858?registration_city=sindh"
-                itemprop="relatedLink"
+                itemProp="relatedLink"
                 title="Tractors for sale in Lahore"
               >
                 Tractors Lahore
@@ -168,7 +168,7 @@ export default function usedTractor() {
             <li className="col-md-3">
               <a
                 href="/used-Tractors/islamabad/24856?registration_city=sindh"
-                itemprop="relatedLink"
+                itemProp="relatedLink"
                 title="Tractors for sale in Islamabad"
               >
                 Tractors Islamabad
@@ -179,7 +179,7 @@ export default function usedTractor() {
             <li className="col-md-3">
               <a
                 href="/used-Tractors/hyderabad/24771?registration_city=sindh"
-                itemprop="relatedLink"
+                itemProp="relatedLink"
                 title="Tractors for sale in Hyderabad"
               >
                 Tractors Hyderabad
@@ -190,7 +190,7 @@ export default function usedTractor() {
             <li className="col-md-3">
               <a
                 href="/used-Tractors/quetta/24826?registration_city=sindh"
-                itemprop="relatedLink"
+                itemProp="relatedLink"
                 title="Tractors for sale in Quetta"
               >
                 Tractors Quetta
@@ -201,7 +201,7 @@ export default function usedTractor() {
             <li className="col-md-3">
               <a
                 href="/used-Tractors/multan/24810?registration_city=sindh"
-                itemprop="relatedLink"
+                itemProp="relatedLink"
                 title="Tractors for sale in Multan"
               >
                 Tractors Multan
@@ -212,7 +212,7 @@ export default function usedTractor() {
             <li className="col-md-3">
               <a
                 href="/used-Tractors/rawalpindi/24831?registration_city=sindh"
-                itemprop="relatedLink"
+                itemProp="relatedLink"
                 title="Tractors for sale in Rawalpindi"
               >
                 Tractors Rawalpindi
@@ -223,7 +223,7 @@ export default function usedTractor() {
             <li className="col-md-3">
               <a
                 href="/used-Tractors/bahawalpur/24732?registration_city=sindh"
-                itemprop="relatedLink"
+                itemProp="relatedLink"
                 title="Tractors for sale in Bahawalpur"
               >
                 Tractors Bahawalpur
@@ -234,7 +234,7 @@ export default function usedTractor() {
             <li className="col-md-3">
               <a
                 href="/used-Tractors/rahim-yar-khan/68120?registration_city=sindh"
-                itemprop="relatedLink"
+                itemProp="relatedLink"
                 title="Tractors for sale in Rahim Yar Khan"
               >
                 Tractors Rahim Yar Khan
@@ -245,7 +245,7 @@ export default function usedTractor() {
             <li className="col-md-3">
               <a
                 href="/used-Tractors/peshawar/24821?registration_city=sindh"
-                itemprop="relatedLink"
+                itemProp="relatedLink"
                 title="Tractors for sale in Peshawar"
               >
                 Tractors Peshawar
@@ -256,7 +256,7 @@ export default function usedTractor() {
             <li className="col-md-3">
               <a
                 href="/used-Tractors/faisalabad/24753?registration_city=sindh"
-                itemprop="relatedLink"
+                itemProp="relatedLink"
                 title="Tractors for sale in Faisalabad"
               >
                 Tractors Faisalabad
@@ -267,7 +267,7 @@ export default function usedTractor() {
             <li className="col-md-3">
               <a
                 href="/used-Tractors/abbottabad/727521?registration_city=sindh"
-                itemprop="relatedLink"
+                itemProp="relatedLink"
                 title="Tractors for sale in Abbottabad"
               >
                 Tractors Abbottabad
@@ -278,7 +278,7 @@ export default function usedTractor() {
             <li className="col-md-3">
               <a
                 href="/used-Tractors/d-g-khan/68114?registration_city=sindh"
-                itemprop="relatedLink"
+                itemProp="relatedLink"
                 title="Tractors for sale in D.G.Khan"
               >
                 Tractors D.G.Khan
@@ -289,7 +289,7 @@ export default function usedTractor() {
             <li className="col-md-3">
               <a
                 href="/used-Tractors/sukkur/24843?registration_city=sindh"
-                itemprop="relatedLink"
+                itemProp="relatedLink"
                 title="Tractors for sale in Sukkur"
               >
                 Tractors Sukkur
@@ -300,7 +300,7 @@ export default function usedTractor() {
             <li className="col-md-3">
               <a
                 href="/used-Tractors/mansehra/752719?registration_city=sindh"
-                itemprop="relatedLink"
+                itemProp="relatedLink"
                 title="Tractors for sale in Mansehra"
               >
                 Tractors Mansehra
@@ -311,7 +311,7 @@ export default function usedTractor() {
             <li className="col-md-3">
               <a
                 href="/used-Tractors/dera-ismail-khan/24749?registration_city=sindh"
-                itemprop="relatedLink"
+                itemProp="relatedLink"
                 title="Tractors for sale in Dera ismail khan"
               >
                 Tractors Dera ismail khan
@@ -322,7 +322,7 @@ export default function usedTractor() {
             <li className="col-md-3">
               <a
                 href="/used-Tractors/sadiqabad/24833?registration_city=sindh"
-                itemprop="relatedLink"
+                itemProp="relatedLink"
                 title="Tractors for sale in Sadiqabad"
               >
                 Tractors Sadiqabad
@@ -333,7 +333,7 @@ export default function usedTractor() {
             <li className="col-md-3">
               <a
                 href="/used-Tractors/mirpur-khas/24809?registration_city=sindh"
-                itemprop="relatedLink"
+                itemProp="relatedLink"
                 title="Tractors for sale in Mirpur khas"
               >
                 Tractors Mirpur khas
@@ -344,7 +344,7 @@ export default function usedTractor() {
             <li className="col-md-3">
               <a
                 href="/used-Tractors/nawabshah/69292?registration_city=sindh"
-                itemprop="relatedLink"
+                itemProp="relatedLink"
                 title="Tractors for sale in Nawabshah"
               >
                 Tractors Nawabshah
@@ -355,7 +355,7 @@ export default function usedTractor() {
             <li className="col-md-3">
               <a
                 href="/used-Tractors/khanpur--2/677247?registration_city=sindh"
-                itemprop="relatedLink"
+                itemProp="relatedLink"
                 title="Tractors for sale in Khanpur"
               >
                 Tractors Khanpur
@@ -369,7 +369,7 @@ export default function usedTractor() {
             <li className="col-md-3">
               <a
                 href="/used-Tractors/toyota/33"
-                itemprop="relatedLink"
+                itemProp="relatedLink"
                 title="Toyota Tractors for sale in Pakistan"
               >
                 Toyota Tractors
@@ -380,7 +380,7 @@ export default function usedTractor() {
             <li className="col-md-3">
               <a
                 href="/used-Tractors/suzuki/32"
-                itemprop="relatedLink"
+                itemProp="relatedLink"
                 title="Suzuki Tractors for sale in Pakistan"
               >
                 Suzuki Tractors
@@ -391,7 +391,7 @@ export default function usedTractor() {
             <li className="col-md-3">
               <a
                 href="/used-Tractors/honda/14"
-                itemprop="relatedLink"
+                itemProp="relatedLink"
                 title="Honda Tractors for sale in Pakistan"
               >
                 Honda Tractors
@@ -402,7 +402,7 @@ export default function usedTractor() {
             <li className="col-md-3">
               <a
                 href="/used-Tractors/daihatsu/12"
-                itemprop="relatedLink"
+                itemProp="relatedLink"
                 title="Daihatsu Tractors for sale in Pakistan"
               >
                 Daihatsu Tractors
@@ -413,7 +413,7 @@ export default function usedTractor() {
             <li className="col-md-3">
               <a
                 href="/used-Tractors/kia/19"
-                itemprop="relatedLink"
+                itemProp="relatedLink"
                 title="KIA Tractors for sale in Pakistan"
               >
                 Belarus Tractors
@@ -424,7 +424,7 @@ export default function usedTractor() {
             <li className="col-md-3">
               <a
                 href="/used-Tractors/nissan/26"
-                itemprop="relatedLink"
+                itemProp="relatedLink"
                 title="Nissan Tractors for sale in Pakistan"
               >
                 Nissan Tractors
@@ -435,7 +435,7 @@ export default function usedTractor() {
             <li className="col-md-3">
               <a
                 href="/used-Tractors/hyundai/15"
-                itemprop="relatedLink"
+                itemProp="relatedLink"
                 title="Hyundai Tractors for sale in Pakistan"
               >
                 Hyundai Tractors
@@ -446,7 +446,7 @@ export default function usedTractor() {
             <li className="col-md-3">
               <a
                 href="/used-Tractors/mitsubishi/25"
-                itemprop="relatedLink"
+                itemProp="relatedLink"
                 title="Mitsubishi Tractors for sale in Pakistan"
               >
                 Mitsubishi Tractors
@@ -457,7 +457,7 @@ export default function usedTractor() {
             <li className="col-md-3">
               <a
                 href="/used-Tractors/changan/47"
-                itemprop="relatedLink"
+                itemProp="relatedLink"
                 title="Changan Tractors for sale in Pakistan"
               >
                 Changan Tractors
@@ -468,7 +468,7 @@ export default function usedTractor() {
             <li className="col-md-3">
               <a
                 href="/used-Tractors/mercedes-benz/23"
-                itemprop="relatedLink"
+                itemProp="relatedLink"
                 title="Mercedes Benz Tractors for sale in Pakistan"
               >
                 Mercedes Benz Tractors
@@ -479,7 +479,7 @@ export default function usedTractor() {
             <li className="col-md-3">
               <a
                 href="/used-Tractors/mg/121559"
-                itemprop="relatedLink"
+                itemProp="relatedLink"
                 title="MG Tractors for sale in Pakistan"
               >
                 MG Tractors
@@ -490,7 +490,7 @@ export default function usedTractor() {
             <li className="col-md-3">
               <a
                 href="/used-Tractors/audi/41"
-                itemprop="relatedLink"
+                itemProp="relatedLink"
                 title="Bull Power / IMT for sale in Pakistan - Used Audi Tractors"
               >
                 Bull Power / IMT Tractors
@@ -501,7 +501,7 @@ export default function usedTractor() {
             <li className="col-md-3">
               <a
                 href="/used-Tractors/faw/56"
-                itemprop="relatedLink"
+                itemProp="relatedLink"
                 title="Bull Power / IMT Tractors for sale in Pakistan"
               >
                 Bull Power / IMT Tractors
@@ -512,7 +512,7 @@ export default function usedTractor() {
             <li className="col-md-3">
               <a
                 href="/used-Tractors/bmw/8"
-                itemprop="relatedLink"
+                itemProp="relatedLink"
                 title="BMW Tractors for sale in Pakistan"
               >
                 AL Ghazi Tractors Ltd. Tractors
@@ -523,7 +523,7 @@ export default function usedTractor() {
             <li className="col-md-3">
               <a
                 href="/used-Tractors/dfsk/59"
-                itemprop="relatedLink"
+                itemProp="relatedLink"
                 title="AL Ghazi Tractors Ltd.  for sale in Pakistan"
               >
                 AL Ghazi Tractors Ltd. Tractors
@@ -534,7 +534,7 @@ export default function usedTractor() {
             <li className="col-md-3">
               <a
                 href="/used-Tractors/prince/385797"
-                itemprop="relatedLink"
+                itemProp="relatedLink"
                 title="Millat Tractors Ltd. for sale in Pakistan"
               >
                 Millat Tractors Ltd. Tractors
@@ -545,7 +545,7 @@ export default function usedTractor() {
             <li className="col-md-3">
               <a
                 href="/used-Tractors/mazda/22"
-                itemprop="relatedLink"
+                itemProp="relatedLink"
                 title="Mazda Tractors for sale in Pakistan"
               >
                 Mazda Tractors
@@ -556,7 +556,7 @@ export default function usedTractor() {
             <li className="col-md-3">
               <a
                 href="/used-Tractors/proton/27977"
-                itemprop="relatedLink"
+                itemProp="relatedLink"
                 title="Proton Tractors for sale in Pakistan"
               >
                 Proton Tractors
@@ -567,7 +567,7 @@ export default function usedTractor() {
             <li className="col-md-3">
               <a
                 href="/used-Tractors/lexus/21"
-                itemprop="relatedLink"
+                itemProp="relatedLink"
                 title="Lexus Tractors for sale in Pakistan"
               >
                 Lexus Tractors
@@ -578,7 +578,7 @@ export default function usedTractor() {
             <li className="col-md-3">
               <a
                 href="/used-Tractors/chevrolet/10"
-                itemprop="relatedLink"
+                itemProp="relatedLink"
                 title="Chevrolet Tractors for sale in Pakistan"
               >
                 Chevrolet Tractors
@@ -593,7 +593,7 @@ export default function usedTractor() {
             <li className="col-md-3">
               <a
                 href="/used-Tractors/toyota-corolla/688"
-                itemprop="relatedLink"
+                itemProp="relatedLink"
                 title="Toyota Corolla Tractors for sale in Pakistan"
               >
                 Toyota Corolla for sale
@@ -604,7 +604,7 @@ export default function usedTractor() {
             <li className="col-md-3">
               <a
                 href="/used-Tractors/honda-civic/642"
-                itemprop="relatedLink"
+                itemProp="relatedLink"
                 title="Honda Civic Tractors for sale in Pakistan"
               >
                 Honda Civic for sale
@@ -615,7 +615,7 @@ export default function usedTractor() {
             <li className="col-md-3">
               <a
                 href="/used-Tractors/suzuki-mehran/661"
-                itemprop="relatedLink"
+                itemProp="relatedLink"
                 title="Suzuki Mehran for sale in Pakistan"
               >
                 Suzuki Mehran for sale
@@ -626,7 +626,7 @@ export default function usedTractor() {
             <li className="col-md-3">
               <a
                 href="/used-Tractors/honda-city/664"
-                itemprop="relatedLink"
+                itemProp="relatedLink"
                 title="Honda City for sale in Pakistan"
               >
                 Honda City for sale
@@ -637,7 +637,7 @@ export default function usedTractor() {
             <li className="col-md-3">
               <a
                 href="/used-Tractors/suzuki-cultus/660"
-                itemprop="relatedLink"
+                itemProp="relatedLink"
                 title="Cultus for sale in Pakistan"
               >
                 Suzuki Cultus for sale
@@ -648,7 +648,7 @@ export default function usedTractor() {
             <li className="col-md-3">
               <a
                 href="/used-Tractors/suzuki-alto/658"
-                itemprop="relatedLink"
+                itemProp="relatedLink"
                 title="Suzuki Alto for Sale in Pakistan"
               >
                 Suzuki Alto for sale
@@ -659,7 +659,7 @@ export default function usedTractor() {
             <li className="col-md-3">
               <a
                 href="/used-Tractors/toyota-vitz/781"
-                itemprop="relatedLink"
+                itemProp="relatedLink"
                 title="Toyota Vitz for sale in Pakistan"
               >
                 Toyota Vitz for sale
@@ -670,7 +670,7 @@ export default function usedTractor() {
             <li className="col-md-3">
               <a
                 href="/used-Tractors/suzuki-wagon-r/801"
-                itemprop="relatedLink"
+                itemProp="relatedLink"
                 title="Suzuki Wagon R for sale in Pakistan"
               >
                 Suzuki Wagon R for sale
@@ -681,7 +681,7 @@ export default function usedTractor() {
             <li className="col-md-3">
               <a
                 href="/used-Tractors/suzuki-bolan/693"
-                itemprop="relatedLink"
+                itemProp="relatedLink"
                 title="Suzuki Bolan for sale in Pakistan"
               >
                 Suzuki Bolan for sale
@@ -692,7 +692,7 @@ export default function usedTractor() {
             <li className="col-md-3">
               <a
                 href="/used-Tractors/toyota-prado/38678"
-                itemprop="relatedLink"
+                itemProp="relatedLink"
                 title="Toyota Prado for sale in Pakistan - Parado"
               >
                 Toyota Prado for sale
@@ -703,7 +703,7 @@ export default function usedTractor() {
             <li className="col-md-3">
               <a
                 href="/used-Tractors/suzuki-swift/778"
-                itemprop="relatedLink"
+                itemProp="relatedLink"
                 title="Suzuki Swift Tractors for sale in Pakistan"
               >
                 Suzuki Swift for sale
@@ -714,7 +714,7 @@ export default function usedTractor() {
             <li className="col-md-3">
               <a
                 href="/used-Tractors/toyota-hilux/789"
-                itemprop="relatedLink"
+                itemProp="relatedLink"
                 title="Toyota Hilux for sale in Pakistan - Hilux Tractors"
               >
                 Toyota Hilux for sale
@@ -725,7 +725,7 @@ export default function usedTractor() {
             <li className="col-md-3">
               <a
                 href="/used-Tractors/toyota-land-cruiser/651"
-                itemprop="relatedLink"
+                itemProp="relatedLink"
                 title="Land Cruiser for sale in Pakistan"
               >
                 Toyota Land Cruiser for sale
@@ -736,7 +736,7 @@ export default function usedTractor() {
             <li className="col-md-3">
               <a
                 href="/used-Tractors/daihatsu-cuore/665"
-                itemprop="relatedLink"
+                itemProp="relatedLink"
                 title="Euro Ford Tractor for sale in Pakistan"
               >
                 Euro Ford Tractor for sale
@@ -747,7 +747,7 @@ export default function usedTractor() {
             <li className="col-md-3">
               <a
                 href="/used-Tractors/honda-vezel/57545"
-                itemprop="relatedLink"
+                itemProp="relatedLink"
                 title="Euro Ford Tractor Tractors for sale in Pakistan"
               >
                 Euro Ford Tractor for sale
@@ -758,7 +758,7 @@ export default function usedTractor() {
             <li className="col-md-3">
               <a
                 href="/used-Tractors/toyota-passo/803"
-                itemprop="relatedLink"
+                itemProp="relatedLink"
                 title="Belarus Tractors for sale in Pakistan"
               >
                 Belarus for sale
@@ -769,7 +769,7 @@ export default function usedTractor() {
             <li className="col-md-3">
               <a
                 href="/used-Tractors/kia-sportage/715"
-                itemprop="relatedLink"
+                itemProp="relatedLink"
                 title="Belarus Sportage Tractors for sale in Pakistan"
               >
                 Belarus Sportage for sale
@@ -780,7 +780,7 @@ export default function usedTractor() {
             <li className="col-md-3">
               <a
                 href="/used-Tractors/toyota-fortuner/833"
-                itemprop="relatedLink"
+                itemProp="relatedLink"
                 title="Toyota Fortuner Tractors for sale in Pakistan"
               >
                 Toyota Fortuner for sale
@@ -791,7 +791,7 @@ export default function usedTractor() {
             <li className="col-md-3">
               <a
                 href="/used-Tractors/daihatsu-mira/788"
-                itemprop="relatedLink"
+                itemProp="relatedLink"
                 title="Daihatsu Mira for sale in Pakistan"
               >
                 Daihatsu Mira for sale
@@ -802,7 +802,7 @@ export default function usedTractor() {
             <li className="col-md-3">
               <a
                 href="/used-Tractors/suzuki-khyber/698"
-                itemprop="relatedLink"
+                itemProp="relatedLink"
                 title="Khyber for sale in Pakistan"
               >
                 Suzuki Khyber for sale
@@ -818,7 +818,7 @@ export default function usedTractor() {
             <li className="col-md-3">
               <a
                 href="/used-Tractors/suzuki-alto-vxr/73649"
-                itemprop="relatedLink"
+                itemProp="relatedLink"
                 title="Suzuki Alto VXR for sale in Pakistan"
               >
                 Suzuki Alto VXR
@@ -829,7 +829,7 @@ export default function usedTractor() {
             <li className="col-md-3">
               <a
                 href="/used-Tractors/toyota-corolla-gli/11052"
-                itemprop="relatedLink"
+                itemProp="relatedLink"
                 title="GLi for sale in Pakistan"
               >
                 GLi
@@ -840,7 +840,7 @@ export default function usedTractor() {
             <li className="col-md-3">
               <a
                 href="/used-Tractors/honda-civic-vti-oriel/11049"
-                itemprop="relatedLink"
+                itemProp="relatedLink"
                 title="Used Civic VTi Oriel Tractors for sale in Pakistan"
               >
                 Civic VTi Oriel
@@ -851,7 +851,7 @@ export default function usedTractor() {
             <li className="col-md-3">
               <a
                 href="/used-Tractors/suzuki-mehran-vx/73466"
-                itemprop="relatedLink"
+                itemProp="relatedLink"
                 title="Mehran VX for sale in Pakistan"
               >
                 Mehran VX
@@ -862,7 +862,7 @@ export default function usedTractor() {
             <li className="col-md-3">
               <a
                 href="/used-Tractors/toyota-corolla-altis/57921"
-                itemprop="relatedLink"
+                itemProp="relatedLink"
                 title="Altis for sale in Pakistan"
               >
                 Altis
@@ -873,7 +873,7 @@ export default function usedTractor() {
             <li className="col-md-3">
               <a
                 href="/used-Tractors/honda-civic-vti/11047"
-                itemprop="relatedLink"
+                itemProp="relatedLink"
                 title="Civic VTi for sale in Pakistan"
               >
                 Civic VTi
@@ -884,7 +884,7 @@ export default function usedTractor() {
             <li className="col-md-3">
               <a
                 href="/used-Tractors/toyota-corolla-xli/10936"
-                itemprop="relatedLink"
+                itemProp="relatedLink"
                 title="Xli Tractors for sale in Pakistan"
               >
                 XLi
@@ -895,7 +895,7 @@ export default function usedTractor() {
             <li className="col-md-3">
               <a
                 href="/used-Tractors/toyota-vitz-f/233972"
-                itemprop="relatedLink"
+                itemProp="relatedLink"
                 title="Vitz F for sale in Pakistan"
               >
                 Vitz F
@@ -906,7 +906,7 @@ export default function usedTractor() {
             <li className="col-md-3">
               <a
                 href="/used-Tractors/honda-civic-exi/73549"
-                itemprop="relatedLink"
+                itemProp="relatedLink"
                 title="Civic EXi for sale in Pakistan"
               >
                 Civic EXi
@@ -917,7 +917,7 @@ export default function usedTractor() {
             <li className="col-md-3">
               <a
                 href="/used-Tractors/toyota-passo-x/73421"
-                itemprop="relatedLink"
+                itemProp="relatedLink"
                 title="Toyota Passo X for sale in Pakistan"
               >
                 Toyota Passo X
@@ -928,7 +928,7 @@ export default function usedTractor() {
             <li className="col-md-3">
               <a
                 href="/used-Tractors/honda-city-aspire/10993"
-                itemprop="relatedLink"
+                itemProp="relatedLink"
                 title="Used Honda City Aspire i-VTEC For Sale In Pakistan"
               >
                 Honda City Aspire i-VTEC
@@ -939,7 +939,7 @@ export default function usedTractor() {
             <li className="col-md-3">
               <a
                 href="/used-Tractors/honda-city-prosmatec/846738"
-                itemprop="relatedLink"
+                itemProp="relatedLink"
                 title="Honda City Prosmatec Tractors for sale in Pakistan"
               >
                 Honda City Prosmatec
@@ -950,7 +950,7 @@ export default function usedTractor() {
             <li className="col-md-3">
               <a
                 href="/used-Tractors/toyota-hilux-double-cabin/1194974"
-                itemprop="relatedLink"
+                itemProp="relatedLink"
                 title="Toyota Hilux Double Cabin Tractors for sale in Pakistan"
               >
                 Toyota Hilux Double Cabin
@@ -961,7 +961,7 @@ export default function usedTractor() {
             <li className="col-md-3">
               <a
                 href="/used-Tractors/suzuki-swift-dlx/108812"
-                itemprop="relatedLink"
+                itemProp="relatedLink"
                 title="Swift DLX for sale in Pakistan"
               >
                 Swift DLX
@@ -972,7 +972,7 @@ export default function usedTractor() {
             <li className="col-md-3">
               <a
                 href="/used-Tractors/honda-city-idsi/480516"
-                itemprop="relatedLink"
+                itemProp="relatedLink"
                 title="Honda City idsi for Sale in Pakistan"
               >
                 Honda City iDSI
@@ -983,7 +983,7 @@ export default function usedTractor() {
             <li className="col-md-3">
               <a
                 href="/used-Tractors/suzuki-cultus-vxri/73452"
-                itemprop="relatedLink"
+                itemProp="relatedLink"
                 title="Suzuki Cultus VXRi for sale in Pakistan"
               >
                 Suzuki Cultus VXRi
@@ -994,7 +994,7 @@ export default function usedTractor() {
             <li className="col-md-3">
               <a
                 href="/used-Tractors/toyota-corolla-altis-x/679937"
-                itemprop="relatedLink"
+                itemProp="relatedLink"
                 title="Toyota Corolla Altis X Tractors for sale in Pakistan"
               >
                 Toyota Corolla Altis X
@@ -1005,7 +1005,7 @@ export default function usedTractor() {
             <li className="col-md-3">
               <a
                 href="/used-Tractors/daihatsu-cuore-cx/10816"
-                itemprop="relatedLink"
+                itemProp="relatedLink"
                 title="Used Cuore CX For Sale In Pakistan"
               >
                 Daihatsu Cuore CX
@@ -1020,7 +1020,7 @@ export default function usedTractor() {
             <li className="col-md-3">
               <a
                 href="/used-Tractors/family-Tractors/587667"
-                itemprop="relatedLink"
+                itemProp="relatedLink"
                 title="Family Tractors for sale in Pakistan"
               >
                 Family Tractors
@@ -1031,7 +1031,7 @@ export default function usedTractor() {
             <li className="col-md-3">
               <a
                 href="/used-Tractors/small/266374"
-                itemprop="relatedLink"
+                itemProp="relatedLink"
                 title="Small Tractors for sale in Pakistan"
               >
                 Small Tractors for Sale
@@ -1042,7 +1042,7 @@ export default function usedTractor() {
             <li className="col-md-3">
               <a
                 href="/used-Tractors/old/430603"
-                itemprop="relatedLink"
+                itemProp="relatedLink"
                 title="Old Tractors for sale in Pakistan"
               >
                 Old Tractors
@@ -1053,7 +1053,7 @@ export default function usedTractor() {
             <li className="col-md-3">
               <a
                 href="/used-Tractors/big/266260"
-                itemprop="relatedLink"
+                itemProp="relatedLink"
                 title="Big Tractors for sale in Pakistan"
               >
                 Big Tractors
@@ -1064,7 +1064,7 @@ export default function usedTractor() {
             <li className="col-md-3">
               <a
                 href="/used-Tractors/low-priced/328875"
-                itemprop="relatedLink"
+                itemProp="relatedLink"
                 title="Low Price Tractors in Pakistan for Sale"
               >
                 Low Price Tractors for Sale
@@ -1075,7 +1075,7 @@ export default function usedTractor() {
             <li className="col-md-3">
               <a
                 href="/used-Tractors/low-mileage/485505"
-                itemprop="relatedLink"
+                itemProp="relatedLink"
                 title="Low Mileage Tractors for sale in Pakistan"
               >
                 Low Mileage Tractors
@@ -1086,7 +1086,7 @@ export default function usedTractor() {
             <li className="col-md-3">
               <a
                 href="/used-Tractors/luxury/72787"
-                itemprop="relatedLink"
+                itemProp="relatedLink"
                 title="Luxury Tractors for sale in Pakistan"
               >
                 Luxury Tractors in Pakistan
@@ -1097,7 +1097,7 @@ export default function usedTractor() {
             <li className="col-md-3">
               <a
                 href="/used-Tractors/cheap/329024"
-                itemprop="relatedLink"
+                itemProp="relatedLink"
                 title="Cheap Tractors for sale in Pakistan"
               >
                 Cheap Tractors
@@ -1108,7 +1108,7 @@ export default function usedTractor() {
             <li className="col-md-3">
               <a
                 href="/used-Tractors/carry-daba/270569"
-                itemprop="relatedLink"
+                itemProp="relatedLink"
                 title="Carry Daba in Pakistan"
               >
                 Carry Daba in Pakistan
@@ -1119,7 +1119,7 @@ export default function usedTractor() {
             <li className="col-md-3">
               <a
                 href="/used-Tractors/sports/72786"
-                itemprop="relatedLink"
+                itemProp="relatedLink"
                 title="Sports Tractors - Price in Pakistan, Tractors for sale"
               >
                 Sports Tractors
@@ -1130,7 +1130,7 @@ export default function usedTractor() {
             <li className="col-md-3">
               <a
                 href="/used-Tractors/modified/389984"
-                itemprop="relatedLink"
+                itemProp="relatedLink"
                 title="Modified Tractors for sale in Pakistan"
               >
                 Modified Tractors
@@ -1141,7 +1141,7 @@ export default function usedTractor() {
             <li className="col-md-3">
               <a
                 href="/used-Tractors/custom-auction/716218"
-                itemprop="relatedLink"
+                itemProp="relatedLink"
                 title="Custom Auction Tractors for sale in Pakistan"
               >
                 Custom Auction Tractors
@@ -1152,7 +1152,7 @@ export default function usedTractor() {
             <li className="col-md-3">
               <a
                 href="/used-Tractors/duplicate-book/389980"
-                itemprop="relatedLink"
+                itemProp="relatedLink"
                 title="Duplicate Book Tractors for sale in Pakistan"
               >
                 Duplicate Book Tractors
@@ -1163,7 +1163,7 @@ export default function usedTractor() {
             <li className="col-md-3">
               <a
                 href="/used-Tractors/exotic/73686"
-                itemprop="relatedLink"
+                itemProp="relatedLink"
                 title="Exotic Tractors for sale in Pakistan"
               >
                 Exotic Tractors
@@ -1174,7 +1174,7 @@ export default function usedTractor() {
             <li className="col-md-3">
               <a
                 href="/used-Tractors/duplicate-file/716615"
-                itemprop="relatedLink"
+                itemProp="relatedLink"
                 title="Duplicate File Tractors for sale in Pakistan"
               >
                 Duplicate File Tractors
@@ -1185,7 +1185,7 @@ export default function usedTractor() {
             <li className="col-md-3">
               <a
                 href="/used-Tractors/electric/389926"
-                itemprop="relatedLink"
+                itemProp="relatedLink"
                 title="Electric Tractors in Pakistan"
               >
                 Electric Tractors for Sale in Pakistan
@@ -1196,7 +1196,7 @@ export default function usedTractor() {
             <li className="col-md-3">
               <a
                 href="/used-Tractors/amnesty-scheme/716454"
-                itemprop="relatedLink"
+                itemProp="relatedLink"
                 title="Amnesty Scheme Tractors for sale in Pakistan"
               >
                 Amnesty Scheme Tractors
@@ -1207,7 +1207,7 @@ export default function usedTractor() {
             <li className="col-md-3">
               <a
                 href="/used-Tractors/army-auction-jeep/430586"
-                itemprop="relatedLink"
+                itemProp="relatedLink"
                 title="Army Jeeps, Army Auction Jeeps for sale in Pakistan"
               >
                 Army Jeeps for Sale
@@ -1223,7 +1223,7 @@ export default function usedTractor() {
             <li className="col-md-3">
               <a
                 href="/used-Tractors/family-Tractors/587667"
-                itemprop="relatedLink"
+                itemProp="relatedLink"
                 title="Family Tractors for sale in Pakistan"
               >
                 Family Tractors
@@ -1234,7 +1234,7 @@ export default function usedTractor() {
             <li className="col-md-3">
               <a
                 href="/used-Tractors/small/266374"
-                itemprop="relatedLink"
+                itemProp="relatedLink"
                 title="Small Tractors for sale in Pakistan"
               >
                 Small Tractors for Sale
@@ -1245,7 +1245,7 @@ export default function usedTractor() {
             <li className="col-md-3">
               <a
                 href="/used-Tractors/old/430603"
-                itemprop="relatedLink"
+                itemProp="relatedLink"
                 title="Old Tractors for sale in Pakistan"
               >
                 Old Tractors
@@ -1256,7 +1256,7 @@ export default function usedTractor() {
             <li className="col-md-3">
               <a
                 href="/used-Tractors/big/266260"
-                itemprop="relatedLink"
+                itemProp="relatedLink"
                 title="Big Tractors for sale in Pakistan"
               >
                 Big Tractors
@@ -1267,7 +1267,7 @@ export default function usedTractor() {
             <li className="col-md-3">
               <a
                 href="/used-Tractors/low-priced/328875"
-                itemprop="relatedLink"
+                itemProp="relatedLink"
                 title="Low Price Tractors in Pakistan for Sale"
               >
                 Low Price Tractors for Sale
@@ -1278,7 +1278,7 @@ export default function usedTractor() {
             <li className="col-md-3">
               <a
                 href="/used-Tractors/low-mileage/485505"
-                itemprop="relatedLink"
+                itemProp="relatedLink"
                 title="Low Mileage Tractors for sale in Pakistan"
               >
                 Low Mileage Tractors
@@ -1289,7 +1289,7 @@ export default function usedTractor() {
             <li className="col-md-3">
               <a
                 href="/used-Tractors/luxury/72787"
-                itemprop="relatedLink"
+                itemProp="relatedLink"
                 title="Luxury Tractors for sale in Pakistan"
               >
                 Luxury Tractors in Pakistan
@@ -1300,7 +1300,7 @@ export default function usedTractor() {
             <li className="col-md-3">
               <a
                 href="/used-Tractors/cheap/329024"
-                itemprop="relatedLink"
+                itemProp="relatedLink"
                 title="Cheap Tractors for sale in Pakistan"
               >
                 Cheap Tractors
@@ -1311,7 +1311,7 @@ export default function usedTractor() {
             <li className="col-md-3">
               <a
                 href="/used-Tractors/carry-daba/270569"
-                itemprop="relatedLink"
+                itemProp="relatedLink"
                 title="Carry Daba in Pakistan"
               >
                 Carry Daba in Pakistan
@@ -1322,7 +1322,7 @@ export default function usedTractor() {
             <li className="col-md-3">
               <a
                 href="/used-Tractors/sports/72786"
-                itemprop="relatedLink"
+                itemProp="relatedLink"
                 title="Sports Tractors - Price in Pakistan, Tractors for sale"
               >
                 Sports Tractors
@@ -1333,7 +1333,7 @@ export default function usedTractor() {
             <li className="col-md-3">
               <a
                 href="/used-Tractors/modified/389984"
-                itemprop="relatedLink"
+                itemProp="relatedLink"
                 title="Modified Tractors for sale in Pakistan"
               >
                 Modified Tractors
@@ -1344,7 +1344,7 @@ export default function usedTractor() {
             <li className="col-md-3">
               <a
                 href="/used-Tractors/custom-auction/716218"
-                itemprop="relatedLink"
+                itemProp="relatedLink"
                 title="Custom Auction Tractors for sale in Pakistan"
               >
                 Custom Auction Tractors
@@ -1355,7 +1355,7 @@ export default function usedTractor() {
             <li className="col-md-3">
               <a
                 href="/used-Tractors/duplicate-book/389980"
-                itemprop="relatedLink"
+                itemProp="relatedLink"
                 title="Duplicate Book Tractors for sale in Pakistan"
               >
                 Duplicate Book Tractors
@@ -1366,7 +1366,7 @@ export default function usedTractor() {
             <li className="col-md-3">
               <a
                 href="/used-Tractors/exotic/73686"
-                itemprop="relatedLink"
+                itemProp="relatedLink"
                 title="Exotic Tractors for sale in Pakistan"
               >
                 Exotic Tractors
@@ -1377,7 +1377,7 @@ export default function usedTractor() {
             <li className="col-md-3">
               <a
                 href="/used-Tractors/duplicate-file/716615"
-                itemprop="relatedLink"
+                itemProp="relatedLink"
                 title="Duplicate File Tractors for sale in Pakistan"
               >
                 Duplicate File Tractors
@@ -1388,7 +1388,7 @@ export default function usedTractor() {
             <li className="col-md-3">
               <a
                 href="/used-Tractors/electric/389926"
-                itemprop="relatedLink"
+                itemProp="relatedLink"
                 title="Electric Tractors in Pakistan"
               >
                 Electric Tractors for Sale in Pakistan
@@ -1399,7 +1399,7 @@ export default function usedTractor() {
             <li className="col-md-3">
               <a
                 href="/used-Tractors/amnesty-scheme/716454"
-                itemprop="relatedLink"
+                itemProp="relatedLink"
                 title="Amnesty Scheme Tractors for sale in Pakistan"
               >
                 Amnesty Scheme Tractors
@@ -1410,7 +1410,7 @@ export default function usedTractor() {
             <li className="col-md-3">
               <a
                 href="/used-Tractors/army-auction-jeep/430586"
-                itemprop="relatedLink"
+                itemProp="relatedLink"
                 title="Army Jeeps, Army Auction Jeeps for sale in Pakistan"
               >
                 Army Jeeps for Sale
@@ -1426,7 +1426,7 @@ export default function usedTractor() {
             href="/used-cars/sell"
             className="sell-bar-fixed sell-floating-btn sign-in-comp"
             target="_blank"
-            onclick="trackEvents('UsedCars','Sellform','From - Search');"
+            onClick="trackEvents('UsedCars','Sellform','From - Search');"
             style={{ width: "50px" }}
           >
             <p className="mt-3 text-white"> Sell</p>
@@ -1436,7 +1436,7 @@ export default function usedTractor() {
             href="/used-cars/sell"
             className="sell-bar-fixed sell-floating-btn sign-in-comp"
             target="_blank"
-            onclick="trackEvents('UsedCars','Sellform','From - Search');"
+            onClick="trackEvents('UsedCars','Sellform','From - Search');"
           >
             <span className="sell-icons">
               <Image
