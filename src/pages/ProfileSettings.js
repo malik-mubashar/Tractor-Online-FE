@@ -1,14 +1,5 @@
 import React, { useState, useEffect, useContext } from "react";
-import {
-  Row,
-  Col,
-  Breadcrumb,
-  Button,
-  Form,
-  Image,
-  Modal,
-  ButtonToolbar
-} from "react-bootstrap";
+import { Row, Col, Breadcrumb, Button, Form, Image } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import Navigation from "../components/Navigation/Navigation";
 import Footer from "./Footer/Footer";
@@ -16,6 +7,9 @@ import { user } from "../API/User/index";
 import user1 from "../assets/img/user/big/1.png";
 import { RootContext } from "../context/RootContext";
 import { useHistory } from "react-router-dom";
+import { city } from "../API/Country/City";
+import { language } from "../API/Country/Language";
+import PasswordResetModal from "./Modals/PasswordReset";
 
 const ProfileSettings = () => {
   const { currentUser } = useContext(RootContext);
@@ -25,6 +19,9 @@ const ProfileSettings = () => {
   const [sideMenue, setSideMenu] = useState();
   const [fileDataURL, setFileDataURL] = useState(null);
   const [modalShow, setModalShow] = useState(false);
+  const [cities, setCities] = useState();
+  const [languageList, setLanguageList] = useState();
+  const [countryList, setCountryList] = useState();
   const [updatePassword, setUpdatePassword] = useState({
     email: null,
     current_password: null,
@@ -47,7 +44,6 @@ const ProfileSettings = () => {
   let history = useHistory();
 
   useEffect(() => {
-    handlePersonalDetail();
     let fileReader,
       isCancel = false;
     if (editProfile.image) {
@@ -67,6 +63,21 @@ const ProfileSettings = () => {
       }
     };
   }, [editProfile.image]);
+  useEffect(() => {
+    handlePersonalDetail();
+    handleDropDownOptions();
+  }, []);
+
+  const handleDropDownOptions = async () => {
+    const result = await city.getAllCities();
+    setCities(result.data.data);
+
+    const response = await language.getAllLanguages();
+    setLanguageList(response.data.data);
+
+    const countryArray = await city.getAllCountry();
+    setCountryList(countryArray.data.data);
+  };
 
   const handlePersonalDetail = async () => {
     const result = await user.findUser(currentUser.data.id);
@@ -116,7 +127,9 @@ const ProfileSettings = () => {
       formData.append("user[profile]", editProfile.image);
       const result = await user.profile(
         editProfile,
-        userPersonalDetail.personal_detail ? userPersonalDetail.personal_detail.id : "",
+        userPersonalDetail.personal_detail
+          ? userPersonalDetail.personal_detail.id
+          : "",
         formData
       );
       if (result.error === false) {
@@ -127,7 +140,6 @@ const ProfileSettings = () => {
   const modalClose = () => {
     setModalShow(!modalShow);
   };
-
 
   return (
     <>
@@ -208,7 +220,7 @@ const ProfileSettings = () => {
                       <Form.Control
                         type="text"
                         placeholder=" "
-                        value={editProfile.username}
+                        value={editProfile.username ? editProfile.username : ""}
                         onChange={(e) => {
                           handleUpdateProfile(e.target.value, "username");
                         }}
@@ -220,10 +232,7 @@ const ProfileSettings = () => {
                         type="text"
                         placeholder=""
                         disabled={true}
-                        value={editProfile.email}
-                        // onChange={(e) => {
-                        //   handleUpdateProfile(e.target.value, "email");
-                        // }}
+                        value={editProfile.email ? editProfile.email : ""}
                       />
                     </Form.Group>
                   </Form.Row>
@@ -235,15 +244,12 @@ const ProfileSettings = () => {
                         as="select"
                         value={editProfile.gender ? editProfile.gender : ""}
                         onChange={(e) => {
-                          handleUpdateProfile(
-                            parseInt(e.target.value),
-                            "gender"
-                          );
+                          handleUpdateProfile(e.target.value, "gender");
                         }}
                       >
-                        <option value="0">Male</option>
-                        <option value="1">Female</option>
-                        <option value="2">Others</option>
+                        <option value="male">Male</option>
+                        <option value="female">Female</option>
+                        <option value="others">Others</option>
                       </Form.Control>
                     </Form.Group>
                     <Form.Group as={Col}>
@@ -252,7 +258,7 @@ const ProfileSettings = () => {
                         type="date"
                         name="dob"
                         placeholder="Date of Birth"
-                        value={editProfile.birthDay}
+                        value={editProfile.birthDay ? editProfile.birthDay : ""}
                         onChange={(e) => {
                           handleUpdateProfile(e.target.value, "birthDay");
                         }}
@@ -283,6 +289,14 @@ const ProfileSettings = () => {
                         }}
                       >
                         <option>Select Language ....</option>
+                        {languageList &&
+                          languageList.map((item) => {
+                            return (
+                              <>
+                                <option key={item.id}>{item.name}</option>
+                              </>
+                            );
+                          })}
                         <option>English</option>
                         <option>Urdu</option>
                       </Form.Control>
@@ -299,8 +313,14 @@ const ProfileSettings = () => {
                         }}
                       >
                         <option>Select Country ....</option>
-                        <option>Pakistan</option>
-                        <option>India</option>
+                        {countryList &&
+                          countryList.map((item) => {
+                            return (
+                              <>
+                                <option key={item.id}>{item.name}</option>
+                              </>
+                            );
+                          })}
                       </Form.Control>
                     </Form.Group>
 
@@ -314,8 +334,14 @@ const ProfileSettings = () => {
                         }}
                       >
                         <option>Select City ....</option>
-                        <option>Lahore</option>
-                        <option>Nankana Sahib</option>
+                        {cities &&
+                          cities.map((item, i) => {
+                            return (
+                              <>
+                                <option key={i}>{item.name}</option>
+                              </>
+                            );
+                          })}
                       </Form.Control>
                     </Form.Group>
                   </Form.Row>
@@ -337,6 +363,12 @@ const ProfileSettings = () => {
               </div>
             </Col>
           </Row>
+          <PasswordResetModal
+            modalClose={modalClose}
+            modalShow={modalShow}
+            updatePassword={updatePassword}
+            handleUpdatePassword={handleUpdatePassword}
+          />
           {/* End Profile Settings */}
 
           {/* Footer  */}
@@ -345,74 +377,6 @@ const ProfileSettings = () => {
           {/* End Footer  */}
         </div>
       </div>
-
-      <Modal
-        show={modalShow}
-        onHide={modalClose}
-        size="md"
-        aria-labelledby="contained-modal-title-vcenter"
-        centered
-      >
-        <Modal.Header closeButton>
-          <Modal.Title id="contained-modal-title-vcenter">
-            Change Password
-          </Modal.Title>
-        </Modal.Header>
-
-        <Modal.Body>
-          <Form>
-            <Form.Group as={Col} controlId="formBasicEmail">
-              <Form.Label>Email </Form.Label>
-              <Form.Control
-                type="email"
-                placeholder="Enter email"
-                disabled={updatePassword.email}
-                value={updatePassword.email}
-              />
-            </Form.Group>
-            <Form.Group as={Col} controlId="formBasicC_Password">
-              <Form.Label>Current Password</Form.Label>
-              <Form.Control
-                type="password"
-                placeholder="Enter current password"
-                onChange={(e) =>
-                  handleUpdatePassword(e.target.value, "current_password")
-                }
-              />
-            </Form.Group>
-
-            <Form.Group as={Col} controlId="formBasicN_Password">
-              <Form.Label>New Password</Form.Label>
-              <Form.Control
-                type="password"
-                placeholder="Create a new password"
-                onChange={(e) =>
-                  handleUpdatePassword(e.target.value, "new_password")
-                }
-              />
-            </Form.Group>
-            <Form.Group as={Col} controlId="formBasicCN_Password">
-              <Form.Label>Confirm Password</Form.Label>
-              <Form.Control
-                type="password"
-                placeholder="Re-enter your password."
-                onChange={(e) =>
-                  handleUpdatePassword(e.target.value, "confirm_password")
-                }
-              />
-            </Form.Group>
-          </Form>
-        </Modal.Body>
-
-        <Modal.Footer className="border-0 d-flex justify-content-between">
-          <Button variant="danger" onClick={modalClose}>
-            Cancel
-          </Button>
-          <Button variant="success" onClick={modalClose}>
-            Save
-          </Button>
-        </Modal.Footer>
-      </Modal>
     </>
   );
 };

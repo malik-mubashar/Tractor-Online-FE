@@ -4,8 +4,10 @@ import { Col, Tabs, Tab, Image } from "react-bootstrap";
 import ThousandCC from "../../assets/img/1000cc.svg";
 import ThirteenHundredCC from "../../assets/img/1300cc.svg";
 import SportsCar from "../../assets/img/sports-car.svg";
+import { useHistory } from "react-router-dom";
 
 export default function Categories() {
+  let history = useHistory();
   const [index, setIndex] = useState([1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]);
   const [city, setCity] = useState([
     "Lahore",
@@ -44,7 +46,7 @@ export default function Categories() {
                         {index.map((option) => (
                           <li className="col-4 col-lg-2 mt-4" key={option}>
                             <a
-                              href="#"
+                             onClick={()=>history.push('/')}
                               title="In Pakistan, there is a 1000cc tractor for sale."
                             >
                               <Image src={ThousandCC} alt="Profile Image" />
@@ -59,7 +61,7 @@ export default function Categories() {
                         {index.map((option) => (
                           <li className="col-4 col-lg-2 mt-4" key={option}>
                             <a
-                              href="#"
+                              onClick={()=>history.push('/')}
                               title="In Pakistan, there is a 1000cc tractor for sale."
                             >
                               <Image
@@ -77,7 +79,7 @@ export default function Categories() {
                         {index.map((option) => (
                           <li className="col-4 col-lg-2 mt-4" key={option}>
                             <a
-                              href="#"
+                              onClick={()=>history.push('/')}
                               title="In Pakistan, there is a 1000cc tractor for sale."
                             >
                               <Image src={SportsCar} alt="Profile Image" />
@@ -99,7 +101,7 @@ export default function Categories() {
                             className="col-4 col-lg-2 p-3 text-center"
                             key={option}
                           >
-                            <a className="text-dark" href="#">
+                            <a className="text-dark" onClick={()=>history.push('/')}>
                               {option}
                             </a>
                           </li>
@@ -113,7 +115,7 @@ export default function Categories() {
                             className="col-4 col-lg-2 p-3 text-center"
                             key={option}
                           >
-                            <a className="text-dark" href="#">
+                            <a className="text-dark" onClick={()=>history.push('/')}>
                               {option}
                             </a>
                           </li>
@@ -127,7 +129,7 @@ export default function Categories() {
                             className="col-4 col-lg-2 p-3 text-center"
                             key={option}
                           >
-                            <a className="text-dark" href="#">
+                            <a className="text-dark" onClick={()=>history.push('/')}>
                               {option}
                             </a>
                           </li>
@@ -143,7 +145,7 @@ export default function Categories() {
                       <ul className="browse-listing row p-0">
                         {index.map((option) => (
                           <li className="col-4 col-lg-2 mt-4" key={option}>
-                            <a href="#" title="Toyota for sale in Pakistan">
+                            <a onClick={()=>history.push('/')}title="Toyota for sale in Pakistan">
                               <img
                                 alt="Toyota"
                                 src="https://cache4.pakwheels.com/system/car_manufacturers/manufacturers/000/000/042/resized/Tyota.png"
@@ -158,7 +160,7 @@ export default function Categories() {
                       <ul className="browse-listing row p-0">
                         {index.map((option) => (
                           <li className="col-4 col-lg-2 mt-4" key={option}>
-                            <a href="#" title="Toyota for sale in Pakistan">
+                            <a onClick={()=>history.push('/')} title="Toyota for sale in Pakistan">
                               <img
                                 alt="Toyota"
                                 src="https://cache4.pakwheels.com/system/car_manufacturers/manufacturers/000/000/021/resized/KIA.png"
@@ -173,7 +175,7 @@ export default function Categories() {
                       <ul className="browse-listing row p-0">
                         {index.map((option) => (
                           <li className="col-4 col-lg-2 mt-4" key={option}>
-                            <a href="#" title="Toyota for sale in Pakistan">
+                            <a onClick={()=>history.push('/')} title="Toyota for sale in Pakistan">
                               <img
                                 alt="Toyota"
                                 src="https://cache3.pakwheels.com/system/car_manufacturers/manufacturers/000/000/041/resized/Suzuki.png"

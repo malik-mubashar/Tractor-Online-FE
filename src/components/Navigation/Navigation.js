@@ -6,9 +6,6 @@ import {
   Navbar,
   Nav,
   NavDropdown,
-  Container,
-  Row,
-  Col,
   Form,
   FormControl,
   Button,
@@ -22,9 +19,6 @@ import SideMenuDark from "./SideMenu/SideMenuDark";
 // If want to active light sidebar then please uncomment below & comment above component
 import SideMenuLight from "./SideMenu/SideMenuLight";
 
-// Logo image path
-import Logo from "../../assets/img/logo.png";
-import SmallLogo from "../../assets/img/small-logo.png";
 
 // Profile & user image path
 import profile from "../../assets/img/profile.jpg";
@@ -61,10 +55,6 @@ class Navigation extends React.Component {
       <div className="page-wrapper">
         <Navbar fixed="top" className="top-menu">
           <Link to="/dashboard" className={`navbar-brand`}>
-            {/* Large logo */}
-            {/* <Image src={Logo} alt="Logo" style={{width:"30%"}} className="logo" />  */}
-            {/* Small logo */}
-            {/* <Image src={Logo} alt="Small Logo" className="small-logo" />  */}
           </Link>
 
           <Navbar.Toggle aria-controls="basic-navbar-nav" />

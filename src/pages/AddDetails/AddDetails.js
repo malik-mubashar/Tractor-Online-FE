@@ -90,16 +90,16 @@ export default function AddDetails() {
             <ul className="breadcrumb bread">
               <li>
                 <a>
-                  <span itemprop="name">Home /</span>
+                  <span itemProp="name">Home /</span>
                 </a>
               </li>
               <li>
                 <a>
-                  <span itemprop="name">Used Tractor /</span>
+                  <span itemProp="name">Used Tractor /</span>
                 </a>
               </li>
               <li>
-                <span itemprop="name">Used Tractor For Sale In Pakistan</span>
+                <span itemProp="name">Used Tractor For Sale In Pakistan</span>
               </li>
             </ul>
           </div>
@@ -109,7 +109,7 @@ export default function AddDetails() {
               <div className="bg-white p-4">
                 <div className="">
                   <h3>Suzuki Alto Vxr 2021 </h3>
-                  <p class="detail-sub-heading d-flex">
+                  <p className="detail-sub-heading d-flex">
                     <a href="#" className="d-flex">
                       <Image
                         src={mapsBlack}
@@ -121,7 +121,7 @@ export default function AddDetails() {
                       Abdalians Housing Society, Lahore Punjab
                     </a>
                     {"  "} {"|"}
-                    <span class="time d-flex">
+                    <span className="time d-flex">
                       <Image
                         src={cellPhoneSvg}
                         height="20px"
@@ -129,11 +129,7 @@ export default function AddDetails() {
                         alt="Profile Image"
                         className="d-flex justify-content-center m-auto"
                       />{" "}
-                      <a
-                        href="/main/apps"
-                        onclick='trackEvents("UsedCars","AppsPage","From- Ad Detail")'
-                        target="_blank"
-                      >
+                      <a href="/main/apps" target="_blank">
                         Added via Phone
                       </a>
                     </span>
@@ -145,7 +141,7 @@ export default function AddDetails() {
                 {/* after image gallery */}
                 <table
                   width="100%"
-                  class="table table-bordered text-center table-engine-detail fs16"
+                  className="table table-bordered text-center table-engine-detail fs16"
                 >
                   <tbody>
                     <tr>
@@ -225,40 +221,38 @@ export default function AddDetails() {
                 <div className="inspection  clearfix mb40 ">
                   <div id="" className="row">
                     <div className="col-7">
-                      <h6 class="mt0 mb10 title">
+                      <h6 className="mt0 mb10 title">
                         Never buy a used Tractor without{" "}
-                        <strong class="generic-blue show fs24">
+                        <strong className="generic-blue show fs24">
                           TractorOnline{" "}
-                          <span class="generic-red">
+                          <span className="generic-red">
                             Tractor Inspection<span></span>
                           </span>
                         </strong>
                       </h6>
-                      <p class="fs18 mb10">
+                      <p className="fs18 mb10">
                         Over 200 checkpoints will be used to inspect the
                         tractor.{" "}
                       </p>
-                      <ul class="list-unstyled list-inline fs16 mb15">
+                      <ul className="list-unstyled list-inline fs16 mb15">
                         <li>
-                          <i class="fa fa-tick generic-green"></i> Engine
+                          <i className="fa fa-tick generic-green"></i> Engine
                         </li>
                         <li>
-                          <i class="fa fa-tick generic-green"></i> Suspension
+                          <i className="fa fa-tick generic-green"></i>{" "}
+                          Suspension
                         </li>
                         <li>
-                          <i class="fa fa-tick generic-green"></i> Exterior
+                          <i className="fa fa-tick generic-green"></i> Exterior
                         </li>
                         <li>
-                          <i class="fa fa-tick generic-green"></i> Interior
+                          <i className="fa fa-tick generic-green"></i> Interior
                         </li>
                       </ul>
                       <a
                         href="#"
                         className="btn btn-lg btn-success "
                         style={{ color: "white" }}
-                        // data-toggle="modal"
-                        // data-target="#car_sure_request_confirmation"
-                        // onclick="showModal();"
                       >
                         Inspection Schedule
                       </a>
@@ -266,12 +260,12 @@ export default function AddDetails() {
                       <a
                         href="/products/tractoronline-inspection"
                         id=""
-                        class="ib mt15 fs18"
+                        className="ib mt15 fs18"
                       >
                         Learn More
                       </a>
                     </div>
-                    <div class="right-img pull-right">
+                    <div className="right-img pull-right">
                       <img
                         alt="Tractor Inspection Rate"
                         src="https://wsa2.pakwheels.com/assets/inspection/inspection-car-rate-7b4ede752bdfc0e0cd08c3247e7e37a8.png"
@@ -428,17 +422,17 @@ export default function AddDetails() {
               </div>
 
               {/*add at bottom  */}
-              <div class="sellAdd clearfix text-center p20 mt-70">
+              <div className="sellAdd clearfix text-center p20 mt-70">
                 <img
                   alt="Post an Ad"
                   src="https://wsa4.pakwheels.com/assets/sell-car-bf334aeb9cf3001080a3e887d51a3b32.png"
                   title="Post an Ad"
                 />
 
-                <h3 class="title">
-                  Post an ad for <span class="generic-red">FREE</span>
+                <h3 className="title">
+                  Post an ad for <span className="generic-red">FREE</span>
                 </h3>
-                <p class="mt10 mb5 fs16">
+                <p className="mt10 mb5 fs16">
                   Sell it to tens of thousands of people in less time.{" "}
                 </p>
                 <div>
@@ -449,8 +443,7 @@ export default function AddDetails() {
                   <a
                     style={{ color: "white" }}
                     href="/used-tractors/sell"
-                    class="btn btn-success sign-in-comp"
-                    onclick="trackEvents('Used tractors', 'Add Car', 'From - Search');"
+                    className="btn btn-success sign-in-comp"
                   >
                     Sell Your Car
                   </a>
@@ -468,14 +461,14 @@ export default function AddDetails() {
               <div className="bg-white p-4">
                 <div className="">
                   <div className="priceBox">
-                    <strong class="genericGreen">
+                    <strong className="genericGreen">
                       PKR 19.1 <span>lacs</span>
                     </strong>
                     <br />
                     <a
                       href="/car-loan-calculator/search/?car_finance_lead%5Baddress%5D=&amp;car_finance_lead%5Bage%5D=&amp;car_finance_lead%5Bbank_id%5D=&amp;car_finance_lead%5Bcar_loan_id%5D=31&amp;car_finance_lead%5Bcity%5D=&amp;car_finance_lead%5Bcity_area_id%5D=&amp;car_finance_lead%5Bcity_id%5D=&amp;car_finance_lead%5Bcnic%5D=&amp;car_finance_lead%5Bcomment%5D=&amp;car_finance_lead%5Bcurrent_bank%5D=&amp;car_finance_lead%5Bdate%5D=&amp;car_finance_lead%5Bdisposition%5D=&amp;car_finance_lead%5Bdown_payment%5D=15.0&amp;car_finance_lead%5Bin_debt%5D=&amp;car_finance_lead%5Bis_filler%5D=&amp;car_finance_lead%5Bmedium_id%5D=&amp;car_finance_lead%5Bmobile%5D=&amp;car_finance_lead%5Bmodel_year%5D=2021&amp;car_finance_lead%5Bname%5D=&amp;car_finance_lead%5Boccupation%5D=&amp;car_finance_lead%5Bprice%5D=1910000&amp;car_finance_lead%5Bprocessing_period%5D=&amp;car_finance_lead%5Breason%5D=&amp;car_finance_lead%5Bsalary%5D=&amp;car_finance_lead%5Bsource%5D=&amp;car_finance_lead%5Bstatus%5D=&amp;car_finance_lead%5Btenure%5D=7&amp;car_finance_lead%5Btime_to_call%5D=&amp;car_finance_lead%5Bused_car_id%5D=&amp;car_finance_lead%5Bvehicle_intent%5D=&amp;type=used-car"
-                      class="fs12 fwb genericGreen mt5 pointer"
-                      // onclick="trackEvents('CarFinance','EMI', 'From - UserCarDetail');"
+                      className="fs12 fwb genericGreen mt5 pointer"
+                      
                     >
                       <u>PKR 34,782/Month</u>
                     </a>
@@ -497,7 +490,7 @@ export default function AddDetails() {
                     </span>
                   </div>
 
-                  <div class="btn btn-link-outline btn-lg btn-block sendMessageButton mt-20 d-flex">
+                  <div className="btn btn-link-outline btn-lg btn-block sendMessageButton mt-20 d-flex">
                     <Image
                       src={email}
                       height="20px"
@@ -648,12 +641,7 @@ export default function AddDetails() {
             </div>
             <div className="col-lg-3">
               Frequency
-              <select
-                className="form-control mb-2"
-                id="sortby"
-                name="sortby"
-                onchange="callPjax('/used-tractors/search/-/?sortby=' + $(this).val())"
-              >
+              <select className="form-control mb-2" id="sortby" name="sortby">
                 <option value="bumped_at-desc" selected="selected">
                   Updated Date: Recent First
                 </option>

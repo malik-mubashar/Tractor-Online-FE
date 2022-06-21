@@ -1,17 +1,17 @@
 import React from "react";
-
+import { Link } from "react-router-dom";
 export default function MobileBannerFooter() {
   return (
     <div>
       <div className="mobile-footer">
         <div className="footer-bottom">
           <div className="footer-links">
-            <a href="/">About</a>
-            <a href="/">Products</a>
-            <a href="/">Contact</a>
-            <a href="/">Privacy</a>
-            <a href="/">Terms</a>
-            <a href="/">Sitemap</a>
+            <Link to="/">About</Link>
+            <Link to="/">Products</Link>
+            <Link to="/">Contact</Link>
+            <Link to="/">Privacy</Link>
+            <Link to="/">Terms</Link>
+            <Link to="/">Sitemap</Link>
           </div>
           <p className="copy">
             Copyright Ⓒ 2003 - 2022 TractorOnline (Pvt) Ltd. - All Rights

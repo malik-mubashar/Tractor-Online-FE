@@ -46,7 +46,7 @@ export default function SearchListing() {
                 className="form-control col-7 mb-2"
                 id="sortby"
                 name="sortby"
-                onchange="callPjax('/used-tractors/search/-/?sortby=' + $(this).val())"
+                onChange={(e)=>console.log(e)}
               >
                 <option value="bumped_at-desc" selected="selected">
                   Updated Date: Recent First
