@@ -1,44 +1,58 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Nav, Image } from "react-bootstrap";
 import * as Icon from "react-feather";
 import DropDown from "../LandingPage/DropDown";
 import { useHistory } from "react-router-dom";
 import user1 from "../../assets/img/user/user1.jpg";
+import { PRODUCT_CATEGORY } from "../../API/Products/product-category";
 
 const SideMenue = () => {
+  const [productCategories, setProductCategories] = useState();
+
   const history = useHistory();
+
+  useEffect(() => {
+    handleGetAllCategories();
+  }, []);
+
+  const handleGetAllCategories = async () => {
+    const result = await PRODUCT_CATEGORY.getAllProductCategories();
+    setProductCategories(result.data && result.data.data);
+  };
   return (
     <Nav defaultActiveKey="/" className="flex-column categoryNavbar">
-      <Nav.Link href="/" className="d-flex w-100 dropdown-button-category ">
-        <span className="user-pic">
-          <Image src={user1} alt="User Image" roundedCircle width={"24px"} />
-        </span>
-        <DropDown title="Tractors" usedCars={true} dropDownIcon={true} />
-      </Nav.Link>
-      <Nav.Link eventKey="link-1" className="d-flex w-100 mt-1 dropdown-button-category ">
-        <span className="user-pic">
-          <Image src={user1} alt="User Image" roundedCircle width={"24px"} />
-        </span>
-        <DropDown title="Farming Equipment"  newCars={true} dropDownIcon={true} />
-      </Nav.Link>
-      <Nav.Link eventKey="link-2" className="d-flex w-100 mt-1 dropdown-button-category ">
-        <span className="user-pic">
-          <Image src={user1} alt="User Image" roundedCircle width={"24px"} />
-        </span>
-        <DropDown title="Accessories and Parts" autoStore={true} dropDownIcon={true} />
-      </Nav.Link>
-      <Nav.Link eventKey="link-1" className="d-flex w-100 mt-1 dropdown-button-category ">
-        <span className="user-pic">
-          <Image src={user1} alt="User Image" roundedCircle width={"24px"} />
-        </span>
-        <DropDown  title="Fertilizers and Seeds"  newCars={true} dropDownIcon={true} />
-      </Nav.Link>
-      <Nav.Link eventKey="link-2" className="d-flex w-100 mt-1 dropdown-button-category ">
-        <span className="user-pic">
-          <Image src={user1} alt="User Image" roundedCircle width={"24px"} />
-        </span>
-        <DropDown title="Plants and Horticulture" autoStore={true} dropDownIcon={true} />
-      </Nav.Link>
+      {productCategories &&
+        productCategories.map((item, i) => {
+          return (
+            <>
+              <Nav.Link
+                href="/"
+                className="d-flex w-100 dropdown-button-category "
+                key={i}
+              >
+                <span className="user-pic">
+                  <Image
+                    src={user1}
+                    alt="User Image"
+                    roundedCircle
+                    width={"24px"}
+                  />
+                </span>
+                <DropDown
+                  title={item.title}
+                  usedCars={item.title === "Tractors"}
+                  newCars={item.title === "Farming Equipments"}
+                  autoStore={item.title === "Accessories and Parts"}
+                  fertilizerAndSeeds={item.title === "Fertilizers and Seeds"}
+                  plantAndHortiCulture={
+                    item.title === "Plants and Horticulture"
+                  }
+                  dropDownIcon={true}
+                />
+              </Nav.Link>
+            </>
+          );
+        })}
     </Nav>
   );
 };
