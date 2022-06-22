@@ -3,11 +3,11 @@ import axios from "axios";
 //no_of_record=5&page=2
 var user = JSON.parse(window.localStorage.getItem("currentUser")) || null;
 
-class ProdCategories {
-  deleteProdCategory = async (id) => {
+class ProdSubCategories {
+  deleteProdSubCategory = async (id) => {
     return axios({
       method: "delete",
-      url: `${process.env.REACT_APP_API_LOCAL_PATH}product_categories/${id}`,
+      url: `${process.env.REACT_APP_API_LOCAL_PATH}product_sub_categories/${id}`,
       headers: {
         "Content-Type": "application/json; charset=utf-8",
         "Access-Control-Allow-Origin": "*",
@@ -31,10 +31,10 @@ class ProdCategories {
         };
       });
   };
-  updateProdCategory = async (prodCategoriesState) => {
+  updateProdSubCategory = async (prodSubCategoriesState) => {
     return axios({
       method: "put",
-      url: `${process.env.REACT_APP_API_LOCAL_PATH}product_categories/${prodCategoriesState.prodCategoryId}`,
+      url: `${process.env.REACT_APP_API_LOCAL_PATH}product_sub_categories/${prodSubCategoriesState.prodCategoryId}`,
       headers: {
         "Content-Type": "application/json; charset=utf-8",
         "Access-Control-Allow-Origin": "*",
@@ -45,10 +45,11 @@ class ProdCategories {
         mode: "no-cors",
       },
 			data: {
-        title: prodCategoriesState.title,
-        status: prodCategoriesState.status,
-        link: prodCategoriesState.link,
-        description: prodCategoriesState.description,
+        title: prodSubCategoriesState.title,
+        status: prodSubCategoriesState.status,
+        link: prodSubCategoriesState.link,
+				description: prodSubCategoriesState.description,
+				product_category_head_id:prodSubCategoriesState.product_category_head_id
       },
     })
       .then((result) => {
@@ -64,11 +65,11 @@ class ProdCategories {
         };
       });
   };
-	addProdCategory = async (prodCategoriesState) => {
+	addProdSubCategory = async (prodSubCategoriesState) => {
 		debugger;
     return axios({
       method: "post",
-      url: `${process.env.REACT_APP_API_LOCAL_PATH}product_categories`,
+      url: `${process.env.REACT_APP_API_LOCAL_PATH}product_sub_categories`,
       headers: {
         "Content-Type": "application/json; charset=utf-8",
         "Access-Control-Allow-Origin": "*",
@@ -79,10 +80,11 @@ class ProdCategories {
         mode: "no-cors",
       },
       data: {
-        title: prodCategoriesState.title,
-        status: prodCategoriesState.status,
-        link: prodCategoriesState.link,
-        description: prodCategoriesState.description,
+        title: prodSubCategoriesState.title,
+        status: prodSubCategoriesState.status,
+        link: prodSubCategoriesState.link,
+        description: prodSubCategoriesState.description,
+        product_category_head_id: prodSubCategoriesState.product_category_head_id,
       },
     })
       .then((result) => {
@@ -99,11 +101,11 @@ class ProdCategories {
       });
   };
 
-	getProdCategories = async (page, searchString, noOfRec) => {
+	getProdSubCategories = async (page, searchString, noOfRec) => {
 		debugger;
     return axios({
       method: "get",
-      url: `${process.env.REACT_APP_API_LOCAL_PATH}product_categories?page=${page}&q%5Bname_or_comments_cont%5D=${searchString}&no_of_record=${noOfRec}`,
+      url: `${process.env.REACT_APP_API_LOCAL_PATH}product_sub_categories?page=${page}&q%5Bname_or_comments_cont%5D=${searchString}&no_of_record=${noOfRec}`,
       headers: {
         "Content-Type": "application/json;",
         "access-token": `${user.accessToken}`,
@@ -112,15 +114,13 @@ class ProdCategories {
         mode: "no-cors",
       },
     })
-			.then((result) => {
-				debugger;
+      .then((result) => {
         return {
           error: false,
           data: result.data,
         };
       })
-			.catch((error) => {
-				debugger;
+      .catch((error) => {
         return {
           error: true,
           data: error.response.data,
@@ -129,4 +129,4 @@ class ProdCategories {
   };
 }
 
-export let prodApi = new ProdCategories();
+export let prodSubApi = new ProdSubCategories();

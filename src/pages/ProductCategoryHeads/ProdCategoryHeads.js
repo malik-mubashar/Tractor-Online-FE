@@ -12,33 +12,33 @@ import {
   Form,
   Pagination,
 } from "react-bootstrap";
-import AddAndEditProdCategories from "./AddAndEditProdCategories";
-import { prodApi } from "../../API/ProdCategoriesApis";
+import AddAndEditProdCategoryHeads from "./AddAndEditProdCategoryHeads";
+import { prodCategoryHeadsApi} from "../../API/ProdCategoryHeadsApis";
 import toast from "react-hot-toast";
 
-export default function ProdCategories() {
+export default function ProdCategoryHeads() {
   const [paginationNumbers, setPaginationNumbers] = useState();
   const [noOfRec, setNoOfRec] = useState(10);
   const [mainSearchString, setMainSearchString] = useState("");
   useEffect(() => {
-    getProdCategories(1, "", 10);
+    getProdCategoryHeads(1, "", 10);
   }, []);
 
-  const getProdCategories = async (page, mainSearch, noOfRec) => {
+  const getProdCategoryHeads = async (page, mainSearch, noOfRec) => {
     const loadingToastId = toast.loading("Loading..!");
-
+		debugger;
     try {
-      const result = await prodApi.getProdCategories(page, mainSearch, noOfRec);
-      if (result.error == false && result.data.status == "success") {
+      const result = await prodCategoryHeadsApi.getProdCategoryHeads(page, mainSearch, noOfRec);
+      if (result.error === false && result.data.status === "success") {
         toast.dismiss(loadingToastId);
 
-        setProdCategoriesState({
-          ...prodCategoriesState,
-          prodCategories: result.data.data,
+        setProdCategoryHeadsState({
+          ...prodCategoryHeadsState,
+          prodCategoryHeads: result.data.data,
           pagination: result.data.pagination,
-          originalProdCategories: result.data.data,
-          isAddProdCategory: false,
-          isEditProdCategory: false,
+          originalProdCategoryHeads: result.data.data,
+          isAddProdCategoryHead: false,
+          isEditProdCategoryHead: false,
         });
         var temp = [];
         for (var i = 1; i <= result.data.pagination.pages; i++) {
@@ -55,18 +55,17 @@ export default function ProdCategories() {
     }
   };
 
-  const deleteProdCategory = async (id) => {
+  const deleteProdCategoryHead = async (id) => {
     const loadingToastId = toast.loading("Loading..!");
     try {
-      const result = await prodApi.deleteProdCategory(id);
+      const result = await prodCategoryHeadsApi.deleteProdCategoryHead(id);
       debugger;
       if (
-        result.error === false &&
-        result.data.notice === "Product Category was successfully removed."
+        result.error == false 
       ) {
         toast.dismiss(loadingToastId);
         toast.success("Successfully deleted!");
-        getProdCategories(1, "", 10);
+        getProdCategoryHeads(1, "", 10);
       }
       console.log(result);
     } catch (error) {
@@ -79,18 +78,17 @@ export default function ProdCategories() {
     setSideMenu(active);
   }
 
-  const [prodCategoriesState, setProdCategoriesState] = useState({
-    isEditProdCategory: false,
-    isAddProdCategory: false,
-    isViewProdCategory: false,
-    prodCategories: null,
-    originalProdCategories: null,
+  const [prodCategoryHeadsState, setProdCategoryHeadsState] = useState({
+    isEditProdCategoryHead: false,
+    isAddProdCategoryHead: false,
+    prodCategoryHeads: null,
+    originalProdCategoryHeads: null,
     status: "active",
   });
 
   const handleSearch = (searchString) => {
     if (searchString) {
-      const filteredCities = prodCategoriesState.prodCategories.filter(
+      const filteredHeads = prodCategoryHeadsState.prodCategoryHeads.filter(
         (item) => {
           return (
             item.name.toLowerCase().includes(searchString.toLowerCase()) ||
@@ -99,14 +97,14 @@ export default function ProdCategories() {
           );
         }
       );
-      setProdCategoriesState({
-        ...prodCategoriesState,
-        prodCategories: filteredCities,
+      setProdCategoryHeadsState({
+        ...prodCategoryHeadsState,
+        prodCategoryHeads: filteredHeads,
       });
     } else {
-      setProdCategoriesState({
-        ...prodCategoriesState,
-        prodCategories: prodCategoriesState.originalProdCategories,
+      setProdCategoryHeadsState({
+        ...prodCategoryHeadsState,
+        prodCategoryHeads: prodCategoryHeadsState.originalProdCategoryHeads,
       });
     }
   };
@@ -114,12 +112,13 @@ export default function ProdCategories() {
   const handleMainSearch = (event) => {
     setMainSearchString(event.target.value);
     if (event.keyCode == 13) {
-      getProdCategories(1, event.target.value, noOfRec);
+      getProdCategoryHeads(1, event.target.value, noOfRec);
     }
     if (event.target.value == "") {
-      getProdCategories(1, event.target.value, noOfRec);
+      getProdCategoryHeads(1, event.target.value, noOfRec);
     }
-  };
+	};
+	console.log("asd,asd", prodCategoryHeadsState);
 
   return (
     <>
@@ -127,14 +126,14 @@ export default function ProdCategories() {
         <Navigation onClick={() => onSideMenu} />
         <div className="prodCategoryPage">
           <div className={`main-content d-flex flex-column`}>
-            {prodCategoriesState.isViewProdCategory ? (
+            {prodCategoryHeadsState.isViewProdCategory ? (
               <></>
-            ) : prodCategoriesState.isAddProdCategory === true ||
-              prodCategoriesState.isEditProdCategory === true ? (
-              <AddAndEditProdCategories
-                prodCategoriesState={prodCategoriesState}
-                setProdCategoriesState={setProdCategoriesState}
-                getProdCategories={getProdCategories}
+            ) : prodCategoryHeadsState.isAddProdCategoryHead === true ||
+              prodCategoryHeadsState.isEditProdCategoryHead === true ? (
+              <AddAndEditProdCategoryHeads
+                prodCategoryHeadsState={prodCategoryHeadsState}
+                setProdCategoryHeadsState={setProdCategoryHeadsState}
+                getProdCategoryHeads={getProdCategoryHeads}
               />
             ) : (
               <>
@@ -142,13 +141,13 @@ export default function ProdCategories() {
                   type="button"
                   className="btn btn-outline-primary col-sm-2 mb-4"
                   onClick={() => {
-                    setProdCategoriesState({
-                      ...prodCategoriesState,
-                      isAddProdCategory: true,
+                    setProdCategoryHeadsState({
+                      ...prodCategoryHeadsState,
+                      isAddProdCategoryHead: true,
                     });
                   }}
                 >
-                  Add Product Category
+                  Add Product Category Head
                 </button>
                 <div className={`${isMobile ? "" : "d-flex"}`}>
                   <FormControl
@@ -160,7 +159,7 @@ export default function ProdCategories() {
                   <select
                     onChange={(e) => {
                       setNoOfRec(e.target.value);
-                      getProdCategories(1, mainSearchString, e.target.value);
+                      getProdCategoryHeads(1, mainSearchString, e.target.value);
                     }}
                     className={`${
                       isMobile ? "mt-3" : "adjustNoOfRecSelect"
@@ -185,7 +184,7 @@ export default function ProdCategories() {
                 <div className="card mb-4">
                   <div className="card-body">
                     <div className="card-header d-flex">
-                      <h5 className="card-title w-50 float-left">Cites</h5>
+                      <h5 className="card-title w-50 float-left">Category Heads</h5>
                       <Form className="nav-search-form d-none d-sm-block float-right">
                         <FormControl
                           type="text"
@@ -209,8 +208,8 @@ export default function ProdCategories() {
                         </thead>
 
                         <tbody>
-                          {prodCategoriesState.prodCategories &&
-                            prodCategoriesState.prodCategories.map(
+                          {prodCategoryHeadsState.prodCategoryHeads &&
+                            prodCategoryHeadsState.prodCategoryHeads.map(
                               (prod, idx) => (
                                 <tr key={idx}>
                                   <td>{prod.title && prod.title}</td>
@@ -221,9 +220,9 @@ export default function ProdCategories() {
                                     <Icon.Edit2
                                       style={{ cursor: "pointer" }}
                                       onClick={() => {
-                                        setProdCategoriesState({
-                                          ...prodCategoriesState,
-                                          isEditProdCategory: true,
+                                        setProdCategoryHeadsState({
+                                          ...prodCategoryHeadsState,
+                                          isEditProdCategoryHead: true,
                                           name: prod.name,
                                           comments: prod.comments,
                                           prodCategoryId: prod.id,
@@ -234,7 +233,7 @@ export default function ProdCategories() {
                                     <Link className="text-danger mr-2">
                                       <Icon.X
                                         onClick={() =>
-                                          deleteProdCategory(prod.id)
+                                          deleteProdCategoryHead(prod.id)
                                         }
                                         className="icon wh-15 mt-minus-3"
                                       />
@@ -250,28 +249,28 @@ export default function ProdCategories() {
                       className={`${isMobile ? "" : "d-flex"}`}
                       style={{ justifyContent: "space-between" }}
                     >
-                      {prodCategoriesState.pagination && (
+                      {prodCategoryHeadsState.pagination && (
                         <>
                           <Pagination>
                             <Pagination.First
                               disabled={
-                                prodCategoriesState.pagination.page == 1
+                                prodCategoryHeadsState.pagination.page == 1
                                   ? true
                                   : false
                               }
                               onClick={() => {
-                                getProdCategories(1, mainSearchString, noOfRec);
+                                getProdCategoryHeads(1, mainSearchString, noOfRec);
                               }}
                             />
                             <Pagination.Prev
                               disabled={
-                                prodCategoriesState.pagination.page == 1
+                                prodCategoryHeadsState.pagination.page == 1
                                   ? true
                                   : false
                               }
                               onClick={() => {
-                                getProdCategories(
-                                  prodCategoriesState.pagination.prev,
+                                getProdCategoryHeads(
+                                  prodCategoryHeadsState.pagination.prev,
                                   mainSearchString,
                                   noOfRec
                                 );
@@ -282,14 +281,14 @@ export default function ProdCategories() {
                                 return (
                                   <Pagination.Item
                                     disabled={
-                                      prodCategoriesState.pagination.page ==
+                                      prodCategoryHeadsState.pagination.page ==
                                       item
                                         ? true
                                         : false
                                     }
                                     key={item}
                                     onClick={() => {
-                                      getProdCategories(
+                                      getProdCategoryHeads(
                                         item,
                                         mainSearchString,
                                         noOfRec
@@ -304,14 +303,14 @@ export default function ProdCategories() {
 
                             <Pagination.Next
                               disabled={
-                                prodCategoriesState.pagination.page ==
-                                prodCategoriesState.pagination.last
+                                prodCategoryHeadsState.pagination.page ==
+                                prodCategoryHeadsState.pagination.last
                                   ? true
                                   : false
                               }
                               onClick={() => {
-                                getProdCategories(
-                                  prodCategoriesState.pagination.next,
+                                getProdCategoryHeads(
+                                  prodCategoryHeadsState.pagination.next,
                                   mainSearchString,
                                   noOfRec
                                 );
@@ -319,15 +318,15 @@ export default function ProdCategories() {
                             />
                             <Pagination.Last
                               onClick={() => {
-                                getProdCategories(
-                                  prodCategoriesState.pagination.last,
+                                getProdCategoryHeads(
+                                  prodCategoryHeadsState.pagination.last,
                                   mainSearchString,
                                   noOfRec
                                 );
                               }}
                               disabled={
-                                prodCategoriesState.pagination.page ==
-                                prodCategoriesState.pagination.last
+                                prodCategoryHeadsState.pagination.page ==
+                                prodCategoryHeadsState.pagination.last
                                   ? true
                                   : false
                               }
@@ -335,9 +334,9 @@ export default function ProdCategories() {
                           </Pagination>
 
                           <div style={{ marginTop: "25px" }}>
-                            displaying {prodCategoriesState.pagination.from} to{" "}
-                            {prodCategoriesState.pagination.to} of total{" "}
-                            {prodCategoriesState.pagination.count}
+                            displaying {prodCategoryHeadsState.pagination.from} to{" "}
+                            {prodCategoryHeadsState.pagination.to} of total{" "}
+                            {prodCategoryHeadsState.pagination.count}
                           </div>
                         </>
                       )}

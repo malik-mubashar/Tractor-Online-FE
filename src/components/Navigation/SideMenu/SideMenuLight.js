@@ -55,6 +55,63 @@ class SideMenuLight extends React.Component {
                   Forgot Password
                 </NavLink>
               </NavDropdown>
+
+
+							<NavDropdown
+                title={
+                  <div className="dropdown-title">
+                    <Icon.Settings className="icon" />
+                    <span className="title">
+                      Settings
+                      <Icon.ChevronRight className="icon fr" />
+                    </span>
+                  </div>
+                }
+                id="basic-nav-dropdown"
+              >
+                <NavLink
+                  to="/productCategories/"
+                  className="dropdown-item"
+                  target="_blank"
+                >
+                  <Icon.Plus className="icon" />
+                  Product Categories 
+								</NavLink>
+								<NavLink
+                  to="/productSubCategories"
+                  className="dropdown-item"
+                  target="_blank"
+                >
+                  <Icon.Plus className="icon" />
+                  Product Sub Categories 
+								</NavLink>
+								<NavLink
+                  to="/city"
+                  className="dropdown-item"
+                  target="_blank"
+                >
+                  <Icon.Plus className="icon" />
+                  City 
+								</NavLink>
+								
+								<NavLink
+                  to="/country"
+                  className="dropdown-item"
+                  target="_blank"
+                >
+                  <Icon.Plus className="icon" />
+                  Country 
+								</NavLink>
+								
+                <NavLink to="/productCategoryHeads/" className="dropdown-item" target="_blank">
+                  <Icon.Plus className="icon" />
+                  Product Categories Head
+                </NavLink>
+        
+              </NavDropdown>
+
+
+
             </Nav>
           </Navbar.Collapse>
         </Navbar>
