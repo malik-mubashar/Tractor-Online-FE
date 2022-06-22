@@ -63,6 +63,7 @@ const ProfileSettings = () => {
       }
     };
   }, [editProfile.image]);
+
   useEffect(() => {
     handlePersonalDetail();
     handleDropDownOptions();
@@ -70,37 +71,54 @@ const ProfileSettings = () => {
 
   const handleDropDownOptions = async () => {
     const result = await city.getAllCities();
-    setCities(result.data.data);
+    setCities(result.data && result.data.data);
 
     const response = await language.getAllLanguages();
-    setLanguageList(response.data.data);
+    setLanguageList(response.data && response.data.data);
 
     const countryArray = await city.getAllCountry();
-    setCountryList(countryArray.data.data);
+    setCountryList(countryArray.data && countryArray.data.data);
   };
 
   const handlePersonalDetail = async () => {
     const result = await user.findUser(currentUser.data.id);
     setUserPersonalDetail(result.data);
     setEditProfile({
-      name: result.data.name,
-      image: result.data.image,
+      name: result.data && result.data.name,
+      image: result.data && result.data.image,
       language:
-        result.data.personal_detail && result.data.personal_detail.language,
-      birthDay: result.data.personal_detail && result.data.personal_detail.dob,
+        result.data &&
+        result.data.personal_detail &&
+        result.data.personal_detail.language,
+      birthDay:
+        result.data &&
+        result.data.personal_detail &&
+        result.data.personal_detail.dob,
       phone:
-        result.data.personal_detail && result.data.personal_detail.phone_number,
-      email: result.data.email,
-      gender: result.data.personal_detail && result.data.personal_detail.gender,
+        result.data &&
+        result.data.personal_detail &&
+        result.data.personal_detail.phone_number,
+      email: result.data && result.data.email,
+      gender:
+        result.data &&
+        result.data.personal_detail &&
+        result.data.personal_detail.gender,
       country:
-        result.data.personal_detail && result.data.personal_detail.country,
-      city: result.data.personal_detail && result.data.personal_detail.city,
+        result.data &&
+        result.data.personal_detail &&
+        result.data.personal_detail.country,
+      city:
+        result.data &&
+        result.data.personal_detail &&
+        result.data.personal_detail.city,
       username:
-        result.data.personal_detail && result.data.personal_detail.username
+        result.data &&
+        result.data.personal_detail &&
+        result.data.personal_detail.username
     });
     setUpdatePassword({
       ...updatePassword,
-      email: result.data.email
+      email: result.data && result.data.email
     });
   };
 
@@ -108,18 +126,21 @@ const ProfileSettings = () => {
   const onSideMenu = (active) => {
     setSideMenu(active);
   };
+
   const handleUpdateProfile = (value, target) => {
     setEditProfile({
       ...editProfile,
       [target]: value
     });
   };
+
   const handleUpdatePassword = (value, target) => {
     setUpdatePassword({
       ...updatePassword,
       [target]: value
     });
   };
+
   const updateProfile = async (e) => {
     e.preventDefault();
     try {
@@ -137,6 +158,7 @@ const ProfileSettings = () => {
       }
     } catch (error) {}
   };
+
   const modalClose = () => {
     setModalShow(!modalShow);
   };
@@ -288,17 +310,20 @@ const ProfileSettings = () => {
                           handleUpdateProfile(e.target.value, "language");
                         }}
                       >
-                        <option>Select Language ....</option>
-                        {languageList &&
+                        <option key="blankChoice" hidden value>
+                          -- Select Language --
+                        </option>
+                        {languageList ? (
                           languageList.map((item) => {
                             return (
                               <>
                                 <option key={item.id}>{item.name}</option>
                               </>
                             );
-                          })}
-                        <option>English</option>
-                        <option>Urdu</option>
+                          })
+                        ) : (
+                          <option>-- No option avaliable --</option>
+                        )}
                       </Form.Control>
                     </Form.Group>
                   </Form.Row>
@@ -312,15 +337,22 @@ const ProfileSettings = () => {
                           handleUpdateProfile(e.target.value, "country");
                         }}
                       >
-                        <option>Select Country ....</option>
-                        {countryList &&
+                        <option key="blankChoice" hidden value>
+                          {" "}
+                          --Select Country--{" "}
+                        </option>
+
+                        {countryList ? (
                           countryList.map((item) => {
                             return (
                               <>
                                 <option key={item.id}>{item.name}</option>
                               </>
                             );
-                          })}
+                          })
+                        ) : (
+                          <option>-- No option avaliable --</option>
+                        )}
                       </Form.Control>
                     </Form.Group>
 
@@ -333,15 +365,20 @@ const ProfileSettings = () => {
                           handleUpdateProfile(e.target.value, "city");
                         }}
                       >
-                        <option>Select City ....</option>
-                        {cities &&
+                        <option key="blankChoice" hidden value>
+                          Select City ....
+                        </option>
+                        {cities ? (
                           cities.map((item, i) => {
                             return (
                               <>
                                 <option key={i}>{item.name}</option>
                               </>
                             );
-                          })}
+                          })
+                        ) : (
+                          <option>-- No option avaliable --</option>
+                        )}
                       </Form.Control>
                     </Form.Group>
                   </Form.Row>

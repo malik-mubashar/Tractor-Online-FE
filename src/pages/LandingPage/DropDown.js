@@ -3,9 +3,15 @@ import * as Icon from "react-feather";
 import Icofont from "react-icofont";
 import { Link } from "react-router-dom";
 
-
-export default function DropDown({ title,usedCars, newCars, autoStore,dropDownIcon }) {
-
+export default function DropDown({
+  title,
+  usedCars,
+  newCars,
+  autoStore,
+  dropDownIcon,
+  fertilizerAndSeeds,
+  plantAndHortiCulture
+}) {
   const usedTractors = [
     {
       heading: "Search for a Used Tractor for Sale.",
@@ -140,23 +146,24 @@ export default function DropDown({ title,usedCars, newCars, autoStore,dropDownIc
     <div>
       <div className={`${!dropDownIcon ? " dropdown-button p-2" : "p-1"}`}>
         {title}
-        {!dropDownIcon && <Icon.ChevronDown className="icon" height="15px" width="15px" />}
+        {!dropDownIcon && (
+          <Icon.ChevronDown className="icon" height="15px" width="15px" />
+        )}
         <div
           className={`drop-down-items row py-3 ${
             usedCars ? "usedCarsWidth" : ""
           } ${newCars ? "newCarsWidth" : ""} ${
-            autoStore ? "autoStoreWidth" : null
+            plantAndHortiCulture || fertilizerAndSeeds || autoStore
+              ? "autoStoreWidth"
+              : null
           }`}
         >
           {usedCars ? (
             <>
               <ul className="list-unstyled col-4 p-0 border-right">
-                {usedTractors.map((option,i) => (
+                {usedTractors.map((option, i) => (
                   <li className="dropdown-list" key={i}>
-                    <Link
-                      to="/"
-                      className="d-flex pl-1 dropdown-link"
-                    >
+                    <Link to="/" className="d-flex pl-1 dropdown-link">
                       <Icofont
                         icon={option.icon}
                         height="10px"
@@ -172,7 +179,7 @@ export default function DropDown({ title,usedCars, newCars, autoStore,dropDownIc
                 ))}
               </ul>
               <ul className="list-unstyled col-4 p-0 border-right">
-                {usedTractorsSecond.map((option,i) => (
+                {usedTractorsSecond.map((option, i) => (
                   <li className="dropdown-list" key={i}>
                     <Link to="/" className="d-flex pl-1 dropdown-link">
                       <Icofont
@@ -196,7 +203,7 @@ export default function DropDown({ title,usedCars, newCars, autoStore,dropDownIc
                     <strong>Popular Cities</strong>
                   </Link>
                 </li>
-                {cities.map((option,i) => (
+                {cities.map((option, i) => (
                   <li key={i}>
                     <Link
                       to="/"
@@ -215,7 +222,7 @@ export default function DropDown({ title,usedCars, newCars, autoStore,dropDownIc
                     <strong>Popular Models</strong>
                   </Link>
                 </li>
-                {model.map((option,i) => (
+                {model.map((option, i) => (
                   <li key={i}>
                     <Link
                       to="/"
@@ -233,7 +240,7 @@ export default function DropDown({ title,usedCars, newCars, autoStore,dropDownIc
           {newCars ? (
             <>
               <ul className="list-unstyled col-6 border-right">
-                {newTractors.map((option,i) => (
+                {newTractors.map((option, i) => (
                   <li className="dropdown-list" key={i}>
                     <Link to="/" className="d-flex pl-1 dropdown-link">
                       <Icofont
@@ -257,7 +264,7 @@ export default function DropDown({ title,usedCars, newCars, autoStore,dropDownIc
                     <strong>Popular New Tractor</strong>
                   </Link>
                 </li>
-                {model.map((option,i) => (
+                {model.map((option, i) => (
                   <li key={i}>
                     <Link
                       to="/"
@@ -275,7 +282,51 @@ export default function DropDown({ title,usedCars, newCars, autoStore,dropDownIc
           {autoStore ? (
             <>
               <ul className="list-unstyled col-12 ">
-                {autoStoreValues.map((option,i) => (
+                {autoStoreValues.map((option, i) => (
+                  <li className="dropdown-list" key={i}>
+                    <Link to="/" className="d-flex pl-1 dropdown-link">
+                      <Icofont
+                        icon={option.icon}
+                        height="10px"
+                        width="10px"
+                        className="icofont-2x ml-2 col-2 p-0"
+                      />
+                      <div className="col-10 p-0">
+                        <strong>{option.heading}</strong>
+                        <p>{option.subHeading}</p>
+                      </div>
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+            </>
+          ) : null}
+          {fertilizerAndSeeds ? (
+            <>
+              <ul className="list-unstyled col-12 ">
+                {autoStoreValues.map((option, i) => (
+                  <li className="dropdown-list" key={i}>
+                    <Link to="/" className="d-flex pl-1 dropdown-link">
+                      <Icofont
+                        icon={option.icon}
+                        height="10px"
+                        width="10px"
+                        className="icofont-2x ml-2 col-2 p-0"
+                      />
+                      <div className="col-10 p-0">
+                        <strong>{option.heading}</strong>
+                        <p>{option.subHeading}</p>
+                      </div>
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+            </>
+          ) : null}
+          {plantAndHortiCulture ? (
+            <>
+              <ul className="list-unstyled col-12 ">
+                {autoStoreValues.map((option, i) => (
                   <li className="dropdown-list" key={i}>
                     <Link to="/" className="d-flex pl-1 dropdown-link">
                       <Icofont
