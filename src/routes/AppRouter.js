@@ -27,6 +27,8 @@ import City from "../pages/City/City";
 import toast, { Toaster } from 'react-hot-toast';
 import Country from "../pages/Country/Country";
 import ProdCategories from "../pages/ProductCategories/ProdCategories";
+import ProdSubCategories from "../pages/ProductSubCategories /ProdSubCategories";
+import ProdCategoryHeads from "../pages/ProductCategoryHeads/ProdCategoryHeads";
 
 
 const AppRouter = () => {
@@ -45,15 +47,25 @@ const AppRouter = () => {
           <UnProtectedRoute exact path="/login">
             <Login />
 					</UnProtectedRoute>
+					{/* /// */}
 					<ProtectedRoute exact path="/city">
             <City />
 					</ProtectedRoute>
 					<ProtectedRoute exact path="/country">
             <Country />
 					</ProtectedRoute>
+					<ProtectedRoute exact path="/productCategoryHeads">
+            <ProdCategoryHeads />
+					</ProtectedRoute>
+
 					<ProtectedRoute exact path="/productCategories">
             <ProdCategories />
 					</ProtectedRoute>
+
+					<ProtectedRoute exact path="/productSubCategories">
+            <ProdSubCategories />
+					</ProtectedRoute>
+			
           <UnProtectedRoute exact path="/usedtractor">
             <Layout>
               <UsedTractor />
