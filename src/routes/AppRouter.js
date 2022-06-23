@@ -29,6 +29,8 @@ import Country from "../pages/Country/Country";
 import ProdCategories from "../pages/ProductCategories/ProdCategories";
 import ProdSubCategories from "../pages/ProductSubCategories /ProdSubCategories";
 import ProdCategoryHeads from "../pages/ProductCategoryHeads/ProdCategoryHeads";
+import ProdBrands from "../pages/ProductBrands/ProdBrands";
+import Languages from "../pages/Languages/Languages";
 
 
 const AppRouter = () => {
@@ -57,9 +59,16 @@ const AppRouter = () => {
 					<ProtectedRoute exact path="/productCategoryHeads">
             <ProdCategoryHeads />
 					</ProtectedRoute>
+					<ProtectedRoute exact path="/productBrands">
+            <ProdBrands />
+					</ProtectedRoute>
 
 					<ProtectedRoute exact path="/productCategories">
             <ProdCategories />
+					</ProtectedRoute>
+
+					<ProtectedRoute exact path="/languages">
+            <Languages />
 					</ProtectedRoute>
 
 					<ProtectedRoute exact path="/productSubCategories">
