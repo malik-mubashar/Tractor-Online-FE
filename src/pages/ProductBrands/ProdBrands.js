@@ -12,35 +12,37 @@ import {
   Form,
   Pagination,
 } from "react-bootstrap";
-import ViewCity from "./ViewCity";
-import AddAndEditCity from "./AddAndEditCity";
-import { city } from "../../API/City/CityApis";
 import toast from "react-hot-toast";
+import AddAndEditProdBrands from "./AddAndEditProdBrands";
+import { prodBrandsApis } from "../../API/ProdBrandsApis";
 
-export default function City() {
+export default function ProdBrands() {
   const [paginationNumbers, setPaginationNumbers] = useState();
   const [noOfRec, setNoOfRec] = useState(10);
   const [mainSearchString, setMainSearchString] = useState("");
   useEffect(() => {
-    getCities(1, "", 10);
+    getProdBrands(1, "", 10);
   }, []);
 
-  const getCities = async (page, mainSearch, noOfRec) => {
+  const getProdBrands = async (page, mainSearch, noOfRec) => {
     const loadingToastId = toast.loading("Loading..!");
 
-    console.log(page);
     try {
-      const result = await city.getCities(page, mainSearch, noOfRec);
+      const result = await prodBrandsApis.getProdBrands(
+        page,
+        mainSearch,
+        noOfRec
+      );
       if (result.error == false && result.data.status == "success") {
         toast.dismiss(loadingToastId);
 
-        setCityState({
-          ...cityState,
-          cities: result.data.data,
+        setProdBrandsState({
+          ...prodBrandsState,
+          prodBrands: result.data.data,
           pagination: result.data.pagination,
-          originalCities: result.data.data,
-          isAddCity: false,
-          isEditCity: false,
+          originalProdBrands: result.data.data,
+          isAddProdBrand: false,
+          isEditProdBrand: false,
         });
         var temp = [];
         for (var i = 1; i <= result.data.pagination.pages; i++) {
@@ -57,18 +59,15 @@ export default function City() {
     }
   };
 
-  const deleteCity = async (id) => {
+  const deleteProdBrand = async (id) => {
     const loadingToastId = toast.loading("Loading..!");
     try {
-      const result = await city.deleteCity(id);
+      const result = await prodBrandsApis.deleteProdBrand(id);
       debugger;
-      if (
-        result.error == false &&
-        result.data.notice == "City was successfully removed."
-      ) {
+      if (result.error === false) {
         toast.dismiss(loadingToastId);
         toast.success("Successfully deleted!");
-        getCities(1, "", 10);
+        getProdBrands(1, "", 10);
       }
       console.log(result);
     } catch (error) {
@@ -81,31 +80,37 @@ export default function City() {
     setSideMenu(active);
   }
 
-  const [cityState, setCityState] = useState({
-    isEditCity: false,
-    isAddCity: false,
-    isViewCity: false,
-    cities: null,
-    originalCities: null,
+  const [prodBrandsState, setProdBrandsState] = useState({
+    isEditProdBrand: false,
+    isAddProdBrand: false,
+    prodBrands: null,
+    originalProdBrands: null,
+    status: "active",
   });
 
   const handleSearch = (searchString) => {
     if (searchString) {
-      const filteredCities = cityState.cities.filter((item) => {
+      const filteredBrands = prodBrandsState.prodBrands.filter((item) => {
         return (
-          item.name.toLowerCase().includes(searchString.toLowerCase()) ||
+          item.title.toLowerCase().includes(searchString.toLowerCase()) ||
           (item.comments &&
-            item.comments.toLowerCase().includes(searchString.toLowerCase()))
+            item.comments.toLowerCase().includes(searchString.toLowerCase())) ||
+          (item.description &&
+            item.description
+              .toLowerCase()
+              .includes(searchString.toLowerCase())) ||
+          (item.status &&
+            item.status.toLowerCase().includes(searchString.toLowerCase()))
         );
       });
-      setCityState({
-        ...cityState,
-        cities: filteredCities,
+      setProdBrandsState({
+        ...prodBrandsState,
+        prodBrands: filteredBrands,
       });
     } else {
-      setCityState({
-        ...cityState,
-        cities: cityState.originalCities,
+      setProdBrandsState({
+        ...prodBrandsState,
+        prodBrands: prodBrandsState.originalProdBrands,
       });
     }
   };
@@ -113,29 +118,27 @@ export default function City() {
   const handleMainSearch = (event) => {
     setMainSearchString(event.target.value);
     if (event.keyCode == 13) {
-      getCities(1, event.target.value, noOfRec);
+      getProdBrands(1, event.target.value, noOfRec);
     }
     if (event.target.value == "") {
-      getCities(1, event.target.value, noOfRec);
+      getProdBrands(1, event.target.value, noOfRec);
     }
   };
 
-  console.log("cityState in index", cityState);
-  console.log("cityState in index", noOfRec);
   return (
     <>
       <>
         <Navigation onClick={() => onSideMenu} />
-        <div className="cityPage">
+        <div className="prodCategoryPage">
           <div className={`main-content d-flex flex-column`}>
-            {cityState.isViewCity ? (
-              <ViewCity cityState={cityState} setCityState={setCityState} />
-            ) : cityState.isAddCity === true ||
-              cityState.isEditCity === true ? (
-              <AddAndEditCity
-                cityState={cityState}
-                setCityState={setCityState}
-                getCities={getCities}
+            {prodBrandsState.isViewProdCategory ? (
+              <></>
+            ) : prodBrandsState.isAddProdBrand === true ||
+              prodBrandsState.isEditProdBrand === true ? (
+              <AddAndEditProdBrands
+                prodBrandsState={prodBrandsState}
+                setProdBrandsState={setProdBrandsState}
+                getProdBrands={getProdBrands}
               />
             ) : (
               <>
@@ -143,13 +146,13 @@ export default function City() {
                   type="button"
                   className="btn btn-outline-primary col-sm-2 mb-4"
                   onClick={() => {
-                    setCityState({
-                      ...cityState,
-                      isAddCity: true,
+                    setProdBrandsState({
+                      ...prodBrandsState,
+                      isAddProdBrand: true,
                     });
                   }}
                 >
-                  Add City
+                  Add Product Brand
                 </button>
                 <div className={`${isMobile ? "" : "d-flex"}`}>
                   <FormControl
@@ -161,7 +164,7 @@ export default function City() {
                   <select
                     onChange={(e) => {
                       setNoOfRec(e.target.value);
-                      getCities(1, mainSearchString, e.target.value);
+                      getProdBrands(1, mainSearchString, e.target.value);
                     }}
                     className={`${
                       isMobile ? "mt-3" : "adjustNoOfRecSelect"
@@ -201,35 +204,39 @@ export default function City() {
                       <Table className="m-0" responsive>
                         <thead>
                           <tr>
-                            <th>Name</th>
-                            <th>Comments</th>
+                            <th>Title</th>
+                            <th>Link</th>
+                            <th>Status</th>
+                            <th>Description</th>
                             <th className="text-center">Action</th>
                           </tr>
                         </thead>
 
                         <tbody>
-                          {cityState.cities &&
-                            cityState.cities.map((city, idx) => (
+                          {prodBrandsState.prodBrands &&
+                            prodBrandsState.prodBrands.map((prod, idx) => (
                               <tr key={idx}>
-                                <td>{city.name && city.name}</td>
-                                <td>{city.comments && city.comments}</td>
+                                <td>{prod.title && prod.title}</td>
+                                <td>{prod.link && prod.link}</td>
+                                <td>{prod.status && prod.status}</td>
+                                <td>{prod.description && prod.description}</td>
                                 <td className="text-center">
                                   <Icon.Edit2
                                     style={{ cursor: "pointer" }}
                                     onClick={() => {
-                                      setCityState({
-                                        ...cityState,
-                                        isEditCity: true,
-                                        name: city.name,
-                                        comments: city.comments,
-                                        cityId: city.id,
+                                      setProdBrandsState({
+                                        ...prodBrandsState,
+                                        isEditProdBrand: true,
+                                        name: prod.name,
+                                        comments: prod.comments,
+                                        prodCategoryId: prod.id,
                                       });
                                     }}
                                     className="text-success mr-2 icon wh-15 mt-minus-3"
                                   />
                                   <Link className="text-danger mr-2">
                                     <Icon.X
-                                      onClick={() => deleteCity(city.id)}
+                                      onClick={() => deleteProdBrand(prod.id)}
                                       className="icon wh-15 mt-minus-3"
                                     />
                                   </Link>
@@ -238,21 +245,27 @@ export default function City() {
                             ))}
                         </tbody>
                       </Table>
-                    </div>
-                    {cityState && cityState.pagination && (
+												</div>
+												{/* Pagination Start */}
+                    <div
+                      className={`${isMobile ? "" : "d-flex"}`}
+                      style={{ justifyContent: "space-between" }}
+												>
+													
+													{prodBrandsState && prodBrandsState.pagination && (
                       <div>
                         <span>Rows per page</span>
                         <span className="mx-4">
-                          {cityState.pagination.from}-{cityState.pagination.to}{" "}
-                          of {cityState.pagination.count}
+                          {prodBrandsState.pagination.from}-{prodBrandsState.pagination.to}{" "}
+                          of {prodBrandsState.pagination.count}
                         </span>
 
                         <button
                           className={`pagination-button ${
-                            cityState.pagination.page == 1 ? "disabled" : ""
+                            prodBrandsState.pagination.page == 1 ? "disabled" : ""
                           }`}
                           onClick={() => {
-                            getCities(1, mainSearchString, noOfRec);
+                            getProdBrands(1, mainSearchString, noOfRec);
                           }}
                           type="button"
                         >
@@ -269,11 +282,11 @@ export default function City() {
                         </button>
                         <button
                           className={`pagination-button ${
-                            cityState.pagination.page == 1 ? "disabled" : ""
+                            prodBrandsState.pagination.page == 1 ? "disabled" : ""
                           }`}
                           onClick={() => {
-                            getCities(
-                              cityState.pagination.prev,
+                            getProdBrands(
+                              prodBrandsState.pagination.prev,
                               mainSearchString,
                               noOfRec
                             );
@@ -293,16 +306,16 @@ export default function City() {
                         </button>
                         <button
                           className={`pagination-button ${
-                            cityState.pagination.page ==
-                            cityState.pagination.last
+                            prodBrandsState.pagination.page ==
+                            prodBrandsState.pagination.last
                               ? "disabled"
                               : ""
                           }`}
                           tabindex="0"
                           type="button"
                           onClick={() => {
-                            getCities(
-                              cityState.pagination.next,
+                            getProdBrands(
+                              prodBrandsState.pagination.next,
                               mainSearchString,
                               noOfRec
                             );
@@ -323,16 +336,16 @@ export default function City() {
 
                         <button
                           className={`pagination-button ${
-                            cityState.pagination.page ==
-                            cityState.pagination.last
+                            prodBrandsState.pagination.page ==
+                            prodBrandsState.pagination.last
                               ? "disabled"
                               : ""
                           }`}
                           tabindex="0"
                           type="button"
                           onClick={() => {
-                            getCities(
-                              cityState.pagination.last,
+                            getProdBrands(
+                              prodBrandsState.pagination.last,
                               mainSearchString,
                               noOfRec
                             );
@@ -351,6 +364,10 @@ export default function City() {
                         </button>
                       </div>
                     )}
+                      
+
+											{/* Pagination End */}
+                    </div>
                   </div>
                 </div>
               </>

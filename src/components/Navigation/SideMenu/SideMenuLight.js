@@ -56,8 +56,8 @@ class SideMenuLight extends React.Component {
                 </NavLink>
               </NavDropdown>
 
-
-							<NavDropdown
+              {/* productBrand */}
+              <NavDropdown
                 title={
                   <div className="dropdown-title">
                     <Icon.Settings className="icon" />
@@ -75,43 +75,57 @@ class SideMenuLight extends React.Component {
                   target="_blank"
                 >
                   <Icon.Plus className="icon" />
-                  Product Categories 
-								</NavLink>
-								<NavLink
+                  Product Categories
+                </NavLink>
+                <NavLink
+                  to="/productBrands/"
+                  className="dropdown-item"
+                  target="_blank"
+                >
+                  <Icon.Plus className="icon" />
+                  Product Brands
+                </NavLink>
+                <NavLink
                   to="/productSubCategories"
                   className="dropdown-item"
                   target="_blank"
                 >
                   <Icon.Plus className="icon" />
-                  Product Sub Categories 
-								</NavLink>
-								<NavLink
-                  to="/city"
+                  Product Sub Categories
+                </NavLink>
+
+                <NavLink
+                  to="/productCategoryHeads/"
                   className="dropdown-item"
                   target="_blank"
                 >
                   <Icon.Plus className="icon" />
-                  City 
-								</NavLink>
-								
-								<NavLink
+                  Product Categories Head
+                </NavLink>
+
+                <NavLink to="/city" className="dropdown-item" target="_blank">
+                  <Icon.Plus className="icon" />
+                  City
+                </NavLink>
+
+                <NavLink
                   to="/country"
                   className="dropdown-item"
                   target="_blank"
                 >
                   <Icon.Plus className="icon" />
-                  Country 
-								</NavLink>
-								
-                <NavLink to="/productCategoryHeads/" className="dropdown-item" target="_blank">
-                  <Icon.Plus className="icon" />
-                  Product Categories Head
+                  Country
                 </NavLink>
-        
+
+                <NavLink
+                  to="/languages/"
+                  className="dropdown-item"
+                  target="_blank"
+                >
+                  <Icon.Plus className="icon" />
+                  Languages
+                </NavLink>
               </NavDropdown>
-
-
-
             </Nav>
           </Navbar.Collapse>
         </Navbar>

@@ -12,35 +12,35 @@ import {
   Form,
   Pagination,
 } from "react-bootstrap";
-import ViewCity from "./ViewCity";
-import AddAndEditCity from "./AddAndEditCity";
-import { city } from "../../API/City/CityApis";
+import AddAndEditCity from "./AddAndEditLanguage";
 import toast from "react-hot-toast";
+import AddAndEditLanguage from "./AddAndEditLanguage";
+import { languageApis } from "../../API/LanguagesApis ";
 
-export default function City() {
+export default function Languages() {
   const [paginationNumbers, setPaginationNumbers] = useState();
   const [noOfRec, setNoOfRec] = useState(10);
   const [mainSearchString, setMainSearchString] = useState("");
   useEffect(() => {
-    getCities(1, "", 10);
+    getLanguages(1, "", 10);
   }, []);
 
-  const getCities = async (page, mainSearch, noOfRec) => {
+  const getLanguages = async (page, mainSearch, noOfRec) => {
     const loadingToastId = toast.loading("Loading..!");
 
     console.log(page);
     try {
-      const result = await city.getCities(page, mainSearch, noOfRec);
+      const result = await languageApis.getLanguages(page, mainSearch, noOfRec);
       if (result.error == false && result.data.status == "success") {
         toast.dismiss(loadingToastId);
 
-        setCityState({
-          ...cityState,
-          cities: result.data.data,
+        setLanguagesState({
+          ...languagesState,
+          languages: result.data.data,
           pagination: result.data.pagination,
-          originalCities: result.data.data,
-          isAddCity: false,
-          isEditCity: false,
+          originalLanguages: result.data.data,
+          isAddLanguage: false,
+          isEditLanguage: false,
         });
         var temp = [];
         for (var i = 1; i <= result.data.pagination.pages; i++) {
@@ -57,18 +57,17 @@ export default function City() {
     }
   };
 
-  const deleteCity = async (id) => {
+  const deleteLanguage = async (id) => {
     const loadingToastId = toast.loading("Loading..!");
     try {
-      const result = await city.deleteCity(id);
+      const result = await languageApis.deleteLanguage(id);
       debugger;
       if (
-        result.error == false &&
-        result.data.notice == "City was successfully removed."
+        result.error === false 
       ) {
         toast.dismiss(loadingToastId);
         toast.success("Successfully deleted!");
-        getCities(1, "", 10);
+        getLanguages(1, "", 10);
       }
       console.log(result);
     } catch (error) {
@@ -81,31 +80,33 @@ export default function City() {
     setSideMenu(active);
   }
 
-  const [cityState, setCityState] = useState({
-    isEditCity: false,
-    isAddCity: false,
-    isViewCity: false,
-    cities: null,
-    originalCities: null,
+  const [languagesState, setLanguagesState] = useState({
+    isEditLanguage: false,
+    isAddLanguage: false,
+    languages: null,
+    originalLanguages: null,
+    status: 'active',
   });
 
   const handleSearch = (searchString) => {
     if (searchString) {
-      const filteredCities = cityState.cities.filter((item) => {
+      const filteredLanguages = languagesState.languages.filter((item) => {
         return (
           item.name.toLowerCase().includes(searchString.toLowerCase()) ||
           (item.comments &&
-            item.comments.toLowerCase().includes(searchString.toLowerCase()))
+            item.comments.toLowerCase().includes(searchString.toLowerCase()))||
+						(item.description &&
+							item.description.toLowerCase().includes(searchString.toLowerCase()))
         );
       });
-      setCityState({
-        ...cityState,
-        cities: filteredCities,
+      setLanguagesState({
+        ...languagesState,
+        languages: filteredLanguages,
       });
     } else {
-      setCityState({
-        ...cityState,
-        cities: cityState.originalCities,
+      setLanguagesState({
+        ...languagesState,
+        languages: languagesState.originalLanguages,
       });
     }
   };
@@ -113,29 +114,29 @@ export default function City() {
   const handleMainSearch = (event) => {
     setMainSearchString(event.target.value);
     if (event.keyCode == 13) {
-      getCities(1, event.target.value, noOfRec);
+      getLanguages(1, event.target.value, noOfRec);
     }
     if (event.target.value == "") {
-      getCities(1, event.target.value, noOfRec);
+      getLanguages(1, event.target.value, noOfRec);
     }
   };
 
-  console.log("cityState in index", cityState);
-  console.log("cityState in index", noOfRec);
+  console.log("languagesState in index", languagesState);
+  console.log("languagesState in index", noOfRec);
   return (
     <>
       <>
         <Navigation onClick={() => onSideMenu} />
         <div className="cityPage">
           <div className={`main-content d-flex flex-column`}>
-            {cityState.isViewCity ? (
-              <ViewCity cityState={cityState} setCityState={setCityState} />
-            ) : cityState.isAddCity === true ||
-              cityState.isEditCity === true ? (
-              <AddAndEditCity
-                cityState={cityState}
-                setCityState={setCityState}
-                getCities={getCities}
+            {languagesState.isViewCity ? (
+								<></>
+						): languagesState.isAddLanguage === true ||
+              languagesState.isEditLanguage === true ? (
+              <AddAndEditLanguage
+                languagesState={languagesState}
+                setLanguagesState={setLanguagesState}
+                getLanguages={getLanguages}
               />
             ) : (
               <>
@@ -143,13 +144,13 @@ export default function City() {
                   type="button"
                   className="btn btn-outline-primary col-sm-2 mb-4"
                   onClick={() => {
-                    setCityState({
-                      ...cityState,
-                      isAddCity: true,
+                    setLanguagesState({
+                      ...languagesState,
+                      isAddLanguage: true,
                     });
                   }}
                 >
-                  Add City
+                  Add Language
                 </button>
                 <div className={`${isMobile ? "" : "d-flex"}`}>
                   <FormControl
@@ -161,7 +162,7 @@ export default function City() {
                   <select
                     onChange={(e) => {
                       setNoOfRec(e.target.value);
-                      getCities(1, mainSearchString, e.target.value);
+                      getLanguages(1, mainSearchString, e.target.value);
                     }}
                     className={`${
                       isMobile ? "mt-3" : "adjustNoOfRecSelect"
@@ -202,34 +203,37 @@ export default function City() {
                         <thead>
                           <tr>
                             <th>Name</th>
-                            <th>Comments</th>
+                            <th>Status</th>
+                            <th>Description</th>
                             <th className="text-center">Action</th>
                           </tr>
                         </thead>
 
                         <tbody>
-                          {cityState.cities &&
-                            cityState.cities.map((city, idx) => (
+                          {languagesState.languages &&
+                            languagesState.languages.map((language, idx) => (
                               <tr key={idx}>
-                                <td>{city.name && city.name}</td>
-                                <td>{city.comments && city.comments}</td>
+                                <td>{language.name && language.name}</td>
+                                <td>{language.status && language.status}</td>
+                                <td>{language.description && language.description}</td>
                                 <td className="text-center">
                                   <Icon.Edit2
                                     style={{ cursor: "pointer" }}
                                     onClick={() => {
-                                      setCityState({
-                                        ...cityState,
-                                        isEditCity: true,
-                                        name: city.name,
-                                        comments: city.comments,
-                                        cityId: city.id,
+                                      setLanguagesState({
+                                        ...languagesState,
+                                        isEditLanguage: true,
+                                        name: language.name,
+                                        status: language.status,
+                                        description: language.description,
+                                        languageId: language.id,
                                       });
                                     }}
                                     className="text-success mr-2 icon wh-15 mt-minus-3"
                                   />
                                   <Link className="text-danger mr-2">
                                     <Icon.X
-                                      onClick={() => deleteCity(city.id)}
+                                      onClick={() => deleteLanguage(language.id)}
                                       className="icon wh-15 mt-minus-3"
                                     />
                                   </Link>
@@ -239,20 +243,20 @@ export default function City() {
                         </tbody>
                       </Table>
                     </div>
-                    {cityState && cityState.pagination && (
+                    {languagesState && languagesState.pagination && (
                       <div>
                         <span>Rows per page</span>
                         <span className="mx-4">
-                          {cityState.pagination.from}-{cityState.pagination.to}{" "}
-                          of {cityState.pagination.count}
+                          {languagesState.pagination.from}-{languagesState.pagination.to}{" "}
+                          of {languagesState.pagination.count}
                         </span>
 
                         <button
                           className={`pagination-button ${
-                            cityState.pagination.page == 1 ? "disabled" : ""
+                            languagesState.pagination.page == 1 ? "disabled" : ""
                           }`}
                           onClick={() => {
-                            getCities(1, mainSearchString, noOfRec);
+                            getLanguages(1, mainSearchString, noOfRec);
                           }}
                           type="button"
                         >
@@ -269,11 +273,11 @@ export default function City() {
                         </button>
                         <button
                           className={`pagination-button ${
-                            cityState.pagination.page == 1 ? "disabled" : ""
+                            languagesState.pagination.page == 1 ? "disabled" : ""
                           }`}
                           onClick={() => {
-                            getCities(
-                              cityState.pagination.prev,
+                            getLanguages(
+                              languagesState.pagination.prev,
                               mainSearchString,
                               noOfRec
                             );
@@ -293,16 +297,16 @@ export default function City() {
                         </button>
                         <button
                           className={`pagination-button ${
-                            cityState.pagination.page ==
-                            cityState.pagination.last
+                            languagesState.pagination.page ==
+                            languagesState.pagination.last
                               ? "disabled"
                               : ""
                           }`}
                           tabindex="0"
                           type="button"
                           onClick={() => {
-                            getCities(
-                              cityState.pagination.next,
+                            getLanguages(
+                              languagesState.pagination.next,
                               mainSearchString,
                               noOfRec
                             );
@@ -323,16 +327,16 @@ export default function City() {
 
                         <button
                           className={`pagination-button ${
-                            cityState.pagination.page ==
-                            cityState.pagination.last
+                            languagesState.pagination.page ==
+                            languagesState.pagination.last
                               ? "disabled"
                               : ""
                           }`}
                           tabindex="0"
                           type="button"
                           onClick={() => {
-                            getCities(
-                              cityState.pagination.last,
+                            getLanguages(
+                              languagesState.pagination.last,
                               mainSearchString,
                               noOfRec
                             );
