@@ -17,7 +17,9 @@ const SideMenue = () => {
 
   const handleGetAllCategories = async () => {
     const result = await PRODUCT_CATEGORY.getAllProductCategories();
+    debugger
     setProductCategories(result.data && result.data.data);
+    console.log('asdasd',result.data  &&result.data.data)
   };
   return (
     <Nav defaultActiveKey="/" className="flex-column categoryNavbar">
@@ -39,14 +41,9 @@ const SideMenue = () => {
                   />
                 </span>
                 <DropDown
+                productHead={item.product_category_heads}
                   title={item.title}
-                  usedCars={item.title === "Tractors"}
-                  newCars={item.title === "Farming Equipments"}
-                  autoStore={item.title === "Accessories and Parts"}
-                  fertilizerAndSeeds={item.title === "Fertilizers and Seeds"}
-                  plantAndHortiCulture={
-                    item.title === "Plants and Horticulture"
-                  }
+                 
                   dropDownIcon={true}
                 />
               </Nav.Link>

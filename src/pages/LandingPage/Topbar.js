@@ -17,9 +17,9 @@ const Topbar = () => {
         <DropDown title="New Tractors" newCars={true} />
         <DropDown title="Auto Stores" autoStore={true} />
         <div className="dropdown-button p-2">New Farming Equipment</div>
-        <div className="dropdown-button p-2">Accessories and Parts</div>
-        <div className="dropdown-button p-2">Fertilizers and seeds</div>
-        <div className="dropdown-button p-2">Plants and Horticulture</div>
+        <div className="dropdown-button p-2">Accessories & Parts</div>
+        <div className="dropdown-button p-2">Fertilizers & seeds</div>
+        <div className="dropdown-button p-2">Plants & Horticulture</div>
 
         <Nav className="ml-auto right-nav">
           <ul className="navbar-nav mr-auto">

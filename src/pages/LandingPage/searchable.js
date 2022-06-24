@@ -47,34 +47,34 @@ const searchAble = () => {
     { label: "3 lac", value: "3 lac" }
   ]);
 
-  useEffect(() => {
-    handleGetAllCity();
-    if (minPrice) {
-      let temp = maxPriceOptions.filter(function(x) {
-        return parseInt(x.label) > parseInt(minPrice);
-      });
-      setMaxPriceOptions(temp);
-    }
-  }, [minPrice]);
-  useEffect(() => {
-    if (maxPrice) {
-      let temp = minPriceOptions.filter(function(x) {
-        return parseInt(x.label) < parseInt(maxPrice);
-      });
-      setMinPriceOptions(temp);
-    }
-  }, [maxPrice]);
+  // useEffect(() => {
+  //   handleGetAllCity();
+  //   if (minPrice) {
+  //     let temp = maxPriceOptions.filter(function(x) {
+  //       return parseInt(x.label) > parseInt(minPrice);
+  //     });
+  //     setMaxPriceOptions(temp);
+  //   }
+  // }, [minPrice]);
+  // useEffect(() => {
+  //   if (maxPrice) {
+  //     let temp = minPriceOptions.filter(function(x) {
+  //       return parseInt(x.label) < parseInt(maxPrice);
+  //     });
+  //     setMinPriceOptions(temp);
+  //   }
+  // }, [maxPrice]);
 
-  const handleGetAllCity = async () => {
-    const result = await city.getAllCities();
-    const tempArray = [];
-    result &&
-      result.data &&
-      result.data.data.map((item) =>
-        tempArray.push({ label: item.name, value: item.name })
-      );
-    setCities(tempArray);
-  };
+  // const handleGetAllCity = async () => {
+  //   const result = await city.getAllCities();
+  //   const tempArray = [];
+  //   result &&
+  //     result.data &&
+  //     result.data.data.map((item) =>
+  //       tempArray.push({ label: item.name, value: item.name })
+  //     );
+  //   setCities(tempArray);
+  // };
 
   return (
     <>
