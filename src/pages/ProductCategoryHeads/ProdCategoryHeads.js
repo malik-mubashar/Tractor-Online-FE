@@ -212,7 +212,7 @@ export default function ProdCategoryHeads() {
                             prodCategoryHeadsState.prodCategoryHeads.map(
                               (prod, idx) => (
                                 <tr key={idx}>
-                                  <td>{prod.title && prod.title}</td>
+                                  <td>{prod.name && prod.name}</td>
                                   <td>{prod.link && prod.link}</td>
                                   <td>{prod.status && prod.status}</td>
                                   <td>{prod.description && prod.description}</td>
@@ -245,102 +245,120 @@ export default function ProdCategoryHeads() {
                         </tbody>
                       </Table>
                     </div>
-                    <div
-                      className={`${isMobile ? "" : "d-flex"}`}
-                      style={{ justifyContent: "space-between" }}
-                    >
-                      {prodCategoryHeadsState.pagination && (
-                        <>
-                          <Pagination>
-                            <Pagination.First
-                              disabled={
-                                prodCategoryHeadsState.pagination.page == 1
-                                  ? true
-                                  : false
-                              }
-                              onClick={() => {
-                                getProdCategoryHeads(1, mainSearchString, noOfRec);
-                              }}
-                            />
-                            <Pagination.Prev
-                              disabled={
-                                prodCategoryHeadsState.pagination.page == 1
-                                  ? true
-                                  : false
-                              }
-                              onClick={() => {
-                                getProdCategoryHeads(
-                                  prodCategoryHeadsState.pagination.prev,
-                                  mainSearchString,
-                                  noOfRec
-                                );
-                              }}
-                            />
-                            {paginationNumbers &&
-                              paginationNumbers.map((item) => {
-                                return (
-                                  <Pagination.Item
-                                    disabled={
-                                      prodCategoryHeadsState.pagination.page ==
-                                      item
-                                        ? true
-                                        : false
-                                    }
-                                    key={item}
-                                    onClick={() => {
-                                      getProdCategoryHeads(
-                                        item,
-                                        mainSearchString,
-                                        noOfRec
-                                      );
-                                    }}
-                                    className="paginationButton"
-                                  >
-                                    {item}
-                                  </Pagination.Item>
-                                );
-                              })}
-
-                            <Pagination.Next
-                              disabled={
-                                prodCategoryHeadsState.pagination.page ==
-                                prodCategoryHeadsState.pagination.last
-                                  ? true
-                                  : false
-                              }
-                              onClick={() => {
-                                getProdCategoryHeads(
-                                  prodCategoryHeadsState.pagination.next,
-                                  mainSearchString,
-                                  noOfRec
-                                );
-                              }}
-                            />
-                            <Pagination.Last
-                              onClick={() => {
-                                getProdCategoryHeads(
-                                  prodCategoryHeadsState.pagination.last,
-                                  mainSearchString,
-                                  noOfRec
-                                );
-                              }}
-                              disabled={
-                                prodCategoryHeadsState.pagination.page ==
-                                prodCategoryHeadsState.pagination.last
-                                  ? true
-                                  : false
-                              }
-                            />
-                          </Pagination>
-
-                          <div style={{ marginTop: "25px" }}>
-                            displaying {prodCategoryHeadsState.pagination.from} to{" "}
-                            {prodCategoryHeadsState.pagination.to} of total{" "}
-                            {prodCategoryHeadsState.pagination.count}
-                          </div>
-                        </>
-                      )}
-                    </div>
+												{
+													prodCategoryHeadsState && prodCategoryHeadsState.pagination && (
+														<div>
+															<span>Rows per page</span>
+															<span className="mx-4">
+																{prodCategoryHeadsState.pagination.from}-{prodCategoryHeadsState.pagination.to}{" "}
+																of {prodCategoryHeadsState.pagination.count}
+															</span>
+			
+															<button
+																className={`pagination-button ${
+																	prodCategoryHeadsState.pagination.page == 1 ? "disabled" : ""
+																}`}
+																onClick={() => {
+																	getProdCategoryHeads(1, mainSearchString, noOfRec);
+																}}
+																type="button"
+															>
+																<span class="MuiIconButton-label">
+																	<svg
+																		class="MuiSvgIcon-root"
+																		focusable="false"
+																		viewBox="0 0 24 24"
+																		aria-hidden="true"
+																	>
+																		<path d="M18.41 16.59L13.82 12l4.59-4.59L17 6l-6 6 6 6zM6 6h2v12H6z"></path>
+																	</svg>
+																</span>
+															</button>
+															<button
+																className={`pagination-button ${
+																	prodCategoryHeadsState.pagination.page == 1 ? "disabled" : ""
+																}`}
+																onClick={() => {
+																	getProdCategoryHeads(
+																		prodCategoryHeadsState.pagination.prev,
+																		mainSearchString,
+																		noOfRec
+																	);
+																}}
+																type="button"
+															>
+																<span class="MuiIconButton-label">
+																	<svg
+																		class="MuiSvgIcon-root"
+																		focusable="false"
+																		viewBox="0 0 24 24"
+																		aria-hidden="true"
+																	>
+																		<path d="M15.41 16.59L10.83 12l4.58-4.59L14 6l-6 6 6 6 1.41-1.41z"></path>
+																	</svg>
+																</span>
+															</button>
+															<button
+																className={`pagination-button ${
+																	prodCategoryHeadsState.pagination.page ==
+																	prodCategoryHeadsState.pagination.last
+																		? "disabled"
+																		: ""
+																}`}
+																tabindex="0"
+																type="button"
+																onClick={() => {
+																	getProdCategoryHeads(
+																		prodCategoryHeadsState.pagination.next,
+																		mainSearchString,
+																		noOfRec
+																	);
+																}}
+															>
+																<span class="MuiIconButton-label">
+																	<svg
+																		class="MuiSvgIcon-root"
+																		focusable="false"
+																		viewBox="0 0 24 24"
+																		aria-hidden="true"
+																	>
+																		<path d="M8.59 16.59L13.17 12 8.59 7.41 10 6l6 6-6 6-1.41-1.41z"></path>
+																	</svg>
+																</span>
+																<span class="MuiTouchRipple-root"></span>
+															</button>
+			
+															<button
+																className={`pagination-button ${
+																	prodCategoryHeadsState.pagination.page ==
+																	prodCategoryHeadsState.pagination.last
+																		? "disabled"
+																		: ""
+																}`}
+																tabindex="0"
+																type="button"
+																onClick={() => {
+																	getProdCategoryHeads(
+																		prodCategoryHeadsState.pagination.last,
+																		mainSearchString,
+																		noOfRec
+																	);
+																}}
+															>
+																<span class="MuiIconButton-label">
+																	<svg
+																		class="MuiSvgIcon-root"
+																		focusable="false"
+																		viewBox="0 0 24 24"
+																		aria-hidden="true"
+																	>
+																		<path d="M5.59 7.41L10.18 12l-4.59 4.59L7 18l6-6-6-6zM16 6h2v12h-2z"></path>
+																	</svg>
+																</span>
+															</button>
+														</div>
+													)
+										}
                   </div>
                 </div>
               </>

@@ -45,7 +45,8 @@ const Login = () => {
         console.error(result.data.errors.full_messages);
         alert("Error user not create");
       }
-    } catch (error) {
+		} catch (error) {
+			alert('error')
       console.error(error);
     }
   };

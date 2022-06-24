@@ -68,7 +68,15 @@ class SideMenuLight extends React.Component {
                   </div>
                 }
                 id="basic-nav-dropdown"
-              >
+							>
+								<NavLink
+                  to="/products/"
+                  className="dropdown-item"
+                  target="_blank"
+                >
+                  <Icon.Plus className="icon" />
+                  Products
+                </NavLink>
                 <NavLink
                   to="/productCategories/"
                   className="dropdown-item"
@@ -106,6 +114,11 @@ class SideMenuLight extends React.Component {
                 <NavLink to="/city" className="dropdown-item" target="_blank">
                   <Icon.Plus className="icon" />
                   City
+                </NavLink>
+
+								<NavLink to="/roles" className="dropdown-item" target="_blank">
+                  <Icon.Plus className="icon" />
+                  Roles
                 </NavLink>
 
                 <NavLink

@@ -31,6 +31,8 @@ import ProdSubCategories from "../pages/ProductSubCategories /ProdSubCategories"
 import ProdCategoryHeads from "../pages/ProductCategoryHeads/ProdCategoryHeads";
 import ProdBrands from "../pages/ProductBrands/ProdBrands";
 import Languages from "../pages/Languages/Languages";
+import Products from "../pages/Products/Products";
+import Roles from "../pages/Roles/Roles";
 
 
 const AppRouter = () => {
@@ -73,6 +75,14 @@ const AppRouter = () => {
 
 					<ProtectedRoute exact path="/productSubCategories">
             <ProdSubCategories />
+					</ProtectedRoute>
+
+					<ProtectedRoute exact path="/products">
+            <Products />
+					</ProtectedRoute>
+
+					<ProtectedRoute exact path="/roles">
+            <Roles />
 					</ProtectedRoute>
 			
           <UnProtectedRoute exact path="/usedtractor">
