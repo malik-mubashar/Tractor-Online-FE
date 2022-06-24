@@ -3,11 +3,11 @@ import axios from "axios";
 //no_of_record=5&page=2
 var user = JSON.parse(window.localStorage.getItem("currentUser")) || null;
 
-class ProdSubCategories {
-  deleteProdSubCategory = async (id) => {
+class Products {
+  deleteProduct = async (id) => {
     return axios({
       method: "delete",
-      url: `${process.env.REACT_APP_API_LOCAL_PATH}product_sub_categories/${id}`,
+      url: `${process.env.REACT_APP_API_LOCAL_PATH}products/${id}`,
       headers: {
         "Content-Type": "application/json; charset=utf-8",
         "Access-Control-Allow-Origin": "*",
@@ -31,10 +31,10 @@ class ProdSubCategories {
         };
       });
   };
-  updateProdSubCategory = async (prodSubCategoriesState) => {
+  updateProduct = async (productsState) => {
     return axios({
       method: "put",
-      url: `${process.env.REACT_APP_API_LOCAL_PATH}product_sub_categories/${prodSubCategoriesState.prodCategoryId}`,
+      url: `${process.env.REACT_APP_API_LOCAL_PATH}products/${productsState.productId}`,
       headers: {
         "Content-Type": "application/json; charset=utf-8",
         "Access-Control-Allow-Origin": "*",
@@ -45,11 +45,13 @@ class ProdSubCategories {
         mode: "no-cors",
       },
 			data: {
-        title: prodSubCategoriesState.title,
-        status: prodSubCategoriesState.status,
-        link: prodSubCategoriesState.link,
-				description: prodSubCategoriesState.description,
-				product_category_head_id:prodSubCategoriesState.product_category_head_id
+        title: productsState.title,
+        status: productsState.status,
+        description: productsState.description,
+        price: productsState.price,
+        location: productsState.location,
+        link: productsState.link,
+        extra_fields: productsState.extra_fields,
       },
     })
       .then((result) => {
@@ -65,11 +67,11 @@ class ProdSubCategories {
         };
       });
   };
-	addProdSubCategory = async (prodSubCategoriesState) => {
+	addProduct = async (productsState) => {
 		debugger;
     return axios({
       method: "post",
-      url: `${process.env.REACT_APP_API_LOCAL_PATH}product_sub_categories`,
+      url: `${process.env.REACT_APP_API_LOCAL_PATH}products`,
       headers: {
         "Content-Type": "application/json; charset=utf-8",
         "Access-Control-Allow-Origin": "*",
@@ -79,12 +81,14 @@ class ProdSubCategories {
         uid: `${user.uid}`,
         mode: "no-cors",
       },
-      data: {
-        title: prodSubCategoriesState.title,
-        status: prodSubCategoriesState.status,
-        link: prodSubCategoriesState.link,
-        description: prodSubCategoriesState.description,
-        product_category_head_id: prodSubCategoriesState.product_category_head_id,
+			data: {
+        title: productsState.title,
+        status: productsState.status,
+        description: productsState.description,
+        price: productsState.price,
+        location: productsState.location,
+        link: productsState.link,
+        extra_fields: productsState.extra_fields,
       },
     })
       .then((result) => {
@@ -101,11 +105,11 @@ class ProdSubCategories {
       });
   };
 
-	getProdSubCategories = async (page, searchString, noOfRec) => {
+	getProducts = async (page, searchString, noOfRec) => {
 		debugger;
     return axios({
       method: "get",
-      url: `${process.env.REACT_APP_API_LOCAL_PATH}product_sub_categories?page=${page}&q%5Btitle_or_description_or_status_or_link_cont%5D=${searchString}&no_of_record=${noOfRec}`,
+      url: `${process.env.REACT_APP_API_LOCAL_PATH}products?page=${page}&q%5Btitle_or_status_or_description_or_location_cont%5D=${searchString}&no_of_record=${noOfRec}`,
       headers: {
         "Content-Type": "application/json;",
         "access-token": `${user.accessToken}`,
@@ -129,4 +133,4 @@ class ProdSubCategories {
   };
 }
 
-export let prodSubApi = new ProdSubCategories();
+export let productApis = new Products();

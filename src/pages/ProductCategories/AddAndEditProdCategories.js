@@ -78,7 +78,7 @@ export default function AddAndEditProdCategories({
                     defaultValue={prodCategoriesState.title}
                     name="title"
                     type="text"
-                    placeholder="Enter Country Name"
+                    placeholder="Enter Product Category Name"
                     onChange={(e) => handleChange(e)}
                   />
                 </Form.Group>

@@ -1,13 +1,13 @@
-import axios from "axios";
+ import axios from "axios";
 
 //no_of_record=5&page=2
 var user = JSON.parse(window.localStorage.getItem("currentUser")) || null;
 
-class ProdSubCategories {
-  deleteProdSubCategory = async (id) => {
+class Roles {
+  deleteRole = async (id) => {
     return axios({
       method: "delete",
-      url: `${process.env.REACT_APP_API_LOCAL_PATH}product_sub_categories/${id}`,
+      url: `${process.env.REACT_APP_API_LOCAL_PATH}roles/${id}`,
       headers: {
         "Content-Type": "application/json; charset=utf-8",
         "Access-Control-Allow-Origin": "*",
@@ -31,10 +31,10 @@ class ProdSubCategories {
         };
       });
   };
-  updateProdSubCategory = async (prodSubCategoriesState) => {
+  updateRole = async (rolesState) => {
     return axios({
       method: "put",
-      url: `${process.env.REACT_APP_API_LOCAL_PATH}product_sub_categories/${prodSubCategoriesState.prodCategoryId}`,
+      url: `${process.env.REACT_APP_API_LOCAL_PATH}roles/${rolesState.roleId}`,
       headers: {
         "Content-Type": "application/json; charset=utf-8",
         "Access-Control-Allow-Origin": "*",
@@ -45,11 +45,8 @@ class ProdSubCategories {
         mode: "no-cors",
       },
 			data: {
-        title: prodSubCategoriesState.title,
-        status: prodSubCategoriesState.status,
-        link: prodSubCategoriesState.link,
-				description: prodSubCategoriesState.description,
-				product_category_head_id:prodSubCategoriesState.product_category_head_id
+        name: rolesState.name,
+        status: rolesState.status,
       },
     })
       .then((result) => {
@@ -65,11 +62,11 @@ class ProdSubCategories {
         };
       });
   };
-	addProdSubCategory = async (prodSubCategoriesState) => {
+	addRole = async (rolesState) => {
 		debugger;
     return axios({
       method: "post",
-      url: `${process.env.REACT_APP_API_LOCAL_PATH}product_sub_categories`,
+      url: `${process.env.REACT_APP_API_LOCAL_PATH}roles`,
       headers: {
         "Content-Type": "application/json; charset=utf-8",
         "Access-Control-Allow-Origin": "*",
@@ -79,12 +76,9 @@ class ProdSubCategories {
         uid: `${user.uid}`,
         mode: "no-cors",
       },
-      data: {
-        title: prodSubCategoriesState.title,
-        status: prodSubCategoriesState.status,
-        link: prodSubCategoriesState.link,
-        description: prodSubCategoriesState.description,
-        product_category_head_id: prodSubCategoriesState.product_category_head_id,
+			data: {
+        name: rolesState.name,
+        status: rolesState.status,
       },
     })
       .then((result) => {
@@ -101,11 +95,11 @@ class ProdSubCategories {
       });
   };
 
-	getProdSubCategories = async (page, searchString, noOfRec) => {
+	getRoles = async (page, searchString, noOfRec) => {
 		debugger;
     return axios({
       method: "get",
-      url: `${process.env.REACT_APP_API_LOCAL_PATH}product_sub_categories?page=${page}&q%5Btitle_or_description_or_status_or_link_cont%5D=${searchString}&no_of_record=${noOfRec}`,
+      url: `${process.env.REACT_APP_API_LOCAL_PATH}roles?page=${page}&q%5Bname_or_comments_cont%5D=${searchString}&no_of_record=${noOfRec}`,
       headers: {
         "Content-Type": "application/json;",
         "access-token": `${user.accessToken}`,
@@ -129,4 +123,4 @@ class ProdSubCategories {
   };
 }
 
-export let prodSubApi = new ProdSubCategories();
+export let roleApis = new Roles();
