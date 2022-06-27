@@ -7,10 +7,8 @@ import { user } from "../API/User/index";
 import user1 from "../assets/img/user/big/1.png";
 import { RootContext } from "../context/RootContext";
 import { useHistory } from "react-router-dom";
-import { city } from "../API/Country/City";
-import { language } from "../API/Country/Language";
 import PasswordResetModal from "./Modals/PasswordReset";
-
+import { city } from "../API/City/CityApis";
 const ProfileSettings = () => {
   const { currentUser } = useContext(RootContext);
   const [userPersonalDetail, setUserPersonalDetail] = useState(
@@ -64,20 +62,22 @@ const ProfileSettings = () => {
     };
   }, [editProfile.image]);
 
-  useEffect(() => {
+  useEffect(() => { 
     handlePersonalDetail();
     handleDropDownOptions();
   }, []);
 
   const handleDropDownOptions = async () => {
-    const result = await city.getAllCities();
-    setCities(result.data && result.data.data);
+     const result = await city.getAllCities();
+     setCities(result.data && result.data.data);
+    //setCities([]);
+    // const response = await language.getAllLanguages();
+    // setLanguageList(response.data && response.data.data);
+    setLanguageList([]);
 
-    const response = await language.getAllLanguages();
-    setLanguageList(response.data && response.data.data);
-
-    const countryArray = await city.getAllCountry();
-    setCountryList(countryArray.data && countryArray.data.data);
+    // const countryArray = await city.getAllCountry();
+    // setCountryList(countryArray.data && countryArray.data.data);
+    setCountryList([]);
   };
 
   const handlePersonalDetail = async () => {

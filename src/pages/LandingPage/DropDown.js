@@ -1,7 +1,9 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import * as Icon from "react-feather";
 import Icofont from "react-icofont";
 import { Link } from "react-router-dom";
+import { useHistory } from "react-router-dom";
+
 
 export default function DropDown({
   title,
@@ -12,7 +14,11 @@ export default function DropDown({
   fertilizerAndSeeds,
   plantAndHortiCulture,
   productHead,
+  cities,
 }) {
+  const history = useHistory();
+
+  const icons = ["light-bulb", "layers", "grocery", "star"];
   const usedTractors = [
     {
       heading: "Search for a Used Tractor for Sale.",
@@ -92,16 +98,16 @@ export default function DropDown({
     },
   ];
 
-  const cities = [
-    "Karachi",
-    "Lahore",
-    "Islamabad",
-    "Rawalpindi",
-    "Peshawar",
-    "Faisalabad",
-    "Multan",
-    "Gujranwala",
-  ];
+  // const cities = [
+  //   "Karachi",
+  //   "Lahore",
+  //   "Islamabad",
+  //   "Rawalpindi",
+  //   "Peshawar",
+  //   "Faisalabad",
+  //   "Multan",
+  //   "Gujranwala",
+  // ];
 
   const model = [
     "Toyota Corolla",
@@ -142,6 +148,8 @@ export default function DropDown({
       icon: "recycle",
     },
   ];
+  debugger
+console.log(cities)
 
   return (
     <div>
@@ -166,7 +174,7 @@ export default function DropDown({
                   <li className="dropdown-list" key={i}>
                     <Link to="/" className="d-flex pl-1 dropdown-link">
                       <Icofont
-                        icon={item.icon}
+                        icon={icons[i]}
                         height="10px"
                         width="10px"
                         className="icofont-2x ml-2 col-2 p-0"
@@ -201,6 +209,7 @@ export default function DropDown({
                   </li>
                 ))}
               </ul>
+              
               <ul className="list-unstyled col-2 border-right text-center">
                 <li className="mb-3">
                   <Link to="/">
@@ -208,17 +217,18 @@ export default function DropDown({
                     <strong>Popular Cities</strong>
                   </Link>
                 </li>
-                {cities.map((item, i) => (
-                  <li key={i}>
-                    <Link
-                      to="/"
-                      className="dropdown-link"
-                      title="Used Cars for sale in Karachi"
-                    >
-                      <p className="city-name">{item}</p>
-                    </Link>
-                  </li>
-                ))}
+                {cities &&
+                  cities.map((item, i) => (
+                    <li key={i}>
+                      <Link
+                        to="/"
+                        className="dropdown-link"
+                        
+                      >
+                        <p className="city-name">{item.name}</p>
+                      </Link>
+                    </li>
+                  ))}
               </ul>
               <ul className="list-unstyled col-2  text-center">
                 <li className="mb-3">

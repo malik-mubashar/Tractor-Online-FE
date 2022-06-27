@@ -4,6 +4,26 @@ import axios from "axios";
 var user = JSON.parse(window.localStorage.getItem("currentUser")) || null;
 
 class Languages {
+  getAllLanguages = async () => {
+    return axios({
+      method: "get",
+      url: `${process.env.REACT_APP_API_LOCAL_PATH}languages`,
+      headers: Headers,
+    })
+      .then((result) => {
+        return {
+          error: false,
+          data: result.data,
+        };
+      })
+      .catch((error) => {
+        return {
+          error: true,
+          data: error.response.data,
+        };
+      });
+  };
+
   deleteLanguage = async (id) => {
     return axios({
       method: "delete",
@@ -63,8 +83,8 @@ class Languages {
         };
       });
   };
-	addLanguage = async (languagesState) => {
-		debugger;
+  addLanguage = async (languagesState) => {
+    debugger;
     return axios({
       method: "post",
       url: `${process.env.REACT_APP_API_LOCAL_PATH}languages`,
@@ -97,8 +117,8 @@ class Languages {
       });
   };
 
-	getLanguages = async (page, searchString, noOfRec) => {
-		debugger;
+  getLanguages = async (page, searchString, noOfRec) => {
+    debugger;
     return axios({
       method: "get",
       url: `${process.env.REACT_APP_API_LOCAL_PATH}languages?page=${page}&q%5Btitle_or_comments_cont%5D=${searchString}&no_of_record=${noOfRec}`,

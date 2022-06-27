@@ -18,7 +18,7 @@ const CategoriesNavBar = () => {
       <div className=" row category">
         <div className=" relative bg-white category-section border-radius p-0 ">
           <h3 className="category-title border-bottom p-2 m-1 ">
-            <Icon.List className="icon" /> Categories
+            <Icon.List className="icon" /> Categories1
           </h3>
 
           <SideMenue />
@@ -26,9 +26,9 @@ const CategoriesNavBar = () => {
         <div className="col-lg-9 col-12 p-4 mt-4">
           <div className="category-menu">
             <div className="category-title  p-2">
-              <Icon.List className="icon" /> Categories
+              <Icon.List className="icon" /> Categories2
               <div className="category-drop-down">
-                <SideMenue />
+                {/* <SideMenue /> */}
               </div>
             </div>
           </div>

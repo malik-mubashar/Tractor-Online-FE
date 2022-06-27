@@ -2,8 +2,50 @@ import axios from "axios";
 
 //no_of_record=5&page=2
 var user= JSON.parse(window.localStorage.getItem("currentUser")) || null;
- 
+Headers = {
+  ...Headers,
+  "Access-Control-Allow-Origin": "*",
+  mode: "no-cors"
+};
 class City {
+  getAllCities = async () => {
+    return axios({
+      method: "get",
+      url: `${process.env.REACT_APP_API_LOCAL_PATH}cities?no_of_record=10000000&page=1`,
+      headers: Headers
+    })
+      .then((result) => {
+        return {
+          error: false,
+          data: result.data
+        };
+      })
+      .catch((error) => {
+        return {
+          error: true,
+          data: error.response.data
+        };
+      });
+  };
+  getAllCity = async () => {
+    return axios({
+      method: "get",
+      url: `${process.env.REACT_APP_API_LOCAL_PATH}all_cities?no_of_record=10000000&page=1`,
+      headers: Headers
+    })
+      .then((result) => {
+        return {
+          error: false,
+          data: result.data
+        };
+      })
+      .catch((error) => {
+        return {
+          error: true,
+          data: error.response.data
+        };
+      });
+  };
 	deleteCity = async (id) => {
 		 
     return axios({

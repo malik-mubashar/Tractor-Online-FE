@@ -4,6 +4,26 @@ import axios from "axios";
 var user= JSON.parse(window.localStorage.getItem("currentUser")) || null;
  
 class Country {
+
+  getAllCountry = async () => {
+    return axios({
+      method: "get",
+      url: `${process.env.REACT_APP_API_LOCAL_PATH}countries?no_of_record=1000`,
+      headers: Headers
+    })
+      .then((result) => {
+        return {
+          error: false,
+          data: result.data
+        };
+      })
+      .catch((error) => {
+        return {
+          error: true,
+          data: error.response.data
+        };
+      });
+  };
 	deleteCountry = async (id) => {
 		 
     return axios({
