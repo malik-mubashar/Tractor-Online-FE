@@ -93,7 +93,7 @@ export default function City() {
     if (searchString) {
       const filteredCities = cityState.cities.filter((item) => {
         return (
-          item.name.toLowerCase().includes(searchString.toLowerCase()) ||
+          item.title.toLowerCase().includes(searchString.toLowerCase()) ||
           (item.comments &&
             item.comments.toLowerCase().includes(searchString.toLowerCase()))
         );
@@ -211,7 +211,7 @@ export default function City() {
                           {cityState.cities &&
                             cityState.cities.map((city, idx) => (
                               <tr key={idx}>
-                                <td>{city.name && city.name}</td>
+                                <td>{city.title && city.title}</td>
                                 <td>{city.comments && city.comments}</td>
                                 <td className="text-center">
                                   <Icon.Edit2
@@ -220,7 +220,7 @@ export default function City() {
                                       setCityState({
                                         ...cityState,
                                         isEditCity: true,
-                                        name: city.name,
+                                        name: city.title,
                                         comments: city.comments,
                                         cityId: city.id,
                                       });

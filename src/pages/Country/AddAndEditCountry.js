@@ -25,7 +25,7 @@ export default function AddAndEditCountry({
     if (countryState.isAddCountry) {
       try {
         const result = await country.addCountry(
-          countryState.name,
+          countryState.title,
           countryState.comments
         );
         if (result.error == false) {
@@ -44,7 +44,7 @@ export default function AddAndEditCountry({
     } else if (countryState.isEditCountry) {
       try {
         const result = await country.updateCountry(
-          countryState.name,
+          countryState.title,
           countryState.comments,
           countryState.countryId
         );
@@ -80,8 +80,8 @@ export default function AddAndEditCountry({
                 <Form.Group controlId="formBasicName">
                   <Form.Label>Name</Form.Label>
                   <Form.Control
-                    defaultValue={countryState.name}
-                    name="name"
+                    defaultValue={countryState.title}
+                    name="title"
                     type="text"
                     placeholder="Enter Country Name"
                     onChange={(e) => handleChange(e)}

@@ -45,7 +45,7 @@ class Languages {
         mode: "no-cors",
       },
 			data: {
-        name: languagesState.name,
+        title: languagesState.title,
         status: languagesState.status,
         description: languagesState.description,
       },
@@ -78,7 +78,7 @@ class Languages {
         mode: "no-cors",
       },
 			data: {
-        name: languagesState.name,
+        title: languagesState.title,
         status: languagesState.status,
         description: languagesState.description,
       },
@@ -101,7 +101,7 @@ class Languages {
 		debugger;
     return axios({
       method: "get",
-      url: `${process.env.REACT_APP_API_LOCAL_PATH}languages?page=${page}&q%5Bname_or_comments_cont%5D=${searchString}&no_of_record=${noOfRec}`,
+      url: `${process.env.REACT_APP_API_LOCAL_PATH}languages?page=${page}&q%5Btitle_or_comments_cont%5D=${searchString}&no_of_record=${noOfRec}`,
       headers: {
         "Content-Type": "application/json;",
         "access-token": `${user.accessToken}`,

@@ -17,7 +17,7 @@ export default function AddAndEditCity({ cityState, setCityState, getCities }) {
 
     if (cityState.isAddCity) {
       try {
-        const result = await city.addCity(cityState.name, cityState.comments);
+        const result = await city.addCity(cityState.title, cityState.comments);
         console.log(result);
         if ((result.error == false)) {
           toast.dismiss(loadingToastId);
@@ -35,7 +35,7 @@ export default function AddAndEditCity({ cityState, setCityState, getCities }) {
     } else if (cityState.isEditCity) {
       try {
         const result = await city.updateCity(
-          cityState.name,
+          cityState.title,
           cityState.comments,
           cityState.cityId
         );
@@ -70,8 +70,8 @@ export default function AddAndEditCity({ cityState, setCityState, getCities }) {
                 <Form.Group controlId="formBasicName">
                   <Form.Label>Name</Form.Label>
                   <Form.Control
-                    defaultValue={cityState.name}
-                    name="name"
+                    defaultValue={cityState.title}
+                    name="title"
                     type="text"
                     placeholder="Enter Country Name"
                     onChange={(e) => handleChange(e)}

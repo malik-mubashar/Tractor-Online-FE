@@ -94,7 +94,7 @@ class User {
       headers: Headers,
       data: {
         // profile:formData,
-        name: profile.name,
+        title: profile.title,
         personal_detail_attributes: personal_detail
       }
     })

@@ -36,7 +36,7 @@ class City {
         };
       });
   };
-	updateCity = async (name, comments,id) => {
+	updateCity = async (title, comments,id) => {
 		 
     return axios({
       method: "put",
@@ -52,7 +52,7 @@ class City {
 				
 			},
 			data: {
-				name: name,
+				title: title,
 				comments: comments,
 			}
     })
@@ -72,7 +72,7 @@ class City {
         };
       });
   };
-	addCity = async (name, comments) => {
+	addCity = async (title, comments) => {
 		 
     return axios({
       method: "post",
@@ -88,7 +88,7 @@ class City {
 				
 			},
 			data: {
-				name: name,
+				title: title,
 				comments: comments,
 			}
     })
@@ -112,7 +112,7 @@ class City {
 		 
     return axios({
       method: "get",
-      url: `${process.env.REACT_APP_API_LOCAL_PATH}cities?page=${page}&q%5Bname_or_comments_cont%5D=${searchString}&no_of_record=${noOfRec}`,
+      url: `${process.env.REACT_APP_API_LOCAL_PATH}cities?page=${page}&q%5Btitle_or_comments_cont%5D=${searchString}&no_of_record=${noOfRec}`,
       headers: {
         "Content-Type": "application/json;",
 				"access-token": `${user.accessToken}`,

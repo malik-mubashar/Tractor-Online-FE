@@ -91,7 +91,7 @@ export default function Products() {
     if (searchString) {
       const filteredProducts = productsState.products.filter((item) => {
         return (
-          item.name.toLowerCase().includes(searchString.toLowerCase()) ||
+          item.title.toLowerCase().includes(searchString.toLowerCase()) ||
           (item.comments &&
             item.comments.toLowerCase().includes(searchString.toLowerCase()))||
 						(item.description &&
@@ -230,7 +230,7 @@ export default function Products() {
                                       setProductsState({
                                         ...productsState,
                                         isEditProduct: true,
-                                        name: product.name,
+                                        title: product.title,
                                         status: product.status,
                                         description: product.description,
                                         productId: product.id,
