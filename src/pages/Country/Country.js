@@ -87,7 +87,7 @@ export default function Country() {
     if (searchString) {
       const filteredCountries = countryState.countries.filter((item) => {
         return (
-          item.name.toLowerCase().includes(searchString.toLowerCase()) ||
+          item.title.toLowerCase().includes(searchString.toLowerCase()) ||
           (item.comments &&
             item.comments.toLowerCase().includes(searchString.toLowerCase()))
         );
@@ -205,7 +205,7 @@ export default function Country() {
                           {countryState.countries &&
                             countryState.countries.map((country, idx) => (
                               <tr key={idx}>
-                                <td>{country.name && country.name}</td>
+                                <td>{country.title && country.title}</td>
                                 <td>{country.comments && country.comments}</td>
                                 <td className="text-center">
                                   <Icon.Edit2
@@ -215,7 +215,7 @@ export default function Country() {
                                       setCountryState({
                                         ...countryState,
                                         isEditCountry: true,
-                                        name: country.name,
+                                        title: country.title,
                                         comments: country.comments,
                                         countryId: country.id,
                                       });

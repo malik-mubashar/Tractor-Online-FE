@@ -228,7 +228,7 @@ export default function ProdSubCategories() {
                                         setProdSubCategoriesState({
                                           ...prodSubCategoriesState,
                                           isEditProdSubCategory: true,
-                                          name: prod.name,
+                                          title: prod.title,
                                           comments: prod.comments,
                                           prodCategoryId: prod.id,
                                         });

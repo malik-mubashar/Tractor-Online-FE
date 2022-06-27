@@ -91,7 +91,7 @@ export default function ProdCategoryHeads() {
       const filteredHeads = prodCategoryHeadsState.prodCategoryHeads.filter(
         (item) => {
           return (
-            item.name.toLowerCase().includes(searchString.toLowerCase()) ||
+            item.title.toLowerCase().includes(searchString.toLowerCase()) ||
             (item.comments &&
               item.comments.toLowerCase().includes(searchString.toLowerCase()))
           );
@@ -212,7 +212,7 @@ export default function ProdCategoryHeads() {
                             prodCategoryHeadsState.prodCategoryHeads.map(
                               (prod, idx) => (
                                 <tr key={idx}>
-                                  <td>{prod.name && prod.name}</td>
+                                  <td>{prod.title && prod.title}</td>
                                   <td>{prod.link && prod.link}</td>
                                   <td>{prod.status && prod.status}</td>
                                   <td>{prod.description && prod.description}</td>
@@ -223,7 +223,7 @@ export default function ProdCategoryHeads() {
                                         setProdCategoryHeadsState({
                                           ...prodCategoryHeadsState,
                                           isEditProdCategoryHead: true,
-                                          name: prod.name,
+                                          title: prod.title,
                                           comments: prod.comments,
                                           prodCategoryId: prod.id,
                                         });

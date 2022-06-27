@@ -91,7 +91,7 @@ export default function Roles() {
     if (searchString) {
       const filteredRoles = rolesState.roles.filter((item) => {
         return (
-          item.name.toLowerCase().includes(searchString.toLowerCase()) ||
+          item.title.toLowerCase().includes(searchString.toLowerCase()) ||
           (item.comments &&
             item.comments.toLowerCase().includes(searchString.toLowerCase()))||
 						(item.description &&
@@ -211,7 +211,7 @@ export default function Roles() {
                           {rolesState.roles &&
                             rolesState.roles.map((role, idx) => (
                               <tr key={idx}>
-                                <td>{role.name && role.name}</td>
+                                <td>{role.title && role.title}</td>
                                 <td>{role.status && role.status}</td>
                                 <td className="text-center">
                                   <Icon.Edit2
@@ -220,7 +220,7 @@ export default function Roles() {
                                       setRolesState({
                                         ...rolesState,
                                         isEditRole: true,
-                                        name: role.name,
+                                        title: role.title,
                                         status: role.status,
                                         roleId: role.id,
                                       });

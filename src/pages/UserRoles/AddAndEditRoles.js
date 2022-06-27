@@ -71,8 +71,8 @@ export default function AddAndEditRole({
                 <Form.Group controlId="formBasicName">
                   <Form.Label>Name</Form.Label>
                   <Form.Control
-                    defaultValue={rolesState.name}
-                    name="name"
+                    defaultValue={rolesState.title}
+                    name="title"
                     type="text"
                     placeholder="Enter Role Name"
                     onChange={(e) => handleChange(e)}

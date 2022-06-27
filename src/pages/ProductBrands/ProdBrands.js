@@ -227,7 +227,7 @@ export default function ProdBrands() {
                                       setProdBrandsState({
                                         ...prodBrandsState,
                                         isEditProdBrand: true,
-                                        name: prod.name,
+                                        title: prod.title,
                                         comments: prod.comments,
                                         prodCategoryId: prod.id,
                                       });
