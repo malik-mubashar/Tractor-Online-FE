@@ -5,15 +5,29 @@ import DropDown from "../LandingPage/DropDown";
 import { useHistory } from "react-router-dom";
 import user1 from "../../assets/img/user/user1.jpg";
 import { PRODUCT_CATEGORY } from "../../API/Products/product-category";
+import { city } from "../../API/City/CityApis";
 
 const SideMenue = () => {
   const [productCategories, setProductCategories] = useState();
 
   const history = useHistory();
+  const [cities, setCities] = useState();
 
   useEffect(() => {
     handleGetAllCategories();
+    handleGetAllCities();
   }, []);
+
+  
+  const handleGetAllCities = async () => {
+    debugger;
+    const result = await city.getAllCity();
+    debugger
+    if(result.error=== false){
+      setCities(result.data && result.data.data);
+      console.log('asdasd mnb',result.data.data)
+    }
+  };
 
   const handleGetAllCategories = async () => {
     const result = await PRODUCT_CATEGORY.getAllProductCategories();
@@ -43,8 +57,9 @@ const SideMenue = () => {
                 <DropDown
                 productHead={item.product_category_heads}
                   title={item.title}
-                 
+                  cities={cities}
                   dropDownIcon={true}
+                  
                 />
               </Nav.Link>
             </>
