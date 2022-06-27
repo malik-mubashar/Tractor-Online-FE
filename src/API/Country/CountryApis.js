@@ -72,8 +72,8 @@ class Country {
         };
       });
   };
-	addCountry = async (name, comments) => {
-		 
+	addCountry = async (title, comments) => {
+		debugger;
     return axios({
       method: "post",
       url: `${process.env.REACT_APP_API_LOCAL_PATH}countries`,
@@ -88,7 +88,7 @@ class Country {
 				
 			},
 			data: {
-				name: name,
+				title: title,
 				comments: comments,
 			}
     })
@@ -113,6 +113,66 @@ class Country {
     return axios({
       method: "get",
       url: `${process.env.REACT_APP_API_LOCAL_PATH}countries?page=${page}&q%5Bname_or_comments_cont%5D=${searchString}&no_of_record=${noOfRec}`,
+      headers: {
+        "Content-Type": "application/json;",
+				"access-token": `${user.accessToken}`,
+				"client": `${user.client}`,
+				"uid":`${user.uid}`,
+				mode: "no-cors",
+				
+			},
+    })
+			.then((result) => {
+				 
+        return {
+          error: false,
+          data: result.data,
+        };
+      })
+			.catch((error) => {
+				 
+        return {
+          error: true,
+          data: error.response.data,
+        };
+      });
+	};
+	
+	getCountriesPdf = async (page,searchString,noOfRec ) => {
+		 
+    return axios({
+      method: "get",
+      url: `${process.env.REACT_APP_API_LOCAL_PATH}countries.pdf?q%5Bname_or_comments_cont%5D=${searchString}`,
+      headers: {
+        "Content-Type": "application/json;",
+				"access-token": `${user.accessToken}`,
+				"client": `${user.client}`,
+				"uid":`${user.uid}`,
+				mode: "no-cors",
+				
+			},
+    })
+			.then((result) => {
+				 
+        return {
+          error: false,
+          data: result.data,
+        };
+      })
+			.catch((error) => {
+				 
+        return {
+          error: true,
+          data: error.response.data,
+        };
+      });
+	};
+	
+	getCountriesCsv = async (page,searchString,noOfRec ) => {
+		 
+    return axios({
+      method: "get",
+      url: `${process.env.REACT_APP_API_LOCAL_PATH}countries.csv?q%5Bname_or_comments_cont%5D=${searchString}`,
       headers: {
         "Content-Type": "application/json;",
 				"access-token": `${user.accessToken}`,

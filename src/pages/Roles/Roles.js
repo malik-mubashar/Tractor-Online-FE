@@ -11,10 +11,13 @@ import {
   FormControl,
   Form,
   Pagination,
+	Image,
 } from "react-bootstrap";
 import toast from "react-hot-toast";
 import AddAndEditRole from "./AddAndEditRoles";
 import { roleApis } from "../../API/RolesApis";
+import csvSvg from "../../assets/svg/csv2.svg";
+import pdfSvg from "../../assets/svg/pdf.svg";
 
 export default function Roles() {
   const [paginationNumbers, setPaginationNumbers] = useState();
@@ -118,6 +121,50 @@ export default function Roles() {
     if (event.target.value == "") {
       getRoles(1, event.target.value, noOfRec);
     }
+	};
+	const handleGetPdf = async () => {
+    const loadingToastId = toast.loading("Loading..!");
+    try {
+      const result = await roleApis.getRolesPdf(
+        mainSearchString
+      );
+      debugger;
+      if (result.error === false) {
+        toast.dismiss(loadingToastId);
+        debugger;
+        window.open(`${result.data.file_path}`, "_blank");
+      } else {
+        toast.dismiss(loadingToastId);
+        console.log("error");
+        toast.error("error");
+      }
+    } catch (e) {
+      toast.dismiss(loadingToastId);
+      console.error(e);
+      toast.error("error", e);
+    }
+  };
+
+  const handleGetCsv = async () => {
+    debugger;
+    const loadingToastId = toast.loading("Loading..!");
+    try {
+      const result = await roleApis.getRolesCsv(
+        mainSearchString
+      );
+      debugger;
+      if (result.error === false) {
+        toast.dismiss(loadingToastId);
+        debugger;
+        window.open(`${result.data.file_path}`, "_blank");
+      } else {
+        toast.dismiss(loadingToastId);
+        console.log("error");
+      }
+    } catch (e) {
+      toast.dismiss(loadingToastId);
+      console.error(e);
+    }
   };
 
   console.log("rolesState in index", rolesState);
@@ -139,6 +186,7 @@ export default function Roles() {
               />
             ) : (
               <>
+										<div className="d-flex">
                 <button
                   type="button"
                   className="btn btn-outline-primary col-sm-2 mb-4"
@@ -150,7 +198,30 @@ export default function Roles() {
                   }}
                 >
                   Add Role
-                </button>
+										</button>
+										<div className="d-flex ml-auto">
+                    <Image
+                      onClick={() => {
+                        handleGetCsv();
+                      }}
+                      className="clickableSvg"
+                      src={csvSvg}
+                      height="40px"
+                      width="60px"
+                      alt="Profile Image"
+                    />
+                    <Image
+                      onClick={() => {
+                        handleGetPdf();
+                      }}
+                      className="clickableSvg"
+                      src={pdfSvg}
+                      height="40px"
+                      width="60px"
+                      alt="Profile Image"
+                    />
+                  </div>
+                </div>
                 <div className={`${isMobile ? "" : "d-flex"}`}>
                   <FormControl
                     type="text"

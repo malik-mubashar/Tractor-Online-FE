@@ -115,7 +115,7 @@ export default function AddAndEditRole({
                     })
                   }
                 >
-                  Cancle
+                   Cancel
                 </Button>
                 <Button
                   onClick={() => {

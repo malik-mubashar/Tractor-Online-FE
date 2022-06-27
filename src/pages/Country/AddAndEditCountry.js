@@ -109,7 +109,7 @@ export default function AddAndEditCountry({
                     })
                   }
                 >
-                  Cancle
+                   Cancel
                 </Button>
                 <Button
                   onClick={() => {

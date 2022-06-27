@@ -132,7 +132,7 @@ export default function AddAndEditProdBrands({
                     })
                   }
                 >
-                  Cancle
+                   Cancel
                 </Button>
                 <Button
                   onClick={() => {

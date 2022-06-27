@@ -126,6 +126,60 @@ class ProdSubCategories {
           data: error.response.data,
         };
       });
+	};
+	
+	getProdSubCategoriesPdf = async (searchString) => {
+		debugger;
+    return axios({
+      method: "get",
+      url: `${process.env.REACT_APP_API_LOCAL_PATH}product_sub_categories.pdf?q%5Btitle_or_description_or_status_or_link_cont%5D=${searchString}`,
+      headers: {
+        "Content-Type": "application/json;",
+        "access-token": `${user.accessToken}`,
+        client: `${user.client}`,
+        uid: `${user.uid}`,
+        mode: "no-cors",
+      },
+    })
+      .then((result) => {
+        return {
+          error: false,
+          data: result.data,
+        };
+      })
+      .catch((error) => {
+        return {
+          error: true,
+          data: error.response.data,
+        };
+      });
+	};
+	
+	getProdSubCategoriesCsv = async (searchString) => {
+		debugger;
+    return axios({
+      method: "get",
+      url: `${process.env.REACT_APP_API_LOCAL_PATH}product_sub_categories.csv?q%5Btitle_or_description_or_status_or_link_cont%5D=${searchString}`,
+      headers: {
+        "Content-Type": "application/json;",
+        "access-token": `${user.accessToken}`,
+        client: `${user.client}`,
+        uid: `${user.uid}`,
+        mode: "no-cors",
+      },
+    })
+      .then((result) => {
+        return {
+          error: false,
+          data: result.data,
+        };
+      })
+      .catch((error) => {
+        return {
+          error: true,
+          data: error.response.data,
+        };
+      });
   };
 }
 

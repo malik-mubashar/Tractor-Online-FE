@@ -115,7 +115,7 @@ export default function AddAndEditLanguage({
                     })
                   }
                 >
-                  Cancle
+                   Cancel
                 </Button>
                 <Button
                   onClick={() => {

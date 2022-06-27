@@ -99,7 +99,7 @@ export default function AddAndEditCity({ cityState, setCityState, getCities }) {
                     })
                   }
                 >
-                  Cancle
+                   Cancel
                 </Button>
                 <Button
                   onClick={() => {
