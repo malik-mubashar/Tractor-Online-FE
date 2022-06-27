@@ -11,11 +11,16 @@ import {
   FormControl,
   Form,
   Pagination,
+	Image,
 } from "react-bootstrap";
 import AddAndEditCity from "./AddAndEditLanguage";
 import toast from "react-hot-toast";
 import AddAndEditLanguage from "./AddAndEditLanguage";
 import { languageApis } from "../../API/LanguagesApis ";
+import csvSvg from "../../assets/svg/csv2.svg";
+import pdfSvg from "../../assets/svg/pdf.svg";
+
+
 
 export default function Languages() {
   const [paginationNumbers, setPaginationNumbers] = useState();
@@ -119,6 +124,51 @@ export default function Languages() {
     if (event.target.value == "") {
       getLanguages(1, event.target.value, noOfRec);
     }
+	};
+	
+	const handleGetPdf = async () => {
+    const loadingToastId = toast.loading("Loading..!");
+    try {
+      const result = await languageApis.getLanguagesPdf(
+        mainSearchString
+      );
+      debugger;
+      if (result.error === false) {
+        toast.dismiss(loadingToastId);
+        debugger;
+        window.open(`${result.data.file_path}`, "_blank");
+      } else {
+        toast.dismiss(loadingToastId);
+        console.log("error");
+        toast.error("error");
+      }
+    } catch (e) {
+      toast.dismiss(loadingToastId);
+      console.error(e);
+      toast.error("error", e);
+    }
+  };
+
+  const handleGetCsv = async () => {
+    debugger;
+    const loadingToastId = toast.loading("Loading..!");
+    try {
+      const result = await languageApis.getLanguagesCsv(
+        mainSearchString
+      );
+      debugger;
+      if (result.error === false) {
+        toast.dismiss(loadingToastId);
+        debugger;
+        window.open(`${result.data.file_path}`, "_blank");
+      } else {
+        toast.dismiss(loadingToastId);
+        console.log("error");
+      }
+    } catch (e) {
+      toast.dismiss(loadingToastId);
+      console.error(e);
+    }
   };
 
   console.log("languagesState in index", languagesState);
@@ -140,6 +190,7 @@ export default function Languages() {
               />
             ) : (
               <>
+										<div className="d-flex">
                 <button
                   type="button"
                   className="btn btn-outline-primary col-sm-2 mb-4"
@@ -151,7 +202,30 @@ export default function Languages() {
                   }}
                 >
                   Add Language
-                </button>
+										</button>
+										<div className="d-flex ml-auto">
+                    <Image
+                      onClick={() => {
+                        handleGetCsv();
+                      }}
+                      className="clickableSvg"
+                      src={csvSvg}
+                      height="40px"
+                      width="60px"
+                      alt="Profile Image"
+                    />
+                    <Image
+                      onClick={() => {
+                        handleGetPdf();
+                      }}
+                      className="clickableSvg"
+                      src={pdfSvg}
+                      height="40px"
+                      width="60px"
+                      alt="Profile Image"
+                    />
+                  </div>
+                </div>
                 <div className={`${isMobile ? "" : "d-flex"}`}>
                   <FormControl
                     type="text"
@@ -213,7 +287,7 @@ export default function Languages() {
                           {languagesState.languages &&
                             languagesState.languages.map((language, idx) => (
                               <tr key={idx}>
-                                <td>{language.name && language.name}</td>
+                                <td>{language.title && language.title}</td>
                                 <td>{language.status && language.status}</td>
                                 <td>{language.description && language.description}</td>
                                 <td className="text-center">
@@ -223,7 +297,7 @@ export default function Languages() {
                                       setLanguagesState({
                                         ...languagesState,
                                         isEditLanguage: true,
-                                        name: language.name,
+                                        title: language.title,
                                         status: language.status,
                                         description: language.description,
                                         languageId: language.id,

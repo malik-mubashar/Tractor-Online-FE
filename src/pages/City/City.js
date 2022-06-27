@@ -11,11 +11,14 @@ import {
   FormControl,
   Form,
   Pagination,
+  Image,
 } from "react-bootstrap";
 import ViewCity from "./ViewCity";
 import AddAndEditCity from "./AddAndEditCity";
 import { city } from "../../API/City/CityApis";
 import toast from "react-hot-toast";
+import csvSvg from "../../assets/svg/csv2.svg";
+import pdfSvg from "../../assets/svg/pdf.svg";
 
 export default function City() {
   const [paginationNumbers, setPaginationNumbers] = useState();
@@ -119,6 +122,43 @@ export default function City() {
       getCities(1, event.target.value, noOfRec);
     }
   };
+  const handleGetPdf = async () => {
+    const loadingToastId = toast.loading("Loading..!");
+    try {
+      const result = await city.getCitiesPdf(mainSearchString);
+      debugger;
+      if (result.error === false) {
+        toast.dismiss(loadingToastId);
+        debugger;
+        window.open(`${result.data.file_path}`, "_blank");
+      } else {
+        toast.dismiss(loadingToastId);
+        console.log("error");
+      }
+    } catch (e) {
+      toast.dismiss(loadingToastId);
+      console.error(e);
+    }
+	};
+	
+	const handleGetCsv = async () => {
+    const loadingToastId = toast.loading("Loading..!");
+    try {
+      const result = await city.getCitiesCsv(mainSearchString);
+      debugger;
+      if (result.error === false) {
+        toast.dismiss(loadingToastId);
+        debugger;
+        window.open(`${result.data.file_path}`, "_blank");
+      } else {
+        toast.dismiss(loadingToastId);
+        console.log("error");
+      }
+    } catch (e) {
+      toast.dismiss(loadingToastId);
+      console.error(e);
+    }
+  };
 
   console.log("cityState in index", cityState);
   console.log("cityState in index", noOfRec);
@@ -139,18 +179,41 @@ export default function City() {
               />
             ) : (
               <>
-                <button
-                  type="button"
-                  className="btn btn-outline-primary col-sm-2 mb-4"
-                  onClick={() => {
-                    setCityState({
-                      ...cityState,
-                      isAddCity: true,
-                    });
-                  }}
-                >
-                  Add City
-                </button>
+                <div className="d-flex">
+                  <button
+                    type="button"
+                    className="btn btn-outline-primary col-sm-2 mb-4"
+                    onClick={() => {
+                      setCityState({
+                        ...cityState,
+                        isAddCity: true,
+                      });
+                    }}
+                  >
+                    Add City
+                  </button>
+
+											<Image
+												onClick={() => {
+													handleGetCsv();
+												}}
+                    className="clickableSvg"
+                    src={csvSvg}
+                    height="40px"
+                    width="60px"
+                    alt="Profile Image"
+                  />
+                  <Image
+                    onClick={() => {
+                      handleGetPdf();
+                    }}
+                    className="clickableSvg"
+                    src={pdfSvg}
+                    height="40px"
+                    width="60px"
+                    alt="Profile Image"
+                  />
+                </div>
                 <div className={`${isMobile ? "" : "d-flex"}`}>
                   <FormControl
                     type="text"

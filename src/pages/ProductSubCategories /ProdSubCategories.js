@@ -11,10 +11,13 @@ import {
   FormControl,
   Form,
   Pagination,
+	Image,
 } from "react-bootstrap";
 import AddAndEditProdSubCategories from "./AddAndEditProdSubCategories";
 import { prodSubApi } from "../../API/ProdSubCategoriesApis";
 import toast from "react-hot-toast";
+import csvSvg from "../../assets/svg/csv2.svg";
+import pdfSvg from "../../assets/svg/pdf.svg";
 
 export default function ProdSubCategories() {
   const [paginationNumbers, setPaginationNumbers] = useState();
@@ -28,7 +31,11 @@ export default function ProdSubCategories() {
     const loadingToastId = toast.loading("Loading..!");
 
     try {
-      const result = await prodSubApi.getProdSubCategories(page, mainSearch, noOfRec);
+      const result = await prodSubApi.getProdSubCategories(
+        page,
+        mainSearch,
+        noOfRec
+      );
       if (result.error == false && result.data.status == "success") {
         toast.dismiss(loadingToastId);
 
@@ -60,17 +67,14 @@ export default function ProdSubCategories() {
     try {
       const result = await prodSubApi.deleteProdSubCategory(id);
       debugger;
-      if (
-        result.error === false
-      ) {
+      if (result.error === false) {
         toast.dismiss(loadingToastId);
         toast.success("Successfully deleted!");
         getProdSubCategories(1, "", 10);
-			} else if(result.error === true) {
-				toast.dismiss(loadingToastId);
+      } else if (result.error === true) {
+        toast.dismiss(loadingToastId);
         toast.error("can not delete!");
-
-			}
+      }
       console.log(result);
     } catch (error) {
       console.error(error);
@@ -97,9 +101,11 @@ export default function ProdSubCategories() {
           return (
             item.title.toLowerCase().includes(searchString.toLowerCase()) ||
             (item.description &&
-							item.description.toLowerCase().includes(searchString.toLowerCase())) ||
-							(item.status &&
-								item.status.toLowerCase().includes(searchString.toLowerCase())) 
+              item.description
+                .toLowerCase()
+                .includes(searchString.toLowerCase())) ||
+            (item.status &&
+              item.status.toLowerCase().includes(searchString.toLowerCase()))
           );
         }
       );
@@ -124,6 +130,46 @@ export default function ProdSubCategories() {
       getProdSubCategories(1, event.target.value, noOfRec);
     }
   };
+  const handleGetPdf = async () => {
+    const loadingToastId = toast.loading("Loading..!");
+    try {
+      const result = await prodSubApi.getProdSubCategoriesPdf(mainSearchString);
+      debugger;
+      if (result.error === false) {
+        toast.dismiss(loadingToastId);
+        debugger;
+        window.open(`${result.data.file_path}`, "_blank");
+      } else {
+        toast.dismiss(loadingToastId);
+        console.log("error");
+        toast.error("error");
+      }
+    } catch (e) {
+      toast.dismiss(loadingToastId);
+      console.error(e);
+      toast.error("error", e);
+    }
+  };
+
+  const handleGetCsv = async () => {
+    debugger;
+    const loadingToastId = toast.loading("Loading..!");
+    try {
+      const result = await prodSubApi.getProdSubCategoriesCsv(mainSearchString);
+      debugger;
+      if (result.error === false) {
+        toast.dismiss(loadingToastId);
+        debugger;
+        window.open(`${result.data.file_path}`, "_blank");
+      } else {
+        toast.dismiss(loadingToastId);
+        console.log("error");
+      }
+    } catch (e) {
+      toast.dismiss(loadingToastId);
+      console.error(e);
+    }
+  };
 
   return (
     <>
@@ -142,18 +188,42 @@ export default function ProdSubCategories() {
               />
             ) : (
               <>
-                <button
-                  type="button"
-                  className="btn btn-outline-primary col-sm-2 mb-4"
-                  onClick={() => {
-                    setProdSubCategoriesState({
-                      ...prodSubCategoriesState,
-                      isAddProdSubCategory: true,
-                    });
-                  }}
-                >
-                  Add Product Sub Category
-                </button>
+                <div className="d-flex">
+                  <button
+                    type="button"
+                    className="btn btn-outline-primary col-sm-2 mb-4"
+                    onClick={() => {
+                      setProdSubCategoriesState({
+                        ...prodSubCategoriesState,
+                        isAddProdSubCategory: true,
+                      });
+                    }}
+                  >
+                    Add Product Sub Category
+                  </button>
+                  <div className="d-flex ml-auto">
+                    <Image
+                      onClick={() => {
+                        handleGetCsv();
+                      }}
+                      className="clickableSvg"
+                      src={csvSvg}
+                      height="40px"
+                      width="60px"
+                      alt="Profile Image"
+                    />
+                    <Image
+                      onClick={() => {
+                        handleGetPdf();
+                      }}
+                      className="clickableSvg"
+                      src={pdfSvg}
+                      height="40px"
+                      width="60px"
+                      alt="Profile Image"
+                    />
+                  </div>
+                </div>
                 <div className={`${isMobile ? "" : "d-flex"}`}>
                   <FormControl
                     type="text"
@@ -220,7 +290,9 @@ export default function ProdSubCategories() {
                                   <td>{prod.title && prod.title}</td>
                                   <td>{prod.link && prod.link}</td>
                                   <td>{prod.status && prod.status}</td>
-                                  <td>{prod.description && prod.description}</td>
+                                  <td>
+                                    {prod.description && prod.description}
+                                  </td>
                                   <td className="text-center">
                                     <Icon.Edit2
                                       style={{ cursor: "pointer" }}
@@ -250,120 +322,128 @@ export default function ProdSubCategories() {
                         </tbody>
                       </Table>
                     </div>
-												{
-													prodSubCategoriesState && prodSubCategoriesState.pagination && (
-														<div>
-															<span>Rows per page</span>
-															<span className="mx-4">
-																{prodSubCategoriesState.pagination.from}-{prodSubCategoriesState.pagination.to}{" "}
-																of {prodSubCategoriesState.pagination.count}
-															</span>
-			
-															<button
-																className={`pagination-button ${
-																	prodSubCategoriesState.pagination.page == 1 ? "disabled" : ""
-																}`}
-																onClick={() => {
-																	getProdSubCategories(1, mainSearchString, noOfRec);
-																}}
-																type="button"
-															>
-																<span class="MuiIconButton-label">
-																	<svg
-																		class="MuiSvgIcon-root"
-																		focusable="false"
-																		viewBox="0 0 24 24"
-																		aria-hidden="true"
-																	>
-																		<path d="M18.41 16.59L13.82 12l4.59-4.59L17 6l-6 6 6 6zM6 6h2v12H6z"></path>
-																	</svg>
-																</span>
-															</button>
-															<button
-																className={`pagination-button ${
-																	prodSubCategoriesState.pagination.page == 1 ? "disabled" : ""
-																}`}
-																onClick={() => {
-																	getProdSubCategories(
-																		prodSubCategoriesState.pagination.prev,
-																		mainSearchString,
-																		noOfRec
-																	);
-																}}
-																type="button"
-															>
-																<span class="MuiIconButton-label">
-																	<svg
-																		class="MuiSvgIcon-root"
-																		focusable="false"
-																		viewBox="0 0 24 24"
-																		aria-hidden="true"
-																	>
-																		<path d="M15.41 16.59L10.83 12l4.58-4.59L14 6l-6 6 6 6 1.41-1.41z"></path>
-																	</svg>
-																</span>
-															</button>
-															<button
-																className={`pagination-button ${
-																	prodSubCategoriesState.pagination.page ==
-																	prodSubCategoriesState.pagination.last
-																		? "disabled"
-																		: ""
-																}`}
-																tabindex="0"
-																type="button"
-																onClick={() => {
-																	getProdSubCategories(
-																		prodSubCategoriesState.pagination.next,
-																		mainSearchString,
-																		noOfRec
-																	);
-																}}
-															>
-																<span class="MuiIconButton-label">
-																	<svg
-																		class="MuiSvgIcon-root"
-																		focusable="false"
-																		viewBox="0 0 24 24"
-																		aria-hidden="true"
-																	>
-																		<path d="M8.59 16.59L13.17 12 8.59 7.41 10 6l6 6-6 6-1.41-1.41z"></path>
-																	</svg>
-																</span>
-																<span class="MuiTouchRipple-root"></span>
-															</button>
-			
-															<button
-																className={`pagination-button ${
-																	prodSubCategoriesState.pagination.page ==
-																	prodSubCategoriesState.pagination.last
-																		? "disabled"
-																		: ""
-																}`}
-																tabindex="0"
-																type="button"
-																onClick={() => {
-																	getProdSubCategories(
-																		prodSubCategoriesState.pagination.last,
-																		mainSearchString,
-																		noOfRec
-																	);
-																}}
-															>
-																<span class="MuiIconButton-label">
-																	<svg
-																		class="MuiSvgIcon-root"
-																		focusable="false"
-																		viewBox="0 0 24 24"
-																		aria-hidden="true"
-																	>
-																		<path d="M5.59 7.41L10.18 12l-4.59 4.59L7 18l6-6-6-6zM16 6h2v12h-2z"></path>
-																	</svg>
-																</span>
-															</button>
-														</div>
-													)
-									 }
+                    {prodSubCategoriesState &&
+                      prodSubCategoriesState.pagination && (
+                        <div>
+                          <span>Rows per page</span>
+                          <span className="mx-4">
+                            {prodSubCategoriesState.pagination.from}-
+                            {prodSubCategoriesState.pagination.to} of{" "}
+                            {prodSubCategoriesState.pagination.count}
+                          </span>
+
+                          <button
+                            className={`pagination-button ${
+                              prodSubCategoriesState.pagination.page == 1
+                                ? "disabled"
+                                : ""
+                            }`}
+                            onClick={() => {
+                              getProdSubCategories(
+                                1,
+                                mainSearchString,
+                                noOfRec
+                              );
+                            }}
+                            type="button"
+                          >
+                            <span class="MuiIconButton-label">
+                              <svg
+                                class="MuiSvgIcon-root"
+                                focusable="false"
+                                viewBox="0 0 24 24"
+                                aria-hidden="true"
+                              >
+                                <path d="M18.41 16.59L13.82 12l4.59-4.59L17 6l-6 6 6 6zM6 6h2v12H6z"></path>
+                              </svg>
+                            </span>
+                          </button>
+                          <button
+                            className={`pagination-button ${
+                              prodSubCategoriesState.pagination.page == 1
+                                ? "disabled"
+                                : ""
+                            }`}
+                            onClick={() => {
+                              getProdSubCategories(
+                                prodSubCategoriesState.pagination.prev,
+                                mainSearchString,
+                                noOfRec
+                              );
+                            }}
+                            type="button"
+                          >
+                            <span class="MuiIconButton-label">
+                              <svg
+                                class="MuiSvgIcon-root"
+                                focusable="false"
+                                viewBox="0 0 24 24"
+                                aria-hidden="true"
+                              >
+                                <path d="M15.41 16.59L10.83 12l4.58-4.59L14 6l-6 6 6 6 1.41-1.41z"></path>
+                              </svg>
+                            </span>
+                          </button>
+                          <button
+                            className={`pagination-button ${
+                              prodSubCategoriesState.pagination.page ==
+                              prodSubCategoriesState.pagination.last
+                                ? "disabled"
+                                : ""
+                            }`}
+                            tabindex="0"
+                            type="button"
+                            onClick={() => {
+                              getProdSubCategories(
+                                prodSubCategoriesState.pagination.next,
+                                mainSearchString,
+                                noOfRec
+                              );
+                            }}
+                          >
+                            <span class="MuiIconButton-label">
+                              <svg
+                                class="MuiSvgIcon-root"
+                                focusable="false"
+                                viewBox="0 0 24 24"
+                                aria-hidden="true"
+                              >
+                                <path d="M8.59 16.59L13.17 12 8.59 7.41 10 6l6 6-6 6-1.41-1.41z"></path>
+                              </svg>
+                            </span>
+                            <span class="MuiTouchRipple-root"></span>
+                          </button>
+
+                          <button
+                            className={`pagination-button ${
+                              prodSubCategoriesState.pagination.page ==
+                              prodSubCategoriesState.pagination.last
+                                ? "disabled"
+                                : ""
+                            }`}
+                            tabindex="0"
+                            type="button"
+                            onClick={() => {
+                              getProdSubCategories(
+                                prodSubCategoriesState.pagination.last,
+                                mainSearchString,
+                                noOfRec
+                              );
+                            }}
+                          >
+                            <span class="MuiIconButton-label">
+                              <svg
+                                class="MuiSvgIcon-root"
+                                focusable="false"
+                                viewBox="0 0 24 24"
+                                aria-hidden="true"
+                              >
+                                <path d="M5.59 7.41L10.18 12l-4.59 4.59L7 18l6-6-6-6zM16 6h2v12h-2z"></path>
+                              </svg>
+                            </span>
+                          </button>
+                        </div>
+                      )}
                   </div>
                 </div>
               </>

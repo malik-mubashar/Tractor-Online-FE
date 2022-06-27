@@ -267,7 +267,7 @@ class Navigation extends React.Component {
         {/*  */}
 
         {/* Side Menu File Path: src/components/Common/ColorSwitch.js */}
-        <ColorSwitch onClick={this.onSideMenuHandler} />
+        {/* <ColorSwitch onClick={this.onSideMenuHandler} /> */}
       </div>
     );
   }

@@ -11,10 +11,13 @@ import {
   FormControl,
   Form,
   Pagination,
+  Image,
 } from "react-bootstrap";
 import toast from "react-hot-toast";
 import AddAndEditProduct from "./AddAndEditProducts";
-import  {productApis}  from "../../API/ProductApis";
+import { productApis } from "../../API/ProductApis";
+import csvSvg from "../../assets/svg/csv2.svg";
+import pdfSvg from "../../assets/svg/pdf.svg";
 
 export default function Products() {
   const [paginationNumbers, setPaginationNumbers] = useState();
@@ -61,9 +64,7 @@ export default function Products() {
     try {
       const result = await productApis.deleteProduct(id);
       debugger;
-      if (
-        result.error === false 
-      ) {
+      if (result.error === false) {
         toast.dismiss(loadingToastId);
         toast.success("Successfully deleted!");
         getProducts(1, "", 10);
@@ -84,7 +85,7 @@ export default function Products() {
     isAddProduct: false,
     products: null,
     originalProducts: null,
-    status: 'active',
+    status: "active",
   });
 
   const handleSearch = (searchString) => {
@@ -93,9 +94,9 @@ export default function Products() {
         return (
           item.title.toLowerCase().includes(searchString.toLowerCase()) ||
           (item.comments &&
-            item.comments.toLowerCase().includes(searchString.toLowerCase()))||
-						(item.description &&
-							item.description.toLowerCase().includes(searchString.toLowerCase()))
+            item.comments.toLowerCase().includes(searchString.toLowerCase())) ||
+          (item.description &&
+            item.description.toLowerCase().includes(searchString.toLowerCase()))
         );
       });
       setProductsState({
@@ -120,6 +121,45 @@ export default function Products() {
     }
   };
 
+  const handleGetPdf = async () => {
+    const loadingToastId = toast.loading("Loading..!");
+    try {
+      const result = await productApis.getProductsPdf(mainSearchString);
+      debugger;
+      if (result.error === false) {
+        toast.dismiss(loadingToastId);
+        debugger;
+        window.open(`${result.data.file_path}`, "_blank");
+      } else {
+        toast.dismiss(loadingToastId);
+        console.log("error");
+      }
+    } catch (e) {
+      toast.dismiss(loadingToastId);
+      console.error(e);
+    }
+  };
+
+	const handleGetCsv = async () => {
+		debugger;
+    const loadingToastId = toast.loading("Loading..!");
+    try {
+      const result = await productApis.getProductsCsv(mainSearchString);
+      debugger;
+      if (result.error === false) {
+        toast.dismiss(loadingToastId);
+        debugger;
+        window.open(`${result.data.file_path}`, "_blank");
+      } else {
+        toast.dismiss(loadingToastId);
+        console.log("error");
+      }
+    } catch (e) {
+      toast.dismiss(loadingToastId);
+      console.error(e);
+    }
+  };
+
   console.log("productsState in index", productsState);
   console.log("productsState in index", noOfRec);
   return (
@@ -129,8 +169,8 @@ export default function Products() {
         <div className="cityPage">
           <div className={`main-content d-flex flex-column`}>
             {productsState.isViewCity ? (
-								<></>
-						): productsState.isAddProduct === true ||
+              <></>
+            ) : productsState.isAddProduct === true ||
               productsState.isEditProduct === true ? (
               <AddAndEditProduct
                 productsState={productsState}
@@ -139,18 +179,42 @@ export default function Products() {
               />
             ) : (
               <>
-                <button
-                  type="button"
-                  className="btn btn-outline-primary col-sm-2 mb-4"
-                  onClick={() => {
-                    setProductsState({
-                      ...productsState,
-                      isAddProduct: true,
-                    });
-                  }}
-                >
-                  Add Product
-                </button>
+                <div className="d-flex">
+                  <button
+                    type="button"
+                    className="btn btn-outline-primary col-sm-2 mb-4"
+                    onClick={() => {
+                      setProductsState({
+                        ...productsState,
+                        isAddProduct: true,
+                      });
+                    }}
+                  >
+                    Add Product
+											</button>
+											<div className="d-flex ml-auto">
+                  <Image
+                    onClick={() => {
+                      handleGetCsv();
+                    }}
+                    className="clickableSvg"
+                    src={csvSvg}
+                    height="40px"
+                    width="60px"
+                    alt="Profile Image"
+                  />
+                  <Image
+                    onClick={() => {
+                      handleGetPdf();
+                    }}
+                    className="clickableSvg"
+                    src={pdfSvg}
+                    height="40px"
+                    width="60px"
+                    alt="Profile Image"
+												/>
+												</div>
+                </div>
                 <div className={`${isMobile ? "" : "d-flex"}`}>
                   <FormControl
                     type="text"
@@ -218,11 +282,15 @@ export default function Products() {
                               <tr key={idx}>
                                 <td>{product.title && product.title}</td>
                                 <td>{product.status && product.status}</td>
-                                <td>{product.description && product.description}</td>
+                                <td>
+                                  {product.description && product.description}
+                                </td>
                                 <td>{product.price && product.price}</td>
                                 <td>{product.location && product.location}</td>
                                 <td>{product.link && product.link}</td>
-                                <td>{product.extra_fields && product.extra_fields}</td>
+                                <td>
+                                  {product.extra_fields && product.extra_fields}
+                                </td>
                                 <td className="text-center">
                                   <Icon.Edit2
                                     style={{ cursor: "pointer" }}
@@ -254,8 +322,9 @@ export default function Products() {
                       <div>
                         <span>Rows per page</span>
                         <span className="mx-4">
-                          {productsState.pagination.from}-{productsState.pagination.to}{" "}
-                          of {productsState.pagination.count}
+                          {productsState.pagination.from}-
+                          {productsState.pagination.to} of{" "}
+                          {productsState.pagination.count}
                         </span>
 
                         <button

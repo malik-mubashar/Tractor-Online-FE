@@ -11,10 +11,13 @@ import {
   FormControl,
   Form,
   Pagination,
+	Image,
 } from "react-bootstrap";
 import AddAndEditCountry from "./AddAndEditCountry";
 import { country } from "../../API/Country/CountryApis";
 import toast from "react-hot-toast";
+import csvSvg from "../../assets/svg/csv2.svg";
+import pdfSvg from "../../assets/svg/pdf.svg";
 
 export default function Country() {
   const [paginationNumbers, setPaginationNumbers] = useState();
@@ -112,6 +115,51 @@ export default function Country() {
     if (event.target.value == "") {
       getCountries(1, event.target.value, noOfRec);
     }
+	};
+	
+	const handleGetPdf = async () => {
+    const loadingToastId = toast.loading("Loading..!");
+    try {
+      const result = await country.getCountriesPdf(
+        mainSearchString
+      );
+      debugger;
+      if (result.error === false) {
+        toast.dismiss(loadingToastId);
+        debugger;
+        window.open(`${result.data.file_path}`, "_blank");
+      } else {
+        toast.dismiss(loadingToastId);
+        console.log("error");
+        toast.error("error");
+      }
+    } catch (e) {
+      toast.dismiss(loadingToastId);
+      console.error(e);
+      toast.error("error", e);
+    }
+  };
+
+  const handleGetCsv = async () => {
+    debugger;
+    const loadingToastId = toast.loading("Loading..!");
+    try {
+      const result = await country.getCountriesCsv(
+        mainSearchString
+      );
+      debugger;
+      if (result.error === false) {
+        toast.dismiss(loadingToastId);
+        debugger;
+        window.open(`${result.data.file_path}`, "_blank");
+      } else {
+        toast.dismiss(loadingToastId);
+        console.log("error");
+      }
+    } catch (e) {
+      toast.dismiss(loadingToastId);
+      console.error(e);
+    }
   };
 
   console.log("CountryState in index", countryState);
@@ -134,6 +182,7 @@ export default function Country() {
               />
             ) : (
               <>
+										<div className="d-flex">
                 <button
                   type="button"
                   className="btn btn-outline-primary col-sm-2 mb-4"
@@ -145,7 +194,30 @@ export default function Country() {
                   }}
                 >
                   Add Country
-                </button>
+										</button>
+										<div className="d-flex ml-auto">
+                    <Image
+                      onClick={() => {
+                        handleGetCsv();
+                      }}
+                      className="clickableSvg"
+                      src={csvSvg}
+                      height="40px"
+                      width="60px"
+                      alt="Profile Image"
+                    />
+                    <Image
+                      onClick={() => {
+                        handleGetPdf();
+                      }}
+                      className="clickableSvg"
+                      src={pdfSvg}
+                      height="40px"
+                      width="60px"
+                      alt="Profile Image"
+                    />
+                  </div>
+                </div>
                 <div className={`${isMobile ? "" : "d-flex"}`}>
                   <FormControl
                     type="text"

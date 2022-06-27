@@ -155,7 +155,7 @@ export default function AddAndEditProduct({
                     })
                   }
                 >
-                  Cancle
+                   Cancel
                 </Button>
                 <Button
                   onClick={() => {

@@ -130,6 +130,60 @@ class Products {
           data: error.response.data,
         };
       });
+	};
+	
+	getProductsPdf = async (searchString) => {
+		debugger;
+    return axios({
+      method: "get",
+      url: `${process.env.REACT_APP_API_LOCAL_PATH}products.pdf?q%5Btitle_or_status_or_description_or_location_cont%5D=${searchString}`,
+      headers: {
+        "Content-Type": "application/json;",
+        "access-token": `${user.accessToken}`,
+        client: `${user.client}`,
+        uid: `${user.uid}`,
+        mode: "no-cors",
+      },
+    })
+      .then((result) => {
+        return {
+          error: false,
+          data: result.data,
+        };
+      })
+      .catch((error) => {
+        return {
+          error: true,
+          data: error.response.data,
+        };
+      });
+	};
+	
+	getProductsCsv = async (searchString) => {
+		debugger;
+    return axios({
+      method: "get",
+      url: `${process.env.REACT_APP_API_LOCAL_PATH}products.csv?q%5Btitle_or_status_or_description_or_location_cont%5D=${searchString}`,
+      headers: {
+        "Content-Type": "application/json;",
+        "access-token": `${user.accessToken}`,
+        client: `${user.client}`,
+        uid: `${user.uid}`,
+        mode: "no-cors",
+      },
+    })
+      .then((result) => {
+        return {
+          error: false,
+          data: result.data,
+        };
+      })
+      .catch((error) => {
+        return {
+          error: true,
+          data: error.response.data,
+        };
+      });
   };
 }
 

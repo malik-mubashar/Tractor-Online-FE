@@ -11,10 +11,13 @@ import {
   FormControl,
   Form,
   Pagination,
+	Image,
 } from "react-bootstrap";
 import AddAndEditProdCategoryHeads from "./AddAndEditProdCategoryHeads";
-import { prodCategoryHeadsApi} from "../../API/ProdCategoryHeadsApis";
+import { prodCategoryHeadsApi } from "../../API/ProdCategoryHeadsApis";
 import toast from "react-hot-toast";
+import csvSvg from "../../assets/svg/csv2.svg";
+import pdfSvg from "../../assets/svg/pdf.svg";
 
 export default function ProdCategoryHeads() {
   const [paginationNumbers, setPaginationNumbers] = useState();
@@ -26,9 +29,13 @@ export default function ProdCategoryHeads() {
 
   const getProdCategoryHeads = async (page, mainSearch, noOfRec) => {
     const loadingToastId = toast.loading("Loading..!");
-		debugger;
+    debugger;
     try {
-      const result = await prodCategoryHeadsApi.getProdCategoryHeads(page, mainSearch, noOfRec);
+      const result = await prodCategoryHeadsApi.getProdCategoryHeads(
+        page,
+        mainSearch,
+        noOfRec
+      );
       if (result.error === false && result.data.status === "success") {
         toast.dismiss(loadingToastId);
 
@@ -60,9 +67,7 @@ export default function ProdCategoryHeads() {
     try {
       const result = await prodCategoryHeadsApi.deleteProdCategoryHead(id);
       debugger;
-      if (
-        result.error == false 
-      ) {
+      if (result.error == false) {
         toast.dismiss(loadingToastId);
         toast.success("Successfully deleted!");
         getProdCategoryHeads(1, "", 10);
@@ -117,8 +122,53 @@ export default function ProdCategoryHeads() {
     if (event.target.value == "") {
       getProdCategoryHeads(1, event.target.value, noOfRec);
     }
-	};
-	console.log("asd,asd", prodCategoryHeadsState);
+  };
+
+  const handleGetPdf = async () => {
+    const loadingToastId = toast.loading("Loading..!");
+    try {
+      const result = await prodCategoryHeadsApi.getProdCategoryHeadsPdf(
+        mainSearchString
+      );
+      debugger;
+      if (result.error === false) {
+        toast.dismiss(loadingToastId);
+        debugger;
+        window.open(`${result.data.file_path}`, "_blank");
+      } else {
+        toast.dismiss(loadingToastId);
+        console.log("error");
+        toast.error("error");
+      }
+    } catch (e) {
+      toast.dismiss(loadingToastId);
+      console.error(e);
+      toast.error("error", e);
+    }
+  };
+
+  const handleGetCsv = async () => {
+    debugger;
+    const loadingToastId = toast.loading("Loading..!");
+    try {
+      const result = await prodCategoryHeadsApi.getProdCategoryHeadsCsv(
+        mainSearchString
+      );
+      debugger;
+      if (result.error === false) {
+        toast.dismiss(loadingToastId);
+        debugger;
+        window.open(`${result.data.file_path}`, "_blank");
+      } else {
+        toast.dismiss(loadingToastId);
+        console.log("error");
+      }
+    } catch (e) {
+      toast.dismiss(loadingToastId);
+      console.error(e);
+    }
+  };
+  console.log("asd,asd", prodCategoryHeadsState);
 
   return (
     <>
@@ -137,18 +187,42 @@ export default function ProdCategoryHeads() {
               />
             ) : (
               <>
-                <button
-                  type="button"
-                  className="btn btn-outline-primary col-sm-2 mb-4"
-                  onClick={() => {
-                    setProdCategoryHeadsState({
-                      ...prodCategoryHeadsState,
-                      isAddProdCategoryHead: true,
-                    });
-                  }}
-                >
-                  Add Product Category Head
-                </button>
+                <div className="d-flex">
+                  <button
+                    type="button"
+                    className="btn btn-outline-primary col-sm-2 mb-4"
+                    onClick={() => {
+                      setProdCategoryHeadsState({
+                        ...prodCategoryHeadsState,
+                        isAddProdCategoryHead: true,
+                      });
+                    }}
+                  >
+                    Add Product Category Head
+                  </button>
+                  <div className="d-flex ml-auto">
+                    <Image
+                      onClick={() => {
+                        handleGetCsv();
+                      }}
+                      className="clickableSvg"
+                      src={csvSvg}
+                      height="40px"
+                      width="60px"
+                      alt="Profile Image"
+                    />
+                    <Image
+                      onClick={() => {
+                        handleGetPdf();
+                      }}
+                      className="clickableSvg"
+                      src={pdfSvg}
+                      height="40px"
+                      width="60px"
+                      alt="Profile Image"
+                    />
+                  </div>
+                </div>
                 <div className={`${isMobile ? "" : "d-flex"}`}>
                   <FormControl
                     type="text"
@@ -184,7 +258,9 @@ export default function ProdCategoryHeads() {
                 <div className="card mb-4">
                   <div className="card-body">
                     <div className="card-header d-flex">
-                      <h5 className="card-title w-50 float-left">Category Heads</h5>
+                      <h5 className="card-title w-50 float-left">
+                        Category Heads
+                      </h5>
                       <Form className="nav-search-form d-none d-sm-block float-right">
                         <FormControl
                           type="text"
@@ -215,7 +291,9 @@ export default function ProdCategoryHeads() {
                                   <td>{prod.title && prod.title}</td>
                                   <td>{prod.link && prod.link}</td>
                                   <td>{prod.status && prod.status}</td>
-                                  <td>{prod.description && prod.description}</td>
+                                  <td>
+                                    {prod.description && prod.description}
+                                  </td>
                                   <td className="text-center">
                                     <Icon.Edit2
                                       style={{ cursor: "pointer" }}
@@ -245,120 +323,128 @@ export default function ProdCategoryHeads() {
                         </tbody>
                       </Table>
                     </div>
-												{
-													prodCategoryHeadsState && prodCategoryHeadsState.pagination && (
-														<div>
-															<span>Rows per page</span>
-															<span className="mx-4">
-																{prodCategoryHeadsState.pagination.from}-{prodCategoryHeadsState.pagination.to}{" "}
-																of {prodCategoryHeadsState.pagination.count}
-															</span>
-			
-															<button
-																className={`pagination-button ${
-																	prodCategoryHeadsState.pagination.page == 1 ? "disabled" : ""
-																}`}
-																onClick={() => {
-																	getProdCategoryHeads(1, mainSearchString, noOfRec);
-																}}
-																type="button"
-															>
-																<span class="MuiIconButton-label">
-																	<svg
-																		class="MuiSvgIcon-root"
-																		focusable="false"
-																		viewBox="0 0 24 24"
-																		aria-hidden="true"
-																	>
-																		<path d="M18.41 16.59L13.82 12l4.59-4.59L17 6l-6 6 6 6zM6 6h2v12H6z"></path>
-																	</svg>
-																</span>
-															</button>
-															<button
-																className={`pagination-button ${
-																	prodCategoryHeadsState.pagination.page == 1 ? "disabled" : ""
-																}`}
-																onClick={() => {
-																	getProdCategoryHeads(
-																		prodCategoryHeadsState.pagination.prev,
-																		mainSearchString,
-																		noOfRec
-																	);
-																}}
-																type="button"
-															>
-																<span class="MuiIconButton-label">
-																	<svg
-																		class="MuiSvgIcon-root"
-																		focusable="false"
-																		viewBox="0 0 24 24"
-																		aria-hidden="true"
-																	>
-																		<path d="M15.41 16.59L10.83 12l4.58-4.59L14 6l-6 6 6 6 1.41-1.41z"></path>
-																	</svg>
-																</span>
-															</button>
-															<button
-																className={`pagination-button ${
-																	prodCategoryHeadsState.pagination.page ==
-																	prodCategoryHeadsState.pagination.last
-																		? "disabled"
-																		: ""
-																}`}
-																tabindex="0"
-																type="button"
-																onClick={() => {
-																	getProdCategoryHeads(
-																		prodCategoryHeadsState.pagination.next,
-																		mainSearchString,
-																		noOfRec
-																	);
-																}}
-															>
-																<span class="MuiIconButton-label">
-																	<svg
-																		class="MuiSvgIcon-root"
-																		focusable="false"
-																		viewBox="0 0 24 24"
-																		aria-hidden="true"
-																	>
-																		<path d="M8.59 16.59L13.17 12 8.59 7.41 10 6l6 6-6 6-1.41-1.41z"></path>
-																	</svg>
-																</span>
-																<span class="MuiTouchRipple-root"></span>
-															</button>
-			
-															<button
-																className={`pagination-button ${
-																	prodCategoryHeadsState.pagination.page ==
-																	prodCategoryHeadsState.pagination.last
-																		? "disabled"
-																		: ""
-																}`}
-																tabindex="0"
-																type="button"
-																onClick={() => {
-																	getProdCategoryHeads(
-																		prodCategoryHeadsState.pagination.last,
-																		mainSearchString,
-																		noOfRec
-																	);
-																}}
-															>
-																<span class="MuiIconButton-label">
-																	<svg
-																		class="MuiSvgIcon-root"
-																		focusable="false"
-																		viewBox="0 0 24 24"
-																		aria-hidden="true"
-																	>
-																		<path d="M5.59 7.41L10.18 12l-4.59 4.59L7 18l6-6-6-6zM16 6h2v12h-2z"></path>
-																	</svg>
-																</span>
-															</button>
-														</div>
-													)
-										}
+                    {prodCategoryHeadsState &&
+                      prodCategoryHeadsState.pagination && (
+                        <div>
+                          <span>Rows per page</span>
+                          <span className="mx-4">
+                            {prodCategoryHeadsState.pagination.from}-
+                            {prodCategoryHeadsState.pagination.to} of{" "}
+                            {prodCategoryHeadsState.pagination.count}
+                          </span>
+
+                          <button
+                            className={`pagination-button ${
+                              prodCategoryHeadsState.pagination.page == 1
+                                ? "disabled"
+                                : ""
+                            }`}
+                            onClick={() => {
+                              getProdCategoryHeads(
+                                1,
+                                mainSearchString,
+                                noOfRec
+                              );
+                            }}
+                            type="button"
+                          >
+                            <span class="MuiIconButton-label">
+                              <svg
+                                class="MuiSvgIcon-root"
+                                focusable="false"
+                                viewBox="0 0 24 24"
+                                aria-hidden="true"
+                              >
+                                <path d="M18.41 16.59L13.82 12l4.59-4.59L17 6l-6 6 6 6zM6 6h2v12H6z"></path>
+                              </svg>
+                            </span>
+                          </button>
+                          <button
+                            className={`pagination-button ${
+                              prodCategoryHeadsState.pagination.page == 1
+                                ? "disabled"
+                                : ""
+                            }`}
+                            onClick={() => {
+                              getProdCategoryHeads(
+                                prodCategoryHeadsState.pagination.prev,
+                                mainSearchString,
+                                noOfRec
+                              );
+                            }}
+                            type="button"
+                          >
+                            <span class="MuiIconButton-label">
+                              <svg
+                                class="MuiSvgIcon-root"
+                                focusable="false"
+                                viewBox="0 0 24 24"
+                                aria-hidden="true"
+                              >
+                                <path d="M15.41 16.59L10.83 12l4.58-4.59L14 6l-6 6 6 6 1.41-1.41z"></path>
+                              </svg>
+                            </span>
+                          </button>
+                          <button
+                            className={`pagination-button ${
+                              prodCategoryHeadsState.pagination.page ==
+                              prodCategoryHeadsState.pagination.last
+                                ? "disabled"
+                                : ""
+                            }`}
+                            tabindex="0"
+                            type="button"
+                            onClick={() => {
+                              getProdCategoryHeads(
+                                prodCategoryHeadsState.pagination.next,
+                                mainSearchString,
+                                noOfRec
+                              );
+                            }}
+                          >
+                            <span class="MuiIconButton-label">
+                              <svg
+                                class="MuiSvgIcon-root"
+                                focusable="false"
+                                viewBox="0 0 24 24"
+                                aria-hidden="true"
+                              >
+                                <path d="M8.59 16.59L13.17 12 8.59 7.41 10 6l6 6-6 6-1.41-1.41z"></path>
+                              </svg>
+                            </span>
+                            <span class="MuiTouchRipple-root"></span>
+                          </button>
+
+                          <button
+                            className={`pagination-button ${
+                              prodCategoryHeadsState.pagination.page ==
+                              prodCategoryHeadsState.pagination.last
+                                ? "disabled"
+                                : ""
+                            }`}
+                            tabindex="0"
+                            type="button"
+                            onClick={() => {
+                              getProdCategoryHeads(
+                                prodCategoryHeadsState.pagination.last,
+                                mainSearchString,
+                                noOfRec
+                              );
+                            }}
+                          >
+                            <span class="MuiIconButton-label">
+                              <svg
+                                class="MuiSvgIcon-root"
+                                focusable="false"
+                                viewBox="0 0 24 24"
+                                aria-hidden="true"
+                              >
+                                <path d="M5.59 7.41L10.18 12l-4.59 4.59L7 18l6-6-6-6zM16 6h2v12h-2z"></path>
+                              </svg>
+                            </span>
+                          </button>
+                        </div>
+                      )}
                   </div>
                 </div>
               </>

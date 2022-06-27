@@ -11,10 +11,14 @@ import {
   FormControl,
   Form,
   Pagination,
+	Image,
 } from "react-bootstrap";
 import AddAndEditProdCategories from "./AddAndEditProdCategories";
 import { prodApi } from "../../API/ProdCategoriesApis";
 import toast from "react-hot-toast";
+import csvSvg from "../../assets/svg/csv2.svg";
+import pdfSvg from "../../assets/svg/pdf.svg";
+
 
 export default function ProdCategories() {
   const [paginationNumbers, setPaginationNumbers] = useState();
@@ -122,6 +126,47 @@ export default function ProdCategories() {
     if (event.target.value == "") {
       getProdCategories(1, event.target.value, noOfRec);
     }
+	};
+	const handleGetPdf = async () => {
+    const loadingToastId = toast.loading("Loading..!");
+    try {
+      const result = await prodApi.getProdCategoriesPdf(mainSearchString);
+      debugger;
+      if (result.error === false) {
+        toast.dismiss(loadingToastId);
+        debugger;
+        window.open(`${result.data.file_path}`, "_blank");
+      } else {
+        toast.dismiss(loadingToastId);
+        console.log("error");
+        toast.error("error");
+      }
+    } catch (e) {
+      toast.dismiss(loadingToastId);
+			console.error(e);
+			toast.error("error",e);
+			
+    }
+  };
+
+	const handleGetCsv = async () => {
+		debugger;
+    const loadingToastId = toast.loading("Loading..!");
+    try {
+      const result = await prodApi.getProdCategoriesCsv(mainSearchString);
+      debugger;
+      if (result.error === false) {
+        toast.dismiss(loadingToastId);
+        debugger;
+        window.open(`${result.data.file_path}`, "_blank");
+      } else {
+        toast.dismiss(loadingToastId);
+        console.log("error");
+      }
+    } catch (e) {
+      toast.dismiss(loadingToastId);
+      console.error(e);
+    }
   };
 
   return (
@@ -140,7 +185,8 @@ export default function ProdCategories() {
                 getProdCategories={getProdCategories}
               />
             ) : (
-              <>
+									<>
+										<div className="d-flex">
                 <button
                   type="button"
                   className="btn btn-outline-primary col-sm-2 mb-4"
@@ -152,7 +198,33 @@ export default function ProdCategories() {
                   }}
                 >
                   Add Product Category
-                </button>
+											</button>
+											
+											
+										<div className="d-flex ml-auto">
+
+										<Image
+                    onClick={() => {
+                      handleGetCsv();
+                    }}
+                    className="clickableSvg"
+                    src={csvSvg}
+                    height="40px"
+                    width="60px"
+                    alt="Profile Image"
+                  />
+                  <Image
+                    onClick={() => {
+                      handleGetPdf();
+                    }}
+                    className="clickableSvg"
+                    src={pdfSvg}
+                    height="40px"
+                    width="60px"
+                    alt="Profile Image"
+												/>
+												</div>
+                </div>
                 <div className={`${isMobile ? "" : "d-flex"}`}>
                   <FormControl
                     type="text"

@@ -199,7 +199,7 @@ export default function AddAndEditProdCategoryHeads({
                     })
                   }
                 >
-                  Cancle
+                   Cancel
                 </Button>
                 <Button
                   onClick={() => {

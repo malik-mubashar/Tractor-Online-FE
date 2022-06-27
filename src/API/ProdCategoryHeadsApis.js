@@ -126,6 +126,60 @@ class ProdCategoryHeads {
           data: error.response.data,
         };
       });
+	};
+	
+	getProdCategoryHeadsPdf = async (searchString) => {
+		debugger;
+    return axios({
+      method: "get",
+      url: `${process.env.REACT_APP_API_LOCAL_PATH}product_category_heads.pdf?q%5Btitle_or_comments_cont%5D=${searchString}`,
+      headers: {
+        "Content-Type": "application/json;",
+        "access-token": `${user.accessToken}`,
+        client: `${user.client}`,
+        uid: `${user.uid}`,
+        mode: "no-cors",
+      },
+    })
+      .then((result) => {
+        return {
+          error: false,
+          data: result.data,
+        };
+      })
+      .catch((error) => {
+        return {
+          error: true,
+          data: error.response.data,
+        };
+      });
+	};
+	
+	getProdCategoryHeadsCsv = async (searchString) => {
+		debugger;
+    return axios({
+      method: "get",
+      url: `${process.env.REACT_APP_API_LOCAL_PATH}product_category_heads.csv?q%5Btitle_or_comments_cont%5D=${searchString}`,
+      headers: {
+        "Content-Type": "application/json;",
+        "access-token": `${user.accessToken}`,
+        client: `${user.client}`,
+        uid: `${user.uid}`,
+        mode: "no-cors",
+      },
+    })
+      .then((result) => {
+        return {
+          error: false,
+          data: result.data,
+        };
+      })
+      .catch((error) => {
+        return {
+          error: true,
+          data: error.response.data,
+        };
+      });
   };
 }
 
