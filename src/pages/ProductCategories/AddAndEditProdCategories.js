@@ -14,7 +14,14 @@ export default function AddAndEditProdCategories({
       ...prodCategoriesState,
       [evt.target.name]: evt.target.value,
     });
-  }
+	}
+	
+	const handlePictureUpload = (pic) => {
+		setProdCategoriesState({
+      ...prodCategoriesState,
+      image: pic,
+    });
+	}
 
   const addProdCategory = async (params) => {
     const loadingToastId = toast.loading("Loading..!");
@@ -81,7 +88,20 @@ export default function AddAndEditProdCategories({
                     placeholder="Enter Product Category Name"
                     onChange={(e) => handleChange(e)}
                   />
-                </Form.Group>
+								</Form.Group>
+								
+								<Form.Group as={Col} className="mt-4">
+                      <Form.Label>Upload New Picture</Form.Label>
+                      <Form.Control
+                        type="file"
+                        placeholder=""
+                        className="form-control"
+                        multiple
+                        onChange={(e) => {
+                          handlePictureUpload(e.target.files[0]);
+                        }}
+                      />
+                    </Form.Group>
 
                 {/* <Form.Group controlId="formBasicComments">
                   <Form.Label>Status</Form.Label>

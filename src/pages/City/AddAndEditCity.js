@@ -10,14 +10,21 @@ export default function AddAndEditCity({ cityState, setCityState, getCities }) {
       ...cityState,
       [evt.target.name]: evt.target.value,
     });
-  }
+	}
+	const handlePictureUpload = (pic) => {		
+		setCityState({
+      ...cityState,
+      image: pic,
+    });
+	}
+
 
   const addCity = async (params) => {
     const loadingToastId = toast.loading("Loading..!");
 
     if (cityState.isAddCity) {
       try {
-        const result = await city.addCity(cityState.title, cityState.comments);
+        const result = await city.addCity(cityState.title, cityState.comments, cityState.image);
         console.log(result);
         if ((result.error == false)) {
           toast.dismiss(loadingToastId);
@@ -87,7 +94,20 @@ export default function AddAndEditCity({ cityState, setCityState, getCities }) {
                     placeholder="Comments"
                     onChange={(e) => handleChange(e)}
                   />
-                </Form.Group>
+								</Form.Group>
+								<Form.Group >
+                      <Form.Label>Upload New Picture</Form.Label>
+									<Form.Control
+									style={{padding:"2px"}}
+                        type="file"
+                        placeholder=""
+                        className="form-control"
+                        multiple
+                        onChange={(e) => {
+                          handlePictureUpload(e.target.files[0]);
+                        }}
+                      />
+                    </Form.Group>
                 <Button
                   className="mr-3"
                   variant="secondary"

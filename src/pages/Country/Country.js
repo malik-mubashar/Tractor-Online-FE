@@ -11,7 +11,7 @@ import {
   FormControl,
   Form,
   Pagination,
-	Image,
+  Image,
 } from "react-bootstrap";
 import AddAndEditCountry from "./AddAndEditCountry";
 import { country } from "../../API/Country/CountryApis";
@@ -27,12 +27,12 @@ export default function Country() {
     getCountries(1, "", 10);
   }, []);
 
-	const getCountries = async (page, mainSearch, noOfRec) => {
-		const loadingToastId = toast.loading("Loading..!");
+  const getCountries = async (page, mainSearch, noOfRec) => {
+    const loadingToastId = toast.loading("Loading..!");
     try {
       const result = await country.getCountries(page, mainSearch, noOfRec);
-			if (result.error == false && result.data.status == "success") {
-				toast.dismiss(loadingToastId);
+      if (result.error == false && result.data.status == "success") {
+        toast.dismiss(loadingToastId);
         setCountryState({
           ...countryState,
           countries: result.data.data,
@@ -46,29 +46,32 @@ export default function Country() {
           temp.push(i);
         }
         setPaginationNumbers(temp);
-			} else {
-				toast.dismiss(loadingToastId);
+      } else {
+        toast.dismiss(loadingToastId);
         console.error(result.data);
       }
-		} catch (error) {
-			toast.dismiss(loadingToastId);
+    } catch (error) {
+      toast.dismiss(loadingToastId);
       console.error(error);
     }
   };
 
-	const deleteCountry = async (id) => {
-		const loadingToastId = toast.loading("Loading..!");
+  const deleteCountry = async (id) => {
+    const loadingToastId = toast.loading("Loading..!");
     try {
-			const result = await country.deleteCountry(id);
-			 
-      if (result.error == false && result.data.notice == "Country was successfully removed.") {
-				toast.dismiss(loadingToastId);
-				toast.success("Successfully deleted!");
+      const result = await country.deleteCountry(id);
 
-				getCountries(1, "", 10);
+      if (
+        result.error == false &&
+        result.data.notice == "Country was successfully removed."
+      ) {
+        toast.dismiss(loadingToastId);
+        toast.success("Successfully deleted!");
+
+        getCountries(1, "", 10);
       }
-		} catch (error) {
-			toast.dismiss(loadingToastId);
+    } catch (error) {
+      toast.dismiss(loadingToastId);
       console.error(error);
     }
   };
@@ -115,14 +118,12 @@ export default function Country() {
     if (event.target.value == "") {
       getCountries(1, event.target.value, noOfRec);
     }
-	};
-	
-	const handleGetPdf = async () => {
+  };
+
+  const handleGetPdf = async () => {
     const loadingToastId = toast.loading("Loading..!");
     try {
-      const result = await country.getCountriesPdf(
-        mainSearchString
-      );
+      const result = await country.getCountriesPdf(mainSearchString);
       debugger;
       if (result.error === false) {
         toast.dismiss(loadingToastId);
@@ -144,9 +145,7 @@ export default function Country() {
     debugger;
     const loadingToastId = toast.loading("Loading..!");
     try {
-      const result = await country.getCountriesCsv(
-        mainSearchString
-      );
+      const result = await country.getCountriesCsv(mainSearchString);
       debugger;
       if (result.error === false) {
         toast.dismiss(loadingToastId);
@@ -170,10 +169,10 @@ export default function Country() {
         <Navigation onClick={() => onSideMenu} />
         <div className="countryPage">
           <div className={`main-content d-flex flex-column`}>
-						{countryState.isViewCountry ? (
-						<></>
-              // <ViewCountry countryState={countryState} setCountryState={setCountryState} />
-            ) : countryState.isAddCountry === true ||
+            {countryState.isViewCountry ? (
+              <></>
+            ) : // <ViewCountry countryState={countryState} setCountryState={setCountryState} />
+            countryState.isAddCountry === true ||
               countryState.isEditCountry === true ? (
               <AddAndEditCountry
                 countryState={countryState}
@@ -182,20 +181,20 @@ export default function Country() {
               />
             ) : (
               <>
-										<div className="d-flex">
-                <button
-                  type="button"
-                  className="btn btn-outline-primary col-sm-2 mb-4"
-                  onClick={() => {
-                    setCountryState({
-                      ...countryState,
-                      isAddCountry: true,
-                    });
-                  }}
-                >
-                  Add Country
-										</button>
-										<div className="d-flex ml-auto">
+                <div className="d-flex">
+                  <button
+                    type="button"
+                    className="btn btn-outline-primary col-sm-2 mb-4"
+                    onClick={() => {
+                      setCountryState({
+                        ...countryState,
+                        isAddCountry: true,
+                      });
+                    }}
+                  >
+                    Add Country
+                  </button>
+                  <div className="d-flex ml-auto">
                     <Image
                       onClick={() => {
                         handleGetCsv();
@@ -227,8 +226,9 @@ export default function Country() {
                   />
                   <select
                     onChange={(e) => {
-													setNoOfRec(e.target.value);
-													getCountries(1, mainSearchString, e.target.value);                    }}
+                      setNoOfRec(e.target.value);
+                      getCountries(1, mainSearchString, e.target.value);
+                    }}
                     className={`${
                       isMobile ? "mt-3" : "adjustNoOfRecSelect"
                     } form-control col-4 mb-2`}
@@ -282,8 +282,7 @@ export default function Country() {
                                 <td className="text-center">
                                   <Icon.Edit2
                                     style={{ cursor: "pointer" }}
-																		onClick={() => {
-																			 
+                                    onClick={() => {
                                       setCountryState({
                                         ...countryState,
                                         isEditCountry: true,
@@ -306,97 +305,119 @@ export default function Country() {
                         </tbody>
                       </Table>
                     </div>
-                    <div
-                      className={`${isMobile ? "" : "d-flex"}`}
-                      style={{ justifyContent: "space-between" }}
-                    >
-                      {countryState.pagination && (
-                        <>
-                          <Pagination>
-                            <Pagination.First
-                              disabled={
-                                countryState.pagination.page == 1 ? true : false
-                              }
-                              onClick={() => {
-                                getCountries(1, mainSearchString, noOfRec);
-                              }}
-                            />
-                            <Pagination.Prev
-                              disabled={
-                                countryState.pagination.page == 1 ? true : false
-                              }
-                              onClick={() => {
-                                getCountries(
-                                  countryState.pagination.prev,
-                                  mainSearchString,
-                                  noOfRec
-                                );
-                              }}
-                            />
-                            {paginationNumbers &&
-                              paginationNumbers.map((item) => {
-                                return (
-                                  <Pagination.Item
-                                    disabled={
-                                      countryState.pagination.page == item
-                                        ? true
-                                        : false
-                                    }
-                                    key={item}
-                                    onClick={() => {
-                                      getCountries(
-                                        item,
-                                        mainSearchString,
-                                        noOfRec
-                                      );
-                                    }}
-                                    className="paginationButton"
-                                  >
-                                    {item}
-                                  </Pagination.Item>
-                                );
-                              })}
+                    {countryState && countryState.pagination && (
+                      <div>
+                        <span>Rows per page</span>
+                        <span className="mx-4">
+                          {countryState.pagination.from}-
+                          {countryState.pagination.to} of{" "}
+                          {countryState.pagination.count}
+                        </span>
 
-                            <Pagination.Next
-                              disabled={
-                                countryState.pagination.page ==
-                                countryState.pagination.last
-                                  ? true
-                                  : false
-                              }
-                              onClick={() => {
-                                getCountries(
-                                  countryState.pagination.next,
-                                  mainSearchString,
-                                  noOfRec
-                                );
-                              }}
-                            />
-                            <Pagination.Last
-                              onClick={() => {
-                                getCountries(
-                                  countryState.pagination.last,
-                                  mainSearchString,
-                                  noOfRec
-                                );
-                              }}
-                              disabled={
-                                countryState.pagination.page ==
-                                countryState.pagination.last
-                                  ? true
-                                  : false
-                              }
-                            />
-                          </Pagination>
+                        <button
+                          className={`pagination-button ${
+                            countryState.pagination.page == 1 ? "disabled" : ""
+                          }`}
+                          onClick={() => {
+                            getCountries(1, mainSearchString, noOfRec);
+                          }}
+                          type="button"
+                        >
+                          <span class="MuiIconButton-label">
+                            <svg
+                              class="MuiSvgIcon-root"
+                              focusable="false"
+                              viewBox="0 0 24 24"
+                              aria-hidden="true"
+                            >
+                              <path d="M18.41 16.59L13.82 12l4.59-4.59L17 6l-6 6 6 6zM6 6h2v12H6z"></path>
+                            </svg>
+                          </span>
+                        </button>
+                        <button
+                          className={`pagination-button ${
+                            countryState.pagination.page == 1 ? "disabled" : ""
+                          }`}
+                          onClick={() => {
+                            getCountries(
+                              countryState.pagination.prev,
+                              mainSearchString,
+                              noOfRec
+                            );
+                          }}
+                          type="button"
+                        >
+                          <span class="MuiIconButton-label">
+                            <svg
+                              class="MuiSvgIcon-root"
+                              focusable="false"
+                              viewBox="0 0 24 24"
+                              aria-hidden="true"
+                            >
+                              <path d="M15.41 16.59L10.83 12l4.58-4.59L14 6l-6 6 6 6 1.41-1.41z"></path>
+                            </svg>
+                          </span>
+                        </button>
+                        <button
+                          className={`pagination-button ${
+                            countryState.pagination.page ==
+                            countryState.pagination.last
+                              ? "disabled"
+                              : ""
+                          }`}
+                          tabindex="0"
+                          type="button"
+                          onClick={() => {
+                            getCountries(
+                              countryState.pagination.next,
+                              mainSearchString,
+                              noOfRec
+                            );
+                          }}
+                        >
+                          <span class="MuiIconButton-label">
+                            <svg
+                              class="MuiSvgIcon-root"
+                              focusable="false"
+                              viewBox="0 0 24 24"
+                              aria-hidden="true"
+                            >
+                              <path d="M8.59 16.59L13.17 12 8.59 7.41 10 6l6 6-6 6-1.41-1.41z"></path>
+                            </svg>
+                          </span>
+                          <span class="MuiTouchRipple-root"></span>
+                        </button>
 
-                          <div style={{ marginTop: "25px" }}>
-                            displaying {countryState.pagination.from} to{" "}
-                            {countryState.pagination.to} of total{" "}
-                            {countryState.pagination.count}
-                          </div>
-                        </>
-                      )}
-                    </div>
+                        <button
+                          className={`pagination-button ${
+                            countryState.pagination.page ==
+                            countryState.pagination.last
+                              ? "disabled"
+                              : ""
+                          }`}
+                          tabindex="0"
+                          type="button"
+                          onClick={() => {
+                            getCountries(
+                              countryState.pagination.last,
+                              mainSearchString,
+                              noOfRec
+                            );
+                          }}
+                        >
+                          <span class="MuiIconButton-label">
+                            <svg
+                              class="MuiSvgIcon-root"
+                              focusable="false"
+                              viewBox="0 0 24 24"
+                              aria-hidden="true"
+                            >
+                              <path d="M5.59 7.41L10.18 12l-4.59 4.59L7 18l6-6-6-6zM16 6h2v12h-2z"></path>
+                            </svg>
+                          </span>
+                        </button>
+                      </div>
+                    )}
                   </div>
                 </div>
               </>

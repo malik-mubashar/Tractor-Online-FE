@@ -21,21 +21,22 @@ export default function AddAndEditProdSubCategories({
     const loadingToastId = toast.loading("Loading..!");
 
     try {
-      const result = await prodCategoryHeadsApi.getProdCategoryHeads(1, "", 1000000000000);
+      const result = await prodCategoryHeadsApi.getProdCategoryHeads(
+        1,
+        "",
+        1000000000000
+      );
       if (result.error === false && result.data.status === "success") {
         toast.dismiss(loadingToastId);
         debugger;
-				setProductCategoryHeads(result.data.data);
-				
-				if (
-					prodSubCategoriesState.isAddProdSubCategory		
-				) {
-					
-					setProdSubCategoriesState({
-						...prodSubCategoriesState,
-						product_category_head_id:result.data.data[0].id
-					})
-				}
+        setProductCategoryHeads(result.data.data);
+
+        if (prodSubCategoriesState.isAddProdSubCategory) {
+          setProdSubCategoriesState({
+            ...prodSubCategoriesState,
+            product_category_head_id: result.data.data[0].id,
+          });
+        }
       } else {
         toast.dismiss(loadingToastId);
         console.error(result.data);
@@ -52,6 +53,12 @@ export default function AddAndEditProdSubCategories({
       [evt.target.name]: evt.target.value,
     });
   }
+  const handlePictureUpload = (pic) => {
+    setProdSubCategoriesState({
+      ...prodSubCategoriesState,
+      image: pic,
+    });
+  };
 
   const addProdSubCategory = async (params) => {
     const loadingToastId = toast.loading("Loading..!");
@@ -158,9 +165,17 @@ export default function AddAndEditProdSubCategories({
                   >
                     {productCategoryHeads &&
                       productCategoryHeads.map((item) => {
-                        return <option
-												selected={prodSubCategoriesState.product_category_head_id==item.id}
-													value={item.id}>{item.title}</option>;
+                        return (
+                          <option
+                            selected={
+                              prodSubCategoriesState.product_category_head_id ==
+                              item.id
+                            }
+                            value={item.id}
+                          >
+                            {item.title}
+                          </option>
+                        );
                       })}
                   </Form.Control>
                 </Form.Group>
@@ -187,6 +202,19 @@ export default function AddAndEditProdSubCategories({
                     onChange={(e) => handleChange(e)}
                   />
                 </Form.Group>
+                <Form.Group>
+                  <Form.Label>Upload New Picture</Form.Label>
+                  <Form.Control
+                    style={{ padding: "2px" }}
+                    type="file"
+                    placeholder=""
+                    className="form-control"
+                    multiple
+                    onChange={(e) => {
+                      handlePictureUpload(e.target.files[0]);
+                    }}
+                  />
+                </Form.Group>
                 <Button
                   className="mr-3"
                   variant="secondary"
@@ -198,7 +226,7 @@ export default function AddAndEditProdSubCategories({
                     })
                   }
                 >
-                   Cancel
+                  Cancel
                 </Button>
                 <Button
                   onClick={() => {

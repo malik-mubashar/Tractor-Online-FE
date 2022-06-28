@@ -14,7 +14,13 @@ export default function AddAndEditProdBrands({
       ...prodBrandsState,
       [evt.target.name]: evt.target.value,
     });
-  }
+	}
+	const handlePictureUpload = (pic) => {		
+		setProdBrandsState({
+      ...prodBrandsState,
+      image: pic,
+    });
+	}
 
   const addProdBrand = async (params) => {
     const loadingToastId = toast.loading("Loading..!");
@@ -121,6 +127,20 @@ export default function AddAndEditProdBrands({
                     onChange={(e) => handleChange(e)}
                   />
                 </Form.Group>
+
+								<Form.Group >
+                      <Form.Label>Upload New Picture</Form.Label>
+									<Form.Control
+									style={{padding:"2px"}}
+                        type="file"
+                        placeholder=""
+                        className="form-control"
+                        multiple
+                        onChange={(e) => {
+                          handlePictureUpload(e.target.files[0]);
+                        }}
+                      />
+                    </Form.Group>
                 <Button
                   className="mr-3"
                   variant="secondary"

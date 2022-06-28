@@ -114,13 +114,13 @@ class City {
         };
       });
   };
-	addCity = async (title, comments) => {
-		 
+	addCity = async (title, comments,img) => {
+		debugger;
     return axios({
       method: "post",
       url: `${process.env.REACT_APP_API_LOCAL_PATH}cities`,
       headers: {
-        "Content-Type": "application/json; charset=utf-8",
+        "Content-Type": "multipart/form-data",
 				"Access-Control-Allow-Origin": "*",
 				'Access-Control-Allow-Headers': '*',
 				"access-token": `${user.accessToken}`,
@@ -132,6 +132,7 @@ class City {
 			data: {
 				title: title,
 				comments: comments,
+				active_image: img
 			}
     })
 			.then((result) => {
