@@ -41,26 +41,26 @@ const ProfileSettings = () => {
 
   let history = useHistory();
 
-  useEffect(() => {
-    let fileReader,
-      isCancel = false;
-    if (editProfile.image) {
-      fileReader = new FileReader();
-      fileReader.onload = (e) => {
-        const { result } = e.target;
-        if (result && !isCancel) {
-          setFileDataURL(result);
-        }
-      };
-      fileReader.readAsDataURL(editProfile.image);
-    }
-    return () => {
-      isCancel = true;
-      if (fileReader && fileReader.readyState === 1) {
-        fileReader.abort();
-      }
-    };
-  }, [editProfile.image]);
+  // useEffect(() => {
+  //   let fileReader,
+  //     isCancel = false;
+  //   if (editProfile.image) {
+  //     fileReader = new FileReader();
+  //     fileReader.onload = (e) => {
+  //       const { result } = e.target;
+  //       if (result && !isCancel) {
+  //         setFileDataURL(result);
+  //       }
+  //     };
+  //     fileReader.readAsDataURL(editProfile.image);
+  //   }
+  //   return () => {
+  //     isCancel = true;
+  //     if (fileReader && fileReader.readyState === 1) {
+  //       fileReader.abort();
+  //     }
+  //   };
+  // }, [editProfile.image]);
 
   useEffect(() => { 
     handlePersonalDetail();
@@ -127,6 +127,7 @@ const ProfileSettings = () => {
     setSideMenu(active);
   };
 
+	// handle change
   const handleUpdateProfile = (value, target) => {
     setEditProfile({
       ...editProfile,
@@ -144,14 +145,13 @@ const ProfileSettings = () => {
   const updateProfile = async (e) => {
     e.preventDefault();
     try {
-      let formData = new FormData();
-      formData.append("user[profile]", editProfile.image);
+      // let formData = new FormData();
+      // formData.append("user[profile]", editProfile.image);
       const result = await user.profile(
         editProfile,
         userPersonalDetail.personal_detail
           ? userPersonalDetail.personal_detail.id
-          : "",
-        formData
+          : null
       );
       if (result.error === false) {
         history.push("/profile/");
@@ -161,7 +161,10 @@ const ProfileSettings = () => {
 
   const modalClose = () => {
     setModalShow(!modalShow);
-  };
+	};
+	
+	console.log('editProfile',editProfile)
+	console.log('fileData',fileDataURL)
 
   return (
     <>

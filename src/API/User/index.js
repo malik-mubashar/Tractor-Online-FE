@@ -66,7 +66,8 @@ class User {
         };
       });
   };
-  profile = async (profile, personal_id, formData) => {
+	profile = async (profile, personal_id, formData) => {
+		debugger;
     let personal_detail = personal_id
       ? {
           id: personal_id,
@@ -76,7 +77,7 @@ class User {
           gender: profile.gender,
           username: profile.username,
           phone_number: profile.phone,
-          language: profile.language
+				language: profile.language
         }
       : {
           city: profile.city,
@@ -85,16 +86,23 @@ class User {
           gender: profile.gender,
           username: profile.username,
           phone_number: profile.phone,
-          language: profile.language
+				language: profile.language
+					
         };
 
     return axios({
       method: "patch",
       url: `${process.env.REACT_APP_API_LOCAL_PATH}auth`,
-      headers: Headers,
-      data: {
+			headers: {
+				"Content-Type": "multipart/form-data; charset=utf-8",
+        "Access-Control-Allow-Origin": "*",
+        mode: "no-cors"
+			},
+			data: {
+				profile:profile.image,
+
         // profile:formData,
-        title: profile.title,
+        // title: profile.title,
         personal_detail_attributes: personal_detail
       }
     })

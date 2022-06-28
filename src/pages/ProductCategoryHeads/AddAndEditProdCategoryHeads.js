@@ -15,7 +15,7 @@ export default function AddAndEditProdCategoryHeads({
 
   const [productCategories, setProductCategories] = useState();
 
-	const getProdCategories = async () => {
+  const getProdCategories = async () => {
     debugger;
     const loadingToastId = toast.loading("Loading..!");
 
@@ -24,16 +24,13 @@ export default function AddAndEditProdCategoryHeads({
       if (result.error === false && result.data.status === "success") {
         toast.dismiss(loadingToastId);
         debugger;
-				setProductCategories(result.data.data);
-				if (
-					prodCategoryHeadsState.isAddProdCategoryHead		
-				) {
-					
-					setProdCategoryHeadsState({
-						...prodCategoryHeadsState,
-						product_category_id:result.data.data[0].id
-					})
-				}
+        setProductCategories(result.data.data);
+        if (prodCategoryHeadsState.isAddProdCategoryHead) {
+          setProdCategoryHeadsState({
+            ...prodCategoryHeadsState,
+            product_category_id: result.data.data[0].id,
+          });
+        }
       } else {
         toast.dismiss(loadingToastId);
         console.error(result.data);
@@ -51,8 +48,15 @@ export default function AddAndEditProdCategoryHeads({
     });
   }
 
-	const addProdCategoryHead = async (params) => {
-		debugger;
+  const handlePictureUpload = (pic) => {
+    setProdCategoryHeadsState({
+      ...prodCategoryHeadsState,
+      image: pic,
+    });
+  };
+
+  const addProdCategoryHead = async (params) => {
+    debugger;
     const loadingToastId = toast.loading("Loading..!");
 
     if (prodCategoryHeadsState.isAddProdCategoryHead) {
@@ -157,11 +161,18 @@ export default function AddAndEditProdCategoryHeads({
                     name="product_category_id"
                   >
                     {productCategories &&
-											productCategories.map((item) => {
-											
-												return <option value={item.id}
-												selected={prodCategoryHeadsState.product_category_id==item.id}
-												>{item.title}</option>;
+                      productCategories.map((item) => {
+                        return (
+                          <option
+                            value={item.id}
+                            selected={
+                              prodCategoryHeadsState.product_category_id ==
+                              item.id
+                            }
+                          >
+                            {item.title}
+                          </option>
+                        );
                       })}
                   </Form.Control>
                 </Form.Group>
@@ -188,6 +199,20 @@ export default function AddAndEditProdCategoryHeads({
                     onChange={(e) => handleChange(e)}
                   />
                 </Form.Group>
+                <Form.Group>
+                  <Form.Label>Upload New Picture</Form.Label>
+                  <Form.Control
+                    style={{ padding: "2px" }}
+                    type="file"
+                    placeholder=""
+                    className="form-control"
+                    multiple
+                    onChange={(e) => {
+                      handlePictureUpload(e.target.files[0]);
+                    }}
+                  />
+                </Form.Group>
+
                 <Button
                   className="mr-3"
                   variant="secondary"
@@ -199,7 +224,7 @@ export default function AddAndEditProdCategoryHeads({
                     })
                   }
                 >
-                   Cancel
+                  Cancel
                 </Button>
                 <Button
                   onClick={() => {

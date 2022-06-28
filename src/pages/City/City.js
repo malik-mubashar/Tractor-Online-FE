@@ -192,6 +192,7 @@ export default function City() {
                   >
                     Add City
                   </button>
+									<div className="d-flex ml-auto">
 
 											<Image
 												onClick={() => {
@@ -213,6 +214,7 @@ export default function City() {
                     width="60px"
                     alt="Profile Image"
                   />
+                </div>
                 </div>
                 <div className={`${isMobile ? "" : "d-flex"}`}>
                   <FormControl
