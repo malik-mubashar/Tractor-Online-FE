@@ -96,33 +96,39 @@ const searchAble = () => {
             type="text"
             value={tractorModel}
             onChange={(e) => setTractorModel(e.target.value)}
-            className="ui-autocomplete-input form-control searchAble border-left-radius border-right"
+            className="ui-autocomplete-input form-control searchAble border-left-radius border-right px-2"
             autoComplete="off"
           />
         </li>
         <li className="col-2 px-0">
           <Select className="ui-autocomplete-input form-control searchAble border-right "
             options={cities}
-            setValue={setCountry}
+            //setValue={setCountry}
             label="Select City"
             value={country}
+            onChange={(e) => setCountry(e.label)}
+            clearable={false}
           />
         </li>
         <li className="col-1 px-0">
           <Select  className="ui-autocomplete-input form-control searchAble border-right"
             options={minPriceOptions}
-            setValue={setMinPrice}
+            // setValue={setMinPrice}
             label="Select Min Price "
             value={minPrice}
+             onChange={(e) => setMinPrice(e.label)}
+             clearable={false}
             
           />
         </li>
         <li className="col-1 px-0">
           <Select  className="ui-autocomplete-input form-control searchAble border-right"
             options={maxPriceOptions}
-            setValue={setMaxPrice}
+            // setValue={setMaxPrice}
             label="Select Max Price"
             value={maxPrice}
+            onChange={(e) => setMaxPrice(e.label)}
+            clearable={false}
           />
         </li>
         <li>

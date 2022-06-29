@@ -88,7 +88,7 @@ export default function AddAndEditProduct({
         console.log(result);
         if (result.error == false) {
           toast.dismiss(loadingToastId);
-          toast.success("City created!");
+          toast.success("Product created!");
           setProductsState({
             ...productsState,
             isAddProduct: false,
