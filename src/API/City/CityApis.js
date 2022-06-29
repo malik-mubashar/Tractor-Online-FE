@@ -30,7 +30,7 @@ class City {
   getAllCity = async () => {
     return axios({
       method: "get",
-      url: `${process.env.REACT_APP_API_LOCAL_PATH}all_cities?no_of_record=10000000&page=1`,
+      url: `${process.env.REACT_APP_API_LOCAL_PATH}all_cities`,
       headers: Headers
     })
       .then((result) => {
