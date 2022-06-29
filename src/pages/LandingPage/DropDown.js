@@ -15,6 +15,7 @@ export default function DropDown({
   plantAndHortiCulture,
   productHead,
   cities,
+  brands,
 }) {
   const history = useHistory();
 
@@ -225,7 +226,7 @@ console.log(cities)
                         className="dropdown-link"
                         
                       >
-                        <p className="city-name">{item.name}</p>
+                        <p className="city-name">{item.title}</p>
                       </Link>
                     </li>
                   ))}
@@ -237,14 +238,16 @@ console.log(cities)
                     <strong>Popular Models</strong>
                   </Link>
                 </li>
-                {model.map((item, i) => (
+  
+                {brands &&
+                brands.map((item, i) => (
                   <li key={i}>
                     <Link
                       to="/"
                       className="dropdown-link"
                       title="Used Cars for sale in Karachi"
                     >
-                      <p className="city-name">{item}</p>
+                      <p className="city-name">{item.title}</p>
                     </Link>
                   </li>
                 ))}

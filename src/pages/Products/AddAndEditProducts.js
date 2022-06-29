@@ -1,7 +1,8 @@
-import React, { useEffect } from "react";
+import React, { useRef, useState } from "react";
 import { Button, Col, Form, Row } from "react-bootstrap";
 import toast, { Toaster } from "react-hot-toast";
 import { productApis } from "../../API/ProductApis";
+import Icofont from 'react-icofont';
 
 export default function AddAndEditProduct({
   productsState,
@@ -14,13 +15,76 @@ export default function AddAndEditProduct({
       [evt.target.name]: evt.target.value,
     });
   }
+  const myRefname = useRef(null);
 
+  const [file, setFile] = useState([]);
+
+  function uploadSingleFile(e) {
+    
+    let ImagesArray = Object.entries(e.target.files).map((e) =>
+      URL.createObjectURL(e[1])
+    );
+    console.log(ImagesArray);
+    setFile([...ImagesArray]);
+    console.log("file", file);
+  
+    // let tempArr= [];
+    // debugger;
+    // let ImagesArray = Object.entries(e.target.files).map((e) => {
+
+    //   tempArr.push(e[1]);
+    // });
+    // console.log(ImagesArray);
+    // setFile([...file, ...ImagesArray]);
+    // console.log("file", file);
+    // setProductsState({
+    //   ...productsState,
+    //   images: [...file, ...ImagesArray],
+    // });
+    setProductsState({
+      ...productsState,
+      images: e.target.files,
+    });
+  }
+
+  function upload(e) {
+    e.preventDefault();
+    console.log(file);
+  }
+
+  function deleteFile(e) {
+    const s = file.filter((item, index) => index !== e);
+    setFile(s);
+    const input = document.getElementById('multi-img-field')
+    const fileListArr = Array.from(input.files)
+    fileListArr.splice(e, e) // here u remove the file
+    debugger
+    setProductsState({
+      ...productsState,
+      images: fileListArr,
+    });
+    console.log(s);
+  }
   const addProduct = async (params) => {
     const loadingToastId = toast.loading("Loading..!");
+    let formData = new FormData()
+    debugger;
+    for (const key of Object.keys(productsState.images)) {
+      debugger;
+      formData.append('active_images[]', productsState.images[key])
+  }
+  formData.append('title',productsState.title)
+  formData.append('status',productsState.status)
+  formData.append('description',productsState.description)
+  formData.append('price',productsState.price)
+  formData.append('location',productsState.location)
+  formData.append('link',productsState.link)
+  formData.append('extra_fields',productsState.extra_fields)
+
 
     if (productsState.isAddProduct) {
       try {
-        const result = await productApis.addProduct(productsState);
+        const result = await productApis.addProduct(productsState,formData);
         console.log(result);
         if (result.error == false) {
           toast.dismiss(loadingToastId);
@@ -62,12 +126,12 @@ export default function AddAndEditProduct({
             <div className="card-body">
               <div className="card-header">
                 <h5 className="card-title">
-                  {productsState.isAddProduct
-                    ? "Add Product"
-                    : "Edit Product"}
+                  {productsState.isAddProduct ? "Add Product" : "Edit Product"}
                 </h5>
               </div>
               <Form>
+                
+              
                 <Form.Group controlId="formBasicName">
                   <Form.Label>Title</Form.Label>
                   <Form.Control
@@ -88,8 +152,8 @@ export default function AddAndEditProduct({
                     placeholder="description"
                     onChange={(e) => handleChange(e)}
                   />
-								</Form.Group>
-								<Form.Group controlId="formBasicComments">
+                </Form.Group>
+                <Form.Group controlId="formBasicComments">
                   <Form.Label>Price</Form.Label>
                   <Form.Control
                     defaultValue={productsState.price}
@@ -98,8 +162,8 @@ export default function AddAndEditProduct({
                     placeholder="price"
                     onChange={(e) => handleChange(e)}
                   />
-								</Form.Group>
-								<Form.Group controlId="formBasicComments">
+                </Form.Group>
+                <Form.Group controlId="formBasicComments">
                   <Form.Label>Location</Form.Label>
                   <Form.Control
                     defaultValue={productsState.location}
@@ -108,8 +172,8 @@ export default function AddAndEditProduct({
                     placeholder="location"
                     onChange={(e) => handleChange(e)}
                   />
-								</Form.Group>
-								<Form.Group controlId="formBasicComments">
+                </Form.Group>
+                <Form.Group controlId="formBasicComments">
                   <Form.Label>link</Form.Label>
                   <Form.Control
                     defaultValue={productsState.link}
@@ -118,8 +182,8 @@ export default function AddAndEditProduct({
                     placeholder="link"
                     onChange={(e) => handleChange(e)}
                   />
-								</Form.Group>
-								<Form.Group controlId="formBasicComments">
+                </Form.Group>
+                <Form.Group controlId="formBasicComments">
                   <Form.Label>Extra Fileds</Form.Label>
                   <Form.Control
                     defaultValue={productsState.extra_fields}
@@ -143,6 +207,51 @@ export default function AddAndEditProduct({
                     <option value="deleted">deleted</option>
                   </Form.Control>
                 </Form.Group>
+                <div className="form-group preview row">
+                  {file &&
+                    file.length > 0 &&
+                    file.map((item, index) => {
+                      return (
+                        <div key={item} className="col-1">
+                          <img src={item} alt="" height="70px" width="70px" />
+                          <button
+                            type="button"
+                            className="close-btn"
+                            onClick={() => deleteFile(index)}
+                          >
+                            <Icofont 
+                              icon="close-circled text-danger" 
+                              className="icofont-2x"
+                            />
+                          </button>
+                        </div>
+                      );
+                    })}
+                </div>
+                {file && file.length} selected
+
+                <div className="form-group">
+                  <input
+                    ref={myRefname}
+                    type="file"
+                    id="multi-img-field"
+                    disabled={file && file.length === 5}
+                    className="form-control d-none"
+                    onChange={uploadSingleFile}
+                    multiple
+                  />
+                  <span
+                    className="btn btn-primary"
+                    onClick={() => {
+                      debugger;
+                      myRefname.current.click();
+                      
+                    }}
+                  >
+                    choose file{" "}
+                  </span>
+                </div>
+
 
                 <Button
                   className="mr-3"
@@ -155,7 +264,7 @@ export default function AddAndEditProduct({
                     })
                   }
                 >
-                   Cancel
+                  Cancel
                 </Button>
                 <Button
                   onClick={() => {
