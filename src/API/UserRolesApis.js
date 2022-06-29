@@ -1,13 +1,13 @@
-import axios from "axios";
+ import axios from "axios";
 
 //no_of_record=5&page=2
 var user = JSON.parse(window.localStorage.getItem("currentUser")) || null;
 
-class ProdBrands {
-  deleteProdBrand = async (id) => {
+class UserRoles {
+  deleteUserRole = async (id) => {
     return axios({
       method: "delete",
-      url: `${process.env.REACT_APP_API_LOCAL_PATH}product_brands/${id}`,
+      url: `${process.env.REACT_APP_API_LOCAL_PATH}users_roles/${id}`,
       headers: {
         "Content-Type": "application/json; charset=utf-8",
         "Access-Control-Allow-Origin": "*",
@@ -31,10 +31,10 @@ class ProdBrands {
         };
       });
   };
-  updateProdBrand = async (prodBrandsState) => {
+  updateUserRole = async (rolesState) => {
     return axios({
       method: "put",
-      url: `${process.env.REACT_APP_API_LOCAL_PATH}product_brands/${prodBrandsState.prodCategoryId}`,
+      url: `${process.env.REACT_APP_API_LOCAL_PATH}users_roles/${rolesState.roleId}`,
       headers: {
         "Content-Type": "application/json; charset=utf-8",
         "Access-Control-Allow-Origin": "*",
@@ -45,9 +45,8 @@ class ProdBrands {
         mode: "no-cors",
       },
 			data: {
-        title: prodBrandsState.title,
-        status: prodBrandsState.status,
-        description: prodBrandsState.description,
+        title: rolesState.title,
+        status: rolesState.status,
       },
     })
       .then((result) => {
@@ -63,11 +62,11 @@ class ProdBrands {
         };
       });
   };
-	addProdBrand = async (prodBrandsState) => {
+	addUserRole = async (rolesState) => {
 		debugger;
     return axios({
       method: "post",
-      url: `${process.env.REACT_APP_API_LOCAL_PATH}product_brands`,
+      url: `${process.env.REACT_APP_API_LOCAL_PATH}users_roles`,
       headers: {
         "Content-Type": "application/json; charset=utf-8",
         "Access-Control-Allow-Origin": "*",
@@ -78,10 +77,8 @@ class ProdBrands {
         mode: "no-cors",
       },
 			data: {
-				title: prodBrandsState.title,
-        status: prodBrandsState.status,
-        description: prodBrandsState.description,
-				product_category_id:prodBrandsState.product_category_id
+        user_id:user.data.id ,
+        role_id: rolesState.role_id,
       },
     })
       .then((result) => {
@@ -98,11 +95,11 @@ class ProdBrands {
       });
   };
 
-	getProdBrands = async (page, searchString, noOfRec) => {
+	getUserRoles = async (page, searchString, noOfRec) => {
 		debugger;
     return axios({
       method: "get",
-      url: `${process.env.REACT_APP_API_LOCAL_PATH}product_brands?page=${page}&q%5Btitle_or_description_or_status_cont%5D=${searchString}&no_of_record=${noOfRec}`,
+      url: `${process.env.REACT_APP_API_LOCAL_PATH}users_roles?page=${page}&q%5Btitle_or_comments_cont%5D=${searchString}&no_of_record=${noOfRec}`,
       headers: {
         "Content-Type": "application/json;",
         "access-token": `${user.accessToken}`,
@@ -125,11 +122,11 @@ class ProdBrands {
       });
 	};
 	
-	getProdBrandsPdf = async (searchString) => {
+	getUserRolesPdf = async (searchString) => {
 		debugger;
     return axios({
       method: "get",
-      url: `${process.env.REACT_APP_API_LOCAL_PATH}product_brands.pdf?q%5Btitle_or_description_or_status_cont%5D=${searchString}`,
+      url: `${process.env.REACT_APP_API_LOCAL_PATH}users_roles.pdf?q%5Btitle_or_comments_cont%5D=${searchString}`,
       headers: {
         "Content-Type": "application/json;",
         "access-token": `${user.accessToken}`,
@@ -152,11 +149,11 @@ class ProdBrands {
       });
 	};
 	
-	getProdBrandsCsv = async (searchString) => {
+	getUserRolesCsv = async (searchString) => {
 		debugger;
     return axios({
       method: "get",
-      url: `${process.env.REACT_APP_API_LOCAL_PATH}product_brands.csv?q%5Btitle_or_description_or_status_cont%5D=${searchString}`,
+      url: `${process.env.REACT_APP_API_LOCAL_PATH}users_roles.csv?q%5Btitle_or_comments_cont%5D=${searchString}`,
       headers: {
         "Content-Type": "application/json;",
         "access-token": `${user.accessToken}`,
@@ -180,4 +177,4 @@ class ProdBrands {
   };
 }
 
-export let prodBrandsApis = new ProdBrands();
+export let userRolesApis = new UserRoles();

@@ -137,6 +137,15 @@ class SideMenuLight extends React.Component {
                 >
                   <Icon.Plus className="icon" />
                   Languages
+								</NavLink>
+								
+								<NavLink
+                  to="/userRoles/"
+                  className="dropdown-item"
+                  target="_blank"
+                >
+                  <Icon.Plus className="icon" />
+                  User Roles
                 </NavLink>
               </NavDropdown>
             </Nav>

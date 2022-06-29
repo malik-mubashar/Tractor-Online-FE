@@ -13,33 +13,38 @@ import {
   Pagination,
 } from "react-bootstrap";
 import toast from "react-hot-toast";
-import AddAndEditRole from "./AddAndEditRoles";
-import { roleApis } from "../../API/RolesApis";
+// import AddAndEditUserRoles from "./AddAndEditUserUserRoles";
+import { userRolesApis } from "../../API/UserRolesApis";
+import AddAndEditUserRoles from "./AddAndEditUserRoles";
+// import { userRoleApis } from "../../API/UserRolesApis";
 
-export default function Roles() {
+export default function UserRoles() {
+	var user = JSON.parse(window.localStorage.getItem("currentUser")) || null;
+	console.log('user',user)
   const [paginationNumbers, setPaginationNumbers] = useState();
   const [noOfRec, setNoOfRec] = useState(10);
   const [mainSearchString, setMainSearchString] = useState("");
   useEffect(() => {
-    getRoles(1, "", 10);
+    getUserRoles(1, "", 10);
   }, []);
 
-  const getRoles = async (page, mainSearch, noOfRec) => {
+  const getUserRoles = async (page, mainSearch, noOfRec) => {
     const loadingToastId = toast.loading("Loading..!");
 
     console.log(page);
     try {
-      const result = await roleApis.getRoles(page, mainSearch, noOfRec);
-      if (result.error == false && result.data.status == "success") {
+      const result = await userRolesApis.getUserRoles(page, mainSearch, noOfRec);
+			if (result.error == false && result.data.status == "success") {
+				debugger;
         toast.dismiss(loadingToastId);
 
-        setRolesState({
-          ...rolesState,
-          roles: result.data.data,
+        setUserRolesState({
+          ...userRolesState,
+          userRoles: result.data.data,
           pagination: result.data.pagination,
-          originalRoles: result.data.data,
-          isAddRole: false,
-          isEditRole: false,
+          originalUserRoles: result.data.data,
+          isAddUserRole: false,
+          isEditUserRole: false,
         });
         var temp = [];
         for (var i = 1; i <= result.data.pagination.pages; i++) {
@@ -56,17 +61,17 @@ export default function Roles() {
     }
   };
 
-  const deleteRole = async (id) => {
+  const deleteUserRole = async (id) => {
     const loadingToastId = toast.loading("Loading..!");
     try {
-      const result = await roleApis.deleteRole(id);
+      const result = await userRolesApis.deleteUserRole(id);
       debugger;
       if (
         result.error === false 
       ) {
         toast.dismiss(loadingToastId);
         toast.success("Successfully deleted!");
-        getRoles(1, "", 10);
+        getUserRoles(1, "", 10);
       }
       console.log(result);
     } catch (error) {
@@ -79,17 +84,16 @@ export default function Roles() {
     setSideMenu(active);
   }
 
-  const [rolesState, setRolesState] = useState({
-    isEditRole: false,
-    isAddRole: false,
-    roles: null,
-    originalRoles: null,
-    status: 'active',
+  const [userRolesState, setUserRolesState] = useState({
+    isEditUserRole: false,
+    isAddUserRole: false,
+    userRoles: null,
+    originalUserRoles: null,
   });
 
   const handleSearch = (searchString) => {
     if (searchString) {
-      const filteredRoles = rolesState.roles.filter((item) => {
+      const filteredUserRoles = userRolesState.userRoles.filter((item) => {
         return (
           item.title.toLowerCase().includes(searchString.toLowerCase()) ||
           (item.comments &&
@@ -98,14 +102,14 @@ export default function Roles() {
 							item.description.toLowerCase().includes(searchString.toLowerCase()))
         );
       });
-      setRolesState({
-        ...rolesState,
-        roles: filteredRoles,
+      setUserRolesState({
+        ...userRolesState,
+        userRoles: filteredUserRoles,
       });
     } else {
-      setRolesState({
-        ...rolesState,
-        roles: rolesState.originalRoles,
+      setUserRolesState({
+        ...userRolesState,
+        userRoles: userRolesState.originalUserRoles,
       });
     }
   };
@@ -113,43 +117,44 @@ export default function Roles() {
   const handleMainSearch = (event) => {
     setMainSearchString(event.target.value);
     if (event.keyCode == 13) {
-      getRoles(1, event.target.value, noOfRec);
+      getUserRoles(1, event.target.value, noOfRec);
     }
     if (event.target.value == "") {
-      getRoles(1, event.target.value, noOfRec);
+      getUserRoles(1, event.target.value, noOfRec);
     }
   };
 
-  console.log("rolesState in index", rolesState);
-  console.log("rolesState in index", noOfRec);
+  console.log("userRolesState in index", userRolesState);
+	console.log("userRolesState in index", noOfRec);
+	
   return (
     <>
       <>
         <Navigation onClick={() => onSideMenu} />
-        <div className="rolePage">
+        <div className="userRolePage">
           <div className={`main-content d-flex flex-column`}>
-            {rolesState.isViewRole ? (
+            {userRolesState.isViewUserRole ? (
 								<></>
-						): rolesState.isAddRole === true ||
-              rolesState.isEditRole === true ? (
-              <AddAndEditRole
-                rolesState={rolesState}
-                setRolesState={setRolesState}
-                getRoles={getRoles}
-              />
+						): userRolesState.isAddUserRole === true ||
+              userRolesState.isEditUserRole === true ? (
+									<AddAndEditUserRoles
+									userRolesState={userRolesState}
+									setUserRolesState={setUserRolesState}
+									getUserRoles={getUserRoles}
+									/>
             ) : (
               <>
                 <button
                   type="button"
                   className="btn btn-outline-primary col-sm-2 mb-4"
                   onClick={() => {
-                    setRolesState({
-                      ...rolesState,
-                      isAddRole: true,
+                    setUserRolesState({
+                      ...userRolesState,
+                      isAddUserRole: true,
                     });
                   }}
                 >
-                  Add Role
+                  Add UserRole
                 </button>
                 <div className={`${isMobile ? "" : "d-flex"}`}>
                   <FormControl
@@ -161,7 +166,7 @@ export default function Roles() {
                   <select
                     onChange={(e) => {
                       setNoOfRec(e.target.value);
-                      getRoles(1, mainSearchString, e.target.value);
+                      getUserRoles(1, mainSearchString, e.target.value);
                     }}
                     className={`${
                       isMobile ? "mt-3" : "adjustNoOfRecSelect"
@@ -186,7 +191,7 @@ export default function Roles() {
                 <div className="card mb-4">
                   <div className="card-body">
                     <div className="card-header d-flex">
-                      <h5 className="card-title w-50 float-left">Roles</h5>
+                      <h5 className="card-title w-50 float-left">UserRoles</h5>
                       <Form className="nav-search-form d-none d-sm-block float-right">
                         <FormControl
                           type="text"
@@ -202,34 +207,33 @@ export default function Roles() {
                         <thead>
                           <tr>
                             <th>Name</th>
-                            <th>Status</th>
+                            <th>Roles</th>
                             <th className="text-center">Action</th>
                           </tr>
                         </thead>
 
                         <tbody>
-                          {rolesState.roles &&
-                            rolesState.roles.map((role, idx) => (
+                          {userRolesState.userRoles &&
+                            userRolesState.userRoles.map((userRole, idx) => (
                               <tr key={idx}>
-                                <td>{role.title && role.title}</td>
-                                <td>{role.status && role.status}</td>
+                                <td>{user.data.email && user.data.email}</td>
+                                <td>{'admin'}</td>
                                 <td className="text-center">
                                   <Icon.Edit2
                                     style={{ cursor: "pointer" }}
                                     onClick={() => {
-                                      setRolesState({
-                                        ...rolesState,
-                                        isEditRole: true,
-                                        title: role.title,
-                                        status: role.status,
-                                        roleId: role.id,
+                                      setUserRolesState({
+                                        ...userRolesState,
+                                        isEditUserRole: true,
+                                        title: userRole.title,
+                                        userRoleId: userRole.id,
                                       });
                                     }}
                                     className="text-success mr-2 icon wh-15 mt-minus-3"
                                   />
                                   <Link className="text-danger mr-2">
                                     <Icon.X
-                                      onClick={() => deleteRole(role.id)}
+                                      onClick={() => deleteUserRole(userRole.id)}
                                       className="icon wh-15 mt-minus-3"
                                     />
                                   </Link>
@@ -239,20 +243,20 @@ export default function Roles() {
                         </tbody>
                       </Table>
                     </div>
-                    {rolesState && rolesState.pagination && (
+                    {userRolesState && userRolesState.pagination && (
                       <div>
                         <span>Rows per page</span>
                         <span className="mx-4">
-                          {rolesState.pagination.from}-{rolesState.pagination.to}{" "}
-                          of {rolesState.pagination.count}
+                          {userRolesState.pagination.from}-{userRolesState.pagination.to}{" "}
+                          of {userRolesState.pagination.count}
                         </span>
 
                         <button
                           className={`pagination-button ${
-                            rolesState.pagination.page == 1 ? "disabled" : ""
+                            userRolesState.pagination.page == 1 ? "disabled" : ""
                           }`}
                           onClick={() => {
-                            getRoles(1, mainSearchString, noOfRec);
+                            getUserRoles(1, mainSearchString, noOfRec);
                           }}
                           type="button"
                         >
@@ -269,11 +273,11 @@ export default function Roles() {
                         </button>
                         <button
                           className={`pagination-button ${
-                            rolesState.pagination.page == 1 ? "disabled" : ""
+                            userRolesState.pagination.page == 1 ? "disabled" : ""
                           }`}
                           onClick={() => {
-                            getRoles(
-                              rolesState.pagination.prev,
+                            getUserRoles(
+                              userRolesState.pagination.prev,
                               mainSearchString,
                               noOfRec
                             );
@@ -293,16 +297,16 @@ export default function Roles() {
                         </button>
                         <button
                           className={`pagination-button ${
-                            rolesState.pagination.page ==
-                            rolesState.pagination.last
+                            userRolesState.pagination.page ==
+                            userRolesState.pagination.last
                               ? "disabled"
                               : ""
                           }`}
                           tabindex="0"
                           type="button"
                           onClick={() => {
-                            getRoles(
-                              rolesState.pagination.next,
+                            getUserRoles(
+                              userRolesState.pagination.next,
                               mainSearchString,
                               noOfRec
                             );
@@ -323,16 +327,16 @@ export default function Roles() {
 
                         <button
                           className={`pagination-button ${
-                            rolesState.pagination.page ==
-                            rolesState.pagination.last
+                            userRolesState.pagination.page ==
+                            userRolesState.pagination.last
                               ? "disabled"
                               : ""
                           }`}
                           tabindex="0"
                           type="button"
                           onClick={() => {
-                            getRoles(
-                              rolesState.pagination.last,
+                            getUserRoles(
+                              userRolesState.pagination.last,
                               mainSearchString,
                               noOfRec
                             );

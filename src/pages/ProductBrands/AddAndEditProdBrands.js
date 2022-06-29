@@ -1,13 +1,41 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { Button, Col, Form, Row } from "react-bootstrap";
 import toast, { Toaster } from "react-hot-toast";
 import { prodBrandsApis } from "../../API/ProdBrandsApis";
+import { prodApi } from "../../API/ProdCategoriesApis";
 
 export default function AddAndEditProdBrands({
   prodBrandsState,
   setProdBrandsState,
   getProdBrands,
 }) {
+	useEffect(() => {
+		getProdCategories(1,'', 100000000)
+	}, [])
+	const [prodCategories, setProdCategories] = useState()
+	const getProdCategories = async (page, mainSearch, noOfRec) => {
+    const loadingToastId = toast.loading("Loading..!");
+
+    try {
+      const result = await prodApi.getProdCategories(page, mainSearch, noOfRec);
+      if (result.error === false && result.data.status == "success") {
+        toast.dismiss(loadingToastId);
+				setProdCategories(result.data.data);
+				if (prodBrandsState.isAddProdBrand) {
+          setProdBrandsState({
+            ...prodBrandsState,
+            product_category_id: result.data.data[0].id,
+          });
+        }
+      } else {
+        toast.dismiss(loadingToastId);
+        console.error(result.data);
+      }
+    } catch (error) {
+      toast.dismiss(loadingToastId);
+      console.error(error);
+    }
+  };
   function handleChange(evt) {
     debugger;
     setProdBrandsState({
@@ -126,7 +154,35 @@ export default function AddAndEditProdBrands({
                     placeholder="Description"
                     onChange={(e) => handleChange(e)}
                   />
+								</Form.Group>
+								
+
+								<Form.Group controlId="formGridState">
+                  <Form.Label>Select Product Category</Form.Label>
+                  <Form.Control
+                    as="select"
+                    value={prodBrandsState.status}
+                    onChange={(e) => handleChange(e)}
+                    name="product_category_id"
+									>
+										{
+									prodCategories && prodCategories.map((item) => {
+										return (
+											<>
+												<option
+													selected={
+														prodBrandsState.product_category_id ==
+														item.id
+													}
+													value={item.id}>{item.title}</option>
+											</>
+
+										)
+									})
+								}
+                  </Form.Control>
                 </Form.Group>
+								
 
 								<Form.Group >
                       <Form.Label>Upload New Picture</Form.Label>
