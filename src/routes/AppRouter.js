@@ -33,6 +33,7 @@ import ProdBrands from "../pages/ProductBrands/ProdBrands";
 import Languages from "../pages/Languages/Languages";
 import Products from "../pages/Products/Products";
 import Roles from "../pages/Roles/Roles";
+import UserRoles from "../pages/UserRoles/UserRoles";
 
 
 const AppRouter = () => {
@@ -83,6 +84,10 @@ const AppRouter = () => {
 
 					<ProtectedRoute exact path="/roles">
             <Roles />
+					</ProtectedRoute>
+
+					<ProtectedRoute exact path="/userRoles">
+            <UserRoles />
 					</ProtectedRoute>
 			
           <UnProtectedRoute exact path="/usedtractor">
