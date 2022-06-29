@@ -52,6 +52,7 @@ class Products {
         location: productsState.location,
         link: productsState.link,
         extra_fields: productsState.extra_fields,
+        active_images: productsState.images,
       },
     })
       .then((result) => {
@@ -67,13 +68,15 @@ class Products {
         };
       });
   };
-	addProduct = async (productsState) => {
-		debugger;
+	addProduct = async (productsState,formData) => {
+   
+
     return axios({
       method: "post",
       url: `${process.env.REACT_APP_API_LOCAL_PATH}products`,
+      //formData,
       headers: {
-        "Content-Type": "application/json; charset=utf-8",
+        "Content-Type": "multipart/form-data",
         "Access-Control-Allow-Origin": "*",
         "Access-Control-Allow-Headers": "*",
         "access-token": `${user.accessToken}`,
@@ -81,15 +84,9 @@ class Products {
         uid: `${user.uid}`,
         mode: "no-cors",
       },
-			data: {
-        title: productsState.title,
-        status: productsState.status,
-        description: productsState.description,
-        price: productsState.price,
-        location: productsState.location,
-        link: productsState.link,
-        extra_fields: productsState.extra_fields,
-      },
+
+    	data: formData,
+      
     })
       .then((result) => {
         return {

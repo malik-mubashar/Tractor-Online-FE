@@ -8,15 +8,7 @@ class ProdBrands {
     return axios({
       method: "delete",
       url: `${process.env.REACT_APP_API_LOCAL_PATH}product_brands/${id}`,
-      headers: {
-        "Content-Type": "application/json; charset=utf-8",
-        "Access-Control-Allow-Origin": "*",
-        "Access-Control-Allow-Headers": "*",
-        "access-token": `${user.accessToken}`,
-        client: `${user.client}`,
-        uid: `${user.uid}`,
-        mode: "no-cors",
-      },
+      headers: Headers,
     })
       .then((result) => {
         return {
@@ -35,15 +27,7 @@ class ProdBrands {
     return axios({
       method: "put",
       url: `${process.env.REACT_APP_API_LOCAL_PATH}product_brands/${prodBrandsState.prodCategoryId}`,
-      headers: {
-        "Content-Type": "application/json; charset=utf-8",
-        "Access-Control-Allow-Origin": "*",
-        "Access-Control-Allow-Headers": "*",
-        "access-token": `${user.accessToken}`,
-        client: `${user.client}`,
-        uid: `${user.uid}`,
-        mode: "no-cors",
-      },
+      headers: Headers,
 			data: {
         title: prodBrandsState.title,
         status: prodBrandsState.status,
@@ -103,13 +87,7 @@ class ProdBrands {
     return axios({
       method: "get",
       url: `${process.env.REACT_APP_API_LOCAL_PATH}product_brands?page=${page}&q%5Btitle_or_description_or_status_cont%5D=${searchString}&no_of_record=${noOfRec}`,
-      headers: {
-        "Content-Type": "application/json;",
-        "access-token": `${user.accessToken}`,
-        client: `${user.client}`,
-        uid: `${user.uid}`,
-        mode: "no-cors",
-      },
+      headers: Headers
     })
       .then((result) => {
         return {

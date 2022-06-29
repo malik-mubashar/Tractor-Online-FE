@@ -74,7 +74,7 @@ const searchAble = () => {
     result &&
       result.data &&
       result.data.data.map((item) =>
-        tempArray.push({ ...item, label: item.name, value: item.name })
+        tempArray.push({ ...item, label: item.title, value: item.title })
       );
     setCities(tempArray);
     console.log("city",tempArray)
