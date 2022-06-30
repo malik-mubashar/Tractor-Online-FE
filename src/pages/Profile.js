@@ -37,7 +37,7 @@ const Profile = () => {
     handlePersonalDetail();
   }, []);
   const handlePersonalDetail = async () => {
-    const result = await user.findUser(currentUser.data.id);
+    const result = await user.findUser(currentUser.id);
     setProfile(result.data);
   };
 
@@ -73,7 +73,7 @@ const Profile = () => {
               <Col lg={12}>
                 <div className="profile-header mb-4">
                   <Image
-                    src={currentUser.data.image ? "" : user1}
+                    src={currentUser.image ? "" : user1}
                     alt="Profle"
                     roundedCircle
                   />

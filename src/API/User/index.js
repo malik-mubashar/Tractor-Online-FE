@@ -7,10 +7,12 @@ Headers = {
   mode: "no-cors"
 };
 
-var currentUser = JSON.parse(window.localStorage.getItem("currentUser")) || null;
+const currentUser = JSON.parse(window.localStorage.getItem("currentUser")) || null;
+console.log('currentUser', currentUser)
 
 
 class User {
+	debugger;
   signUp = async (email, password, confirmPassword, fullName) => {
     return axios({
       method: "post",
@@ -29,8 +31,9 @@ class User {
     })
       .then((result) => {
         return {
-          error: false,
-          data: result.data
+					error: false,
+          data: result.data,
+          headers: result.headers
         };
       })
       .catch((error) => {
@@ -41,7 +44,8 @@ class User {
       });
   };
 
-  login = async (email, password) => {
+	login = async (email, password) => {
+		debugger;
     return axios({
       method: "post",
       url: `${process.env.REACT_APP_API_LOCAL_PATH}auth/sign_in`,
@@ -69,7 +73,7 @@ class User {
         };
       });
   };
-	profile = async (editProfile, personal_id) => {
+	profile = async (editProfile, personal_id,tempCurrentUser) => {
 		debugger;
     let personal_detail = personal_id
       ? {
@@ -100,9 +104,9 @@ class User {
 				"Content-Type": "application/json; charset=utf-8",
         "Access-Control-Allow-Origin": "*",
         "Access-Control-Allow-Headers": "*",
-        "access-token": `${currentUser.accessToken}`,
-        client: `${currentUser.client}`,
-        uid: `${currentUser.uid}`,
+        "access-token": `${tempCurrentUser.accessToken}`,
+        client: `${tempCurrentUser.client}`,
+        uid: `${tempCurrentUser.uid}`,
         mode: "no-cors",
 			},
 			data: {
@@ -155,12 +159,24 @@ class User {
         };
       });
   };
-	findUser = async (id) => {
+	findUser = async (tempCurrentUser) => {
+		debugger;
+		const client1 = JSON.parse(window.localStorage.getItem("currentUser")).client
+		const accessToken = JSON.parse(window.localStorage.getItem("currentUser")).accessToken
+		const uid1 = JSON.parse(window.localStorage.getItem("currentUser")).uid
 		debugger;
     return axios({
       method: "get",
-      url: `${process.env.REACT_APP_API_LOCAL_PATH}app_users/${id}`,
-      headers: Headers
+      url: `${process.env.REACT_APP_API_LOCAL_PATH}app_users/${tempCurrentUser.id}`,
+			headers: {
+				"Content-Type": "application/json; charset=utf-8",
+        "Access-Control-Allow-Origin": "*",
+        "Access-Control-Allow-Headers": "*",
+        "access-token": `${tempCurrentUser.accessToken}`,
+        client: `${tempCurrentUser.client}`,
+        uid: `${tempCurrentUser.uid}`,
+        mode: "no-cors",
+			}
     })
       .then((result) => {
         return {
