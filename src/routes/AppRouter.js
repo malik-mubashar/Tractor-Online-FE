@@ -16,6 +16,7 @@ import FourHandedFourError from "../pages/FourHandedFourError";
 import "../assets/css/style.css";
 import "../assets/css/responsive.css";
 import "../assets/css/dashboard.scss";
+import "../assets/css/landingPage.scss";
 import "../assets/css/usedTractor.scss";
 import "../assets/css/addDetails.scss";
 import ProtectedRoute from "../components/ProtectedRoutes/index";

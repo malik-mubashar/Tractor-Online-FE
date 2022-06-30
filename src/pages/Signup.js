@@ -139,7 +139,6 @@ const SignUp = () => {
                       <div className="text-center">
                         <Button
                           variant="primary"
-                          type="submit"
                           onClick={createUserAccount}
                         >
                           Sign Up
