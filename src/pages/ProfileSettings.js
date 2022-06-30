@@ -24,7 +24,7 @@ const ProfileSettings = () => {
     email: null,
     current_password: null,
     new_password: null,
-    confirm_password: null
+    confirm_password: null,
   });
   const [editProfile, setEditProfile] = useState({
     name: null,
@@ -36,7 +36,7 @@ const ProfileSettings = () => {
     gender: null,
     country: null,
     city: null,
-    username: null
+    username: null,
   });
 
   let history = useHistory();
@@ -62,14 +62,14 @@ const ProfileSettings = () => {
   //   };
   // }, [editProfile.image]);
 
-  useEffect(() => { 
+  useEffect(() => {
     handlePersonalDetail();
     handleDropDownOptions();
   }, []);
 
   const handleDropDownOptions = async () => {
-     const result = await city.getAllCities();
-     setCities(result.data && result.data.data);
+    const result = await city.getAllCities();
+    setCities(result.data && result.data.data);
     //setCities([]);
     // const response = await language.getAllLanguages();
     // setLanguageList(response.data && response.data.data);
@@ -81,11 +81,12 @@ const ProfileSettings = () => {
   };
 
   const handlePersonalDetail = async () => {
-    const result = await user.findUser(currentUser.data.id);
+		const result = await user.findUser(currentUser.data.id);
+		debugger;
     setUserPersonalDetail(result.data);
     setEditProfile({
       name: result.data && result.data.name,
-      image: result.data && result.data.image,
+      image: result.data && result.data.profile_path,
       language:
         result.data &&
         result.data.personal_detail &&
@@ -114,11 +115,11 @@ const ProfileSettings = () => {
       username:
         result.data &&
         result.data.personal_detail &&
-        result.data.personal_detail.username
+        result.data.personal_detail.username,
     });
     setUpdatePassword({
       ...updatePassword,
-      email: result.data && result.data.email
+      email: result.data && result.data.email,
     });
   };
 
@@ -127,26 +128,39 @@ const ProfileSettings = () => {
     setSideMenu(active);
   };
 
-	// handle change
+  // handle change
   const handleUpdateProfile = (value, target) => {
     setEditProfile({
       ...editProfile,
-      [target]: value
+      [target]: value,
     });
   };
 
   const handleUpdatePassword = (value, target) => {
     setUpdatePassword({
       ...updatePassword,
-      [target]: value
+      [target]: value,
     });
   };
 
   const updateProfile = async (e) => {
     e.preventDefault();
+    console.log(editProfile);
+    if (editProfile.image) {
+      try {
+        const result = await user.uploadProfilePicture(editProfile.image);
+        if (result.error === false) {
+          alert("pic uploaded");
+        } else if (result.error === true) {
+          alert("not");
+        }
+      } catch (error) {
+        alert("notuploaded");
+        console.error(error);
+      }
+    }
     try {
-      // let formData = new FormData();
-      // formData.append("user[profile]", editProfile.image);
+			debugger;
       const result = await user.profile(
         editProfile,
         userPersonalDetail.personal_detail
@@ -161,10 +175,10 @@ const ProfileSettings = () => {
 
   const modalClose = () => {
     setModalShow(!modalShow);
-	};
-	
-	console.log('editProfile',editProfile)
-	console.log('fileData',fileDataURL)
+  };
+
+  console.log("editProfile", editProfile);
+  console.log("fileData", fileDataURL);
 
   return (
     <>
@@ -206,7 +220,7 @@ const ProfileSettings = () => {
                 <Form>
                   <Form.Row>
                     <Image
-                      src={fileDataURL ? fileDataURL : user1}
+                      src={fileDataURL ? fileDataURL : editProfile.image}
                       roundedCircle
                       alt="User Image"
                       width="100px"
@@ -216,10 +230,11 @@ const ProfileSettings = () => {
                     />
                     <Form.Group as={Col} className="mt-4">
                       <Form.Label>Upload New Picture</Form.Label>
-                      <Form.Control
+											<Form.Control
+												
                         type="file"
                         placeholder=""
-                        className="form-control"
+                        className="form-control p-1"
                         multiple
                         onChange={(e) => {
                           handleUpdateProfile(e.target.files[0], "image");

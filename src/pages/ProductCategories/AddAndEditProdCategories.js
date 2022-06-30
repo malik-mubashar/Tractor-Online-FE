@@ -90,7 +90,7 @@ export default function AddAndEditProdCategories({
                   />
 								</Form.Group>
 								
-								<Form.Group as={Col} className="mt-4">
+								<Form.Group>
                       <Form.Label>Upload New Picture</Form.Label>
                       <Form.Control
                         type="file"
