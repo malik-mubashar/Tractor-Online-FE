@@ -14,24 +14,23 @@ import {
   Image,
 } from "react-bootstrap";
 import toast from "react-hot-toast";
-import AddAndEditProdBrands from "./AddAndEditProdBrands";
-import { prodBrandsApis } from "../../API/ProdBrandsApis";
+import AddAndEditCategoryBrands from "./AddAndEditCategoryBrands";
+import { categoryBrandsApis } from "../../API/CategoryBrandsApis";
 import csvSvg from "../../assets/svg/csv2.svg";
 import pdfSvg from "../../assets/svg/pdf.svg";
 
-export default function ProdBrands() {
-  const [paginationNumbers, setPaginationNumbers] = useState();
+export default function CategoryBrands() {
   const [noOfRec, setNoOfRec] = useState(10);
   const [mainSearchString, setMainSearchString] = useState("");
   useEffect(() => {
-    getProdBrands(1, "", 10);
+    getCategoryBrands(1, "", 10);
   }, []);
 
-  const getProdBrands = async (page, mainSearch, noOfRec) => {
+  const getCategoryBrands = async (page, mainSearch, noOfRec) => {
     const loadingToastId = toast.loading("Loading..!");
 
     try {
-      const result = await prodBrandsApis.getProdBrands(
+      const result = await categoryBrandsApis.getCategoryBrands(
         page,
         mainSearch,
         noOfRec
@@ -39,19 +38,14 @@ export default function ProdBrands() {
       if (result.error == false && result.data.status == "success") {
         toast.dismiss(loadingToastId);
 
-        setProdBrandsState({
-          ...prodBrandsState,
-          prodBrands: result.data.data,
+        setCategoryBrandsState({
+          ...categoryBrandsState,
+          categoryBrands: result.data.data,
           pagination: result.data.pagination,
-          originalProdBrands: result.data.data,
-          isAddProdBrand: false,
-          isEditProdBrand: false,
+          originalCategoryBrands: result.data.data,
+          isAddCategoryBrand: false,
+          isEditCategoryBrand: false,
         });
-        var temp = [];
-        for (var i = 1; i <= result.data.pagination.pages; i++) {
-          temp.push(i);
-        }
-        setPaginationNumbers(temp);
       } else {
         toast.dismiss(loadingToastId);
         console.error(result.data);
@@ -62,15 +56,15 @@ export default function ProdBrands() {
     }
   };
 
-  const deleteProdBrand = async (id) => {
+  const deleteCategoryBrand = async (id) => {
     const loadingToastId = toast.loading("Loading..!");
     try {
-      const result = await prodBrandsApis.deleteProdBrand(id);
+      const result = await categoryBrandsApis.deleteCategoryBrand(id);
       debugger;
       if (result.error === false) {
         toast.dismiss(loadingToastId);
         toast.success("Successfully deleted!");
-        getProdBrands(1, "", 10);
+        getCategoryBrands(1, "", 10);
       }
       console.log(result);
     } catch (error) {
@@ -83,17 +77,17 @@ export default function ProdBrands() {
     setSideMenu(active);
   }
 
-  const [prodBrandsState, setProdBrandsState] = useState({
-    isEditProdBrand: false,
-    isAddProdBrand: false,
-    prodBrands: null,
-    originalProdBrands: null,
+  const [categoryBrandsState, setCategoryBrandsState] = useState({
+    isEditCategoryBrand: false,
+    isAddCategoryBrand: false,
+    categoryBrands: null,
+    originalCategoryBrands: null,
     status: "active",
   });
 
   const handleSearch = (searchString) => {
     if (searchString) {
-      const filteredBrands = prodBrandsState.prodBrands.filter((item) => {
+      const filteredBrands = categoryBrandsState.categoryBrands.filter((item) => {
         return (
           item.title.toLowerCase().includes(searchString.toLowerCase()) ||
           (item.comments &&
@@ -106,14 +100,14 @@ export default function ProdBrands() {
             item.status.toLowerCase().includes(searchString.toLowerCase()))
         );
       });
-      setProdBrandsState({
-        ...prodBrandsState,
-        prodBrands: filteredBrands,
+      setCategoryBrandsState({
+        ...categoryBrandsState,
+        categoryBrands: filteredBrands,
       });
     } else {
-      setProdBrandsState({
-        ...prodBrandsState,
-        prodBrands: prodBrandsState.originalProdBrands,
+      setCategoryBrandsState({
+        ...categoryBrandsState,
+        categoryBrands: categoryBrandsState.originalCategoryBrands,
       });
     }
   };
@@ -121,16 +115,16 @@ export default function ProdBrands() {
   const handleMainSearch = (event) => {
     setMainSearchString(event.target.value);
     if (event.keyCode == 13) {
-      getProdBrands(1, event.target.value, noOfRec);
+      getCategoryBrands(1, event.target.value, noOfRec);
     }
     if (event.target.value == "") {
-      getProdBrands(1, event.target.value, noOfRec);
+      getCategoryBrands(1, event.target.value, noOfRec);
     }
   };
   const handleGetPdf = async () => {
     const loadingToastId = toast.loading("Loading..!");
     try {
-      const result = await prodBrandsApis.getProdBrandsPdf(mainSearchString);
+      const result = await categoryBrandsApis.getCategoryBrandsPdf(mainSearchString);
       debugger;
       if (result.error === false) {
         toast.dismiss(loadingToastId);
@@ -152,7 +146,7 @@ export default function ProdBrands() {
     debugger;
     const loadingToastId = toast.loading("Loading..!");
     try {
-      const result = await prodBrandsApis.getProdBrandsCsv(mainSearchString);
+      const result = await categoryBrandsApis.getCategoryBrandsCsv(mainSearchString);
       debugger;
       if (result.error === false) {
         toast.dismiss(loadingToastId);
@@ -172,16 +166,16 @@ export default function ProdBrands() {
     <>
       <>
         <Navigation onClick={() => onSideMenu} />
-        <div className="prodCategoryPage">
+        <div className="categoryCategoryPage">
           <div className={`main-content d-flex flex-column`}>
-            {prodBrandsState.isViewProdCategory ? (
+            {categoryBrandsState.isViewCategoryCategory ? (
               <></>
-            ) : prodBrandsState.isAddProdBrand === true ||
-              prodBrandsState.isEditProdBrand === true ? (
-              <AddAndEditProdBrands
-                prodBrandsState={prodBrandsState}
-                setProdBrandsState={setProdBrandsState}
-                getProdBrands={getProdBrands}
+            ) : categoryBrandsState.isAddCategoryBrand === true ||
+              categoryBrandsState.isEditCategoryBrand === true ? (
+              <AddAndEditCategoryBrands
+                categoryBrandsState={categoryBrandsState}
+                setCategoryBrandsState={setCategoryBrandsState}
+                getCategoryBrands={getCategoryBrands}
               />
             ) : (
               <>
@@ -190,13 +184,13 @@ export default function ProdBrands() {
                     type="button"
                     className="btn btn-outline-primary col-sm-2 mb-4"
                     onClick={() => {
-                      setProdBrandsState({
-                        ...prodBrandsState,
-                        isAddProdBrand: true,
+                      setCategoryBrandsState({
+                        ...categoryBrandsState,
+                        isAddCategoryBrand: true,
                       });
                     }}
                   >
-                    Add Product Brand
+                    Add Category Brand
                   </button>
                   <div className="d-flex ml-auto">
                     <Image
@@ -231,7 +225,7 @@ export default function ProdBrands() {
                   <select
                     onChange={(e) => {
                       setNoOfRec(e.target.value);
-                      getProdBrands(1, mainSearchString, e.target.value);
+                      getCategoryBrands(1, mainSearchString, e.target.value);
                     }}
                     className={`${
                       isMobile ? "mt-3" : "adjustNoOfRecSelect"
@@ -256,7 +250,7 @@ export default function ProdBrands() {
                 <div className="card mb-4">
                   <div className="card-body">
                     <div className="card-header d-flex">
-                      <h5 className="card-title w-50 float-left">Cites</h5>
+                      <h5 className="card-title w-50 float-left">Category Brands</h5>
                       <Form className="nav-search-form d-none d-sm-block float-right">
                         <FormControl
                           type="text"
@@ -271,39 +265,56 @@ export default function ProdBrands() {
                       <Table className="m-0" responsive>
                         <thead>
                           <tr>
+                            <th>Image</th>
                             <th>Title</th>
                             <th>Link</th>
                             <th>Status</th>
+                            <th>product Category</th>
                             <th>Description</th>
                             <th className="text-center">Action</th>
                           </tr>
                         </thead>
 
                         <tbody>
-                          {prodBrandsState.prodBrands &&
-                            prodBrandsState.prodBrands.map((prod, idx) => (
-                              <tr key={idx}>
-                                <td>{prod.title && prod.title}</td>
-                                <td>{prod.link && prod.link}</td>
-                                <td>{prod.status && prod.status}</td>
-                                <td>{prod.description && prod.description}</td>
+                          {categoryBrandsState.categoryBrands &&
+                            categoryBrandsState.categoryBrands.map((category, idx) => (
+															<tr key={idx}>
+																<td>
+                                    <Image
+                                      onClick={() => {
+                                        handleGetCsv();
+                                      }}
+                                      className="clickableSvg"
+                                      src={`${category.active_image_path}`}
+                                      height="40px"
+                                      width="60px"
+                                      alt="Image"
+																		/>
+                                  </td>
+                                <td>{category.title && category.title}</td>
+                                <td>{category.link && category.link}</td>
+                                <td>{category.status && category.status}</td>
+                                <td>{category.product_category.title && category.product_category.title}</td>
+                                <td>{category.description && category.description}</td>
                                 <td className="text-center">
                                   <Icon.Edit2
                                     style={{ cursor: "pointer" }}
-                                    onClick={() => {
-                                      setProdBrandsState({
-                                        ...prodBrandsState,
-                                        isEditProdBrand: true,
-                                        title: prod.title,
-                                        comments: prod.comments,
-                                        prodCategoryId: prod.id,
+																		onClick={() => {
+																			debugger;
+                                      setCategoryBrandsState({
+                                        ...categoryBrandsState,
+                                        isEditCategoryBrand: true,
+                                        title: category.title,
+                                        comments: category.comments,
+																				categoryBrandId: category.id,
+																				product_category_id: category.product_category_id,
                                       });
                                     }}
                                     className="text-success mr-2 icon wh-15 mt-minus-3"
                                   />
                                   <Link className="text-danger mr-2">
                                     <Icon.X
-                                      onClick={() => deleteProdBrand(prod.id)}
+                                      onClick={() => deleteCategoryBrand(category.id)}
                                       className="icon wh-15 mt-minus-3"
                                     />
                                   </Link>
@@ -318,23 +329,23 @@ export default function ProdBrands() {
                       className={`${isMobile ? "" : "d-flex"}`}
                       style={{ justifyContent: "space-between" }}
                     >
-                      {prodBrandsState && prodBrandsState.pagination && (
+                      {categoryBrandsState && categoryBrandsState.pagination && (
                         <div>
                           <span>Rows per page</span>
                           <span className="mx-4">
-                            {prodBrandsState.pagination.from}-
-                            {prodBrandsState.pagination.to} of{" "}
-                            {prodBrandsState.pagination.count}
+                            {categoryBrandsState.pagination.from}-
+                            {categoryBrandsState.pagination.to} of{" "}
+                            {categoryBrandsState.pagination.count}
                           </span>
 
                           <button
                             className={`pagination-button ${
-                              prodBrandsState.pagination.page == 1
+                              categoryBrandsState.pagination.page == 1
                                 ? "disabled"
                                 : ""
                             }`}
                             onClick={() => {
-                              getProdBrands(1, mainSearchString, noOfRec);
+                              getCategoryBrands(1, mainSearchString, noOfRec);
                             }}
                             type="button"
                           >
@@ -351,13 +362,13 @@ export default function ProdBrands() {
                           </button>
                           <button
                             className={`pagination-button ${
-                              prodBrandsState.pagination.page == 1
+                              categoryBrandsState.pagination.page == 1
                                 ? "disabled"
                                 : ""
                             }`}
                             onClick={() => {
-                              getProdBrands(
-                                prodBrandsState.pagination.prev,
+                              getCategoryBrands(
+                                categoryBrandsState.pagination.prev,
                                 mainSearchString,
                                 noOfRec
                               );
@@ -377,16 +388,16 @@ export default function ProdBrands() {
                           </button>
                           <button
                             className={`pagination-button ${
-                              prodBrandsState.pagination.page ==
-                              prodBrandsState.pagination.last
+                              categoryBrandsState.pagination.page ==
+                              categoryBrandsState.pagination.last
                                 ? "disabled"
                                 : ""
                             }`}
                             tabindex="0"
                             type="button"
                             onClick={() => {
-                              getProdBrands(
-                                prodBrandsState.pagination.next,
+                              getCategoryBrands(
+                                categoryBrandsState.pagination.next,
                                 mainSearchString,
                                 noOfRec
                               );
@@ -407,16 +418,16 @@ export default function ProdBrands() {
 
                           <button
                             className={`pagination-button ${
-                              prodBrandsState.pagination.page ==
-                              prodBrandsState.pagination.last
+                              categoryBrandsState.pagination.page ==
+                              categoryBrandsState.pagination.last
                                 ? "disabled"
                                 : ""
                             }`}
                             tabindex="0"
                             type="button"
                             onClick={() => {
-                              getProdBrands(
-                                prodBrandsState.pagination.last,
+                              getCategoryBrands(
+                                categoryBrandsState.pagination.last,
                                 mainSearchString,
                                 noOfRec
                               );

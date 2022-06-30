@@ -1,29 +1,30 @@
 import React, { useEffect, useState } from "react";
 import { Button, Col, Form, Row } from "react-bootstrap";
 import toast, { Toaster } from "react-hot-toast";
-import { prodBrandsApis } from "../../API/ProdBrandsApis";
+import { categoryBrandsApis } from "../../API/CategoryBrandsApis";
 import { prodApi } from "../../API/ProdCategoriesApis";
 
-export default function AddAndEditProdBrands({
-  prodBrandsState,
-  setProdBrandsState,
-  getProdBrands,
+export default function AddAndEditCategoryBrands({
+  categoryBrandsState,
+  setCategoryBrandsState,
+  getCategoryBrands,
 }) {
 	useEffect(() => {
-		getProdCategories(1,'', 100000000)
+		getProductCategories(1,'', 100000000)
 	}, [])
-	const [prodCategories, setProdCategories] = useState()
-	const getProdCategories = async (page, mainSearch, noOfRec) => {
+	const [productCategories, setProductCategories] = useState()
+	const getProductCategories = async (page, mainSearch, noOfRec) => {
     const loadingToastId = toast.loading("Loading..!");
 
     try {
       const result = await prodApi.getProdCategories(page, mainSearch, noOfRec);
       if (result.error === false && result.data.status == "success") {
         toast.dismiss(loadingToastId);
-				setProdCategories(result.data.data);
-				if (prodBrandsState.isAddProdBrand) {
-          setProdBrandsState({
-            ...prodBrandsState,
+				setProductCategories(result.data.data);
+				if (categoryBrandsState.isAddCategoryBrand) {
+					debugger;
+          setCategoryBrandsState({
+            ...categoryBrandsState,
             product_category_id: result.data.data[0].id,
           });
         }
@@ -38,34 +39,34 @@ export default function AddAndEditProdBrands({
   };
   function handleChange(evt) {
     debugger;
-    setProdBrandsState({
-      ...prodBrandsState,
+    setCategoryBrandsState({
+      ...categoryBrandsState,
       [evt.target.name]: evt.target.value,
     });
 	}
 	const handlePictureUpload = (pic) => {		
-		setProdBrandsState({
-      ...prodBrandsState,
+		setCategoryBrandsState({
+      ...categoryBrandsState,
       image: pic,
     });
 	}
 
-  const addProdBrand = async (params) => {
+  const addCategoryBrand = async (params) => {
     const loadingToastId = toast.loading("Loading..!");
 
-    if (prodBrandsState.isAddProdBrand) {
+    if (categoryBrandsState.isAddCategoryBrand) {
       try {
-        const result = await prodBrandsApis.addProdBrand(prodBrandsState);
+        const result = await categoryBrandsApis.addCategoryBrand(categoryBrandsState);
         console.log(result);
         if (result.error === false) {
           toast.dismiss(loadingToastId);
-          toast.success("Product Category created!");
-          setProdBrandsState({
-            ...prodBrandsState,
-            isAddProdBrand: false,
-            isEditProdBrand: false,
+          toast.success("Category Category created!");
+          setCategoryBrandsState({
+            ...categoryBrandsState,
+            isAddCategoryBrand: false,
+            isEditCategoryBrand: false,
           });
-          getProdBrands(1, "", 10);
+          getCategoryBrands(1, "", 10);
         } else if (result.error == true) {
           toast.dismiss(loadingToastId);
           toast.error("failed");
@@ -73,26 +74,32 @@ export default function AddAndEditProdBrands({
       } catch (error) {
         console.error(error);
       }
-    } else if (prodBrandsState.isEditProdBrand) {
+    } else if (categoryBrandsState.isEditCategoryBrand) {
       try {
-        const result = await prodBrandsApis.updateProdBrand(prodBrandsState);
+        const result = await categoryBrandsApis.updateCategoryBrand(categoryBrandsState);
         if (result.error == false) {
-          toast.success("Product Category updated!");
+          toast.success("Category Category updated!");
           toast.dismiss(loadingToastId);
-          setProdBrandsState({
-            ...prodBrandsState,
-            isEditProdBrand: false,
+          setCategoryBrandsState({
+            ...categoryBrandsState,
+            isEditCategoryBrand: false,
           });
-          getProdBrands(1, "", 10);
+          getCategoryBrands(1, "", 10);
+				}
+				if (result.error == true) {
+          toast.error("error");
+          toast.dismiss(loadingToastId);
+          
         }
       } catch (error) {
         toast.dismiss(loadingToastId);
-        toast.error("err	or..!");
+        toast.error("error..!");
         console.error(error);
       }
     }
   };
-  console.log("asdasd", prodBrandsState);
+  console.log("asdasd", categoryBrandsState);
+  console.log("asdasd", productCategories);
   return (
     <div className="mb-4 mt-5">
       {/* Basic Forms */}
@@ -102,19 +109,19 @@ export default function AddAndEditProdBrands({
             <div className="card-body">
               <div className="card-header">
                 <h5 className="card-title">
-                  {prodBrandsState.isAddProdBrand
-                    ? "Add Product Brand"
-                    : "Edit Product Brand"}
+                  {categoryBrandsState.isAddCategoryBrand
+                    ? "Add Category Brand"
+                    : "Edit Category Brand"}
                 </h5>
               </div>
               <Form>
                 <Form.Group controlId="formBasicName">
                   <Form.Label>Title</Form.Label>
                   <Form.Control
-                    defaultValue={prodBrandsState.title}
+                    defaultValue={categoryBrandsState.title}
                     name="title"
                     type="text"
-                    placeholder="Enter Product Brand Name"
+                    placeholder="Enter Category Brand Name"
                     onChange={(e) => handleChange(e)}
                   />
                 </Form.Group>
@@ -122,7 +129,7 @@ export default function AddAndEditProdBrands({
                 {/* <Form.Group controlId="formBasicComments">
                   <Form.Label>Status</Form.Label>
                   <Form.Control
-                    defaultValue={prodBrandsState.status}
+                    defaultValue={categoryBrandsState.status}
                     name="status"
                     type="text"
                     placeholder="Status"
@@ -134,7 +141,7 @@ export default function AddAndEditProdBrands({
                   <Form.Label>Status</Form.Label>
                   <Form.Control
                     as="select"
-                    value={prodBrandsState.status}
+                    value={categoryBrandsState.status}
                     onChange={(e) => handleChange(e)}
                     name="status"
                   >
@@ -148,7 +155,7 @@ export default function AddAndEditProdBrands({
                   <Form.Label>Description</Form.Label>
                   <Form.Control
                     as="textarea"
-                    defaultValue={prodBrandsState.description}
+                    defaultValue={categoryBrandsState.description}
                     name="description"
                     type="text"
                     placeholder="Description"
@@ -161,17 +168,16 @@ export default function AddAndEditProdBrands({
                   <Form.Label>Select Product Category</Form.Label>
                   <Form.Control
                     as="select"
-                    value={prodBrandsState.status}
                     onChange={(e) => handleChange(e)}
                     name="product_category_id"
 									>
 										{
-									prodCategories && prodCategories.map((item) => {
+									productCategories && productCategories.map((item) => {
 										return (
 											<>
 												<option
 													selected={
-														prodBrandsState.product_category_id ==
+														categoryBrandsState.product_category_id ==
 														item.id
 													}
 													value={item.id}>{item.title}</option>
@@ -201,10 +207,10 @@ export default function AddAndEditProdBrands({
                   className="mr-3"
                   variant="secondary"
                   onClick={() =>
-                    setProdBrandsState({
-                      ...prodBrandsState,
-                      isAddProdBrand: false,
-                      isEditProdBrand: false,
+                    setCategoryBrandsState({
+                      ...categoryBrandsState,
+                      isAddCategoryBrand: false,
+                      isEditCategoryBrand: false,
                     })
                   }
                 >
@@ -212,13 +218,13 @@ export default function AddAndEditProdBrands({
                 </Button>
                 <Button
                   onClick={() => {
-                    addProdBrand();
+                    addCategoryBrand();
                   }}
                   variant={
-                    prodBrandsState.isAddProdBrand ? "success" : "warning"
+                    categoryBrandsState.isAddCategoryBrand ? "success" : "warning"
                   }
                 >
-                  {prodBrandsState.isAddProdBrand ? "Create" : "Update"}
+                  {categoryBrandsState.isAddCategoryBrand ? "Create" : "Update"}
                 </Button>
               </Form>
             </div>

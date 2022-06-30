@@ -295,7 +295,7 @@ export default function ProdCategories() {
                                   <td>
                                     {prod.description && prod.description}
                                   </td>
-																	<td>{ console.log('prod.active_image_path',prod.active_image_path)}
+																	<td>
                                     <Image
                                       onClick={() => {
                                         handleGetCsv();
