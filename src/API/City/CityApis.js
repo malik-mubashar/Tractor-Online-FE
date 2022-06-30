@@ -27,7 +27,28 @@ class City {
         };
       });
   };
-  getAllCity = async () => {
+  getPopularCity = async (popular) => {
+    debugger
+    return axios({
+      method: "get",
+      url: `${process.env.REACT_APP_API_LOCAL_PATH}all_cities?city_type=${popular}`,
+      headers: Headers
+    })
+      .then((result) => {
+        return {
+          error: false,
+          data: result.data
+        };
+      })
+      .catch((error) => {
+        return {
+          error: true,
+          data: error.response.data
+        };
+      });
+  };
+  getAllCity = async (popular) => {
+    debugger
     return axios({
       method: "get",
       url: `${process.env.REACT_APP_API_LOCAL_PATH}all_cities`,

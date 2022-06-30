@@ -80,6 +80,7 @@ export default function AddAndEditProduct({
   formData.append('location',productsState.location)
   formData.append('link',productsState.link)
   formData.append('extra_fields',productsState.extra_fields)
+  formData.append('product_type',productsState.product_type)
 
 
     if (productsState.isAddProduct) {
@@ -101,7 +102,7 @@ export default function AddAndEditProduct({
       }
     } else if (productsState.isEditProduct) {
       try {
-        const result = await productApis.updateProduct(productsState);
+        const result = await productApis.updateProduct(productsState, formData);
         if (result.error === false) {
           toast.success("Product updated!");
           toast.dismiss(loadingToastId);
@@ -183,6 +184,22 @@ export default function AddAndEditProduct({
                     onChange={(e) => handleChange(e)}
                   />
                 </Form.Group>
+                <Form.Group controlId="formGridState">
+                  <Form.Label>Product Type</Form.Label>
+                  <Form.Control
+                    as="select"
+                    value={productsState.product_type}
+                    onChange={(e) => handleChange(e)}
+                    name="product_type"
+                  >
+                    <option value="used">Used</option>
+                    <option value="popular">Popular</option>
+                    <option value="featured">Featured</option>
+                    <option value="upcoming">Upcoming</option>
+                    <option value="newly_launched">Newly Launched</option>
+                  </Form.Control>
+                </Form.Group>
+
                 <Form.Group controlId="formBasicComments">
                   <Form.Label>Extra Fileds</Form.Label>
                   <Form.Control

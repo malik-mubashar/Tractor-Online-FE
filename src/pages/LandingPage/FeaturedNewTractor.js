@@ -1,9 +1,22 @@
 import React, { useState, useContext, useEffect } from "react";
 import Carousel from "react-bootstrap/Carousel";
 import { Col, Tabs, Tab } from "react-bootstrap";
+import { productApis } from "../../API/ProductApis";
 
 export default function Categories({ title, link }) {
   const [index, setIndex] = useState([1, 2, 3, 4]);
+  const [products, setProducts] = useState([]);
+
+  useEffect(() => {
+    handleGetAllProducts();
+  }, []);
+  const handleGetAllProducts = async () => {
+    const result = await productApis.getAllProducts();
+    if (result.error === false) {
+      setProducts(result.data && result.data.data);
+      console.log("products", result.data && result.data.data);
+    }
+  };
   const [city, setCity] = useState([
     "Lahore",
     "Karachi",
@@ -43,21 +56,22 @@ export default function Categories({ title, link }) {
                   <Carousel>
                     <Carousel.Item>
                       <ul className="browse-listing  row p-0">
-                        {index.map((option) => (
-                          <li className=" col-md-3" key={option}>
+                        {products&&
+                        products.map((item,i) => (
+                          <li className=" col-md-3" key={i}>
                             <div
                               className="featured-card bg-white"
-                              key={option}
+                              key={i}
                             >
                               <img
                                 className="card-img"
-                                src="https://cache3.pakwheels.com/ad_pictures/6549/Slide_toyota-prius-s-led-edition-1-8-2013-65495110.jpg"
+                                src={item.active_images_path[0]}
                               />
-                              <h4 className="mb-0 pl-2">Kubota</h4>
+                              <h4 className="mb-0 pl-2">{item.title}</h4>
                               <p className="mb-0 pl-2 text-success">
-                                PKR 100,000
+                                {item.price}
                               </p>
-                              <p className="pl-2">Lahore</p>
+                              <p className="pl-2">{item.location}</p>
                             </div>
                           </li>
                         ))}
@@ -65,21 +79,22 @@ export default function Categories({ title, link }) {
                     </Carousel.Item>
                     <Carousel.Item>
                       <ul className="browse-listing  row p-0">
-                        {index.map((option) => (
-                          <li className=" col-md-3" key={option}>
+                        {products&&
+                        products.map((item,i) => (
+                          <li className=" col-md-3" key={i}>
                             <div
                               className="featured-card bg-white"
-                              key={option}
+                              key={i}
                             >
                               <img
                                 className="card-img"
-                                src="https://cache3.pakwheels.com/ad_pictures/6549/Slide_toyota-prius-s-led-edition-1-8-2013-65495110.jpg"
+                                src={item.active_images_path[0]}
                               />
-                              <h4 className="mb-0 pl-2">Fendt</h4>
+                              <h4 className="mb-0 pl-2">{item.title}</h4>
                               <p className="mb-0 pl-2 text-success">
-                                PKR 100,000
+                                {item.price}
                               </p>
-                              <p className="pl-2">Lahore</p>
+                              <p className="pl-2">{item.location}</p>
                             </div>
                           </li>
                         ))}
@@ -87,21 +102,22 @@ export default function Categories({ title, link }) {
                     </Carousel.Item>
                     <Carousel.Item>
                       <ul className="browse-listing  row p-0">
-                        {index.map((option) => (
-                          <li className=" col-md-3" key={option}>
+                        {products&&
+                        products.map((item,i) => (
+                          <li className=" col-md-3" key={i}>
                             <div
                               className="featured-card bg-white"
-                              key={option}
+                              key={i}
                             >
                               <img
                                 className="card-img"
-                                src="https://cache3.pakwheels.com/ad_pictures/6549/Slide_toyota-prius-s-led-edition-1-8-2013-65495110.jpg"
+                                src={item.active_images_path[0]}
                               />
-                              <h4 className="mb-0 pl-2">Deutz Fahr</h4>
+                              <h4 className="mb-0 pl-2">{item.title}</h4>
                               <p className="mb-0 pl-2 text-success">
-                                PKR 100,000
+                                {item.price}
                               </p>
-                              <p className="pl-2">Lahore</p>
+                              <p className="pl-2">{item.location}</p>
                             </div>
                           </li>
                         ))}

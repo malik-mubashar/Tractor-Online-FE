@@ -106,6 +106,7 @@ const searchAble = () => {
             //setValue={setCountry}
             label="Select City"
             value={country}
+            placeholder="Select City"
             onChange={(e) => setCountry(e.label)}
             clearable={false}
           />
@@ -116,6 +117,7 @@ const searchAble = () => {
             // setValue={setMinPrice}
             label="Select Min Price "
             value={minPrice}
+            placeholder="Select Min Price"
              onChange={(e) => setMinPrice(e.label)}
              clearable={false}
             
@@ -126,6 +128,7 @@ const searchAble = () => {
             options={maxPriceOptions}
             // setValue={setMaxPrice}
             label="Select Max Price"
+            placeholder="Select Max Price"
             value={maxPrice}
             onChange={(e) => setMaxPrice(e.label)}
             clearable={false}

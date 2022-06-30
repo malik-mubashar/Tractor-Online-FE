@@ -11,7 +11,7 @@ class ProductCategories {
   getAllProductCategories = async () => {
     return axios({
       method: "get",
-      url: `${process.env.REACT_APP_API_LOCAL_PATH}product_categories/categories_list`,
+      url: `${process.env.REACT_APP_API_LOCAL_PATH}categories_list`,
     })
       .then((result) => {
         return {
