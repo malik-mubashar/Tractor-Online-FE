@@ -6,34 +6,35 @@ import { useHistory } from "react-router-dom";
 import user1 from "../../assets/img/user/user1.jpg";
 import { PRODUCT_CATEGORY } from "../../API/Products/product-category";
 import { city } from "../../API/City/CityApis";
-// import { prodBrandsApis } from "../../API/ProdBrandsApis";
+import { prodApi } from "../../API/ProdCategoriesApis";
+
 
 
 const SideMenue = () => {
   const [productCategories, setProductCategories] = useState();
 
   const history = useHistory();
-  const [cities, setCities] = useState();
+  const [cities, setCities] = useState([]);
   const [brands, setBrands] = useState();
 
   useEffect(() => {
     handleGetAllCategories();
     handleGetAllCities();
-    // handleGetProdBrands();
+    handleGetAllProductCategories();
   }, []);
 	 
 
-  // const handleGetProdBrands = async () => {
+  const handleGetAllProductCategories = async () => {
     
-  //   const result = await prodBrandsApis.getProdBrands();
-  //   if(result.error=== false){
-  //     setBrands(result.data && result.data.data);
-  //     console.log('brands',result.data  &&result.data.data)
+    const result = await prodApi.getProdCategoriesList();
+    if(result.error=== false){
+      setBrands(result.data && result.data.data);
+      console.log('brands',result.data  &&result.data.data)
     
-  //   }
-  // };
+    }
+  };
   const handleGetAllCities = async () => {
-    const result = await city.getAllCity();
+    const result = await city.getPopularCity('popular');
    
   
     if(result.error=== false){
@@ -70,7 +71,7 @@ const SideMenue = () => {
                 productHead={item.product_category_heads}
                   title={item.title}
                   cities={cities}
-                  brands={item.product_brands}
+                  brands={item.category_brands}
                   dropDownIcon={true}
                   
                 />

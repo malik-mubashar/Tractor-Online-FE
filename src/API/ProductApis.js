@@ -2,6 +2,12 @@ import axios from "axios";
 
 //no_of_record=5&page=2
 var user = JSON.parse(window.localStorage.getItem("currentUser")) || null;
+Headers = {
+  ...Headers,
+  "Access-Control-Allow-Origin": "*",
+  mode: "no-cors"
+};
+
 
 class Products {
   deleteProduct = async (id) => {
@@ -31,12 +37,13 @@ class Products {
         };
       });
   };
-  updateProduct = async (productsState) => {
+  updateProduct = async (productsState, formData) => {
+    debugger
     return axios({
       method: "put",
       url: `${process.env.REACT_APP_API_LOCAL_PATH}products/${productsState.productId}`,
       headers: {
-        "Content-Type": "application/json; charset=utf-8",
+        "Content-Type": "multipart/form-data",
         "Access-Control-Allow-Origin": "*",
         "Access-Control-Allow-Headers": "*",
         "access-token": `${user.accessToken}`,
@@ -44,16 +51,7 @@ class Products {
         uid: `${user.uid}`,
         mode: "no-cors",
       },
-			data: {
-        title: productsState.title,
-        status: productsState.status,
-        description: productsState.description,
-        price: productsState.price,
-        location: productsState.location,
-        link: productsState.link,
-        extra_fields: productsState.extra_fields,
-        active_images: productsState.images,
-      },
+			data: formData
     })
       .then((result) => {
         return {
@@ -69,7 +67,7 @@ class Products {
       });
   };
 	addProduct = async (productsState,formData) => {
-   
+   debugger
 
     return axios({
       method: "post",
@@ -128,7 +126,46 @@ class Products {
         };
       });
 	};
-	
+  getAllProducts = async (productType) => {
+		debugger;
+    return axios({
+      method: "get",
+      url: `${process.env.REACT_APP_API_LOCAL_PATH}get_products`,
+      headers: Headers
+    })
+      .then((result) => {
+        return {
+          error: false,
+          data: result.data,
+        };
+      })
+      .catch((error) => {
+        return {
+          error: true,
+          data: error.response.data,
+        };
+      });
+	};
+	getNewProducts = async (newly_launched) => {
+		debugger;
+    return axios({
+      method: "get",
+      url: `${process.env.REACT_APP_API_LOCAL_PATH}get_products?product_type=${newly_launched}`,
+      headers: Headers
+    })
+      .then((result) => {
+        return {
+          error: false,
+          data: result.data,
+        };
+      })
+      .catch((error) => {
+        return {
+          error: true,
+          data: error.response.data,
+        };
+      });
+	};
 	getProductsPdf = async (searchString) => {
 		debugger;
     return axios({

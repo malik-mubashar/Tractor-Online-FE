@@ -2,6 +2,11 @@ import axios from "axios";
 
 //no_of_record=5&page=2
 var user = JSON.parse(window.localStorage.getItem("currentUser")) || null;
+Headers = {
+  ...Headers,
+  "Access-Control-Allow-Origin": "*",
+  mode: "no-cors"
+};
 
 class ProdCategories {
   deleteProdCategory = async (id) => {
@@ -114,6 +119,28 @@ class ProdCategories {
         uid: `${user.uid}`,
         mode: "no-cors",
       },
+    })
+			.then((result) => {
+				debugger;
+        return {
+          error: false,
+          data: result.data,
+        };
+      })
+			.catch((error) => {
+				debugger;
+        return {
+          error: true,
+          data: error.response.data,
+        };
+      });
+	};
+  getProdCategoriesList = async (page, searchString, noOfRec) => {
+		debugger;
+    return axios({
+      method: "get",
+      url: `${process.env.REACT_APP_API_LOCAL_PATH}product_categories/categories_list`,
+      headers: Headers
     })
 			.then((result) => {
 				debugger;
