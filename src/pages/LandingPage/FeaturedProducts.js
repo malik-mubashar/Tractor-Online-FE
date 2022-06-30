@@ -68,7 +68,8 @@ export default function FeaturedProducts({ title, link }) {
             <div className="featured-card bg-white border-radius" key={i}>
               <img
                 className="card-img border-radius"
-                src={item.active_images_path[0]}
+                src={item.cover_photo_path}
+                alt=""
               />
               <h4 className="mb-0 pl-2 border-radius">{item.title}</h4>
               <p className="mb-0 pl-2 text-success border-radius">

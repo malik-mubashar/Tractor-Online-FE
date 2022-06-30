@@ -65,7 +65,8 @@ export default function Categories({ title, link }) {
                             >
                               <img
                                 className="card-img"
-                                src={item.active_images_path[0]}
+                                src={item.cover_photo_path}
+                                alt=""
                               />
                               <h4 className="mb-0 pl-2">{item.title}</h4>
                               <p className="mb-0 pl-2 text-success">
@@ -88,7 +89,8 @@ export default function Categories({ title, link }) {
                             >
                               <img
                                 className="card-img"
-                                src={item.active_images_path[0]}
+                                src={item.cover_photo_path}
+                                alt=""
                               />
                               <h4 className="mb-0 pl-2">{item.title}</h4>
                               <p className="mb-0 pl-2 text-success">
@@ -111,7 +113,8 @@ export default function Categories({ title, link }) {
                             >
                               <img
                                 className="card-img"
-                                src={item.active_images_path[0]}
+                                src={item.cover_photo_path}
+                                alt=""
                               />
                               <h4 className="mb-0 pl-2">{item.title}</h4>
                               <p className="mb-0 pl-2 text-success">
