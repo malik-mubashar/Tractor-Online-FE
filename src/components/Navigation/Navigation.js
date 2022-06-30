@@ -247,6 +247,8 @@ class Navigation extends React.Component {
                   className="dropdown-item"
                   onClick={() => {
                     localStorage.setItem("currentUser", null);
+                    localStorage.setItem("user", null);
+                    localStorage.setItem("headers", null);
                   }}
                 >
                   <Icon.LogOut className="icon" />

@@ -6,6 +6,8 @@ import { user } from "../API/User/index";
 // Logo image file path
 import Logo from "../assets/img/logo.png";
 import { RootContext } from "../context/RootContext";
+import toast from "react-hot-toast";
+
 const Login = () => {
   const { currentUser, setCurrentUser } = useContext(RootContext);
 
@@ -13,15 +15,20 @@ const Login = () => {
   const [password, setPassword] = useState();
   let history = useHistory();
   const onLoginHandler = async (e) => {
-    e.preventDefault();
+		e.preventDefault();
+		const loadingToastId = toast.loading("Loading..!");
+
+		debugger;
     try {
       const result = await user.login(email, password);
       console.log(result);
       //success
-      if (result.error === false) {
-        alert("wellcome");
+			if (result.error === false) {
+				toast.dismiss(loadingToastId);
+
+        toast.success('wellcome')
         setCurrentUser({
-          ...result.data,
+          ...result.data.data,
           accessToken: result.headers["access-token"],
           client: result.headers["client"],
           uid: result.headers["uid"]
@@ -30,7 +37,7 @@ const Login = () => {
         localStorage.setItem(
           "currentUser",
           JSON.stringify({
-            ...result.data,
+            ...result.data.data,
             accessToken: result.headers["access-token"],
             client: result.headers["client"],
             uid: result.headers["uid"]
@@ -41,12 +48,15 @@ const Login = () => {
       }
 
       //error
-      if (result.error === true) {
+			if (result.error === true) {
+				toast.dismiss(loadingToastId);
+				toast.error('Login failed');
+
         console.error(result.data.errors.full_messages);
-        alert("Error user not create");
       }
 		} catch (error) {
-			alert('error')
+			toast.dismiss(loadingToastId);
+
       console.error(error);
     }
   };

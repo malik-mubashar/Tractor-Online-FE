@@ -5,11 +5,11 @@ import * as Icon from "react-feather";
 // Logo image file path
 import Logo from "../assets/img/logo.png";
 import { user } from "../API/User/index";
-import {RootContext} from "../context/RootContext";
-
+import { RootContext } from "../context/RootContext";
+import toast from "react-hot-toast";
 
 const SignUp = () => {
-	const { currentUser,setCurrentUser } = useContext(RootContext);
+  const { currentUser, setCurrentUser } = useContext(RootContext);
 
   const [email, setEmail] = useState();
   const [confirmPassword, setConfirmPassword] = useState();
@@ -21,37 +21,61 @@ const SignUp = () => {
   let history = useHistory();
 
   const createUserAccount = async (e) => {
-		// e.preventDefault()
-		if (password != confirmPassword) {
-			setError("password not match");
+    // e.preventDefault()
+    if (password != confirmPassword) {
+      setError("password not match");
       return;
     }
-		try {
-			 
-			console.log(email, password, confirmPassword,fullName)
-			const result = await user.signUp(email, password, confirmPassword, fullName);
-			 
-			console.log('signUp result Api', result);
+    const loadingToastId = toast.loading("Loading..!");
+    try {
+      debugger;
+      const result = await user.signUp(
+        email,
+        password,
+        confirmPassword,
+        fullName
+      );
 
-			//success
-			if (result.error === false) {
-				 
-				// toast.success("Wow so easy registered!")
-				setCurrentUser(result.data)
-				localStorage.setItem("currentUser", JSON.stringify(result.data));
-				history.push("/dashboard")
-			}
+      console.log("signUp result Api", result);
 
-			//error
-			if (result.error === true) {
-				console.error(result.data.errors.full_messages)
-				alert("Error user not create");
-			}
+      //success
+      if (result.error === false) {
+      	toast.dismiss(loadingToastId);
 
-		} catch (error) {
-			 
-			console.error(error);
-		}
+        toast.success('wellcome')
+        setCurrentUser({
+          ...result.data.data,
+          accessToken: result.headers["access-token"],
+          client: result.headers["client"],
+          uid: result.headers["uid"]
+        });
+
+        localStorage.setItem(
+          "currentUser",
+          JSON.stringify({
+            ...result.data.data,
+            accessToken: result.headers["access-token"],
+            client: result.headers["client"],
+            uid: result.headers["uid"]
+          })
+        );
+        localStorage.setItem("headers", JSON.stringify(result.headers));
+        history.push("/dashboard");
+      }
+
+      //error
+      if (result.error === true) {
+        toast.dismiss(loadingToastId);
+        toast.error("signup failed");
+
+        console.error(result.data.errors.full_messages);
+        alert("Error user not create");
+      }
+    } catch (error) {
+      toast.dismiss(loadingToastId);
+
+      console.error(error);
+    }
   };
 
   return (
@@ -100,9 +124,9 @@ const SignUp = () => {
                             setEmail(event.target.value);
                           }}
                         />
-											</Form.Group>
-											
-											<Form.Group>
+                      </Form.Group>
+
+                      <Form.Group>
                         <Form.Label>Full Name</Form.Label>
                         <Form.Control
                           type="text"
@@ -137,10 +161,7 @@ const SignUp = () => {
                         ""
                       )}
                       <div className="text-center">
-                        <Button
-                          variant="primary"
-                          onClick={createUserAccount}
-                        >
+                        <Button variant="primary" onClick={createUserAccount}>
                           Sign Up
                         </Button>
                       </div>

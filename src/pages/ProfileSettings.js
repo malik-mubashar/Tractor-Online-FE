@@ -9,10 +9,11 @@ import { RootContext } from "../context/RootContext";
 import { useHistory } from "react-router-dom";
 import PasswordResetModal from "./Modals/PasswordReset";
 import { city } from "../API/City/CityApis";
+import toast from "react-hot-toast";
 const ProfileSettings = () => {
   const { currentUser } = useContext(RootContext);
   const [userPersonalDetail, setUserPersonalDetail] = useState(
-    currentUser.data
+    currentUser
   );
   const [sideMenue, setSideMenu] = useState();
   const [fileDataURL, setFileDataURL] = useState(null);
@@ -80,8 +81,9 @@ const ProfileSettings = () => {
     setCountryList([]);
   };
 
-  const handlePersonalDetail = async () => {
-		const result = await user.findUser(currentUser.data.id);
+	const handlePersonalDetail = async () => {
+		debugger;
+		const result = await user.findUser(currentUser);
 		debugger;
     setUserPersonalDetail(result.data);
     setEditProfile({
@@ -143,19 +145,22 @@ const ProfileSettings = () => {
     });
   };
 
-  const updateProfile = async (e) => {
+	const updateProfile = async (e) => {
+		const loadingToastId = toast.loading("Loading..!");
+
+
     e.preventDefault();
     console.log(editProfile);
     if (editProfile.image) {
       try {
         const result = await user.uploadProfilePicture(editProfile.image);
         if (result.error === false) {
-          alert("pic uploaded");
+          // alert("pic uploaded");
         } else if (result.error === true) {
           alert("not");
         }
       } catch (error) {
-        alert("notuploaded");
+        alert("not uploaded");
         console.error(error);
       }
     }
@@ -165,12 +170,25 @@ const ProfileSettings = () => {
         editProfile,
         userPersonalDetail.personal_detail
           ? userPersonalDetail.personal_detail.id
-          : null
+					: null,
+				currentUser
       );
-      if (result.error === false) {
+			if (result.error === false) {
+		toast.dismiss(loadingToastId);
+		toast.success('Profile Updated');
+				
         history.push("/profile/");
-      }
-    } catch (error) {}
+			}
+			if (result.error === false) {
+				toast.dismiss(loadingToastId);
+				toast.error('Profile Updation failed');
+						
+						// history.push("/profile/");
+					}
+		} catch (error) {
+		toast.dismiss(loadingToastId);
+			
+		}
   };
 
   const modalClose = () => {
