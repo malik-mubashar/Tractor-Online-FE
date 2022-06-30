@@ -88,3 +88,15 @@
 .hot-slider .featured-card{
   width:190px !important;
 }
+
+.cover_image_select{
+  cursor: pointer;
+}
+
+.cover_image_select:hover{
+  border: 3px solid orange;
+}
+
+.cover_image_select.active{
+  border: 3px solid green;
+}

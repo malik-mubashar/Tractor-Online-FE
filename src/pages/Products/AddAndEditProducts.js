@@ -58,13 +58,31 @@ export default function AddAndEditProduct({
     const input = document.getElementById('multi-img-field')
     const fileListArr = Array.from(input.files)
     fileListArr.splice(e, e) // here u remove the file
-    debugger
     setProductsState({
       ...productsState,
       images: fileListArr,
     });
     console.log(s);
   }
+
+  function selectCoverPhoto(e, item, index) {
+    const input = document.getElementById('multi-img-field')
+    const fileListArr = Array.from(input.files)
+    var images_elem = document.getElementsByClassName('cover_image_select')
+    for (var i = 0; i < images_elem.length; i++){
+      if (images_elem[i].classList.contains('active')){
+        images_elem[i].classList.remove('active')
+      }
+    }
+    e.target.classList.add('active')
+    setProductsState({
+      ...productsState,
+      cover_photo: fileListArr[index],
+    });
+  }
+
+
+  
   const addProduct = async (params) => {
     const loadingToastId = toast.loading("Loading..!");
     let formData = new FormData()
@@ -81,6 +99,7 @@ export default function AddAndEditProduct({
   formData.append('link',productsState.link)
   formData.append('extra_fields',productsState.extra_fields)
   formData.append('product_type',productsState.product_type)
+  formData.append('cover_photo',productsState.cover_photo)
 
 
     if (productsState.isAddProduct) {
@@ -131,8 +150,6 @@ export default function AddAndEditProduct({
                 </h5>
               </div>
               <Form>
-                
-              
                 <Form.Group controlId="formBasicName">
                   <Form.Label>Title</Form.Label>
                   <Form.Control
@@ -230,14 +247,14 @@ export default function AddAndEditProduct({
                     file.map((item, index) => {
                       return (
                         <div key={item} className="col-1">
-                          <img src={item} alt="" height="70px" width="70px" />
+                          <img className="cover_image_select" title="Select Image for Cover Photo" src={item} alt="" height="70px" width="70px" onClick={(e) => selectCoverPhoto(e, item, index)} />
                           <button
                             type="button"
                             className="close-btn"
                             onClick={() => deleteFile(index)}
                           >
-                            <Icofont 
-                              icon="close-circled text-danger" 
+                            <Icofont
+                              icon="close-circled text-danger"
                               className="icofont-2x"
                             />
                           </button>
@@ -262,7 +279,6 @@ export default function AddAndEditProduct({
                     onClick={() => {
                       debugger;
                       myRefname.current.click();
-                      
                     }}
                   >
                     choose file{" "}
