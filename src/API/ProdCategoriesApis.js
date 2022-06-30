@@ -36,7 +36,7 @@ class ProdCategories {
       method: "put",
       url: `${process.env.REACT_APP_API_LOCAL_PATH}product_categories/${prodCategoriesState.prodCategoryId}`,
       headers: {
-        "Content-Type": "application/json; charset=utf-8",
+        "Content-Type": "multipart/form-data",
         "Access-Control-Allow-Origin": "*",
         "Access-Control-Allow-Headers": "*",
         "access-token": `${user.accessToken}`,
@@ -48,7 +48,9 @@ class ProdCategories {
         title: prodCategoriesState.title,
         status: prodCategoriesState.status,
         link: prodCategoriesState.link,
-        description: prodCategoriesState.description,
+				description: prodCategoriesState.description,
+				active_image: prodCategoriesState.image,
+
       },
     })
       .then((result) => {

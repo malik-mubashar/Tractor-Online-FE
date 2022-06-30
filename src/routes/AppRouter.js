@@ -30,11 +30,11 @@ import Country from "../pages/Country/Country";
 import ProdCategories from "../pages/ProductCategories/ProdCategories";
 import ProdSubCategories from "../pages/ProductSubCategories /ProdSubCategories";
 import ProdCategoryHeads from "../pages/ProductCategoryHeads/ProdCategoryHeads";
-import ProdBrands from "../pages/ProductBrands/ProdBrands";
 import Languages from "../pages/Languages/Languages";
 import Products from "../pages/Products/Products";
 import Roles from "../pages/Roles/Roles";
 import UserRoles from "../pages/UserRoles/UserRoles";
+import CategoryBrands from "../pages/CategoryBrands/CategoryBrands";
 
 
 const AppRouter = () => {
@@ -63,8 +63,8 @@ const AppRouter = () => {
 					<ProtectedRoute exact path="/productCategoryHeads">
             <ProdCategoryHeads />
 					</ProtectedRoute>
-					<ProtectedRoute exact path="/productBrands">
-            <ProdBrands />
+					<ProtectedRoute exact path="/categoryBrands">
+            <CategoryBrands />
 					</ProtectedRoute>
 
 					<ProtectedRoute exact path="/productCategories">

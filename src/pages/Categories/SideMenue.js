@@ -6,7 +6,7 @@ import { useHistory } from "react-router-dom";
 import user1 from "../../assets/img/user/user1.jpg";
 import { PRODUCT_CATEGORY } from "../../API/Products/product-category";
 import { city } from "../../API/City/CityApis";
-import { prodBrandsApis } from "../../API/ProdBrandsApis";
+// import { prodBrandsApis } from "../../API/ProdBrandsApis";
 
 
 const SideMenue = () => {
@@ -19,19 +19,19 @@ const SideMenue = () => {
   useEffect(() => {
     handleGetAllCategories();
     handleGetAllCities();
-    handleGetProdBrands();
+    // handleGetProdBrands();
   }, []);
 	 
 
-  const handleGetProdBrands = async () => {
+  // const handleGetProdBrands = async () => {
     
-    const result = await prodBrandsApis.getProdBrands();
-    if(result.error=== false){
-      setBrands(result.data && result.data.data);
-      console.log('brands',result.data  &&result.data.data)
+  //   const result = await prodBrandsApis.getProdBrands();
+  //   if(result.error=== false){
+  //     setBrands(result.data && result.data.data);
+  //     console.log('brands',result.data  &&result.data.data)
     
-    }
-  };
+  //   }
+  // };
   const handleGetAllCities = async () => {
     const result = await city.getAllCity();
    
