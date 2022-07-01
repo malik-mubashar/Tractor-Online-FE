@@ -1,55 +1,27 @@
 import React, { useEffect, useState } from "react";
 import Carousel from "react-bootstrap/Carousel";
 import { Col, Tabs, Tab, Image } from "react-bootstrap";
-import ThousandCC from "../../assets/img/1000cc.svg";
-import ThirteenHundredCC from "../../assets/img/1300cc.svg";
-import SportsCar from "../../assets/img/sports-car.svg";
 import { useHistory } from "react-router-dom";
+import { city } from "../../API/City/CityApis";
 
 export default function Categories({ brands }) {
   let history = useHistory();
-  const [index, setIndex] = useState([1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]);
-  const [cities, setCities] = useState([
-    "Lahore",
-    "Karachi",
-    "Islamabad",
-    "Rawalpindi",
-    "Peshawar",
-    "Faisalabad",
-    "Multan",
-    "Gujranwala",
-    "Sialkot",
-    "Sargodha",
-    "Abbottabad",
-    "Bahawalpur",
-  ]);
-  const [cities2, setCities2] = useState([
-    "Hyderabad",
-    "Mardan",
-    "Gujrat",
-    "Quetta",
-    "Wah cantt",
-    "Rahim Yar Khan",
-    "Sahiwal",
-  ]);
+  const [index, setIndex] = useState(0);
+  const [cities, setCities] = useState();
 
-	// var temparr;
-	// useEffect(() => {
-	// 	debugger;
-	// 	var length = brands.length();
-	// 	length =parseInt( length / 4)
-		
-	// 	for (var i = 0; i < length; i++){
-	// 		temparr.push(i)
-	// 	}
-	// 	// for(length)
-	// }, [brands])
-	
-  // const CarouselItem = (item) => {
-  // 	return (
+  useEffect(() => {
+    handleGetAllCities();
+  }, []);
 
-  // )
-  // }
+  const handleGetAllCities = async () => {
+    const result = await city.getPopularCity("popular");
+
+    if (result.error === false) {
+      setCities(result.data && result.data.data);
+      console.log("cities", result.data && result.data.data);
+    }
+  };
+
   return (
     <div>
       <h2 className="text-center">Examine Used Tractors</h2>
@@ -77,6 +49,8 @@ export default function Categories({ brands }) {
                                   >
                                     <img
                                       alt="Toyota"
+                                      height="150px"
+                                      width="150px"
                                       src={item2.active_image_path}
                                     />
                                     {item2.title}
@@ -94,36 +68,20 @@ export default function Categories({ brands }) {
                   <Carousel>
                     <Carousel.Item>
                       <ul className="browse-listing row p-0">
-                        {cities.map((option) => (
-                          <li
-                            className="col-4 col-lg-2 p-3 text-center"
-                            key={option}
-                          >
-                            <a
-                              className="text-dark"
-                              onClick={() => history.push("/")}
+                        {cities &&
+                          cities.map((option) => (
+                            <li
+                              className="col-4 col-lg-2 p-3 text-center"
+                              key={option.id}
                             >
-                              {option}
-                            </a>
-                          </li>
-                        ))}
-                      </ul>
-                    </Carousel.Item>
-                    <Carousel.Item>
-                      <ul className="browse-listing row p-0">
-                        {cities2.map((option) => (
-                          <li
-                            className="col-4 col-lg-2 p-3 text-center"
-                            key={option}
-                          >
-                            <a
-                              className="text-dark"
-                              onClick={() => history.push("/")}
-                            >
-                              {option}
-                            </a>
-                          </li>
-                        ))}
+                              <a
+                                className="text-dark"
+                                onClick={() => history.push("/")}
+                              >
+                                {option.title}
+                              </a>
+                            </li>
+                          ))}
                       </ul>
                     </Carousel.Item>
                   </Carousel>

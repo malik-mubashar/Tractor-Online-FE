@@ -72,7 +72,8 @@ console.log('brandsinlandingpage',brands)
       <div className="overflow-x-hidden">
         <div className={`container-lg py-4 mt-2 ${isMobile ? "bg-white" : ""}`}>
 					<Categories
-					brands={brands}
+            cities={cities}
+					  brands={brands}
 					/>
         </div>
         <div className="bg-white">

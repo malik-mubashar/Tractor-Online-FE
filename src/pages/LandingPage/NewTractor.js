@@ -2,20 +2,20 @@ import React, { useState } from "react";
 import { Link } from "react-router-dom";
 
 const NewTractor = ({brands}) => {
-  const [index2, setIndex2] = useState([1, 2, 3]);
 
   return (
     <>
       <div className="container-lg mt-5 py-4">
         <h2 className="text-center">Make a New Tractor</h2>
-				<div className="row" >
+				<div className="row mt-4" >
         {brands.map((item) => (
             <ul className="make-list col-sm-2 list-unstyled new-car-list" key={item.id}>
               <li className="heading text-center">
                 <Link to="/">
                   <img
                     alt="Mahindra"
-                    height="65"
+                    height="100px"
+                    width="100px"
                     loading="lazy"
                     src={item.active_image_path}
                   />
