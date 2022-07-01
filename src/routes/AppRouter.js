@@ -35,6 +35,7 @@ import Products from "../pages/Products/Products";
 import Roles from "../pages/Roles/Roles";
 import UserRoles from "../pages/UserRoles/UserRoles";
 import CategoryBrands from "../pages/CategoryBrands/CategoryBrands";
+import Brands from "../pages/Brands/Brands";
 
 
 const AppRouter = () => {
@@ -65,6 +66,9 @@ const AppRouter = () => {
 					</ProtectedRoute>
 					<ProtectedRoute exact path="/categoryBrands">
             <CategoryBrands />
+					</ProtectedRoute>
+					<ProtectedRoute exact path="/brands">
+            <Brands />
 					</ProtectedRoute>
 
 					<ProtectedRoute exact path="/productCategories">
