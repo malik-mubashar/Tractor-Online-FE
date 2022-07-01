@@ -161,9 +161,12 @@ const SignUp = () => {
                         ""
                       )}
                       <div className="text-center">
-                        <Button variant="primary" onClick={createUserAccount}>
+                        <Button variant="primary" className="mb-2" onClick={createUserAccount}>
                           Sign Up
                         </Button>
+                        <Link to="/login/" className="">
+                          Already have an Account?
+                        </Link>
                       </div>
                     </Form>
                   </div>
