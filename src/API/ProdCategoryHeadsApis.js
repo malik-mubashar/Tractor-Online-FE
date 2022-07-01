@@ -36,7 +36,7 @@ class ProdCategoryHeads {
       method: "put",
       url: `${process.env.REACT_APP_API_LOCAL_PATH}product_category_heads/${prodSCategoryHeadsState.prodCategoryId}`,
       headers: {
-        "Content-Type": "application/json; charset=utf-8",
+        "Content-Type": "multipart/form-data",
         "Access-Control-Allow-Origin": "*",
         "Access-Control-Allow-Headers": "*",
         "access-token": `${user.accessToken}`,
@@ -50,7 +50,9 @@ class ProdCategoryHeads {
         link: prodSCategoryHeadsState.link,
         icon: prodSCategoryHeadsState.icon,
         description: prodSCategoryHeadsState.description,
-        product_category_id: prodSCategoryHeadsState.product_category_id,
+				product_category_id: prodSCategoryHeadsState.product_category_id,
+				active_image: prodSCategoryHeadsState.image,
+
       },
     })
       .then((result) => {
@@ -72,7 +74,7 @@ class ProdCategoryHeads {
       method: "post",
       url: `${process.env.REACT_APP_API_LOCAL_PATH}product_category_heads`,
       headers: {
-        "Content-Type": "application/json; charset=utf-8",
+        "Content-Type": "multipart/form-data",
         "Access-Control-Allow-Origin": "*",
         "Access-Control-Allow-Headers": "*",
         "access-token": `${user.accessToken}`,
@@ -86,7 +88,9 @@ class ProdCategoryHeads {
         link: prodSCategoryHeadsState.link,
         icon: prodSCategoryHeadsState.icon,
         description: prodSCategoryHeadsState.description,
-        product_category_id: prodSCategoryHeadsState.product_category_id,
+				product_category_id: prodSCategoryHeadsState.product_category_id,
+				active_image: prodSCategoryHeadsState.image,
+
       },
     })
       .then((result) => {

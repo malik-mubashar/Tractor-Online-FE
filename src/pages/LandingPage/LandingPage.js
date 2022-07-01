@@ -10,13 +10,40 @@ import DeskTopBanner from "./DeskTopBanner";
 import CategoriesNavBar from "../Categories/index";
 import TractorSaleAd from "./TractorSale";
 import { city } from "../../API/City/CityApis";
+import toast from "react-hot-toast";
+import { brandApis } from "../../API/BrandsApis";
 
 const LandingPage = () => {
   const [cities, setCities] = useState([]);
+  const [brands, setBrands] = useState([]);
 
   useEffect(()=>{
-    getAllCity()
+		getAllCity()
+		getBrands(1, "", 10000000);
+
   },[])
+
+  const getBrands = async (page, mainSearch, noOfRec) => {
+    const loadingToastId = toast.loading("Loading..!");
+
+    try {
+			const result = await brandApis.getBrands(page, mainSearch, noOfRec);
+			debugger;
+      if (result.error == false && result.data.status == "success") {
+        toast.dismiss(loadingToastId);
+
+        setBrands(
+         result.data.data
+        );
+      } else {
+        toast.dismiss(loadingToastId);
+        console.error(result.data);
+      }
+    } catch (error) {
+      toast.dismiss(loadingToastId);
+      console.error(error);
+    }
+  };
 
   const getAllCity = async () => {
     debugger
@@ -30,7 +57,7 @@ const LandingPage = () => {
     setCities(tempArray);
     console.log("city",tempArray)
   };
-
+console.log('brandsinlandingpage',brands)
   return (
     <>
       {!isMobile &&<> <DeskTopBanner
@@ -44,7 +71,9 @@ const LandingPage = () => {
       {!isMobile && <TractorSaleAd />}
       <div className="overflow-x-hidden">
         <div className={`container-lg py-4 mt-2 ${isMobile ? "bg-white" : ""}`}>
-          <Categories />
+					<Categories
+					brands={brands}
+					/>
         </div>
         <div className="bg-white">
           <div className="container-lg py-4">
@@ -74,7 +103,9 @@ const LandingPage = () => {
           />
         </div>
         <div className="container-lg py-4">
-          <NewTractor />
+					<NewTractor
+					brands={brands}
+					/>
         </div>
       </div>
     </>
