@@ -32,24 +32,25 @@ const CategoriesNavBar = () => {
               </div>
             </div>
           </div>
-          <div className="col-12  mb-4  category-section-slider p-0 border-radius">
+          <div className="col-12  mb-4 category-section-slider p-0 border-radius">
             <MainCategory src="https://static.vecteezy.com/system/resources/previews/003/417/794/non_2x/farming-landing-page-web-banner-background-vector.jpg" />
           </div>
-          <div className="col-12 category-hot-product  border-radius">
-            <div className="col-lg-4 text-center">
-              <h4 className="mt-4 text-white">More Exclusive Deals</h4>
-              <span className="text-white mb-2">
-                Combine with your coupon to save even more!
-              </span>
-              <br></br>
-              <Button
-                variant="success"
-                size="lg"
-                className="mr-2 rmb-5 font-weight-bold"
-              >
-                Claim PKR 823
-                <Icon.ChevronRight className="icon ml-4 font-weight-bold" />
-              </Button>
+          <div className="col-12 category-hot-product border-radius">
+            <div className="col-lg-4 text-center align-middle">
+              <div style={{paddingTop: "50px"}}>
+                <h4 className="mt-4 text-white">More Exclusive Deals</h4>
+                <span className="text-white mb-2">
+                  Combine with your coupon to save even more!
+                </span>
+                <Button
+                  variant="success"
+                  size="lg"
+                  className="mr-2 rmb-5 font-weight-bold"
+                >
+                  Claim PKR 823
+                  <Icon.ChevronRight className="icon ml-4 font-weight-bold" />
+                </Button>
+              </div>
             </div>
             <div className="col-lg-8 hot-slider">
               <FeaturedProducts />

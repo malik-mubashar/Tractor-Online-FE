@@ -1,7 +1,7 @@
 import React from "react";
 import SearchAble from "./searchable";
 import { Button } from "react-bootstrap";
-const DeskTopBanner = () => {
+const DeskTopBanner = ({cities}) => {
   return (
     <>
       <div className="dashboard-carousel">
@@ -12,7 +12,9 @@ const DeskTopBanner = () => {
             correct one for you.
           </p>
         </div>
-        <SearchAble />
+        <SearchAble 
+        cities={cities}
+        />
         <Button className="mt-2 mr-2 d-flex justify-content-center m-auto bg-transparent border border-white">
           {"Advanced Filter >>"}
         </Button>
