@@ -105,7 +105,10 @@ export default function ProdSubCategories() {
                 .toLowerCase()
                 .includes(searchString.toLowerCase())) ||
             (item.status &&
-              item.status.toLowerCase().includes(searchString.toLowerCase()))
+							item.status.toLowerCase().includes(searchString.toLowerCase()))
+							||
+							(item.link &&
+								item.link.toLowerCase().includes(searchString.toLowerCase()))
           );
         }
       );
@@ -170,7 +173,7 @@ export default function ProdSubCategories() {
       console.error(e);
     }
   };
-
+console.log('prodSubCategoriesState',prodSubCategoriesState)
   return (
     <>
       <>
@@ -259,7 +262,7 @@ export default function ProdSubCategories() {
                 <div className="card mb-4">
                   <div className="card-body">
                     <div className="card-header d-flex">
-                      <h5 className="card-title w-50 float-left">Cites</h5>
+                      <h5 className="card-title w-50 float-left">Product sub-Categories</h5>
                       <Form className="nav-search-form d-none d-sm-block float-right">
                         <FormControl
                           type="text"
@@ -277,6 +280,7 @@ export default function ProdSubCategories() {
                             <th>Title</th>
                             <th>Link</th>
                             <th>Status</th>
+                            <th>sub-category Head</th>
                             <th>Description</th>
                             <th className="text-center">Action</th>
                           </tr>
@@ -290,6 +294,7 @@ export default function ProdSubCategories() {
                                   <td>{prod.title && prod.title}</td>
                                   <td>{prod.link && prod.link}</td>
                                   <td>{prod.status && prod.status}</td>
+                                  <td>{prod.product_category_head.title && prod.product_category_head.title}</td>
                                   <td>
                                     {prod.description && prod.description}
                                   </td>

@@ -71,7 +71,13 @@ export default function ProdCategoryHeads() {
         toast.dismiss(loadingToastId);
         toast.success("Successfully deleted!");
         getProdCategoryHeads(1, "", 10);
-      }
+			}
+			if (result.error == true) {
+        toast.dismiss(loadingToastId);
+        toast.error("error while deleting!");
+        getProdCategoryHeads(1, "", 10);
+			}
+			
       console.log(result);
     } catch (error) {
       console.error(error);
