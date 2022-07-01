@@ -6,15 +6,33 @@ import { productApis } from "../../API/ProductApis";
 export default function Categories({ title, link }) {
   const [index, setIndex] = useState([1, 2, 3, 4]);
   const [products, setProducts] = useState([]);
+  const [upcomingProducts, setUpcomingProducts] = useState([]);
+  const [popularProducts, setPopularProducts] = useState([]);
 
   useEffect(() => {
-    handleGetAllProducts();
+    handleGetNewProducts();
+    handleGetUpcomingProducts();
+    handleGetPopularProducts();
   }, []);
-  const handleGetAllProducts = async () => {
-    const result = await productApis.getAllProducts();
+  const handleGetNewProducts = async () => {
+    const result = await productApis.getNewProducts('newly_launched');
     if (result.error === false) {
       setProducts(result.data && result.data.data);
       console.log("products", result.data && result.data.data);
+    }
+  };
+  const handleGetUpcomingProducts = async () => {
+    const result = await productApis.getUpcomingProducts('upcoming');
+    if (result.error === false) {
+      setUpcomingProducts(result.data && result.data.data);
+      console.log("upcomingproducts", result.data && result.data.data);
+    }
+  };
+  const handleGetPopularProducts = async () => {
+    const result = await productApis.getPopularProducts('popular');
+    if (result.error === false) {
+      setPopularProducts(result.data && result.data.data);
+      console.log("popularproducts", result.data && result.data.data);
     }
   };
   const [city, setCity] = useState([
@@ -56,8 +74,8 @@ export default function Categories({ title, link }) {
                   <Carousel>
                     <Carousel.Item>
                       <ul className="browse-listing  row p-0">
-                        {products&&
-                        products.map((item,i) => (
+                        {popularProducts&&
+                        popularProducts.map((item,i) => (
                           <li className=" col-md-3" key={i}>
                             <div
                               className="featured-card bg-white"
@@ -80,8 +98,8 @@ export default function Categories({ title, link }) {
                     </Carousel.Item>
                     <Carousel.Item>
                       <ul className="browse-listing  row p-0">
-                        {products&&
-                        products.map((item,i) => (
+                        {popularProducts&&
+                        popularProducts.map((item,i) => (
                           <li className=" col-md-3" key={i}>
                             <div
                               className="featured-card bg-white"
@@ -104,8 +122,8 @@ export default function Categories({ title, link }) {
                     </Carousel.Item>
                     <Carousel.Item>
                       <ul className="browse-listing  row p-0">
-                        {products&&
-                        products.map((item,i) => (
+                        {popularProducts&&
+                        popularProducts.map((item,i) => (
                           <li className=" col-md-3" key={i}>
                             <div
                               className="featured-card bg-white"
@@ -133,21 +151,23 @@ export default function Categories({ title, link }) {
                   <Carousel>
                     <Carousel.Item>
                       <ul className="browse-listing  row p-0">
-                        {index.map((option) => (
-                          <li className=" col-md-3" key={option}>
+                      {upcomingProducts&&
+                        upcomingProducts.map((item,i) => (
+                          <li className=" col-md-3" key={i}>
                             <div
                               className="featured-card bg-white"
-                              key={option}
+                              key={i}
                             >
                               <img
                                 className="card-img"
-                                src="https://cache3.pakwheels.com/ad_pictures/6549/Slide_toyota-prius-s-led-edition-1-8-2013-65495110.jpg"
+                                src={item.cover_photo_path}
+                                alt=""
                               />
-                              <h4 className="mb-0 pl-2">Claas</h4>
+                              <h4 className="mb-0 pl-2">{item.title}</h4>
                               <p className="mb-0 pl-2 text-success">
-                                PKR 100,000
+                                {item.price}
                               </p>
-                              <p className="pl-2">Lahore</p>
+                              <p className="pl-2">{item.location}</p>
                             </div>
                           </li>
                         ))}
@@ -155,23 +175,23 @@ export default function Categories({ title, link }) {
                     </Carousel.Item>
                     <Carousel.Item>
                       <ul className="browse-listing  row p-0">
-                        {index.map((option) => (
-                          <li className=" col-md-3" key={option}>
+                      {upcomingProducts&&
+                        upcomingProducts.map((item,i) => (
+                          <li className=" col-md-3" key={i}>
                             <div
                               className="featured-card bg-white"
-                              key={option}
+                              key={i}
                             >
                               <img
                                 className="card-img"
-                                src="https://cache3.pakwheels.com/ad_pictures/6549/Slide_toyota-prius-s-led-edition-1-8-2013-65495110.jpg"
+                                src={item.cover_photo_path}
+                                alt=""
                               />
-                              <h4 className="mb-0 pl-2">
-                                Sonalika International
-                              </h4>
+                              <h4 className="mb-0 pl-2">{item.title}</h4>
                               <p className="mb-0 pl-2 text-success">
-                                PKR 100,000
+                                {item.price}
                               </p>
-                              <p className="pl-2">Lahore</p>
+                              <p className="pl-2">{item.location}</p>
                             </div>
                           </li>
                         ))}
@@ -179,21 +199,23 @@ export default function Categories({ title, link }) {
                     </Carousel.Item>
                     <Carousel.Item>
                       <ul className="browse-listing  row p-0">
-                        {index.map((option) => (
-                          <li className=" col-md-3" key={option}>
+                      {upcomingProducts&&
+                        upcomingProducts.map((item,i) => (
+                          <li className=" col-md-3" key={i}>
                             <div
                               className="featured-card bg-white"
-                              key={option}
+                              key={i}
                             >
                               <img
                                 className="card-img"
-                                src="https://cache3.pakwheels.com/ad_pictures/6549/Slide_toyota-prius-s-led-edition-1-8-2013-65495110.jpg"
+                                src={item.cover_photo_path}
+                                alt=""
                               />
-                              <h4 className="mb-0 pl-2">Case IH</h4>
+                              <h4 className="mb-0 pl-2">{item.title}</h4>
                               <p className="mb-0 pl-2 text-success">
-                                PKR 100,000
+                                {item.price}
                               </p>
-                              <p className="pl-2">Lahore</p>
+                              <p className="pl-2">{item.location}</p>
                             </div>
                           </li>
                         ))}
@@ -206,21 +228,23 @@ export default function Categories({ title, link }) {
                   <Carousel>
                     <Carousel.Item>
                       <ul className="browse-listing  row p-0">
-                        {index.map((option) => (
-                          <li className=" col-md-3" key={option}>
+                      {products&&
+                        products.map((item,i) => (
+                          <li className=" col-md-3" key={i}>
                             <div
                               className="featured-card bg-white"
-                              key={option}
+                              key={i}
                             >
                               <img
                                 className="card-img"
-                                src="https://cache3.pakwheels.com/ad_pictures/6549/Slide_toyota-prius-s-led-edition-1-8-2013-65495110.jpg"
+                                src={item.cover_photo_path}
+                                alt=""
                               />
-                              <h4 className="mb-0 pl-2">Massey Ferguson </h4>
+                              <h4 className="mb-0 pl-2">{item.title}</h4>
                               <p className="mb-0 pl-2 text-success">
-                                PKR 100,000
+                                {item.price}
                               </p>
-                              <p className="pl-2">Lahore</p>
+                              <p className="pl-2">{item.location}</p>
                             </div>
                           </li>
                         ))}
@@ -228,21 +252,23 @@ export default function Categories({ title, link }) {
                     </Carousel.Item>
                     <Carousel.Item>
                       <ul className="browse-listing  row p-0">
-                        {index.map((option) => (
-                          <li className=" col-md-3" key={option}>
+                      {products&&
+                        products.map((item,i) => (
+                          <li className=" col-md-3" key={i}>
                             <div
                               className="featured-card bg-white"
-                              key={option}
+                              key={i}
                             >
                               <img
                                 className="card-img"
-                                src="https://cache3.pakwheels.com/ad_pictures/6549/Slide_toyota-prius-s-led-edition-1-8-2013-65495110.jpg"
+                                src={item.cover_photo_path}
+                                alt=""
                               />
-                              <h4 className="mb-0 pl-2">John Deere</h4>
+                              <h4 className="mb-0 pl-2">{item.title}</h4>
                               <p className="mb-0 pl-2 text-success">
-                                PKR 100,000
+                                {item.price}
                               </p>
-                              <p className="pl-2">Lahore</p>
+                              <p className="pl-2">{item.location}</p>
                             </div>
                           </li>
                         ))}
@@ -250,21 +276,23 @@ export default function Categories({ title, link }) {
                     </Carousel.Item>
                     <Carousel.Item>
                       <ul className="browse-listing  row p-0">
-                        {index.map((option) => (
-                          <li className=" col-md-3" key={option}>
+                      {products&&
+                        products.map((item,i) => (
+                          <li className=" col-md-3" key={i}>
                             <div
                               className="featured-card bg-white"
-                              key={option}
+                              key={i}
                             >
                               <img
                                 className="card-img"
-                                src="https://cache3.pakwheels.com/ad_pictures/6549/Slide_toyota-prius-s-led-edition-1-8-2013-65495110.jpg"
+                                src={item.cover_photo_path}
+                                alt=""
                               />
-                              <h4 className="mb-0 pl-2">Mahindra</h4>
+                              <h4 className="mb-0 pl-2">{item.title}</h4>
                               <p className="mb-0 pl-2 text-success">
-                                PKR 100,000
+                                {item.price}
                               </p>
-                              <p className="pl-2">Lahore</p>
+                              <p className="pl-2">{item.location}</p>
                             </div>
                           </li>
                         ))}
