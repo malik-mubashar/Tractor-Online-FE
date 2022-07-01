@@ -176,7 +176,7 @@ console.log("productHead ", productHead)
                   <li className="dropdown-list" key={i}>
                     <Link to="/" className="d-flex pl-1 dropdown-link">
                       <Icofont
-                        icon={icons[i]}
+                        icon={item.icon}
                         height="10px"
                         width="10px"
                         className="icofont-2x ml-2 col-2 p-0"
