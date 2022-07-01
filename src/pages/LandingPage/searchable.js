@@ -5,11 +5,10 @@ import { Button } from "react-bootstrap";
 import SelectSearch from "./SelectSearch";
 import Select from "react-select";
 import { city } from "../../API/City/CityApis";
-const searchAble = () => {
+const searchAble = ({cities}) => {
   const [tractorModel, setTractorModel] = useState("");
   const [country, setCountry] = useState("");
   const [minPrice, setMinPrice] = useState();
-   const [cities, setCities] = useState([]);
 
   const [maxPrice, setMaxPrice] = useState();
   const [minPriceOptions, setMinPriceOptions] = useState([
@@ -46,9 +45,7 @@ const searchAble = () => {
     { label: "2 lac", value: "2 lac" },
     { label: "3 lac", value: "3 lac" }
   ]);
-  useEffect(()=>{
-    handleGetAllCity();
-  },[])
+
   useEffect(() => {
     if (minPrice) {
       let temp = maxPriceOptions.filter(function(x) {
@@ -66,21 +63,6 @@ const searchAble = () => {
     }
   }, [maxPrice]);
   
-
-  const handleGetAllCity = async () => {
-    debugger
-    const result = await city.getAllCity();
-    const tempArray = [];
-    result &&
-      result.data &&
-      result.data.data.map((item) =>
-        tempArray.push({ ...item, label: item.title, value: item.title })
-      );
-    setCities(tempArray);
-    console.log("city",tempArray)
-
-  };
- 
 
   return (
     <>

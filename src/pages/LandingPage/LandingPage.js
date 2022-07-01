@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import "../../components/Navigation/Navigation.css";
 import ExploreProducts from "./ExploreProducts";
 import Categories from "./Categories";
@@ -9,11 +9,33 @@ import { isMobile } from "react-device-detect";
 import DeskTopBanner from "./DeskTopBanner";
 import CategoriesNavBar from "../Categories/index";
 import TractorSaleAd from "./TractorSale";
+import { city } from "../../API/City/CityApis";
 
 const LandingPage = () => {
+  const [cities, setCities] = useState([]);
+
+  useEffect(()=>{
+    getAllCity()
+  },[])
+
+  const getAllCity = async () => {
+    debugger
+    const result = await city.getAllCity();
+    const tempArray = [];
+    result &&
+      result.data &&
+      result.data.data.map((item) =>
+        tempArray.push({ ...item, label: item.title, value: item.title })
+      );
+    setCities(tempArray);
+    console.log("city",tempArray)
+  };
+
   return (
     <>
-      {!isMobile &&<> <DeskTopBanner />
+      {!isMobile &&<> <DeskTopBanner
+      cities={cities}
+      />
       <div className="d-flex p-2 mt-2">
         <div className="col-12 ">
           <CategoriesNavBar />

@@ -14,7 +14,7 @@ const Categories = ({ src }) => {
           className="d-block w-100 m-auto justify-content-center border-radius "
           src={src}
           alt="First slide"
-          height={"250px"}
+          height={"350px"}
         />
         {/* <Carousel.Caption>
             <h3>First slide label</h3>
@@ -26,7 +26,7 @@ const Categories = ({ src }) => {
           className="d-block w-100 m-auto justify-content-center border-radius"
           src={src}
           alt="Second slide"
-          height={"250px"}
+          height={"350px"}
 
         />
         {/* <Carousel.Caption>
@@ -39,7 +39,7 @@ const Categories = ({ src }) => {
           className="d-block w-100 m-auto justify-content-center border-radius"
           src={src}
           alt="Third slide"
-          height={"250px"}
+          height={"350px"}
 
         />
 

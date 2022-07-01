@@ -1,19 +1,24 @@
 import React, { useState, useContext, useEffect } from "react";
-import Carousel from "react-bootstrap/Carousel";
-import { Col, Tabs, Tab } from "react-bootstrap";
+import { Col } from "react-bootstrap";
+import Tabs from 'react-bootstrap/Tabs'
+import Tab from 'react-bootstrap/Tab'
+import NewProductsCarousel from './NewProductsCarousel';
 import { productApis } from "../../API/ProductApis";
 
-export default function Categories({ title, link }) {
-  const [index, setIndex] = useState([1, 2, 3, 4]);
+
+export default function FeaturedNewTractor({ title, link }) {
+
   const [products, setProducts] = useState([]);
   const [upcomingProducts, setUpcomingProducts] = useState([]);
   const [popularProducts, setPopularProducts] = useState([]);
+  const [key, setKey] = useState('Popular');
 
-  useEffect(() => {
+  useEffect(()=>{
     handleGetNewProducts();
     handleGetUpcomingProducts();
     handleGetPopularProducts();
-  }, []);
+  },[])
+
   const handleGetNewProducts = async () => {
     const result = await productApis.getNewProducts('newly_launched');
     if (result.error === false) {
@@ -35,32 +40,13 @@ export default function Categories({ title, link }) {
       console.log("popularproducts", result.data && result.data.data);
     }
   };
-  const [city, setCity] = useState([
-    "Lahore",
-    "Karachi",
-    "Islamabad",
-    "Rawalpindi",
-    "Peshawar",
-    "Faisalabad",
-    "Multan",
-    "Gujranwala",
-    "Sialkot",
-    "Sargodha",
-    "Abbottabad",
-    "Bahawalpur",
-    "Hyderabad",
-    "Gujrat",
-    "Sahiwal",
-    "Attock",
-    "Okara",
-    "Sheikhupura"
-  ]);
+
 
   return (
     <div>
       <div className="d-flex justify-content-between">
         <h2>{title}</h2>
-        <a href="/" className="text-info text-capitalize">
+        <a className="text-info text-capitalize">
           {link}
         </a>
       </div>
@@ -69,236 +55,21 @@ export default function Categories({ title, link }) {
         <div className="mb-4">
           <div className="">
             <div className="tabs-style-three">
-              <Tabs defaultActiveKey="Popular" id="uncontrolled-tab-example">
+              <Tabs
+                defaultActiveKey="Popular"
+                id="controlled-tab-example"
+                onSelect={(e) => {setKey(e)}}
+                activeKey={key}
+              >
                 <Tab eventKey="Popular" title="Popular">
-                  <Carousel>
-                    <Carousel.Item>
-                      <ul className="browse-listing  row p-0">
-                        {popularProducts&&
-                        popularProducts.map((item,i) => (
-                          <li className=" col-md-3" key={i}>
-                            <div
-                              className="featured-card bg-white"
-                              key={i}
-                            >
-                              <img
-                                className="card-img"
-                                src={item.cover_photo_path}
-                                alt=""
-                              />
-                              <h4 className="mb-0 pl-2">{item.title}</h4>
-                              <p className="mb-0 pl-2 text-success">
-                                {item.price}
-                              </p>
-                              <p className="pl-2">{item.location}</p>
-                            </div>
-                          </li>
-                        ))}
-                      </ul>
-                    </Carousel.Item>
-                    <Carousel.Item>
-                      <ul className="browse-listing  row p-0">
-                        {popularProducts&&
-                        popularProducts.map((item,i) => (
-                          <li className=" col-md-3" key={i}>
-                            <div
-                              className="featured-card bg-white"
-                              key={i}
-                            >
-                              <img
-                                className="card-img"
-                                src={item.cover_photo_path}
-                                alt=""
-                              />
-                              <h4 className="mb-0 pl-2">{item.title}</h4>
-                              <p className="mb-0 pl-2 text-success">
-                                {item.price}
-                              </p>
-                              <p className="pl-2">{item.location}</p>
-                            </div>
-                          </li>
-                        ))}
-                      </ul>
-                    </Carousel.Item>
-                    <Carousel.Item>
-                      <ul className="browse-listing  row p-0">
-                        {popularProducts&&
-                        popularProducts.map((item,i) => (
-                          <li className=" col-md-3" key={i}>
-                            <div
-                              className="featured-card bg-white"
-                              key={i}
-                            >
-                              <img
-                                className="card-img"
-                                src={item.cover_photo_path}
-                                alt=""
-                              />
-                              <h4 className="mb-0 pl-2">{item.title}</h4>
-                              <p className="mb-0 pl-2 text-success">
-                                {item.price}
-                              </p>
-                              <p className="pl-2">{item.location}</p>
-                            </div>
-                          </li>
-                        ))}
-                      </ul>
-                    </Carousel.Item>
-                  </Carousel>
+                  <NewProductsCarousel products={popularProducts} />
                 </Tab>
-
                 <Tab eventKey="Upcoming" title="Upcoming">
-                  <Carousel>
-                    <Carousel.Item>
-                      <ul className="browse-listing  row p-0">
-                      {upcomingProducts&&
-                        upcomingProducts.map((item,i) => (
-                          <li className=" col-md-3" key={i}>
-                            <div
-                              className="featured-card bg-white"
-                              key={i}
-                            >
-                              <img
-                                className="card-img"
-                                src={item.cover_photo_path}
-                                alt=""
-                              />
-                              <h4 className="mb-0 pl-2">{item.title}</h4>
-                              <p className="mb-0 pl-2 text-success">
-                                {item.price}
-                              </p>
-                              <p className="pl-2">{item.location}</p>
-                            </div>
-                          </li>
-                        ))}
-                      </ul>
-                    </Carousel.Item>
-                    <Carousel.Item>
-                      <ul className="browse-listing  row p-0">
-                      {upcomingProducts&&
-                        upcomingProducts.map((item,i) => (
-                          <li className=" col-md-3" key={i}>
-                            <div
-                              className="featured-card bg-white"
-                              key={i}
-                            >
-                              <img
-                                className="card-img"
-                                src={item.cover_photo_path}
-                                alt=""
-                              />
-                              <h4 className="mb-0 pl-2">{item.title}</h4>
-                              <p className="mb-0 pl-2 text-success">
-                                {item.price}
-                              </p>
-                              <p className="pl-2">{item.location}</p>
-                            </div>
-                          </li>
-                        ))}
-                      </ul>
-                    </Carousel.Item>
-                    <Carousel.Item>
-                      <ul className="browse-listing  row p-0">
-                      {upcomingProducts&&
-                        upcomingProducts.map((item,i) => (
-                          <li className=" col-md-3" key={i}>
-                            <div
-                              className="featured-card bg-white"
-                              key={i}
-                            >
-                              <img
-                                className="card-img"
-                                src={item.cover_photo_path}
-                                alt=""
-                              />
-                              <h4 className="mb-0 pl-2">{item.title}</h4>
-                              <p className="mb-0 pl-2 text-success">
-                                {item.price}
-                              </p>
-                              <p className="pl-2">{item.location}</p>
-                            </div>
-                          </li>
-                        ))}
-                      </ul>
-                    </Carousel.Item>
-                  </Carousel>
+                  <NewProductsCarousel products={upcomingProducts} />
                 </Tab>
 
-                <Tab eventKey="Newly Launched" title="Newly Launched">
-                  <Carousel>
-                    <Carousel.Item>
-                      <ul className="browse-listing  row p-0">
-                      {products&&
-                        products.map((item,i) => (
-                          <li className=" col-md-3" key={i}>
-                            <div
-                              className="featured-card bg-white"
-                              key={i}
-                            >
-                              <img
-                                className="card-img"
-                                src={item.cover_photo_path}
-                                alt=""
-                              />
-                              <h4 className="mb-0 pl-2">{item.title}</h4>
-                              <p className="mb-0 pl-2 text-success">
-                                {item.price}
-                              </p>
-                              <p className="pl-2">{item.location}</p>
-                            </div>
-                          </li>
-                        ))}
-                      </ul>
-                    </Carousel.Item>
-                    <Carousel.Item>
-                      <ul className="browse-listing  row p-0">
-                      {products&&
-                        products.map((item,i) => (
-                          <li className=" col-md-3" key={i}>
-                            <div
-                              className="featured-card bg-white"
-                              key={i}
-                            >
-                              <img
-                                className="card-img"
-                                src={item.cover_photo_path}
-                                alt=""
-                              />
-                              <h4 className="mb-0 pl-2">{item.title}</h4>
-                              <p className="mb-0 pl-2 text-success">
-                                {item.price}
-                              </p>
-                              <p className="pl-2">{item.location}</p>
-                            </div>
-                          </li>
-                        ))}
-                      </ul>
-                    </Carousel.Item>
-                    <Carousel.Item>
-                      <ul className="browse-listing  row p-0">
-                      {products&&
-                        products.map((item,i) => (
-                          <li className=" col-md-3" key={i}>
-                            <div
-                              className="featured-card bg-white"
-                              key={i}
-                            >
-                              <img
-                                className="card-img"
-                                src={item.cover_photo_path}
-                                alt=""
-                              />
-                              <h4 className="mb-0 pl-2">{item.title}</h4>
-                              <p className="mb-0 pl-2 text-success">
-                                {item.price}
-                              </p>
-                              <p className="pl-2">{item.location}</p>
-                            </div>
-                          </li>
-                        ))}
-                      </ul>
-                    </Carousel.Item>
-                  </Carousel>
+                <Tab eventKey="NewlyLaunched" title="Newly Launched">
+                  <NewProductsCarousel products={products} />
                 </Tab>
               </Tabs>
             </div>

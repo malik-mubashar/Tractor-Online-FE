@@ -22,61 +22,51 @@ export default function Footer() {
   return (
     <div>
       <div className="footer">
-        <div className="container-lg">
-          <div className="row">
-            <div className="col-md-9">
+        <div className="">
+          <div className="row col-12">
+            <div className="col-md-8 ml-auto">
               <div className="row">
                 <div className="col-md-3">
                   <ul
                     className="nomargin footer-links list-unstyled"
                     id="footer-Make"
                   >
-                    <li>
+                    <li className="mt-1">
                       <h5 className="text-white">Tractors By Make</h5>
                     </li>
-                    <li>
+                    <li className="mt-1">
                       <a href="/" className="footer-link">
-                        Toyota Tractors for Sale
+                        AGTL Tractors for Sale
                       </a>
                     </li>
-                    <li>
+                    <li className="mt-1">
                       <a href="/" className="footer-link">
-                        Suzuki Tractors for Sale
+                        IMT Tractors for Sale
                       </a>
                     </li>
-                    <li>
+                    <li className="mt-1">
                       <a href="/" className="footer-link">
-                        Honda Tractors for Sale
+                        Millat Tractors for Sale
                       </a>
                     </li>
-                    <li>
+                    <li className="mt-1">
                       <a href="/" className="footer-link">
-                        Daihatsu Tractors for Sale
+                        Belarus Tractors for Sale
                       </a>
                     </li>
-                    <li>
+                    <li className="mt-1">
                       <a href="/" className="footer-link">
-                        Mitsubishi Tractors for Sale
+                        Messy Ferguson Tractors for Sale
                       </a>
                     </li>
-                    <li>
+                    <li className="mt-1">
                       <a href="/" className="footer-link">
-                        Nissan Tractors for Sale
+                        New Holland Tractors for Sale
                       </a>
                     </li>
-                    <li>
+                    <li className="mt-1">
                       <a href="/" className="footer-link">
-                        Mercedes Tractors for Sale
-                      </a>
-                    </li>
-                    <li>
-                      <a href="/" className="footer-link">
-                        Hyundai Tractors for Sale
-                      </a>
-                    </li>
-                    <li>
-                      <a href="/" className="footer-link">
-                        BMW Tractors for Sale
+                        Orient Automotive Tractors for Sale
                       </a>
                     </li>
                   </ul>
@@ -86,50 +76,50 @@ export default function Footer() {
                     className="nomargin footer-links list-unstyled"
                     id="footer-City"
                   >
-                    <li>
+                    <li className="mt-1">
                       <h5 className="text-white">Tractors By City</h5>
                     </li>
-                    <li>
+                    <li className="mt-1">
                       <a href="/" className="footer-link">
                         Tractors in Lahore
                       </a>
                     </li>
-                    <li>
+                    <li className="mt-1">
                       <a href="/" className="footer-link">
                         Tractors in Karachi
                       </a>
                     </li>
-                    <li>
+                    <li className="mt-1">
                       <a href="/" className="footer-link">
                         Tractors in Islamabad
                       </a>
                     </li>
-                    <li>
+                    <li className="mt-1">
                       <a href="/" className="footer-link">
                         Tractors in Rawalpindi
                       </a>
                     </li>
-                    <li>
+                    <li className="mt-1">
                       <a href="/" className="footer-link">
                         Tractors in Peshawar
                       </a>
                     </li>
-                    <li>
+                    <li className="mt-1">
                       <a href="/" className="footer-link">
                         Tractors in Faisalabad
                       </a>
                     </li>
-                    <li>
+                    <li className="mt-1">
                       <a href="/" className="footer-link">
                         Tractors in Multan
                       </a>
                     </li>
-                    <li>
+                    <li className="mt-1">
                       <a href="/" className="footer-link">
                         Tractors in Gujranwala
                       </a>
                     </li>
-                    <li>
+                    <li className="mt-1">
                       <a href="/" className="footer-link">
                         Tractors in Sialkot
                       </a>
@@ -138,92 +128,82 @@ export default function Footer() {
                 </div>
                 <div className="col-md-3">
                   <ul className="nomargin footer-links list-unstyled">
-                    <li>
+                    <li className="mt-1">
                       <h5 className="text-white">Explore TractorOnline</h5>
                     </li>
-                    <li>
+                    <li className="mt-1">
                       <a href="/" className="footer-link">
                         Used Tractors
                       </a>
                     </li>
-                    <li>
-                      <a href="/" className="footer-link">
-                        Used Bikes
-                      </a>
-                    </li>
-                    <li>
+                    <li className="mt-1">
                       <a href="/" className="footer-link">
                         New Tractors
                       </a>
                     </li>
-                    <li>
+                    <li className="mt-1">
                       <a href="/" className="footer-link">
-                        Auto Parts &amp; Accessories
+                        Parts &amp; Accessories
                       </a>
                     </li>
-                    <li>
+                    <li className="mt-1">
                       <a href="/" className="footer-link">
-                        Cool Rides
+                        New Agriculture machinery
                       </a>
                     </li>
-                    <li>
+                    <li className="mt-1">
                       <a href="/" className="footer-link">
-                        Forums
+                        Seeds &amp; Fertilizers
                       </a>
                     </li>
-                    <li>
+                    <li className="mt-1">
                       <a href="/" className="footer-link">
-                        Autoshow
-                      </a>
-                    </li>
-                    <li>
-                      <a href="/" className="footer-link">
-                        Sitemap
+                        Plants &amp; Horticulture
                       </a>
                     </li>
                   </ul>
                 </div>
-                <div className="col-md-3">
+                <div className="col-md-2">
                   <ul className="nomargin footer-links list-unstyled">
-                    <li>
+                    <li className="mt-1">
                       <h5 className="text-white">TractorOnline.com</h5>
                     </li>
-                    <li>
+                    <li className="mt-1">
                       <a href="/" className="footer-link">
                         About TractorOnline.com
                       </a>
                     </li>
-                    <li>
+                    <li className="mt-1">
                       <a href="/" className="footer-link">
                         Our Products
                       </a>
                     </li>
-                    <li>
+                    <li className="mt-1">
                       <a href="/" className="footer-link">
                         Advertise With Us
                       </a>
                     </li>
-                    <li>
+                    <li className="mt-1">
                       <a href="/" className="footer-link">
                         How To Pay
                       </a>
                     </li>
-                    <li>
+                    <li className="mt-1">
                       <a href="/" className="footer-link">
                         FAQs
                       </a>
                     </li>
-                    <li>
+                    <li className="mt-1">
                       <a href="/" className="footer-link">
                         Refunds &amp; Returns
                       </a>
                     </li>
-                    <li>
+                    <li className="mt-1">
                       <a href="/" className="footer-link">
                         Careers
                       </a>
                     </li>
-                    <li>
+                    <li className="mt-1">
                       <a href="/" className="footer-link">
                         Contact Us
                       </a>
@@ -232,32 +212,27 @@ export default function Footer() {
                 </div>
               </div>
             </div>
-            <div className="col-md-3">
-              <div className="row">
-                <div className="col-md-12">
-                  <ul className="nomargin footer-links list-unstyled">
-                    <li>
-                      <h5 className="text-white">Sell On TractorOnline</h5>
-                    </li>
-                    <li>
-                      <a href="/" className="footer-link">
-                        Sell Your Tractor87
-                      </a>
-                    </li>
-                    <li>
-                      <a href="/" className="footer-link">
-                        Sell Your Bike
-                      </a>{" "}
-                    </li>
-                    <li>
-                      <a href="/" className="footer-link">
-                        Sell Accessory
-                      </a>
-                    </li>
-                  </ul>
+              <div className="col-md-2 mr-auto">
+                <div className="row">
+                  <div className="col-md-12">
+                    <ul className="nomargin footer-links list-unstyled">
+                      <li className="mt-1">
+                        <h5 className="text-white">Sell On TractorOnline</h5>
+                      </li>
+                      <li className="mt-1">
+                        <a href="/" className="footer-link">
+                          Sell Your Tractors
+                        </a>
+                      </li>
+                      <li className="mt-1">
+                        <a href="/" className="footer-link">
+                          Sell Accessory
+                        </a>
+                      </li>
+                    </ul>
+                  </div>
                 </div>
               </div>
-            </div>
           </div>
 
           <hr className="dark" />

@@ -9,26 +9,38 @@ import { useHistory } from "react-router-dom";
 export default function Categories() {
   let history = useHistory();
   const [index, setIndex] = useState([1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]);
-  const [city, setCity] = useState([
-    "Lahore",
-    "Karachi",
-    "Islamabad",
-    "Rawalpindi",
-    "Peshawar",
-    "Faisalabad",
-    "Multan",
-    "Gujranwala",
-    "Sialkot",
-    "Sargodha",
-    "Abbottabad",
-    "Bahawalpur",
-    "Hyderabad",
-    "Gujrat",
-    "Sahiwal",
-    "Attock",
-    "Okara",
-    "Sheikhupura"
-  ]);
+  const [cities, setCities] = useState([
+    'Lahore',
+    'Karachi',
+    'Islamabad',
+    'Rawalpindi',
+    'Peshawar',
+    'Faisalabad',
+    'Multan',
+    'Gujranwala',
+    'Sialkot',
+    'Sargodha',
+    'Abbottabad',
+    'Bahawalpur',
+    'Hyderabad',
+    'Mardan',
+    'Gujrat',
+    'Quetta',
+    'Wah cantt',
+    'Rahim Yar Khan',
+    'Sahiwal',
+    'D.G.Khan',
+    'Attock',
+    'Jhelum',
+    'Mandi bahauddin',
+    'Chakwal',
+    'Swabi',
+    'Okara',
+    'Mansehra',
+    'Haripur',
+    'Sheikhupura',
+    'Nowshera'
+  ])
 
   return (
     <div>
@@ -96,35 +108,7 @@ export default function Categories() {
                   <Carousel>
                     <Carousel.Item>
                       <ul className="browse-listing row p-0">
-                        {city.map((option) => (
-                          <li
-                            className="col-4 col-lg-2 p-3 text-center"
-                            key={option}
-                          >
-                            <a className="text-dark" onClick={()=>history.push('/')}>
-                              {option}
-                            </a>
-                          </li>
-                        ))}
-                      </ul>
-                    </Carousel.Item>
-                    <Carousel.Item>
-                      <ul className="browse-listing row p-0">
-                        {city.map((option) => (
-                          <li
-                            className="col-4 col-lg-2 p-3 text-center"
-                            key={option}
-                          >
-                            <a className="text-dark" onClick={()=>history.push('/')}>
-                              {option}
-                            </a>
-                          </li>
-                        ))}
-                      </ul>
-                    </Carousel.Item>
-                    <Carousel.Item>
-                      <ul className="browse-listing row p-0">
-                        {city.map((option) => (
+                        {cities.map((option) => (
                           <li
                             className="col-4 col-lg-2 p-3 text-center"
                             key={option}

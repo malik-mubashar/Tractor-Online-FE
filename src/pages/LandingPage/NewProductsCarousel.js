@@ -3,19 +3,7 @@ import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
 import { productApis } from "../../API/ProductApis";
 
-export default function FeaturedProducts({ title, link }) {
-  const [products, setProducts] = useState([]);
-
-  useEffect(() => {
-    handleGetAllProducts();
-  }, []);
-  const handleGetAllProducts = async () => {
-    const result = await productApis.getAllProducts();
-    if (result.error === false) {
-      setProducts(result.data && result.data.data);
-      console.log("products", result.data && result.data.data);
-    }
-  };
+export default function NewProductsCarousel({products}) {
 
   const responsive = {
     desktop: {
@@ -35,12 +23,12 @@ export default function FeaturedProducts({ title, link }) {
     },
   };
 
+  console.log(products)
+
 
   return (
     <div>
       <div className="d-flex justify-content-between">
-        <h2>{title}</h2>
-        <a className="text-info text-capitalize">{link}</a>
       </div>
       <Carousel
         swipeable={false}
