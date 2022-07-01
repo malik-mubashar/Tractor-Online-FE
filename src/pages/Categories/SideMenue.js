@@ -68,7 +68,7 @@ const SideMenue = () => {
                   />
                 </span>
                 <DropDown
-                productHead={item.product_category_heads}
+                  productHead={item.product_category_heads}
                   title={item.title}
                   cities={cities}
                   brands={item.category_brands}
