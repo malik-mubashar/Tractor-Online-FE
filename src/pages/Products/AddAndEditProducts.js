@@ -86,9 +86,7 @@ export default function AddAndEditProduct({
   const addProduct = async (params) => {
     const loadingToastId = toast.loading("Loading..!");
     let formData = new FormData()
-    debugger;
     for (const key of Object.keys(productsState.images)) {
-      debugger;
       formData.append('active_images[]', productsState.images[key])
   }
   formData.append('title',productsState.title)
@@ -201,7 +199,7 @@ export default function AddAndEditProduct({
                     onChange={(e) => handleChange(e)}
                   />
                 </Form.Group>
-                <Form.Group controlId="formGridState">
+                <Form.Group controlId="formGridproduct">
                   <Form.Label>Product Type</Form.Label>
                   <Form.Control
                     as="select"
