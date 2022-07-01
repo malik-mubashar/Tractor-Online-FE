@@ -13,36 +13,37 @@ import {
   Pagination,
   Image,
 } from "react-bootstrap";
-import AddAndEditBrands from "./AddAndEditBrands";
-// import { brandApis } from "../../API/BrandsApis";
+import AddAndEditModels from "./AddAndEditModels";
+// import { modelApis } from "../../API/ModelsApis";
 import toast from "react-hot-toast";
 import csvSvg from "../../assets/svg/csv2.svg";
 import pdfSvg from "../../assets/svg/pdf.svg";
-import { brandApis } from "../../API/BrandsApis";
+import { modelApis } from "../../API/ModelsApis";
+// import { modelApis } from "../../API/ModelsApis";
 
-export default function Brands() {
+export default function Models() {
   const [paginationNumbers, setPaginationNumbers] = useState();
   const [noOfRec, setNoOfRec] = useState(10);
   const [mainSearchString, setMainSearchString] = useState("");
   useEffect(() => {
-    getBrands(1, "", 10);
+    getModels(1, "", 10);
   }, []);
 
-  const getBrands = async (page, mainSearch, noOfRec) => {
+  const getModels = async (page, mainSearch, noOfRec) => {
     const loadingToastId = toast.loading("Loading..!");
 
     try {
-      const result = await brandApis.getBrands(page, mainSearch, noOfRec);
+      const result = await modelApis.getModels(page, mainSearch, noOfRec);
       if (result.error == false && result.data.status == "success") {
         toast.dismiss(loadingToastId);
 
-        setBrandsState({
-          ...brandsState,
-          brands: result.data.data,
+        setModelsState({
+          ...modelsState,
+          models: result.data.data,
           pagination: result.data.pagination,
-          originalBrands: result.data.data,
-          isAddBrand: false,
-          isEditBrand: false,
+          originalModels: result.data.data,
+          isAddModel: false,
+          isEditModel: false,
         });
         var temp = [];
         for (var i = 1; i <= result.data.pagination.pages; i++) {
@@ -59,17 +60,17 @@ export default function Brands() {
     }
   };
 
-  const deleteBrand = async (id) => {
+  const deleteModel = async (id) => {
     const loadingToastId = toast.loading("Loading..!");
     try {
-      const result = await brandApis.deleteBrand(id);
+      const result = await modelApis.deleteModel(id);
       debugger;
       if (
         result.error === false
       ) {
         toast.dismiss(loadingToastId);
         toast.success("Successfully deleted!");
-        getBrands(1, "", 10);
+        getModels(1, "", 10);
       }
       console.log(result);
     } catch (error) {
@@ -82,18 +83,18 @@ export default function Brands() {
     setSideMenu(active);
   }
 
-  const [brandsState, setBrandsState] = useState({
-    isEditBrand: false,
-    isAddBrand: false,
-    isViewBrand: false,
-    brands: null,
-    originalBrands: null,
+  const [modelsState, setModelsState] = useState({
+    isEditModel: false,
+    isAddModel: false,
+    isViewModel: false,
+    models: null,
+    originalModels: null,
     status: "active",
   });
 
   const handleSearch = (searchString) => {
     if (searchString) {
-      const filteredCities = brandsState.brands.filter(
+      const filteredCities = modelsState.models.filter(
         (item) => {
 					return (
 						item.title.toLowerCase().includes(searchString.toLowerCase()) ||
@@ -110,14 +111,14 @@ export default function Brands() {
 					);
         }
       );
-      setBrandsState({
-        ...brandsState,
-        brands: filteredCities,
+      setModelsState({
+        ...modelsState,
+        models: filteredCities,
       });
     } else {
-      setBrandsState({
-        ...brandsState,
-        brands: brandsState.originalBrands,
+      setModelsState({
+        ...modelsState,
+        models: modelsState.originalModels,
       });
     }
   };
@@ -125,16 +126,16 @@ export default function Brands() {
   const handleMainSearch = (event) => {
     setMainSearchString(event.target.value);
     if (event.keyCode == 13) {
-      getBrands(1, event.target.value, noOfRec);
+      getModels(1, event.target.value, noOfRec);
     }
     if (event.target.value == "") {
-      getBrands(1, event.target.value, noOfRec);
+      getModels(1, event.target.value, noOfRec);
     }
   };
   const handleGetPdf = async () => {
     const loadingToastId = toast.loading("Loading..!");
     try {
-      const result = await brandApis.getBrandsPdf(mainSearchString);
+      const result = await modelApis.getModelsPdf(mainSearchString);
       debugger;
       if (result.error === false) {
         toast.dismiss(loadingToastId);
@@ -156,7 +157,7 @@ export default function Brands() {
     debugger;
     const loadingToastId = toast.loading("Loading..!");
     try {
-      const result = await brandApis.getBrandsCsv(mainSearchString);
+      const result = await modelApis.getModelsCsv(mainSearchString);
       debugger;
       if (result.error === false) {
         toast.dismiss(loadingToastId);
@@ -171,22 +172,22 @@ export default function Brands() {
       console.error(e);
     }
   };
-  console.log("brand", brandsState);
+  console.log("model", modelsState);
 
   return (
     <>
       <>
         <Navigation onClick={() => onSideMenu} />
-        <div className="brandPage">
+        <div className="modelPage">
           <div className={`main-content d-flex flex-column`}>
-            {brandsState.isViewBrand ? (
+            {modelsState.isViewModel ? (
               <></>
-            ) : brandsState.isAddBrand === true ||
-              brandsState.isEditBrand === true ? (
-              <AddAndEditBrands
-                brandsState={brandsState}
-                setBrandsState={setBrandsState}
-                getBrands={getBrands}
+            ) : modelsState.isAddModel === true ||
+              modelsState.isEditModel === true ? (
+              <AddAndEditModels
+                modelsState={modelsState}
+                setModelsState={setModelsState}
+                getModels={getModels}
               />
             ) : (
               <>
@@ -195,13 +196,13 @@ export default function Brands() {
                     type="button"
                     className="btn btn-outline-primary col-sm-2 mb-4"
                     onClick={() => {
-                      setBrandsState({
-                        ...brandsState,
-                        isAddBrand: true,
+                      setModelsState({
+                        ...modelsState,
+                        isAddModel: true,
                       });
                     }}
                   >
-                    Add  Brand
+                    Add  Model
                   </button>
 
                   <div className="d-flex ml-auto">
@@ -237,7 +238,7 @@ export default function Brands() {
                   <select
                     onChange={(e) => {
                       setNoOfRec(e.target.value);
-                      getBrands(1, mainSearchString, e.target.value);
+                      getModels(1, mainSearchString, e.target.value);
                     }}
                     className={`${
                       isMobile ? "mt-3" : "adjustNoOfRecSelect"
@@ -263,7 +264,7 @@ export default function Brands() {
                   <div className="card-body">
                     <div className="card-header d-flex">
                       <h5 className="card-title w-50 float-left">
-                        Brands
+                        Models
                       </h5>
                       <Form className="nav-search-form d-none d-sm-block float-right">
                         <FormControl
@@ -290,9 +291,9 @@ export default function Brands() {
                         </thead>
 
                         <tbody>
-                          {brandsState.brands &&
-                            brandsState.brands.map(
-                              (brand, idx) => (
+                          {modelsState.models &&
+                            modelsState.models.map(
+                              (model, idx) => (
                                 <tr key={idx}>
 																	<td>
                                     <Image
@@ -300,31 +301,31 @@ export default function Brands() {
                                         handleGetCsv();
                                       }}
                                       className="clickableSvg"
-                                      src={`${brand.active_image_path}`}
+                                      src={`${model.active_image_path}`}
                                       height="40px"
                                       width="60px"
                                       alt="Profile Image"
 																		/>
                                   </td>
-                                  <td>{brand.title && brand.title}</td>
-                                  <td>{brand.link && brand.link}</td>
-                                  <td>{brand.icon && brand.icon}</td>
-                                  <td>{brand.status && brand.status}</td>
+                                  <td>{model.title && model.title}</td>
+                                  <td>{model.link && model.link}</td>
+                                  <td>{model.icon && model.icon}</td>
+                                  <td>{model.status && model.status}</td>
                                   <td>
-                                    {brand.description && brand.description}
+                                    {model.description && model.description}
                                   </td>
                                   <td className="text-center">
                                     <Icon.Edit2
                                       style={{ cursor: "pointer" }}
                                       onClick={() => {
-                                        setBrandsState({
-                                          ...brandsState,
-                                          isEditBrand: true,
-                                          title: brand.title,
-                                          link: brand.link,
-                                          status: brand.status,
-                                          description: brand.description,
-                                          brandId: brand.id,
+                                        setModelsState({
+                                          ...modelsState,
+                                          isEditModel: true,
+                                          title: model.title,
+                                          link: model.link,
+                                          status: model.status,
+                                          description: model.description,
+                                          modelId: model.id,
                                         });
                                       }}
                                       className="text-success mr-2 icon wh-15 mt-minus-3"
@@ -332,7 +333,7 @@ export default function Brands() {
                                     <Link className="text-danger mr-2">
                                       <Icon.X
                                         onClick={() =>
-                                          deleteBrand(brand.id)
+                                          deleteModel(model.id)
                                         }
                                         className="icon wh-15 mt-minus-3"
                                       />
@@ -344,23 +345,23 @@ export default function Brands() {
                         </tbody>
                       </Table>
                     </div>
-                    {brandsState && brandsState.pagination && (
+                    {modelsState && modelsState.pagination && (
                       <div>
                         <span>Rows per page</span>
                         <span className="mx-4">
-                          {brandsState.pagination.from}-
-                          {brandsState.pagination.to} of{" "}
-                          {brandsState.pagination.count}
+                          {modelsState.pagination.from}-
+                          {modelsState.pagination.to} of{" "}
+                          {modelsState.pagination.count}
                         </span>
 
                         <button
                           className={`pagination-button ${
-                            brandsState.pagination.page == 1
+                            modelsState.pagination.page == 1
                               ? "disabled"
                               : ""
                           }`}
                           onClick={() => {
-                            getBrands(1, mainSearchString, noOfRec);
+                            getModels(1, mainSearchString, noOfRec);
                           }}
                           type="button"
                         >
@@ -377,13 +378,13 @@ export default function Brands() {
                         </button>
                         <button
                           className={`pagination-button ${
-                            brandsState.pagination.page == 1
+                            modelsState.pagination.page == 1
                               ? "disabled"
                               : ""
                           }`}
                           onClick={() => {
-                            getBrands(
-                              brandsState.pagination.prev,
+                            getModels(
+                              modelsState.pagination.prev,
                               mainSearchString,
                               noOfRec
                             );
@@ -403,16 +404,16 @@ export default function Brands() {
                         </button>
                         <button
                           className={`pagination-button ${
-                            brandsState.pagination.page ==
-                            brandsState.pagination.last
+                            modelsState.pagination.page ==
+                            modelsState.pagination.last
                               ? "disabled"
                               : ""
                           }`}
                           tabindex="0"
                           type="button"
                           onClick={() => {
-                            getBrands(
-                              brandsState.pagination.next,
+                            getModels(
+                              modelsState.pagination.next,
                               mainSearchString,
                               noOfRec
                             );
@@ -433,16 +434,16 @@ export default function Brands() {
 
                         <button
                           className={`pagination-button ${
-                            brandsState.pagination.page ==
-                            brandsState.pagination.last
+                            modelsState.pagination.page ==
+                            modelsState.pagination.last
                               ? "disabled"
                               : ""
                           }`}
                           tabindex="0"
                           type="button"
                           onClick={() => {
-                            getBrands(
-                              brandsState.pagination.last,
+                            getModels(
+                              modelsState.pagination.last,
                               mainSearchString,
                               noOfRec
                             );

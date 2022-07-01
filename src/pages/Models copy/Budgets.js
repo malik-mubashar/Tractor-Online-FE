@@ -13,36 +13,37 @@ import {
   Pagination,
   Image,
 } from "react-bootstrap";
-import AddAndEditBrands from "./AddAndEditBrands";
-// import { brandApis } from "../../API/BrandsApis";
+import AddAndEditBudgets from "./AddAndEditBudgets";
+// import { budgetApis } from "../../API/BudgetsApis";
 import toast from "react-hot-toast";
 import csvSvg from "../../assets/svg/csv2.svg";
 import pdfSvg from "../../assets/svg/pdf.svg";
-import { brandApis } from "../../API/BrandsApis";
+import { budgetApis } from "../../API/BudgetsApis";
+// import { budgetApis } from "../../API/BudgetsApis";
 
-export default function Brands() {
+export default function Budgets() {
   const [paginationNumbers, setPaginationNumbers] = useState();
   const [noOfRec, setNoOfRec] = useState(10);
   const [mainSearchString, setMainSearchString] = useState("");
   useEffect(() => {
-    getBrands(1, "", 10);
+    getBudgets(1, "", 10);
   }, []);
 
-  const getBrands = async (page, mainSearch, noOfRec) => {
+  const getBudgets = async (page, mainSearch, noOfRec) => {
     const loadingToastId = toast.loading("Loading..!");
 
     try {
-      const result = await brandApis.getBrands(page, mainSearch, noOfRec);
+      const result = await budgetApis.getBudgets(page, mainSearch, noOfRec);
       if (result.error == false && result.data.status == "success") {
         toast.dismiss(loadingToastId);
 
-        setBrandsState({
-          ...brandsState,
-          brands: result.data.data,
+        setBudgetsState({
+          ...budgetsState,
+          budgets: result.data.data,
           pagination: result.data.pagination,
-          originalBrands: result.data.data,
-          isAddBrand: false,
-          isEditBrand: false,
+          originalBudgets: result.data.data,
+          isAddBudget: false,
+          isEditBudget: false,
         });
         var temp = [];
         for (var i = 1; i <= result.data.pagination.pages; i++) {
@@ -59,17 +60,15 @@ export default function Brands() {
     }
   };
 
-  const deleteBrand = async (id) => {
+  const deleteBudget = async (id) => {
     const loadingToastId = toast.loading("Loading..!");
     try {
-      const result = await brandApis.deleteBrand(id);
+      const result = await budgetApis.deleteBudget(id);
       debugger;
-      if (
-        result.error === false
-      ) {
+      if (result.error === false) {
         toast.dismiss(loadingToastId);
         toast.success("Successfully deleted!");
-        getBrands(1, "", 10);
+        getBudgets(1, "", 10);
       }
       console.log(result);
     } catch (error) {
@@ -82,42 +81,40 @@ export default function Brands() {
     setSideMenu(active);
   }
 
-  const [brandsState, setBrandsState] = useState({
-    isEditBrand: false,
-    isAddBrand: false,
-    isViewBrand: false,
-    brands: null,
-    originalBrands: null,
+  const [budgetsState, setBudgetsState] = useState({
+    isEditBudget: false,
+    isAddBudget: false,
+    isViewBudget: false,
+    budgets: null,
+    originalBudgets: null,
     status: "active",
   });
 
   const handleSearch = (searchString) => {
     if (searchString) {
-      const filteredCities = brandsState.brands.filter(
-        (item) => {
-					return (
-						item.title.toLowerCase().includes(searchString.toLowerCase()) ||
-						(item.description &&
-							item.description
-								.toLowerCase()
-								.includes(searchString.toLowerCase())) ||
-						(item.status &&
-							item.status.toLowerCase().includes(searchString.toLowerCase())) ||
-						(item.link &&
-							item.link.toLowerCase().includes(searchString.toLowerCase())) ||
-						(item.icon &&
-							item.icon.toLowerCase().includes(searchString.toLowerCase()))
-					);
-        }
-      );
-      setBrandsState({
-        ...brandsState,
-        brands: filteredCities,
+      const filteredCities = budgetsState.budgets.filter((item) => {
+        return (
+          item.title.toLowerCase().includes(searchString.toLowerCase()) ||
+          (item.description &&
+            item.description
+              .toLowerCase()
+              .includes(searchString.toLowerCase())) ||
+          (item.status &&
+            item.status.toLowerCase().includes(searchString.toLowerCase())) ||
+          (item.link &&
+            item.link.toLowerCase().includes(searchString.toLowerCase())) ||
+          (item.icon &&
+            item.icon.toLowerCase().includes(searchString.toLowerCase()))
+        );
+      });
+      setBudgetsState({
+        ...budgetsState,
+        budgets: filteredCities,
       });
     } else {
-      setBrandsState({
-        ...brandsState,
-        brands: brandsState.originalBrands,
+      setBudgetsState({
+        ...budgetsState,
+        budgets: budgetsState.originalBudgets,
       });
     }
   };
@@ -125,16 +122,16 @@ export default function Brands() {
   const handleMainSearch = (event) => {
     setMainSearchString(event.target.value);
     if (event.keyCode == 13) {
-      getBrands(1, event.target.value, noOfRec);
+      getBudgets(1, event.target.value, noOfRec);
     }
     if (event.target.value == "") {
-      getBrands(1, event.target.value, noOfRec);
+      getBudgets(1, event.target.value, noOfRec);
     }
   };
   const handleGetPdf = async () => {
     const loadingToastId = toast.loading("Loading..!");
     try {
-      const result = await brandApis.getBrandsPdf(mainSearchString);
+      const result = await budgetApis.getBudgetsPdf(mainSearchString);
       debugger;
       if (result.error === false) {
         toast.dismiss(loadingToastId);
@@ -156,7 +153,7 @@ export default function Brands() {
     debugger;
     const loadingToastId = toast.loading("Loading..!");
     try {
-      const result = await brandApis.getBrandsCsv(mainSearchString);
+      const result = await budgetApis.getBudgetsCsv(mainSearchString);
       debugger;
       if (result.error === false) {
         toast.dismiss(loadingToastId);
@@ -171,22 +168,22 @@ export default function Brands() {
       console.error(e);
     }
   };
-  console.log("brand", brandsState);
+  console.log("budget", budgetsState);
 
   return (
     <>
       <>
         <Navigation onClick={() => onSideMenu} />
-        <div className="brandPage">
+        <div className="budgetPage">
           <div className={`main-content d-flex flex-column`}>
-            {brandsState.isViewBrand ? (
+            {budgetsState.isViewBudget ? (
               <></>
-            ) : brandsState.isAddBrand === true ||
-              brandsState.isEditBrand === true ? (
-              <AddAndEditBrands
-                brandsState={brandsState}
-                setBrandsState={setBrandsState}
-                getBrands={getBrands}
+            ) : budgetsState.isAddBudget === true ||
+              budgetsState.isEditBudget === true ? (
+              <AddAndEditBudgets
+                budgetsState={budgetsState}
+                setBudgetsState={setBudgetsState}
+                getBudgets={getBudgets}
               />
             ) : (
               <>
@@ -195,13 +192,13 @@ export default function Brands() {
                     type="button"
                     className="btn btn-outline-primary col-sm-2 mb-4"
                     onClick={() => {
-                      setBrandsState({
-                        ...brandsState,
-                        isAddBrand: true,
+                      setBudgetsState({
+                        ...budgetsState,
+                        isAddBudget: true,
                       });
                     }}
                   >
-                    Add  Brand
+                    Add Budget
                   </button>
 
                   <div className="d-flex ml-auto">
@@ -237,7 +234,7 @@ export default function Brands() {
                   <select
                     onChange={(e) => {
                       setNoOfRec(e.target.value);
-                      getBrands(1, mainSearchString, e.target.value);
+                      getBudgets(1, mainSearchString, e.target.value);
                     }}
                     className={`${
                       isMobile ? "mt-3" : "adjustNoOfRecSelect"
@@ -262,9 +259,7 @@ export default function Brands() {
                 <div className="card mb-4">
                   <div className="card-body">
                     <div className="card-header d-flex">
-                      <h5 className="card-title w-50 float-left">
-                        Brands
-                      </h5>
+                      <h5 className="card-title w-50 float-left">Budgets</h5>
                       <Form className="nav-search-form d-none d-sm-block float-right">
                         <FormControl
                           type="text"
@@ -290,77 +285,71 @@ export default function Brands() {
                         </thead>
 
                         <tbody>
-                          {brandsState.brands &&
-                            brandsState.brands.map(
-                              (brand, idx) => (
-                                <tr key={idx}>
-																	<td>
-                                    <Image
-                                      onClick={() => {
-                                        handleGetCsv();
-                                      }}
-                                      className="clickableSvg"
-                                      src={`${brand.active_image_path}`}
-                                      height="40px"
-                                      width="60px"
-                                      alt="Profile Image"
-																		/>
-                                  </td>
-                                  <td>{brand.title && brand.title}</td>
-                                  <td>{brand.link && brand.link}</td>
-                                  <td>{brand.icon && brand.icon}</td>
-                                  <td>{brand.status && brand.status}</td>
-                                  <td>
-                                    {brand.description && brand.description}
-                                  </td>
-                                  <td className="text-center">
-                                    <Icon.Edit2
-                                      style={{ cursor: "pointer" }}
-                                      onClick={() => {
-                                        setBrandsState({
-                                          ...brandsState,
-                                          isEditBrand: true,
-                                          title: brand.title,
-                                          link: brand.link,
-                                          status: brand.status,
-                                          description: brand.description,
-                                          brandId: brand.id,
-                                        });
-                                      }}
-                                      className="text-success mr-2 icon wh-15 mt-minus-3"
+                          {budgetsState.budgets &&
+                            budgetsState.budgets.map((budget, idx) => (
+                              <tr key={idx}>
+                                <td>
+                                  <Image
+                                    onClick={() => {
+                                      handleGetCsv();
+                                    }}
+                                    className="clickableSvg"
+                                    src={`${budget.active_image_path}`}
+                                    height="40px"
+                                    width="60px"
+                                    alt="Profile Image"
+                                  />
+                                </td>
+                                <td>{budget.title && budget.title}</td>
+                                <td>{budget.link && budget.link}</td>
+                                <td>{budget.icon && budget.icon}</td>
+                                <td>{budget.status && budget.status}</td>
+                                <td>
+                                  {budget.description && budget.description}
+                                </td>
+                                <td className="text-center">
+                                  <Icon.Edit2
+                                    style={{ cursor: "pointer" }}
+                                    onClick={() => {
+                                      setBudgetsState({
+                                        ...budgetsState,
+                                        isEditBudget: true,
+                                        title: budget.title,
+                                        link: budget.link,
+                                        status: budget.status,
+                                        description: budget.description,
+                                        budgetId: budget.id,
+                                      });
+                                    }}
+                                    className="text-success mr-2 icon wh-15 mt-minus-3"
+                                  />
+                                  <Link className="text-danger mr-2">
+                                    <Icon.X
+                                      onClick={() => deleteBudget(budget.id)}
+                                      className="icon wh-15 mt-minus-3"
                                     />
-                                    <Link className="text-danger mr-2">
-                                      <Icon.X
-                                        onClick={() =>
-                                          deleteBrand(brand.id)
-                                        }
-                                        className="icon wh-15 mt-minus-3"
-                                      />
-                                    </Link>
-                                  </td>
-                                </tr>
-                              )
-                            )}
+                                  </Link>
+                                </td>
+                              </tr>
+                            ))}
                         </tbody>
                       </Table>
                     </div>
-                    {brandsState && brandsState.pagination && (
+                    {budgetsState && budgetsState.pagination && (
                       <div>
                         <span>Rows per page</span>
                         <span className="mx-4">
-                          {brandsState.pagination.from}-
-                          {brandsState.pagination.to} of{" "}
-                          {brandsState.pagination.count}
+                          {budgetsState.pagination.from}-
+                          {budgetsState.pagination.to} of{" "}
+                          {budgetsState.pagination.count}
                         </span>
 
                         <button
                           className={`pagination-button ${
-                            brandsState.pagination.page == 1
-                              ? "disabled"
-                              : ""
+                            budgetsState.pagination.page == 1 ? "disabled" : ""
                           }`}
                           onClick={() => {
-                            getBrands(1, mainSearchString, noOfRec);
+                            getBudgets(1, mainSearchString, noOfRec);
                           }}
                           type="button"
                         >
@@ -377,13 +366,11 @@ export default function Brands() {
                         </button>
                         <button
                           className={`pagination-button ${
-                            brandsState.pagination.page == 1
-                              ? "disabled"
-                              : ""
+                            budgetsState.pagination.page == 1 ? "disabled" : ""
                           }`}
                           onClick={() => {
-                            getBrands(
-                              brandsState.pagination.prev,
+                            getBudgets(
+                              budgetsState.pagination.prev,
                               mainSearchString,
                               noOfRec
                             );
@@ -403,16 +390,16 @@ export default function Brands() {
                         </button>
                         <button
                           className={`pagination-button ${
-                            brandsState.pagination.page ==
-                            brandsState.pagination.last
+                            budgetsState.pagination.page ==
+                            budgetsState.pagination.last
                               ? "disabled"
                               : ""
                           }`}
                           tabindex="0"
                           type="button"
                           onClick={() => {
-                            getBrands(
-                              brandsState.pagination.next,
+                            getBudgets(
+                              budgetsState.pagination.next,
                               mainSearchString,
                               noOfRec
                             );
@@ -433,16 +420,16 @@ export default function Brands() {
 
                         <button
                           className={`pagination-button ${
-                            brandsState.pagination.page ==
-                            brandsState.pagination.last
+                            budgetsState.pagination.page ==
+                            budgetsState.pagination.last
                               ? "disabled"
                               : ""
                           }`}
                           tabindex="0"
                           type="button"
                           onClick={() => {
-                            getBrands(
-                              brandsState.pagination.last,
+                            getBudgets(
+                              budgetsState.pagination.last,
                               mainSearchString,
                               noOfRec
                             );
