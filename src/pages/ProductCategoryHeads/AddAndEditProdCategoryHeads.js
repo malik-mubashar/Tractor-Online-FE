@@ -178,6 +178,18 @@ export default function AddAndEditProdCategoryHeads({
                 </Form.Group>
 
                 <Form.Group controlId="formBasicComments">
+                  <Form.Label>Icon</Form.Label>
+                  <Form.Control
+                    defaultValue={prodCategoryHeadsState.icon}
+                    name="icon"
+                    type="text"
+                    placeholder="icon"
+                    onChange={(e) => handleChange(e)}
+                  />
+                </Form.Group>
+
+
+                <Form.Group controlId="formBasicComments">
                   <Form.Label>Link</Form.Label>
                   <Form.Control
                     defaultValue={prodCategoryHeadsState.link}
