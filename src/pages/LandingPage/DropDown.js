@@ -151,6 +151,7 @@ export default function DropDown({
   ];
   debugger
 console.log(cities)
+console.log("productHead ", productHead)
 
   return (
     <div>
@@ -159,7 +160,7 @@ console.log(cities)
         {!dropDownIcon && (
           <Icon.ChevronDown className="icon" height="15px" width="15px" />
         )}
-        <div
+        {productHead.length > 0 && <div
           className={`drop-down-items row py-3 ${
             usedCars || productHead ? "usedCarsWidth" : ""
           } ${newCars ? "newCarsWidth" : ""} ${
@@ -254,7 +255,7 @@ console.log(cities)
               </ul>
             </>
           ) : null}
-        </div>
+        </div>}
       </div>
     </div>
   );
