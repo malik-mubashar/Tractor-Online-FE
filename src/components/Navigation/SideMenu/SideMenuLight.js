@@ -110,9 +110,22 @@ class SideMenuLight extends React.Component {
                   Categories Head
                 </NavLink>
 
-                <NavLink to="/city" className="dropdown-item" target="_blank">
+                <NavLink to="/brands" className="dropdown-item" target="_blank">
+                  <Icon.Plus className="icon" />
+                  Brands
+								</NavLink>
+								
+								<NavLink to="/models" className="dropdown-item" target="_blank">
+                  <Icon.Plus className="icon" />
+                  Models
+								</NavLink>
+								<NavLink to="/city" className="dropdown-item" target="_blank">
                   <Icon.Plus className="icon" />
                   City
+								</NavLink>
+								<NavLink to="/budgets" className="dropdown-item" target="_blank">
+                  <Icon.Plus className="icon" />
+                  Budgets
                 </NavLink>
 
 								<NavLink to="/roles" className="dropdown-item" target="_blank">
