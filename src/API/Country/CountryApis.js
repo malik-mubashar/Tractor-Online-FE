@@ -93,7 +93,7 @@ class Country {
       });
   };
 	addCountry = async (title, comments) => {
-		debugger;
+		 
     return axios({
       method: "post",
       url: `${process.env.REACT_APP_API_LOCAL_PATH}countries`,

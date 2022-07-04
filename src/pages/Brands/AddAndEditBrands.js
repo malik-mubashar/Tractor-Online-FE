@@ -10,7 +10,7 @@ export default function AddAndEditBrands({
   getBrands,
 }) {
   function handleChange(evt) {
-    debugger;
+     
     setBrandsState({
       ...brandsState,
       [evt.target.name]: evt.target.value,
@@ -25,13 +25,13 @@ export default function AddAndEditBrands({
 	}
 
 	const addBrands = async (params) => {
-		debugger;
+		 
     const loadingToastId = toast.loading("Loading..!");
-		debugger;
+		 
 
     if (brandsState.isAddBrand) {
 			try {
-		debugger;
+		 
 				
         const result = await brandApis.addBrand(brandsState);
         console.log(result);

@@ -63,7 +63,7 @@ export default function Products() {
     const loadingToastId = toast.loading("Loading..!");
     try {
       const result = await productApis.deleteProduct(id);
-      debugger;
+       
       if (result.error === false) {
         toast.dismiss(loadingToastId);
         toast.success("Successfully deleted!");
@@ -125,10 +125,10 @@ export default function Products() {
     const loadingToastId = toast.loading("Loading..!");
     try {
       const result = await productApis.getProductsPdf(mainSearchString);
-      debugger;
+       
       if (result.error === false) {
         toast.dismiss(loadingToastId);
-        debugger;
+         
         window.open(`${result.data.file_path}`, "_blank");
       } else {
         toast.dismiss(loadingToastId);
@@ -141,14 +141,14 @@ export default function Products() {
   };
 
 	const handleGetCsv = async () => {
-		debugger;
+		 
     const loadingToastId = toast.loading("Loading..!");
     try {
       const result = await productApis.getProductsCsv(mainSearchString);
-      debugger;
+       
       if (result.error === false) {
         toast.dismiss(loadingToastId);
-        debugger;
+         
         window.open(`${result.data.file_path}`, "_blank");
       } else {
         toast.dismiss(loadingToastId);

@@ -63,7 +63,7 @@ export default function Roles() {
     const loadingToastId = toast.loading("Loading..!");
     try {
       const result = await roleApis.deleteRole(id);
-      debugger;
+       
       if (
         result.error === false 
       ) {
@@ -128,10 +128,10 @@ export default function Roles() {
       const result = await roleApis.getRolesPdf(
         mainSearchString
       );
-      debugger;
+       
       if (result.error === false) {
         toast.dismiss(loadingToastId);
-        debugger;
+         
         window.open(`${result.data.file_path}`, "_blank");
       } else {
         toast.dismiss(loadingToastId);
@@ -146,16 +146,16 @@ export default function Roles() {
   };
 
   const handleGetCsv = async () => {
-    debugger;
+     
     const loadingToastId = toast.loading("Loading..!");
     try {
       const result = await roleApis.getRolesCsv(
         mainSearchString
       );
-      debugger;
+       
       if (result.error === false) {
         toast.dismiss(loadingToastId);
-        debugger;
+         
         window.open(`${result.data.file_path}`, "_blank");
       } else {
         toast.dismiss(loadingToastId);

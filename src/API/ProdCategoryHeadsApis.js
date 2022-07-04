@@ -69,7 +69,7 @@ class ProdCategoryHeads {
       });
   };
 	addProdCategoryHead = async (prodSCategoryHeadsState) => {
-		debugger;
+		 
     return axios({
       method: "post",
       url: `${process.env.REACT_APP_API_LOCAL_PATH}product_category_heads`,
@@ -108,7 +108,7 @@ class ProdCategoryHeads {
   };
 
   getProdCategoryHeads = async (page, searchString, noOfRec) => {
-		debugger;
+		 
     return axios({
       method: "get",
       url: `${process.env.REACT_APP_API_LOCAL_PATH}product_category_heads?page=${page}&q%5Btitle_or_comments_cont%5D=${searchString}&no_of_record=${noOfRec}`,
@@ -135,7 +135,7 @@ class ProdCategoryHeads {
 	};
 	
 	getProdCategoryHeadsPdf = async (searchString) => {
-		debugger;
+		 
     return axios({
       method: "get",
       url: `${process.env.REACT_APP_API_LOCAL_PATH}product_category_heads.pdf?q%5Btitle_or_comments_cont%5D=${searchString}`,
@@ -162,7 +162,7 @@ class ProdCategoryHeads {
 	};
 	
 	getProdCategoryHeadsCsv = async (searchString) => {
-		debugger;
+		 
     return axios({
       method: "get",
       url: `${process.env.REACT_APP_API_LOCAL_PATH}product_category_heads.csv?q%5Btitle_or_comments_cont%5D=${searchString}`,

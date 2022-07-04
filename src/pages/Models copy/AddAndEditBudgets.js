@@ -10,7 +10,7 @@ export default function AddAndEditBudgets({
   getBudgets,
 }) {
   function handleChange(evt) {
-    debugger;
+     
     setBudgetsState({
       ...budgetsState,
       [evt.target.name]: evt.target.value,
@@ -25,13 +25,13 @@ export default function AddAndEditBudgets({
 	}
 
 	const addBudgets = async (params) => {
-		debugger;
+		 
     const loadingToastId = toast.loading("Loading..!");
-		debugger;
+		 
 
     if (budgetsState.isAddBudget) {
 			try {
-		debugger;
+		 
 				
         const result = await budgetApis.addBudget(budgetsState);
         console.log(result);

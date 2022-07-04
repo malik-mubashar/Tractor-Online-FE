@@ -29,7 +29,7 @@ export default function AddAndEditProduct({
     console.log("file", file);
   
     // let tempArr= [];
-    // debugger;
+    //  
     // let ImagesArray = Object.entries(e.target.files).map((e) => {
 
     //   tempArr.push(e[1]);
@@ -275,7 +275,7 @@ export default function AddAndEditProduct({
                   <span
                     className="btn btn-primary"
                     onClick={() => {
-                      debugger;
+                       
                       myRefname.current.click();
                     }}
                   >

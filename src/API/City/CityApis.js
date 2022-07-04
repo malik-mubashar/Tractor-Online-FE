@@ -136,7 +136,7 @@ class City {
       });
   };
 	addCity = async (title, comments,img) => {
-		debugger;
+		 
     return axios({
       method: "post",
       url: `${process.env.REACT_APP_API_LOCAL_PATH}cities`,
@@ -203,7 +203,7 @@ class City {
 	};
 	
 	getCitiesPdf = async (searchString ) => {
-		debugger;
+		 
     return axios({
       method: "get",
       url: `${process.env.REACT_APP_API_LOCAL_PATH}cities.pdf?q%5Btitle_or_comments_cont%5D=${searchString}`,
@@ -232,7 +232,7 @@ class City {
       });
 	};
 	getCitiesPdf = async (searchString ) => {
-		debugger;
+		 
     return axios({
       method: "get",
       url: `${process.env.REACT_APP_API_LOCAL_PATH}cities.pdf?q%5Btitle_or_comments_cont%5D=${searchString}`,
@@ -262,7 +262,7 @@ class City {
 	};
 	
 	getCitiesCsv = async (searchString ) => {
-		debugger;
+		 
     return axios({
       method: "get",
       url: `${process.env.REACT_APP_API_LOCAL_PATH}cities.csv?q%5Btitle_or_comments_cont%5D=${searchString}`,

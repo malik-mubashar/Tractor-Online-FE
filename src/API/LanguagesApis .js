@@ -84,7 +84,7 @@ class Languages {
       });
   };
   addLanguage = async (languagesState) => {
-    debugger;
+     
     return axios({
       method: "post",
       url: `${process.env.REACT_APP_API_LOCAL_PATH}languages`,
@@ -118,7 +118,7 @@ class Languages {
   };
 
   getLanguages = async (page, searchString, noOfRec) => {
-    debugger;
+     
     return axios({
       method: "get",
       url: `${process.env.REACT_APP_API_LOCAL_PATH}languages?page=${page}&q%5Btitle_or_comments_cont%5D=${searchString}&no_of_record=${noOfRec}`,
@@ -145,7 +145,7 @@ class Languages {
 	};
 	
 	getLanguagesPdf = async ( searchString) => {
-		debugger;
+		 
     return axios({
       method: "get",
       url: `${process.env.REACT_APP_API_LOCAL_PATH}languages.pdf?q%5Btitle_or_comments_cont%5D=${searchString}`,
@@ -171,7 +171,7 @@ class Languages {
       });
 	};
 	getLanguagesCsv = async (searchString) => {
-		debugger;
+		 
     return axios({
       method: "get",
       url: `${process.env.REACT_APP_API_LOCAL_PATH}languages.csv?q%5Btitle_or_comments_cont%5D=${searchString}`,

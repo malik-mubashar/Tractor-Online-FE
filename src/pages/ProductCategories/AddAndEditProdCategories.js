@@ -9,7 +9,7 @@ export default function AddAndEditProdCategories({
   getProdCategories,
 }) {
   function handleChange(evt) {
-    debugger;
+     
     setProdCategoriesState({
       ...prodCategoriesState,
       [evt.target.name]: evt.target.value,

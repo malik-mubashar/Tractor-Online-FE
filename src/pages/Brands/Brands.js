@@ -63,7 +63,7 @@ export default function Brands() {
     const loadingToastId = toast.loading("Loading..!");
     try {
       const result = await brandApis.deleteBrand(id);
-      debugger;
+       
       if (
         result.error === false
       ) {
@@ -135,10 +135,10 @@ export default function Brands() {
     const loadingToastId = toast.loading("Loading..!");
     try {
       const result = await brandApis.getBrandsPdf(mainSearchString);
-      debugger;
+       
       if (result.error === false) {
         toast.dismiss(loadingToastId);
-        debugger;
+         
         window.open(`${result.data.file_path}`, "_blank");
       } else {
         toast.dismiss(loadingToastId);
@@ -153,14 +153,14 @@ export default function Brands() {
   };
 
   const handleGetCsv = async () => {
-    debugger;
+     
     const loadingToastId = toast.loading("Loading..!");
     try {
       const result = await brandApis.getBrandsCsv(mainSearchString);
-      debugger;
+       
       if (result.error === false) {
         toast.dismiss(loadingToastId);
-        debugger;
+         
         window.open(`${result.data.file_path}`, "_blank");
       } else {
         toast.dismiss(loadingToastId);

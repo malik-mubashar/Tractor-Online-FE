@@ -28,7 +28,7 @@ const LandingPage = () => {
 
     try {
 			const result = await brandApis.getBrands(page, mainSearch, noOfRec);
-			debugger;
+			 
       if (result.error == false && result.data.status == "success") {
         toast.dismiss(loadingToastId);
 

@@ -74,7 +74,7 @@ class Models {
       });
   };
 	addModel = async (modelsState) => {
-		debugger;
+		 
     return axios({
       method: "post",
       url: `${process.env.REACT_APP_API_LOCAL_PATH}models`,
@@ -111,7 +111,7 @@ class Models {
   };
 
 	getModels = async (page, searchString, noOfRec) => {
-		debugger;
+		 
     return axios({
       method: "get",
       url: `${process.env.REACT_APP_API_LOCAL_PATH}models?page=${page}&q%5Btitle_or_status_or_link_or_description_cont%5D=${searchString}&no_of_record=${noOfRec}`,
@@ -124,14 +124,14 @@ class Models {
       },
     })
 			.then((result) => {
-				debugger;
+				 
         return {
           error: false,
           data: result.data,
         };
       })
 			.catch((error) => {
-				debugger;
+				 
         return {
           error: true,
           data: error.response.data,
@@ -139,21 +139,21 @@ class Models {
       });
 	};
   getModelsList = async (page, searchString, noOfRec) => {
-		debugger;
+		 
     return axios({
       method: "get",
       url: `${process.env.REACT_APP_API_LOCAL_PATH}models/categories_list`,
       headers: Headers
     })
 			.then((result) => {
-				debugger;
+				 
         return {
           error: false,
           data: result.data,
         };
       })
 			.catch((error) => {
-				debugger;
+				 
         return {
           error: true,
           data: error.response.data,
@@ -162,7 +162,7 @@ class Models {
 	};
 	
 		getModelsPdf = async (searchString) => {
-		debugger;
+		 
     return axios({
       method: "get",
       url: `${process.env.REACT_APP_API_LOCAL_PATH}models.pdf?q%5Btitle_or_status_or_link_or_description_cont%5D=${searchString}`,
@@ -175,14 +175,14 @@ class Models {
       },
     })
 			.then((result) => {
-				debugger;
+				 
         return {
           error: false,
           data: result.data,
         };
       })
 			.catch((error) => {
-				debugger;
+				 
         return {
           error: true,
           data: error.response.data,
@@ -191,7 +191,7 @@ class Models {
 		};
 	
 		getModelsCsv = async (searchString) => {
-			debugger;
+			 
 			return axios({
 				method: "get",
 				url: `${process.env.REACT_APP_API_LOCAL_PATH}models.csv?q%5Btitle_or_status_or_link_or_description_cont%5D=${searchString}`,
@@ -204,14 +204,14 @@ class Models {
 				},
 			})
 				.then((result) => {
-					debugger;
+					 
 					return {
 						error: false,
 						data: result.data,
 					};
 				})
 				.catch((error) => {
-					debugger;
+					 
 					return {
 						error: true,
 						data: error.response.data,

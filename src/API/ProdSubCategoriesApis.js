@@ -66,7 +66,7 @@ class ProdSubCategories {
       });
   };
 	addProdSubCategory = async (prodSubCategoriesState) => {
-		debugger;
+		 
     return axios({
       method: "post",
       url: `${process.env.REACT_APP_API_LOCAL_PATH}product_sub_categories`,
@@ -102,7 +102,7 @@ class ProdSubCategories {
   };
 
 	getProdSubCategories = async (page, searchString, noOfRec) => {
-		debugger;
+		 
     return axios({
       method: "get",
       url: `${process.env.REACT_APP_API_LOCAL_PATH}product_sub_categories?page=${page}&q%5Btitle_or_description_or_status_or_link_cont%5D=${searchString}&no_of_record=${noOfRec}`,
@@ -129,7 +129,7 @@ class ProdSubCategories {
 	};
 	
 	getProdSubCategoriesPdf = async (searchString) => {
-		debugger;
+		 
     return axios({
       method: "get",
       url: `${process.env.REACT_APP_API_LOCAL_PATH}product_sub_categories.pdf?q%5Btitle_or_description_or_status_or_link_cont%5D=${searchString}`,
@@ -156,7 +156,7 @@ class ProdSubCategories {
 	};
 	
 	getProdSubCategoriesCsv = async (searchString) => {
-		debugger;
+		 
     return axios({
       method: "get",
       url: `${process.env.REACT_APP_API_LOCAL_PATH}product_sub_categories.csv?q%5Btitle_or_description_or_status_or_link_cont%5D=${searchString}`,

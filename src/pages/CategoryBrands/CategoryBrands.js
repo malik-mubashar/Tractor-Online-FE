@@ -60,7 +60,7 @@ export default function CategoryBrands() {
     const loadingToastId = toast.loading("Loading..!");
     try {
       const result = await categoryBrandsApis.deleteCategoryBrand(id);
-      debugger;
+       
       if (result.error === false) {
         toast.dismiss(loadingToastId);
         toast.success("Successfully deleted!");
@@ -125,10 +125,10 @@ export default function CategoryBrands() {
     const loadingToastId = toast.loading("Loading..!");
     try {
       const result = await categoryBrandsApis.getCategoryBrandsPdf(mainSearchString);
-      debugger;
+       
       if (result.error === false) {
         toast.dismiss(loadingToastId);
-        debugger;
+         
         window.open(`${result.data.file_path}`, "_blank");
       } else {
         toast.dismiss(loadingToastId);
@@ -143,14 +143,14 @@ export default function CategoryBrands() {
   };
 
   const handleGetCsv = async () => {
-    debugger;
+     
     const loadingToastId = toast.loading("Loading..!");
     try {
       const result = await categoryBrandsApis.getCategoryBrandsCsv(mainSearchString);
-      debugger;
+       
       if (result.error === false) {
         toast.dismiss(loadingToastId);
-        debugger;
+         
         window.open(`${result.data.file_path}`, "_blank");
       } else {
         toast.dismiss(loadingToastId);
@@ -300,7 +300,7 @@ export default function CategoryBrands() {
                                   <Icon.Edit2
                                     style={{ cursor: "pointer" }}
 																		onClick={() => {
-																			debugger;
+																			 
                                       setCategoryBrandsState({
                                         ...categoryBrandsState,
                                         isEditCategoryBrand: true,
