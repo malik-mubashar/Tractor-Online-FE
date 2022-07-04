@@ -1,15 +1,26 @@
 import axios from "axios";
 
 //no_of_record=5&page=2
-var user= JSON.parse(window.localStorage.getItem("currentUser")) || null;
+// var user = JSON.parse(window.localStorage.getItem("currentUser")) || null;
+// console.log('userinIndex',user)
  
 class Country {
 
-  getAllCountry = async () => {
+	getAllCountry = async () => {
+		var user = JSON.parse(window.localStorage.getItem("currentUser")) || null;
+
     return axios({
       method: "get",
       url: `${process.env.REACT_APP_API_LOCAL_PATH}countries?no_of_record=1000`,
-      headers: Headers
+			headers: {
+				"Content-Type": "application/json; charset=utf-8",
+				"Access-Control-Allow-Origin": "*",
+				'Access-Control-Allow-Headers': '*',
+				"access-token": `${user.accessToken}`,
+				"client": `${user.client}`,
+				"uid":`${user.uid}`,
+				mode: "no-cors",
+			}
     })
       .then((result) => {
         return {
@@ -25,7 +36,8 @@ class Country {
       });
   };
 	deleteCountry = async (id) => {
-		 
+		var user = JSON.parse(window.localStorage.getItem("currentUser")) || null;
+
     return axios({
       method: "delete",
       url: `${process.env.REACT_APP_API_LOCAL_PATH}countries/${id}`,
@@ -57,7 +69,8 @@ class Country {
       });
   };
 	updateCountry = async (name, comments,id) => {
-		 
+		var user = JSON.parse(window.localStorage.getItem("currentUser")) || null;
+
     return axios({
       method: "put",
       url: `${process.env.REACT_APP_API_LOCAL_PATH}countries/${id}`,
@@ -93,7 +106,8 @@ class Country {
       });
   };
 	addCountry = async (title, comments) => {
-		 
+		var user = JSON.parse(window.localStorage.getItem("currentUser")) || null;
+
     return axios({
       method: "post",
       url: `${process.env.REACT_APP_API_LOCAL_PATH}countries`,
@@ -129,7 +143,8 @@ class Country {
   };
 
 	getCountries = async (page,searchString,noOfRec ) => {
-		 
+		var user = JSON.parse(window.localStorage.getItem("currentUser")) || null;
+
     return axios({
       method: "get",
       url: `${process.env.REACT_APP_API_LOCAL_PATH}countries?page=${page}&q%5Bname_or_comments_cont%5D=${searchString}&no_of_record=${noOfRec}`,
@@ -159,7 +174,8 @@ class Country {
 	};
 	
 	getCountriesPdf = async (page,searchString,noOfRec ) => {
-		 
+		var user = JSON.parse(window.localStorage.getItem("currentUser")) || null;
+
     return axios({
       method: "get",
       url: `${process.env.REACT_APP_API_LOCAL_PATH}countries.pdf?q%5Bname_or_comments_cont%5D=${searchString}`,
@@ -189,7 +205,8 @@ class Country {
 	};
 	
 	getCountriesCsv = async (page,searchString,noOfRec ) => {
-		 
+		var user = JSON.parse(window.localStorage.getItem("currentUser")) || null;
+
     return axios({
       method: "get",
       url: `${process.env.REACT_APP_API_LOCAL_PATH}countries.csv?q%5Bname_or_comments_cont%5D=${searchString}`,

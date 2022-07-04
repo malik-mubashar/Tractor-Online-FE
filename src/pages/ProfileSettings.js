@@ -9,12 +9,12 @@ import { RootContext } from "../context/RootContext";
 import { useHistory } from "react-router-dom";
 import PasswordResetModal from "./Modals/PasswordReset";
 import { city } from "../API/City/CityApis";
+import { country } from "../API/Country/CountryApis";
+import { languageApis } from "../API/LanguagesApis ";
 import toast from "react-hot-toast";
 const ProfileSettings = () => {
   const { currentUser } = useContext(RootContext);
-  const [userPersonalDetail, setUserPersonalDetail] = useState(
-    currentUser
-  );
+  const [userPersonalDetail, setUserPersonalDetail] = useState(currentUser);
   const [sideMenue, setSideMenu] = useState();
   const [fileDataURL, setFileDataURL] = useState(null);
   const [modalShow, setModalShow] = useState(false);
@@ -42,53 +42,89 @@ const ProfileSettings = () => {
 
   let history = useHistory();
 
-  // useEffect(() => {
-  //   let fileReader,
-  //     isCancel = false;
-  //   if (editProfile.image) {
-  //     fileReader = new FileReader();
-  //     fileReader.onload = (e) => {
-  //       const { result } = e.target;
-  //       if (result && !isCancel) {
-  //         setFileDataURL(result);
-  //       }
-  //     };
-  //     fileReader.readAsDataURL(editProfile.image);
-  //   }
-  //   return () => {
-  //     isCancel = true;
-  //     if (fileReader && fileReader.readyState === 1) {
-  //       fileReader.abort();
-  //     }
-  //   };
-  // }, [editProfile.image]);
+	useEffect(() => {
+		 
+    let fileReader,
+      isCancel = false;
+    if (editProfile.image) {
+      fileReader = new FileReader();
+      fileReader.onload = (e) => {
+        const { result } = e.target;
+        if (result && !isCancel) {
+          setFileDataURL(result);
+        }
+      };
+      fileReader.readAsDataURL(editProfile.image);
+    }
+    return () => {
+      isCancel = true;
+      if (fileReader && fileReader.readyState === 1) {
+        fileReader.abort();
+      }
+    };
+  }, [editProfile.image]);
 
   useEffect(() => {
+     
     handlePersonalDetail();
     handleDropDownOptions();
   }, []);
-
+	const[profilePic,setProfilePic]=useState()
   const handleDropDownOptions = async () => {
-    const result = await city.getAllCities();
-    setCities(result.data && result.data.data);
-    //setCities([]);
-    // const response = await language.getAllLanguages();
-    // setLanguageList(response.data && response.data.data);
-    setLanguageList([]);
+    const loadingToastId = toast.loading("Loading..!");
 
-    // const countryArray = await city.getAllCountry();
-    // setCountryList(countryArray.data && countryArray.data.data);
-    setCountryList([]);
+    try {
+      const countryResponse = await country.getAllCountry();
+      if (countryResponse.error === false) {
+        toast.dismiss(loadingToastId);
+        setCountryList(countryResponse.data.data);
+			} else if (countryResponse.error === true) {
+				toast.error('error getting cities')
+        toast.dismiss(loadingToastId);
+      }
+    } catch (error) {
+      toast.dismiss(loadingToastId)
+      console.error(error);
+    }
+
+    try {
+      const res = await city.getAllCities();
+      if (res.error === false) {
+         
+        toast.dismiss(loadingToastId);
+        setCities(res.data.data);
+			} else if (res.error === true) {
+				toast.error('error getting cities')
+        toast.dismiss(loadingToastId);
+      }
+    } catch (error) {
+      toast.dismiss(loadingToastId);
+      console.error(error);
+		}
+		
+		try {
+      const res = await languageApis.getAllLanguages();
+      if (res.error === false) {
+         
+        toast.dismiss(loadingToastId);
+        setLanguageList(res.data.data);
+			} else if (res.error === true) {
+				toast.error('error getting cities')
+        toast.dismiss(loadingToastId);
+      }
+    } catch (error) {
+      toast.dismiss(loadingToastId);
+      console.error(error);
+    }
   };
 
-	const handlePersonalDetail = async () => {
-		 
-		const result = await user.findUser(currentUser);
-		 
+  const handlePersonalDetail = async () => {
+    const result = await user.findUser(currentUser);
+
     setUserPersonalDetail(result.data);
     setEditProfile({
       name: result.data && result.data.name,
-      image: result.data && result.data.profile_path,
+     
       language:
         result.data &&
         result.data.personal_detail &&
@@ -122,7 +158,8 @@ const ProfileSettings = () => {
     setUpdatePassword({
       ...updatePassword,
       email: result.data && result.data.email,
-    });
+		});
+		setProfilePic(result.data && result.data.profile_path)
   };
 
   // handle change
@@ -140,9 +177,8 @@ const ProfileSettings = () => {
     });
   };
 
-	const updateProfile = async (e) => {
-		const loadingToastId = toast.loading("Loading..!");
-
+  const updateProfile = async (e) => {
+    const loadingToastId = toast.loading("Loading..!");
 
     e.preventDefault();
     console.log(editProfile);
@@ -160,30 +196,28 @@ const ProfileSettings = () => {
       }
     }
     try {
-			 
       const result = await user.profile(
         editProfile,
         userPersonalDetail.personal_detail
           ? userPersonalDetail.personal_detail.id
-					: null,
-				currentUser
+          : null,
+        currentUser
       );
-			if (result.error === false) {
-		toast.dismiss(loadingToastId);
-		toast.success('Profile Updated');
-				
+      if (result.error === false) {
+        toast.dismiss(loadingToastId);
+        toast.success("Profile Updated");
+
         history.push("/profile/");
-			}
-			if (result.error === false) {
-				toast.dismiss(loadingToastId);
-				toast.error('Profile Updation failed');
-						
-						// history.push("/profile/");
-					}
-		} catch (error) {
-		toast.dismiss(loadingToastId);
-			
-		}
+      }
+      if (result.error === true) {
+        toast.dismiss(loadingToastId);
+        toast.error("Profile Updation failed");
+
+        // history.push("/profile/");
+      }
+    } catch (error) {
+      toast.dismiss(loadingToastId);
+    }
   };
 
   const modalClose = () => {
@@ -192,6 +226,9 @@ const ProfileSettings = () => {
 
   console.log("editProfile", editProfile);
   console.log("fileData", fileDataURL);
+  console.log("countryLIs", countryList);
+  console.log("cities", cities);
+  console.log("languageList", languageList);
 
   return (
     <>
@@ -225,7 +262,7 @@ const ProfileSettings = () => {
                 <Form>
                   <Form.Row>
                     <Image
-                      src={fileDataURL ? fileDataURL : editProfile.image}
+                      src={fileDataURL ? fileDataURL : profilePic}
                       roundedCircle
                       alt="User Image"
                       width="100px"
@@ -235,8 +272,7 @@ const ProfileSettings = () => {
                     />
                     <Form.Group as={Col} className="mt-4">
                       <Form.Label>Upload New Picture</Form.Label>
-											<Form.Control
-												
+                      <Form.Control
                         type="file"
                         placeholder=""
                         className="form-control p-1"
@@ -340,7 +376,7 @@ const ProfileSettings = () => {
                           languageList.map((item) => {
                             return (
                               <>
-                                <option key={item.id}>{item.name}</option>
+                                <option key={item.id}>{item.title}</option>
                               </>
                             );
                           })
@@ -369,7 +405,7 @@ const ProfileSettings = () => {
                           countryList.map((item) => {
                             return (
                               <>
-                                <option key={item.id}>{item.name}</option>
+                                <option key={item.id}>{item.title}</option>
                               </>
                             );
                           })
@@ -395,7 +431,7 @@ const ProfileSettings = () => {
                           cities.map((item, i) => {
                             return (
                               <>
-                                <option key={i}>{item.name}</option>
+                                <option key={i}>{item.title}</option>
                               </>
                             );
                           })

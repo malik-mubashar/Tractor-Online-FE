@@ -8,11 +8,21 @@ Headers = {
   mode: "no-cors"
 };
 class City {
-  getAllCities = async () => {
+	getAllCities = async () => {
+		var user = JSON.parse(window.localStorage.getItem("currentUser")) || null;
+
     return axios({
       method: "get",
       url: `${process.env.REACT_APP_API_LOCAL_PATH}cities?no_of_record=10000000&page=1`,
-      headers: Headers
+			headers: {
+				"Content-Type": "application/json; charset=utf-8",
+				"Access-Control-Allow-Origin": "*",
+				'Access-Control-Allow-Headers': '*',
+				"access-token": `${user.accessToken}`,
+				"client": `${user.client}`,
+				"uid":`${user.uid}`,
+				mode: "no-cors",
+			}
     })
       .then((result) => {
         return {

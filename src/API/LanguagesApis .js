@@ -4,11 +4,21 @@ import axios from "axios";
 var user = JSON.parse(window.localStorage.getItem("currentUser")) || null;
 
 class Languages {
-  getAllLanguages = async () => {
+	getAllLanguages = async () => {
+		var user = JSON.parse(window.localStorage.getItem("currentUser")) || null;
+
     return axios({
       method: "get",
       url: `${process.env.REACT_APP_API_LOCAL_PATH}languages`,
-      headers: Headers,
+			headers: {
+				"Content-Type": "application/json; charset=utf-8",
+        "Access-Control-Allow-Origin": "*",
+        "Access-Control-Allow-Headers": "*",
+        "access-token": `${user.accessToken}`,
+        client: `${user.client}`,
+        uid: `${user.uid}`,
+        mode: "no-cors",
+			},
     })
       .then((result) => {
         return {

@@ -20,6 +20,7 @@ import postImageThree from "../assets/img/post/post-img3.jpg";
 import { user } from "../API/User/index";
 import ProfileSettings from "./ProfileSettings";
 import { useHistory } from "react-router-dom";
+import toast from "react-hot-toast";
 
 const Profile = () => {
   const { currentUser } = useContext(RootContext);
@@ -32,9 +33,15 @@ const Profile = () => {
   useEffect(() => {
     handlePersonalDetail();
   }, []);
-  const handlePersonalDetail = async () => {
-    const result = await user.findUser(currentUser.id);
-    setProfile(result.data);
+	const handlePersonalDetail = async () => {
+		const loadingToastId = toast.loading("Loading..!");
+
+		const result = await user.findUser(currentUser);
+		if (result.error === false) {
+			toast.dismiss(loadingToastId);
+			console.log(result);
+			setProfile(result.data);
+		}
   };
 
   return (
@@ -60,7 +67,7 @@ const Profile = () => {
               <Col lg={12}>
                 <div className="profile-header mb-4">
                   <Image
-                    src={currentUser.image ? "" : user1}
+                    src={profile && profile.profile_path}
                     alt="Profle"
                     roundedCircle
                   />
