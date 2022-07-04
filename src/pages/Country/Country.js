@@ -76,11 +76,6 @@ export default function Country() {
     }
   };
 
-  const [sideMenu, setSideMenu] = useState(false);
-  function onSideMenu(active) {
-    setSideMenu(active);
-  }
-
   const [countryState, setCountryState] = useState({
     isEditCountry: false,
     isAddCountry: false,
@@ -166,9 +161,7 @@ export default function Country() {
   return (
     <>
       <>
-        <Navigation onClick={() => onSideMenu} />
         <div className="countryPage">
-          <div className={`main-content d-flex flex-column`}>
             {countryState.isViewCountry ? (
               <></>
             ) : // <ViewCountry countryState={countryState} setCountryState={setCountryState} />
@@ -422,7 +415,6 @@ export default function Country() {
                 </div>
               </>
             )}
-          </div>
         </div>
       </>
     </>

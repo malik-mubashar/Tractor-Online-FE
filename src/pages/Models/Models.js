@@ -78,11 +78,6 @@ export default function Models() {
     }
   };
 
-  const [sideMenu, setSideMenu] = useState(false);
-  function onSideMenu(active) {
-    setSideMenu(active);
-  }
-
   const [modelsState, setModelsState] = useState({
     isEditModel: false,
     isAddModel: false,
@@ -177,9 +172,7 @@ export default function Models() {
   return (
     <>
       <>
-        <Navigation onClick={() => onSideMenu} />
         <div className="modelPage">
-          <div className={`main-content d-flex flex-column`}>
             {modelsState.isViewModel ? (
               <></>
             ) : modelsState.isAddModel === true ||
@@ -466,7 +459,6 @@ export default function Models() {
                 </div>
               </>
             )}
-          </div>
         </div>
       </>
     </>

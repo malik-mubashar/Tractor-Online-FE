@@ -38,7 +38,7 @@ import CategoryBrands from "../pages/CategoryBrands/CategoryBrands";
 import Brands from "../pages/Brands/Brands";
 import Models from "../pages/Models/Models";
 import Budgets from "../pages/Models copy/Budgets";
-
+import DashboardLayout from "../layouts/DashboardLayout";
 
 const AppRouter = () => {
   return (
@@ -58,50 +58,74 @@ const AppRouter = () => {
 					</UnProtectedRoute>
 					{/* /// */}
 					<ProtectedRoute exact path="/city">
-            <City />
+            <DashboardLayout>
+              <City />
+            </DashboardLayout>
 					</ProtectedRoute>
 					<ProtectedRoute exact path="/country">
-            <Country />
+            <DashboardLayout>
+              <Country />
+            </DashboardLayout>
 					</ProtectedRoute>
 					<ProtectedRoute exact path="/productCategoryHeads">
-            <ProdCategoryHeads />
+            <DashboardLayout>
+              <ProdCategoryHeads />
+            </DashboardLayout>
 					</ProtectedRoute>
 					<ProtectedRoute exact path="/categoryBrands">
-            <CategoryBrands />
+            <DashboardLayout>
+              <CategoryBrands />
+            </DashboardLayout>
 					</ProtectedRoute>
 					<ProtectedRoute exact path="/brands">
-            <Brands />
+            <DashboardLayout>
+              <Brands />
+            </DashboardLayout>
 					</ProtectedRoute>
 					<ProtectedRoute exact path="/models">
-            <Models />
+            <DashboardLayout>
+              <Models />
+            </DashboardLayout>
 					</ProtectedRoute>
 					<ProtectedRoute exact path="/budgets">
-            <Budgets />
+            <DashboardLayout>
+              <Budgets />
+            </DashboardLayout>
 					</ProtectedRoute>
-
-
 					<ProtectedRoute exact path="/productCategories">
-            <ProdCategories />
+            <DashboardLayout>
+              <ProdCategories />
+            </DashboardLayout>
 					</ProtectedRoute>
 
 					<ProtectedRoute exact path="/languages">
-            <Languages />
+            <DashboardLayout>
+              <Languages />
+            </DashboardLayout>
 					</ProtectedRoute>
 
 					<ProtectedRoute exact path="/productSubCategories">
-            <ProdSubCategories />
+            <DashboardLayout>
+              <ProdSubCategories />
+            </DashboardLayout>
 					</ProtectedRoute>
 
 					<ProtectedRoute exact path="/products">
-            <Products />
+            <DashboardLayout>
+              <Products />
+            </DashboardLayout>
 					</ProtectedRoute>
 
 					<ProtectedRoute exact path="/roles">
-            <Roles />
+            <DashboardLayout>
+              <Roles />
+            </DashboardLayout>
 					</ProtectedRoute>
 
 					<ProtectedRoute exact path="/userRoles">
-            <UserRoles />
+            <DashboardLayout>
+              <UserRoles />
+            </DashboardLayout>
 					</ProtectedRoute>
 			
           <UnProtectedRoute exact path="/usedtractor">
@@ -126,14 +150,20 @@ const AppRouter = () => {
           </ProtectedRoute>
 
           <ProtectedRoute exact path="/profile/">
-            <Profile />
+            <DashboardLayout>
+              <Profile />
+            </DashboardLayout>
           </ProtectedRoute>
           <ProtectedRoute exact path="/profile-settings/">
-            <ProfileSettings />
+            <DashboardLayout>
+              <ProfileSettings />
+            </DashboardLayout>
           </ProtectedRoute>
 
           <ProtectedRoute exact path="/search/">
-            <Search />
+            <DashboardLayout>
+              <Search />
+            </DashboardLayout>
           </ProtectedRoute>
 
           {/* <Route exact path="/calendar/" component={Calendar} /> */}

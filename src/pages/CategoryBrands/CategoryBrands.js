@@ -72,11 +72,6 @@ export default function CategoryBrands() {
     }
   };
 
-  const [sideMenu, setSideMenu] = useState(false);
-  function onSideMenu(active) {
-    setSideMenu(active);
-  }
-
   const [categoryBrandsState, setCategoryBrandsState] = useState({
     isEditCategoryBrand: false,
     isAddCategoryBrand: false,
@@ -165,9 +160,7 @@ export default function CategoryBrands() {
   return (
     <>
       <>
-        <Navigation onClick={() => onSideMenu} />
         <div className="categoryCategoryPage">
-          <div className={`main-content d-flex flex-column`}>
             {categoryBrandsState.isViewCategoryCategory ? (
               <></>
             ) : categoryBrandsState.isAddCategoryBrand === true ||
@@ -453,7 +446,6 @@ export default function CategoryBrands() {
                 </div>
               </>
             )}
-          </div>
         </div>
       </>
     </>

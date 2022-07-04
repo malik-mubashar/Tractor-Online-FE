@@ -77,11 +77,6 @@ export default function Brands() {
     }
   };
 
-  const [sideMenu, setSideMenu] = useState(false);
-  function onSideMenu(active) {
-    setSideMenu(active);
-  }
-
   const [brandsState, setBrandsState] = useState({
     isEditBrand: false,
     isAddBrand: false,
@@ -176,9 +171,7 @@ export default function Brands() {
   return (
     <>
       <>
-        <Navigation onClick={() => onSideMenu} />
         <div className="brandPage">
-          <div className={`main-content d-flex flex-column`}>
             {brandsState.isViewBrand ? (
               <></>
             ) : brandsState.isAddBrand === true ||
@@ -465,7 +458,6 @@ export default function Brands() {
                 </div>
               </>
             )}
-          </div>
         </div>
       </>
     </>

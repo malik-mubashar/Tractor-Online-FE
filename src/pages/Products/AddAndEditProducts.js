@@ -96,7 +96,9 @@ export default function AddAndEditProduct({
   formData.append('location',productsState.location)
   formData.append('link',productsState.link)
   formData.append('extra_fields',productsState.extra_fields)
-  formData.append('product_type',productsState.product_type)
+  if (!productsState.product_type === undefined){
+    formData.append('product_type',productsState.product_type)
+  }
   formData.append('cover_photo',productsState.cover_photo)
 
 
@@ -207,9 +209,9 @@ export default function AddAndEditProduct({
                     onChange={(e) => handleChange(e)}
                     name="product_type"
                   >
+                    <option>Please select Product Type....</option>
                     <option value="used">Used</option>
                     <option value="popular">Popular</option>
-                    <option value="featured">Featured</option>
                     <option value="upcoming">Upcoming</option>
                     <option value="newly_launched">Newly Launched</option>
                   </Form.Control>

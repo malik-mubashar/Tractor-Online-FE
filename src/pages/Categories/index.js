@@ -28,7 +28,7 @@ const CategoriesNavBar = () => {
             <div className="category-title  p-2">
               <Icon.List className="icon" /> Categories
               <div className="category-drop-down">
-                 <SideMenue /> 
+                 <SideMenue />
               </div>
             </div>
           </div>

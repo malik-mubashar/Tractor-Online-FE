@@ -84,11 +84,6 @@ export default function ProdCategoryHeads() {
     }
   };
 
-  const [sideMenu, setSideMenu] = useState(false);
-  function onSideMenu(active) {
-    setSideMenu(active);
-  }
-
   const [prodCategoryHeadsState, setProdCategoryHeadsState] = useState({
     isEditProdCategoryHead: false,
     isAddProdCategoryHead: false,
@@ -179,9 +174,7 @@ export default function ProdCategoryHeads() {
   return (
     <>
       <>
-        <Navigation onClick={() => onSideMenu} />
         <div className="prodCategoryPage">
-          <div className={`main-content d-flex flex-column`}>
             {prodCategoryHeadsState.isViewProdCategory ? (
               <></>
             ) : prodCategoryHeadsState.isAddProdCategoryHead === true ||
@@ -455,7 +448,6 @@ export default function ProdCategoryHeads() {
                 </div>
               </>
             )}
-          </div>
         </div>
       </>
     </>
