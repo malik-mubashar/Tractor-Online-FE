@@ -81,11 +81,6 @@ export default function ProdSubCategories() {
     }
   };
 
-  const [sideMenu, setSideMenu] = useState(false);
-  function onSideMenu(active) {
-    setSideMenu(active);
-  }
-
   const [prodSubCategoriesState, setProdSubCategoriesState] = useState({
     isEditProdSubCategory: false,
     isAddProdSubCategory: false,
@@ -177,9 +172,7 @@ console.log('prodSubCategoriesState',prodSubCategoriesState)
   return (
     <>
       <>
-        <Navigation onClick={() => onSideMenu} />
         <div className="prodCategoryPage">
-          <div className={`main-content d-flex flex-column`}>
             {prodSubCategoriesState.isViewProdCategory ? (
               <></>
             ) : prodSubCategoriesState.isAddProdSubCategory === true ||
@@ -453,7 +446,6 @@ console.log('prodSubCategoriesState',prodSubCategoriesState)
                 </div>
               </>
             )}
-          </div>
         </div>
       </>
     </>

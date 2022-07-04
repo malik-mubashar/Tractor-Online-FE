@@ -75,11 +75,6 @@ export default function Products() {
     }
   };
 
-  const [sideMenu, setSideMenu] = useState(false);
-  function onSideMenu(active) {
-    setSideMenu(active);
-  }
-
   const [productsState, setProductsState] = useState({
     isEditProduct: false,
     isAddProduct: false,
@@ -165,9 +160,7 @@ export default function Products() {
   return (
     <>
       <>
-        <Navigation onClick={() => onSideMenu} />
         <div className="cityPage">
-          <div className={`main-content d-flex flex-column`}>
             {productsState.isViewCity ? (
               <></>
             ) : productsState.isAddProduct === true ||
@@ -435,7 +428,6 @@ export default function Products() {
                 </div>
               </>
             )}
-          </div>
         </div>
       </>
     </>

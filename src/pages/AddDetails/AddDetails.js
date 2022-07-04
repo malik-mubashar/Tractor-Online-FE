@@ -670,7 +670,6 @@ export default function AddDetails() {
           </div>
         </div>
       </div>
-      <Footer />
     </div>
   );
 }

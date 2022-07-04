@@ -125,11 +125,6 @@ const ProfileSettings = () => {
     });
   };
 
-  // Toggle side bar menu
-  const onSideMenu = (active) => {
-    setSideMenu(active);
-  };
-
   // handle change
   const handleUpdateProfile = (value, target) => {
     setEditProfile({
@@ -201,14 +196,6 @@ const ProfileSettings = () => {
   return (
     <>
       <div className="page-wrapper">
-        {/* Navigation */}
-        <Navigation onClick={onSideMenu} />
-        {/* End Navigation */}
-        <div
-          className={`main-content d-flex flex-column ${
-            sideMenue ? "hide-sidemenu" : ""
-          }`}
-        >
           {/* Breadcrumb */}
           <div className="main-content-header">
             <Breadcrumb>
@@ -448,7 +435,6 @@ const ProfileSettings = () => {
           <div className="flex-grow-1"></div>
           <Footer />
           {/* End Footer  */}
-        </div>
       </div>
     </>
   );

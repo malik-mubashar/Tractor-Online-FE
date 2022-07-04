@@ -5,7 +5,6 @@ import Tab from 'react-bootstrap/Tab'
 import NewProductsCarousel from './NewProductsCarousel';
 import { productApis } from "../../API/ProductApis";
 
-
 export default function FeaturedNewTractor({ title, link }) {
 
   const [products, setProducts] = useState([]);

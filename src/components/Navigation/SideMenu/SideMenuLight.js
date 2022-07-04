@@ -9,7 +9,7 @@ class SideMenuLight extends React.Component {
     return (
       <div
         className={`sidemenu-area sidemenu-light ${
-          this.props.sideMenu ? "" : "sidemenu-toggle"
+          this.props.sideMenu ? "sidemenu-expande-width" : "sidemenu-toggle"
         }`}
       >
         <Navbar

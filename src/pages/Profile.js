@@ -29,10 +29,6 @@ const Profile = () => {
   const [sideMenu, setSideMenu] = useState(true);
   let history = useHistory();
 
-  // Toggle side bar menu
-  const onSideMenu = (active) => {
-    setSideMenu(active);
-  };
   useEffect(() => {
     handlePersonalDetail();
   }, []);
@@ -47,15 +43,6 @@ const Profile = () => {
         <ProfileSettings />
       ) : (
         <div className="page-wrapper">
-          {/* Navigation */}
-          <Navigation onClick={onSideMenu} />
-          {/* End Navigation */}
-
-          <div
-            className={`main-content d-flex flex-column ${
-              sideMenu ? "hide-sidemenu" : ""
-            }`}
-          >
             {/* Breadcrumb */}
             <div className="main-content-header">
               <Breadcrumb>
@@ -434,7 +421,6 @@ const Profile = () => {
             <div className="flex-grow-1"></div>
             <Footer />
             {/* End Footer  */}
-          </div>
         </div>
       )}
     </>

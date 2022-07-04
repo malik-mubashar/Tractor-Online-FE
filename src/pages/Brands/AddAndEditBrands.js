@@ -97,9 +97,6 @@ export default function AddAndEditBrands({
                     onChange={(e) => handleChange(e)}
                   />
 								</Form.Group>
-								
-							
-
                 <Form.Group controlId="formGridState">
                   <Form.Label>Status</Form.Label>
                   <Form.Control

@@ -112,3 +112,38 @@
 	// 	box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
 	// }
 }
+
+.featuredBand{
+  position: absolute;
+  top: 0px;
+  padding: 2px 15px;
+  border-radius: 5px;
+  background-color: #ffc107;
+  color: black;
+}
+
+.productTitleTruncate{
+  width: 180px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.sidemenu.navbar-expand{
+  width: 220px;
+}
+
+.sidemenu-toggle{
+  .sidemenu.hide-nav-title{
+    width: 70px;
+  }
+}
+.sidemenu-expande-width{
+  width: 220px !important;
+}
+
+.sidemenu-toggle:hover{
+  .sidemenu.hide-nav-title{
+    width: 220px;
+  }
+}

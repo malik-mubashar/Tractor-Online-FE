@@ -79,11 +79,6 @@ export default function City() {
     }
   };
 
-  const [sideMenu, setSideMenu] = useState(false);
-  function onSideMenu(active) {
-    setSideMenu(active);
-  }
-
   const [cityState, setCityState] = useState({
     isEditCity: false,
     isAddCity: false,
@@ -165,9 +160,7 @@ export default function City() {
   return (
     <>
       <>
-        <Navigation onClick={() => onSideMenu} />
         <div className="cityPage">
-          <div className={`main-content d-flex flex-column`}>
             {cityState.isViewCity ? (
               <ViewCity cityState={cityState} setCityState={setCityState} />
             ) : cityState.isAddCity === true ||
@@ -420,7 +413,6 @@ export default function City() {
                 </div>
               </>
             )}
-          </div>
         </div>
       </>
     </>

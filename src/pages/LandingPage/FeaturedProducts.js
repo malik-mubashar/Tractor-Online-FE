@@ -64,13 +64,13 @@ export default function FeaturedProducts({ title, link }) {
           products.map((item, i) => {
           return(
             <>
-            <div className="featured-card bg-white border-radius" key={i}>
+            <div className="featured-card bg-white border-radius cursor-pointer" key={i}>
               <img
                 className="card-img border-radius"
                 src={item.cover_photo_path}
                 alt=""
               />
-              <h4 className="mb-0 pl-2 border-radius">{item.title}</h4>
+              <h4 className="mb-0 pl-2 border-radius productTitleTruncate" title={item.title}>{item.title}</h4>
               <p className="mb-0 pl-2 text-success border-radius">
                 {item.price}
               </p>

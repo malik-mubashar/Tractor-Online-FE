@@ -77,11 +77,6 @@ export default function Roles() {
     }
   };
 
-  const [sideMenu, setSideMenu] = useState(false);
-  function onSideMenu(active) {
-    setSideMenu(active);
-  }
-
   const [rolesState, setRolesState] = useState({
     isEditRole: false,
     isAddRole: false,
@@ -172,9 +167,7 @@ export default function Roles() {
   return (
     <>
       <>
-        <Navigation onClick={() => onSideMenu} />
         <div className="rolePage">
-          <div className={`main-content d-flex flex-column`}>
             {rolesState.isViewRole ? (
 								<></>
 						): rolesState.isAddRole === true ||
@@ -426,7 +419,6 @@ export default function Roles() {
                 </div>
               </>
             )}
-          </div>
         </div>
       </>
     </>
