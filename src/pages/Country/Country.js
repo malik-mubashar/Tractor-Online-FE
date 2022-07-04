@@ -124,10 +124,10 @@ export default function Country() {
     const loadingToastId = toast.loading("Loading..!");
     try {
       const result = await country.getCountriesPdf(mainSearchString);
-      debugger;
+       
       if (result.error === false) {
         toast.dismiss(loadingToastId);
-        debugger;
+         
         window.open(`${result.data.file_path}`, "_blank");
       } else {
         toast.dismiss(loadingToastId);
@@ -142,14 +142,14 @@ export default function Country() {
   };
 
   const handleGetCsv = async () => {
-    debugger;
+     
     const loadingToastId = toast.loading("Loading..!");
     try {
       const result = await country.getCountriesCsv(mainSearchString);
-      debugger;
+       
       if (result.error === false) {
         toast.dismiss(loadingToastId);
-        debugger;
+         
         window.open(`${result.data.file_path}`, "_blank");
       } else {
         toast.dismiss(loadingToastId);

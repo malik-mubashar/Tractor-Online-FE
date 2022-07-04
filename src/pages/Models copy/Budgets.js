@@ -64,7 +64,7 @@ export default function Budgets() {
     const loadingToastId = toast.loading("Loading..!");
     try {
       const result = await budgetApis.deleteBudget(id);
-      debugger;
+       
       if (result.error === false) {
         toast.dismiss(loadingToastId);
         toast.success("Successfully deleted!");
@@ -132,10 +132,10 @@ export default function Budgets() {
     const loadingToastId = toast.loading("Loading..!");
     try {
       const result = await budgetApis.getBudgetsPdf(mainSearchString);
-      debugger;
+       
       if (result.error === false) {
         toast.dismiss(loadingToastId);
-        debugger;
+         
         window.open(`${result.data.file_path}`, "_blank");
       } else {
         toast.dismiss(loadingToastId);
@@ -150,14 +150,14 @@ export default function Budgets() {
   };
 
   const handleGetCsv = async () => {
-    debugger;
+     
     const loadingToastId = toast.loading("Loading..!");
     try {
       const result = await budgetApis.getBudgetsCsv(mainSearchString);
-      debugger;
+       
       if (result.error === false) {
         toast.dismiss(loadingToastId);
-        debugger;
+         
         window.open(`${result.data.file_path}`, "_blank");
       } else {
         toast.dismiss(loadingToastId);

@@ -66,7 +66,7 @@ export default function ProdSubCategories() {
     const loadingToastId = toast.loading("Loading..!");
     try {
       const result = await prodSubApi.deleteProdSubCategory(id);
-      debugger;
+       
       if (result.error === false) {
         toast.dismiss(loadingToastId);
         toast.success("Successfully deleted!");
@@ -137,10 +137,10 @@ export default function ProdSubCategories() {
     const loadingToastId = toast.loading("Loading..!");
     try {
       const result = await prodSubApi.getProdSubCategoriesPdf(mainSearchString);
-      debugger;
+       
       if (result.error === false) {
         toast.dismiss(loadingToastId);
-        debugger;
+         
         window.open(`${result.data.file_path}`, "_blank");
       } else {
         toast.dismiss(loadingToastId);
@@ -155,14 +155,14 @@ export default function ProdSubCategories() {
   };
 
   const handleGetCsv = async () => {
-    debugger;
+     
     const loadingToastId = toast.loading("Loading..!");
     try {
       const result = await prodSubApi.getProdSubCategoriesCsv(mainSearchString);
-      debugger;
+       
       if (result.error === false) {
         toast.dismiss(loadingToastId);
-        debugger;
+         
         window.open(`${result.data.file_path}`, "_blank");
       } else {
         toast.dismiss(loadingToastId);

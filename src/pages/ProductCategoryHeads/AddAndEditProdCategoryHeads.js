@@ -16,14 +16,14 @@ export default function AddAndEditProdCategoryHeads({
   const [productCategories, setProductCategories] = useState();
 
   const getProdCategories = async () => {
-    debugger;
+     
     const loadingToastId = toast.loading("Loading..!");
 
     try {
       const result = await prodApi.getProdCategories(1, "", 1000000000000);
       if (result.error === false && result.data.status === "success") {
         toast.dismiss(loadingToastId);
-        debugger;
+         
         setProductCategories(result.data.data);
         if (prodCategoryHeadsState.isAddProdCategoryHead) {
           setProdCategoryHeadsState({
@@ -41,7 +41,7 @@ export default function AddAndEditProdCategoryHeads({
     }
   };
   function handleChange(evt) {
-    debugger;
+     
     setProdCategoryHeadsState({
       ...prodCategoryHeadsState,
       [evt.target.name]: evt.target.value,
@@ -56,7 +56,7 @@ export default function AddAndEditProdCategoryHeads({
   };
 
   const addProdCategoryHead = async (params) => {
-    debugger;
+     
     const loadingToastId = toast.loading("Loading..!");
 
     if (prodCategoryHeadsState.isAddProdCategoryHead) {

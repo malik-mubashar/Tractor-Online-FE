@@ -10,7 +10,7 @@ export default function AddAndEditModels({
   getModels,
 }) {
   function handleChange(evt) {
-    debugger;
+     
     setModelsState({
       ...modelsState,
       [evt.target.name]: evt.target.value,
@@ -25,13 +25,13 @@ export default function AddAndEditModels({
 	}
 
 	const addModels = async (params) => {
-		debugger;
+		 
     const loadingToastId = toast.loading("Loading..!");
-		debugger;
+		 
 
     if (modelsState.isAddModel) {
 			try {
-		debugger;
+		 
 				
         const result = await modelApis.addModel(modelsState);
         console.log(result);

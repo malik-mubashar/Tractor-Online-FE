@@ -22,7 +22,7 @@ export default function AddAndEditCategoryBrands({
         toast.dismiss(loadingToastId);
 				setProductCategories(result.data.data);
 				if (categoryBrandsState.isAddCategoryBrand) {
-					debugger;
+					 
           setCategoryBrandsState({
             ...categoryBrandsState,
             product_category_id: result.data.data[0].id,
@@ -38,7 +38,7 @@ export default function AddAndEditCategoryBrands({
     }
   };
   function handleChange(evt) {
-    debugger;
+     
     setCategoryBrandsState({
       ...categoryBrandsState,
       [evt.target.name]: evt.target.value,

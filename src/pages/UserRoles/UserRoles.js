@@ -35,7 +35,7 @@ export default function UserRoles() {
     try {
       const result = await userRolesApis.getUserRoles(page, mainSearch, noOfRec);
 			if (result.error == false && result.data.status == "success") {
-				debugger;
+				 
         toast.dismiss(loadingToastId);
 
         setUserRolesState({
@@ -65,7 +65,7 @@ export default function UserRoles() {
     const loadingToastId = toast.loading("Loading..!");
     try {
       const result = await userRolesApis.deleteUserRole(id);
-      debugger;
+       
       if (
         result.error === false 
       ) {

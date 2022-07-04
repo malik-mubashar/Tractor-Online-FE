@@ -17,7 +17,7 @@ export default function AddAndEditProdSubCategories({
   const [productCategoryHeads, setProductCategoryHeads] = useState();
 
   const getProdCategoryHeads = async () => {
-    debugger;
+     
     const loadingToastId = toast.loading("Loading..!");
 
     try {
@@ -28,7 +28,7 @@ export default function AddAndEditProdSubCategories({
       );
       if (result.error === false && result.data.status === "success") {
         toast.dismiss(loadingToastId);
-        debugger;
+         
         setProductCategoryHeads(result.data.data);
 
         if (prodSubCategoriesState.isAddProdSubCategory) {
@@ -47,7 +47,7 @@ export default function AddAndEditProdSubCategories({
     }
   };
   function handleChange(evt) {
-    debugger;
+     
     setProdSubCategoriesState({
       ...prodSubCategoriesState,
       [evt.target.name]: evt.target.value,

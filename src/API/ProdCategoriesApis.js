@@ -72,7 +72,7 @@ class ProdCategories {
       });
   };
 	addProdCategory = async (prodCategoriesState) => {
-		debugger;
+		 
     return axios({
       method: "post",
       url: `${process.env.REACT_APP_API_LOCAL_PATH}product_categories`,
@@ -108,7 +108,7 @@ class ProdCategories {
   };
 
 	getProdCategories = async (page, searchString, noOfRec) => {
-		debugger;
+		 
     return axios({
       method: "get",
       url: `${process.env.REACT_APP_API_LOCAL_PATH}product_categories?page=${page}&q%5Btitle_or_status_or_link_or_description_cont%5D=${searchString}&no_of_record=${noOfRec}`,
@@ -121,14 +121,14 @@ class ProdCategories {
       },
     })
 			.then((result) => {
-				debugger;
+				 
         return {
           error: false,
           data: result.data,
         };
       })
 			.catch((error) => {
-				debugger;
+				 
         return {
           error: true,
           data: error.response.data,
@@ -136,21 +136,21 @@ class ProdCategories {
       });
 	};
   getProdCategoriesList = async (page, searchString, noOfRec) => {
-		debugger;
+		 
     return axios({
       method: "get",
       url: `${process.env.REACT_APP_API_LOCAL_PATH}product_categories/categories_list`,
       headers: Headers
     })
 			.then((result) => {
-				debugger;
+				 
         return {
           error: false,
           data: result.data,
         };
       })
 			.catch((error) => {
-				debugger;
+				 
         return {
           error: true,
           data: error.response.data,
@@ -159,7 +159,7 @@ class ProdCategories {
 	};
 	
 		getProdCategoriesPdf = async (searchString) => {
-		debugger;
+		 
     return axios({
       method: "get",
       url: `${process.env.REACT_APP_API_LOCAL_PATH}product_categories.pdf?q%5Btitle_or_status_or_link_or_description_cont%5D=${searchString}`,
@@ -172,14 +172,14 @@ class ProdCategories {
       },
     })
 			.then((result) => {
-				debugger;
+				 
         return {
           error: false,
           data: result.data,
         };
       })
 			.catch((error) => {
-				debugger;
+				 
         return {
           error: true,
           data: error.response.data,
@@ -188,7 +188,7 @@ class ProdCategories {
 		};
 	
 		getProdCategoriesCsv = async (searchString) => {
-			debugger;
+			 
 			return axios({
 				method: "get",
 				url: `${process.env.REACT_APP_API_LOCAL_PATH}product_categories.csv?q%5Btitle_or_status_or_link_or_description_cont%5D=${searchString}`,
@@ -201,14 +201,14 @@ class ProdCategories {
 				},
 			})
 				.then((result) => {
-					debugger;
+					 
 					return {
 						error: false,
 						data: result.data,
 					};
 				})
 				.catch((error) => {
-					debugger;
+					 
 					return {
 						error: true,
 						data: error.response.data,

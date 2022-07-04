@@ -66,7 +66,7 @@ export default function Languages() {
     const loadingToastId = toast.loading("Loading..!");
     try {
       const result = await languageApis.deleteLanguage(id);
-      debugger;
+       
       if (
         result.error === false 
       ) {
@@ -132,10 +132,10 @@ export default function Languages() {
       const result = await languageApis.getLanguagesPdf(
         mainSearchString
       );
-      debugger;
+       
       if (result.error === false) {
         toast.dismiss(loadingToastId);
-        debugger;
+         
         window.open(`${result.data.file_path}`, "_blank");
       } else {
         toast.dismiss(loadingToastId);
@@ -150,16 +150,16 @@ export default function Languages() {
   };
 
   const handleGetCsv = async () => {
-    debugger;
+     
     const loadingToastId = toast.loading("Loading..!");
     try {
       const result = await languageApis.getLanguagesCsv(
         mainSearchString
       );
-      debugger;
+       
       if (result.error === false) {
         toast.dismiss(loadingToastId);
-        debugger;
+         
         window.open(`${result.data.file_path}`, "_blank");
       } else {
         toast.dismiss(loadingToastId);

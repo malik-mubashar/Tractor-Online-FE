@@ -29,7 +29,7 @@ export default function ProdCategoryHeads() {
 
   const getProdCategoryHeads = async (page, mainSearch, noOfRec) => {
     const loadingToastId = toast.loading("Loading..!");
-    debugger;
+     
     try {
       const result = await prodCategoryHeadsApi.getProdCategoryHeads(
         page,
@@ -66,7 +66,7 @@ export default function ProdCategoryHeads() {
     const loadingToastId = toast.loading("Loading..!");
     try {
       const result = await prodCategoryHeadsApi.deleteProdCategoryHead(id);
-      debugger;
+       
       if (result.error == false) {
         toast.dismiss(loadingToastId);
         toast.success("Successfully deleted!");
@@ -136,10 +136,10 @@ export default function ProdCategoryHeads() {
       const result = await prodCategoryHeadsApi.getProdCategoryHeadsPdf(
         mainSearchString
       );
-      debugger;
+       
       if (result.error === false) {
         toast.dismiss(loadingToastId);
-        debugger;
+         
         window.open(`${result.data.file_path}`, "_blank");
       } else {
         toast.dismiss(loadingToastId);
@@ -154,16 +154,16 @@ export default function ProdCategoryHeads() {
   };
 
   const handleGetCsv = async () => {
-    debugger;
+     
     const loadingToastId = toast.loading("Loading..!");
     try {
       const result = await prodCategoryHeadsApi.getProdCategoryHeadsCsv(
         mainSearchString
       );
-      debugger;
+       
       if (result.error === false) {
         toast.dismiss(loadingToastId);
-        debugger;
+         
         window.open(`${result.data.file_path}`, "_blank");
       } else {
         toast.dismiss(loadingToastId);

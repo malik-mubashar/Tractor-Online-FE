@@ -63,7 +63,7 @@ class UserRoles {
       });
   };
 	addUserRole = async (rolesState) => {
-		debugger;
+		 
     return axios({
       method: "post",
       url: `${process.env.REACT_APP_API_LOCAL_PATH}users_roles`,
@@ -96,7 +96,7 @@ class UserRoles {
   };
 
 	getUserRoles = async (page, searchString, noOfRec) => {
-		debugger;
+		 
     return axios({
       method: "get",
       url: `${process.env.REACT_APP_API_LOCAL_PATH}users_roles?page=${page}&q%5Btitle_or_comments_cont%5D=${searchString}&no_of_record=${noOfRec}`,
@@ -123,7 +123,7 @@ class UserRoles {
 	};
 	
 	getUserRolesPdf = async (searchString) => {
-		debugger;
+		 
     return axios({
       method: "get",
       url: `${process.env.REACT_APP_API_LOCAL_PATH}users_roles.pdf?q%5Btitle_or_comments_cont%5D=${searchString}`,
@@ -150,7 +150,7 @@ class UserRoles {
 	};
 	
 	getUserRolesCsv = async (searchString) => {
-		debugger;
+		 
     return axios({
       method: "get",
       url: `${process.env.REACT_APP_API_LOCAL_PATH}users_roles.csv?q%5Btitle_or_comments_cont%5D=${searchString}`,

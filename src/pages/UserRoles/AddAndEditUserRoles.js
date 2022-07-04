@@ -22,7 +22,7 @@ export default function AddAndEditUserRoles({
     try {
       const result = await roleApis.getRoles(1, "", 10000000);
       if (result.error === false) {
-        debugger;
+         
         toast.dismiss(loadingToastId);
 
         setRoles(result.data.data);

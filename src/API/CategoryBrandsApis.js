@@ -64,7 +64,7 @@ class CategoryBrands {
       });
   };
 	addCategoryBrand = async (categoryBrandsState) => {
-		debugger;
+		 
     return axios({
       method: "post",
       url: `${process.env.REACT_APP_API_LOCAL_PATH}category_brands`,
@@ -101,7 +101,7 @@ class CategoryBrands {
   };
 
 	getCategoryBrands = async (page, searchString, noOfRec) => {
-		debugger;
+		 
     return axios({
       method: "get",
       url: `${process.env.REACT_APP_API_LOCAL_PATH}category_brands?page=${page}&q%5Btitle_or_description_or_status_cont%5D=${searchString}&no_of_record=${noOfRec}`,
@@ -130,7 +130,7 @@ class CategoryBrands {
 	};
 	
 	getCategoryBrandsPdf = async (searchString) => {
-		debugger;
+		 
     return axios({
       method: "get",
       url: `${process.env.REACT_APP_API_LOCAL_PATH}category_brands.pdf?q%5Btitle_or_description_or_status_cont%5D=${searchString}`,
@@ -157,7 +157,7 @@ class CategoryBrands {
 	};
 	
 	getCategoryBrandsCsv = async (searchString) => {
-		debugger;
+		 
     return axios({
       method: "get",
       url: `${process.env.REACT_APP_API_LOCAL_PATH}category_brands.csv?q%5Btitle_or_description_or_status_cont%5D=${searchString}`,

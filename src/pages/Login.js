@@ -19,7 +19,7 @@ const Login = () => {
 		e.preventDefault();
 		const loadingToastId = toast.loading("Loading..!");
 
-		debugger;
+		 
     try {
       const result = await user.login(email, password);
       console.log(result);

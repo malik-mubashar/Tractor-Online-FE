@@ -101,7 +101,7 @@ class Products {
   };
 
 	getProducts = async (page, searchString, noOfRec) => {
-		debugger;
+		 
     return axios({
       method: "get",
       url: `${process.env.REACT_APP_API_LOCAL_PATH}products?page=${page}&q%5Btitle_or_status_or_description_or_location_cont%5D=${searchString}&no_of_record=${noOfRec}`,
@@ -127,7 +127,7 @@ class Products {
       });
 	};
   getAllProducts = async (productType) => {
-		debugger;
+		 
     return axios({
       method: "get",
       url: `${process.env.REACT_APP_API_LOCAL_PATH}get_products`,
@@ -147,7 +147,7 @@ class Products {
       });
 	};
 	getNewProducts = async (newly_launched) => {
-		debugger;
+		 
     return axios({
       method: "get",
       url: `${process.env.REACT_APP_API_LOCAL_PATH}get_products?product_type=${newly_launched}`,
@@ -167,7 +167,7 @@ class Products {
       });
 	};
   getUsedProducts = async (used) => {
-		debugger;
+		 
     return axios({
       method: "get",
       url: `${process.env.REACT_APP_API_LOCAL_PATH}get_products?product_type=${used}`,
@@ -187,7 +187,7 @@ class Products {
       });
 	};
   getPopularProducts = async (popular) => {
-		debugger;
+		 
     return axios({
       method: "get",
       url: `${process.env.REACT_APP_API_LOCAL_PATH}get_products?product_type=${popular}`,
@@ -207,7 +207,7 @@ class Products {
       });
 	};
   getFeaturedProducts = async (featured) => {
-		debugger;
+		 
     return axios({
       method: "get",
       url: `${process.env.REACT_APP_API_LOCAL_PATH}get_products?product_type=${featured}`,
@@ -227,7 +227,7 @@ class Products {
       });
 	};
   getUpcomingProducts = async (upcoming) => {
-		debugger;
+		 
     return axios({
       method: "get",
       url: `${process.env.REACT_APP_API_LOCAL_PATH}get_products?product_type=${upcoming}`,
@@ -247,7 +247,7 @@ class Products {
       });
 	};
 	getProductsPdf = async (searchString) => {
-		debugger;
+		 
     return axios({
       method: "get",
       url: `${process.env.REACT_APP_API_LOCAL_PATH}products.pdf?q%5Btitle_or_status_or_description_or_location_cont%5D=${searchString}`,
@@ -274,7 +274,7 @@ class Products {
 	};
 	
 	getProductsCsv = async (searchString) => {
-		debugger;
+		 
     return axios({
       method: "get",
       url: `${process.env.REACT_APP_API_LOCAL_PATH}products.csv?q%5Btitle_or_status_or_description_or_location_cont%5D=${searchString}`,

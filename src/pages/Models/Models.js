@@ -64,7 +64,7 @@ export default function Models() {
     const loadingToastId = toast.loading("Loading..!");
     try {
       const result = await modelApis.deleteModel(id);
-      debugger;
+       
       if (
         result.error === false
       ) {
@@ -136,10 +136,10 @@ export default function Models() {
     const loadingToastId = toast.loading("Loading..!");
     try {
       const result = await modelApis.getModelsPdf(mainSearchString);
-      debugger;
+       
       if (result.error === false) {
         toast.dismiss(loadingToastId);
-        debugger;
+         
         window.open(`${result.data.file_path}`, "_blank");
       } else {
         toast.dismiss(loadingToastId);
@@ -154,14 +154,14 @@ export default function Models() {
   };
 
   const handleGetCsv = async () => {
-    debugger;
+     
     const loadingToastId = toast.loading("Loading..!");
     try {
       const result = await modelApis.getModelsCsv(mainSearchString);
-      debugger;
+       
       if (result.error === false) {
         toast.dismiss(loadingToastId);
-        debugger;
+         
         window.open(`${result.data.file_path}`, "_blank");
       } else {
         toast.dismiss(loadingToastId);

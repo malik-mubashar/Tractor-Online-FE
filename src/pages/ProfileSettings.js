@@ -82,9 +82,9 @@ const ProfileSettings = () => {
   };
 
 	const handlePersonalDetail = async () => {
-		debugger;
+		 
 		const result = await user.findUser(currentUser);
-		debugger;
+		 
     setUserPersonalDetail(result.data);
     setEditProfile({
       name: result.data && result.data.name,
@@ -165,7 +165,7 @@ const ProfileSettings = () => {
       }
     }
     try {
-			debugger;
+			 
       const result = await user.profile(
         editProfile,
         userPersonalDetail.personal_detail

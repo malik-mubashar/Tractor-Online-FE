@@ -64,7 +64,7 @@ export default function City() {
     const loadingToastId = toast.loading("Loading..!");
     try {
       const result = await city.deleteCity(id);
-      debugger;
+       
       if (
         result.error == false &&
         result.data.notice == "City was successfully removed."
@@ -126,10 +126,10 @@ export default function City() {
     const loadingToastId = toast.loading("Loading..!");
     try {
       const result = await city.getCitiesPdf(mainSearchString);
-      debugger;
+       
       if (result.error === false) {
         toast.dismiss(loadingToastId);
-        debugger;
+         
         window.open(`${result.data.file_path}`, "_blank");
       } else {
         toast.dismiss(loadingToastId);
@@ -145,10 +145,10 @@ export default function City() {
     const loadingToastId = toast.loading("Loading..!");
     try {
       const result = await city.getCitiesCsv(mainSearchString);
-      debugger;
+       
       if (result.error === false) {
         toast.dismiss(loadingToastId);
-        debugger;
+         
         window.open(`${result.data.file_path}`, "_blank");
       } else {
         toast.dismiss(loadingToastId);

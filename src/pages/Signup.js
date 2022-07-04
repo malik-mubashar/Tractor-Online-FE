@@ -28,7 +28,7 @@ const SignUp = () => {
     }
     const loadingToastId = toast.loading("Loading..!");
     try {
-      debugger;
+       
       const result = await user.signUp(
         email,
         password,
