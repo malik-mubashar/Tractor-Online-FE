@@ -19,6 +19,7 @@ import "../assets/css/dashboard.scss";
 import "../assets/css/landingPage.scss";
 import "../assets/css/usedTractor.scss";
 import "../assets/css/addDetails.scss";
+import "../assets/css/Loader.scss";
 import ProtectedRoute from "../components/ProtectedRoutes/index";
 import UnProtectedRoute from "../components/UnprotectedRoutes/index";
 

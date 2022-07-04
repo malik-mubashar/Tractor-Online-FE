@@ -51,9 +51,6 @@ const Topbar = () => {
           productCategories.map((item, i) => {
             return (
               <>
-                {console.log("mbmb", item)}
-             
-
                 <DropDown
                   title={item.title}
                   productHead={item.product_category_heads}

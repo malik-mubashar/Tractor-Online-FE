@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState ,useEffect} from "react";
 import {
   Row,
   Col,
@@ -10,9 +10,8 @@ import {
   Modal,
   Image,
 } from "react-bootstrap";
+import BootstrapSwitchButton from "bootstrap-switch-button-react";
 
-// import card_thumb_one from '../../assets/img/product/card_thumb_one.jpg'
-// import card_thumb_one from '../../assets/img/card-thumb-one.jpg';
 import {
   BrowserView,
   MobileView,
@@ -22,9 +21,12 @@ import {
 import * as Icon from "react-feather";
 import { useHistory } from "react-router-dom";
 import CustomPopover from "./CustomPopover";
+import { productApis } from "../../API/ProductApis";
+import Loader from "../Loader";
 
 export default function SearchListing() {
   const [showNumberWarning, setShowNumberWarning] = useState(true);
+  const [loader, setLoader] = useState(true);
   let history = useHistory();
   const [openShowPhone, setOpenShowPhone] = useState(false);
 
@@ -33,10 +35,24 @@ export default function SearchListing() {
     setOpenShowPhone(false);
     console.log("ping");
   };
+  const [products, setProducts] = useState([]);
+
+  useEffect(() => {
+    handleGetAllProducts();
+  }, []);
+  const handleGetAllProducts = async () => {
+    const result = await productApis.getAllProducts();
+    if (result.error === false) {
+      setProducts(result.data && result.data.data);
+      setLoader(false);
+      console.log("products", result.data && result.data.data);
+    }
+  };
   console.log(openShowPhone);
 
   return (
     <>
+      <Loader show={loader} />
       <Col sm={12} lg={12} xl={12}>
         <div className="topSorting">
           <div className="organize-results">
@@ -46,7 +62,7 @@ export default function SearchListing() {
                 className="form-control col-7 mb-2"
                 id="sortby"
                 name="sortby"
-                onChange={(e)=>console.log(e)}
+                onChange={(e) => console.log(e)}
               >
                 <option value="bumped_at-desc" selected="selected">
                   Updated Date: Recent First
@@ -66,35 +82,31 @@ export default function SearchListing() {
             </div>
 
             {!isMobile && (
-              <div className="col-md-4 mt5 text-right">
-                <div className="btn-group" data-toggle="buttons-radio">
-                  <button
-                    onClick={() => setGridOrList("list")}
-                    type="button"
-                    id="list"
-                    className="sortButtonList"
-                  >
-                    List
-                  </button>
-                  <button
-                    onClick={() => setGridOrList("grid")}
-                    type="button"
-                    id="grid"
-                    className="sortButtonGrid"
-                  >
-                    Grid
-                  </button>
+              <div className="col-md-4 mt5 text-right ex" >
+                <div className="btn-group" data-toggle="buttons-radio"   style={{ marginTop: "10px" }}>
+                  <BootstrapSwitchButton
+                    className="col-md-8 d-flex"
+                    checked={true}
+                    onstyle="outline-danger"
+                    offstyle="outline-info"
+                    onlabel="Grid"
+                    offlabel="List"
+                    onChange={(checked) => {
+                      if (checked){
+                        setGridOrList("list")
+                      }
+                      else{
+                        setGridOrList("grid")
+                      }
+                    }}
+                  />
                 </div>
               </div>
             )}
           </div>
         </div>
-        <div
-          // className="searchList"
-          className={gridOrList === "list" ? "" : "row"}
-        >
-          <>
-            {[1, 2, 3, 4].map(() => {
+        <div className={gridOrList === "list" ? "" : "row"}>
+            {products.map((item) => {
               return (
                 <>
                   <div className={`${gridOrList === "list" ? "" : "col-4"}`}>
@@ -106,27 +118,28 @@ export default function SearchListing() {
                       <img
                         // className="card-img-top"
                         // className={gridOrList==='list'?'list':'grid'}
-                        src="https://bsmedia.business-standard.com/_media/bs/img/article/2020-06/01/full/1590987638-6809.png"
+                        src={item.cover_photo_path}
                         alt="Card"
                         style={{ width: "200px", height: "140px" }}
                       />
                       <div style={{ width: "100%" }}>
                         <div
-                          className="d-flex"
-                          style={{ justifyContent: "space-between" }}
+                          className={gridOrList === "list" ? "d-flex justify-content-between" : "mt-2"}
                         >
                           <h5
+                            className={gridOrList === "list" ? "cursor-pointer ml-3" : "cursor-pointer"}
                             onClick={() => {
                               history.push("/addDetails");
                             }}
-                            style={{ cursor: "pointer" }}
                           >
-                            Toyota Prado TX Limited 2.7 2008
+                            {item.title}
                           </h5>
-                          <h5>PKR 123 lacs</h5>
+                          <h5
+                          className={gridOrList === "list" ? "cursor-pointer ml-3" : "cursor-pointer"}
+                          >PKR {item.price}</h5>
                         </div>
-                        <p className="card-text">Karachi</p>
-                        <p>
+                        <p className={gridOrList === "list" ? " ml-3" : null}>{item.location}</p>
+                        <p style={{paddingLeft:"8px"}}>
                           2008 | 111,123 km | Petrol | 2700cc | Automatic | 4.5
                           Grade
                         </p>
@@ -140,11 +153,11 @@ export default function SearchListing() {
                           } `}
                           style={{ justifyContent: "space-between" }}
                         >
-                          <small className="text-muted">
+                          <small className="text-muted" style={{paddingLeft:"8px"}}>
                             Last updated 3 mins ago
                           </small>
                           <div className="d-flex">
-                            <button className="mr-3" type="submit">
+                            <button className="mr-3 btn btn-outline-primary p-1" type="submit">
                               <Icon.Heart
                                 style={{ height: "14px" }}
                                 className="icon"
@@ -165,11 +178,11 @@ export default function SearchListing() {
                                 />
                                 Show Phone Number
                               </button>
-														) : (
-																<>
-                             
-																	<CustomPopover />
-																	</>
+                            ) : (
+                              <>
+
+                                <CustomPopover />
+                              </>
                             )}
                           </div>
                         </div>
@@ -179,7 +192,6 @@ export default function SearchListing() {
                 </>
               );
             })}
-          </>
         </div>
         <div className="pagination">
           <span className="mx-auto">
