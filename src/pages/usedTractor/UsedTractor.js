@@ -7,6 +7,7 @@ import { Image } from "react-bootstrap";
 import tractorSVG from "../../assets/svg/tractor-1.svg";
 import { isMobile } from "react-device-detect";
 import { useHistory } from "react-router-dom";
+import Loader from "../Loader";
 
 export default function usedTractor() {
   const history = useHistory();

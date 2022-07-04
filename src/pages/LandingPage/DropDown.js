@@ -157,9 +157,15 @@ console.log("productHead ", productHead)
     <div>
       <div className={`${!dropDownIcon ? " dropdown-button p-2" : "p-1"}`}>
         {title}
-        {!dropDownIcon && (
-          <Icon.ChevronDown className="icon" height="15px" width="15px" />
-        )}
+          { productHead && !dropDownIcon ? 
+            (
+              <>
+                <Icon.ChevronDown className="icon" height="15px" width="15px" />
+              </>
+            )
+            :
+            null
+          }
         {productHead.length > 0 && <div
           className={`drop-down-items row py-3 ${
             usedCars || productHead ? "usedCarsWidth" : ""
@@ -174,7 +180,7 @@ console.log("productHead ", productHead)
               <ul className="list-unstyled col-4 p-0 border-right">
                 {productHead.map((item, i) => (
                   <li className="dropdown-list" key={i}>
-                    <Link to="/" className="d-flex pl-1 dropdown-link">
+                    <Link to="/usedtractor" className="d-flex pl-1 dropdown-link">
                       <Icofont
                         icon={item.icon}
                         height="10px"
@@ -186,7 +192,7 @@ console.log("productHead ", productHead)
                         {item.product_sub_categories !== null &&
                           item.product_sub_categories !== undefined &&
                           item.product_sub_categories.map((y, i) => {
-                            return <li>{y.title}</li>;
+                            return <p>{y.title}</p>;
                           })}
                       </div>
                     </Link>

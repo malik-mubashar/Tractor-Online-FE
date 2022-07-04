@@ -9,6 +9,7 @@
   "dependencies": {
     "axios": "^0.27.2",
     "bootstrap": "^4.2.1",
+    "bootstrap-switch-button-react": "^1.2.0",
     "history": "^4.7.2",
     "node-sass": "^4.11.0",
     "prop-types": "^15.6.2",
