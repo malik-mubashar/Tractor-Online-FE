@@ -157,7 +157,7 @@ console.log("productHead ", productHead)
     <div>
       <div className={`${!dropDownIcon ? " dropdown-button p-2" : "p-1"}`}>
         {title}
-          { productHead && !dropDownIcon ? 
+          { productHead.length > 0? 
             (
               <>
                 <Icon.ChevronDown className="icon" height="15px" width="15px" />
