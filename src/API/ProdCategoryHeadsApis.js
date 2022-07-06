@@ -34,7 +34,7 @@ class ProdCategoryHeads {
   updateProdCategoryHead = async (prodSCategoryHeadsState) => {
     return axios({
       method: "put",
-      url: `${process.env.REACT_APP_API_LOCAL_PATH}product_category_heads/${prodSCategoryHeadsState.prodCategoryId}`,
+      url: `${process.env.REACT_APP_API_LOCAL_PATH}product_category_heads/${prodSCategoryHeadsState.prodCategoryHeadId}`,
       headers: {
         "Content-Type": "multipart/form-data",
         "Access-Control-Allow-Origin": "*",

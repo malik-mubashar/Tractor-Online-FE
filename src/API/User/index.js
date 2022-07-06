@@ -74,7 +74,7 @@ class User {
       });
   };
 	profile = async (editProfile, personal_id,tempCurrentUser) => {
-		debugger;
+		 
     let personal_detail = personal_id
       ? {
 				id: personal_id,
@@ -131,7 +131,7 @@ class User {
 	uploadProfilePicture = async (picture) => {
 		const currentUser = JSON.parse(window.localStorage.getItem("currentUser")) || null;
 
-		debugger;
+		 
     return axios({
       method: "patch",
       url: `${process.env.REACT_APP_API_LOCAL_PATH}auth`,
@@ -162,7 +162,7 @@ class User {
       });
   };
 	findUser = async (tempCurrentUser) => {
-		debugger;
+		 
     return axios({
       method: "get",
       url: `${process.env.REACT_APP_API_LOCAL_PATH}app_users/${tempCurrentUser.id}`,
