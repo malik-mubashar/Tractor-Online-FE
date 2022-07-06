@@ -89,7 +89,7 @@ export default function ProdCategoryHeads() {
     isAddProdCategoryHead: false,
     prodCategoryHeads: null,
     originalProdCategoryHeads: null,
-    status: "active",
+    status: null,
   });
 
   const handleSearch = (searchString) => {
@@ -193,7 +193,13 @@ export default function ProdCategoryHeads() {
                     onClick={() => {
                       setProdCategoryHeadsState({
                         ...prodCategoryHeadsState,
-                        isAddProdCategoryHead: true,
+												isAddProdCategoryHead: true,
+												title: null,
+												status: null,
+												comments: null,
+												link: null,
+												icon:null,
+												product_category:null
                       });
                     }}
                   >
@@ -276,6 +282,7 @@ export default function ProdCategoryHeads() {
                           <tr>
                             <th>Title</th>
                             <th>Link</th>
+                            <th>Product Category</th>
                             <th>Status</th>
                             <th>Description</th>
                             <th className="text-center">Action</th>
@@ -285,13 +292,14 @@ export default function ProdCategoryHeads() {
                         <tbody>
                           {prodCategoryHeadsState.prodCategoryHeads &&
                             prodCategoryHeadsState.prodCategoryHeads.map(
-                              (prod, idx) => (
+                              (prodHead, idx) => (
                                 <tr key={idx}>
-                                  <td>{prod.title && prod.title}</td>
-                                  <td>{prod.link && prod.link}</td>
-                                  <td>{prod.status && prod.status}</td>
+                                  <td>{prodHead.title && prodHead.title}</td>
+                                  <td>{prodHead.link && prodHead.link}</td>
+                                  <td>{prodHead.product_category && prodHead.product_category.title}</td>
+                                  <td>{prodHead.status && prodHead.status}</td>
                                   <td>
-                                    {prod.description && prod.description}
+                                    {prodHead.description && prodHead.description}
                                   </td>
                                   <td className="text-center">
                                     <Icon.Edit2
@@ -300,9 +308,14 @@ export default function ProdCategoryHeads() {
                                         setProdCategoryHeadsState({
                                           ...prodCategoryHeadsState,
                                           isEditProdCategoryHead: true,
-                                          title: prod.title,
-                                          comments: prod.comments,
-                                          prodCategoryId: prod.id,
+																					title: prodHead.title,
+																					icon:prodHead.icon,
+                                          status: prodHead.status,
+                                          comments: prodHead.comments,
+                                          link: prodHead.link,
+																					prodCategoryHeadId: prodHead.id,
+																					product_category: prodHead.product_category,
+																					product_category_id:prodHead.product_category.id
                                         });
                                       }}
                                       className="text-success mr-2 icon wh-15 mt-minus-3"
@@ -310,7 +323,7 @@ export default function ProdCategoryHeads() {
                                     <Link className="text-danger mr-2">
                                       <Icon.X
                                         onClick={() =>
-                                          deleteProdCategoryHead(prod.id)
+                                          deleteProdCategoryHead(prodHead.id)
                                         }
                                         className="icon wh-15 mt-minus-3"
                                       />

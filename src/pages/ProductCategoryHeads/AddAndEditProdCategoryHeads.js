@@ -12,25 +12,40 @@ export default function AddAndEditProdCategoryHeads({
   useEffect(() => {
     getProdCategories(1, "", 10);
   }, []);
+  const fieldsMap = [
+    { name: "title", required: true },
+    { name: "status", required: true },
+    { name: "product_category_id", required: true },
+    { name: "icon", required: false },
+    { name: "link", required: false },
+    { name: "description", required: false },
+  ];
+  const [fieldsWithError, setFieldsWithError] = useState({
+    description: false,
+    icon: false,
+    link: false,
+    product_category_id: false,
+    status: false,
+    title: false,
+  });
 
   const [productCategories, setProductCategories] = useState();
 
   const getProdCategories = async () => {
-     
     const loadingToastId = toast.loading("Loading..!");
 
     try {
       const result = await prodApi.getProdCategories(1, "", 1000000000000);
       if (result.error === false && result.data.status === "success") {
         toast.dismiss(loadingToastId);
-         
+
         setProductCategories(result.data.data);
-        if (prodCategoryHeadsState.isAddProdCategoryHead) {
-          setProdCategoryHeadsState({
-            ...prodCategoryHeadsState,
-            product_category_id: result.data.data[0].id,
-          });
-        }
+        // if (prodCategoryHeadsState.isAddProdCategoryHead) {
+        //   setProdCategoryHeadsState({
+        //     ...prodCategoryHeadsState,
+        //     product_category_id: result.data.data[0].id,
+        //   });
+        // }
       } else {
         toast.dismiss(loadingToastId);
         console.error(result.data);
@@ -54,53 +69,106 @@ export default function AddAndEditProdCategoryHeads({
       image: pic,
     });
   };
+  const doValidation = () => {
+    var tempFieldsWithError = {};
+    fieldsMap.forEach((fieldDetail) => {
+      console.log(prodCategoryHeadsState);
+      if (
+        prodCategoryHeadsState[fieldDetail.name] == undefined ||
+        prodCategoryHeadsState[fieldDetail.name] == ""
+      ) {
+         
+
+        if (fieldDetail.required === true) {
+          tempFieldsWithError = {
+            ...tempFieldsWithError,
+            [fieldDetail.name]: true,
+          };
+        } else if (fieldDetail.required === false) {
+          tempFieldsWithError = {
+            ...tempFieldsWithError,
+            [fieldDetail.name]: false,
+          };
+        }
+      } else if (
+        prodCategoryHeadsState[fieldDetail.name] != undefined ||
+        prodCategoryHeadsState[fieldDetail.name] != ""
+      ) {
+         
+
+        if (fieldDetail.required === true) {
+          tempFieldsWithError = {
+            ...tempFieldsWithError,
+            [fieldDetail.name]: false,
+          };
+        }
+      }
+    });
+     
+    console.log("tempFieldsWithError", tempFieldsWithError);
+    var isValidationFailed = false;
+    console.log(tempFieldsWithError);
+    setFieldsWithError(tempFieldsWithError);
+    Object.values(tempFieldsWithError).map((item) => {
+      if (item === true) {
+        isValidationFailed = true;
+      }
+    });
+    console.log("isValidationFailed", isValidationFailed);
+
+    return isValidationFailed;
+  };
 
   const addProdCategoryHead = async (params) => {
      
-    const loadingToastId = toast.loading("Loading..!");
+    if (!doValidation()) {
+      const loadingToastId = toast.loading("Loading..!");
 
-    if (prodCategoryHeadsState.isAddProdCategoryHead) {
-      try {
-        const result = await prodCategoryHeadsApi.addProdCategoryHead(
-          prodCategoryHeadsState
-        );
-        console.log(result);
-        if (result.error == false) {
-          toast.dismiss(loadingToastId);
-          toast.success("Product Category created!");
-          setProdCategoryHeadsState({
-            ...prodCategoryHeadsState,
-            isAddProdCategoryHead: false,
-            isEditProdCategoryHead: false,
-          });
-          getProdCategoryHeads(1, "", 10);
-        } else if (result.error == true) {
-          toast.dismiss(loadingToastId);
-          toast.error("failed");
+      if (prodCategoryHeadsState.isAddProdCategoryHead) {
+        try {
+          const result = await prodCategoryHeadsApi.addProdCategoryHead(
+            prodCategoryHeadsState
+          );
+          console.log(result);
+          if (result.error == false) {
+            toast.dismiss(loadingToastId);
+            toast.success("Product Category created!");
+            setProdCategoryHeadsState({
+              ...prodCategoryHeadsState,
+              isAddProdCategoryHead: false,
+              isEditProdCategoryHead: false,
+            });
+            getProdCategoryHeads(1, "", 10);
+          } else if (result.error == true) {
+            toast.dismiss(loadingToastId);
+            toast.error("failed");
+          }
+        } catch (error) {
+          console.error(error);
         }
-      } catch (error) {
-        console.error(error);
-      }
-    } else if (prodCategoryHeadsState.isEditProdCategoryHead) {
-      try {
-        const result = await prodCategoryHeadsApi.updateProdCategoryHead(
-          prodCategoryHeadsState
-        );
-        if (result.error == false) {
-          toast.success("Product Category updated!");
-          toast.dismiss(loadingToastId);
-          setProdCategoryHeadsState({
-            ...prodCategoryHeadsState,
-            isEditProdCategoryHead: false,
-          });
-          getProdCategoryHeads(1, "", 10);
+      } else if (prodCategoryHeadsState.isEditProdCategoryHead) {
+        try {
+          const result = await prodCategoryHeadsApi.updateProdCategoryHead(
+            prodCategoryHeadsState
+          );
+          if (result.error == false) {
+            toast.success("Product Category updated!");
+            toast.dismiss(loadingToastId);
+            setProdCategoryHeadsState({
+              ...prodCategoryHeadsState,
+              isEditProdCategoryHead: false,
+            });
+            getProdCategoryHeads(1, "", 10);
+          }
+        } catch (error) {
+          console.error(error);
         }
-      } catch (error) {
-        console.error(error);
       }
+    } else {
+      toast.error("Validation Failed");
     }
   };
-  console.log("asdasd", prodCategoryHeadsState);
+  console.log("prodCategoryHeadsState", prodCategoryHeadsState);
   return (
     <div className="mb-4 mt-5">
       {/* Basic Forms */}
@@ -119,6 +187,9 @@ export default function AddAndEditProdCategoryHeads({
                 <Form.Group controlId="formBasicName">
                   <Form.Label>Title</Form.Label>
                   <Form.Control
+                    className={
+                      fieldsWithError.title === true ? "border-danger" : ""
+                    }
                     defaultValue={prodCategoryHeadsState.title}
                     name="title"
                     type="text"
@@ -127,25 +198,20 @@ export default function AddAndEditProdCategoryHeads({
                   />
                 </Form.Group>
 
-                {/* <Form.Group controlId="formBasicComments">
-                  <Form.Label>Status</Form.Label>
-                  <Form.Control
-                    defaultValue={prodCategoryHeadsState.status}
-                    name="status"
-                    type="text"
-                    placeholder="Status"
-                    onChange={(e) => handleChange(e)}
-                  />
-                </Form.Group> */}
-
                 <Form.Group controlId="formGridState">
                   <Form.Label>Status</Form.Label>
                   <Form.Control
+                    className={
+                      fieldsWithError.status === true ? "border-danger" : ""
+                    }
                     as="select"
                     value={prodCategoryHeadsState.status}
                     onChange={(e) => handleChange(e)}
                     name="status"
                   >
+                    <option key="blankChoice" hidden value>
+                      -- Select Product Category --
+                    </option>
                     <option value="active">active</option>
                     <option value="passive">passive</option>
                     <option value="deleted">deleted</option>
@@ -155,20 +221,30 @@ export default function AddAndEditProdCategoryHeads({
                 <Form.Group controlId="formGridState">
                   <Form.Label>Product Category</Form.Label>
                   <Form.Control
+                    className={
+                      fieldsWithError.product_category_id === true
+                        ? "border-danger"
+                        : ""
+                    }
                     as="select"
-                    value={prodCategoryHeadsState.product_category_head_id}
                     onChange={(e) => handleChange(e)}
                     name="product_category_id"
                   >
+                    <option key="blankChoice" hidden value>
+                      -- Select Product Category --
+                    </option>
                     {productCategories &&
                       productCategories.map((item) => {
                         return (
                           <option
                             value={item.id}
                             selected={
-                              prodCategoryHeadsState.product_category_id ==
-                              item.id
+                              prodCategoryHeadsState &&
+                              prodCategoryHeadsState.product_category &&
+                              prodCategoryHeadsState.product_category.id ==
+                                item.id
                             }
+                            key={item.id}
                           >
                             {item.title}
                           </option>
@@ -180,6 +256,9 @@ export default function AddAndEditProdCategoryHeads({
                 <Form.Group controlId="formBasicComments">
                   <Form.Label>Icon</Form.Label>
                   <Form.Control
+                    className={
+                      fieldsWithError.icon === true ? "border-danger" : ""
+                    }
                     defaultValue={prodCategoryHeadsState.icon}
                     name="icon"
                     type="text"
@@ -188,10 +267,12 @@ export default function AddAndEditProdCategoryHeads({
                   />
                 </Form.Group>
 
-
                 <Form.Group controlId="formBasicComments">
                   <Form.Label>Link</Form.Label>
                   <Form.Control
+                    className={
+                      fieldsWithError.link === true ? "border-danger" : ""
+                    }
                     defaultValue={prodCategoryHeadsState.link}
                     name="link"
                     type="text"
@@ -203,6 +284,11 @@ export default function AddAndEditProdCategoryHeads({
                 <Form.Group controlId="formBasicComments">
                   <Form.Label>Description</Form.Label>
                   <Form.Control
+                    className={
+                      fieldsWithError.description === true
+                        ? "border-danger"
+                        : ""
+                    }
                     as="textarea"
                     defaultValue={prodCategoryHeadsState.description}
                     name="description"
