@@ -4,9 +4,7 @@ import * as Icon from "react-feather";
 import { Link } from "react-router-dom";
 import { isMobile } from "react-device-detect";
 import {
-  Dropdown,
   Table,
-  Badge,
   Button,
   FormControl,
   Form,
@@ -63,7 +61,6 @@ export default function Products() {
     const loadingToastId = toast.loading("Loading..!");
     try {
       const result = await productApis.deleteProduct(id);
-       
       if (result.error === false) {
         toast.dismiss(loadingToastId);
         toast.success("Successfully deleted!");
@@ -81,6 +78,10 @@ export default function Products() {
     products: null,
     originalProducts: null,
     status: "active",
+    description: '',
+    price: '',
+    location: '',
+    link: ''
   });
 
   const handleSearch = (searchString) => {
@@ -163,8 +164,10 @@ export default function Products() {
         <div className="cityPage">
             {productsState.isViewCity ? (
               <></>
-            ) : productsState.isAddProduct === true ||
-              productsState.isEditProduct === true ? (
+            ) : 
+            // productsState.isAddProduct === true ||
+            //   productsState.isEditProduct === true ? (
+            true? (
               <AddAndEditProduct
                 productsState={productsState}
                 setProductsState={setProductsState}
@@ -282,7 +285,32 @@ export default function Products() {
                                 <td>{product.location && product.location}</td>
                                 <td>{product.link && product.link}</td>
                                 <td>
-                                  {product.extra_fields && product.extra_fields}
+                                  <div>
+                                    <div className="btn btn-outline-success extraFieldsBtn relative">
+                                      Hover me to view Extra Fields
+                                      <div className="extraFieldsContainer">
+                                        <div className="popover-header bg-info">All Extra Fields</div>
+                                          <div className="popover-body">
+                                            {Object.entries(product.extra_fields).length > 0 ?
+                                              <>
+                                                {product.extra_fields && Object.entries(product.extra_fields).map((item, i) =>{
+                                                  return (
+                                                    <>
+                                                    {i+1}.<span className="ml-1"><b>{item[0]}</b></span>:
+                                                    <span className="ml-1">{item[1]}</span>
+                                                    <div></div>
+                                                    </>
+                                                  )
+                                                }
+                                                )}
+                                              </>
+                                            :
+                                              <div className="text-danger text-center">No Record Found...</div>
+                                            }
+                                          </div>
+                                      </div>
+                                    </div>
+                                  </div>
                                 </td>
                                 <td className="text-center">
                                   <Icon.Edit2
