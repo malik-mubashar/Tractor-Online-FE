@@ -55,7 +55,7 @@ class SideMenuDark extends React.Component {
                                 <NavLink 
                                     to="/signup/" 
                                     className="dropdown-item" 
-                                    target="_blank">
+                                    >
                                     <Icon.UserPlus 
                                         className="icon" 
                                     /> 
@@ -64,7 +64,7 @@ class SideMenuDark extends React.Component {
                                 <NavLink 
                                     to="/login/" 
                                     className="dropdown-item" 
-                                    target="_blank"> 
+                                    > 
                                     <Icon.UserCheck 
                                         className="icon" 
                                     /> 
@@ -73,7 +73,7 @@ class SideMenuDark extends React.Component {
                                 <NavLink 
                                     to="/forgot-password/" 
                                     className="dropdown-item" 
-                                    target="_blank">
+                                    >
                                     <Icon.Unlock 
                                         className="icon" 
                                     /> 

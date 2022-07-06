@@ -129,7 +129,7 @@ export default function AddDetails() {
                         alt="Profile Image"
                         className="d-flex justify-content-center m-auto"
                       />{" "}
-                      <a href="/main/apps" target="_blank">
+                      <a href="/main/apps" >
                         Added via Phone
                       </a>
                     </span>

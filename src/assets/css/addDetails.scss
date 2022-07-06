@@ -147,3 +147,47 @@
     width: 220px;
   }
 }
+
+.extraFieldsContainer{
+    position: absolute;
+    bottom: 0;
+    left: 195px;
+    z-index: 1070;
+    width: 250px;
+    background-color: #fff;
+    border: 1px solid rgba(0,0,0,.2);
+    border-radius: 0.3rem;
+    color: black;
+    display: none;
+
+    .popover-header {
+      padding: 0.5rem 1rem;
+      margin-bottom: 0;
+      font-size: 1rem;
+      color: white;
+      border-bottom: 1px solid rgba(0,0,0,.2);
+      border-top-left-radius: calc(0.3rem - 1px);
+      border-top-right-radius: calc(0.3rem - 1px);
+    }
+    .popover-body {
+      padding: 1rem;
+      color: #212529;
+      text-align: left;
+      span{
+        width: 90px;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+      }
+    }
+}
+.extraFieldsBtn:hover{
+  .extraFieldsContainer{
+    display: block;
+    color: black;
+  }
+}
+
+.extraFieldsContainer:hover{
+  display: block;
+}

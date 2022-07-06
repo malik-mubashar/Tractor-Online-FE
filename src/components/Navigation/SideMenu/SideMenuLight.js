@@ -37,19 +37,19 @@ class SideMenuLight extends React.Component {
                 <NavLink
                   to="/signup/"
                   className="dropdown-item"
-                  target="_blank"
+                  
                 >
                   <Icon.UserPlus className="icon" />
                   Sign Up
                 </NavLink>
-                <NavLink to="/login/" className="dropdown-item" target="_blank">
+                <NavLink to="/login/" className="dropdown-item" >
                   <Icon.UserCheck className="icon" />
                   Login
                 </NavLink>
                 <NavLink
                   to="/forgot-password/"
                   className="dropdown-item"
-                  target="_blank"
+                  
                 >
                   <Icon.Unlock className="icon" />
                   Forgot Password
@@ -71,7 +71,7 @@ class SideMenuLight extends React.Component {
 								<NavLink
                   to="/products/"
                   className="dropdown-item"
-                  target="_blank"
+                  
                 >
                   <Icon.Plus className="icon" />
                   Products
@@ -79,7 +79,7 @@ class SideMenuLight extends React.Component {
                 <NavLink
                   to="/productCategories/"
                   className="dropdown-item"
-                  target="_blank"
+                  
                 >
                   <Icon.Plus className="icon" />
                   Product Categories
@@ -87,7 +87,7 @@ class SideMenuLight extends React.Component {
                 <NavLink
                   to="/categoryBrands/"
                   className="dropdown-item"
-                  target="_blank"
+                  
                 >
                   <Icon.Plus className="icon" />
                   category Brands
@@ -95,7 +95,7 @@ class SideMenuLight extends React.Component {
                 <NavLink
                   to="/productSubCategories"
                   className="dropdown-item"
-                  target="_blank"
+                  
                 >
                   <Icon.Plus className="icon" />
                   Product Sub Categories
@@ -104,31 +104,31 @@ class SideMenuLight extends React.Component {
                 <NavLink
                   to="/productCategoryHeads/"
                   className="dropdown-item"
-                  target="_blank"
+                  
                 >
                   <Icon.Plus className="icon" />
                   Categories Head
                 </NavLink>
 
-                <NavLink to="/brands" className="dropdown-item" target="_blank">
+                <NavLink to="/brands" className="dropdown-item" >
                   <Icon.Plus className="icon" />
                   Brands
 								</NavLink>
 								
-								<NavLink to="/models" className="dropdown-item" target="_blank">
+								<NavLink to="/models" className="dropdown-item" >
                   <Icon.Plus className="icon" />
                   Models
 								</NavLink>
-								<NavLink to="/city" className="dropdown-item" target="_blank">
+								<NavLink to="/city" className="dropdown-item" >
                   <Icon.Plus className="icon" />
                   City
 								</NavLink>
-								<NavLink to="/budgets" className="dropdown-item" target="_blank">
+								<NavLink to="/budgets" className="dropdown-item" >
                   <Icon.Plus className="icon" />
                   Budgets
                 </NavLink>
 
-								<NavLink to="/roles" className="dropdown-item" target="_blank">
+								<NavLink to="/roles" className="dropdown-item" >
                   <Icon.Plus className="icon" />
                   Roles
                 </NavLink>
@@ -136,7 +136,7 @@ class SideMenuLight extends React.Component {
                 <NavLink
                   to="/country"
                   className="dropdown-item"
-                  target="_blank"
+                  
                 >
                   <Icon.Plus className="icon" />
                   Country
@@ -145,7 +145,7 @@ class SideMenuLight extends React.Component {
                 <NavLink
                   to="/languages/"
                   className="dropdown-item"
-                  target="_blank"
+                  
                 >
                   <Icon.Plus className="icon" />
                   Languages
@@ -154,7 +154,7 @@ class SideMenuLight extends React.Component {
 								<NavLink
                   to="/userRoles/"
                   className="dropdown-item"
-                  target="_blank"
+                  
                 >
                   <Icon.Plus className="icon" />
                   User Roles
