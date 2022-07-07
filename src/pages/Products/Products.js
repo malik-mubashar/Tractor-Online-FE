@@ -328,7 +328,8 @@ export default function Products() {
                                         title: product.title,
                                         status: product.status,
                                         description: product.description,
-                                        featured: product.featured,
+																				featured: product.featured,
+																				extra_fields:product.extra_fields,
 																				productId: product.id,
 																				brand: product.brand,
 																				brand_id:product.brand_id

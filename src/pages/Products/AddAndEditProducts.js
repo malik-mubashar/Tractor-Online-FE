@@ -4,18 +4,26 @@ import toast, { Toaster } from "react-hot-toast";
 import { productApis } from "../../API/ProductApis";
 import { brandApis } from "../../API/BrandsApis";
 import Icofont from "react-icofont";
+import { object } from "prop-types";
 
 export default function AddAndEditProduct({
   productsState,
   setProductsState,
   getProducts,
 }) {
-  const [extraFieldsArr, setExtraFieldsArr] = useState([0]);
+  const [extraFieldsArr, setExtraFieldsArr] = useState([
+    {
+      id: parseInt(
+        new Date().getTime().toString() + Math.floor(Math.random() * 1000000)
+      ),
+      key: null,
+      value: null,
+    },
+  ]);
   const [extraFields, setExtraFields] = useState([]);
   const [brands, setBrands] = useState();
 
-	function handleChange(evt) {
-		 
+  function handleChange(evt) {
     setProductsState({
       ...productsState,
       [evt.target.name]: evt.target.value,
@@ -32,20 +40,6 @@ export default function AddAndEditProduct({
     console.log(ImagesArray);
     setFile([...ImagesArray]);
     console.log("file", file);
-
-    // let tempArr= [];
-    //
-    // let ImagesArray = Object.entries(e.target.files).map((e) => {
-
-    //   tempArr.push(e[1]);
-    // });
-    // console.log(ImagesArray);
-    // setFile([...file, ...ImagesArray]);
-    // console.log("file", file);
-    // setProductsState({
-    //   ...productsState,
-    //   images: [...file, ...ImagesArray],
-    // });
     setProductsState({
       ...productsState,
       images: e.target.files,
@@ -54,6 +48,23 @@ export default function AddAndEditProduct({
   useEffect(() => {
     getBrands(1, "", 100000000);
   }, []);
+
+  useEffect(() => {
+    if (productsState.isEditProduct === true) {
+      if (Object.entries(productsState.extra_fields).length > 0) {
+        let tempExtraFieldsArr = [];
+        Object.entries(productsState.extra_fields).forEach((item, i) => {
+          tempExtraFieldsArr.push({
+            id: new Date().getTime().toString() + Math.floor(Math.random() * 1000000),
+            key: item[0],
+            value: item[1],
+          });
+        });
+        debugger;
+        setExtraFieldsArr(tempExtraFieldsArr);
+      }
+    }
+  }, [productsState.extra_fields]);
   const getBrands = async (page, mainSearch, noOfRec) => {
     const loadingToastId = toast.loading("Loading..!");
 
@@ -71,11 +82,6 @@ export default function AddAndEditProduct({
       console.error(error);
     }
   };
-
-  function upload(e) {
-    e.preventDefault();
-    console.log(file);
-  }
 
   function deleteFile(e) {
     const s = file.filter((item, index) => index !== e);
@@ -107,13 +113,13 @@ export default function AddAndEditProduct({
   }
   const getExtraFieldData = () => {
     let extraFieldsObj = {};
-    extraFields.forEach((item) => {
+    extraFieldsArr.forEach((item) => {
       extraFieldsObj = {
         ...extraFieldsObj,
         [item.key]: item.value,
       };
     });
-    console.log("extraFieldsObj", extraFieldsObj);
+    console.log("..extraFieldsObj..", extraFieldsObj);
     return extraFieldsObj;
   };
   const addProduct = async (params) => {
@@ -133,7 +139,7 @@ export default function AddAndEditProduct({
     formData.append("location", productsState.location);
     formData.append("link", productsState.link);
     formData.append("extra_fields", JSON.stringify(extraFieldsData));
-    formData.append("brand_id", 1);
+    // formData.append("brand_id", 1);
     formData.append("cover_photo", productsState.cover_photo);
     formData.append("featured", productsState.featured);
     formData.append("brand_id", productsState.brand_id);
@@ -154,15 +160,14 @@ export default function AddAndEditProduct({
             isEditProduct: false,
           });
           getProducts(1, "", 10);
-				}
-				if (result.error === true) {
-					toast.dismiss(loadingToastId);
-          toast.error('error');
-
-				}
-			} catch (error) {
-				toast.dismiss(loadingToastId);
-				toast.error('error')
+        }
+        if (result.error === true) {
+          toast.dismiss(loadingToastId);
+          toast.error("error");
+        }
+      } catch (error) {
+        toast.dismiss(loadingToastId);
+        toast.error("error");
         console.error(error);
       }
     } else if (productsState.isEditProduct) {
@@ -177,88 +182,83 @@ export default function AddAndEditProduct({
           });
           getProducts(1, "", 10);
         }
-			} catch (error) {
-				toast.dismiss(loadingToastId);
-				toast.error('error')
+      } catch (error) {
+        toast.dismiss(loadingToastId);
+        toast.error("error");
         console.error(error);
       }
     }
   };
 
   function addExtraFields(e) {
+    let idThatNeverRepeat = parseInt(
+      new Date().getTime().toString() + Math.floor(Math.random() * 1000000)
+    );
     var arr = [...extraFieldsArr];
-    arr.push(1);
+    arr.push({
+      id: idThatNeverRepeat,
+      key: null,
+      value: null,
+    });
     setExtraFieldsArr(arr);
   }
 
-  function removeExtraFields(e, i) {
+  function removeExtraFields(e, id) {
     var arr = [...extraFieldsArr];
-    var tempArr = [...extraFields];
-
-     
-
-    setExtraFields(
-      tempArr.filter((item) => {
-        return item.index != i;
-      })
-    );
     setExtraFieldsArr(
-      arr.filter((item,index) => {
-        return index != i;
+      arr.filter((item, index) => {
+        return item.id != id;
       })
     );
   }
-  const handleExtraField = (e, index) => {
-    // console.log(change from)
-    let tempIndexes = [...extraFields];
-    if (e.target.name == "extra_fields_key") {
-      let ifExist = tempIndexes.filter((item) => {
-        return item.index == index;
+  //////////////////////////////////
+	const handleExtraField = (event, id) => {
+		debugger;
+    let tempExtraFieldsArr = [...extraFieldsArr];
+    if (event.target.name == "extra_fields_key") {
+      let found = false;
+      tempExtraFieldsArr.map((item) => {
+        if (item.id == id) {
+          item.key = event.target.value;
+          found = true;
+        }
       });
-       
-      if (ifExist.length > 0) {
-        ifExist[0].key = e.target.value;
-        var removedIfExist = tempIndexes.filter((item) => {
-          return item.index != index;
-        });
-        removedIfExist.push(ifExist[0]);
-        setExtraFields(removedIfExist);
-      } else {
-        //when first time
-         
-        tempIndexes.push({
-          index: index,
-          key: e.target.value,
+      if (found === false) {
+        let idThatNeverRepeat = parseInt(
+          new Date().getTime().toString() + Math.floor(Math.random() * 1000000)
+        );
+        tempExtraFieldsArr.push({
+          id: idThatNeverRepeat,
+          key: event.target.value,
           value: null,
         });
-        setExtraFields(tempIndexes);
       }
-    } else if (e.target.name == "extra_fields_value") {
-      let ifExist = tempIndexes.filter((item) => {
-        return item.index == index;
+			setExtraFieldsArr(tempExtraFieldsArr);
+    } else if (event.target.name == "extra_fields_value") {
+      let found = false;
+      tempExtraFieldsArr.map((item) => {
+        if (item.id == id) {
+          item.value = event.target.value;
+          found = true;
+        }
       });
-       
-      if (ifExist.length > 0) {
-        ifExist[0]["value"] = e.target.value;
-        var removedIfExist = tempIndexes.filter((item) => {
-          return item.index != index;
-        });
-        removedIfExist.push(ifExist[0]);
-        setExtraFields(removedIfExist);
-      } else {
-        tempIndexes.push({
-          index: index,
+      if (found === false) {
+        let idThatNeverRepeat = parseInt(
+          new Date().getTime().toString() + Math.floor(Math.random() * 1000000)
+        );
+        tempExtraFieldsArr.push({
+          id: idThatNeverRepeat,
           key: null,
-          value: e.target.value,
+          value: event.target.value,
         });
-        setExtraFields(tempIndexes);
       }
+			setExtraFieldsArr(tempExtraFieldsArr);
     }
   };
-  // console.log("extraFieldsArr", extraFieldsArr);
-  // console.log("extraFields", extraFields);
-  console.log("prodState", productsState);
-  console.log("brand", brands);
+
+  console.log("extraFieldsArr", extraFieldsArr);
+  // console.log("prodState", productsState);
+  // console.log("brand", brands);
   return (
     <div className="mb-4">
       {/* Basic Forms */}
@@ -321,8 +321,8 @@ export default function AddAndEditProduct({
                     placeholder="link"
                     onChange={(e) => handleChange(e)}
                   />
-								</Form.Group>
-								<Form.Group controlId="formGridState">
+                </Form.Group>
+                <Form.Group controlId="formGridState">
                   <Form.Label>Product Brand</Form.Label>
                   <Form.Control
                     // className={
@@ -345,8 +345,7 @@ export default function AddAndEditProduct({
                             selected={
                               productsState &&
                               productsState.brand &&
-                              productsState.brand.id ==
-                                item.id
+                              productsState.brand.id == item.id
                             }
                             key={item.id}
                           >
@@ -356,34 +355,6 @@ export default function AddAndEditProduct({
                       })}
                   </Form.Control>
                 </Form.Group>
-                {/* <Form.Group controlId="formGridState">
-                  <Form.Label>Select Brand</Form.Label>
-                  <Form.Control
-                    as="select"
-                    onChange={(e) => handleChange(e)}
-                    name="brand_id"
-                  >
-                    <option key="blankChoice" hidden value>
-                      -- Select Brand --
-                    </option>
-                    {brands &&
-                      brands.map((item) => {
-                        return (
-                          <option
-                            key={item.id}
-                            selected={
-                              productsState &&
-                              productsState.brand &&
-                              productsState.brand.id == item.id
-                            }
-                            value={item.id}
-                          >
-                            {item.title}
-                          </option>
-                        );
-                      })}
-                  </Form.Control>
-                </Form.Group> */}
                 <Form.Group controlId="formGridproduct">
                   <Form.Label>Product Type</Form.Label>
                   <Form.Control
@@ -398,26 +369,26 @@ export default function AddAndEditProduct({
                     <option value="upcoming">Upcoming</option>
                     <option value="newly_launched">Newly Launched</option>
                   </Form.Control>
-								</Form.Group>
-								<Form.Group className="d-flex" controlId="formGridproduct">
+                </Form.Group>
+                <Form.Group className="d-flex" controlId="formGridproduct">
                   <Form.Label>Is Featured</Form.Label>
                   <Form.Check
                     type="checkbox"
                     className="ml-3"
-										defaultChecked={productsState&&productsState.featured==true?true:false}
+                    defaultChecked={
+                      productsState && productsState.featured == true
+                        ? true
+                        : false
+                    }
                     // value={productsState.product_type}
-										onChange={(e) => {
-											setProductsState({
+                    onChange={(e) => {
+                      setProductsState({
                         ...productsState,
                         featured: e.currentTarget.checked,
-                      })
-										}
-										
-										}
+                      });
+                    }}
                     name="featured"
-                  >
-                 
-                  </Form.Check>
+                  ></Form.Check>
                 </Form.Group>
                 <Form.Group controlId="formGridState">
                   <Form.Label>Status</Form.Label>
@@ -451,7 +422,7 @@ export default function AddAndEditProduct({
                             icon="close text-danger float-right mt-2 pt-4 cursor-pointer"
                             className="icofont-2x"
                             value={i}
-                            onClick={(e) => removeExtraFields(e, i)}
+                            onClick={(e) => removeExtraFields(e, item.id)}
                           />
                         </div>
                         <div className="row">
@@ -464,10 +435,11 @@ export default function AddAndEditProduct({
                                 Add extra Product heading.
                               </Form.Label>
                               <Form.Control
-                                onChange={(e) => handleExtraField(e, i)}
+                                onChange={(e) => handleExtraField(e, item.id)}
                                 name="extra_fields_key"
                                 type="text"
                                 placeholder="Add product heading...."
+                                value={item && item.key}
                               />
                             </Form.Group>
                           </div>
@@ -480,8 +452,8 @@ export default function AddAndEditProduct({
                                 Add extra Product information.
                               </Form.Label>
                               <Form.Control
-                                // disabled={extraFields.filter(item => item.index ==i).length < 0}
-                                onChange={(e) => handleExtraField(e, i)}
+                                value={item && item.value}
+                                onChange={(e) => handleExtraField(e, item.id)}
                                 name="extra_fields_value"
                                 type="text"
                                 placeholder="Add product information...."
