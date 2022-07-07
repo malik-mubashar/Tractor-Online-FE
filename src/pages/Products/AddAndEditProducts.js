@@ -121,7 +121,7 @@ export default function AddAndEditProduct({
     const loadingToastId = toast.loading("Loading..!");
     let formData = new FormData();
      
-    if (!productsState.images === undefined) {
+    if (productsState.images !== undefined) {
       for (const key of Object.keys(productsState.images)) {
         formData.append("active_images[]", productsState.images[key]);
       }
@@ -137,7 +137,7 @@ export default function AddAndEditProduct({
     formData.append("cover_photo", productsState.cover_photo);
     formData.append("featured", productsState.featured);
     formData.append("brand_id", productsState.brand_id);
-    if (!productsState.product_type === undefined) {
+    if (productsState.product_type !== undefined) {
       formData.append("product_type", productsState.product_type);
     }
 
