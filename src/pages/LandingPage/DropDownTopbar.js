@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 import { useHistory } from "react-router-dom";
 
 
-export default function DropDown({
+export default function DropDownTopbar({
   title,
   usedCars,
   newCars,
@@ -51,9 +51,9 @@ console.log("productHead ", productHead)
 
   return (
     <div>
-      <div className={`${!dropDownIcon ? " dropdown-button p-1" : "p-1"}`}>
-        {title}
-          {/* { productHead.length > 0? 
+      <div className={`${!dropDownIcon ? " dropdown-button p-1" : "p-1"}`} title={title}>
+        <span className="truncate-topbar">{title}</span>
+          { productHead.length > 0? 
             (
               <>
                 <Icon.ChevronDown className="icon" height="15px" width="15px" />
@@ -61,7 +61,7 @@ console.log("productHead ", productHead)
             )
             :
             null
-          } */}
+          }
         {productHead.length > 0 && <div
           className={`drop-down-items row py-3 ${
             usedCars || productHead ? "usedCarsWidth" : ""

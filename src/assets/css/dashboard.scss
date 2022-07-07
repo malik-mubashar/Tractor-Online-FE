@@ -211,8 +211,10 @@
 .dropdown-button {
   position: relative;
   cursor: pointer;
+  display: flex;
 }
 .dropdown-button:hover {
+  display: block;
   .drop-down-items {
     display: flex;
   }
