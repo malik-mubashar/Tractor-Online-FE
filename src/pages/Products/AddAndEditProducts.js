@@ -14,7 +14,8 @@ export default function AddAndEditProduct({
   const [extraFields, setExtraFields] = useState([]);
   const [brands, setBrands] = useState();
 
-  function handleChange(evt) {
+	function handleChange(evt) {
+		 
     setProductsState({
       ...productsState,
       [evt.target.name]: evt.target.value,
@@ -119,7 +120,7 @@ export default function AddAndEditProduct({
     let extraFieldsData = getExtraFieldData();
     const loadingToastId = toast.loading("Loading..!");
     let formData = new FormData();
-    debugger;
+     
     if (!productsState.images === undefined) {
       for (const key of Object.keys(productsState.images)) {
         formData.append("active_images[]", productsState.images[key]);
@@ -134,6 +135,8 @@ export default function AddAndEditProduct({
     formData.append("extra_fields", JSON.stringify(extraFieldsData));
     formData.append("brand_id", 1);
     formData.append("cover_photo", productsState.cover_photo);
+    formData.append("featured", productsState.featured);
+    formData.append("brand_id", productsState.brand_id);
     if (!productsState.product_type === undefined) {
       formData.append("product_type", productsState.product_type);
     }
@@ -151,8 +154,15 @@ export default function AddAndEditProduct({
             isEditProduct: false,
           });
           getProducts(1, "", 10);
-        }
-      } catch (error) {
+				}
+				if (result.error === true) {
+					toast.dismiss(loadingToastId);
+          toast.error('error');
+
+				}
+			} catch (error) {
+				toast.dismiss(loadingToastId);
+				toast.error('error')
         console.error(error);
       }
     } else if (productsState.isEditProduct) {
@@ -167,7 +177,9 @@ export default function AddAndEditProduct({
           });
           getProducts(1, "", 10);
         }
-      } catch (error) {
+			} catch (error) {
+				toast.dismiss(loadingToastId);
+				toast.error('error')
         console.error(error);
       }
     }
@@ -183,7 +195,7 @@ export default function AddAndEditProduct({
     var arr = [...extraFieldsArr];
     var tempArr = [...extraFields];
 
-    debugger;
+     
 
     setExtraFields(
       tempArr.filter((item) => {
@@ -203,7 +215,7 @@ export default function AddAndEditProduct({
       let ifExist = tempIndexes.filter((item) => {
         return item.index == index;
       });
-      debugger;
+       
       if (ifExist.length > 0) {
         ifExist[0].key = e.target.value;
         var removedIfExist = tempIndexes.filter((item) => {
@@ -213,7 +225,7 @@ export default function AddAndEditProduct({
         setExtraFields(removedIfExist);
       } else {
         //when first time
-        debugger;
+         
         tempIndexes.push({
           index: index,
           key: e.target.value,
@@ -225,7 +237,7 @@ export default function AddAndEditProduct({
       let ifExist = tempIndexes.filter((item) => {
         return item.index == index;
       });
-      debugger;
+       
       if (ifExist.length > 0) {
         ifExist[0]["value"] = e.target.value;
         var removedIfExist = tempIndexes.filter((item) => {
@@ -244,7 +256,9 @@ export default function AddAndEditProduct({
     }
   };
   // console.log("extraFieldsArr", extraFieldsArr);
-  console.log("extraFields", extraFields);
+  // console.log("extraFields", extraFields);
+  console.log("prodState", productsState);
+  console.log("brand", brands);
   return (
     <div className="mb-4">
       {/* Basic Forms */}
@@ -307,6 +321,40 @@ export default function AddAndEditProduct({
                     placeholder="link"
                     onChange={(e) => handleChange(e)}
                   />
+								</Form.Group>
+								<Form.Group controlId="formGridState">
+                  <Form.Label>Product Brand</Form.Label>
+                  <Form.Control
+                    // className={
+                    //   fieldsWithError.product_category_id === true
+                    //     ? "border-danger"
+                    //     : ""
+                    // }
+                    as="select"
+                    onChange={(e) => handleChange(e)}
+                    name="brand_id"
+                  >
+                    <option key="blankChoice" hidden value>
+                      -- Select Product Brand --
+                    </option>
+                    {brands &&
+                      brands.map((item) => {
+                        return (
+                          <option
+                            value={item.id}
+                            selected={
+                              productsState &&
+                              productsState.brand &&
+                              productsState.brand.id ==
+                                item.id
+                            }
+                            key={item.id}
+                          >
+                            {item.title}
+                          </option>
+                        );
+                      })}
+                  </Form.Control>
                 </Form.Group>
                 {/* <Form.Group controlId="formGridState">
                   <Form.Label>Select Brand</Form.Label>
@@ -350,6 +398,25 @@ export default function AddAndEditProduct({
                     <option value="upcoming">Upcoming</option>
                     <option value="newly_launched">Newly Launched</option>
                   </Form.Control>
+								</Form.Group>
+								<Form.Group controlId="formGridproduct">
+                  <Form.Label>Is Featured</Form.Label>
+                  <Form.Check
+                    type="checkbox"
+										defaultChecked={productsState&&productsState.featured==true?true:false}
+                    // value={productsState.product_type}
+										onChange={(e) => {
+											setProductsState({
+                        ...productsState,
+                        featured: e.currentTarget.checked,
+                      })
+										}
+										
+										}
+                    name="featured"
+                  >
+                 
+                  </Form.Check>
                 </Form.Group>
                 <Form.Group controlId="formGridState">
                   <Form.Label>Status</Form.Label>

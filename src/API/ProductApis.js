@@ -38,7 +38,6 @@ class Products {
       });
   };
   updateProduct = async (productsState, formData) => {
-    debugger
     return axios({
       method: "put",
       url: `${process.env.REACT_APP_API_LOCAL_PATH}products/${productsState.productId}`,
@@ -67,7 +66,6 @@ class Products {
       });
   };
 	addProduct = async (productsState,formData) => {
-   debugger
 
     return axios({
       method: "post",
@@ -101,7 +99,6 @@ class Products {
   };
 
 	getProducts = async (page, searchString, noOfRec) => {
-		 
     return axios({
       method: "get",
       url: `${process.env.REACT_APP_API_LOCAL_PATH}products?page=${page}&q%5Btitle_or_status_or_description_or_location_cont%5D=${searchString}&no_of_record=${noOfRec}`,
