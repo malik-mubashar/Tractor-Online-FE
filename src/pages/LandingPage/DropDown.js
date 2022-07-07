@@ -45,7 +45,6 @@ export default function DropDown({
     },
   ];
 
-  debugger
 console.log(cities)
 console.log("productHead ", productHead)
 
