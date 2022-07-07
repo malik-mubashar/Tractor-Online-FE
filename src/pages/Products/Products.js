@@ -140,14 +140,12 @@ export default function Products() {
   };
 
 	const handleGetCsv = async () => {
-		 
     const loadingToastId = toast.loading("Loading..!");
     try {
       const result = await productApis.getProductsCsv(mainSearchString);
-       
       if (result.error === false) {
         toast.dismiss(loadingToastId);
-         
+
         window.open(`${result.data.file_path}`, "_blank");
       } else {
         toast.dismiss(loadingToastId);
@@ -166,7 +164,7 @@ export default function Products() {
         <div className="cityPage">
             {productsState.isViewCity ? (
               <></>
-            ) : 
+            ) :
             productsState.isAddProduct === true ||
               productsState.isEditProduct === true ? (
             // true? (
@@ -297,7 +295,7 @@ export default function Products() {
                                       <div className="extraFieldsContainer">
                                         <div className="popover-header bg-info">All Extra Fields</div>
                                           <div className="popover-body">
-                                            {Object.entries(product.extra_fields).length > 0 ?
+                                            {product.extra_fields && Object.entries(product.extra_fields).length > 0 ?
                                               <>
                                                 {product.extra_fields && Object.entries(product.extra_fields).map((item, i) =>{
                                                   return (
