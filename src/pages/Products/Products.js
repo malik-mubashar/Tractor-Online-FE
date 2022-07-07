@@ -16,6 +16,7 @@ import AddAndEditProduct from "./AddAndEditProducts";
 import { productApis } from "../../API/ProductApis";
 import csvSvg from "../../assets/svg/csv2.svg";
 import pdfSvg from "../../assets/svg/pdf.svg";
+import { brandApis } from "../../API/BrandsApis";
 
 export default function Products() {
   const [paginationNumbers, setPaginationNumbers] = useState();
@@ -25,15 +26,17 @@ export default function Products() {
     getProducts(1, "", 10);
   }, []);
 
+ 
   const getProducts = async (page, mainSearch, noOfRec) => {
     const loadingToastId = toast.loading("Loading..!");
 
     console.log(page);
     try {
-      const result = await productApis.getProducts(page, mainSearch, noOfRec);
+			const result = await productApis.getProducts(page, mainSearch, noOfRec);
+			 
       if (result.error == false && result.data.status == "success") {
         toast.dismiss(loadingToastId);
-
+				 
         setProductsState({
           ...productsState,
           products: result.data.data,
@@ -157,7 +160,6 @@ export default function Products() {
   };
 
   console.log("productsState in index", productsState);
-  console.log("productsState in index", noOfRec);
   return (
     <>
       <>
@@ -165,9 +167,9 @@ export default function Products() {
             {productsState.isViewCity ? (
               <></>
             ) : 
-            // productsState.isAddProduct === true ||
-            //   productsState.isEditProduct === true ? (
-            true? (
+            productsState.isAddProduct === true ||
+              productsState.isEditProduct === true ? (
+            // true? (
               <AddAndEditProduct
                 productsState={productsState}
                 setProductsState={setProductsState}
@@ -265,6 +267,8 @@ export default function Products() {
                             <th>Status</th>
                             <th>Description</th>
                             <th>Price</th>
+                            <th>featured</th>
+                            <th>Brand</th>
                             <th>Location</th>
                             <th>Link</th>
                             <th>Extra Fields</th>
@@ -282,6 +286,8 @@ export default function Products() {
                                   {product.description && product.description}
                                 </td>
                                 <td>{product.price && product.price}</td>
+                                <td>{product.featured && product.featured?'YES':''}</td>
+                                <td>{product && product.brand && product.brand.title}</td>
                                 <td>{product.location && product.location}</td>
                                 <td>{product.link && product.link}</td>
                                 <td>
@@ -322,7 +328,10 @@ export default function Products() {
                                         title: product.title,
                                         status: product.status,
                                         description: product.description,
-                                        productId: product.id,
+                                        featured: product.featured,
+																				productId: product.id,
+																				brand: product.brand,
+																				brand_id:product.brand_id
                                       });
                                     }}
                                     className="text-success mr-2 icon wh-15 mt-minus-3"
