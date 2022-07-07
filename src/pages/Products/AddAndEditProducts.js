@@ -399,10 +399,11 @@ export default function AddAndEditProduct({
                     <option value="newly_launched">Newly Launched</option>
                   </Form.Control>
 								</Form.Group>
-								<Form.Group controlId="formGridproduct">
+								<Form.Group className="d-flex" controlId="formGridproduct">
                   <Form.Label>Is Featured</Form.Label>
                   <Form.Check
                     type="checkbox"
+                    className="ml-3"
 										defaultChecked={productsState&&productsState.featured==true?true:false}
                     // value={productsState.product_type}
 										onChange={(e) => {
