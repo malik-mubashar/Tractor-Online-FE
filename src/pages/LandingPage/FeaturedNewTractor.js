@@ -19,21 +19,21 @@ export default function FeaturedNewTractor({ title, link }) {
   },[])
 
   const handleGetNewProducts = async () => {
-    const result = await productApis.getNewProducts('newly_launched');
+    const result = await productApis.getNewProducts('newly_launched', true);
     if (result.error === false) {
       setProducts(result.data && result.data.data);
       console.log("products", result.data && result.data.data);
     }
   };
   const handleGetUpcomingProducts = async () => {
-    const result = await productApis.getUpcomingProducts('upcoming');
+    const result = await productApis.getUpcomingProducts('upcoming', true);
     if (result.error === false) {
       setUpcomingProducts(result.data && result.data.data);
       console.log("upcomingproducts", result.data && result.data.data);
     }
   };
   const handleGetPopularProducts = async () => {
-    const result = await productApis.getPopularProducts('popular');
+    const result = await productApis.getPopularProducts('popular', true);
     if (result.error === false) {
       setPopularProducts(result.data && result.data.data);
       console.log("popularproducts", result.data && result.data.data);

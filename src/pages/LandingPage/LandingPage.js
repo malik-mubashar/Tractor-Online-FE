@@ -12,6 +12,8 @@ import TractorSaleAd from "./TractorSale";
 import { city } from "../../API/City/CityApis";
 import toast from "react-hot-toast";
 import { brandApis } from "../../API/BrandsApis";
+import FeaturedTractor from "./FeaturedTractor";
+
 
 const LandingPage = () => {
   const [cities, setCities] = useState([]);
@@ -99,7 +101,7 @@ console.log('cities',cities)
         </div>
         <div className="bg-white">
           <div className="container-lg py-4">
-            <FeaturedProducts
+            <FeaturedTractor
               title="Used Tractor For Sale Featured"
               link="See all of the featured used tractors."
             />
