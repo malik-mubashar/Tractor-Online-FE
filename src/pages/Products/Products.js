@@ -269,6 +269,7 @@ export default function Products() {
                             <th>Brand</th>
                             <th>Location</th>
                             <th>Link</th>
+                            <th>Product Type</th>
                             <th>Extra Fields</th>
                             <th className="text-center">Action</th>
                           </tr>
@@ -288,6 +289,7 @@ export default function Products() {
                                 <td>{product && product.brand && product.brand.title}</td>
                                 <td>{product.location && product.location}</td>
                                 <td>{product.link && product.link}</td>
+                                <td>{product.product_type && product.product_type}</td>
                                 <td>
                                   <div>
                                     <div className="btn btn-outline-success extraFieldsBtn relative">

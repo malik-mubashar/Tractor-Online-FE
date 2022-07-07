@@ -123,11 +123,11 @@ class Products {
         };
       });
 	};
-  getAllProducts = async (feature) => {
+  getAllProducts = async (featured) => {
 		 
     return axios({
       method: "get",
-      url: `${process.env.REACT_APP_API_LOCAL_PATH}get_products?feature=${feature}`,
+      url: `${process.env.REACT_APP_API_LOCAL_PATH}get_products?featured=${featured}`,
       headers: Headers
     })
       .then((result) => {
@@ -143,11 +143,11 @@ class Products {
         };
       });
 	};
-	getNewProducts = async (newly_launched,feature) => {
+	getNewProducts = async (newly_launched,featured) => {
 		 
     return axios({
       method: "get",
-      url: `${process.env.REACT_APP_API_LOCAL_PATH}get_products?product_type=${newly_launched}&feature=${feature}`,
+      url: `${process.env.REACT_APP_API_LOCAL_PATH}get_products?product_type=${newly_launched}&featured=${featured}`,
       headers: Headers
     })
       .then((result) => {
@@ -163,11 +163,11 @@ class Products {
         };
       });
 	};
-  getUsedProducts = async (used,feature) => {
+  getUsedProducts = async (used,featured) => {
 		 
     return axios({
       method: "get",
-      url: `${process.env.REACT_APP_API_LOCAL_PATH}get_products?product_type=${used}&feature=${feature}`,
+      url: `${process.env.REACT_APP_API_LOCAL_PATH}get_products?product_type=${used}&featured=${featured}`,
       headers: Headers
     })
       .then((result) => {
@@ -183,11 +183,11 @@ class Products {
         };
       });
 	};
-  getPopularProducts = async (popular, feature) => {
+  getPopularProducts = async (popular, featured) => {
 		 
     return axios({
       method: "get",
-      url: `${process.env.REACT_APP_API_LOCAL_PATH}get_products?product_type=${popular}&feature=${feature}`,
+      url: `${process.env.REACT_APP_API_LOCAL_PATH}get_products?product_type=${popular}&featured=${featured}`,
       headers: Headers
     })
       .then((result) => {
@@ -203,11 +203,11 @@ class Products {
         };
       });
 	};
-  getFeaturedProducts = async (featured , feature) => {
+  getFeaturedProducts = async (feature , featured) => {
 		 
     return axios({
       method: "get",
-      url: `${process.env.REACT_APP_API_LOCAL_PATH}get_products?product_type=${featured}&feature=${feature}`,
+      url: `${process.env.REACT_APP_API_LOCAL_PATH}get_products?product_type=${feature}&featured=${featured}`,
       headers: Headers
     })
       .then((result) => {
@@ -223,11 +223,11 @@ class Products {
         };
       });
 	};
-  getUpcomingProducts = async (upcoming,feature) => {
+  getUpcomingProducts = async (upcoming,featured) => {
 		 
     return axios({
       method: "get",
-      url: `${process.env.REACT_APP_API_LOCAL_PATH}get_products?product_type=${upcoming}&feature=${feature}`,
+      url: `${process.env.REACT_APP_API_LOCAL_PATH}get_products?product_type=${upcoming}&featured=${featured}`,
       headers: Headers
     })
       .then((result) => {
