@@ -149,7 +149,6 @@ export default function DropDown({
       icon: "recycle",
     },
   ];
-  debugger
 console.log(cities)
 console.log("productHead ", productHead)
 

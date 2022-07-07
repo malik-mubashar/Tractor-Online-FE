@@ -4,10 +4,11 @@ import { Col, Tabs, Tab, Image } from "react-bootstrap";
 import { useHistory } from "react-router-dom";
 import { city } from "../../API/City/CityApis";
 
-export default function Categories({ brands }) {
+export default function Categories({ brands, brandsForCategories }) {
   let history = useHistory();
   const [index, setIndex] = useState(0);
   const [cities, setCities] = useState();
+  const [citiesForCarousel, setCitiesForCarousel] = useState();
 
   useEffect(() => {
     handleGetAllCities();
@@ -15,11 +16,18 @@ export default function Categories({ brands }) {
 
   const handleGetAllCities = async () => {
     const result = await city.getPopularCity("popular");
-
+		debugger;
     if (result.error === false) {
       setCities(result.data && result.data.data);
       console.log("cities", result.data && result.data.data);
-    }
+		}
+		let tempArr = [];
+				const chunkSize =12
+        for (let i = 0; i < result.data.data.length; i += chunkSize) {
+          const chunk = result.data.data.slice(i, i + chunkSize);
+          tempArr.push(chunk);
+				}
+        setCitiesForCarousel(tempArr)
   };
 
   return (
@@ -33,11 +41,11 @@ export default function Categories({ brands }) {
               <Tabs defaultActiveKey="Make" id="uncontrolled-tab-example">
                 <Tab eventKey="Make" title="Make">
                   <Carousel>
-                    {brands &&
-                      brands.map((item) => (
+                    {brandsForCategories &&
+                      brandsForCategories.map((item) => (
                         <Carousel.Item>
                           <ul className="browse-listing row p-0">
-                            {brands.map((item2) => (
+                            {item.map((item2) => (
                               <>
                                 <li
                                   className="col-4 col-lg-2 mt-4"
@@ -66,24 +74,28 @@ export default function Categories({ brands }) {
 
                 <Tab eventKey="City" title="City">
                   <Carousel>
-                    <Carousel.Item>
-                      <ul className="browse-listing row p-0">
-                        {cities &&
-                          cities.map((option) => (
-                            <li
+									{citiesForCarousel &&
+                      citiesForCarousel.map((item) => (
+                        <Carousel.Item>
+                          <ul className="browse-listing row p-0">
+                            {item.map((item2) => (
+                              <>
+                                <li
                               className="col-4 col-lg-2 p-3 text-center"
-                              key={option.id}
+                              key={item2.id}
                             >
                               <a
                                 className="text-dark"
                                 onClick={() => history.push("/")}
                               >
-                                {option.title}
+                                {item2.title}
                               </a>
                             </li>
-                          ))}
-                      </ul>
-                    </Carousel.Item>
+                              </>
+                            ))}
+                          </ul>
+                        </Carousel.Item>
+                      ))}
                   </Carousel>
                 </Tab>
               </Tabs>
