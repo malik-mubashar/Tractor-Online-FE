@@ -191,3 +191,10 @@
 .extraFieldsContainer:hover{
   display: block;
 }
+
+.truncate-topbar{
+  width: 90px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}

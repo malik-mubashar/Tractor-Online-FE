@@ -3,7 +3,7 @@ import React, { useEffect, useState } from "react";
 import "../../components/Navigation/Navigation.css";
 import { Navbar, Nav, Image } from "react-bootstrap";
 import { useHistory } from "react-router-dom";
-import DropDown from "./DropDown";
+import DropDownTopbar from "./DropDownTopbar";
 import "../Categories/SideMenue.css";
 import Logo from "../../assets/img/tractoronline.png";
 import { PRODUCT_CATEGORY } from "../../API/Products/product-category";
@@ -51,18 +51,12 @@ const Topbar = () => {
           productCategories.map((item, i) => {
             return (
               <>
-                <DropDown
+                <DropDownTopbar
                   title={item.title}
                   productHead={item.product_category_heads}
                   cities={cities}
                   brands={item.category_brands}
                 />
-                {/* <DropDown title="New Tractors" newCars={true} />
-        <DropDown title="Auto Stores" autoStore={true} />
-        <div className="dropdown-button p-2">New Farming Equipment</div>
-        <div className="dropdown-button p-2">Accessories & Parts</div>
-        <div className="dropdown-button p-2">Fertilizers & seeds</div>
-        <div className="dropdown-button p-2">Plants & Horticulture</div> */}
               </>
             );
           })}
