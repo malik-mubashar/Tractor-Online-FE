@@ -67,7 +67,7 @@ const Topbar = () => {
           })}
 
           <div className="dropdown-button-more p-2">
-            <span class="">More</span>
+            <span className="">More</span>
               <Icofont
                 icon="caret-down"
                 height="10px"
