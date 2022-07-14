@@ -56,7 +56,7 @@ console.log("productHead ", productHead)
           { productHead.length > 0? 
             (
               <>
-                <Icon.ChevronDown className="icon" height="15px" width="15px" />
+                <Icon.ChevronDown className="icon ml-1" height="15px" width="15px" />
               </>
             )
             :

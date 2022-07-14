@@ -132,6 +132,15 @@ export default function AddAndEditProduct({
         formData.append("active_images[]", productsState.images[key]);
       }
     }
+
+    if (productsState.cover_photo === undefined){
+      if (productsState.images !== undefined){
+        formData.append("cover_photo", productsState.images[0]);
+      }
+    }
+    else{
+      formData.append("cover_photo", productsState.cover_photo);
+    }
     formData.append("title", productsState.title);
     formData.append("status", productsState.status);
     formData.append("description", productsState.description);
@@ -139,8 +148,6 @@ export default function AddAndEditProduct({
     formData.append("location", productsState.location);
     formData.append("link", productsState.link);
     formData.append("extra_fields", JSON.stringify(extraFieldsData));
-    // formData.append("brand_id", 1);
-    formData.append("cover_photo", productsState.cover_photo);
     formData.append("featured", productsState.featured);
     formData.append("brand_id", productsState.brand_id);
     if (productsState.product_type !== undefined) {
@@ -464,21 +471,21 @@ export default function AddAndEditProduct({
                       </div>
                     );
                   })}
-                <div className="form-group preview row">
+                <div className="form-group preview row mt-4">
                   {file &&
                     file.length > 0 &&
                     file.map((item, index) => {
                       return (
-                        <div key={item} className="col-12 col-lg-1">
+                        <div key={item} className="col-12 col-lg-1 cover-photo-container">
                           <img
                             className="cover_image_select"
-                            title="Select Image for Cover Photo"
                             src={item}
                             alt=""
                             height="100px"
                             width="100px"
                             onClick={(e) => selectCoverPhoto(e, item, index)}
                           />
+                          <div className="cover-photo-title">Select image for Cover Photo</div>
                           <button
                             type="button"
                             className="close-btn"
