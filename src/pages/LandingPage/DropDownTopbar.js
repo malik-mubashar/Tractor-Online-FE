@@ -51,12 +51,17 @@ console.log("productHead ", productHead)
 
   return (
     <div>
-      <div className={`${!dropDownIcon ? " dropdown-button p-1" : "p-1"}`} title={title}>
-        <span className="truncate-topbar">{title}</span>
-          { productHead.length > 0? 
+      <div className={`${!dropDownIcon ? " dropdown-button p-2" : "p-2"}`} title={title}>
+        <span>{title}</span>
+          { productHead.length > 0?
             (
               <>
-                <Icon.ChevronDown className="icon ml-1" height="15px" width="15px" />
+                <Icofont
+                  icon="caret-down"
+                  height="10px"
+                  width="10px"
+                  className="icofont ml-1"
+                />
               </>
             )
             :

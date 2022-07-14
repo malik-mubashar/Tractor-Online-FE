@@ -1,3 +1,4 @@
+@import "~react-image-gallery/styles/scss/image-gallery.scss";
 .dashboard-carousel {
   background: linear-gradient(to top, #660033 0%, #003366 100%);
   height: auto;
@@ -211,12 +212,24 @@
 .dropdown-button {
   position: relative;
   cursor: pointer;
-  display: flex;
+}
+.dropdown-button-more {
+  position: relative;
+  cursor: pointer;
 }
 .dropdown-button:hover {
   display: block;
   .drop-down-items {
     display: flex;
+  }
+  background-color: white;
+  box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+}
+
+.dropdown-button-more:hover {
+  display: block;
+  .drop-down-items-more {
+    display: block;
   }
   background-color: white;
   border-radius: 10px;
@@ -239,7 +252,7 @@
     display: flex;
   }
   background-color: white;
-  
+
 }
 .category-menu {
   display: none;
@@ -274,6 +287,17 @@
   display: none;
   left: 15px;
 }
+
+.drop-down-items-more:hover {
+  display: block;
+}
+
+.drop-down-items-more {
+  position: absolute;
+  background-color: white;
+  display: none;
+  left: 0px;
+}
 @media screen and (max-width: 992px) {
   .category-menu {
     display: inline-block;
@@ -304,6 +328,13 @@
 }
 .usedCarsWidth {
   width: 70rem;
+  border-bottom: 5px solid #b30000;
+  -moz-box-shadow: 0 4px 4px gray;
+  -webkit-box-shadow: 0 4px 4px gray;
+  box-shadow: 0 4px 4px gray;
+}
+.more-width{
+  width: 10rem;
   border-bottom: 5px solid #b30000;
   -moz-box-shadow: 0 4px 4px gray;
   -webkit-box-shadow: 0 4px 4px gray;

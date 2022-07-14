@@ -9,6 +9,7 @@ import Logo from "../../assets/img/tractoronline.png";
 import { PRODUCT_CATEGORY } from "../../API/Products/product-category";
 import { city } from "../../API/City/CityApis";
 import { prodApi } from "../../API/ProdCategoriesApis";
+import Icofont from "react-icofont";
 
 const Topbar = () => {
   const history = useHistory();
@@ -51,15 +52,45 @@ const Topbar = () => {
           productCategories.map((item, i) => {
             return (
               <>
+              {i < 5 ?
                 <DropDownTopbar
                   title={item.title}
                   productHead={item.product_category_heads}
                   cities={cities}
                   brands={item.category_brands}
                 />
+              :
+                null
+              }
               </>
             );
           })}
+
+          <div className="dropdown-button-more p-2">
+            <span class="">More</span>
+              <Icofont
+                icon="caret-down"
+                height="10px"
+                width="10px"
+                className="icofont ml-1"
+              />
+            <div className="drop-down-items-more py-3 more-width">
+              {productCategories &&
+                productCategories.map((item, i) => {
+                  return (
+                    <>
+                    {i > 4 ?
+                      <div className="p-2 dropdown-link">
+                        {item.title}
+                      </div>
+                      :
+                      null
+                      }
+                    </>
+                  );
+              })}
+            </div>
+          </div>
         <Nav className="ml-auto right-nav">
           <ul className="navbar-nav mr-auto">
             <div
