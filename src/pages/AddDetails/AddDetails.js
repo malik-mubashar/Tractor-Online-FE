@@ -11,7 +11,7 @@ import {
   Button,
   Image
 } from "react-bootstrap";
-import { ImageGallery } from "react-image-gallery";
+// import { ImageGallery } from "react-image-gallery";
 import Footer from "../LandingPage/Footer";
 import { isMobile } from "react-device-detect";
 import cellPhoneSvg from "../../assets/svg/cellPhone.svg";
