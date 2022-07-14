@@ -95,7 +95,45 @@
 
 .cover_image_select:hover{
   border: 3px solid orange;
+  .cover-photo-title{
+    display: block;
+  }
 }
+
+.cover-photo-container:hover{
+  .cover-photo-title{
+    display: block;
+  }
+}
+
+.cover-photo-title{
+  position: absolute;
+  top: 23px;
+  left: 140px;
+  background-color: black;
+  width: 191px;
+  color: white;
+  padding: 10px;
+  // border-radius: 10px;
+  display: none;
+  z-index: 999;
+  height: 40px;
+  border-top-right-radius: 10px;
+  border-bottom-right-radius: 10px;
+}
+
+.cover-photo-title:after{
+  color: black;
+  border-right: 20px solid;
+  border-top: 20px solid transparent;
+  border-bottom: 20px solid transparent;
+  display: inline-block;
+  content: '';
+  position: absolute;
+  left: -20px;
+  top: 0px;
+}
+
 
 .cover_image_select.active{
   border: 3px solid green;

@@ -50,7 +50,7 @@ export default function NewProductsCarousel({products}) {
           products.map((item, i) => {
           return(
             <>
-            <div className="featured-card bg-white border-radius cursor-pointer" key={i}>
+            <div className="featured-card bg-white border-radius cursor-pointer h-100" key={i}>
               <img
                 className="card-img border-radius"
                 src={item.cover_photo_path}
