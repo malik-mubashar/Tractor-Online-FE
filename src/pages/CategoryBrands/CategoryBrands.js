@@ -77,7 +77,7 @@ export default function CategoryBrands() {
     isAddCategoryBrand: false,
     categoryBrands: null,
     originalCategoryBrands: null,
-    status: "active",
+    status: null,
   });
 
   const handleSearch = (searchString) => {
@@ -287,7 +287,7 @@ export default function CategoryBrands() {
                                 <td>{category.title && category.title}</td>
                                 <td>{category.link && category.link}</td>
                                 <td>{category.status && category.status}</td>
-                                <td>{category.product_category.title && category.product_category.title}</td>
+                                <td>{category.product_category && category.product_category.title && category.product_category.title}</td>
                                 <td>{category.description && category.description}</td>
                                 <td className="text-center">
                                   <Icon.Edit2
@@ -300,6 +300,7 @@ export default function CategoryBrands() {
                                         title: category.title,
                                         comments: category.comments,
 																				categoryBrandId: category.id,
+																				status: category.status,
 																				product_category_id: category.product_category_id,
                                       });
                                     }}

@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { Button, Col, Form, Row } from "react-bootstrap";
 import toast, { Toaster } from "react-hot-toast";
 import { languageApis } from "../../API/LanguagesApis ";
@@ -8,6 +8,66 @@ export default function AddAndEditLanguage({
   setLanguagesState,
   getLanguages,
 }) {
+	const fieldsMap = [
+    { name: "title", required: true },
+    { name: "status", required: true },
+
+  ];
+  const [fieldsWithError, setFieldsWithError] = useState({
+    status: false,
+    title: false,
+	});
+	const doValidation = () => {
+    var tempFieldsWithError = {};
+    fieldsMap.forEach((fieldDetail) => {
+      console.log(languagesState);
+      if (
+        languagesState[fieldDetail.name] == undefined ||
+				languagesState[fieldDetail.name] == "" ||
+				languagesState[fieldDetail.name] == null
+      ) {
+         
+
+        if (fieldDetail.required === true) {
+          tempFieldsWithError = {
+            ...tempFieldsWithError,
+            [fieldDetail.name]: true,
+          };
+        } else if (fieldDetail.required === false) {
+          tempFieldsWithError = {
+            ...tempFieldsWithError,
+            [fieldDetail.name]: false,
+          };
+        }
+      } else if (
+        languagesState[fieldDetail.name] != undefined ||
+        languagesState[fieldDetail.name] != ""
+      ) {
+         
+
+        if (fieldDetail.required === true) {
+          tempFieldsWithError = {
+            ...tempFieldsWithError,
+            [fieldDetail.name]: false,
+          };
+        }
+      }
+    });
+     
+    console.log("tempFieldsWithError", tempFieldsWithError);
+    var isValidationFailed = false;
+    console.log(tempFieldsWithError);
+    setFieldsWithError(tempFieldsWithError);
+    Object.values(tempFieldsWithError).forEach((item) => {
+      if (item === true) {
+        isValidationFailed = true;
+      }
+    });
+    console.log("isValidationFailed", isValidationFailed);
+
+    return isValidationFailed;
+  };
+
   function handleChange(evt) {
     setLanguagesState({
       ...languagesState,
@@ -15,7 +75,9 @@ export default function AddAndEditLanguage({
     });
   }
 
-  const addLanguage = async (params) => {
+	const addLanguage = async (params) => {
+		if (!doValidation()) {
+
     const loadingToastId = toast.loading("Loading..!");
 
     if (languagesState.isAddLanguage) {
@@ -50,7 +112,10 @@ export default function AddAndEditLanguage({
       } catch (error) {
         console.error(error);
       }
-    }
+		}
+	} else {
+		toast.error("Validation Failed");
+	}
   };
   console.log(languagesState);
   return (
@@ -70,38 +135,49 @@ export default function AddAndEditLanguage({
               <Form>
                 <Form.Group controlId="formBasicName">
                   <Form.Label>Name</Form.Label>
-                  <Form.Control
+									<Form.Control
+										className={
+                      fieldsWithError.title === true ? "border-danger" : ""
+                    }
                     defaultValue={languagesState.name}
-                    name="name"
+                    name="title"
                     type="text"
                     placeholder="Enter Language Name"
                     onChange={(e) => handleChange(e)}
                   />
                 </Form.Group>
 
+                <Form.Group controlId="formGridState">
+                  <Form.Label>Status</Form.Label>
+									<Form.Control
+											className={
+												fieldsWithError.status === true ? "border-danger" : ""
+											}
+                    as="select"
+                    value={languagesState.status}
+                    onChange={(e) => handleChange(e)}
+                    name="status"
+                  >
+                    <option value hidden>-- Select Status --</option>
+                    <option value="active">active</option>
+                    <option value="passive">passive</option>
+                    <option value="deleted">deleted</option>
+                  </Form.Control>
+								</Form.Group>
+								
+
                 <Form.Group controlId="formBasicComments">
                   <Form.Label>Description</Form.Label>
-                  <Form.Control
+									<Form.Control
+										className={
+                      fieldsWithError.description === true ? "border-danger" : ""
+                    }
                     defaultValue={languagesState.description}
                     name="description"
                     type="text"
                     placeholder="description"
                     onChange={(e) => handleChange(e)}
                   />
-                </Form.Group>
-
-                <Form.Group controlId="formGridState">
-                  <Form.Label>Status</Form.Label>
-                  <Form.Control
-                    as="select"
-                    value={languagesState.status}
-                    onChange={(e) => handleChange(e)}
-                    name="status"
-                  >
-                    <option value="active">active</option>
-                    <option value="passive">passive</option>
-                    <option value="deleted">deleted</option>
-                  </Form.Control>
                 </Form.Group>
 
                 <Button

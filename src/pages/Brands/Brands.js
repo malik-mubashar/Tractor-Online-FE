@@ -83,7 +83,7 @@ export default function Brands() {
     isViewBrand: false,
     brands: null,
     originalBrands: null,
-    status: "active",
+    status: null,
   });
 
   const handleSearch = (searchString) => {
@@ -190,7 +190,11 @@ export default function Brands() {
                     onClick={() => {
                       setBrandsState({
                         ...brandsState,
-                        isAddBrand: true,
+												isAddBrand: true,
+												title: null,
+												status: null,
+												link: null,
+												icon:null
                       });
                     }}
                   >
@@ -314,6 +318,7 @@ export default function Brands() {
                                           ...brandsState,
                                           isEditBrand: true,
                                           title: brand.title,
+                                          icon: brand.icon,
                                           link: brand.link,
                                           status: brand.status,
                                           description: brand.description,

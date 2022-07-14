@@ -56,6 +56,7 @@ class Models {
 				description: modelsState.description,
 				active_image: modelsState.image,
 				icon:modelsState.icon,
+				product_id:modelsState.product_id,
 
 
       },
@@ -93,7 +94,9 @@ class Models {
         link: modelsState.link,
 				description: modelsState.description,
 				icon:modelsState.icon,
-        active_image: modelsState.image,
+				active_image: modelsState.image,
+				product_id:modelsState.product_id,
+
       },
     })
       .then((result) => {

@@ -87,7 +87,7 @@ export default function Budgets() {
     isViewBudget: false,
     budgets: null,
     originalBudgets: null,
-    status: "active",
+    status: null,
   });
 
   const handleSearch = (searchString) => {

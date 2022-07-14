@@ -16,7 +16,7 @@ export default function ExploreProducts() {
     {
       heading: 'TractorOnline, buy Fertilizers.',
       image: FertilizerLogo,
-      text: 'You can but fertilizers as well.',
+      text: 'You can buy fertilizers as well.',
     },
     {
       heading: 'TractorOnline, please sell it for me.',

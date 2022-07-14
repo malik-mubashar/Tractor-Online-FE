@@ -85,7 +85,7 @@ class Country {
 				
 			},
 			data: {
-				name: name,
+				title: name,
 				comments: comments,
 			}
     })

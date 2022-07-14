@@ -90,7 +90,7 @@ export default function Languages() {
     isAddLanguage: false,
     languages: null,
     originalLanguages: null,
-    status: 'active',
+    status: null,
   });
 
   const handleSearch = (searchString) => {

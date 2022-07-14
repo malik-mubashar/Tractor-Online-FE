@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { Button, Col, Form, Row } from "react-bootstrap";
 import { city } from "../../API/City/CityApis";
 import toast, { Toaster } from "react-hot-toast";
@@ -18,8 +18,66 @@ export default function AddAndEditCity({ cityState, setCityState, getCities }) {
     });
 	}
 
+	const fieldsMap = [
+    { name: "title", required: true },
 
-  const addCity = async (params) => {
+  ];
+  const [fieldsWithError, setFieldsWithError] = useState({
+
+    title: false,
+  });
+
+	const doValidation = () => {
+    var tempFieldsWithError = {};
+    fieldsMap.forEach((fieldDetail) => {
+      console.log(cityState);
+      if (
+        cityState[fieldDetail.name] == undefined ||
+				cityState[fieldDetail.name] == "" ||
+				cityState[fieldDetail.name] == null
+      ) {
+        if (fieldDetail.required === true) {
+          tempFieldsWithError = {
+            ...tempFieldsWithError,
+            [fieldDetail.name]: true,
+          };
+        } else if (fieldDetail.required === false) {
+          tempFieldsWithError = {
+            ...tempFieldsWithError,
+            [fieldDetail.name]: false,
+          };
+        }
+      } else if (
+        cityState[fieldDetail.name] != undefined ||
+        cityState[fieldDetail.name] != ""
+      ) {
+        if (fieldDetail.required === true) {
+          tempFieldsWithError = {
+            ...tempFieldsWithError,
+            [fieldDetail.name]: false,
+          };
+        }
+      }
+    });
+
+		console.log("tempFieldsWithError", tempFieldsWithError);
+		if (cityState.isEditCategoryBrand === true) {
+			tempFieldsWithError.image = false 
+		}
+    var isValidationFailed = false;
+    console.log(tempFieldsWithError);
+    setFieldsWithError(tempFieldsWithError);
+    Object.values(tempFieldsWithError).forEach((item) => {
+      if (item === true) {
+        isValidationFailed = true;
+      }
+    });
+    console.log("isValidationFailed", isValidationFailed);
+
+    return isValidationFailed;
+  };
+	const addCity = async (params) => {
+		if (!doValidation()) {
     const loadingToastId = toast.loading("Loading..!");
 
     if (cityState.isAddCity) {
@@ -58,7 +116,10 @@ export default function AddAndEditCity({ cityState, setCityState, getCities }) {
       } catch (error) {
         console.error(error);
       }
-    }
+		}
+	} else {
+		toast.error("Validation Failed");
+	}
   };
   console.log(cityState);
   return (
@@ -76,7 +137,10 @@ export default function AddAndEditCity({ cityState, setCityState, getCities }) {
               <Form>
                 <Form.Group controlId="formBasicName">
                   <Form.Label>Name</Form.Label>
-                  <Form.Control
+									<Form.Control
+										className={
+                      fieldsWithError.title === true ? "border-danger" : ""
+                    }
                     defaultValue={cityState.title}
                     name="title"
                     type="text"
@@ -87,7 +151,10 @@ export default function AddAndEditCity({ cityState, setCityState, getCities }) {
 
                 <Form.Group controlId="formBasicComments">
                   <Form.Label>Comments</Form.Label>
-                  <Form.Control
+									<Form.Control
+										className={
+                      fieldsWithError.comments === true ? "border-danger" : ""
+                    }
                     defaultValue={cityState.comments}
                     name="comments"
                     type="text"
@@ -98,10 +165,13 @@ export default function AddAndEditCity({ cityState, setCityState, getCities }) {
 								<Form.Group >
                       <Form.Label>Upload New Picture</Form.Label>
 									<Form.Control
+										className={
+                      fieldsWithError.image === true ? "border-danger form-control" : "form-control"
+                    }
 									style={{padding:"2px"}}
                         type="file"
                         placeholder=""
-                        className="form-control"
+
                         multiple
                         onChange={(e) => {
                           handlePictureUpload(e.target.files[0]);

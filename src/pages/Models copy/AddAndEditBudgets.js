@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { Button, Col, Form, Row } from "react-bootstrap";
 import toast from "react-hot-toast";
 import { budgetApis } from "../../API/BudgetsApis";
@@ -9,6 +9,71 @@ export default function AddAndEditBudgets({
   setBudgetsState,
   getBudgets,
 }) {
+	const fieldsMap = [
+    { name: "title", required: true },
+    { name: "status", required: true },
+    { name: "link", required: true },
+    { name: "icon", required: true },
+    { name: "description", required: false },
+    { name: "image", required: true },
+  ];
+  const [fieldsWithError, setFieldsWithError] = useState({
+    description: false,
+    image: false,
+    link: false,
+    icon: false,
+    status: false,
+    title: false,
+	});
+	const doValidation = () => {
+    var tempFieldsWithError = {};
+    fieldsMap.forEach((fieldDetail) => {
+      console.log(budgetsState);
+      if (
+        budgetsState[fieldDetail.name] == undefined ||
+				budgetsState[fieldDetail.name] == "" ||
+				budgetsState[fieldDetail.name] == null
+      ) {
+        if (fieldDetail.required === true) {
+          tempFieldsWithError = {
+            ...tempFieldsWithError,
+            [fieldDetail.name]: true,
+          };
+        } else if (fieldDetail.required === false) {
+          tempFieldsWithError = {
+            ...tempFieldsWithError,
+            [fieldDetail.name]: false,
+          };
+        }
+      } else if (
+        budgetsState[fieldDetail.name] != undefined ||
+        budgetsState[fieldDetail.name] != ""
+      ) {
+        if (fieldDetail.required === true) {
+          tempFieldsWithError = {
+            ...tempFieldsWithError,
+            [fieldDetail.name]: false,
+          };
+        }
+      }
+    });
+
+		console.log("tempFieldsWithError", tempFieldsWithError);
+		if (budgetsState.isEditCategoryBrand === true) {
+			tempFieldsWithError.image = false 
+		}
+    var isValidationFailed = false;
+    console.log(tempFieldsWithError);
+    setFieldsWithError(tempFieldsWithError);
+    Object.values(tempFieldsWithError).forEach((item) => {
+      if (item === true) {
+        isValidationFailed = true;
+      }
+    });
+    console.log("isValidationFailed", isValidationFailed);
+
+    return isValidationFailed;
+  };
   function handleChange(evt) {
      
     setBudgetsState({
@@ -25,6 +90,8 @@ export default function AddAndEditBudgets({
 	}
 
 	const addBudgets = async (params) => {
+		if (!doValidation()) {
+
 		 
     const loadingToastId = toast.loading("Loading..!");
 		 
@@ -69,7 +136,10 @@ export default function AddAndEditBudgets({
       } catch (error) {
         console.error(error);
       }
-    }
+		}
+	} else {
+		toast.error("Validation Failed");
+	}
   };
   console.log("asdasd", budgetsState);
   return (
@@ -89,7 +159,10 @@ export default function AddAndEditBudgets({
               <Form>
                 <Form.Group controlId="formBasicName">
                   <Form.Label>Title</Form.Label>
-                  <Form.Control
+									<Form.Control
+										 className={
+                      fieldsWithError.title === true ? "border-danger" : ""
+                    }
                     defaultValue={budgetsState.title}
                     name="title"
                     type="text"
@@ -102,12 +175,16 @@ export default function AddAndEditBudgets({
 
                 <Form.Group controlId="formGridState">
                   <Form.Label>Status</Form.Label>
-                  <Form.Control
+									<Form.Control
+										 className={
+                      fieldsWithError.status === true ? "border-danger" : ""
+                    }
                     as="select"
                     value={budgetsState.status}
                     onChange={(e) => handleChange(e)}
                     name="status"
                   >
+                    <option value hidden>-- Select Status --</option>
                     <option value="active">active</option>
                     <option value="passive">passive</option>
                     <option value="deleted">deleted</option>
@@ -116,7 +193,10 @@ export default function AddAndEditBudgets({
 
                 <Form.Group controlId="formBasicComments">
                   <Form.Label>Link</Form.Label>
-                  <Form.Control
+									<Form.Control
+										 className={
+                      fieldsWithError.link === true ? "border-danger" : ""
+                    }
                     defaultValue={budgetsState.link}
                     name="link"
                     type="text"
@@ -125,20 +205,13 @@ export default function AddAndEditBudgets({
                   />
                 </Form.Group>
 
-                <Form.Group controlId="formBasicComments">
-                  <Form.Label>Description</Form.Label>
-                  <Form.Control
-                    as="textarea"
-                    defaultValue={budgetsState.description}
-                    name="description"
-                    type="text"
-                    placeholder="Description"
-                    onChange={(e) => handleChange(e)}
-                  />
-								</Form.Group>
+          
 								<Form.Group controlId="formBasicComments">
                   <Form.Label>Icon</Form.Label>
-                  <Form.Control
+									<Form.Control
+										 className={
+                      fieldsWithError.icon === true ? "border-danger" : ""
+                    }
                     defaultValue={budgetsState.icon}
                     name="icon"
                     type="text"
@@ -148,10 +221,12 @@ export default function AddAndEditBudgets({
                 </Form.Group>
 								<Form.Group>
                       <Form.Label>Upload New Picture</Form.Label>
-                      <Form.Control
+									<Form.Control
+										 className={
+                      fieldsWithError.title === true ? "border-danger form-control p-1" : "form-control p-1"
+                    }
                         type="file"
                         placeholder=""
-                        className="form-control p-1"
                         multiple
                         onChange={(e) => {
                           handlePictureUpload(e.target.files[0]);
@@ -159,7 +234,20 @@ export default function AddAndEditBudgets({
                       />
                     </Form.Group>
 
-                
+										<Form.Group controlId="formBasicComments">
+                  <Form.Label>Description</Form.Label>
+									<Form.Control
+										 className={
+                      fieldsWithError.description === true ? "border-danger" : ""
+                    }
+                    as="textarea"
+                    defaultValue={budgetsState.description}
+                    name="description"
+                    type="text"
+                    placeholder="Description"
+                    onChange={(e) => handleChange(e)}
+                  />
+								</Form.Group>
                 <Button
                   className="mr-3"
                   variant="secondary"

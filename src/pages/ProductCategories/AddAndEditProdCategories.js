@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { Button, Col, Form, Row } from "react-bootstrap";
 import toast, { Toaster } from "react-hot-toast";
 import { prodApi } from "../../API/ProdCategoriesApis";
@@ -8,60 +8,121 @@ export default function AddAndEditProdCategories({
   setProdCategoriesState,
   getProdCategories,
 }) {
+  const fieldsMap = [
+    { name: "title", required: true },
+    { name: "status", required: true },
+    { name: "link", required: false },
+    { name: "description", required: false },
+  ];
+  const [fieldsWithError, setFieldsWithError] = useState({
+    description: false,
+    link: false,
+    status: false,
+    title: false,
+  });
+  const doValidation = () => {
+    var tempFieldsWithError = {};
+    fieldsMap.forEach((fieldDetail) => {
+      console.log(prodCategoriesState);
+      if (
+        prodCategoriesState[fieldDetail.name] == undefined ||
+				prodCategoriesState[fieldDetail.name] == "" ||
+				prodCategoriesState[fieldDetail.name] == null
+      ) {
+        if (fieldDetail.required === true) {
+          tempFieldsWithError = {
+            ...tempFieldsWithError,
+            [fieldDetail.name]: true,
+          };
+        } else if (fieldDetail.required === false) {
+          tempFieldsWithError = {
+            ...tempFieldsWithError,
+            [fieldDetail.name]: false,
+          };
+        }
+      } else if (
+        prodCategoriesState[fieldDetail.name] != undefined ||
+        prodCategoriesState[fieldDetail.name] != ""
+      ) {
+        if (fieldDetail.required === true) {
+          tempFieldsWithError = {
+            ...tempFieldsWithError,
+            [fieldDetail.name]: false,
+          };
+        }
+      }
+    });
+		console.log("tempFieldsWithError", tempFieldsWithError);
+
+    var isValidationFailed = false;
+    setFieldsWithError(tempFieldsWithError);
+    Object.values(tempFieldsWithError).forEach((item) => {
+      if (item === true) {
+        isValidationFailed = true;
+      }
+    });
+    console.log("isValidationFailed", isValidationFailed);
+
+    return isValidationFailed;
+  };
+
   function handleChange(evt) {
-     
     setProdCategoriesState({
       ...prodCategoriesState,
       [evt.target.name]: evt.target.value,
     });
-	}
-	
-	const handlePictureUpload = (pic) => {
-		setProdCategoriesState({
+  }
+
+  const handlePictureUpload = (pic) => {
+    setProdCategoriesState({
       ...prodCategoriesState,
       image: pic,
     });
-	}
+  };
 
   const addProdCategory = async (params) => {
-    const loadingToastId = toast.loading("Loading..!");
+    if (!doValidation()) {
+      const loadingToastId = toast.loading("Loading..!");
 
-    if (prodCategoriesState.isAddProdCategory) {
-      try {
-        const result = await prodApi.addProdCategory(prodCategoriesState);
-        console.log(result);
-        if (result.error == false) {
-          toast.dismiss(loadingToastId);
-          toast.success("Product Category created!");
-          setProdCategoriesState({
-            ...prodCategoriesState,
-            isAddProdCategory: false,
-            isEditProdCategory: false,
-          });
-          getProdCategories(1, "", 10);
-        } else if (result.error == true) {
-          toast.dismiss(loadingToastId);
-          toast.error("failed");
+      if (prodCategoriesState.isAddProdCategory) {
+        try {
+          const result = await prodApi.addProdCategory(prodCategoriesState);
+          console.log(result);
+          if (result.error == false) {
+            toast.dismiss(loadingToastId);
+            toast.success("Product Category created!");
+            setProdCategoriesState({
+              ...prodCategoriesState,
+              isAddProdCategory: false,
+              isEditProdCategory: false,
+            });
+            getProdCategories(1, "", 10);
+          } else if (result.error == true) {
+            toast.dismiss(loadingToastId);
+            toast.error("failed");
+          }
+        } catch (error) {
+          console.error(error);
         }
-      } catch (error) {
-        console.error(error);
-      }
-    } else if (prodCategoriesState.isEditProdCategory) {
-      try {
-        const result = await prodApi.updateProdCategory(prodCategoriesState);
-        if (result.error == false) {
-          toast.success("Product Category updated!");
-          toast.dismiss(loadingToastId);
-          setProdCategoriesState({
-            ...prodCategoriesState,
-            isEditProdCategory: false,
-          });
-          getProdCategories(1, "", 10);
+      } else if (prodCategoriesState.isEditProdCategory) {
+        try {
+          const result = await prodApi.updateProdCategory(prodCategoriesState);
+          if (result.error === false) {
+            toast.success("Product Category updated!");
+            toast.dismiss(loadingToastId);
+            setProdCategoriesState({
+              ...prodCategoriesState,
+              isEditProdCategory: false,
+            });
+            getProdCategories(1, "", 10);
+          }
+        } catch (error) {
+          console.error(error);
         }
-      } catch (error) {
-        console.error(error);
-      }
-    }
+      } 
+    }else {
+			toast.error("Validation Failed");
+		}
   };
   console.log("asdasd", prodCategoriesState);
   return (
@@ -81,27 +142,30 @@ export default function AddAndEditProdCategories({
               <Form>
                 <Form.Group controlId="formBasicName">
                   <Form.Label>Title</Form.Label>
-                  <Form.Control
+									<Form.Control
+										 className={
+                      fieldsWithError.title === true ? "border-danger" : ""
+                    }
                     defaultValue={prodCategoriesState.title}
                     name="title"
                     type="text"
                     placeholder="Enter Product Category Name"
                     onChange={(e) => handleChange(e)}
                   />
-								</Form.Group>
-								
-								<Form.Group>
-                      <Form.Label>Upload New Picture</Form.Label>
-                      <Form.Control
-                        type="file"
-                        placeholder=""
-                        className="form-control"
-                        multiple
-                        onChange={(e) => {
-                          handlePictureUpload(e.target.files[0]);
-                        }}
-                      />
-                    </Form.Group>
+                </Form.Group>
+
+                <Form.Group>
+                  <Form.Label>Upload New Picture</Form.Label>
+                  <Form.Control
+                    type="file"
+                    placeholder=""
+                    className="form-control"
+                    multiple
+                    onChange={(e) => {
+                      handlePictureUpload(e.target.files[0]);
+                    }}
+                  />
+                </Form.Group>
 
                 {/* <Form.Group controlId="formBasicComments">
                   <Form.Label>Status</Form.Label>
@@ -116,12 +180,18 @@ export default function AddAndEditProdCategories({
 
                 <Form.Group controlId="formGridState">
                   <Form.Label>Status</Form.Label>
-                  <Form.Control
+									<Form.Control
+										 className={
+                      fieldsWithError.status === true ? "border-danger" : ""
+                    }
                     as="select"
                     value={prodCategoriesState.status}
                     onChange={(e) => handleChange(e)}
                     name="status"
-                  >
+									>
+										<option key="blankChoice" hidden value>
+                      -- Select Product Status --
+                    </option>
                     <option value="active">active</option>
                     <option value="passive">passive</option>
                     <option value="deleted">deleted</option>
@@ -161,7 +231,7 @@ export default function AddAndEditProdCategories({
                     })
                   }
                 >
-                   Cancel
+                  Cancel
                 </Button>
                 <Button
                   onClick={() => {

@@ -75,7 +75,8 @@ export default function AddAndEditProdCategoryHeads({
       console.log(prodCategoryHeadsState);
       if (
         prodCategoryHeadsState[fieldDetail.name] == undefined ||
-        prodCategoryHeadsState[fieldDetail.name] == ""
+				prodCategoryHeadsState[fieldDetail.name] == "" ||
+				prodCategoryHeadsState[fieldDetail.name] == null
       ) {
          
 
@@ -109,7 +110,7 @@ export default function AddAndEditProdCategoryHeads({
     var isValidationFailed = false;
     console.log(tempFieldsWithError);
     setFieldsWithError(tempFieldsWithError);
-    Object.values(tempFieldsWithError).map((item) => {
+    Object.values(tempFieldsWithError).forEach((item) => {
       if (item === true) {
         isValidationFailed = true;
       }
@@ -210,7 +211,7 @@ export default function AddAndEditProdCategoryHeads({
                     name="status"
                   >
                     <option key="blankChoice" hidden value>
-                      -- Select Product Category --
+                      -- Select Product Status --
                     </option>
                     <option value="active">active</option>
                     <option value="passive">passive</option>
