@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import {
   Navbar,
   Nav,
@@ -9,9 +9,17 @@ import {
   Form,
   FormControl,
   Button,
-  Image
+  Image,
 } from "react-bootstrap";
-// import { ImageGallery } from "react-image-gallery";
+import ImageGallery from "react-image-gallery";
+import PT from "prop-types";
+import {
+  LightgalleryProvider,
+  LightgalleryItem,
+  withLightgallery,
+  useLightgallery,
+} from "react-lightgallery";
+import "lightgallery.js/dist/css/lightgallery.css";
 import Footer from "../LandingPage/Footer";
 import { isMobile } from "react-device-detect";
 import cellPhoneSvg from "../../assets/svg/cellPhone.svg";
@@ -41,17 +49,69 @@ export default function AddDetails() {
   const images = [
     {
       original: "https://picsum.photos/id/1018/1000/600/",
-      thumbnail: "https://picsum.photos/id/1018/250/150/"
+      thumbnail: "https://picsum.photos/id/1018/250/150/",
     },
     {
       original: "https://picsum.photos/id/1015/1000/600/",
-      thumbnail: "https://picsum.photos/id/1015/250/150/"
+      thumbnail: "https://picsum.photos/id/1015/250/150/",
     },
     {
       original: "https://picsum.photos/id/1019/1000/600/",
-      thumbnail: "https://picsum.photos/id/1019/250/150/"
-    }
+      thumbnail: "https://picsum.photos/id/1019/250/150/",
+    },
   ];
+
+  const GROUP2 = [
+    "https://images.unsplash.com/photo-1594818898109-44704fb548f6?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1950&q=80",
+    "https://images.unsplash.com/photo-1594818896795-35ad7bcf3c6a?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1950&q=80",
+    "https://images.unsplash.com/photo-1594818896744-57eca4d47b07?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1950&q=80",
+    "https://images.unsplash.com/photo-1594818897077-aec41f55241f?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1951&q=80",
+  ];
+
+  const PhotoItem = ({ image, thumb, group }) => (
+    <div style={{ maxWidth: "250px", width: "200px", padding: "5px" }}>
+      <LightgalleryItem group={group} src={image} thumb={thumb}>
+        <img src={image} style={{ width: "100%" }} />
+      </LightgalleryItem>
+    </div>
+  );
+  PhotoItem.propTypes = {
+    image: PT.string.isRequired,
+    thumb: PT.string,
+    group: PT.string.isRequired,
+  };
+
+  const OpenButtonWithHoc = withLightgallery(({ openGallery, ...props }) => {
+    return (
+      <button
+        {...props}
+        onClick={() => {
+          openGallery("group1");
+        }}
+        className={["button is-primary", props.className || ""].join(" ")}
+      >
+        Open first photos group (using hoc)
+      </button>
+    );
+  });
+
+  const OpenButtonWithHook = (props) => {
+    const { openGallery } = useLightgallery();
+    return (
+      <button
+        {...props}
+        onClick={() => openGallery("group2")}
+        className={["button is-primary", props.className || ""].join(" ")}
+      >
+        Open second photos group (using hook)
+      </button>
+    );
+  };
+  OpenButtonWithHook.propTypes = {
+    className: PT.string,
+  };
+  const [visible, setVisible] = useState(true);
+
   return (
     //sidebar
     <div className="addDetails">
@@ -129,14 +189,64 @@ export default function AddDetails() {
                         alt="Profile Image"
                         className="d-flex justify-content-center m-auto"
                       />{" "}
-                      <a href="/main/apps" >
-                        Added via Phone
-                      </a>
+                      <a href="/main/apps">Added via Phone</a>
                     </span>
                   </p>
                 </div>
                 <div className="imageGallery">
-                  {/* <ImageGallery items={images} /> */}
+                  <div className="content">
+                    <button
+                      className="button is-light"
+                      style={{
+                        position: "absolute",
+                      }}
+                      onClick={() => setVisible(!visible)}
+                    >
+                      {visible ? (
+                        <i className="fas fa-eye-slash" />
+                      ) : (
+                        <i className="fas fa-eye" />
+                      )}
+                    </button>
+
+                    <div>
+                      {visible ? (
+                        <LightgalleryProvider
+                          onBeforeOpen={() => console.info("onBeforeOpen")}
+                          onAfterOpen={() => console.info("onAfterOpen")}
+                          onSlideItemLoad={() =>
+                            console.info("onSlideItemLoad")
+                          }
+                          onBeforeSlide={() => console.info("onBeforeSlide")}
+                          onAfterSlide={() => console.info("onAfterSlide")}
+                          onBeforePrevSlide={() =>
+                            console.info("onBeforePrevSlide")
+                          }
+                          onBeforeNextSlide={() =>
+                            console.info("onBeforeNextSlide")
+                          }
+                          onDragstart={() => console.info("onDragstart")}
+                          onDragmove={() => console.info("onDragmove")}
+                          onDragend={() => console.info("onDragend")}
+                          onSlideClick={() => console.info("onSlideClick")}
+                          onBeforeClose={() => console.info("onBeforeClose")}
+                          onCloseAfter={() => console.info("onCloseAfter")}
+                        >
+                          <div
+                            style={{
+                              display: "flex",
+                              alignItems: "center",
+                              justifyContent: "center",
+                            }}
+                          >
+                            {GROUP2.map((p, idx) => (
+                              <PhotoItem key={idx} image={p} group="group2" />
+                            ))}
+                          </div>
+                        </LightgalleryProvider>
+                      ) : null}
+                    </div>
+                  </div>
                 </div>
                 {/* after image gallery */}
                 <table
@@ -468,7 +578,6 @@ export default function AddDetails() {
                     <a
                       href="/car-loan-calculator/search/?car_finance_lead%5Baddress%5D=&amp;car_finance_lead%5Bage%5D=&amp;car_finance_lead%5Bbank_id%5D=&amp;car_finance_lead%5Bcar_loan_id%5D=31&amp;car_finance_lead%5Bcity%5D=&amp;car_finance_lead%5Bcity_area_id%5D=&amp;car_finance_lead%5Bcity_id%5D=&amp;car_finance_lead%5Bcnic%5D=&amp;car_finance_lead%5Bcomment%5D=&amp;car_finance_lead%5Bcurrent_bank%5D=&amp;car_finance_lead%5Bdate%5D=&amp;car_finance_lead%5Bdisposition%5D=&amp;car_finance_lead%5Bdown_payment%5D=15.0&amp;car_finance_lead%5Bin_debt%5D=&amp;car_finance_lead%5Bis_filler%5D=&amp;car_finance_lead%5Bmedium_id%5D=&amp;car_finance_lead%5Bmobile%5D=&amp;car_finance_lead%5Bmodel_year%5D=2021&amp;car_finance_lead%5Bname%5D=&amp;car_finance_lead%5Boccupation%5D=&amp;car_finance_lead%5Bprice%5D=1910000&amp;car_finance_lead%5Bprocessing_period%5D=&amp;car_finance_lead%5Breason%5D=&amp;car_finance_lead%5Bsalary%5D=&amp;car_finance_lead%5Bsource%5D=&amp;car_finance_lead%5Bstatus%5D=&amp;car_finance_lead%5Btenure%5D=7&amp;car_finance_lead%5Btime_to_call%5D=&amp;car_finance_lead%5Bused_car_id%5D=&amp;car_finance_lead%5Bvehicle_intent%5D=&amp;type=used-car"
                       className="fs12 fwb genericGreen mt5 pointer"
-                      
                     >
                       <u>PKR 34,782/Month</u>
                     </a>
