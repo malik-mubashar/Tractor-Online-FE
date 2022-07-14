@@ -22,7 +22,6 @@ import { modelApis } from "../../API/ModelsApis";
 // import { modelApis } from "../../API/ModelsApis";
 
 export default function Models() {
-  const [paginationNumbers, setPaginationNumbers] = useState();
   const [noOfRec, setNoOfRec] = useState(10);
   const [mainSearchString, setMainSearchString] = useState("");
   useEffect(() => {
@@ -45,11 +44,6 @@ export default function Models() {
           isAddModel: false,
           isEditModel: false,
         });
-        var temp = [];
-        for (var i = 1; i <= result.data.pagination.pages; i++) {
-          temp.push(i);
-        }
-        setPaginationNumbers(temp);
       } else {
         toast.dismiss(loadingToastId);
         console.error(result.data);
@@ -84,7 +78,7 @@ export default function Models() {
     isViewModel: false,
     models: null,
     originalModels: null,
-    status: "active",
+    status: null,
   });
 
   const handleSearch = (searchString) => {
@@ -318,7 +312,9 @@ export default function Models() {
                                           link: model.link,
                                           status: model.status,
                                           description: model.description,
-                                          modelId: model.id,
+																					modelId: model.id,
+																					product_id: model.product_id,
+																					product:model.product
                                         });
                                       }}
                                       className="text-success mr-2 icon wh-15 mt-minus-3"

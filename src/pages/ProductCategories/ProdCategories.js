@@ -83,7 +83,7 @@ export default function ProdCategories() {
     isViewProdCategory: false,
     prodCategories: null,
     originalProdCategories: null,
-    status: "active",
+    status: null,
   });
 
   const handleSearch = (searchString) => {

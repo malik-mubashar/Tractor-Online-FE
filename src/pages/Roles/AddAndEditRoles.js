@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { Button, Col, Form, Row } from "react-bootstrap";
 import toast, { Toaster } from "react-hot-toast";
 import { roleApis } from "../../API/RolesApis";
@@ -14,42 +14,99 @@ export default function AddAndEditRole({
       [evt.target.name]: evt.target.value,
     });
   }
+  const fieldsMap = [
+    { name: "title", required: true },
+    { name: "status", required: true },
+  ];
 
+  const [fieldsWithError, setFieldsWithError] = useState({
+    status: false,
+    title: false,
+  });
+  const doValidation = () => {
+    var tempFieldsWithError = {};
+    fieldsMap.forEach((fieldDetail) => {
+      console.log(rolesState);
+      if (
+        rolesState[fieldDetail.name] == undefined ||
+        rolesState[fieldDetail.name] == ""
+      ) {
+        if (fieldDetail.required === true) {
+          tempFieldsWithError = {
+            ...tempFieldsWithError,
+            [fieldDetail.name]: true,
+          };
+        } else if (fieldDetail.required === false) {
+          tempFieldsWithError = {
+            ...tempFieldsWithError,
+            [fieldDetail.name]: false,
+          };
+        }
+      } else if (
+        rolesState[fieldDetail.name] != undefined ||
+        rolesState[fieldDetail.name] != ""
+      ) {
+        if (fieldDetail.required === true) {
+          tempFieldsWithError = {
+            ...tempFieldsWithError,
+            [fieldDetail.name]: false,
+          };
+        }
+      }
+    });
+
+    console.log("tempFieldsWithError", tempFieldsWithError);
+    var isValidationFailed = false;
+    console.log(tempFieldsWithError);
+    setFieldsWithError(tempFieldsWithError);
+    Object.values(tempFieldsWithError).forEach((item) => {
+      if (item === true) {
+        isValidationFailed = true;
+      }
+    });
+    console.log("isValidationFailed", isValidationFailed);
+
+    return isValidationFailed;
+  };
   const addRole = async (params) => {
-    const loadingToastId = toast.loading("Loading..!");
+    if (!doValidation()) {
+      const loadingToastId = toast.loading("Loading..!");
 
-    if (rolesState.isAddRole) {
-      try {
-        const result = await roleApis.addRole(rolesState);
-        console.log(result);
-        if (result.error == false) {
-          toast.dismiss(loadingToastId);
-          toast.success("City created!");
-          setRolesState({
-            ...rolesState,
-            isAddRole: false,
-            isEditRole: false,
-          });
-          getRoles(1, "", 10);
+      if (rolesState.isAddRole) {
+        try {
+          const result = await roleApis.addRole(rolesState);
+          console.log(result);
+          if (result.error == false) {
+            toast.dismiss(loadingToastId);
+            toast.success("City created!");
+            setRolesState({
+              ...rolesState,
+              isAddRole: false,
+              isEditRole: false,
+            });
+            getRoles(1, "", 10);
+          }
+        } catch (error) {
+          console.error(error);
         }
-      } catch (error) {
-        console.error(error);
-      }
-    } else if (rolesState.isEditRole) {
-      try {
-        const result = await roleApis.updateRole(rolesState);
-        if (result.error === false) {
-          toast.success("Role updated!");
-          toast.dismiss(loadingToastId);
-          setRolesState({
-            ...rolesState,
-            isEditRole: false,
-          });
-          getRoles(1, "", 10);
+      } else if (rolesState.isEditRole) {
+        try {
+          const result = await roleApis.updateRole(rolesState);
+          if (result.error === false) {
+            toast.success("Role updated!");
+            toast.dismiss(loadingToastId);
+            setRolesState({
+              ...rolesState,
+              isEditRole: false,
+            });
+            getRoles(1, "", 10);
+          }
+        } catch (error) {
+          console.error(error);
         }
-      } catch (error) {
-        console.error(error);
       }
+    } else {
+      toast.error("Validation Failed");
     }
   };
   console.log(rolesState);
@@ -62,15 +119,16 @@ export default function AddAndEditRole({
             <div className="card-body">
               <div className="card-header">
                 <h5 className="card-title">
-                  {rolesState.isAddRole
-                    ? "Add Role"
-                    : "Edit Role"}
+                  {rolesState.isAddRole ? "Add Role" : "Edit Role"}
                 </h5>
               </div>
               <Form>
                 <Form.Group controlId="formBasicName">
                   <Form.Label>Name</Form.Label>
-                  <Form.Control
+									<Form.Control
+										   className={
+												fieldsWithError.title === true ? "border-danger" : ""
+											}
                     defaultValue={rolesState.title}
                     name="title"
                     type="text"
@@ -79,29 +137,36 @@ export default function AddAndEditRole({
                   />
                 </Form.Group>
 
-                <Form.Group controlId="formBasicComments">
+                <Form.Group controlId="formGridState">
+                  <Form.Label>Status</Form.Label>
+									<Form.Control
+										   className={
+												fieldsWithError.status === true ? "border-danger" : ""
+											}
+                    as="select"
+                    value={rolesState.status}
+                    onChange={(e) => handleChange(e)}
+                    name="status"
+                  >
+                    <option value hidden >-- Select Status --</option>
+                    <option value="active">active</option>
+                    <option value="passive">passive</option>
+                    <option value="deleted">deleted</option>
+                  </Form.Control>
+								</Form.Group>
+								
+								<Form.Group controlId="formBasicComments">
                   <Form.Label>Description</Form.Label>
-                  <Form.Control
+									<Form.Control
+										   className={
+												fieldsWithError.description === true ? "border-danger" : ""
+											}
                     defaultValue={rolesState.description}
                     name="description"
                     type="text"
                     placeholder="description"
                     onChange={(e) => handleChange(e)}
                   />
-                </Form.Group>
-
-                <Form.Group controlId="formGridState">
-                  <Form.Label>Status</Form.Label>
-                  <Form.Control
-                    as="select"
-                    value={rolesState.status}
-                    onChange={(e) => handleChange(e)}
-                    name="status"
-                  >
-                    <option value="active">active</option>
-                    <option value="passive">passive</option>
-                    <option value="deleted">deleted</option>
-                  </Form.Control>
                 </Form.Group>
 
                 <Button
@@ -115,7 +180,7 @@ export default function AddAndEditRole({
                     })
                   }
                 >
-                   Cancel
+                  Cancel
                 </Button>
                 <Button
                   onClick={() => {

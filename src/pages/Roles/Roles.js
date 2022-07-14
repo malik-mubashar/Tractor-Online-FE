@@ -82,7 +82,7 @@ export default function Roles() {
     isAddRole: false,
     roles: null,
     originalRoles: null,
-    status: 'active',
+    status: null,
   });
 
   const handleSearch = (searchString) => {
@@ -286,6 +286,7 @@ export default function Roles() {
                                         isEditRole: true,
                                         title: role.title,
                                         status: role.status,
+                                        description: role.description,
                                         roleId: role.id,
                                       });
                                     }}

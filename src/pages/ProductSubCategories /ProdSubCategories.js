@@ -86,7 +86,7 @@ export default function ProdSubCategories() {
     isAddProdSubCategory: false,
     prodSubCategories: null,
     originalProdSubCategories: null,
-    status: "active",
+    status: null,
   });
 
   const handleSearch = (searchString) => {
@@ -299,8 +299,12 @@ console.log('prodSubCategoriesState',prodSubCategoriesState)
                                           ...prodSubCategoriesState,
                                           isEditProdSubCategory: true,
                                           title: prod.title,
+                                          status: prod.status,
+                                          link: prod.link,
                                           comments: prod.comments,
-                                          prodCategoryId: prod.id,
+																					prodCategoryId: prod.id,
+																					product_category_head:prod.product_category_head,
+																					product_category_head_id:prod.product_category_head_id
                                         });
                                       }}
                                       className="text-success mr-2 icon wh-15 mt-minus-3"
