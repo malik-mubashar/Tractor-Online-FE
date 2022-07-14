@@ -11,7 +11,7 @@ import {
   Button,
   Image,
 } from "react-bootstrap";
-import ImageGallery from "react-image-gallery";
+// import ImageGallery from "react-image-gallery";
 import PT from "prop-types";
 import {
   LightgalleryProvider,
