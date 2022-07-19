@@ -1,10 +1,13 @@
 import React, { useEffect, useState } from "react";
 import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
+import { Link } from "react-router-dom";
 import { productApis } from "../../API/ProductApis";
+import { useHistory } from "react-router-dom";
 
 export default function FeaturedProducts({ title, link }) {
   const [products, setProducts] = useState([]);
+  const history = useHistory()
 
   useEffect(() => {
     handleGetAllProducts();
@@ -16,6 +19,7 @@ export default function FeaturedProducts({ title, link }) {
       console.log("products", result.data && result.data.data);
     }
   };
+ 
 
   const responsive = {
     desktop: {
@@ -65,17 +69,19 @@ export default function FeaturedProducts({ title, link }) {
           return(
             <>
             <div className="featured-card bg-white border-radius cursor-pointer h-100" key={i}>
-              <img
-                className="card-img border-radius"
-                src={item.cover_photo_path}
-                alt=""
-              />
-              <h4 className="mb-0 pl-2 border-radius productTitleTruncate" title={item.title}>{item.title}</h4>
-              <p className="mb-0 pl-2 text-success border-radius">
-                {item.price}
-              </p>
-              <p className="pl-2 border-radius">{item.location}</p>
-            </div>
+              <Link to ={`/addDetails/${item.id}`}>
+                <img
+                  className="card-img border-radius"
+                  src={item.cover_photo_path}
+                  alt=""
+                />
+                <h4 className="mb-0 pl-2 border-radius productTitleTruncate" title={item.title}>{item.title}</h4>
+                <p className="mb-0 pl-2 text-success border-radius">
+                  {item.price}
+                </p>
+                <p className="pl-2 border-radius">{item.location}</p>
+              </Link>
+              </div>
             </>
         );
       })}

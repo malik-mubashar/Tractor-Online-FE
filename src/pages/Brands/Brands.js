@@ -44,11 +44,6 @@ export default function Brands() {
           isAddBrand: false,
           isEditBrand: false,
         });
-        var temp = [];
-        for (var i = 1; i <= result.data.pagination.pages; i++) {
-          temp.push(i);
-        }
-        setPaginationNumbers(temp);
       } else {
         toast.dismiss(loadingToastId);
         console.error(result.data);

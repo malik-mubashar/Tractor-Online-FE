@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
   Navbar,
   Nav,
@@ -44,28 +44,15 @@ import carAC from "../../assets/svg/air-conditioner.svg";
 import steering from "../../assets/svg/steering-wheel.svg";
 import tick from "../../assets/svg/tick-symbol.svg";
 // import cellPhoneSvg from "../../assets/svg/cellPhone.svg";
+import { productApis } from "../../API/ProductApis";
+import { useParams } from "react-router";
 
 export default function AddDetails() {
-  const images = [
-    {
-      original: "https://picsum.photos/id/1018/1000/600/",
-      thumbnail: "https://picsum.photos/id/1018/250/150/",
-    },
-    {
-      original: "https://picsum.photos/id/1015/1000/600/",
-      thumbnail: "https://picsum.photos/id/1015/250/150/",
-    },
-    {
-      original: "https://picsum.photos/id/1019/1000/600/",
-      thumbnail: "https://picsum.photos/id/1019/250/150/",
-    },
-  ];
+  const { id } = useParams();
+  console.log("idasd", id);
 
-  const GROUP2 = [
-    "https://images.unsplash.com/photo-1594818898109-44704fb548f6?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1950&q=80",
-    "https://images.unsplash.com/photo-1594818896795-35ad7bcf3c6a?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1950&q=80",
-    "https://images.unsplash.com/photo-1594818896744-57eca4d47b07?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1950&q=80",
-    "https://images.unsplash.com/photo-1594818897077-aec41f55241f?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1951&q=80",
+  var GROUP2 = [
+    
   ];
 
   const PhotoItem = ({ image, thumb, group }) => (
@@ -81,37 +68,21 @@ export default function AddDetails() {
     group: PT.string.isRequired,
   };
 
-  const OpenButtonWithHoc = withLightgallery(({ openGallery, ...props }) => {
-    return (
-      <button
-        {...props}
-        onClick={() => {
-          openGallery("group1");
-        }}
-        className={["button is-primary", props.className || ""].join(" ")}
-      >
-        Open first photos group (using hoc)
-      </button>
-    );
-  });
-
-  const OpenButtonWithHook = (props) => {
-    const { openGallery } = useLightgallery();
-    return (
-      <button
-        {...props}
-        onClick={() => openGallery("group2")}
-        className={["button is-primary", props.className || ""].join(" ")}
-      >
-        Open second photos group (using hook)
-      </button>
-    );
-  };
-  OpenButtonWithHook.propTypes = {
-    className: PT.string,
-  };
   const [visible, setVisible] = useState(true);
-
+  const [product, setProduct] = useState([]);
+  useEffect(() => {
+    handleGetProductDetails();
+  }, []);
+  const handleGetProductDetails = async () => {
+    debugger;
+    const result = await productApis.getProductDetails(id);
+    if (result.error === false) {
+      setProduct(result.data && result.data.data);
+      console.log("showproducts", result.data && result.data.data);
+      GROUP2 = result.data.data.active_images_path;
+    }
+  };
+  console.log("product.acacac", product.active_images_path);
   return (
     //sidebar
     <div className="addDetails">
@@ -163,12 +134,13 @@ export default function AddDetails() {
               </li>
             </ul>
           </div>
+
           <div className="row">
             {/* left side */}
             <div className="col-lg-8 col-md-8">
               <div className="bg-white p-4">
                 <div className="">
-                  <h3>Suzuki Alto Vxr 2021 </h3>
+                  <h3>{product.title} </h3>
                   <p className="detail-sub-heading d-flex">
                     <a href="#" className="d-flex">
                       <Image
@@ -178,7 +150,7 @@ export default function AddDetails() {
                         alt="Profile Image"
                         className="d-flex justify-content-center m-auto"
                       />{" "}
-                      Abdalians Housing Society, Lahore Punjab
+                      {product.location}
                     </a>
                     {"  "} {"|"}
                     <span className="time d-flex">
@@ -193,9 +165,18 @@ export default function AddDetails() {
                     </span>
                   </p>
                 </div>
+                <div className="right-img pull-right">
+                      <img
+                        alt="Tractor Inspection Rate"
+                        src={product.cover_photo_path}
+                        width="100%"
+                        height="100%"
+                      />
+                    </div>
+                  
                 <div className="imageGallery">
                   <div className="content">
-                    <button
+                    {/* <button
                       className="button is-light"
                       style={{
                         position: "absolute",
@@ -207,7 +188,7 @@ export default function AddDetails() {
                       ) : (
                         <i className="fas fa-eye" />
                       )}
-                    </button>
+                    </button> */}
 
                     <div>
                       {visible ? (
@@ -239,9 +220,10 @@ export default function AddDetails() {
                               justifyContent: "center",
                             }}
                           >
-                            {GROUP2.map((p, idx) => (
-                              <PhotoItem key={idx} image={p} group="group2" />
-                            ))}
+                            {/* {GROUP2.map((p, idx) => ( */}
+                            {product&&product.active_images_path&& product.active_images_path.map((p, idx) => (
+                                <PhotoItem key={idx} image={p} group="group2" />
+                              ))}
                           </div>
                         </LightgalleryProvider>
                       ) : null}
@@ -378,12 +360,13 @@ export default function AddDetails() {
                     <div className="right-img pull-right">
                       <img
                         alt="Tractor Inspection Rate"
-                        src="https://wsa2.pakwheels.com/assets/inspection/inspection-car-rate-7b4ede752bdfc0e0cd08c3247e7e37a8.png"
+                        src={product.cover_photo_path}
                         width="266"
                       />
                     </div>
                   </div>
                 </div>
+
                 {/* car details */}
                 <div className="mt-4">
                   <div className="row">
