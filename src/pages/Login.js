@@ -48,6 +48,7 @@ const Login = () => {
         );
         localStorage.setItem("headers", JSON.stringify(result.headers));
         history.push("/dashboard");
+        setSignUpMessage(false)
       }
 
       //error
