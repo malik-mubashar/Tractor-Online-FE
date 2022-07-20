@@ -24,6 +24,7 @@ export default ({ children }) => {
 
 	/*****setting values from local storage to constants*******************/
 	const [currentUser, setCurrentUser] = useState(prevUser);
+	const [signUpMessage, setSignUpMessage] = useState(false);
 	// const [logoutMessage, setLogoutMessage] = useState("");
 	// const [activeRoute, setActiveRoute] = useState(preActiveRoute);
 	// const [activeCampaign, setActiveCampaign] = useState("");
@@ -174,6 +175,8 @@ export default ({ children }) => {
 	const defaultContext = {
 		currentUser,
 		setCurrentUser,
+		signUpMessage,
+		setSignUpMessage
 		// logoutMessage,
 		// setLogoutMessage,
 		// activeRoute,
