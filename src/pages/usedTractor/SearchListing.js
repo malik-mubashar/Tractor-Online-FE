@@ -22,11 +22,9 @@ import * as Icon from "react-feather";
 import { useHistory } from "react-router-dom";
 import CustomPopover from "./CustomPopover";
 import { productApis } from "../../API/ProductApis";
-import Loader from "../Loader";
 
 export default function SearchListing() {
   const [showNumberWarning, setShowNumberWarning] = useState(true);
-  const [loader, setLoader] = useState(true);
   let history = useHistory();
   const [openShowPhone, setOpenShowPhone] = useState(false);
 
@@ -44,7 +42,6 @@ export default function SearchListing() {
     const result = await productApis.getAllProducts();
     if (result.error === false) {
       setProducts(result.data && result.data.data);
-      setLoader(false);
       console.log("products", result.data && result.data.data);
     }
   };
@@ -52,7 +49,6 @@ export default function SearchListing() {
 
   return (
     <>
-      <Loader show={loader} />
       <Col sm={12} lg={12} xl={12}>
         <div className="topSorting">
           <div className="organize-results">

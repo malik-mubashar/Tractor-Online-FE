@@ -1,5 +1,191 @@
-import React from "react";
+import React, {useState} from "react";
+import { Link, useHistory } from "react-router-dom";
+import { Form, Button, Image, Modal } from "react-bootstrap";
+import Icofont from 'react-icofont';
+
+
+function MyVerticallyCenteredModal(props) {
+  const [password, setPassword] = useState();
+  const [email, setEmail] = useState();
+  const [signUp, setSignUp] = useState(false);
+  const [passwordType, setPasswordType] = useState("password");
+    const [passwordInput, setPasswordInput] = useState("");
+
+    const handlePasswordChange =(evnt)=>{
+        setPasswordInput(evnt.target.value);
+    }
+    const togglePassword =()=>{
+      if(passwordType==="password")
+      {
+       setPasswordType("text")
+       return;
+      }
+      setPasswordType("password")
+    }
+  return (
+    <Modal
+      {...props}
+      size="md"
+      aria-labelledby="contained-modal-title-vcenter"
+      centered
+    >
+      <Modal.Header closeButton>
+        <Modal.Title id="contained-modal-title-vcenter">
+          {signUp ? "Sign Up" : "Login" }
+        </Modal.Title>
+      </Modal.Header>
+      <Modal.Body>
+        <div className="form-content p-0">
+          {signUp ?
+            <Form>
+              <Form.Group>
+                <Form.Label>Email Address</Form.Label>
+                <Form.Control
+                  type="email"
+                  onChange={(event) => {
+                    // setEmail(event.target.value);
+                  }}
+                />
+              </Form.Group>
+
+              <Form.Group>
+                <Form.Label>Full Name</Form.Label>
+                <Form.Control
+                  type="text"
+                  onChange={(event) => {
+                    // setFullName(event.target.value);
+                  }}
+                />
+              </Form.Group>
+
+              <Form.Group className="relative">
+                <Form.Label>Password</Form.Label>
+                <Form.Control
+                  type={passwordType}
+                  onChange={(event) => {
+                    // setPassword(event.target.value);
+                  }}
+                />
+                {/* <i className="password-icons cursor-pointer" onClick={togglePassword}>
+                {
+                  passwordType==="password"?
+                    <Icofont
+                      icon="eye"
+                      className="icofont-2x"
+                    />
+                  :
+                    <Icofont
+                      icon="eye-blocked"
+                      className="icofont-2x"
+                    />
+                }
+              </i> */}
+              </Form.Group>
+
+              <Form.Group className="relative">
+                <Form.Label>Confirm Password</Form.Label>
+                <Form.Control
+                  // type={confirmPasswordType}
+                  onChange={(event) => {
+                    // setConfirmPassword(event.target.value);
+                  }}
+                />
+                {/* <i className="password-icons cursor-pointer" onClick={confirmTogglePassword}>
+                {
+                  confirmPasswordType==="password"?
+                    <Icofont
+                      icon="eye"
+                      className="icofont-2x"
+                    />
+                  :
+                    <Icofont
+                      icon="eye-blocked"
+                      className="icofont-2x"
+                    />
+                }
+              </i> */}
+              </Form.Group>
+              {/* {error ? (
+                <span className="text-danger">{error}</span>
+              ) : (
+                ""
+              )} */}
+              <div className="text-center">
+                <Button variant="primary" className="mb-2">
+                  Sign Up
+                </Button>
+                <Link to="/login/" className="">
+                  Already have an Account?
+                </Link>
+              </div>
+            </Form>
+          :
+            <Form>
+              <Form.Group>
+                <Form.Label>Email address</Form.Label>
+                <Form.Control
+                  type="email"
+                  onChange={(event) => setEmail(event.target.value)}
+                />
+              </Form.Group>
+              <Form.Group className="relative">
+                <Form.Label>Password</Form.Label>
+                <Form.Control
+                  type={passwordType}
+                  onChange={(event) => setPassword(event.target.value)}
+                />
+                <i className="password-icons cursor-pointer" onClick={togglePassword}>
+                  {
+                    passwordType==="password"?
+                      <Icofont
+                        icon="eye"
+                        className="icofont-2x"
+                      />
+                    :
+                      <Icofont
+                        icon="eye-blocked"
+                        className="icofont-2x"
+                      />
+                  }
+                </i>
+              </Form.Group>
+              <div className="text-center">
+                <Button
+                  className="mb-2"
+                  variant="primary"
+                  type="submit"
+                  // onClick={onLoginHandler}
+                >
+                  Log In
+                </Button>
+                <Link onClick={() => {setSignUp(true)}}>
+                  Don't Have an Account?
+                </Link>
+              </div>
+            </Form>
+          }
+        </div>
+      </Modal.Body>
+      <Modal.Footer>
+        <Button onClick={props.onHide}>Close</Button>
+      </Modal.Footer>
+    </Modal>
+  );
+}
+
 const TractorSaleAd = () => {
+  const [modalShow, setModalShow] = React.useState(false);
+
+  function postAdd () {
+    debugger
+    if (localStorage.currentUser === undefined){
+      setModalShow(true)
+    }
+    else{
+
+    }
+  }
+
   return (
     <>
       <div className="bg-white">
@@ -27,9 +213,13 @@ const TractorSaleAd = () => {
                   possible for the best price.
                 </li>
               </ul>
-              <a href={"/"} className="btn btn-danger btn-lg text-white">
+              <MyVerticallyCenteredModal
+                show={modalShow}
+                onHide={() => setModalShow(false)}
+              />
+              <button onClick={ () => {postAdd()}} className="btn btn-danger btn-lg text-white">
                 Place Your Ad Here
-              </a>
+              </button>
             </div>
             <div className="col-lg-6 col-12 mt-4">
               <h2>Sell It For Me on TractorOnline</h2>
@@ -47,9 +237,9 @@ const TractorSaleAd = () => {
                   transaction.
                 </li>
               </ul>
-              <a href={"/"} className="btn btn-info btn-lg text-white">
-                Tractor Registration{" "}
-              </a>
+              <span className="btn btn-info btn-lg text-white">
+                Coming Soon....
+              </span>
             </div>
           </div>
         </div>

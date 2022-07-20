@@ -10,7 +10,10 @@ import toast from "react-hot-toast";
 import Icofont from 'react-icofont';
 
 const Login = () => {
-  const { currentUser, setCurrentUser } = useContext(RootContext);
+  const { currentUser, setCurrentUser, signUpMessage, setSignUpMessage } = useContext(RootContext);
+  const [alertMessage, setAlertMessage]  = useState('Confirmation Mail mail sent to your Email Address. Kindly Confirm Your email to continue..')
+  const [alertType, setAlertType] = useState('alert-success')
+
 
   const [email, setEmail] = useState();
   const [password, setPassword] = useState();
@@ -19,7 +22,6 @@ const Login = () => {
 		e.preventDefault();
 		const loadingToastId = toast.loading("Loading..!");
 
-		 
     try {
       const result = await user.login(email, password);
       console.log(result);
@@ -51,9 +53,10 @@ const Login = () => {
       //error
 			if (result.error === true) {
 				toast.dismiss(loadingToastId);
-				toast.error('Login failed');
-
-        console.error(result.data.errors.full_messages);
+				// toast.error('Login failed');
+        setAlertMessage(result.data.errors[0])
+        setSignUpMessage(true)
+        setAlertType('alert-danger')
       }
 		} catch (error) {
 			toast.dismiss(loadingToastId);
@@ -78,6 +81,16 @@ const Login = () => {
 
   return (
     <div className="auth-main-content auth-bg-image">
+      {signUpMessage ?
+        <div class={`alert ${alertType} alert-dismissible fade show mt-2`} role="alert">
+          {alertMessage}
+          <button type="button" class="close" data-dismiss="alert" aria-label="Close" onClick={ () => {setSignUpMessage(false)}}>
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        :
+        null
+      }
       <div className="d-table">
         <div className="d-tablecell">
           <div className="auth-box">

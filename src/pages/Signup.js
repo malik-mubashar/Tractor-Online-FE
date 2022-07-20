@@ -10,7 +10,7 @@ import toast from "react-hot-toast";
 import Icofont from 'react-icofont';
 
 const SignUp = () => {
-  const { currentUser, setCurrentUser } = useContext(RootContext);
+  const { currentUser, setCurrentUser, setSignUpMessage } = useContext(RootContext);
   const [confirmPasswordType, setConfirmPasswordType] = useState("password");
   const [passwordType, setPasswordType] = useState("password");
   const [email, setEmail] = useState();
@@ -44,25 +44,27 @@ const SignUp = () => {
       if (result.error === false) {
       	toast.dismiss(loadingToastId);
 
-        toast.success('wellcome')
-        setCurrentUser({
-          ...result.data.data,
-          accessToken: result.headers["access-token"],
-          client: result.headers["client"],
-          uid: result.headers["uid"]
-        });
+        // toast.success('wellcome')
+        setSignUpMessage(true)
+        history.push('/login')
+        // setCurrentUser({
+        //   ...result.data.data,
+        //   accessToken: result.headers["access-token"],
+        //   client: result.headers["client"],
+        //   uid: result.headers["uid"]
+        // });
 
-        localStorage.setItem(
-          "currentUser",
-          JSON.stringify({
-            ...result.data.data,
-            accessToken: result.headers["access-token"],
-            client: result.headers["client"],
-            uid: result.headers["uid"]
-          })
-        );
-        localStorage.setItem("headers", JSON.stringify(result.headers));
-        history.push("/dashboard");
+        // localStorage.setItem(
+        //   "currentUser",
+        //   JSON.stringify({
+        //     ...result.data.data,
+        //     accessToken: result.headers["access-token"],
+        //     client: result.headers["client"],
+        //     uid: result.headers["uid"]
+        //   })
+        // );
+        // localStorage.setItem("headers", JSON.stringify(result.headers));
+        // history.push("/dashboard");
       }
 
       //error

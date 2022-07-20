@@ -1,9 +1,10 @@
-import React, { useContext, useState } from "react";
+import React from "react";
 
-const Loader = (show) => {
+const Loader = ({show}) => {
+
 
   return (
-    <div className={`loaderContainer ${show ? "d-none" : null}`}>
+    <div className={`loaderContainer ${show ? "d-none" : ""}`}>
         <div className="lds-hourglass"></div>
         <div className="loaderText d-flex"><div className="mt-2">Loading</div> <div class="lds-ellipsis"><div></div><div></div><div></div><div></div></div></div>
     </div>
