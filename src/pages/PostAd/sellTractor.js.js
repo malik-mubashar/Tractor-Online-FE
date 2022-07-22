@@ -1,24 +1,22 @@
 import React from "react";
-import postAdLogo from "../../assets/img/postAd.png"
-import postInspect from "../../assets/img/postInspection.png"
-import Icofont from 'react-icofont';
+import postAdLogo from "../../assets/img/postAd.png";
+import postInspect from "../../assets/img/postInspection.png";
+import Icofont from "react-icofont";
 
-const postAd = () => {
+const sellTractor = () => {
   return (
-    <>
+    <div className="sell-tractor">
       <section>
         <div className="container">
           <div className="well p40">
             <div className="size">
-              <h1 className="text-center">Sell Your Tractor at the Best Price</h1>
+              <h1 className="text-center">
+                Sell Your Tractor at the Best Price
+              </h1>
               <ul className="pitching-widgets pre-sell-select">
                 <li>
                   <div className="pull-right">
-                    <img
-                      alt="Post-ad-art"
-                      src={postAdLogo}
-                      width="220"
-                    />
+                    <img alt="Post-ad-art" src={postAdLogo} width="220" />
                   </div>
                   <div className="generic-gray">
                     <label className="item styled-control styled-control-radio">
@@ -37,24 +35,24 @@ const postAd = () => {
                       </h3>
                       <ul className="list-unstyled fs14">
                         <li>
-                        <Icofont
-                              icon="tick-mark text-success"
-                              className="icofont-2x"
-                            />
+                          <Icofont
+                            icon="tick-mark text-success"
+                            className="icofont-2x"
+                          />
                           Free Ad Posting in 3 Simple Steps
                         </li>
                         <li>
-                        <Icofont
-                              icon="tick-mark text-success"
-                              className="icofont-2x"
-                            />
+                          <Icofont
+                            icon="tick-mark text-success"
+                            className="icofont-2x"
+                          />
                           Receive sincere bids from confirmed buyers.
                         </li>
                         <li>
-                        <Icofont
-                              icon="tick-mark text-success"
-                              className="icofont-2x"
-                            />
+                          <Icofont
+                            icon="tick-mark text-success"
+                            className="icofont-2x"
+                          />
                           Sell Your Tractor Quickly and for the Highest Price
                         </li>
                       </ul>
@@ -85,24 +83,24 @@ const postAd = () => {
                       </h3>
                       <ul className="list-unstyled fs14">
                         <li>
-                        <Icofont
-                              icon="tick-mark text-success"
-                              className="icofont-2x"
-                            />
+                          <Icofont
+                            icon="tick-mark text-success"
+                            className="icofont-2x"
+                          />
                           Dedicated Sales Expert to Sell Your Tractor
                         </li>
                         <li>
-                        <Icofont
-                              icon="tick-mark text-success"
-                              className="icofont-2x"
-                            />
-                          We Bargain on Your Behalf and Share the Best Offer 
+                          <Icofont
+                            icon="tick-mark text-success"
+                            className="icofont-2x"
+                          />
+                          We Bargain on Your Behalf and Share the Best Offer
                         </li>
                         <li>
-                        <Icofont
-                              icon="tick-mark text-success"
-                              className="icofont-2x"
-                            />
+                          <Icofont
+                            icon="tick-mark text-success"
+                            className="icofont-2x"
+                          />
                           We ensure Safe &amp; Secure Transaction
                         </li>
                       </ul>
@@ -152,76 +150,78 @@ const postAd = () => {
         </div>
       </section>
       <div>
-      <section>
-        <div className="container">
-          <h2>Why Sell Your Tractor on TractorOnline?</h2>
-          <div className="row why-pw-cards-container">
-            <div className="col-md-3 card pw-card">
-              <div className="img-cont">
-                <img
-                  alt="Post Your Ad for Free"
-                  src="https://wsa2.pakwheels.com/assets/product/why-pw-icons/post-ad-icon-4cae31b8670bf33c6dc559081e90641a.svg"
-                />
+        <section>
+          <div className="container">
+            <h2>Why Sell Your Tractor on TractorOnline?</h2>
+            <div className="row why-pw-cards-container">
+              <div className="col-md-3 card pw-card">
+                <div className="img-cont">
+                  <img
+                    alt="Post Your Ad for Free"
+                    src="https://wsa2.pakwheels.com/assets/product/why-pw-icons/post-ad-icon-4cae31b8670bf33c6dc559081e90641a.svg"
+                  />
+                </div>
+                <h5 className="fs18">Post Your Ad for Free</h5>
+                <p className="fs14 mb0">
+                  Post your ad on Pakistan's largest automotive marketplace.
+                </p>
               </div>
-              <h5 className="fs18">Post Your Ad for Free</h5>
-              <p className="fs14 mb0">
-                Post your ad on Pakistan's largest automotive marketplace.
-              </p>
-            </div>
-            <div className="col-md-3 card pw-card">
-              <div className="img-cont">
-                <img
-                  alt="Used Cars Get Sold in No Time"
-                  src="https://wsa3.pakwheels.com/assets/product/why-pw-icons/authenticity-9cb150848599d0244900db4a8f90022f.svg"
-                />
+              <div className="col-md-3 card pw-card">
+                <div className="img-cont">
+                  <img
+                    alt="Used Cars Get Sold in No Time"
+                    src="https://wsa3.pakwheels.com/assets/product/why-pw-icons/authenticity-9cb150848599d0244900db4a8f90022f.svg"
+                  />
+                </div>
+                <h5 className="fs18">Used Cars Get Sold in No Time</h5>
+                <p className="fs14 mb0">
+                  100,000+ buyers visit the website daily.
+                </p>
               </div>
-              <h5 className="fs18">Used Cars Get Sold in No Time</h5>
-              <p className="fs14 mb0">
-                100,000+ buyers visit the website daily.
-              </p>
-            </div>
-            <div className="col-md-3 card pw-card">
-              <div className="img-cont">
-                <img
-                  alt="Best Rates for Used Cars"
-                  src="https://wsa4.pakwheels.com/assets/product/why-pw-icons/best-rate-icon-6759604f64e0740d77736a0ab913699f.svg"
-                />
+              <div className="col-md-3 card pw-card">
+                <div className="img-cont">
+                  <img
+                    alt="Best Rates for Used Cars"
+                    src="https://wsa4.pakwheels.com/assets/product/why-pw-icons/best-rate-icon-6759604f64e0740d77736a0ab913699f.svg"
+                  />
+                </div>
+                <h5 className="fs18">Best Rates for Used Tractors</h5>
+                <p className="fs14 mb0">
+                  Buyers willing to pay more for Pre-Inspected &amp; Certified
+                  Cars.
+                </p>
               </div>
-              <h5 className="fs18">Best Rates for Used Tractors</h5>
-              <p className="fs14 mb0">
-                Buyers willing to pay more for Pre-Inspected &amp; Certified
-                Cars.
-              </p>
-            </div>
-            <div className="col-md-3 card pw-card">
-              <div className="img-cont">
-                <img
-                  alt="Feature Your Ad"
-                  src="https://wsa4.pakwheels.com/assets/product/why-pw-icons/feature-your-ad-845803be6d28522284311870f288ec43.svg"
-                />
+              <div className="col-md-3 card pw-card">
+                <div className="img-cont">
+                  <img
+                    alt="Feature Your Ad"
+                    src="https://wsa4.pakwheels.com/assets/product/why-pw-icons/feature-your-ad-845803be6d28522284311870f288ec43.svg"
+                  />
+                </div>
+                <h5 className="fs18">Feature Your Ad</h5>
+                <p className="fs14 mb0">
+                  Featured Ads get Tractors sold quickly.
+                </p>
               </div>
-              <h5 className="fs18">Feature Your Ad</h5>
-              <p className="fs14 mb0">Featured Ads get Tractors sold quickly.</p>
             </div>
           </div>
-        </div>
-        
-      </section>
+        </section>
       </div>
       <section>
         <div className="container">
           <h2>5 Simple Steps to Sell Your Tractor</h2>
           <div className="row inspection-work-points sell-it-work-points mt30 fs16">
             <div className="col-sm-6">
-              <span className="point">1</span> Sign up on TractorOnline &amp; Post
-              an Ad
+              <span className="point">1</span> Sign up on TractorOnline &amp;
+              Post an Ad
             </div>
             <div className="col-sm-6">
               <span className="point">2</span> Provide necessary details about
               your used Tractor
             </div>
             <div className="col-sm-6">
-              <span className="point">3</span> Upload clear photos of your Tractor
+              <span className="point">3</span> Upload clear photos of your
+              Tractor
             </div>
             <div className="col-sm-6">
               <span className="point">4</span> Provide your contact information
@@ -252,8 +252,8 @@ const postAd = () => {
                         src="https://wsa3.pakwheels.com/assets/product/why-pw-icons/tip-icon-4e7948fce88f053b4617071b89e3fff2.svg"
                       />
                     </div>
-                    Get your Tractor repaired and fix any minor defects to increase
-                    its resale value
+                    Get your Tractor repaired and fix any minor defects to
+                    increase its resale value
                   </div>
                   <div className="col-md-3 card pw-card">
                     <div className="img-cont">
@@ -282,7 +282,8 @@ const postAd = () => {
                         src="https://wsa3.pakwheels.com/assets/product/why-pw-icons/tip-icon-4e7948fce88f053b4617071b89e3fff2.svg"
                       />
                     </div>
-                    Get your Tractor inspected by TractorOnline to get premium rates
+                    Get your Tractor inspected by TractorOnline to get premium
+                    rates
                   </div>
                 </div>
               </div>
@@ -362,16 +363,15 @@ const postAd = () => {
                 </h3>
               </a>
               <div>
-                Selling a used Tractor is not an easy job these days. When you
-                consult a dealership, they suggest you a less comparative price
-                than the market, which is less than you expected. It can easily
-                disappoint you to a great extent. Don't get into any trap of
-                selling your Tractor...
+                It can be time-consuming, exhausting, and difficult to sell a
+                secondhand tractor in Pakistan, especially if you have to go it
+                alone. You can easily and quickly sell your tractor in Pakistan
+                with the aid of TractorOnline. You can adhere to the easy
+                instructions below while selling your tractor:
               </div>
               <a href="/blog/selling-used-car/" rel="nofollow">
                 more »
               </a>
-
             </div>
             <div className="col-md-4 ">
               <a
@@ -391,10 +391,10 @@ const postAd = () => {
               </a>
               <div>
                 We all talk about the things you must check before buying a used
-                Tractor. But let's talk about things you should do before selling
-                Tractor in pakistan. If you are selling it on the basis of 'as it
-                is' and have mentioned it in the ad as well, then no point doing
-                anything to...
+                Tractor. But let's talk about things you should do before
+                selling Tractor in pakistan. If you are selling it on the basis
+                of 'as it is' and have mentioned it in the ad as well, then no
+                point doing anything to...
               </div>
               <a
                 href="/blog/5-things-you-should-take-care-of-before-selling-your-car/"
@@ -422,10 +422,10 @@ const postAd = () => {
               <div>
                 So you have decided to sell your Tractor online, but you are
                 thinking about how to create an effective ad that will make your
-                Tractor stand out from the crowd. Setting up a good ad for your Tractor
-                requires a lot of time and effort, but that time and effort will
-                be worth it, as, in the end, you can earn quite a good price for
-                your Tractor.
+                Tractor stand out from the crowd. Setting up a good ad for your
+                Tractor requires a lot of time and effort, but that time and
+                effort will be worth it, as, in the end, you can earn quite a
+                good price for your Tractor.
               </div>
               <a
                 href="/blog/heres-how-you-can-contact-pakwheels-services/"
@@ -470,12 +470,12 @@ const postAd = () => {
                 itemtype="https://schema.org/Answer"
               >
                 <div className="accordion-inner" itemprop="text">
-                  Millions of users visit the TractorOnline website daily which
-                  makes it easy for you to sell your Tractors. Based on our data,
-                  used Tractors either get sold within days and sometimes within
-                  hours. The key to selling your Tractor quickly is to set a
-                  reasonable price, add comprehensive details &amp; provide
-                  clear pictures. Check out TractorOnline{" "}
+                  The TractorOnline website receives millions of daily visitors,
+                  making it simple for you to sell your tractors. According to
+                  our research, used tractors are frequently sold within hours
+                  or only a few days. Set a fair asking price, include all
+                  relevant information, and include crisp images if you want to
+                  sell your tractor soon. Visit TractorOnline.{" "}
                   <a href="https://www.pakwheels.com/blog/selling-used-car/">
                     Used Car Selling Guide
                   </a>{" "}
@@ -508,12 +508,12 @@ const postAd = () => {
                 itemtype="https://schema.org/Answer"
               >
                 <div className="accordion-inner" itemprop="text">
-                  Go to TractorOnline.com &amp; post a free ad to sell your Tractor
-                  online. TractorOnline connects you to millions of buyers easily
-                  and quickly from the comfort of your home. All you have to do
-                  is post a free ad to sell your Tractor, put up a reasonable price
-                  and that’s it! You will get genuine offers from verified
-                  buyers.
+                  Go to TractorOnline.com &amp; To sell your tractor online,
+                  place a free ad. From the convenience of your home,
+                  TractorOnline links you with millions of buyers. All you have
+                  to do to sell your tractor is post a free ad, set a fair
+                  asking price, and that's it! You'll receive sincere offers
+                  from confirmed buyers.
                 </div>
               </div>
             </div>
@@ -543,8 +543,8 @@ const postAd = () => {
               >
                 <div className="accordion-inner" itemprop="text">
                   To get the best offers, post detailed descriptions including
-                  condition of the Tractor, mileage, service history, documents and
-                  ownership details etc and set a reasonable price. Our data
+                  condition of the Tractor, mileage, service history, documents
+                  and ownership details etc and set a reasonable price. Our data
                   shows that Used Tractors which are Pre-inspected get the best
                   offers. You can use TractorOnline's{" "}
                   <a href="https://www.pakwheels.com/products/pakwheels-inspection">
@@ -581,9 +581,10 @@ const postAd = () => {
                 <div className="accordion-inner" itemprop="text">
                   Selling your new or used Tractor in Pakistan requires time and
                   effort but selling it online can make the process a lot
-                  easier. TractorOnline.com is the best website where you can sell
-                  your Tractor without any hassle! With millions of verified buyers,
-                  TractorOnline makes it easier for you to sell your Tractors quickly.
+                  easier. TractorOnline.com is the best website where you can
+                  sell your Tractor without any hassle! With millions of
+                  verified buyers, TractorOnline makes it easier for you to sell
+                  your Tractors quickly.
                 </div>
               </div>
             </div>
@@ -612,11 +613,12 @@ const postAd = () => {
                 itemtype="https://schema.org/Answer"
               >
                 <div className="accordion-inner" itemprop="text">
-                  It is easier to get a better price for your Tractor if you repair
-                  it before selling. Identifying major and minor damages to the
-                  Tractor and getting them repaired can restore and increase the
-                  value of your Tractor. This will allow you to get a much better
-                  price for your Tractor than you could get before repairing it.
+                  It is easier to get a better price for your Tractor if you
+                  repair it before selling. Identifying major and minor damages
+                  to the Tractor and getting them repaired can restore and
+                  increase the value of your Tractor. This will allow you to get
+                  a much better price for your Tractor than you could get before
+                  repairing it.
                 </div>
               </div>
             </div>
@@ -645,12 +647,12 @@ const postAd = () => {
                 itemtype="https://schema.org/Answer"
               >
                 <div className="accordion-inner" itemprop="text">
-                  In TractorOnline Sell It For Me, TractorOnline takes over and sells
-                  your Tractor on your behalf with a money back guarantee. We will
-                  inspect the Tractor, put up an Ad with pictures, make a deal
-                  within 45 days and handle the paperwork for you. Moreover,
-                  under this service, the Ad is featured and will remain at the
-                  top of search lists, which attracts more buyers.
+                  In TractorOnline Sell It For Me, TractorOnline takes over and
+                  sells your Tractor on your behalf with a money back guarantee.
+                  We will inspect the Tractor, put up an Ad with pictures, make
+                  a deal within 45 days and handle the paperwork for you.
+                  Moreover, under this service, the Ad is featured and will
+                  remain at the top of search lists, which attracts more buyers.
                 </div>
               </div>
             </div>
@@ -672,10 +674,11 @@ const postAd = () => {
 
             <p dir="ltr">
               <span id="docs-internal-guid-efe7015f-7fff-9b04-27e0-6d80c1b9a79a">
-                Selling a used Tractor in Pakistan can be time-taking, tiring and
-                challenging, especially if you have to do it alone. TractorOnline is
-                here to help you sell your Tractor in Pakistan easily and quickly.
-                You can follow this simple guide while selling your Tractor:
+                Selling a used Tractor in Pakistan can be time-taking, tiring
+                and challenging, especially if you have to do it alone.
+                TractorOnline is here to help you sell your Tractor in Pakistan
+                easily and quickly. You can follow this simple guide while
+                selling your Tractor:
               </span>
             </p>
 
@@ -689,21 +692,22 @@ const postAd = () => {
               </li>
             </ol>
 
-            <p dir="ltr" >
+            <p dir="ltr">
               <span id="docs-internal-guid-efe7015f-7fff-9b04-27e0-6d80c1b9a79a">
-                It is important to know what your Tractor is actually worth, and for
-                that, you need to inspect your vehicle in detail. From the
-                condition of its external body to its engine, you need to do a
-                thorough check-up of your Tractor and estimate its price. We
-                acknowledge the necessity of this task and that it can be
-                time-consuming, so we provide{" "}
+                It's critical to understand the true value of your tractor, and
+                the only way to do that is to conduct a thorough inspection. You
+                must perform a complete inspection of your tractor and determine
+                its cost, taking into account everything from the state of its
+                exterior body to its engine. We provide these resources because
+                we understand how important this task is and how time-consuming
+                it can be.{" "}
               </span>
               <a href="https://www.pakwheels.com/products/pakwheels-inspection">
                 Tractor Inspection
               </a>{" "}
-              Services. Our Tractor inspection team will arrive at your location,
-              examine your Tractor to the smallest detail and provide an inspection
-              report with complete details of your Tractor.&nbsp;
+              Services. Our tractor inspection crew will visit your location,
+              thoroughly inspect your tractor, and then deliver an inspection
+              report that includes all of your tractor's specifics..&nbsp;
             </p>
 
             <ol>
@@ -718,11 +722,11 @@ const postAd = () => {
 
             <p dir="ltr">
               <span id="docs-internal-guid-efe7015f-7fff-9b04-27e0-6d80c1b9a79a">
-                After your Tractor has been evaluated, you can determine at what
-                price you want to sell it. The price you set must not be too
-                low, or you will not get what your Tractor is actually worth.
-                Similarly, your price should not be too high, or it will be
-                challenging to find buyers.&nbsp;
+                You can choose the selling price for your Tractor once it has
+                been appraised. You must not make your price too low, else you
+                won't obtain what your tractor is really worth. Likewise, if
+                your pricing is too high, it will be difficult to locate
+                purchasers..&nbsp;
               </span>
             </p>
 
@@ -738,29 +742,30 @@ const postAd = () => {
 
             <p dir="ltr">
               <span id="docs-internal-guid-efe7015f-7fff-9b04-27e0-6d80c1b9a79a">
-                To find buyers for your used Tractor in Pakistan, you need to
-                advertise your Tractor. There are several platforms on print and
-                electronic media. The most efficient way would be to advertise
-                on an online platform where buyers can explore their options,
-                such as TractorOnline. Using TractorOnline can make the process of
-                selling your Tractor in Pakistan convenient and quick.
+                You must publicise your used tractor if you want to find
+                customers in Pakistan. There are numerous print and digital
+                media sources. The most effective method would be to place an ad
+                on a website like TractorOnline where purchasers may research
+                their possibilities. Selling your tractor in Pakistan can be
+                simple and quick when you use TractorOnline.
               </span>
             </p>
 
             <h2 dir="ltr">
               <span id="docs-internal-guid-efe7015f-7fff-9b04-27e0-6d80c1b9a79a">
-              TractorOnline.com - The Best Online Tractor Selling Site
+                TractorOnline.com - The Best Online Tractor Selling Site
               </span>
             </h2>
 
             <p dir="ltr">
               <span id="docs-internal-guid-df9647e7-7fff-0f16-cd8c-e73d70c3241c">
-              TractorOnline is a platform that connects Tractor sellers and buyers
-                online for free! Sellers can post ads of their Tractors where buyers
-                can easily see information on their Tractors and then contact them.
-                Advertising your Tractor on TractorOnline can get your Tractor sold for the
-                best deal within a few weeks. It is convenient, quick and
-                reliable.{" "}
+                A platform called TractorOnline links tractor dealers and
+                buyers. free online buyers! Tractor advertising can be posted by
+                vendors. a place where purchasers may readily see details about
+                their tractors and contact them then. Using TractorOnline to
+                promote your tractor can within a few weeks, sell your tractor
+                for the highest possible price. It is practical, speedy, and
+                trustwort{" "}
               </span>
             </p>
 
@@ -770,7 +775,7 @@ const postAd = () => {
               </span>
             </p>
 
-            <ol >
+            <ol>
               <li aria-level="1" dir="ltr">
                 <h3 dir="ltr" role="presentation">
                   <span id="docs-internal-guid-df9647e7-7fff-0f16-cd8c-e73d70c3241c">
@@ -780,15 +785,16 @@ const postAd = () => {
               </li>
             </ol>
 
-            <p dir="ltr" >
+            <p dir="ltr">
               <span id="docs-internal-guid-df9647e7-7fff-0f16-cd8c-e73d70c3241c">
-                Sell a&nbsp;Tractor is PakWheel's free service where you can easily
-                advertise your Tractor on our website or app. All you have to do is
-                post an ad with the pictures of your Tractor and set a price- all
-                from the comfort of your own home. Your ad will be seen by
-                thousands of TractorOnline users and you will be quickly contacted
-                by buyers. After that, all you have to do is settle on a good
-                deal and say goodbye to your old Tractor. Yes, it's that simple!
+                Sell a&nbsp;The free TractorOnline service allows you to quickly
+                advertise your tractor on our website or mobile application. All
+                you have to do, while remaining in the comfort of your home, is
+                post an advertisement with images of your tractor and a price.
+                Thousands of TractorOnline users will see your advertisement,
+                and you will receive quick contact from potential buyers. All
+                there's left to do is choose an excellent deal and bid your old
+                Tractor farewell after that. It really is that easy!
               </span>
             </p>
 
@@ -802,25 +808,25 @@ const postAd = () => {
               </li>
             </ol>
 
-            <p dir="ltr" >
+            <p dir="ltr">
               <span id="docs-internal-guid-df9647e7-7fff-0f16-cd8c-e73d70c3241c">
-                If you are on a tight schedule and can't even find time for
-                taking pictures of your Tractor and putting up an ad, then this
-                service is for you! Sell It For Me is TractorOnline premium service
-                where all you have to do is fill out a form and let our team
-                take Tractore of the rest. Our team will inspect your Tractor, create a
-                report of your Tractor's condition, determine a price, take pictures
-                of your Tractor and put up a featured ad on our website. Our team
-                will be in contact with the buyers and will secure the best deal
-                for you with your approval. And just like that, your Tractor will be
-                sold within 40 days without you doing anything!
+                This service is for you if you don't even have time to
+                photograph your tractor and post an advertisement because of
+                your busy schedule. With TractorOnline's premium service, Sell
+                It For Me, all you have to do is complete a form; the rest will
+                be handled by our experts. The members of our team will evaluate
+                your tractor, write a report on its condition, set a price, take
+                images of it, and post a prominent ad on our website. With your
+                permission, our team will communicate with the purchasers to
+                negotiate the best price for you. Instantaneously, without your
+                involvement, your tractor will be sold within 40 days!
               </span>
             </p>
           </div>
         </div>
       </section>
-    </>
+    </div>
   );
 };
 
-export default postAd;
+export default sellTractor;
