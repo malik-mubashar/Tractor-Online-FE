@@ -16,7 +16,6 @@ export default function Categories({ brands, brandsForCategories }) {
 
   const handleGetAllCities = async () => {
     const result = await city.getPopularCity("popular");
-		debugger;
     if (result.error === false) {
       setCities(result.data && result.data.data);
       console.log("cities", result.data && result.data.data);

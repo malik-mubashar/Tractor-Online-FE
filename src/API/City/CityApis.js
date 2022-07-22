@@ -38,7 +38,6 @@ class City {
       });
   };
   getPopularCity = async (popular) => {
-    debugger
     return axios({
       method: "get",
       url: `${process.env.REACT_APP_API_LOCAL_PATH}all_cities?city_type=${popular}`,
@@ -58,7 +57,6 @@ class City {
       });
   };
   getAllCity = async (popular) => {
-    debugger
     return axios({
       method: "get",
       url: `${process.env.REACT_APP_API_LOCAL_PATH}all_cities`,

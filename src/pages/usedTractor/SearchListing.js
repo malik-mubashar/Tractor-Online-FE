@@ -23,7 +23,7 @@ import { useHistory } from "react-router-dom";
 import CustomPopover from "./CustomPopover";
 import { productApis } from "../../API/ProductApis";
 
-export default function SearchListing() {
+export default function SearchListing({products}) {
   const [showNumberWarning, setShowNumberWarning] = useState(true);
   let history = useHistory();
   const [openShowPhone, setOpenShowPhone] = useState(false);
@@ -33,18 +33,7 @@ export default function SearchListing() {
     setOpenShowPhone(false);
     console.log("ping");
   };
-  const [products, setProducts] = useState([]);
 
-  useEffect(() => {
-    handleGetAllProducts();
-  }, []);
-  const handleGetAllProducts = async () => {
-    const result = await productApis.getAllProducts();
-    if (result.error === false) {
-      setProducts(result.data && result.data.data);
-      console.log("products", result.data && result.data.data);
-    }
-  };
   console.log(openShowPhone);
 
   return (

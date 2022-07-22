@@ -131,7 +131,7 @@ const AppRouter = () => {
             </DashboardLayout>
 					</ProtectedRoute>
 			
-          <UnProtectedRoute exact path="/usedtractor">
+          <UnProtectedRoute exact path="/usedtractor/search">
             <Layout>
               <UsedTractor />
             </Layout>

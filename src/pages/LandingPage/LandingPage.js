@@ -59,7 +59,6 @@ const LandingPage = () => {
       result.data.data.map((item) =>
         tempArray.push({ ...item, label: item.title, value: item.title })
       );
-    debugger;
     setCities(tempArray);
     console.log("city", tempArray);
   };

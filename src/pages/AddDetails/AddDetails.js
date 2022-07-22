@@ -74,7 +74,6 @@ export default function AddDetails() {
     handleGetProductDetails();
   }, []);
   const handleGetProductDetails = async () => {
-    debugger;
     const result = await productApis.getProductDetails(id);
     if (result.error === false) {
       setProduct(result.data && result.data.data);

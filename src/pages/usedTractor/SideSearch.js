@@ -1,15 +1,18 @@
 import React, { useState } from "react";
-import {
-  Accordion,
-  AccordionItem,
-  AccordionItemTitle,
-  AccordionItemBody,
-} from "react-accessible-accordion";
-import "react-accessible-accordion/dist/fancy-example.css";
 import { Form, FormControl } from "react-bootstrap";
 import SelectSearch from "./SelectSearch";
+import { MDBAccordion, MDBAccordionItem } from "mdb-react-ui-kit";
 
-export default function SideSearch() {
+export default function SideSearch({
+  setSearchFilters,
+  cities,
+  searchFilters,
+  priceRangeFrom,
+  setPriceRangeFrom,
+  priceRangeTo,
+  setPriceRangeTo,
+}) {
+  const make = ["balarus", "messy"];
   const priceRangeFromOption = [
     { label: "10000", value: "10000" },
     { label: "20000", value: "20000" },
@@ -29,271 +32,174 @@ export default function SideSearch() {
     { label: "600000", value: "600000" },
     { label: "700000", value: "700000" },
   ];
-  const [priceRangeFrom, setPriceRangeFrom] = useState();
-  const [priceRangeTo, setPriceRangeTo] = useState();
+
   return (
     <>
-      <Accordion className="custom-accordion mb-4">
-        <div className="sideSearchHeading">SHOW RESULTS BY</div>
-        <AccordionItem>
-          <AccordionItemTitle>
-            <h3>SEARCH BY KEYWORD</h3>
-            <div className="accordion__arrow"></div>
-          </AccordionItemTitle>
-          <AccordionItemBody>
-            <Form
-              className="nav-search-form row"
-              // onSubmit={this._handleSubmit}
-              // action="/search/"
-            >
-              <FormControl
-                type="text"
-                className="col-10"
-                // value={this.state.term}
-                // onChange={(e) => this.setState({ term: e.target.value })}
-                placeholder="Search..."
-              />
+      <MDBAccordion alwaysOpen initialActive={1}>
+        <MDBAccordionItem collapseId={1} headerTitle="SEARCH FILTERS">
+          <ul class="list-unstyled">
+            {searchFilters !==undefined? 
+              Object.entries(searchFilters).map((item, i) => {
+                return (
+                  <>
+                    {item[0] === "featured" ? (
+                      item[1] === true ? (
+                        <li className="d-flex" key={i}>
+                          {item[0]}
+                          <span class="ml-auto">
+                            {/* <i class="fa fa-times-circle"></i> */}
+                          </span>
+                        </li>
+                      ) : null
+                    ) : (
+                      <li className="d-flex" key={i}>
+                        {item[1]}
+                        <span class="ml-auto">
+                          {/* <i class="fa fa-times-circle"></i> */}
+                        </span>
+                      </li>
+                    )}
+                  </>
+                );
+							})
+							:
+							'No Filters'
+						}
+          </ul>
+        </MDBAccordionItem>
+        <MDBAccordionItem collapseId={2} headerTitle="SEARCH BY KEYWORD">
+          <Form
+            className="nav-search-form row"
+            // onSubmit={this._handleSubmit}
+            // action="/search/"
+          >
+            <FormControl
+              type="text"
+              className="col-10"
+              // value={this.state.term}
+              // onChange={(e) => this.setState({ term: e.target.value })}
+              placeholder="Search..."
+            />
 
-              <input
-                className="btn btn-primary refine-go col-2"
-                type="submit"
-                value="Go"
-              />
-            </Form>
-          </AccordionItemBody>
-        </AccordionItem>
+            <input
+              className="btn btn-primary refine-go col-2"
+              type="submit"
+              value="Go"
+            />
+          </Form>
+        </MDBAccordionItem>
+        <MDBAccordionItem collapseId={3} headerTitle="CITY">
+          <ul className="list-unstyled ">
+            {cities &&
+              cities.map((item) => {
+                return (
+                  <>
+                    <li
+                      title="Cars for Sale in Lahore, Pakistan"
+                      key={item.title}
+                    >
+                      <label className="filter-check clearfix">
+                        <input
+                          type="radio"
+                          name="city"
+                          value={item.title}
+                          onChange={(e) => {
+                            setSearchFilters({
+                              ...searchFilters,
+                              city: e.target.value,
+                            });
+                          }}
+                        />
+                        {item.title}
+                        <span className="pull-right count"></span>
+                      </label>
+                    </li>
+                  </>
+                );
+              })}
+          </ul>
+        </MDBAccordionItem>
+        <MDBAccordionItem collapseId={3} headerTitle="MAKE">
+          <ul className="list-unstyled ">
+            {make &&
+              make.map((item) => {
+                return (
+                  <>
+                    <li title="Cars for Sale in Lahore, Pakistan">
+                      <label className="filter-check clearfix">
+                        <input
+                          type="radio"
+                          value={item}
+                          onChange={(e) => {
+                            setSearchFilters({
+                              ...searchFilters,
+                              make: e.target.value,
+                            });
+                          }}
+                        />
+                        {item}
+                        <span className="pull-right count">14256</span>
+                      </label>
+                    </li>
+                  </>
+                );
+              })}
+          </ul>
+        </MDBAccordionItem>
+        <MDBAccordionItem collapseId={3} headerTitle="FEATURED">
+          <label className="filter-check clearfix">
+            <input
+              type="checkbox"
+              value="featured"
+              onChange={(e) => {
+                setSearchFilters({
+                  ...searchFilters,
+                  featured: e.target.checked,
+                });
+              }}
+            />
+            featured
+          </label>
+        </MDBAccordionItem>
 
-        <AccordionItem>
-          <AccordionItemTitle>
-            <h3>CITY</h3>
-            <div className="accordion__arrow"></div>
-          </AccordionItemTitle>
-          <AccordionItemBody>
-            <ul className="list-unstyled ">
-              <li title="Cars for Sale in Lahore, Pakistan">
-                <label className="filter-check clearfix">
-                  <a href="" title="Cars for Sale in Lahore, Pakistan">
-                    <input type="checkbox" />
-                    Lahore
-                    <span className="pull-right count">14256</span>
-                  </a>
-                </label>
+        <MDBAccordionItem collapseId={4} headerTitle="PRICE RANGE">
+          <div className="priceRange">
+            <ul className="list-unstyled justify-content-center d-flex">
+              <li className="home-autocomplete-field"></li>
+              <li className="col-5 px-0">
+                <SelectSearch
+                  options={priceRangeFromOption}
+                  setValue={setPriceRangeFrom}
+                  label="From"
+                  value={priceRangeFrom}
+                />
               </li>
-
-              <li title="Cars for Sale in Karachi, Pakistan">
-                <label className="filter-check clearfix">
-                  <a href="" title="Cars for Sale in Karachi, Pakistan">
-                    <input type="checkbox" />
-                    Karachi
-                    <span className="pull-right count">13189</span>
-                  </a>
-                </label>
+              <li className="col-5 px-0">
+                <SelectSearch
+                  options={priceRangeToOption}
+                  setValue={setPriceRangeTo}
+                  label="To"
+                  value={priceRangeTo}
+                />
               </li>
-
-              <li title="Cars for Sale in Islamabad, Pakistan">
-                <label className="filter-check clearfix">
-                  <a href="" title="Cars for Sale in Islamabad, Pakistan">
-                    <input type="checkbox" />
-                    Islamabad
-                    <span className="pull-right count">10359</span>
-                  </a>
-                </label>
-              </li>
-
-              <li title="Cars for Sale in Rawalpindi, Pakistan">
-                <label className="filter-check clearfix">
-                  <a href="" title="Cars for Sale in Rawalpindi, Pakistan">
-                    <input type="checkbox" />
-                    Rawalpindi
-                    <span className="pull-right count">5052</span>
-                  </a>
-                </label>
-              </li>
-
-              <li title="Cars for Sale in Peshawar, Pakistan">
-                <label className="filter-check clearfix">
-                  <a href="" title="Cars for Sale in Peshawar, Pakistan">
-                    <input type="checkbox" />
-                    Peshawar
-                    <span className="pull-right count">3661</span>
-                  </a>
-                </label>
-              </li>
-            </ul>
-          </AccordionItemBody>
-        </AccordionItem>
-
-        <AccordionItem>
-          <AccordionItemTitle>
-            <h3>MAKE</h3>
-            <div className="accordion__arrow"></div>
-          </AccordionItemTitle>
-          <AccordionItemBody>
-            <ul className="list-unstyled ">
-              <li title="Toyota Cars for Sale in Pakistan">
-                <label className="filter-check clearfix">
-                  <a href="" title="Toyota Cars for Sale in Pakistan">
-                    <input type="checkbox" />
-                    Toyota
-                    <span className="pull-right count">22831</span>
-                  </a>
-                </label>
-              </li>
-
-              <li title="Suzuki Cars for Sale in Pakistan">
-                <label className="filter-check clearfix">
-                  <a href="" title="Suzuki Cars for Sale in Pakistan">
-                    <input type="checkbox" />
-                    Suzuki
-                    <span className="pull-right count">19891</span>
-                  </a>
-                </label>
-              </li>
-
-              <li title="Honda Cars for Sale in Pakistan">
-                <label className="filter-check clearfix">
-                  <a href="" title="Honda Cars for Sale in Pakistan">
-                    <input type="checkbox" />
-                    Honda
-                    <span className="pull-right count">13885</span>
-                  </a>
-                </label>
-              </li>
-
-              <li title="Daihatsu Cars for Sale in Pakistan">
-                <label className="filter-check clearfix">
-                  <a href="" title="Daihatsu Cars for Sale in Pakistan">
-                    <input type="checkbox" />
-                    Daihatsu
-                    <span className="pull-right count">2736</span>
-                  </a>
-                </label>
-              </li>
-
-              <li title="Kia Cars for Sale in Pakistan">
-                <label className="filter-check clearfix">
-                  <a href="" title="Kia Cars for Sale in Pakistan">
-                    <input type="checkbox" />
-                    KIA
-                    <span className="pull-right count">1655</span>
-                  </a>
-                </label>
-              </li>
-            </ul>
-          </AccordionItemBody>
-        </AccordionItem>
-
-        <AccordionItem>
-          <AccordionItemTitle>
-            <h3>PROVINCE</h3>
-            <div className="accordion__arrow"></div>
-          </AccordionItemTitle>
-          <AccordionItemBody>
-            <ul className="list-unstyled ">
-              <li title="Cars for Sale in Punjab, Pakistan">
-                <label className="filter-check clearfix">
-                  <a href="" title="Cars for Sale in Punjab, Pakistan">
-                    <input type="checkbox" />
-                    Punjab
-                    <span className="pull-right count">36873</span>
-                  </a>
-                </label>
-              </li>
-
-              <li title="Cars for Sale in Sindh, Pakistan">
-                <label className="filter-check clearfix">
-                  <a href="nofollow" title="Cars for Sale in Sindh, Pakistan">
-                    <input type="checkbox" />
-                    Sindh
-                    <span className="pull-right count">14380</span>
-                  </a>
-                </label>
-              </li>
-
-              <li title="Cars for Sale in Kpk, Pakistan">
-                <label className="filter-check clearfix">
-                  <a href="" title="Cars for Sale in Kpk, Pakistan">
-                    <input type="checkbox" />
-                    KPK
-                    <span className="pull-right count">6977</span>
-                  </a>
-                </label>
-              </li>
-
-              <li title="Cars for Sale in Balochistan, Pakistan">
-                <label className="filter-check clearfix">
-                  <a href="" title="Cars for Sale in Balochistan, Pakistan">
-                    <input type="checkbox" />
-                    Balochistan
-                    <span className="pull-right count">581</span>
-                  </a>
-                </label>
-              </li>
-
-              <li title="Cars for Sale in Azad Kashmir, Pakistan">
-                <label className="filter-check clearfix">
-                  <a href="" title="Cars for Sale in Azad Kashmir, Pakistan">
-                    <input type="checkbox" />
-                    Azad Kashmir
-                    <span className="pull-right count">497</span>
-                  </a>
-                </label>
-              </li>
-
-              <li title="Cars for Sale in Federally Administered Tribal Areas, Pakistan">
-                <label className="filter-check clearfix">
-                  <a
-                    href="/"
-                    rel="nofollow"
-                    title="Cars for Sale in Federally Administered Tribal Areas, Pakistan"
-                  >
-                    <input type="checkbox" />
-                    Federally Administered Tribal Areas
-                    <span className="pull-right count">8</span>
-                  </a>
-                </label>
+              <li className="col-2 px-0">
+                <input
+                  className="btn btn-primary refine-go"
+                  type="submit"
+                  value="Go"
+                  onClick={() =>
+                    setSearchFilters({
+                      ...searchFilters,
+                      priceRangeTo: priceRangeTo,
+                      priceRangeFrom: priceRangeFrom,
+                    })
+                  }
+                />
               </li>
             </ul>
-          </AccordionItemBody>
-        </AccordionItem>
-
-        <AccordionItem>
-          <AccordionItemTitle>
-            <h3>PRICE RANGE </h3>
-            <div className="accordion__arrow"></div>
-          </AccordionItemTitle>
-          <AccordionItemBody>
-            <div className="myClass">
-              <ul className="list-unstyled justify-content-center d-flex">
-                <li className="home-autocomplete-field"></li>
-                <li className="col-5 px-0">
-                  <SelectSearch
-                    options={priceRangeFromOption}
-                    setValue={setPriceRangeFrom}
-                    label="From"
-                    value={priceRangeFrom}
-                  />
-                </li>
-                <li className="col-5 px-0">
-                  <SelectSearch
-                    options={priceRangeToOption}
-                    setValue={setPriceRangeTo}
-                    label="To"
-                    value={priceRangeTo}
-                  />
-                </li>
-                <li className="col-2 px-0">
-                  <input
-                    className="btn btn-primary refine-go"
-                    type="submit"
-                    value="Go"
-                  />
-                </li>
-              </ul>
-            </div>
-          </AccordionItemBody>
-        </AccordionItem>
-      </Accordion>
+          </div>
+        </MDBAccordionItem>
+      </MDBAccordion>
     </>
   );
 }
