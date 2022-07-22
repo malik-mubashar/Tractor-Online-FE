@@ -1,5 +1,5 @@
 import React, {useState} from "react";
-import { Link, useHistory } from "react-router-dom";
+import { Link, NavLink, useHistory } from "react-router-dom";
 import { Form, Button, Image, Modal } from "react-bootstrap";
 import Icofont from 'react-icofont';
 
@@ -178,8 +178,10 @@ const TractorSaleAd = () => {
 
   function postAdd () {
     debugger
+    
     if (localStorage.currentUser === undefined){
       setModalShow(true)
+      
     }
     else{
 
@@ -210,16 +212,26 @@ const TractorSaleAd = () => {
                 </li>
                 <li>
                   <i className="fa fa-tick"></i>Sell your car as soon as
-                  possible for the best price.
+                  possible for the best price
                 </li>
-              </ul>
-              <MyVerticallyCenteredModal
+              </ul>{localStorage.currentUser === undefined ?<>
+
+              
+                <NavLink to ="/login/"  className="btn btn-danger btn-lg text-white">
+                Place Your Ad Here
+              </NavLink>
+              </>:<>
+              <button onClick={ () => {postAdd()}} className="btn btn-danger btn-lg text-white">
+                Place Your Ad Here
+              </button>
+              </>}
+              {/* <MyVerticallyCenteredModal
                 show={modalShow}
                 onHide={() => setModalShow(false)}
               />
               <button onClick={ () => {postAdd()}} className="btn btn-danger btn-lg text-white">
                 Place Your Ad Here
-              </button>
+              </button> */}
             </div>
             <div className="col-lg-6 col-12 mt-4">
               <h2>Sell It For Me on TractorOnline</h2>

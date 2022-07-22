@@ -40,7 +40,8 @@ import Brands from "../pages/Brands/Brands";
 import Models from "../pages/Models/Models";
 import Budgets from "../pages/Models copy/Budgets";
 import DashboardLayout from "../layouts/DashboardLayout";
-import PostAd from "../pages/PostAd/postAd"
+import SellTractor from "../pages/PostAd/sellTractor.js";
+import PostAd from "../pages/PostAd/post-ad"
 
 const AppRouter = () => {
   return (
@@ -135,7 +136,12 @@ const AppRouter = () => {
               <UsedTractor />
             </Layout>
           </UnProtectedRoute>
-          <UnProtectedRoute exact path="/postAd">
+          <UnProtectedRoute exact path="/sellTractor">
+            <Layout>
+              <SellTractor />
+            </Layout>
+          </UnProtectedRoute>
+          <UnProtectedRoute exact path="/sellTractor/postAd">
             <Layout>
               <PostAd />
             </Layout>

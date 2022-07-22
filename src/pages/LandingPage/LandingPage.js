@@ -14,37 +14,33 @@ import toast from "react-hot-toast";
 import { brandApis } from "../../API/BrandsApis";
 import FeaturedTractor from "./FeaturedTractor";
 
-
 const LandingPage = () => {
   const [cities, setCities] = useState([]);
-	const [brands, setBrands] = useState([]);
-	const [brandsForCategories, setBrandsForCategories] = useState([]);
+  const [brands, setBrands] = useState([]);
+  const [brandsForCategories, setBrandsForCategories] = useState([]);
 
-  useEffect(()=>{
-		getAllCity()
-		getBrands(1, "", 10000000);
-
-  },[])
+  useEffect(() => {
+    getAllCity();
+    getBrands(1, "", 10000000);
+  }, []);
 
   const getBrands = async (page, mainSearch, noOfRec) => {
     const loadingToastId = toast.loading("Loading..!");
 
     try {
-			const result = await brandApis.getBrands(page, mainSearch, noOfRec);
-			 
+      const result = await brandApis.getBrands(page, mainSearch, noOfRec);
+
       if (result.error == false && result.data.status == "success") {
         toast.dismiss(loadingToastId);
 
-        setBrands(
-         result.data.data
-				);
-				let tempArr = [];
-				const chunkSize =12
+        setBrands(result.data.data);
+        let tempArr = [];
+        const chunkSize = 12;
         for (let i = 0; i < result.data.data.length; i += chunkSize) {
           const chunk = result.data.data.slice(i, i + chunkSize);
           tempArr.push(chunk);
-				}
-        setBrandsForCategories(tempArr)
+        }
+        setBrandsForCategories(tempArr);
       } else {
         toast.dismiss(loadingToastId);
         console.error(result.data);
@@ -62,30 +58,33 @@ const LandingPage = () => {
       result.data &&
       result.data.data.map((item) =>
         tempArray.push({ ...item, label: item.title, value: item.title })
-			);
-		debugger;
+      );
+    debugger;
     setCities(tempArray);
-    console.log("city",tempArray)
+    console.log("city", tempArray);
   };
-console.log('cities',cities)
+  console.log("cities", cities);
   return (
     <>
-      {!isMobile &&<> <DeskTopBanner
-      cities={cities}
-      />
-      <div className="d-flex p-2 mt-2">
-        <div className="col-12 ">
-          <CategoriesNavBar />
-        </div>
-      </div></>}
+      {!isMobile && (
+        <>
+          {" "}
+          <DeskTopBanner cities={cities} />
+          <div className="d-flex p-2 mt-2">
+            <div className="col-12 ">
+              <CategoriesNavBar />
+            </div>
+          </div>
+        </>
+      )}
       {!isMobile && <TractorSaleAd />}
       <div className="overflow-x-hidden">
         <div className={`container-lg py-4 mt-2 ${isMobile ? "bg-white" : ""}`}>
-					<Categories
-						brandsForCategories={brandsForCategories}
+          <Categories
+            brandsForCategories={brandsForCategories}
             cities={cities}
-					  brands={brands}
-					/>
+            brands={brands}
+          />
         </div>
         <div className="bg-white">
           <div className="container-lg py-4">
@@ -115,9 +114,7 @@ console.log('cities',cities)
           />
         </div>
         <div className="container-lg py-4">
-					<NewTractor
-					brands={brands}
-					/>
+          <NewTractor brands={brands} />
         </div>
       </div>
     </>
