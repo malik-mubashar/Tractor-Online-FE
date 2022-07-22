@@ -45,7 +45,6 @@ export default function DropDownTopbar({
     },
   ];
 
-  debugger
 console.log(cities)
 console.log("productHead ", productHead)
 

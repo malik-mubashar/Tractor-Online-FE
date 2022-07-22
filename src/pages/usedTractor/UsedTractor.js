@@ -1,5 +1,5 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Footer from "../LandingPage/Footer";
 import SearchListing from "./SearchListing";
 import SideSearch from "./SideSearch";
@@ -7,8 +7,51 @@ import { Image } from "react-bootstrap";
 import tractorSVG from "../../assets/svg/tractor-1.svg";
 import { isMobile } from "react-device-detect";
 import { useHistory } from "react-router-dom";
+import { productApis } from "../../API/ProductApis";
+import { city } from "../../API/City/CityApis";
 
 export default function usedTractor() {
+  const [products, setProducts] = useState([]);
+  const [searchFilters, setSearchFilters] = useState();
+  const [cities, setCities] = useState();
+  const [priceRangeFrom, setPriceRangeFrom] = useState();
+  const [priceRangeTo, setPriceRangeTo] = useState();
+
+  useEffect(() => {
+    handleGetAllProducts();
+    GetPopularCities();
+  }, []);
+  const GetPopularCities = async () => {
+    const result = await city.getPopularCity("popular");
+
+    if (result.error === false) {
+      setCities(result.data && result.data.data);
+      console.log("cities", result.data && result.data.data);
+    }
+  };
+
+  const handleGetAllProducts = async (
+    city='nil',
+    tempPriceRangeTo='nil',
+		tempPriceRangeFrom = 'nil',
+		featured='nil'
+		
+  ) => {
+    const result = await productApis.getAllProducts(city,tempPriceRangeTo,tempPriceRangeFrom,featured);
+    if (result.error === false) {
+      setProducts(result.data && result.data.data);
+      console.log("products", result.data && result.data.data);
+    }
+  };
+  useEffect(() => {
+    debugger;
+    if (searchFilters) {
+        handleGetAllProducts(searchFilters.city,searchFilters.priceRangeTo,searchFilters.priceRangeFrom,searchFilters.featured);
+    }
+  }, [searchFilters]);
+  console.log("searchFilters", searchFilters);
+  console.log("priceRangeTo", priceRangeTo);
+  console.log("priceRangeFrom", priceRangeFrom);
   const history = useHistory();
   return (
     <>
@@ -55,10 +98,18 @@ export default function usedTractor() {
           </div>
           <div className="row">
             <div className="col-md-3">
-              <SideSearch />
+              <SideSearch
+                setSearchFilters={setSearchFilters}
+                searchFilters={searchFilters}
+                cities={cities}
+                priceRangeFrom={priceRangeFrom}
+                setPriceRangeFrom={setPriceRangeFrom}
+                priceRangeTo={priceRangeTo}
+                setPriceRangeTo={setPriceRangeTo}
+              />
             </div>
             <div className="col-md-9">
-              <SearchListing />
+              <SearchListing products={products} />
             </div>
           </div>
         </div>

@@ -148,11 +148,11 @@ class Products {
         };
       });
 	};
-  getAllProducts = async (featured) => {
-		 
+  getAllProducts = async (city,priceRangeTo,priceRangefrom,featured) => {
+		debugger;
     return axios({
       method: "get",
-      url: `${process.env.REACT_APP_API_LOCAL_PATH}get_products?featured=${featured}`,
+      url: `${process.env.REACT_APP_API_LOCAL_PATH}get_products?featured=${featured}&price_lt=${priceRangeTo}&price_gt=${priceRangefrom}&city=${city}`,
       headers: Headers
     })
       .then((result) => {

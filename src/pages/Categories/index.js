@@ -16,7 +16,7 @@ const CategoriesNavBar = () => {
   return (
     <>
       <div className=" row category">
-        <div className=" relative bg-white category-section border-radius p-0 ">
+        <div className=" relative bg-white category-section border-radius p-0 col-lg-2">
           <h3 className="category-title border-bottom p-2 m-1 ">
             <Icon.List className="icon" /> Categories
           </h3>

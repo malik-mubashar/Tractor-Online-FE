@@ -1,5 +1,5 @@
 import React, { useState, useContext, useEffect } from "react";
-import { Row, Col, Breadcrumb, Image, Media, Button } from "react-bootstrap";
+import { Row, Col, Breadcrumb, Image, Card, Button } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import Navigation from "../components/Navigation/Navigation";
 import Footer from "./Footer/Footer";
@@ -153,7 +153,7 @@ const Profile = () => {
                 <div className="profile-middle-content mb-4">
                   {/* Post card */}
                   <div className="post-card">
-                    <Media>
+                    <Card>
                       <Image
                         width={50}
                         height={50}
@@ -162,7 +162,7 @@ const Profile = () => {
                         roundedCircle
                         alt="User"
                       />
-                      <Media.Body>
+                      <Card.Body>
                         <h5>
                           <Link to="">
                             There are many variations of passages of Lorem Ipsum
@@ -191,14 +191,14 @@ const Profile = () => {
                             897
                           </Link>
                         </div>
-                      </Media.Body>
-                    </Media>
+                      </Card.Body>
+                    </Card>
                   </div>
                   {/* End post card */}
 
                   {/* Post card */}
                   <div className="post-card">
-                    <Media>
+                    <Card>
                       <Image
                         width={50}
                         height={50}
@@ -207,7 +207,7 @@ const Profile = () => {
                         roundedCircle
                         alt="User"
                       />
-                      <Media.Body>
+                      <Card.Body>
                         <h5>
                           <Link to="">
                             There are many variations of passages of Lorem Ipsum
@@ -236,14 +236,14 @@ const Profile = () => {
                             897
                           </Link>
                         </div>
-                      </Media.Body>
-                    </Media>
+                      </Card.Body>
+                    </Card>
                   </div>
                   {/* End post card */}
 
                   {/* Post card */}
                   <div className="post-card">
-                    <Media>
+                    <Card>
                       <Image
                         width={50}
                         height={50}
@@ -252,7 +252,7 @@ const Profile = () => {
                         roundedCircle
                         alt="User"
                       />
-                      <Media.Body>
+                      <Card.Body>
                         <h5>
                           <Link to="">
                             There are many variations of passages of Lorem Ipsum
@@ -281,8 +281,8 @@ const Profile = () => {
                             897
                           </Link>
                         </div>
-                      </Media.Body>
-                    </Media>
+                      </Card.Body>
+                    </Card>
                   </div>
                   {/* End post card */}
                 </div>
@@ -298,7 +298,7 @@ const Profile = () => {
 
                       <div className="connecting-list">
                         {/* Card */}
-                        <Media>
+                        <Card>
                           <Link to="">
                             <Image
                               width={35}
@@ -310,19 +310,19 @@ const Profile = () => {
                             />
                           </Link>
 
-                          <Media.Body>
+                          <Card.Body>
                             <h5>
                               <Link to="">Amber Gibs</Link>
                             </h5>
                             <Button variant="outline-primary rounded">
                               Follow
                             </Button>
-                          </Media.Body>
-                        </Media>
+                          </Card.Body>
+                        </Card>
                         {/* End Card */}
 
                         {/* Card */}
-                        <Media>
+                        <Card>
                           <Link to="">
                             <Image
                               width={35}
@@ -334,19 +334,19 @@ const Profile = () => {
                             />
                           </Link>
 
-                          <Media.Body>
+                          <Card.Body>
                             <h5>
                               <Link to="">Carl Roland</Link>
                             </h5>
                             <Button variant="outline-primary rounded">
                               Follow
                             </Button>
-                          </Media.Body>
-                        </Media>
+                          </Card.Body>
+                        </Card>
                         {/* End Card */}
 
                         {/* Card */}
-                        <Media>
+                        <Card>
                           <Link to="">
                             <Image
                               width={35}
@@ -358,19 +358,19 @@ const Profile = () => {
                             />
                           </Link>
 
-                          <Media.Body>
+                          <Card.Body>
                             <h5>
                               <Link to="">Paul Wilson</Link>
                             </h5>
                             <Button variant="outline-primary rounded">
                               Follow
                             </Button>
-                          </Media.Body>
-                        </Media>
+                          </Card.Body>
+                        </Card>
                         {/* End Card */}
 
                         {/* Card */}
-                        <Media>
+                        <Card>
                           <Link to="">
                             <Image
                               width={35}
@@ -382,19 +382,19 @@ const Profile = () => {
                             />
                           </Link>
 
-                          <Media.Body>
+                          <Card.Body>
                             <h5>
                               <Link to="">Alice Jenkins</Link>
                             </h5>
                             <Button variant="outline-primary rounded">
                               Follow
                             </Button>
-                          </Media.Body>
-                        </Media>
+                          </Card.Body>
+                        </Card>
                         {/* End Card */}
 
                         {/* Card */}
-                        <Media>
+                        <Card>
                           <Link to="">
                             <Image
                               width={35}
@@ -406,15 +406,15 @@ const Profile = () => {
                             />
                           </Link>
 
-                          <Media.Body>
+                          <Card.Body>
                             <h5>
                               <Link to="">Lauren Cox</Link>
                             </h5>
                             <Button variant="outline-primary rounded">
                               Follow
                             </Button>
-                          </Media.Body>
-                        </Media>
+                          </Card.Body>
+                        </Card>
                         {/* End Card */}
                       </div>
                     </div>

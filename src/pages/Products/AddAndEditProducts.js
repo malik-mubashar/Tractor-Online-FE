@@ -60,7 +60,6 @@ export default function AddAndEditProduct({
             value: item[1],
           });
         });
-        debugger;
         setExtraFieldsArr(tempExtraFieldsArr);
       }
     }
@@ -220,7 +219,6 @@ export default function AddAndEditProduct({
   }
   //////////////////////////////////
 	const handleExtraField = (event, id) => {
-		debugger;
     let tempExtraFieldsArr = [...extraFieldsArr];
     if (event.target.name == "extra_fields_key") {
       let found = false;

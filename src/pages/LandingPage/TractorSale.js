@@ -177,8 +177,6 @@ const TractorSaleAd = () => {
   const [modalShow, setModalShow] = React.useState(false);
 
   function postAdd () {
-    debugger
-    
     if (localStorage.currentUser === undefined){
       setModalShow(true)
       
