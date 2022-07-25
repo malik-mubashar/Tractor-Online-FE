@@ -38,8 +38,6 @@ const SignUp = () => {
         fullName
       );
 
-      console.log("signUp result Api", result);
-
       //success
       if (result.error === false) {
       	toast.dismiss(loadingToastId);

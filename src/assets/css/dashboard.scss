@@ -148,7 +148,7 @@
 .browse-listing {
   list-style: none;
 }
-.browse-listing li a {
+.browse-listing li span {
   color: #545454;
   padding: 4px 10px;
   font-size: 16px;
@@ -163,21 +163,37 @@
   flex-direction: column;
   background-color: #fff;
   border-radius: 6px;
+  cursor: pointer;
 }
 .carousel-control-prev {
-  left: -40px !important;
+  left: -20px !important;
+  width: 5% !important;
+  background-color: rgba(26, 26, 26, .3);
+  border-top-right-radius: 50%;
+  border-bottom-right-radius: 50%;
 }
 .carousel-control-next {
-  right: -85px;
+  right: -20px !important;
+  width: 5% !important;
+  background-color: rgba(26, 26, 26, .3);
+  border-top-left-radius: 50%;
+  border-bottom-left-radius: 50%;
 }
+
 .carousel-control-prev-icon,
 .carousel-control-next-icon {
   height: 30px !important;
   width: 30px !important;
-  background-color: gray !important;
 }
 .carousel-indicators {
   bottom: -30px !important;
+  button{
+    border-radius: 5px;
+    border: 1px solid gray;
+    background-color: white;
+    width: 30px;
+    margin-left: 5px;
+  }
 }
 .carousel-indicators li {
   background-color: gray;

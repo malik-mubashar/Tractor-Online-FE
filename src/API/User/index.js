@@ -8,7 +8,6 @@ Headers = {
 };
 
 const currentUser = JSON.parse(window.localStorage.getItem("currentUser")) || null;
-console.log('currentUser', currentUser)
 
 
 class User {

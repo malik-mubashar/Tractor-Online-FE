@@ -13,7 +13,6 @@ export default function FeaturedTractor({ title, link }) {
     const result = await productApis.getUsedProducts('used', true);
     if (result.error === false) {
       setUsedProducts(result.data && result.data.data);
-      console.log("usedproducts", result.data && result.data.data);
     }
   };
 
@@ -63,7 +62,6 @@ export default function FeaturedTractor({ title, link }) {
         { usedProducts &&
           usedProducts.map((item, i) => {
           return(
-            <>
             <div className="featured-card bg-white border-radius cursor-pointer h-100" key={i}>
               <img
                 className="card-img border-radius"
@@ -77,7 +75,6 @@ export default function FeaturedTractor({ title, link }) {
               <p className="pl-2 border-radius">{item.location}</p>
               <span className="featuredBand">Featured</span>
             </div>
-            </>
         );
       })}
       </Carousel>

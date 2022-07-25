@@ -45,9 +45,6 @@ export default function DropDownTopbar({
     },
   ];
 
-console.log(cities)
-console.log("productHead ", productHead)
-
   return (
     <div>
       <div className={`${!dropDownIcon ? " dropdown-button p-2" : "p-2"}`} title={title}>
@@ -91,8 +88,8 @@ console.log("productHead ", productHead)
                         <strong>{item.title}</strong>
                         {item.product_sub_categories !== null &&
                           item.product_sub_categories !== undefined &&
-                          item.product_sub_categories.map((y, i) => {
-                            return <p>{y.title}</p>;
+                          item.product_sub_categories.map((y, j) => {
+                            return <p key={j}>{y.title}</p>;
                           })}
                       </div>
                     </Link>
@@ -131,7 +128,6 @@ console.log("productHead ", productHead)
                       <Link
                         to="/"
                         className="dropdown-link"
-                        
                       >
                         <p className="city-name">{item.title}</p>
                       </Link>

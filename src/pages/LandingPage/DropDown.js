@@ -45,9 +45,6 @@ export default function DropDown({
     },
   ];
 
-console.log(cities)
-console.log("productHead ", productHead)
-
   return (
     <div>
       <div className={`${!dropDownIcon ? " dropdown-button p-1" : "p-1"}`}>
@@ -86,8 +83,8 @@ console.log("productHead ", productHead)
                         <strong>{item.title}</strong>
                         {item.product_sub_categories !== null &&
                           item.product_sub_categories !== undefined &&
-                          item.product_sub_categories.map((y, i) => {
-                            return <p>{y.title}</p>;
+                          item.product_sub_categories.map((y, j) => {
+                            return <p key={j}>{y.title}</p>;
                           })}
                       </div>
                     </Link>

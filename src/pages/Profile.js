@@ -39,7 +39,6 @@ const Profile = () => {
 		const result = await user.findUser(currentUser);
 		if (result.error === false) {
 			toast.dismiss(loadingToastId);
-			console.log(result);
 			setProfile(result.data);
 		}
   };

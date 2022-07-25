@@ -29,7 +29,6 @@ const SideMenue = () => {
     const result = await prodApi.getProdCategoriesList();
     if(result.error=== false){
       setBrands(result.data && result.data.data);
-      console.log('brands',result.data  &&result.data.data)
     
     }
   };
@@ -39,21 +38,19 @@ const SideMenue = () => {
   
     if(result.error=== false){
       setCities(result.data && result.data.data);
-      console.log('cities',result.data  &&result.data.data)
     }
   };
 
   const handleGetAllCategories = async () => {
     const result = await PRODUCT_CATEGORY.getAllProductCategories();
     setProductCategories(result.data && result.data.data);
-    console.log('categories',result.data  &&result.data.data)
   };
   return (
     <Nav defaultActiveKey="/" className="flex-column categoryNavbar">
       {productCategories &&
         productCategories.map((item, i) => {
           return (
-            <>
+            <div key={i}>
               <Nav.Link
                 href="/"
                 className="d-flex w-100 dropdown-button-category "
@@ -73,10 +70,9 @@ const SideMenue = () => {
                   cities={cities}
                   brands={item.category_brands}
                   dropDownIcon={true}
-                  
                 />
               </Nav.Link>
-            </>
+            </div>
           );
         })}
     </Nav>
