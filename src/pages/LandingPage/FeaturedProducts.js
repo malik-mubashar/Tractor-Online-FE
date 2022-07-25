@@ -16,7 +16,6 @@ export default function FeaturedProducts({ title, link }) {
     const result = await productApis.getAllProducts();
     if (result.error === false) {
       setProducts(result.data && result.data.data);
-      console.log("products", result.data && result.data.data);
     }
   };
  
@@ -67,7 +66,6 @@ export default function FeaturedProducts({ title, link }) {
         { products &&
           products.map((item, i) => {
           return(
-            <>
             <div className="featured-card bg-white border-radius cursor-pointer h-100" key={i}>
               <Link to ={`/addDetails/${item.id}`}>
                 <img
@@ -81,8 +79,7 @@ export default function FeaturedProducts({ title, link }) {
                 </p>
                 <p className="pl-2 border-radius">{item.location}</p>
               </Link>
-              </div>
-            </>
+            </div>
         );
       })}
       </Carousel>

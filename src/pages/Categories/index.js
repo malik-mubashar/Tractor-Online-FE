@@ -2,16 +2,12 @@ import React, { useState } from "react";
 import "bootstrap/dist/css/bootstrap.css";
 import Tab from "react-bootstrap/Tab";
 import * as Icon from "react-feather";
-import { Nav, Row, Col, Button } from "react-bootstrap";
+import { Button } from "react-bootstrap";
 import MainCategory from "./categoryBody";
 import SideMenue from "./SideMenue";
 import FeaturedProducts from "../LandingPage/FeaturedProducts";
 
 const CategoriesNavBar = () => {
-  const [index, setIndex] = useState(0);
-  const handleSelect = (selectedIndex, e) => {
-    setIndex(selectedIndex);
-  };
 
   return (
     <>

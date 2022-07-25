@@ -155,8 +155,6 @@ export default function City() {
     }
   };
 
-  console.log("cityState in index", cityState);
-  console.log("cityState in index", noOfRec);
   return (
     <>
       <>

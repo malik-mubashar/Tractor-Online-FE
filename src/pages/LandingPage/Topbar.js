@@ -1,7 +1,7 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
 import React, { useEffect, useContext, useState } from "react";
 import "../../components/Navigation/Navigation.css";
-import { Navbar, Nav, Image,  NavDropdown,} from "react-bootstrap";
+import { Navbar, Nav, Image, NavDropdown } from "react-bootstrap";
 import { NavLink, useHistory } from "react-router-dom";
 import DropDownTopbar from "./DropDownTopbar";
 import "../Categories/SideMenue.css";
@@ -11,7 +11,6 @@ import { city } from "../../API/City/CityApis";
 import { prodApi } from "../../API/ProdCategoriesApis";
 import Icofont from "react-icofont";
 import * as Icon from "react-feather";
-
 
 const Topbar = () => {
   const history = useHistory();
@@ -23,14 +22,12 @@ const Topbar = () => {
     handleGetAllCategories();
     handleGetAllCities();
     handleGetAllProductCategories();
-    
   }, []);
 
   const handleGetAllProductCategories = async () => {
     const result = await prodApi.getProdCategoriesList();
     if (result.error === false) {
       setBrands(result.data && result.data.data);
-      console.log("brands", result.data && result.data.data);
     }
   };
   const handleGetAllCities = async () => {
@@ -38,16 +35,13 @@ const Topbar = () => {
 
     if (result.error === false) {
       setCities(result.data && result.data.data);
-      console.log("cities", result.data && result.data.data);
     }
   };
 
   const handleGetAllCategories = async () => {
     const result = await PRODUCT_CATEGORY.getAllProductCategories();
     setProductCategories(result.data && result.data.data);
-    console.log("categories", result.data && result.data.data);
   };
-
 
   return (
     <Navbar fixed="top" className="top-menu landingTopbar">
@@ -56,87 +50,84 @@ const Topbar = () => {
         {productCategories &&
           productCategories.map((item, i) => {
             return (
-              <>
-              {i < 5 ?
-                <DropDownTopbar
-                  title={item.title}
-                  productHead={item.product_category_heads}
-                  cities={cities}
-                  brands={item.category_brands}
-                
-                />
-              :
-                null
-              }
-              </>
+              <div key={i}>
+                {i < 5 ? (
+                  <DropDownTopbar
+                    title={item.title}
+                    productHead={item.product_category_heads}
+                    cities={cities}
+                    brands={item.category_brands}
+                  />
+                ) : null}
+              </div>
             );
           })}
 
-          <div className="dropdown-button-more p-2">
-            <span className="">More</span>
-              <Icofont
-                icon="caret-down"
-                height="10px"
-                width="10px"
-                className="icofont ml-1"
-              />
-            <div className="drop-down-items-more py-3 more-width">
-              {productCategories &&
-                productCategories.map((item, i) => {
-                  return (
-                    <>
-                    {i > 4 ?
-                      <div className="p-2 dropdown-link">
-                        {item.title}
-                      </div>
-                      :
-                      null
-                      }
-                    </>
-                  );
-              })}
-            </div>
-          </div>
-         
-          {localStorage.currentUser != undefined ?<>
-            <Nav className="ml-auto right-nav">
-          <ul className="navbar-nav mr-auto">
-          <button  className="btn btn-danger btn-lg text-white">
-                Post An Ad
-              </button>
-          <NavDropdown
-                title={
-                  <div className="menu-profile">
-                    <span className="name">Welcome {profile && profile.name ? profile.name : "user name"} </span>
-                    {/* <Image src={profile} alt="Profile Image" roundedCircle /> */}
+        <div className="dropdown-button-more p-2">
+          <span className="">More</span>
+          <Icofont
+            icon="caret-down"
+            height="10px"
+            width="10px"
+            className="icofont ml-1"
+          />
+          <div className="drop-down-items-more py-3 more-width">
+            {productCategories &&
+              productCategories.map((item, i) => {
+                return (
+                  <div key={i}>
+                    {i > 4 ? (
+                      <div className="p-2 dropdown-link">{item.title}</div>
+                    ) : null}
                   </div>
-                }
-                id="basic-nav-dropdown"
-                className="profile-nav-item"
-              >
-                <NavLink to="/profile/" className="dropdown-item">
-                  <Icon.User className="icon" />
-                  Profile
-                </NavLink>
-                <NavLink to="/profile-settings/" className="dropdown-item">
-                  <Icon.Settings className="icon" />
-                  Edit Profile
-                </NavLink>
+                );
+              })}
+          </div>
+        </div>
 
-                <NavLink
-                  to="/login/"
-                  className="dropdown-item"
-                  onClick={() => {
-                    localStorage.setItem("currentUser", null);
-                    localStorage.setItem("user", null);
-                    localStorage.setItem("headers", null);
-                  }}
+        {localStorage.currentUser !== undefined ? (
+          <>
+            <Nav className="ml-auto right-nav">
+              <ul className="navbar-nav mr-auto">
+                <button className="btn btn-danger btn-lg text-white mr-2">
+                  Post An Ad
+                </button>
+                <NavDropdown
+                  title={
+                    <div className="menu-profile">
+                      <span className="name">
+                        Welcome{" "}
+                        {profile && profile.name ? profile.name : "user name"}{" "}
+                      </span>
+                      {/* <Image src={profile} alt="Profile Image" roundedCircle /> */}
+                    </div>
+                  }
+                  id="basic-nav-dropdown"
+                  className="profile-nav-item"
                 >
-                  <Icon.LogOut className="icon" />
-                  Logout
-                </NavLink>
-              </NavDropdown>
-          {/* <div className="dropdown-button p-2">
+                  <NavLink to="/profile/" className="dropdown-item">
+                    <Icon.User className="icon" />
+                    Profile
+                  </NavLink>
+                  <NavLink to="/profile-settings/" className="dropdown-item">
+                    <Icon.Settings className="icon" />
+                    Edit Profile
+                  </NavLink>
+
+                  <NavLink
+                    to="/login/"
+                    className="dropdown-item"
+                    onClick={() => {
+                      localStorage.setItem("currentUser", null);
+                      localStorage.setItem("user", null);
+                      localStorage.setItem("headers", null);
+                    }}
+                  >
+                    <Icon.LogOut className="icon" />
+                    Logout
+                  </NavLink>
+                </NavDropdown>
+                {/* <div className="dropdown-button p-2">
               Welcome  {profile && profile.name ? profile.name : "user name"}
             </div>
             <NavLink
@@ -150,30 +141,32 @@ const Topbar = () => {
             >
               Log out
               </NavLink> */}
-            
-            
-            </ul>
-            </Nav></> : <>
+              </ul>
+            </Nav>
+          </>
+        ) : (
+          <>
             <Nav className="ml-auto right-nav">
-          <ul className="navbar-nav mr-auto">
-          <button  className="btn btn-danger btn-lg text-white">
-                Post An Ad
-              </button>
-            <div
-              onClick={() => history.push("/login/")}
-              className="dropdown-button p-2"
-            >
-              Login
-            </div>
-            <div
-              onClick={() => history.push("/signup/")}
-              className="dropdown-button p-2"
-            >
-              Sign Up
-            </div>
-          </ul>
-        </Nav>
-            </>}
+              <ul className="navbar-nav mr-auto">
+                <button className="btn btn-danger btn-lg text-white mr-2">
+                  Post An Ad
+                </button>
+                <div
+                  onClick={() => history.push("/login/")}
+                  className="dropdown-button p-2"
+                >
+                  Login
+                </div>
+                <div
+                  onClick={() => history.push("/signup/")}
+                  className="dropdown-button p-2"
+                >
+                  Sign Up
+                </div>
+              </ul>
+            </Nav>
+          </>
+        )}
       </Navbar.Collapse>
     </Navbar>
   );

@@ -26,7 +26,6 @@ export default function usedTractor() {
 
     if (result.error === false) {
       setCities(result.data && result.data.data);
-      console.log("cities", result.data && result.data.data);
     }
   };
 

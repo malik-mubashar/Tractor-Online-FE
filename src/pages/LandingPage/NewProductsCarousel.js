@@ -1,8 +1,6 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
-import Badge from 'react-bootstrap/Badge'
-
 
 export default function NewProductsCarousel({products}) {
 
@@ -49,7 +47,6 @@ export default function NewProductsCarousel({products}) {
         { products &&
           products.map((item, i) => {
           return(
-            <>
             <div className="featured-card bg-white border-radius cursor-pointer h-100" key={i}>
               <img
                 className="card-img border-radius"
@@ -63,9 +60,8 @@ export default function NewProductsCarousel({products}) {
               <p className="pl-2 border-radius">{item.location}</p>
               <span className="featuredBand">Featured</span>
             </div>
-            </>
-        );
-      })}
+          );
+        })}
       </Carousel>
     </div>
   );

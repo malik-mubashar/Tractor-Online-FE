@@ -60,9 +60,7 @@ const LandingPage = () => {
         tempArray.push({ ...item, label: item.title, value: item.title })
       );
     setCities(tempArray);
-    console.log("city", tempArray);
   };
-  console.log("cities", cities);
   return (
     <>
       {!isMobile && (

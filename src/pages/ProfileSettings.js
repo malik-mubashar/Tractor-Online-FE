@@ -181,7 +181,6 @@ const ProfileSettings = () => {
     const loadingToastId = toast.loading("Loading..!");
 
     e.preventDefault();
-    console.log(editProfile);
     if (editProfile.image) {
       try {
         const result = await user.uploadProfilePicture(editProfile.image);
@@ -223,12 +222,6 @@ const ProfileSettings = () => {
   const modalClose = () => {
     setModalShow(!modalShow);
   };
-
-  console.log("editProfile", editProfile);
-  console.log("fileData", fileDataURL);
-  console.log("countryLIs", countryList);
-  console.log("cities", cities);
-  console.log("languageList", languageList);
 
   return (
     <>
