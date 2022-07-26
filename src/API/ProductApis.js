@@ -127,13 +127,7 @@ class Products {
     return axios({
       method: "get",
       url: `${process.env.REACT_APP_API_LOCAL_PATH}products/${id}`,
-      headers: {
-        "Content-Type": "application/json;",
-        "access-token": `${user.accessToken}`,
-        client: `${user.client}`,
-        uid: `${user.uid}`,
-        mode: "no-cors",
-      },
+      headers: Headers,
     })
       .then((result) => {
         return {
@@ -148,7 +142,7 @@ class Products {
         };
       });
 	};
-  getAllProducts = async (city,priceRangeTo,priceRangefrom,featured) => {
+  getAllProducts = async (city='nil',priceRangeTo='nil',priceRangefrom = 'nil',featured='nil') => {
 		debugger;
     return axios({
       method: "get",

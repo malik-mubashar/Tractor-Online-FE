@@ -4,6 +4,7 @@ import Tabs from 'react-bootstrap/Tabs'
 import Tab from 'react-bootstrap/Tab'
 import NewProductsCarousel from './NewProductsCarousel';
 import { productApis } from "../../API/ProductApis";
+import { Link } from "react-router-dom";
 
 export default function FeaturedNewTractor({ title, link }) {
 
@@ -51,12 +52,15 @@ export default function FeaturedNewTractor({ title, link }) {
         <div className="mb-4">
           <div className="">
             <div className="tabs-style-three">
+            <Link to ={`/addDetails/${products.id}`}>
+           
               <Tabs
                 defaultActiveKey="Popular"
                 id="controlled-tab-example"
                 onSelect={(e) => {setKey(e)}}
                 activeKey={key}
               >
+                 
                 <Tab eventKey="Popular" title="Popular">
                   <NewProductsCarousel products={popularProducts} />
                 </Tab>
@@ -67,7 +71,9 @@ export default function FeaturedNewTractor({ title, link }) {
                 <Tab eventKey="NewlyLaunched" title="Newly Launched">
                   <NewProductsCarousel products={products} />
                 </Tab>
+                
               </Tabs>
+              </Link>
             </div>
           </div>
         </div>
