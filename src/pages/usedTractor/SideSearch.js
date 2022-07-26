@@ -38,33 +38,36 @@ export default function SideSearch({
       <MDBAccordion alwaysOpen initialActive={1}>
         <MDBAccordionItem collapseId={1} headerTitle="SEARCH FILTERS">
           <ul class="list-unstyled">
-            {searchFilters !==undefined? 
-              Object.entries(searchFilters).map((item, i) => {
-                return (
-                  <>
-                    {item[0] === "featured" ? (
-                      item[1] === true ? (
+            {searchFilters !== undefined
+              ? Object.entries(searchFilters).map((item, i) => {
+                  return (
+                    <>
+                      {item[0] === "featured" ? (
+                        item[1] === true ? (
+                          <li className="d-flex" key={i}>
+                            {item[0]}
+                            <span class="ml-auto">
+                              {/* <i class="fa fa-times-circle"></i> */}
+                            </span>
+                          </li>
+                        ) : null
+                      ) : item[0] === "priceRangeFrom" ||
+                        item[0] === "priceRangeTo" ? (
+                        item[0] === "priceRangeFrom" ? (
+                          `Price Range ${searchFilters.priceRangeFrom} to ${searchFilters.priceRangeTo}`
+                        ) : null
+                      ) : (
                         <li className="d-flex" key={i}>
-                          {item[0]}
+                          {item[1]}
                           <span class="ml-auto">
                             {/* <i class="fa fa-times-circle"></i> */}
                           </span>
                         </li>
-                      ) : null
-                    ) : (
-                      <li className="d-flex" key={i}>
-                        {item[1]}
-                        <span class="ml-auto">
-                          {/* <i class="fa fa-times-circle"></i> */}
-                        </span>
-                      </li>
-                    )}
-                  </>
-                );
-							})
-							:
-							'No Filters'
-						}
+                      )}
+                    </>
+                  );
+                })
+              : "No Filters"}
           </ul>
         </MDBAccordionItem>
         <MDBAccordionItem collapseId={2} headerTitle="SEARCH BY KEYWORD">

@@ -143,7 +143,7 @@ class Products {
       });
 	};
   getAllProducts = async (city='nil',priceRangeTo='nil',priceRangefrom = 'nil',featured='nil') => {
-		
+
     return axios({
       method: "get",
       url: `${process.env.REACT_APP_API_LOCAL_PATH}get_products?featured=${featured}&price_lt=${priceRangeTo}&price_gt=${priceRangefrom}&city=${city}`,
