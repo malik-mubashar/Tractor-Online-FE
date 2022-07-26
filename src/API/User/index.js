@@ -72,6 +72,69 @@ class User {
         };
       });
   };
+
+  forgotPassword = async (email, url) => {
+    return axios({
+      method: "post",
+      url: `${process.env.REACT_APP_API_LOCAL_PATH}auth/password`,
+      headers: {
+        "Content-Type": "application/json; charset=utf-8",
+        "Access-Control-Allow-Origin": "*",
+        mode: "no-cors"
+      },
+      data: {
+        email: email,
+        redirect_url: url
+      }
+    })
+      .then((result) => {
+        return {
+          error: false,
+          data: result.data,
+          headers: result.headers
+        };
+      })
+      .catch((error) => {
+        return {
+          error: true,
+          data: error.response.data
+        };
+      });
+  };
+
+  resetPassword = async (password, confirmPassword, accessToken, client, uid ) => {
+    return axios({
+      method: "put",
+      url: `${process.env.REACT_APP_API_LOCAL_PATH}auth/password`,
+      headers: {
+        "Content-Type": "application/json; charset=utf-8",
+        "Access-Control-Allow-Origin": "*",
+        "access-token": `${accessToken}`,
+        "client": `${client}`,
+        "uid": `${uid}`,
+        mode: "no-cors"
+      },
+      data: {
+        email: uid,
+        password: password,
+        password_confirmation: confirmPassword
+      }
+    })
+      .then((result) => {
+        return {
+          error: false,
+          data: result.data,
+          headers: result.headers
+        };
+      })
+      .catch((error) => {
+        return {
+          error: true,
+          data: error.response.data
+        };
+      });
+  };
+
 	profile = async (editProfile, personal_id,tempCurrentUser) => {
 		 
     let personal_detail = personal_id

@@ -1,79 +1,90 @@
-import React from 'react';
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
-import {Row, Col, Form, Button, Image } from 'react-bootstrap';
-import * as Icon from 'react-feather';
+import { Row, Col, Form, Button } from "react-bootstrap";
+import { user } from "../API/User/index";
+import toast from "react-hot-toast";
 
-// Logo image file path
-import Logo from '../assets/img/logo.png';
+const ForgotPassword = () => {
 
-class ForgotPassword extends React.Component {
+  const [alertMessage, setAlertMessage] = useState("");
+  const [alertShow, setAlertShow] = useState(false);
+  const [alertType, setAlertType] = useState("alert-success");
+  const [email, setEmail] = useState();
 
-    onForgotHandler = () => {
-        this.props.history.push("/");
+  const onForgotHandler = async (e) => {
+    e.preventDefault();
+    const loadingToastId = toast.loading("Loading..!");
+    var url = 'https://tractoronline.com.pk/reset-password'
+    if (window.location.host === "localhost:3000"){
+      url = 'http://localhost:3000/reset-password'
     }
 
-    render() {
-        return (
-            <div className="auth-main-content auth-bg-image">
-                <div className="d-table">
-                    <div className="d-tablecell">
-                        <div className="auth-box">
-                            <Row>
-                                <Col md={6}>
-                                    <div className="form-left-content">
-                                        <div className="auth-logo">
-                                            <Image src={Logo} alt="Logo" />  
-                                        </div>
+    try {
+      const result = await user.forgotPassword(email, url);
+      //success
+      if (result.error === false) {
+        toast.dismiss(loadingToastId);
+        toast.success("Email Sent");
+        setAlertType("alert-success");
+        setAlertMessage(result.data.message)
+        setAlertShow(true)
+      }
+      //error
+      if (result.error === true) {
+        toast.dismiss(loadingToastId);
+        setAlertMessage(result.data.errors[0]);
+        setAlertShow(true)
+        setAlertType("alert-danger");
+        setAlertMessage(result.data.errors[0])
+      }
+    } catch (error) {
+      toast.dismiss(loadingToastId);
+    }
+  };
+;
 
-                                        <div className="login-links">
-                                            <Link to="/" className="fb">
-                                                <Icon.Facebook 
-                                                    className="icon" 
-                                                />
-                                                Sign Up with Facebook
-                                            </Link>
-                                            <Link to="/" className="twi">
-                                                <Icon.Twitter 
-                                                    className="icon" 
-                                                />
-                                                Sign Up with Twitter
-                                            </Link>
-                                            <Link to="/" className="ema">
-                                                <Icon.Mail 
-                                                    className="icon" 
-                                                />
-                                                Sign Up with Email
-                                            </Link>
-                                        </div>
-                                    </div>
-                                </Col>
+  return (
+    <div className="auth-main-content auth-bg-image">
+      {alertShow ?
+        <div class={`alert ${alertType} alert-dismissible fade show mt-2`} role="alert">
+          {alertMessage}
+          <button type="button" class="close" data-dismiss="alert" aria-label="Close" onClick={ () => {setAlertShow(false)}}>
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        :
+        null
+      }
+      <div className="d-table">
+        <div className="d-tablecell">
+          <div className="reset-auth-box">
+            <Row>
+              <Col md={12}>
+                <div className="form-content">
+                  <h1 className="heading">Forgot password</h1>
+                  <Form>
+                    <Form.Group>
+                      <Form.Label>Email address</Form.Label>
+                      <Form.Control type="email" onChange={(event) => setEmail(event.target.value)} />
+                    </Form.Group>
 
-                                <Col md={6}>
-                                    <div className="form-content">
-                                        <h1 className="heading">Forgot password</h1>
-                                        <Form onSubmit={this.onForgotHandler}>
-                                            <Form.Group>
-                                                <Form.Label>Email address</Form.Label>
-                                                <Form.Control type="email" />
-                                            </Form.Group>
+                    <div className="text-center mt-2">
+                      <Button variant="primary" onClick={onForgotHandler}>
+                        Send the Reset Instruction
+                      </Button>
 
-                                            <div className="text-center">
-                                                <Button variant="primary" type="submit">
-                                                    Send the Reset Instruction
-                                                </Button>
-
-                                                <Link to="/login/" className="fp-link">Log In</Link>
-                                            </div>
-                                        </Form>
-                                    </div>
-                                </Col>
-                            </Row>
-                        </div>
+                      <Link to="/login" className="fp-link">
+                        Log In
+                      </Link>
                     </div>
+                  </Form>
                 </div>
-            </div>
-        );
-    }
-}
-
+              </Col>
+            </Row>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+};
 export default ForgotPassword;
