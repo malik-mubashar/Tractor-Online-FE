@@ -43,7 +43,6 @@ export default function usedTractor() {
     }
   };
   useEffect(() => {
-    
     if (searchFilters) {
         handleGetAllProducts(searchFilters.city,searchFilters.priceRangeTo,searchFilters.priceRangeFrom,searchFilters.featured);
     }

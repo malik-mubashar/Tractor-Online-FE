@@ -42,6 +42,7 @@ import Budgets from "../pages/Models copy/Budgets";
 import DashboardLayout from "../layouts/DashboardLayout";
 import SellTractor from "../pages/PostAd/sellTractor.js";
 import PostAd from "../pages/PostAd/post-ad"
+import ProductMappings from "../pages/Product Mapping/ProductMappings";
 
 
 const AppRouter = () => {
@@ -131,7 +132,11 @@ const AppRouter = () => {
               <UserRoles />
             </DashboardLayout>
 					</ProtectedRoute>
-			
+					<ProtectedRoute exact path="/productmappings">
+            <DashboardLayout>
+              <ProductMappings />
+            </DashboardLayout>
+					</ProtectedRoute>
           <UnProtectedRoute exact path="/usedtractor/search">
             <Layout>
               <UsedTractor />
