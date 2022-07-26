@@ -291,7 +291,7 @@ const MobileFooter = () => {
         <button
           className="css-4g4bsj"
           onClick={() => {
-            debugger;
+            
             setShow(true);
           }}
         >
