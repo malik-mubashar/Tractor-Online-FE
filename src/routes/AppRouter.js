@@ -43,6 +43,7 @@ import DashboardLayout from "../layouts/DashboardLayout";
 import SellTractor from "../pages/PostAd/sellTractor.js";
 import PostAd from "../pages/PostAd/post-ad"
 
+
 const AppRouter = () => {
   return (
 		<>
@@ -141,6 +142,7 @@ const AppRouter = () => {
               <SellTractor />
             </Layout>
           </UnProtectedRoute>
+        
           <UnProtectedRoute exact path="/sellTractor/postAd">
             <Layout>
               <PostAd />

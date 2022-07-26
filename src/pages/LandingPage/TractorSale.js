@@ -1,6 +1,9 @@
-import React, {useState} from "react";
-import { Link, NavLink } from "react-router-dom";
+import React, {useContext, useState} from "react";
+import { Link, NavLink, useHistory } from "react-router-dom";
 import { Form, Button, Image, Modal } from "react-bootstrap";
+import { RootContext } from "../../context/RootContext";
+import {user} from "../../API/User/index"
+import toast from "react-hot-toast";
 import Icofont from 'react-icofont';
 
 
@@ -9,7 +12,61 @@ function MyVerticallyCenteredModal(props) {
   const [email, setEmail] = useState();
   const [signUp, setSignUp] = useState(false);
   const [passwordType, setPasswordType] = useState("password");
+  let history = useHistory();
     const [passwordInput, setPasswordInput] = useState("");
+    const { currentUser, setCurrentUser, signUpMessage, setSignUpMessage } = useContext(RootContext);
+    const [alertMessage, setAlertMessage]  = useState('Confirmation Mail mail sent to your Email Address. Kindly Confirm Your email to continue..')
+    const [alertType, setAlertType] = useState('alert-success')
+    
+
+
+    const onLoginHandler = async (e) => {
+      e.preventDefault();
+      const loadingToastId = toast.loading("Loading..!");
+  
+      try {
+        const result = await user.login(email, password);
+        console.log(result);
+        //success
+        if (result.error === false) {
+          toast.dismiss(loadingToastId);
+  
+          toast.success('welcome')
+          setCurrentUser({
+            ...result.data.data,
+            accessToken: result.headers["access-token"],
+            client: result.headers["client"],
+            uid: result.headers["uid"]
+          });
+  
+          localStorage.setItem(
+            "currentUser",
+            JSON.stringify({
+              ...result.data.data,
+              accessToken: result.headers["access-token"],
+              client: result.headers["client"],
+              uid: result.headers["uid"]
+            })
+          );
+          localStorage.setItem("headers", JSON.stringify(result.headers));
+          history.push("/sellTractor");
+          setSignUpMessage(false)
+        }
+  
+        //error
+        if (result.error === true) {
+          toast.dismiss(loadingToastId);
+          // toast.error('Login failed');
+          setAlertMessage(result.data.errors[0])
+          setSignUpMessage(true)
+          setAlertType('alert-danger')
+        }
+      } catch (error) {
+        toast.dismiss(loadingToastId);
+  
+        console.error(error);
+      }
+    };
 
     const handlePasswordChange =(evnt)=>{
         setPasswordInput(evnt.target.value);
@@ -43,7 +100,7 @@ function MyVerticallyCenteredModal(props) {
                 <Form.Control
                   type="email"
                   onChange={(event) => {
-                    // setEmail(event.target.value);
+                    setEmail(event.target.value);
                   }}
                 />
               </Form.Group>
@@ -63,7 +120,7 @@ function MyVerticallyCenteredModal(props) {
                 <Form.Control
                   type={passwordType}
                   onChange={(event) => {
-                    // setPassword(event.target.value);
+                    setPassword(event.target.value);
                   }}
                 />
                 {/* <i className="password-icons cursor-pointer" onClick={togglePassword}>
@@ -154,11 +211,11 @@ function MyVerticallyCenteredModal(props) {
                   className="mb-2"
                   variant="primary"
                   type="submit"
-                  // onClick={onLoginHandler}
+                  onClick={onLoginHandler}
                 >
                   Log In
                 </Button>
-                <Link onClick={() => {setSignUp(true)}}>
+                <Link to="/signup/">
                   Don't Have an Account?
                 </Link>
               </div>
@@ -212,24 +269,14 @@ const TractorSaleAd = () => {
                   <i className="fa fa-tick"></i>Sell your car as soon as
                   possible for the best price
                 </li>
-              </ul>{localStorage.currentUser === undefined ?<>
-
-              
-                <NavLink to ="/login/"  className="btn btn-danger btn-lg text-white">
-                Place Your Ad Here
-              </NavLink>
-              </>:<>
-              <button onClick={ () => {postAdd()}} className="btn btn-danger btn-lg text-white">
-                Place Your Ad Here
-              </button>
-              </>}
-              {/* <MyVerticallyCenteredModal
+              </ul>
+              <MyVerticallyCenteredModal
                 show={modalShow}
                 onHide={() => setModalShow(false)}
               />
               <button onClick={ () => {postAdd()}} className="btn btn-danger btn-lg text-white">
                 Place Your Ad Here
-              </button> */}
+              </button>
             </div>
             <div className="col-lg-6 col-12 mt-4">
               <h2>Sell It For Me on TractorOnline</h2>
