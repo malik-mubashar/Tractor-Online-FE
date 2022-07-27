@@ -72,7 +72,7 @@ class ProdCategories {
       });
   };
 	addProdCategory = async (prodCategoriesState) => {
-		 
+		debugger;
     return axios({
       method: "post",
       url: `${process.env.REACT_APP_API_LOCAL_PATH}product_categories`,
@@ -85,7 +85,8 @@ class ProdCategories {
         uid: `${user.uid}`,
         mode: "no-cors",
       },
-      data: {
+			data: {
+				is_option:prodCategoriesState.is_option,
         title: prodCategoriesState.title,
         status: prodCategoriesState.status,
         link: prodCategoriesState.link,

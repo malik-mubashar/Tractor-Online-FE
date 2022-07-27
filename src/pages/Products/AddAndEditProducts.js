@@ -5,12 +5,19 @@ import { productApis } from "../../API/ProductApis";
 import { brandApis } from "../../API/BrandsApis";
 import Icofont from "react-icofont";
 import { object } from "prop-types";
+import { prodApi } from "../../API/ProdCategoriesApis";
+import { productMappingApis } from "../../API/ProductMappingApis";
 
 export default function AddAndEditProduct({
   productsState,
   setProductsState,
   getProducts,
 }) {
+
+  const [brands, setBrands] = useState();
+  const [productMappings, setProductMappings] = useState([]);
+	const myRefname = useRef(null);
+  const [file, setFile] = useState([]);
   const [extraFieldsArr, setExtraFieldsArr] = useState([
     {
       id: parseInt(
@@ -20,8 +27,102 @@ export default function AddAndEditProduct({
       value: null,
     },
   ]);
-  const [extraFields, setExtraFields] = useState([]);
-  const [brands, setBrands] = useState();
+  const fieldsMap = [
+    { name: "title", required: true },
+    { name: "status", required: true },
+    {
+      name: "product_category_id",
+      required: productsState && productsState.isAddProduct ? true : false,
+    },
+    { name: "icon", required: false },
+    { name: "link", required: false },
+    { name: "description", required: false },
+    { name: "price", required: false },
+    { name: "brand_id", required: true },
+  ];
+  const [fieldsWithError, setFieldsWithError] = useState({
+    description: false,
+    icon: false,
+    link: false,
+    product_category_id: false,
+    status: false,
+    title: false,
+  });
+  const doValidation = () => {
+    var tempFieldsWithError = {};
+    fieldsMap.forEach((fieldDetail) => {
+      console.log(productsState);
+      if (
+        productsState[fieldDetail.name] == undefined ||
+        productsState[fieldDetail.name] == "" ||
+        productsState[fieldDetail.name] == null
+      ) {
+        if (fieldDetail.required === true) {
+          tempFieldsWithError = {
+            ...tempFieldsWithError,
+            [fieldDetail.name]: true,
+          };
+        } else if (fieldDetail.required === false) {
+          tempFieldsWithError = {
+            ...tempFieldsWithError,
+            [fieldDetail.name]: false,
+          };
+        }
+      } else if (
+        productsState[fieldDetail.name] != undefined ||
+        productsState[fieldDetail.name] != ""
+      ) {
+        if (fieldDetail.required === true) {
+          tempFieldsWithError = {
+            ...tempFieldsWithError,
+            [fieldDetail.name]: false,
+          };
+        }
+      }
+    });
+
+    console.log("tempFieldsWithError", tempFieldsWithError);
+    var isValidationFailed = false;
+    console.log(tempFieldsWithError);
+    setFieldsWithError(tempFieldsWithError);
+    Object.values(tempFieldsWithError).forEach((item) => {
+      if (item === true) {
+        isValidationFailed = true;
+      }
+    });
+    console.log("isValidationFailed", isValidationFailed);
+
+    return isValidationFailed;
+  };
+
+
+
+  const getProductMappings = async (page, mainSearch, noOfRec) => {
+    const loadingToastId = toast.loading("Loading..!");
+
+    console.log(page);
+    try {
+      const result = await productMappingApis.getProductMappings(
+        page,
+        mainSearch,
+        noOfRec
+      );
+
+      if (result.error == false && result.data.status == "success") {
+        toast.dismiss(loadingToastId);
+
+        setProductMappings(
+					result.data.data
+        );
+      } else {
+        toast.dismiss(loadingToastId);
+        console.error(result.data);
+      }
+    } catch (error) {
+      toast.dismiss(loadingToastId);
+      console.error(error);
+    }
+  };
 
   function handleChange(evt) {
     setProductsState({
@@ -29,9 +130,7 @@ export default function AddAndEditProduct({
       [evt.target.name]: evt.target.value,
     });
   }
-  const myRefname = useRef(null);
 
-  const [file, setFile] = useState([]);
 
   function uploadSingleFile(e) {
     let ImagesArray = Object.entries(e.target.files).map((e) =>
@@ -46,24 +145,32 @@ export default function AddAndEditProduct({
     });
   }
   useEffect(() => {
-    getBrands(1, "", 100000000);
+		getBrands(1, "", 100000000);
+		getProductMappings(1, "", 1000000);
+
   }, []);
 
   useEffect(() => {
     if (productsState.isEditProduct === true) {
-      if (Object.entries(productsState.extra_fields).length > 0) {
-        let tempExtraFieldsArr = [];
-        Object.entries(productsState.extra_fields).forEach((item, i) => {
-          tempExtraFieldsArr.push({
-            id: new Date().getTime().toString() + Math.floor(Math.random() * 1000000),
-            key: item[0],
-            value: item[1],
-          });
-        });
-        setExtraFieldsArr(tempExtraFieldsArr);
-      }
+			getExtraFields(productsState.extra_fields)
     }
-  }, [productsState.extra_fields]);
+	}, [productsState.extra_fields]);
+
+	const getExtraFields = (extraFieldObject) => {
+		if (Object.entries(extraFieldObject).length > 0) {
+			let tempExtraFieldsArr = [];
+			Object.entries(extraFieldObject).forEach((item, i) => {
+				tempExtraFieldsArr.push({
+					id:
+						new Date().getTime().toString() +
+						Math.floor(Math.random() * 1000000),
+					key: item[0],
+					value: item[1],
+				});
+			});
+			setExtraFieldsArr(tempExtraFieldsArr);
+		}
+	}
   const getBrands = async (page, mainSearch, noOfRec) => {
     const loadingToastId = toast.loading("Loading..!");
 
@@ -110,7 +217,7 @@ export default function AddAndEditProduct({
       cover_photo: fileListArr[index],
     });
   }
-  const getExtraFieldData = () => {
+  const getExtraFieldDataForApi = () => {
     let extraFieldsObj = {};
     extraFieldsArr.forEach((item) => {
       extraFieldsObj = {
@@ -121,78 +228,89 @@ export default function AddAndEditProduct({
     console.log("..extraFieldsObj..", extraFieldsObj);
     return extraFieldsObj;
   };
+
   const addProduct = async (params) => {
-    let extraFieldsData = getExtraFieldData();
-    const loadingToastId = toast.loading("Loading..!");
-    let formData = new FormData();
-     
-    if (productsState.images !== undefined) {
-      for (const key of Object.keys(productsState.images)) {
-        formData.append("active_images[]", productsState.images[key]);
-      }
-    }
+    if (!doValidation()) {
+      var user = JSON.parse(window.localStorage.getItem("currentUser")) || null;
 
-    if (productsState.cover_photo === undefined){
-      if (productsState.images !== undefined){
-        formData.append("cover_photo", productsState.images[0]);
-      }
-    }
-    else{
-      formData.append("cover_photo", productsState.cover_photo);
-    }
-    formData.append("title", productsState.title);
-    formData.append("status", productsState.status);
-    formData.append("description", productsState.description);
-    formData.append("price", productsState.price);
-    formData.append("location", productsState.location);
-    formData.append("link", productsState.link);
-    formData.append("extra_fields", JSON.stringify(extraFieldsData));
-    formData.append("featured", productsState.featured);
-    formData.append("brand_id", productsState.brand_id);
-    if (productsState.product_type !== undefined) {
-      formData.append("product_type", productsState.product_type);
-    }
+      let extraFieldsData = getExtraFieldDataForApi();
+      const loadingToastId = toast.loading("Loading..!");
+      let formData = new FormData();
 
-    if (productsState.isAddProduct) {
-      try {
-        const result = await productApis.addProduct(productsState, formData);
-        console.log(result);
-        if (result.error == false) {
-          toast.dismiss(loadingToastId);
-          toast.success("Product created!");
-          setProductsState({
-            ...productsState,
-            isAddProduct: false,
-            isEditProduct: false,
-          });
-          getProducts(1, "", 10);
+      if (productsState.images !== undefined) {
+        for (const key of Object.keys(productsState.images)) {
+          formData.append("active_images[]", productsState.images[key]);
         }
-        if (result.error === true) {
+      }
+
+      if (productsState.cover_photo === undefined) {
+        if (productsState.images !== undefined) {
+          formData.append("cover_photo", productsState.images[0]);
+        }
+      } else {
+        formData.append("cover_photo", productsState.cover_photo);
+      }
+      formData.append("title", productsState.title);
+      formData.append("status", productsState.status);
+      formData.append("description", productsState.description);
+      formData.append("price", productsState.price);
+      formData.append("location", productsState.location);
+      formData.append("link", productsState.link);
+      formData.append("extra_fields", JSON.stringify(extraFieldsData));
+      formData.append("featured", productsState.featured);
+      formData.append("brand_id", productsState.brand_id);
+      formData.append("user_id", user.id);
+      if (productsState.product_type !== undefined) {
+        formData.append("product_type", productsState.product_type);
+      }
+
+      if (productsState.isAddProduct) {
+        try {
+          const result = await productApis.addProduct(productsState, formData);
+          console.log(result);
+          if (result.error == false) {
+            toast.dismiss(loadingToastId);
+            toast.success("Product created!");
+            setProductsState({
+              ...productsState,
+              isAddProduct: false,
+              isEditProduct: false,
+            });
+            getProducts(1, "", 10);
+          }
+          if (result.error === true) {
+            toast.dismiss(loadingToastId);
+            toast.error("error");
+          }
+        } catch (error) {
           toast.dismiss(loadingToastId);
           toast.error("error");
+          console.error(error);
         }
-      } catch (error) {
-        toast.dismiss(loadingToastId);
-        toast.error("error");
-        console.error(error);
-      }
-    } else if (productsState.isEditProduct) {
-      try {
-        const result = await productApis.updateProduct(productsState, formData);
-        if (result.error === false) {
-          toast.success("Product updated!");
+      } else if (productsState.isEditProduct) {
+        try {
+          const result = await productApis.updateProduct(
+            productsState,
+            formData
+          );
+          if (result.error === false) {
+            toast.success("Product updated!");
+            toast.dismiss(loadingToastId);
+            setProductsState({
+              ...productsState,
+              isEditProduct: false,
+            });
+            getProducts(1, "", 10);
+          }
+        } catch (error) {
           toast.dismiss(loadingToastId);
-          setProductsState({
-            ...productsState,
-            isEditProduct: false,
-          });
-          getProducts(1, "", 10);
+          toast.error("error");
+          console.error(error);
         }
-      } catch (error) {
-        toast.dismiss(loadingToastId);
-        toast.error("error");
-        console.error(error);
       }
+    } else {
+      toast.error("Validation Failed..!");
+      toast("please enter the values in red fields");
     }
   };
 
@@ -218,7 +336,7 @@ export default function AddAndEditProduct({
     );
   }
   //////////////////////////////////
-	const handleExtraField = (event, id) => {
+  const handleExtraField = (event, id) => {
     let tempExtraFieldsArr = [...extraFieldsArr];
     if (event.target.name == "extra_fields_key") {
       let found = false;
@@ -238,7 +356,7 @@ export default function AddAndEditProduct({
           value: null,
         });
       }
-			setExtraFieldsArr(tempExtraFieldsArr);
+      setExtraFieldsArr(tempExtraFieldsArr);
     } else if (event.target.name == "extra_fields_value") {
       let found = false;
       tempExtraFieldsArr.map((item) => {
@@ -257,13 +375,22 @@ export default function AddAndEditProduct({
           value: event.target.value,
         });
       }
-			setExtraFieldsArr(tempExtraFieldsArr);
+      setExtraFieldsArr(tempExtraFieldsArr);
     }
-  };
+	};
+	
+	const handleProductCategoryChange = (e) => {
+		handleChange(e)
+		debugger;
+		console.log(extraFieldsArr)
+		console.log(productsState)
+		console.log(productMappings)
+		var temp=	productMappings.find((item)=>{
+			return(item.product_category.id==e.target.value)
+		})
+		getExtraFields(temp.extra_fields)
+	}
 
-  console.log("extraFieldsArr", extraFieldsArr);
-  // console.log("prodState", productsState);
-  // console.log("brand", brands);
   return (
     <div className="mb-4">
       {/* Basic Forms */}
@@ -280,6 +407,9 @@ export default function AddAndEditProduct({
                 <Form.Group controlId="formBasicName">
                   <Form.Label>Title</Form.Label>
                   <Form.Control
+                    className={
+                      fieldsWithError.title === true ? "border-danger" : ""
+                    }
                     defaultValue={productsState.title}
                     name="title"
                     type="text"
@@ -290,6 +420,11 @@ export default function AddAndEditProduct({
                 <Form.Group controlId="formBasicComments">
                   <Form.Label>Description</Form.Label>
                   <Form.Control
+                    className={
+                      fieldsWithError.description === true
+                        ? "border-danger"
+                        : ""
+                    }
                     defaultValue={productsState.description}
                     name="description"
                     type="text"
@@ -300,6 +435,9 @@ export default function AddAndEditProduct({
                 <Form.Group controlId="formBasicComments">
                   <Form.Label>Price</Form.Label>
                   <Form.Control
+                    className={
+                      fieldsWithError.price === true ? "border-danger" : ""
+                    }
                     defaultValue={productsState.price}
                     name="price"
                     type="text"
@@ -310,6 +448,9 @@ export default function AddAndEditProduct({
                 <Form.Group controlId="formBasicComments">
                   <Form.Label>Location</Form.Label>
                   <Form.Control
+                    className={
+                      fieldsWithError.location === true ? "border-danger" : ""
+                    }
                     defaultValue={productsState.location}
                     name="location"
                     type="text"
@@ -320,6 +461,9 @@ export default function AddAndEditProduct({
                 <Form.Group controlId="formBasicComments">
                   <Form.Label>link</Form.Label>
                   <Form.Control
+                    className={
+                      fieldsWithError.link === true ? "border-danger" : ""
+                    }
                     defaultValue={productsState.link}
                     name="link"
                     type="text"
@@ -330,11 +474,9 @@ export default function AddAndEditProduct({
                 <Form.Group controlId="formGridState">
                   <Form.Label>Product Brand</Form.Label>
                   <Form.Control
-                    // className={
-                    //   fieldsWithError.product_category_id === true
-                    //     ? "border-danger"
-                    //     : ""
-                    // }
+                    className={
+                      fieldsWithError.brand_id === true ? "border-danger" : ""
+                    }
                     as="select"
                     onChange={(e) => handleChange(e)}
                     name="brand_id"
@@ -363,6 +505,11 @@ export default function AddAndEditProduct({
                 <Form.Group controlId="formGridproduct">
                   <Form.Label>Product Type</Form.Label>
                   <Form.Control
+                    className={
+                      fieldsWithError.product_type === true
+                        ? "border-danger"
+                        : ""
+                    }
                     as="select"
                     value={productsState.product_type}
                     onChange={(e) => handleChange(e)}
@@ -375,11 +522,11 @@ export default function AddAndEditProduct({
                     <option value="newly_launched">Newly Launched</option>
                   </Form.Control>
                 </Form.Group>
-                <Form.Group className="d-flex" controlId="formGridproduct">
+                <Form.Group className="d-flex mt-3" controlId="formGridproduct">
                   <Form.Label>Is Featured</Form.Label>
                   <Form.Check
                     type="checkbox"
-                    className="ml-3"
+                    className="ml-4"
                     defaultChecked={
                       productsState && productsState.featured == true
                         ? true
@@ -398,6 +545,9 @@ export default function AddAndEditProduct({
                 <Form.Group controlId="formGridState">
                   <Form.Label>Status</Form.Label>
                   <Form.Control
+                    className={
+                      fieldsWithError.status === true ? "border-danger" : ""
+                    }
                     as="select"
                     value={productsState.status}
                     onChange={(e) => handleChange(e)}
@@ -408,6 +558,33 @@ export default function AddAndEditProduct({
                     <option value="deleted">deleted</option>
                   </Form.Control>
                 </Form.Group>
+                {productsState && productsState.isAddProduct ? (
+                  <Form.Group controlId="formGridState">
+                    <Form.Label>Product Category</Form.Label>
+                    <Form.Control
+                      className={
+                        fieldsWithError.product_category_id === true
+                          ? "border-danger"
+                          : ""
+                      }
+                      as="select"
+                      onChange={(e) => handleProductCategoryChange(e)}
+                      name="product_category_id"
+                    >
+                      <option key="blankChoice" hidden value>
+                        -- Select Product Category --
+                      </option>
+                      {productMappings &&
+                        productMappings.map((item) => {
+                          return (
+                            <option value={item.product_category.id} key={item.product_category.id}>
+                              {item.product_category.title}
+                            </option>
+                          );
+                        })}
+                    </Form.Control>
+                  </Form.Group>
+                ) : null}
                 <div className="d-flex">
                   <Form.Group className="mt-1" controlId="formBasicComments">
                     <Form.Label>Add more information about product.</Form.Label>
@@ -474,7 +651,10 @@ export default function AddAndEditProduct({
                     file.length > 0 &&
                     file.map((item, index) => {
                       return (
-                        <div key={item} className="col-12 col-lg-1 cover-photo-container">
+                        <div
+                          key={item}
+                          className="col-12 col-lg-1 cover-photo-container"
+                        >
                           <img
                             className="cover_image_select"
                             src={item}
@@ -483,7 +663,9 @@ export default function AddAndEditProduct({
                             width="100px"
                             onClick={(e) => selectCoverPhoto(e, item, index)}
                           />
-                          <div className="cover-photo-title">Select image for Cover Photo</div>
+                          <div className="cover-photo-title">
+                            Select image for Cover Photo
+                          </div>
                           <button
                             type="button"
                             className="close-btn"
