@@ -44,13 +44,13 @@ import DashboardLayout from "../layouts/DashboardLayout";
 import SellTractor from "../pages/PostAd/sellTractor.js";
 import PostAd from "../pages/PostAd/post-ad"
 import ProductMappings from "../pages/Product Mapping/ProductMappings";
-
+import Loader from "../pages/Loader";
 
 const AppRouter = () => {
   return (
 		<>
 			<Toaster />
-
+      <Loader />
       <BrowserRouter>
         <Switch>
           {/* unprotected routes */}
