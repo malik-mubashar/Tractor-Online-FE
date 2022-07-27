@@ -58,14 +58,16 @@ class User {
         password: password
       }
     })
-      .then((result) => {
+			.then((result) => {
+				debugger;
         return {
           error: false,
           data: result.data,
           headers: result.headers
         };
       })
-      .catch((error) => {
+			.catch((error) => {
+				debugger;
         return {
           error: true,
           data: error.response.data

@@ -207,6 +207,20 @@ export default function AddAndEditProdCategories({
                     placeholder="Link"
                     onChange={(e) => handleChange(e)}
                   />
+								</Form.Group>
+								
+								<Form.Group controlId="formBasicComments" className="d-flex">
+                  <Form.Label>Is Option</Form.Label>
+                  <Form.Check
+                    defaultValue={prodCategoriesState.is_option}
+                    name="is_option"
+										placeholder="Link"
+										className="ml-4"
+										onChange={(e) =>{ setProdCategoriesState({
+											...prodCategoriesState,
+											[e.target.name]: e.target.checked,
+										});} }
+                  />
                 </Form.Group>
 
                 <Form.Group controlId="formBasicComments">
@@ -221,7 +235,7 @@ export default function AddAndEditProdCategories({
                   />
                 </Form.Group>
                 <Button
-                  className="mr-3"
+                  className="mr-3 mt-3"
                   variant="secondary"
                   onClick={() =>
                     setProdCategoriesState({
@@ -233,7 +247,8 @@ export default function AddAndEditProdCategories({
                 >
                   Cancel
                 </Button>
-                <Button
+								<Button
+									className=" mt-3"
                   onClick={() => {
                     addProdCategory();
                   }}
