@@ -31,7 +31,9 @@ export default function SideSearch({
     { label: "500000", value: "500000" },
     { label: "600000", value: "600000" },
     { label: "700000", value: "700000" },
-  ];
+	];
+	
+	const [first, setfirst] = useState(false)
 
   return (
     <>
@@ -47,20 +49,26 @@ export default function SideSearch({
                           <li className="d-flex" key={i}>
                             {item[0]}
                             <span class="ml-auto">
-                              {/* <i class="fa fa-times-circle"></i> */}
+														<i class="fa fa-times-circle" onClick={()=>setSearchFilters({...searchFilters,[item[0]]:'nil'})}></i>
                             </span>
                           </li>
                         ) : null
-                      ) : item[0] === "priceRangeFrom" ||
-                        item[0] === "priceRangeTo" ? (
-                        item[0] === "priceRangeFrom" ? (
-                          `Price Range ${searchFilters.priceRangeFrom} to ${searchFilters.priceRangeTo}`
+											) : item[1] !== 'nil' &&
+												(item[0] === "priceRangeFrom" ||
+                        item[0] === "priceRangeTo") ? (
+														item[0] === "priceRangeFrom" ? (
+															<li className="d-flex" key={i}>
+                          Price Range ${searchFilters.priceRangeFrom} to ${searchFilters.priceRangeTo}
+															<span class="ml-auto">
+																<i class="fa fa-times-circle" onClick={()=>setSearchFilters({...searchFilters,priceRangeTo:'nil',priceRangeFrom:'nil'})}></i>
+															</span>
+														</li>
                         ) : null
-                      ) : (
+                      ) : (item[1]!=='nil'&&
                         <li className="d-flex" key={i}>
                           {item[1]}
                           <span class="ml-auto">
-                            {/* <i class="fa fa-times-circle"></i> */}
+                            <i class="fa fa-times-circle" onClick={()=>setSearchFilters({...searchFilters,[item[0]]:'nil'})}></i>
                           </span>
                         </li>
                       )}
@@ -105,7 +113,8 @@ export default function SideSearch({
                         <input
                           type="radio"
                           name="city"
-                          value={item.title}
+													value={item.title}
+													checked={searchFilters&&searchFilters.city === item.title}
                           onChange={(e) => {
                             setSearchFilters({
                               ...searchFilters,
@@ -131,7 +140,8 @@ export default function SideSearch({
                     <li title="Cars for Sale in Lahore, Pakistan">
                       <label className="filter-check clearfix">
                         <input
-                          type="radio"
+													type="radio"
+													checked={searchFilters&&searchFilters.make === item}
                           value={item}
                           onChange={(e) => {
                             setSearchFilters({
