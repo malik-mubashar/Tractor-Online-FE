@@ -1,10 +1,8 @@
 import React, { useState, useEffect, useContext } from "react";
 import { Row, Col, Breadcrumb, Button, Form, Image } from "react-bootstrap";
 import { Link } from "react-router-dom";
-import Navigation from "../components/Navigation/Navigation";
 import Footer from "./Footer/Footer";
 import { user } from "../API/User/index";
-import user1 from "../assets/img/user/big/1.png";
 import { RootContext } from "../context/RootContext";
 import { useHistory } from "react-router-dom";
 import PasswordResetModal from "./Modals/PasswordReset";
@@ -42,8 +40,7 @@ const ProfileSettings = () => {
 
   let history = useHistory();
 
-	useEffect(() => {
-		 
+  useEffect(() => {
     let fileReader,
       isCancel = false;
     if (editProfile.image) {
@@ -65,11 +62,10 @@ const ProfileSettings = () => {
   }, [editProfile.image]);
 
   useEffect(() => {
-     
     handlePersonalDetail();
     handleDropDownOptions();
   }, []);
-	const[profilePic,setProfilePic]=useState()
+  const [profilePic, setProfilePic] = useState();
   const handleDropDownOptions = async () => {
     const loadingToastId = toast.loading("Loading..!");
 
@@ -78,38 +74,36 @@ const ProfileSettings = () => {
       if (countryResponse.error === false) {
         toast.dismiss(loadingToastId);
         setCountryList(countryResponse.data.data);
-			} else if (countryResponse.error === true) {
-				toast.error('error getting cities')
+      } else if (countryResponse.error === true) {
+        toast.error("error getting cities");
         toast.dismiss(loadingToastId);
       }
     } catch (error) {
-      toast.dismiss(loadingToastId)
+      toast.dismiss(loadingToastId);
       console.error(error);
     }
 
     try {
       const res = await city.getAllCities();
       if (res.error === false) {
-         
         toast.dismiss(loadingToastId);
         setCities(res.data.data);
-			} else if (res.error === true) {
-				toast.error('error getting cities')
+      } else if (res.error === true) {
+        toast.error("error getting cities");
         toast.dismiss(loadingToastId);
       }
     } catch (error) {
       toast.dismiss(loadingToastId);
       console.error(error);
-		}
-		
-		try {
+    }
+
+    try {
       const res = await languageApis.getAllLanguages();
       if (res.error === false) {
-         
         toast.dismiss(loadingToastId);
         setLanguageList(res.data.data);
-			} else if (res.error === true) {
-				toast.error('error getting cities')
+      } else if (res.error === true) {
+        toast.error("error getting cities");
         toast.dismiss(loadingToastId);
       }
     } catch (error) {
@@ -124,7 +118,7 @@ const ProfileSettings = () => {
     setUserPersonalDetail(result.data);
     setEditProfile({
       name: result.data && result.data.name,
-     
+
       language:
         result.data &&
         result.data.personal_detail &&
@@ -158,8 +152,8 @@ const ProfileSettings = () => {
     setUpdatePassword({
       ...updatePassword,
       email: result.data && result.data.email,
-		});
-		setProfilePic(result.data && result.data.profile_path)
+    });
+    setProfilePic(result.data && result.data.profile_path);
   };
 
   // handle change
@@ -226,58 +220,58 @@ const ProfileSettings = () => {
   return (
     <>
       <div className="page-wrapper">
-          {/* Breadcrumb */}
-          <div className="main-content-header">
-            <Breadcrumb>
-              <h1>Edit Profile</h1>
-              <Link to="/dashboard" className="breadcrumb-item">
-                Dashboard
-              </Link>
-              <Link to="/profile" className="breadcrumb-item">
-                Profile
-              </Link>
-              <Breadcrumb.Item active>Profile Settings</Breadcrumb.Item>
-            </Breadcrumb>
-          </div>
-          {/* End Breadcrumb */}
+        {/* Breadcrumb */}
+        <div className="main-content-header">
+          <Breadcrumb>
+            <h1>Edit Profile</h1>
+            <Link to="/dashboard" className="breadcrumb-item">
+              Dashboard
+            </Link>
+            <Link to="/profile" className="breadcrumb-item">
+              Profile
+            </Link>
+            <Breadcrumb.Item active>Profile Settings</Breadcrumb.Item>
+          </Breadcrumb>
+        </div>
+        {/* End Breadcrumb */}
 
-          {/* Profile Settings */}
-          <Row>
-            <Col lg={12}>
-              <div className="profile-settings-form mb-3">
-                <Button
-                  variant="info"
-                  className="float-right mb-4"
-                  onClick={modalClose}
-                >
-                  Change Password
-                </Button>
-                <Form>
-                  <Form.Row>
-                    <Image
-                      src={fileDataURL ? fileDataURL : profilePic}
-                      roundedCircle
-                      alt="User Image"
-                      width="100px"
-                      height="100px"
-                      className="m-2"
-                      as={Col}
+        {/* Profile Settings */}
+        <Row>
+          <Col lg={12}>
+            <div className="profile-settings-form mb-3">
+              <Button
+                variant="info"
+                className="float-right mb-4"
+                onClick={modalClose}
+              >
+                Change Password
+              </Button>
+              <Form>
+                <Form.Group controlId="formBasicComments">
+                  <Image
+                    src={fileDataURL ? fileDataURL : profilePic}
+                    roundedCircle
+                    alt="User Image"
+                    width="100px"
+                    height="100px"
+                    className="m-2"
+                    as={Col}
+                  />
+                  <Form.Group as={Col} className="mt-4">
+                    <Form.Label>Upload New Picture</Form.Label>
+                    <Form.Control
+                      type="file"
+                      placeholder=""
+                      className="form-control p-1"
+                      multiple
+                      onChange={(e) => {
+                        handleUpdateProfile(e.target.files[0], "image");
+                      }}
                     />
-                    <Form.Group as={Col} className="mt-4">
-                      <Form.Label>Upload New Picture</Form.Label>
-                      <Form.Control
-                        type="file"
-                        placeholder=""
-                        className="form-control p-1"
-                        multiple
-                        onChange={(e) => {
-                          handleUpdateProfile(e.target.files[0], "image");
-                        }}
-                      />
-                    </Form.Group>
-                  </Form.Row>
+                  </Form.Group>
+                </Form.Group>
 
-                  <Form.Row>
+                <Form.Group controlId="formBasicComments">
                     <Form.Group as={Col}>
                       <Form.Label>Name</Form.Label>
                       <Form.Control
@@ -309,9 +303,9 @@ const ProfileSettings = () => {
                         value={editProfile.email ? editProfile.email : ""}
                       />
                     </Form.Group>
-                  </Form.Row>
+                  </Form.Group>
 
-                  <Form.Row>
+                  <Form.Group>
                     <Form.Group as={Col} controlId="ControlSelect1">
                       <Form.Label>Gender</Form.Label>
                       <Form.Control
@@ -338,9 +332,9 @@ const ProfileSettings = () => {
                         }}
                       />
                     </Form.Group>
-                  </Form.Row>
+                  </Form.Group>
 
-                  <Form.Row>
+                  <Form.Group>
                     <Form.Group as={Col}>
                       <Form.Label>Phone</Form.Label>
                       <Form.Control
@@ -378,8 +372,8 @@ const ProfileSettings = () => {
                         )}
                       </Form.Control>
                     </Form.Group>
-                  </Form.Row>
-                  <Form.Row>
+                  </Form.Group>
+                  <Form.Group>
                     <Form.Group as={Col} controlId="formGridCity">
                       <Form.Label>Country</Form.Label>
                       <Form.Control
@@ -433,7 +427,7 @@ const ProfileSettings = () => {
                         )}
                       </Form.Control>
                     </Form.Group>
-                  </Form.Row>
+                  </Form.Group>
 
                   <div className="text-center d-flex justify-content-between mt-5">
                     <div>
@@ -448,22 +442,22 @@ const ProfileSettings = () => {
                       <Button variant="success">Save Changes</Button>
                     </div>
                   </div>
-                </Form>
-              </div>
-            </Col>
-          </Row>
-          <PasswordResetModal
-            modalClose={modalClose}
-            modalShow={modalShow}
-            updatePassword={updatePassword}
-            handleUpdatePassword={handleUpdatePassword}
-          />
-          {/* End Profile Settings */}
+              </Form>
+            </div>
+          </Col>
+        </Row>
+        <PasswordResetModal
+          modalClose={modalClose}
+          modalShow={modalShow}
+          updatePassword={updatePassword}
+          handleUpdatePassword={handleUpdatePassword}
+        />
+        {/* End Profile Settings */}
 
-          {/* Footer  */}
-          <div className="flex-grow-1"></div>
-          <Footer />
-          {/* End Footer  */}
+        {/* Footer  */}
+        <div className="flex-grow-1"></div>
+        <Footer />
+        {/* End Footer  */}
       </div>
     </>
   );
