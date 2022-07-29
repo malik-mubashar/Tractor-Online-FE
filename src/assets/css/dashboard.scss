@@ -344,7 +344,7 @@
   }
 }
 .usedCarsWidth {
-  width: 70rem;
+  width: 50rem;
   border-bottom: 5px solid #b30000;
   -moz-box-shadow: 0 4px 4px gray;
   -webkit-box-shadow: 0 4px 4px gray;
@@ -886,4 +886,12 @@ container:before, .container:after {
   display: none;
 }
 
+}
+
+.addEditProd{
+  .searchAble{
+    .Select-control{
+      height: 35px !important;
+    }
+  }
 }

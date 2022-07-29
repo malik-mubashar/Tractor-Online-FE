@@ -69,7 +69,7 @@ export default function DropDown({
         >
           {productHead ? (
             <>
-              <ul className="list-unstyled col-4 p-0 border-right">
+              <ul className="list-unstyled col-6 p-0 border-right">
                 {productHead.map((item, i) => (
                   <li className="dropdown-list" key={i}>
                     <Link to="/usedtractor" className="d-flex pl-1 dropdown-link">
@@ -91,7 +91,7 @@ export default function DropDown({
                   </li>
                 ))}
               </ul>
-              <ul className="list-unstyled col-4 p-0 border-right">
+              {/* <ul className="list-unstyled col-4 p-0 border-right">
                 {usedTractorsSecond.map((item, i) => (
                   <li className="dropdown-list" key={i}>
                     <Link to="/" className="d-flex pl-1 dropdown-link">
@@ -108,9 +108,9 @@ export default function DropDown({
                     </Link>
                   </li>
                 ))}
-              </ul>
+              </ul> */}
               
-              <ul className="list-unstyled col-2 border-right text-center">
+              <ul className="list-unstyled col-3 border-right text-center">
                 <li className="mb-3">
                   <Link to="/">
                     <Icon.MapPin className="icon mr-2" />
@@ -130,7 +130,7 @@ export default function DropDown({
                     </li>
                   ))}
               </ul>
-              <ul className="list-unstyled col-2  text-center">
+              <ul className="list-unstyled col-3  text-center">
                 <li className="mb-3">
                   <Link to="/">
                     <Icon.Trello className="icon mr-2" />
