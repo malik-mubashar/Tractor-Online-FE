@@ -10,6 +10,7 @@ export default ({ children }) => {
 	const [currentUser, setCurrentUser] = useState(prevUser);
 	const [signUpMessage, setSignUpMessage] = useState(false);
 	const [showLoader, setShowLoader] = useState(false);
+	const [landingPageSearchOptions, setLandingPageSearchOptions] = useState({});
 
 	/*****************************************************************/
 
@@ -33,7 +34,9 @@ export default ({ children }) => {
 		signUpMessage,
 		setSignUpMessage,
 		showLoader,
-		setShowLoader
+		setShowLoader,
+		landingPageSearchOptions,
+		setLandingPageSearchOptions
 	};
 	/*******************************************************************/
 

@@ -33,7 +33,6 @@ export default function SideSearch({
     { label: "700000", value: "700000" },
 	];
 	
-	const [first, setfirst] = useState(false)
 
   return (
     <>
