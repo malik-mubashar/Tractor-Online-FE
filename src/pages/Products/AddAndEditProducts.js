@@ -22,13 +22,13 @@ export default function AddAndEditProduct({
   const [file, setFile] = useState([]);
   const [cities, setCities] = useState([]);
   const [extraFieldsArr, setExtraFieldsArr] = useState([
-    {
-      id: parseInt(
-        new Date().getTime().toString() + Math.floor(Math.random() * 1000000)
-      ),
-      key: null,
-      value: null,
-    },
+    // {
+    //   id: parseInt(
+    //     new Date().getTime().toString() + Math.floor(Math.random() * 1000000)
+    //   ),
+    //   key: null,
+    //   value: null,
+    // },
   ]);
   const fieldsMap = [
     { name: "title", required: true },
@@ -330,27 +330,27 @@ export default function AddAndEditProduct({
     }
   };
 
-  function addExtraFields(e) {
-    let idThatNeverRepeat = parseInt(
-      new Date().getTime().toString() + Math.floor(Math.random() * 1000000)
-    );
-    var arr = [...extraFieldsArr];
-    arr.push({
-      id: idThatNeverRepeat,
-      key: null,
-      value: null,
-    });
-    setExtraFieldsArr(arr);
-  }
+  // function addExtraFields(e) {
+  //   let idThatNeverRepeat = parseInt(
+  //     new Date().getTime().toString() + Math.floor(Math.random() * 1000000)
+  //   );
+  //   var arr = [...extraFieldsArr];
+  //   arr.push({
+  //     id: idThatNeverRepeat,
+  //     key: null,
+  //     value: null,
+  //   });
+  //   setExtraFieldsArr(arr);
+  // }
 
-  function removeExtraFields(e, id) {
-    var arr = [...extraFieldsArr];
-    setExtraFieldsArr(
-      arr.filter((item, index) => {
-        return item.id != id;
-      })
-    );
-  }
+  // function removeExtraFields(e, id) {
+  //   var arr = [...extraFieldsArr];
+  //   setExtraFieldsArr(
+  //     arr.filter((item, index) => {
+  //       return item.id != id;
+  //     })
+  //   );
+  // }
   //////////////////////////////////
   const handleExtraField = (event, id) => {
     let tempExtraFieldsArr = [...extraFieldsArr];
@@ -620,23 +620,23 @@ export default function AddAndEditProduct({
                   <Form.Group className="mt-1" controlId="formBasicComments">
                     <Form.Label>Add more information about product.</Form.Label>
                   </Form.Group>
-                  <Icofont
+                  {/* <Icofont
                     icon="plus text-success"
                     className="icofont-2x ml-2 cursor-pointer"
                     onClick={(e) => addExtraFields(e)}
-                  />
+                  /> */}
                 </div>
                 {extraFieldsArr &&
                   extraFieldsArr.map((item, i) => {
                     return (
                       <div className="mt-3">
                         <div>
-                          <Icofont
+                          {/* <Icofont
                             icon="close text-danger float-right mt-2 pt-4 cursor-pointer"
                             className="icofont-2x"
                             value={i}
                             onClick={(e) => removeExtraFields(e, item.id)}
-                          />
+                          /> */}
                         </div>
                         <div className="row">
                           <div className="col-6">
