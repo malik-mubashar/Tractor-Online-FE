@@ -1,5 +1,5 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import Footer from "../LandingPage/Footer";
 import SearchListing from "./SearchListing";
 import SideSearch from "./SideSearch";
@@ -9,6 +9,7 @@ import { isMobile } from "react-device-detect";
 import { useHistory } from "react-router-dom";
 import { productApis } from "../../API/ProductApis";
 import { city } from "../../API/City/CityApis";
+import { RootContext } from "../../context/RootContext";
 
 export default function usedTractor() {
   const [products, setProducts] = useState([]);
@@ -16,10 +17,17 @@ export default function usedTractor() {
   const [cities, setCities] = useState();
   const [priceRangeFrom, setPriceRangeFrom] = useState();
   const [priceRangeTo, setPriceRangeTo] = useState();
+	const { landingPageSearchOptions } = useContext(RootContext);
 
   useEffect(() => {
     handleGetAllProducts();
-    GetPopularCities();
+		GetPopularCities();
+		if (Object.keys(landingPageSearchOptions).length > 0) {
+			setSearchFilters({
+				...landingPageSearchOptions
+			});
+      handleGetAllProducts(landingPageSearchOptions.city,landingPageSearchOptions.priceRangeTo,landingPageSearchOptions.priceRangeFrom,landingPageSearchOptions.featured);;
+    }
   }, []);
   const GetPopularCities = async () => {
     const result = await city.getPopularCity("popular");

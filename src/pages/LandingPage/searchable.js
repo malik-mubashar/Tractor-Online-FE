@@ -1,49 +1,36 @@
 /* eslint-disable no-unused-vars */
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import * as Icon from "react-feather";
-import { Button } from "react-bootstrap";
-import SelectSearch from "./SelectSearch";
+import { useHistory } from "react-router-dom";
 import Select from "react-select";
-import { city } from "../../API/City/CityApis";
-const searchAble = ({cities}) => {
+import { RootContext } from "../../context/RootContext";
+const searchAble = ({ cities }) => {
+	const history = useHistory();
+	const { setLandingPageSearchOptions } = useContext(RootContext);
+
   const [tractorModel, setTractorModel] = useState("");
-  const [country, setCountry] = useState("");
+  const [city, setCity] = useState("");
   const [minPrice, setMinPrice] = useState();
 
   const [maxPrice, setMaxPrice] = useState();
   const [minPriceOptions, setMinPriceOptions] = useState([
-    { label: "5 lac", value: "5 lac" },
-    { label: "10 lac", value: "10 lac" },
-    { label: "20 lac", value: "20 lac" },
-    { label: "15 lac", value: "15 lac" },
-    { label: "14 lac", value: "14 lac" },
-    { label: "12 lac", value: "12 lac" },
-    { label: "11 lac", value: "11 lac" },
-    { label: "22 lac", value: "22 lac" },
-    { label: "25 lac", value: "25 lac" },
-    { label: "24 lac", value: "24 lac" },
-    { label: "23 lac", value: "23 lac" },
-    { label: "27 lac", value: "27 lac" },
-    { label: "1 lac", value: "1 lac" },
-    { label: "2 lac", value: "2 lac" },
-    { label: "3 lac", value: "3 lac" }
+
+		{ label: "10000", value: "10000" },
+    { label: "20000", value: "20000" },
+    { label: "30000", value: "30000" },
+    { label: "40000", value: "40000" },
+    { label: "50000", value: "50000" },
+    { label: "60000", value: "60000" },
+    { label: "70000", value: "70000" },
   ]);
   const [maxPriceOptions, setMaxPriceOptions] = useState([
-    { label: "5 lac", value: "5 lac" },
-    { label: "10 lac", value: "10 lac" },
-    { label: "20 lac", value: "20 lac" },
-    { label: "15 lac", value: "15 lac" },
-    { label: "14 lac", value: "14 lac" },
-    { label: "12 lac", value: "12 lac" },
-    { label: "11 lac", value: "11 lac" },
-    { label: "22 lac", value: "22 lac" },
-    { label: "25 lac", value: "25 lac" },
-    { label: "24 lac", value: "24 lac" },
-    { label: "23 lac", value: "23 lac" },
-    { label: "27 lac", value: "27 lac" },
-    { label: "1 lac", value: "1 lac" },
-    { label: "2 lac", value: "2 lac" },
-    { label: "3 lac", value: "3 lac" }
+		{ label: "100000", value: "100000" },
+    { label: "200000", value: "200000" },
+    { label: "300000", value: "300000" },
+    { label: "400000", value: "400000" },
+    { label: "500000", value: "500000" },
+    { label: "600000", value: "600000" },
+    { label: "700000", value: "700000" },
   ]);
 
   useEffect(() => {
@@ -62,8 +49,6 @@ const searchAble = ({cities}) => {
       setMinPriceOptions(temp);
     }
   }, [maxPrice]);
-  
-
   return (
     <>
       <ul className="list-unstyled search-front clearfix d-flex justify-content-center d-flex">
@@ -83,30 +68,32 @@ const searchAble = ({cities}) => {
           />
         </li>
         <li className="col-2 px-0">
-          <Select className="ui-autocomplete-input form-control searchAble border-right "
+          <Select
+            className="ui-autocomplete-input form-control searchAble border-right "
             options={cities}
-            //setValue={setCountry}
+            //setValue={setCity}
             label="Select City"
-            value={country}
+            value={city}
             placeholder="Select City"
-            onChange={(e) => setCountry(e.label)}
+            onChange={(e) => setCity(e.label)}
             clearable={false}
           />
         </li>
         <li className="col-1 px-0">
-          <Select  className="ui-autocomplete-input form-control searchAble border-right"
+          <Select
+            className="ui-autocomplete-input form-control searchAble border-right"
             options={minPriceOptions}
             // setValue={setMinPrice}
             label="Select Min Price "
             value={minPrice}
             placeholder="Select Min Price"
-             onChange={(e) => setMinPrice(e.label)}
-             clearable={false}
-            
+            onChange={(e) => setMinPrice(e.label)}
+            clearable={false}
           />
         </li>
         <li className="col-1 px-0">
-          <Select  className="ui-autocomplete-input form-control searchAble border-right"
+          <Select
+            className="ui-autocomplete-input form-control searchAble border-right"
             options={maxPriceOptions}
             // setValue={setMaxPrice}
             label="Select Max Price"
@@ -119,7 +106,16 @@ const searchAble = ({cities}) => {
         <li>
           <button
             className="btn-success p-1  searchAble border-right-radius"
-            type="submit"
+						type="submit"
+						onClick={() => {
+							setLandingPageSearchOptions({
+								city: city || 'nil',
+								priceRangeTo: maxPrice || 'nil',
+								priceRangeFrom: minPrice || 'nil',
+								make: tractorModel || 'nil'
+							});
+							history.push('/usedTractor/search')
+						}}
           >
             <Icon.Search className="icon" />
           </button>
