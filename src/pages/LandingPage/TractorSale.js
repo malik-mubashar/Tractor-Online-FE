@@ -239,6 +239,7 @@ const TractorSaleAd = () => {
       
     }
     else{
+      
 
     }
   }
@@ -269,14 +270,20 @@ const TractorSaleAd = () => {
                   <i className="fa fa-tick"></i>Sell your car as soon as
                   possible for the best price
                 </li>
-              </ul>
-              <MyVerticallyCenteredModal
+              </ul>{localStorage.currentUser === undefined ?<>
+                <MyVerticallyCenteredModal
                 show={modalShow}
                 onHide={() => setModalShow(false)}
               />
-              <button onClick={ () => {postAdd()}} className="btn btn-danger btn-lg text-white">
+              <button onClick={ () => setModalShow(true)} className="btn btn-danger btn-lg text-white">
                 Place Your Ad Here
-              </button>
+              </button></>:<>
+              
+              <NavLink to ="/sellTractor" className="btn btn-danger btn-lg text-white">
+                Place Your Ad Here
+              </NavLink>
+              </>}
+             
             </div>
             <div className="col-lg-6 col-12 mt-4">
               <h2>Sell It For Me on TractorOnline</h2>
