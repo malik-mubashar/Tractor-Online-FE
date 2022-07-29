@@ -45,6 +45,11 @@ import SellTractor from "../pages/PostAd/sellTractor.js";
 import PostAd from "../pages/PostAd/post-ad"
 import ProductMappings from "../pages/Product Mapping/ProductMappings";
 import Loader from "../pages/Loader";
+import SavedAds from "../pages/PostAd/saved-ads";
+import Rides from "../pages/PostAd/myRides";
+import Alerts from "../pages/PostAd/myAlerts";
+import Ads from "../pages/PostAd/myAds";
+
 
 const AppRouter = () => {
   return (
@@ -149,9 +154,37 @@ const AppRouter = () => {
             </Layout>
           </UnProtectedRoute>
         
-          <UnProtectedRoute exact path="/sellTractor/postAd">
+          <UnProtectedRoute exact path="/users">
             <Layout>
               <PostAd />
+            </Layout>
+          </UnProtectedRoute>
+          <UnProtectedRoute exact path="/users/my-ads">
+            <Layout>
+              <PostAd>
+                <Ads/>
+                </PostAd>
+            </Layout>
+          </UnProtectedRoute>
+          <UnProtectedRoute exact path="/users/saved-ads">
+            <Layout>
+              <PostAd>
+              <SavedAds />
+              </PostAd>
+            </Layout>
+          </UnProtectedRoute>
+          <UnProtectedRoute exact path="/alerts">
+            <Layout>
+              <PostAd>
+              <Alerts />
+              </PostAd>
+            </Layout>
+          </UnProtectedRoute>
+          <UnProtectedRoute exact path="/rides/my_rides">
+            <Layout>
+              <PostAd>
+              <Rides />
+              </PostAd>
             </Layout>
           </UnProtectedRoute>
           <UnProtectedRoute exact path="/addDetails/:id">

@@ -1,6 +1,7 @@
 import React from "react";
 import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
+import { Link } from "react-router-dom";
 
 export default function NewProductsCarousel({products}) {
 
@@ -48,6 +49,7 @@ export default function NewProductsCarousel({products}) {
           products.map((item, i) => {
           return(
             <div className="featured-card bg-white border-radius cursor-pointer h-100" key={i}>
+              <Link to ={`/addDetails/${item.id}`}>
               <img
                 className="card-img border-radius"
                 src={item.cover_photo_path}
@@ -59,6 +61,7 @@ export default function NewProductsCarousel({products}) {
               </p>
               <p className="pl-2 border-radius">{item.location}</p>
               <span className="featuredBand">Featured</span>
+              </Link>
             </div>
           );
         })}
