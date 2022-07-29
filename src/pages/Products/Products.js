@@ -84,7 +84,8 @@ export default function Products() {
     description: '',
     price: '',
     location: '',
-    link: ''
+    link: '',
+    city: ''
   });
 
   const handleSearch = (searchString) => {

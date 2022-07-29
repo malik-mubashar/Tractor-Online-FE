@@ -7,6 +7,8 @@ import Icofont from "react-icofont";
 import { object } from "prop-types";
 import { prodApi } from "../../API/ProdCategoriesApis";
 import { productMappingApis } from "../../API/ProductMappingApis";
+import { city } from "../../API/City/CityApis";
+import Select from "react-select";
 
 export default function AddAndEditProduct({
   productsState,
@@ -18,6 +20,7 @@ export default function AddAndEditProduct({
   const [productMappings, setProductMappings] = useState([]);
 	const myRefname = useRef(null);
   const [file, setFile] = useState([]);
+  const [cities, setCities] = useState([]);
   const [extraFieldsArr, setExtraFieldsArr] = useState([
     {
       id: parseInt(
@@ -145,6 +148,7 @@ export default function AddAndEditProduct({
     });
   }
   useEffect(() => {
+    getAllCity();
 		getBrands(1, "", 100000000);
 		getProductMappings(1, "", 1000000);
 
@@ -155,6 +159,17 @@ export default function AddAndEditProduct({
 			getExtraFields(productsState.extra_fields)
     }
 	}, [productsState.extra_fields]);
+
+  const getAllCity = async () => {
+    const result = await city.getAllCities();
+    const tempArray = [];
+    result &&
+      result.data &&
+      result.data.data.map((item) =>
+        tempArray.push({ ...item, label: item.title, value: item.title })
+      );
+    setCities(tempArray);
+  };
 
 	const getExtraFields = (extraFieldObject) => {
 		if (Object.entries(extraFieldObject).length > 0) {
@@ -260,6 +275,7 @@ export default function AddAndEditProduct({
       formData.append("featured", productsState.featured);
       formData.append("brand_id", productsState.brand_id);
       formData.append("user_id", user.id);
+      formData.append("city", productsState.city);
       if (productsState.product_type !== undefined) {
         formData.append("product_type", productsState.product_type);
       }
@@ -381,7 +397,6 @@ export default function AddAndEditProduct({
 	
 	const handleProductCategoryChange = (e) => {
 		handleChange(e)
-		debugger;
 		console.log(extraFieldsArr)
 		console.log(productsState)
 		console.log(productMappings)
@@ -445,6 +460,22 @@ export default function AddAndEditProduct({
                     onChange={(e) => handleChange(e)}
                   />
                 </Form.Group>
+                <div className="addEditProd">
+                  <Form.Label>City</Form.Label>
+                  <Select className="ui-autocomplete-input form-control searchAble border-right "
+                    options={cities}
+                    //setValue={setCountry}
+                    name="city"
+                    label="Select City"
+                    value={productsState.city}
+                    placeholder="Select City"
+                    onChange={(e) => {setProductsState({
+                      ...productsState,
+                      city: e.title,
+                    });}}
+                    clearable={false}
+                  />
+                </div>
                 <Form.Group controlId="formBasicComments">
                   <Form.Label>Location</Form.Label>
                   <Form.Control
