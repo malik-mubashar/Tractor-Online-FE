@@ -89,9 +89,9 @@ const Topbar = () => {
           <>
             <Nav className="ml-auto right-nav">
               <ul className="navbar-nav mr-auto">
-                <button className="btn btn-danger btn-lg text-white mr-2">
+                <NavLink to ="/sellTractor/" className="btn btn-danger btn-lg text-white mr-2">
                   Post An Ad
-                </button>
+                </NavLink>
                 <NavDropdown
                   title={
                     <div className="menu-profile">
