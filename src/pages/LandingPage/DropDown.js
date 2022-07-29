@@ -72,7 +72,7 @@ export default function DropDown({
               <ul className="list-unstyled col-6 p-0 border-right">
                 {productHead.map((item, i) => (
                   <li className="dropdown-list" key={i}>
-                    <Link to="/usedtractor" className="d-flex pl-1 dropdown-link">
+                    <Link to="/usedtractor/search" className="d-flex pl-1 dropdown-link">
                       <Icofont
                         icon={item.icon}
                         height="10px"
