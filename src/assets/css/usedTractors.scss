@@ -1,0 +1,33 @@
+.usedTractorMain{
+  .usedTractorsContainer{
+    padding: 50px 0px 90px;
+    background-color: #223c7a;
+    color: white;
+    p {
+      font-size: 16px;
+      color: #fff;
+      margin-bottom: 0;
+    }
+  }
+  .searchCard{
+    width: 1000px;
+    max-width: 100%;
+    margin: 0 auto;
+    background-color: #fff;
+    border: 1px solid #e6e6e6;
+    margin-top: -60px;
+    margin-bottom: 30px;
+    padding: 20px;
+  }
+
+  .searchTitle{
+    border: 1px solid #ccc;
+  }
+
+  .fieldHeight{
+    height: 50px;
+    .Select-control{
+      height: 50px;
+    }
+  }
+}

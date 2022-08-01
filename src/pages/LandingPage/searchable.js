@@ -58,7 +58,7 @@ const searchAble = ({ cities }) => {
             data-pw-source="car"
             id="home-query"
             name="home-query"
-            placeholder="Tractor Make or Model"
+            placeholder="Search by Name..."
             tabIndex="2"
             type="text"
             value={makeOrModel}
