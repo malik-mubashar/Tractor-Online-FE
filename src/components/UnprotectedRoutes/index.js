@@ -1,5 +1,5 @@
 import React, { useContext } from 'react';
-import { Route, Redirect } from 'react-router-dom';
+import { Route, Redirect, useLocation } from 'react-router-dom';
 import { useHistory } from "react-router-dom";
 
 /**unprotected routes redirects to root(/) if  logged in */
@@ -7,15 +7,13 @@ const UnProtectedRoute = ({ children, ...routeProps }) => {
 	var user = JSON.parse(window.localStorage.getItem("currentUser")) || null;
 
   const history = useHistory();
-
+	const location = useLocation();
   return (
     <Route
       {...routeProps}
 			render={() => {
-				debugger;
-        if (user!= null) {
+        if (user!= null && location.pathname=='/login/') {
 					history.push('/dashboard')
-					debugger;
         }
         else {
           return children
