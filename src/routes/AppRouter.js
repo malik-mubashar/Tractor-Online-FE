@@ -2,7 +2,7 @@ import React from "react";
 import { Route, BrowserRouter, Switch } from "react-router-dom";
 import Dashboard from "../pages/Dashboard/Dashboard";
 import LandingPage from "../pages/LandingPage/LandingPage";
-import UsedTractor from "../pages/usedTractor/UsedTractor";
+import UsedTractorSearch from "../pages/usedTractor/UsedTractorSearch";
 
 // import Calendar from "../pages/Calendar";
 import Search from "../pages/Search";
@@ -21,6 +21,7 @@ import "../assets/css/landingPage.scss";
 import "../assets/css/usedTractor.scss";
 import "../assets/css/addDetails.scss";
 import "../assets/css/Loader.scss";
+import "../assets/css/usedTractors.scss";
 import ProtectedRoute from "../components/ProtectedRoutes/index";
 import UnProtectedRoute from "../components/UnprotectedRoutes/index";
 
@@ -49,7 +50,7 @@ import SavedAds from "../pages/PostAd/saved-ads";
 import Rides from "../pages/PostAd/myRides";
 import Alerts from "../pages/PostAd/myAlerts";
 import Ads from "../pages/PostAd/myAds";
-
+import UsedTractor from "../pages/usedTractor/UsedTractor";
 
 const AppRouter = () => {
   return (
@@ -145,14 +146,19 @@ const AppRouter = () => {
 					</ProtectedRoute>
           <UnProtectedRoute exact path="/usedtractor/search">
             <Layout>
-              <UsedTractor />
+              <UsedTractorSearch />
             </Layout>
           </UnProtectedRoute>
-          <UnProtectedRoute exact path="/sellTractor">
+          <Route exact path="/used-tractors/">
+            <Layout>
+              <UsedTractor />
+            </Layout>
+          </Route>
+          <Route exact path="/sellTractor">
             <Layout>
               <SellTractor />
             </Layout>
-          </UnProtectedRoute>
+          </Route>
         
           <UnProtectedRoute exact path="/users">
             <Layout>
