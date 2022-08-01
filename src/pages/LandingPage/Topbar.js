@@ -6,7 +6,6 @@ import { NavLink, useHistory,Link } from "react-router-dom";
 import DropDownTopbar from "./DropDownTopbar";
 import "../Categories/SideMenue.css";
 import Logo from "../../assets/img/tractoronline.png";
-import { PRODUCT_CATEGORY } from "../../API/Products/product-category";
 import { city } from "../../API/City/CityApis";
 import { prodApi } from "../../API/ProdCategoriesApis";
 import Icofont from "react-icofont";
@@ -271,7 +270,7 @@ const Topbar = () => {
   };
 
   const handleGetAllCategories = async () => {
-    const result = await PRODUCT_CATEGORY.getAllProductCategories();
+    const result = await prodApi.getAllProductCategories();
     setProductCategories(result.data && result.data.data);
   };
 

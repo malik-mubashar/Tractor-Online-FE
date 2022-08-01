@@ -8,7 +8,7 @@ const searchAble = ({ cities }) => {
 	const history = useHistory();
 	const { setLandingPageSearchOptions } = useContext(RootContext);
 
-  const [tractorModel, setTractorModel] = useState("");
+  const [makeOrModel, setTractorModel] = useState("");
   const [city, setCity] = useState("");
   const [minPrice, setMinPrice] = useState();
 
@@ -61,7 +61,7 @@ const searchAble = ({ cities }) => {
             placeholder="Tractor Make or Model"
             tabIndex="2"
             type="text"
-            value={tractorModel}
+            value={makeOrModel}
             onChange={(e) => setTractorModel(e.target.value)}
             className="ui-autocomplete-input form-control searchAble border-left-radius border-right px-2"
             autoComplete="off"
@@ -112,7 +112,7 @@ const searchAble = ({ cities }) => {
 								city: city || 'nil',
 								priceRangeTo: maxPrice || 'nil',
 								priceRangeFrom: minPrice || 'nil',
-								make: tractorModel || 'nil'
+								title: makeOrModel || 'nil'
 							});
 							history.push('/usedTractor/search')
 						}}

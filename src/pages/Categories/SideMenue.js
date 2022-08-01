@@ -4,7 +4,6 @@ import * as Icon from "react-feather";
 import DropDown from "../LandingPage/DropDown";
 import { useHistory } from "react-router-dom";
 import user1 from "../../assets/img/user/user1.jpg";
-import { PRODUCT_CATEGORY } from "../../API/Products/product-category";
 import { city } from "../../API/City/CityApis";
 import { prodApi } from "../../API/ProdCategoriesApis";
 
@@ -42,7 +41,7 @@ const SideMenue = () => {
   };
 
   const handleGetAllCategories = async () => {
-    const result = await PRODUCT_CATEGORY.getAllProductCategories();
+    const result = await prodApi.getAllProductCategories();
     setProductCategories(result.data && result.data.data);
   };
   return (

@@ -142,11 +142,11 @@ class Products {
         };
       });
 	};
-  getAllProducts = async (city='nil',priceRangeTo='nil',priceRangefrom = 'nil',featured='nil') => {
+  getAllProducts = async (city='nil',priceRangeTo='nil',priceRangefrom = 'nil',featured='nil',title='nil',brand='nil') => {
 
     return axios({
       method: "get",
-      url: `${process.env.REACT_APP_API_LOCAL_PATH}get_products?featured=${featured}&price_lt=${priceRangeTo}&price_gt=${priceRangefrom}&city=${city}`,
+      url: `${process.env.REACT_APP_API_LOCAL_PATH}get_products?featured=${featured}&price_lt=${priceRangeTo}&price_gt=${priceRangefrom}&city=${city}&brand_id=${brand}&title=${title}`,
       headers: Headers
     })
       .then((result) => {

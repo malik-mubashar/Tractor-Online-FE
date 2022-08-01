@@ -1,7 +1,10 @@
 import React from "react";
 import SearchAble from "./searchable";
 import { Button } from "react-bootstrap";
-const DeskTopBanner = ({cities}) => {
+import { useHistory } from "react-router-dom";
+const DeskTopBanner = ({ cities }) => {
+	const history = useHistory();
+
   return (
     <>
       <div className="dashboard-carousel">
@@ -15,7 +18,7 @@ const DeskTopBanner = ({cities}) => {
         <SearchAble 
         cities={cities}
         />
-        <Button className="mt-2 mr-2 d-flex justify-content-center m-auto bg-transparent border border-white">
+        <Button onClick={()=>{history.push('/usedTractor/search')}} className="mt-2 mr-2 d-flex justify-content-center m-auto bg-transparent border border-white">
           {"Advanced Filter >>"}
         </Button>
       </div>

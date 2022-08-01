@@ -59,11 +59,11 @@ const AppRouter = () => {
       <BrowserRouter>
         <Switch>
           {/* unprotected routes */}
-          <UnProtectedRoute exact path="/">
+          <Route exact path="/">
             <Layout>
               <LandingPage />
             </Layout>
-          </UnProtectedRoute>
+          </Route>
           <UnProtectedRoute exact path="/login">
             <Login />
 					</UnProtectedRoute>
