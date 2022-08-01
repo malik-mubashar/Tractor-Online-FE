@@ -22,11 +22,12 @@ export default function usedTractor() {
   useEffect(() => {
     handleGetAllProducts();
 		GetPopularCities();
+		console.log('asd',landingPageSearchOptions)
 		if (Object.keys(landingPageSearchOptions).length > 0) {
 			setSearchFilters({
 				...landingPageSearchOptions
 			});
-      handleGetAllProducts(landingPageSearchOptions.city,landingPageSearchOptions.priceRangeTo,landingPageSearchOptions.priceRangeFrom,landingPageSearchOptions.featured);;
+			handleGetAllProducts(landingPageSearchOptions.city, landingPageSearchOptions.priceRangeTo, landingPageSearchOptions.priceRangeFrom, landingPageSearchOptions.featured, landingPageSearchOptions.title);;
     }
   }, []);
   const GetPopularCities = async () => {
@@ -41,10 +42,11 @@ export default function usedTractor() {
     city='nil',
     tempPriceRangeTo='nil',
 		tempPriceRangeFrom = 'nil',
-		featured='nil'
+		featured = 'nil',
+		title='nil'
 		
   ) => {
-    const result = await productApis.getAllProducts(city,tempPriceRangeTo,tempPriceRangeFrom,featured);
+    const result = await productApis.getAllProducts(city,tempPriceRangeTo,tempPriceRangeFrom,featured,title);
     if (result.error === false) {
       setProducts(result.data && result.data.data);
       console.log("products", result.data && result.data.data);
@@ -52,7 +54,7 @@ export default function usedTractor() {
   };
   useEffect(() => {
     if (searchFilters) {
-        handleGetAllProducts(searchFilters.city,searchFilters.priceRangeTo,searchFilters.priceRangeFrom,searchFilters.featured);
+        handleGetAllProducts(searchFilters.city,searchFilters.priceRangeTo,searchFilters.priceRangeFrom,searchFilters.featured,searchFilters.title);
     }
   }, [searchFilters]);
   console.log("searchFilters", searchFilters);

@@ -112,7 +112,7 @@ class ProdCategories {
 		 
     return axios({
       method: "get",
-      url: `${process.env.REACT_APP_API_LOCAL_PATH}product_categories?is_option=${isOption}&page=${page}&q%5Btitle_or_status_or_link_or_description_cont%5D=${searchString}&no_of_record=${noOfRec}`,
+      url: `${process.env.REACT_APP_API_LOCAL_PATH}product_categories?page=${page}&q%5B${isOption!=='nil'?'is_option_eq%5D=true':`title_or_status_or_link_or_description_cont%5D=${searchString}&no_of_record=${noOfRec}`}`,
       headers: {
         "Content-Type": "application/json;",
         "access-token": `${user.accessToken}`,
@@ -189,7 +189,7 @@ class ProdCategories {
 		};
 	
 		getProdCategoriesCsv = async (searchString) => {
-			 
+			// is_option=${isOption}	 
 			return axios({
 				method: "get",
 				url: `${process.env.REACT_APP_API_LOCAL_PATH}product_categories.csv?q%5Btitle_or_status_or_link_or_description_cont%5D=${searchString}`,
@@ -213,6 +213,25 @@ class ProdCategories {
 					return {
 						error: true,
 						data: error.response.data,
+					};
+				});
+		};
+	
+		getAllProductCategories = async () => {
+			return axios({
+				method: "get",
+				url: `${process.env.REACT_APP_API_LOCAL_PATH}categories_list`,
+			})
+				.then((result) => {
+					return {
+						error: false,
+						data: result.data
+					};
+				})
+				.catch((error) => {
+					return {
+						error: true,
+						data: error.response.data
 					};
 				});
 		};

@@ -24,7 +24,7 @@ export default function AddAndEditProductMappings({
 	
   const [prodCategories, setProdCategories ] = useState([]);
 	useEffect(() => {
-    getProdCategories(1, "", 10,true);
+    getProdCategories(1, "", 10000000000,true);
   }, []);
 
   const getProdCategories = async (page, mainSearch, noOfRec,isOption) => {
