@@ -2,8 +2,10 @@ import React from "react";
 import postAdLogo from "../../assets/img/postAd.png";
 import postInspect from "../../assets/img/postInspection.png";
 import Icofont from "react-icofont";
+import { useHistory } from "react-router-dom";
 
 const SellTractor = () => {
+	const history = useHistory();
   return (
     <div className="sell-tractor">
       <section>
@@ -119,7 +121,8 @@ const SellTractor = () => {
                   name="Submit"
                   value="Continue"
                   className="btn btn-success btn-lg"
-                  type="submit"
+									type="submit"
+									onClick={()=>{history.push('/used-tractor/sell/post-ad')}}
                 />
                 <p className="generic-red mt10 fs12">
                   * By clicking "Continue" you are agreeing to the{" "}
