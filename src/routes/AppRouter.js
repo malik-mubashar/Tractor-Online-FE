@@ -51,7 +51,7 @@ import Rides from "../pages/PostAd/myRides";
 import Alerts from "../pages/PostAd/myAlerts";
 import Ads from "../pages/PostAd/myAds";
 import UsedTractor from "../pages/usedTractor/UsedTractor";
-import BrandDetails from "../pages/ProdBrands/brandDetails";
+import BrandDetails from "../pages/LandingPage/BrandDetails/brandDetails";
 
 
 const AppRouter = () => {

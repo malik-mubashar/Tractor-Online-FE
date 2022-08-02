@@ -1,9 +1,9 @@
 import React, { useState, useEffect, useContext } from "react";
 import { useParams } from "react-router";
 import { Link } from "react-router-dom";
-import {productApis} from'../../API/ProductApis'
-import { RootContext } from "../../context/RootContext";
-import { prodBrandsApis } from "../../API/User/ProdBrands";
+import {productApis} from'../../../API/ProductApis'
+import { RootContext } from "../../../context/RootContext";
+import { brandApis } from "../../../API/BrandsApis";
 
 const brandDetails = () => {
   const { setShowLoader } = useContext(RootContext);
@@ -13,11 +13,11 @@ const brandDetails = () => {
   const [brands, setBrands] = useState([]);
 
   useEffect(() => {
-    handleGetAllProductBrands();
-    handleGetAllBrands();
+    getProductsOfBrand();
+    handleGetBrandDetails();
   }, []);
 
-  const handleGetAllProductBrands = async () => {
+  const getProductsOfBrand = async () => {
     setShowLoader(true);
     const result = await productApis.getAllProducts('nil','nil','nil','nil','nil',id);
     if (result.error === false) {
@@ -29,9 +29,9 @@ const brandDetails = () => {
     }
 
   };
-  const handleGetAllBrands = async () => {
+  const handleGetBrandDetails = async () => {
     setShowLoader(true);
-    const result = await prodBrandsApis.getProdBrandsDetail(id);
+    const result = await brandApis.getBrandDetailAndProducts(id);
     if (result.error === false) {
 
       console.log("showprodBrands", result);      
