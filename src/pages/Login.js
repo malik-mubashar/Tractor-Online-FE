@@ -46,8 +46,16 @@ const Login = () => {
             uid: result.headers["uid"]
           })
         );
-        localStorage.setItem("headers", JSON.stringify(result.headers));
-        history.push("/dashboard");
+				localStorage.setItem("headers", JSON.stringify(result.headers));
+				const placeAdClicked = JSON.parse(window.localStorage.getItem("placeAdClicked")) || null;
+				debugger;
+				if (placeAdClicked) {
+					history.push("/sellTractor");
+					localStorage.setItem("placeAdClicked", JSON.stringify(false));
+				} else {
+					
+					history.push("/dashboard");
+				}
         setSignUpMessage(false)
       }
 
@@ -155,7 +163,7 @@ const Login = () => {
                     </Form.Group>
                     <div className="text-center">
                       <Button
-                        className="mb-2"
+                        className="mb-2 mt-4"
                         variant="primary"
                         type="submit"
                         onClick={onLoginHandler}

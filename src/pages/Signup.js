@@ -41,28 +41,8 @@ const SignUp = () => {
       //success
       if (result.error === false) {
       	toast.dismiss(loadingToastId);
-
-        // toast.success('wellcome')
         setSignUpMessage(true)
         history.push('/login')
-        // setCurrentUser({
-        //   ...result.data.data,
-        //   accessToken: result.headers["access-token"],
-        //   client: result.headers["client"],
-        //   uid: result.headers["uid"]
-        // });
-
-        // localStorage.setItem(
-        //   "currentUser",
-        //   JSON.stringify({
-        //     ...result.data.data,
-        //     accessToken: result.headers["access-token"],
-        //     client: result.headers["client"],
-        //     uid: result.headers["uid"]
-        //   })
-        // );
-        // localStorage.setItem("headers", JSON.stringify(result.headers));
-        // history.push("/dashboard");
       }
 
       //error

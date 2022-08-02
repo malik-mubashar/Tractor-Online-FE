@@ -4,7 +4,7 @@ import Logo from "../../assets/img/tractoronline.png";
 import { Form, FormControl, Button, Image } from "react-bootstrap";
 import * as Icon from "react-feather";
 
-const MobileBanner = () => {
+const MobileTopbar = () => {
   const history = useHistory();
 
   return (
@@ -60,4 +60,4 @@ const MobileBanner = () => {
   );
 };
 
-export default MobileBanner;
+export default MobileTopbar;
