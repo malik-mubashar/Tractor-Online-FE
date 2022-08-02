@@ -1,7 +1,7 @@
 import React from "react";
 import Footer from "../pages/LandingPage/Footer";
 import DeskTopBanner from "../pages/LandingPage/DeskTopBanner";
-import MobileBanner from "../pages/LandingPage/MobileBanner";
+import MobileBanner from "../pages/LandingPage/MobileTopbar";
 import MobileFooter from "../pages/LandingPage/MobileFooter";
 import { isMobile } from "react-device-detect";
 import MobileBannerFooter from "../pages/LandingPage/MobileBannerFooter";

@@ -330,7 +330,11 @@ const Topbar = () => {
                         Welcome{" "}
                         {profile && profile.name ? profile.name : "user name"}{" "}
                       </span>
-                      {/* <Image src={profile} alt="Profile Image" roundedCircle /> */}
+											<Image
+												// src={profile}
+												alt="Profile Image"
+												roundedCircle
+											/>
                     </div>
                   }
                   id="basic-nav-dropdown"
@@ -346,7 +350,7 @@ const Topbar = () => {
                   </NavLink>
 
                   <NavLink
-                    to="/login/"
+                    to="/"
                     className="dropdown-item"
                     onClick={() => {
                       localStorage.setItem("currentUser", null);

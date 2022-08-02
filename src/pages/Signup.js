@@ -10,8 +10,10 @@ import toast from "react-hot-toast";
 import Icofont from 'react-icofont';
 
 const SignUp = () => {
-  const { currentUser, setCurrentUser, setSignUpMessage } = useContext(RootContext);
-  const [confirmPasswordType, setConfirmPasswordType] = useState("password");
+  const { currentUser, setCurrentUser, setSignUpMessage,signUpMessage } = useContext(RootContext);
+	const [confirmPasswordType, setConfirmPasswordType] = useState("password");
+	const [alertMessage, setAlertMessage]  = useState('')
+  const [alertType, setAlertType] = useState('alert-success')
   const [passwordType, setPasswordType] = useState("password");
   const [email, setEmail] = useState();
   const [confirmPassword, setConfirmPassword] = useState();
@@ -46,12 +48,16 @@ const SignUp = () => {
       }
 
       //error
-      if (result.error === true) {
+			if (result.error === true) {
+
+				console.log('result', result)
+				setSignUpMessage(result.data.errors.full_messages)
+				setAlertMessage(result.data.errors.full_messages)
+        setAlertType('alert-danger')
         toast.dismiss(loadingToastId);
         toast.error("signup failed");
 
-        console.error(result.data.errors.full_messages);
-        alert("Error user not create");
+        console.error('asd',result.data.errors.full_messages);
       }
     } catch (error) {
       toast.dismiss(loadingToastId);
@@ -80,7 +86,17 @@ const SignUp = () => {
 
   return (
     <>
-      <div className="auth-main-content auth-bg-image">
+			<div className="auth-main-content auth-bg-image">
+			{signUpMessage ?
+        <div class={`alert ${alertType} alert-dismissible fade show mt-2`} role="alert">
+          {alertMessage}
+          <button type="button" class="close" data-dismiss="alert" aria-label="Close" onClick={ () => {setSignUpMessage(false)}}>
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        :
+        null
+      }
         <div className="d-table">
           <div className="d-tablecell">
             <div className="auth-box">
@@ -189,7 +205,7 @@ const SignUp = () => {
                         ""
                       )}
                       <div className="text-center">
-                        <Button variant="primary" className="mb-2" onClick={createUserAccount}>
+                        <Button variant="primary" className="mb-2 mt-4" onClick={createUserAccount}>
                           Sign Up
                         </Button>
                         <Link to="/login/" className="">

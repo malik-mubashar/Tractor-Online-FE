@@ -42,7 +42,7 @@ import Brands from "../pages/Brands/Brands";
 import Models from "../pages/Models/Models";
 import Budgets from "../pages/Models copy/Budgets";
 import DashboardLayout from "../layouts/DashboardLayout";
-import SellTractor from "../pages/PostAd/sellTractor.js";
+import SellTractor from "../pages/PostAd/SellTractor.js.js";
 import PostAd from "../pages/PostAd/post-ad"
 import ProductMappings from "../pages/Product Mapping/ProductMappings";
 import Loader from "../pages/Loader";

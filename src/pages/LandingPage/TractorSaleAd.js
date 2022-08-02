@@ -9,6 +9,8 @@ import Cookies from 'universal-cookie';
 
 
 function MyVerticallyCenteredModal(props) {
+	const cookies = new Cookies();
+
 	const [confirmPassword, setConfirmPassword] = useState();
 	const [confirmPasswordError, setConfirmPasswordError] = useState();
 	const [fullName, setFullName] = useState();
@@ -97,6 +99,8 @@ function MyVerticallyCenteredModal(props) {
       	toast.dismiss(loadingToastId);
 				setSignUpMessage(true);
 				localStorage.setItem("placeAdClicked", JSON.stringify(true));
+				cookies.set('placeAdClicked', 'true', { path: '/' });
+
 
 				history.push('/login');
       }
@@ -105,7 +109,9 @@ function MyVerticallyCenteredModal(props) {
       if (result.error === true) {
         toast.dismiss(loadingToastId);
         toast.error("signup failed");
-
+				setSignUpMessage(result.data.errors.full_messages)
+				setAlertMessage(result.data.errors.full_messages)
+        setAlertType('alert-danger')
         console.error(result.data.errors.full_messages);
       }
     } catch (error) {
@@ -134,11 +140,22 @@ function MyVerticallyCenteredModal(props) {
     >
       <Modal.Header closeButton>
         <Modal.Title id="contained-modal-title-vcenter">
-          {signUp ? "Sign Up" : "Login"}
+					{signUp ? "Sign Up" : "Login"}
+					
         </Modal.Title>
       </Modal.Header>
       <Modal.Body>
-        <div className="form-content p-0">
+				<div className="form-content p-0">
+				{signUpMessage ?
+        <div class={`alert ${alertType} alert-dismissible fade show mt-2`} role="alert">
+          {alertMessage}
+          <button type="button" class="close" data-dismiss="alert" aria-label="Close" onClick={ () => {setSignUpMessage(false)}}>
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        :
+        null
+      }
           {signUp ? (
             <Form>
               <Form.Group>
