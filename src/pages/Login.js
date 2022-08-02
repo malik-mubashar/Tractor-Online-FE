@@ -55,10 +55,8 @@ const Login = () => {
 				debugger;
 				if (cookies.get('placeAdClicked') == 'true') {
 					cookies.remove('placeAdClicked')
-					history.push("/sellTractor");
-					
+					history.push("/sell-tractor");
 				} else {
-					
 					history.push("/dashboard");
 				}
         setSignUpMessage(false)

@@ -67,7 +67,7 @@ console.log('mbmbproducts',products)
           products.map((item, i) => {
           return(
             <div className="featured-card bg-white border-radius cursor-pointer h-100" key={i}>
-              <Link to ={`/addDetails/${item.id}`}>
+              <Link to ={`/add-details/${item.id}`}>
                 <img
                   className="card-img border-radius"
                   src={item.cover_photo_path}

@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useEffect} from "react";
 import Footer from "../pages/LandingPage/Footer";
 import DeskTopBanner from "../pages/LandingPage/DeskTopBanner";
 import MobileBanner from "../pages/LandingPage/MobileTopbar";
@@ -8,6 +8,9 @@ import MobileBannerFooter from "../pages/LandingPage/MobileBannerFooter";
 import Topbar from "../pages/LandingPage/Topbar";
 
 const Layout = (props) => {
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
   return (
     <>
       <main>

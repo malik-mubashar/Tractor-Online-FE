@@ -114,7 +114,7 @@ const searchAble = ({ cities }) => {
 								priceRangeFrom: minPrice || 'nil',
 								title: makeOrModel || 'nil'
 							});
-							history.push('/usedTractor/search')
+							history.push('/used-tractor/search')
 						}}
           >
             <Icon.Search className="icon" />

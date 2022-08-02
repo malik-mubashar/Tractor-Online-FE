@@ -15,7 +15,7 @@ class FourHandedFourError extends React.Component {
                             <h1>404</h1>
                             <h4>Page not found</h4>
                             <p>The page you are looking for was moved, removed, renamed or might never exist!</p>
-                            <Link to="/dashboard" className="back-link">
+                            <Link to="/" className="back-link">
                                 Back to Home Page
                             </Link>
                         </div>

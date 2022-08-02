@@ -88,7 +88,7 @@ export default function UsedTractorSearch() {
               <li>
                 <a>
                   <span
-                    onClick={() => history.push("/usedtractor/search")}
+                    onClick={() => history.push("/used-tractor/search")}
                     className="cursor-pointer"
                     itemProp="name"
                   >
