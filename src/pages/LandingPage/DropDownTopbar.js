@@ -138,7 +138,7 @@ export default function DropDownTopbar({
                 <li className="mb-3">
                   <Link to="/">
                     <Icon.Trello className="icon mr-2" />
-                    <strong>Popular Models</strong>
+                    <strong>Popular Brands</strong>
                   </Link>
                 </li>
   

@@ -36,6 +36,28 @@ class Brands {
         };
       });
   };
+
+  getBrandDetailAndProducts = async (id) => {
+    return axios({
+      method: "get",
+      url: `${process.env.REACT_APP_API_LOCAL_PATH}brand_with_products/${id}`,
+      headers: Headers,
+    })
+      .then((result) => {
+        return {
+          error: false,
+          data: result.data,
+        };
+      })
+      .catch((error) => {
+        return {
+          error: true,
+          data: error.response.data,
+        };
+      });
+  };
+
+  
   updateBrand = async (brandsState) => {
     return axios({
       method: "put",
@@ -75,6 +97,7 @@ class Brands {
   };
 	addBrand = async (brandsState) => {
 		 
+    
     return axios({
       method: "post",
       url: `${process.env.REACT_APP_API_LOCAL_PATH}brands`,
