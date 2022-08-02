@@ -244,13 +244,16 @@ class Navigation extends React.Component {
                 </NavLink>
 
                 <NavLink
-                  to="/login/"
+                  to="/"
                   className="dropdown-item"
-                  onClick={() => {
+									onClick={() => {
+										// setCurrentUser(null) for now i am refresing the page to get local storage right value
                     localStorage.setItem("currentUser", null);
                     localStorage.setItem("user", null);
-                    localStorage.setItem("headers", null);
-                  }}
+										localStorage.setItem("headers", null);
+										// window.location.reload();
+									}}
+									
                 >
                   <Icon.LogOut className="icon" />
                   Logout

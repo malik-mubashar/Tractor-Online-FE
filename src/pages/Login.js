@@ -8,8 +8,12 @@ import Logo from "../assets/img/logo.png";
 import { RootContext } from "../context/RootContext";
 import toast from "react-hot-toast";
 import Icofont from 'react-icofont';
+import Cookies from 'universal-cookie';
+
 
 const Login = () => {
+	const cookies = new Cookies();
+
   const { currentUser, setCurrentUser, signUpMessage, setSignUpMessage } = useContext(RootContext);
   const [alertMessage, setAlertMessage]  = useState('Confirmation Mail mail sent to your Email Address. Kindly Confirm Your email to continue..')
   const [alertType, setAlertType] = useState('alert-success')
@@ -46,12 +50,13 @@ const Login = () => {
             uid: result.headers["uid"]
           })
         );
-				localStorage.setItem("headers", JSON.stringify(result.headers));
-				const placeAdClicked = JSON.parse(window.localStorage.getItem("placeAdClicked")) || null;
 				debugger;
-				if (placeAdClicked) {
+
+				debugger;
+				if (cookies.get('placeAdClicked') == 'true') {
+					cookies.remove('placeAdClicked')
 					history.push("/sellTractor");
-					localStorage.setItem("placeAdClicked", JSON.stringify(false));
+					
 				} else {
 					
 					history.push("/dashboard");
@@ -64,8 +69,8 @@ const Login = () => {
 				toast.dismiss(loadingToastId);
 				// toast.error('Login failed');
         setAlertMessage(result.data.errors[0])
-        setSignUpMessage(true)
         setAlertType('alert-danger')
+        setSignUpMessage(true)
       }
 		} catch (error) {
 			toast.dismiss(loadingToastId);

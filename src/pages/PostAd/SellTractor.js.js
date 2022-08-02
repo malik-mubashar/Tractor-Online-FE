@@ -3,7 +3,7 @@ import postAdLogo from "../../assets/img/postAd.png";
 import postInspect from "../../assets/img/postInspection.png";
 import Icofont from "react-icofont";
 
-const sellTractor = () => {
+const SellTractor = () => {
   return (
     <div className="sell-tractor">
       <section>
@@ -829,4 +829,4 @@ const sellTractor = () => {
   );
 };
 
-export default sellTractor;
+export default SellTractor;
