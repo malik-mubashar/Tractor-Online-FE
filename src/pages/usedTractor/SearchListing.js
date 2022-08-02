@@ -114,7 +114,7 @@ export default function SearchListing({products}) {
                           <h5
                             className={gridOrList === "list" ? "cursor-pointer ml-3" : "cursor-pointer"}
                             onClick={() => {
-                              history.push("/addDetails");
+                              history.push("/add-details");
                             }}
                           >
                             {item.title}

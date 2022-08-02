@@ -57,7 +57,7 @@ function MyVerticallyCenteredModal(props) {
             })
           );
           localStorage.setItem("headers", JSON.stringify(result.headers));
-          history.push("/sellTractor");
+          history.push("/sell-tractor");
           setSignUpMessage(false)
         }
   
@@ -276,7 +276,7 @@ const Topbar = () => {
 
   return (
     <Navbar fixed="top" className="top-menu landingTopbar">
-      <Image src={Logo} height="30px" width="160px" alt="Profile Image" />
+      <Image onClick={() => {history.push("/")}} className="cursor-pointer" src={Logo} height="30px" width="160px" alt="Profile Image" />
       <Navbar.Collapse id="basic-navbar-nav" className="ml-5 pl-5">
         {productCategories &&
           productCategories.map((item, i) => {
@@ -320,7 +320,7 @@ const Topbar = () => {
           <>
             <Nav className="ml-auto right-nav">
               <ul className="navbar-nav mr-auto">
-                <NavLink to ="/sellTractor/" className="btn btn-danger btn-lg text-white mr-2">
+                <NavLink to ="/sell-tractor/" className="btn btn-danger btn-lg text-white mr-2">
                   Post An Ad
                 </NavLink>
                 <NavDropdown

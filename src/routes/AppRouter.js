@@ -139,27 +139,26 @@ const AppRouter = () => {
               <UserRoles />
             </DashboardLayout>
 					</ProtectedRoute>
-					<ProtectedRoute exact path="/productmappings">
+					<ProtectedRoute exact path="/product-mappings">
             <DashboardLayout>
               <ProductMappings />
             </DashboardLayout>
 					</ProtectedRoute>
-          <UnProtectedRoute exact path="/usedtractor/search">
+          <Route exact path="/used-tractor/search">
             <Layout>
               <UsedTractorSearch />
             </Layout>
-          </UnProtectedRoute>
+          </Route>
           <Route exact path="/used-tractors/">
             <Layout>
               <UsedTractor />
             </Layout>
           </Route>
-          <Route exact path="/sellTractor">
+          <Route exact path="used-tractor/sell">
             <Layout>
               <SellTractor />
             </Layout>
           </Route>
-        
           <UnProtectedRoute exact path="/users">
             <Layout>
               <PostAd />
@@ -193,7 +192,7 @@ const AppRouter = () => {
               </PostAd>
             </Layout>
           </UnProtectedRoute>
-          <UnProtectedRoute exact path="/addDetails/:id">
+          <UnProtectedRoute exact path="/add-details/:id">
             <Layout>
               <AddDetails />
             </Layout>

@@ -60,7 +60,7 @@ function MyVerticallyCenteredModal(props) {
           })
         );
         localStorage.setItem("headers", JSON.stringify(result.headers));
-        history.push("/sellTractor");
+        history.push("/sell-tractor");
         setSignUpMessage(false);
       }
 
@@ -325,8 +325,7 @@ const TractorSaleAd = () => {
               ) : (
                 <>
 										<NavLink
-											
-                    to="/sellTractor"
+                    to="/sell-tractor"
                     className="btn btn-danger btn-lg text-white"
                   >
                     Place Your Ad Here

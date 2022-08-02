@@ -114,7 +114,7 @@ class SideMenuLight extends React.Component {
                   <Icon.Plus className="icon" />
                   Brands
 								</NavLink>
-                <NavLink to="/productmappings" className="dropdown-item" >
+                <NavLink to="/product-mappings" className="dropdown-item" >
                   <Icon.Plus className="icon" />
                   Product Mappings
 								</NavLink>

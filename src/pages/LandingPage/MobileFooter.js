@@ -54,7 +54,7 @@ function MyVerticallyCenteredModal(props) {
             })
           );
           localStorage.setItem("headers", JSON.stringify(result.headers));
-          history.push("/sellTractor");
+          history.push("/sell-tractor");
           setSignUpMessage(false)
         }
   
@@ -277,7 +277,7 @@ const MobileFooter = () => {
         <div>
           <button
             className="bottom-nav-sell-blue"
-            onClick={() => history.push("/sellTractor")}
+            onClick={() => history.push("/sell-tractor")}
           >
             <Image src={AddSell} alt="" width="100%" height="18px" />
           </button>
