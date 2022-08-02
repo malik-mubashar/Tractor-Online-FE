@@ -276,6 +276,7 @@ export default function AddAndEditProduct({
       formData.append("brand_id", productsState.brand_id);
       formData.append("user_id", user.id);
       formData.append("city", productsState.city);
+      formData.append("product_category_id", productsState.product_category_id);
       if (productsState.product_type !== undefined) {
         formData.append("product_type", productsState.product_type);
       }

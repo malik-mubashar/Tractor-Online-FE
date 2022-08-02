@@ -5,6 +5,8 @@ import { RootContext } from "../../context/RootContext";
 import { user } from "../../API/User/index";
 import toast from "react-hot-toast";
 import Icofont from "react-icofont";
+import Cookies from 'universal-cookie';
+
 
 function MyVerticallyCenteredModal(props) {
 	const [confirmPassword, setConfirmPassword] = useState();
@@ -95,6 +97,7 @@ function MyVerticallyCenteredModal(props) {
       	toast.dismiss(loadingToastId);
 				setSignUpMessage(true);
 				localStorage.setItem("placeAdClicked", JSON.stringify(true));
+
 				history.push('/login');
       }
 
