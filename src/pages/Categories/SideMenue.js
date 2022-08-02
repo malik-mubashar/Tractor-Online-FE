@@ -51,7 +51,7 @@ const SideMenue = () => {
           return (
             <div key={i}>
               <Nav.Link
-                href="/"
+                href={item.link}
                 className="d-flex w-100 dropdown-button-category "
                 key={i}
               >
