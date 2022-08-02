@@ -51,6 +51,8 @@ import Rides from "../pages/PostAd/myRides";
 import Alerts from "../pages/PostAd/myAlerts";
 import Ads from "../pages/PostAd/myAds";
 import UsedTractor from "../pages/usedTractor/UsedTractor";
+import BrandDetails from "../pages/ProdBrands/brandDetails";
+
 
 const AppRouter = () => {
   return (
@@ -195,6 +197,13 @@ const AppRouter = () => {
           <UnProtectedRoute exact path="/add-details/:id">
             <Layout>
               <AddDetails />
+            </Layout>
+          </UnProtectedRoute>
+          <UnProtectedRoute exact path="/brandDetails/:id">
+            <Layout>
+              
+              <BrandDetails />
+             
             </Layout>
           </UnProtectedRoute>
           <UnProtectedRoute exact path="/signup/">

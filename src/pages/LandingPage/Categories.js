@@ -17,14 +17,15 @@ export default function Categories({ brands, brandsForCategories }) {
     const result = await city.getPopularCity("popular");
     if (result.error === false) {
       setCities(result.data && result.data.data);
+      let tempArr = [];
+          const chunkSize =12
+          debugger;
+          for (let i = 0; i < result.data.data.length; i += chunkSize) {
+            const chunk = result.data.data.slice(i, i + chunkSize);
+            tempArr.push(chunk);
+          }
+          setCitiesForCarousel(tempArr)
 		}
-		let tempArr = [];
-				const chunkSize =12
-        for (let i = 0; i < result.data.data.length; i += chunkSize) {
-          const chunk = result.data.data.slice(i, i + chunkSize);
-          tempArr.push(chunk);
-				}
-        setCitiesForCarousel(tempArr)
   };
 
   return (

@@ -11,7 +11,7 @@ const NewTractor = ({brands}) => {
         {brands.map((item) => (
             <ul className="make-list col-sm-2 list-unstyled new-car-list" key={item.id}>
               <li className="heading text-center">
-                <Link to="/">
+                <Link to={`/brandDetails/${item.id}`}>
                   <img
                     alt="Mahindra"
                     height="100px"

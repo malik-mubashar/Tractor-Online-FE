@@ -75,6 +75,7 @@ class Brands {
   };
 	addBrand = async (brandsState) => {
 		 
+    
     return axios({
       method: "post",
       url: `${process.env.REACT_APP_API_LOCAL_PATH}brands`,
