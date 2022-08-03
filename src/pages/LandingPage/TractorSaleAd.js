@@ -60,7 +60,7 @@ function MyVerticallyCenteredModal(props) {
           })
         );
         localStorage.setItem("headers", JSON.stringify(result.headers));
-        history.push("/used-tractor/sell");
+        history.push("/used-tractors/sell");
         setSignUpMessage(false);
       }
 

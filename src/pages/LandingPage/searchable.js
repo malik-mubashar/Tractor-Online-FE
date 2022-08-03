@@ -75,7 +75,7 @@ const searchAble = ({ cities }) => {
             label="Select City"
             value={city}
             placeholder="Select City"
-            onChange={(e) => setCity(e.label)}
+            onChange={(e) => {if(e){setCity(e.label)}}}
             clearable={false}
           />
         </li>
@@ -87,7 +87,7 @@ const searchAble = ({ cities }) => {
             label="Select Min Price "
             value={minPrice}
             placeholder="Select Min Price"
-            onChange={(e) => setMinPrice(e.label)}
+            onChange={(e) => {if(e){setCity(e.label)}}}
             clearable={false}
           />
         </li>
@@ -99,7 +99,7 @@ const searchAble = ({ cities }) => {
             label="Select Max Price"
             placeholder="Select Max Price"
             value={maxPrice}
-            onChange={(e) => setMaxPrice(e.label)}
+            onChange={(e) => {if(e){setCity(e.label)}}}
             clearable={false}
           />
         </li>

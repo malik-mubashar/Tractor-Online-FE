@@ -6,7 +6,7 @@ import SideSearch from "./SideSearch";
 import { Image } from "react-bootstrap";
 import tractorSVG from "../../assets/svg/tractor-1.svg";
 import { isMobile } from "react-device-detect";
-import { useHistory } from "react-router-dom";
+import { useHistory, useLocation } from "react-router-dom";
 import { productApis } from "../../API/ProductApis";
 import { city } from "../../API/City/CityApis";
 import { RootContext } from "../../context/RootContext";
@@ -18,6 +18,7 @@ export default function UsedTractorSearch() {
   const [priceRangeFrom, setPriceRangeFrom] = useState();
   const [priceRangeTo, setPriceRangeTo] = useState();
 	const { landingPageSearchOptions } = useContext(RootContext);
+  const search = useLocation().search;
 
   useEffect(() => {
     handleGetAllProducts();
@@ -29,7 +30,16 @@ export default function UsedTractorSearch() {
 			});
 			handleGetAllProducts(landingPageSearchOptions.city, landingPageSearchOptions.priceRangeTo, landingPageSearchOptions.priceRangeFrom, landingPageSearchOptions.featured, landingPageSearchOptions.title);;
     }
-  }, []);
+		var featured = new URLSearchParams(search).get('featured');
+		if (featured) {
+			setSearchFilters({
+				...searchFilters,
+				featured:true
+			})
+		}
+	}, []);
+	
+
   const GetPopularCities = async () => {
     const result = await city.getPopularCity("popular");
 
