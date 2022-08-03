@@ -23,15 +23,15 @@ const Dashboard = () => {
 			handlePersonalDetail();
 		}
 	}, [])
-	const [profilePic,setProfilePic]=useState()
 	const handlePersonalDetail = async () => {
 		const loadingToastId = toast.loading("Loading..!");
 
 		const result = await user.findUser(currentUser);
 		if (result.error === false) {
 			toast.dismiss(loadingToastId);
+			localStorage.setItem('userProfilePicture',JSON.stringify(result.data.profile_path))
 			setUserProfilePicture(result.data.profile_path)
-			setProfilePic(result.data.profile_path) 
+
 		}
   };
 
@@ -55,11 +55,13 @@ const Dashboard = () => {
     // if (this.state.loading) {
     //   loader = <Loader message="Loading..." />;
     // }
+		console.log('userProfilePicture',userProfilePicture)
+
 
     return (
       <div className="page-wrapper">
         {/* Navigation */}
-				<Navigation profilePic={ profilePic}  onClick={()=>{_onSideMenu()}} />
+				<Navigation onClick={()=>{_onSideMenu()}} />
         {/* End Navigation */}
 
         <div

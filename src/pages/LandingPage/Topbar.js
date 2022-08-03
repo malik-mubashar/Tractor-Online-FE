@@ -245,7 +245,7 @@ function MyVerticallyCenteredModal(props) {
 }
 
 const Topbar = () => {
-  const { setUserProfilePicture, userProfilePicture } = useContext(RootContext);
+  const { setUserProfilePicture, userProfilePicture,currentUser,setCurrentUser } = useContext(RootContext);
 
   const [modalShow, setModalShow] = React.useState(false);
   const history = useHistory();
@@ -276,7 +276,8 @@ const Topbar = () => {
   const handleGetAllCategories = async () => {
     const result = await prodApi.getAllProductCategories();
     setProductCategories(result.data && result.data.data);
-  };
+	};
+	console.log('userProfilePicture',userProfilePicture)
 
   return (
     <Navbar fixed="top" className="top-menu landingTopbar">
@@ -329,7 +330,9 @@ const Topbar = () => {
           </div>
         </div>
 
-        {(localStorage.currentUser !== undefined &&localStorage.currentUser !== null) ? (
+				{/* {(localStorage.currentUser !== undefined && localStorage.currentUser !== null) ? ( */}
+        {(currentUser != undefined &&currentUser != null) ? (
+					
           <>
             {/* login case */}
             <Nav className="ml-auto right-nav">
@@ -342,12 +345,12 @@ const Topbar = () => {
                     <div className="menu-profile">
                       <span className="name">
                         Welcome{" "}
-                        {profile && profile.name ? profile.name : "user name"}{" "}
+                        {/* {profile && profile.name ? profile.name : "user name"}{" "} */}
                       </span>
 
                       {userProfilePicture && userProfilePicture !== null ? (
                         <Image
-                          src={userProfilePicture}
+                          src={userProfilePicture&&userProfilePicture}
                           alt="Profile Image"
                           roundedCircle
                         />
@@ -372,20 +375,21 @@ const Topbar = () => {
                     Edit Profile
                   </NavLink>
 
-                  <NavLink
-                    to="/"
+                  <button
+                    
                     className="dropdown-item"
                     onClick={() => {
                       localStorage.setItem("currentUser", null);
                       localStorage.setItem("user", null);
                       localStorage.setItem("headers", null);
 											setUserProfilePicture(null);
-											// history.push('/')
+											setCurrentUser(null)
+											history.push('/')
                     }}
                   >
                     <Icon.LogOut className="icon" />
                     Logout
-                  </NavLink>
+                  </button>
                 </NavDropdown>
                 {/* <div className="dropdown-button p-2">
               Welcome  {profile && profile.name ? profile.name : "user name"}
