@@ -279,7 +279,7 @@ const TractorSaleAd = () => {
                 Place Your Ad Here
               </button></>:<>
               
-              <NavLink to ="/sell-tractor" className="btn btn-danger btn-lg text-white">
+              <NavLink to ="/used-tractors/sell" className="btn btn-danger btn-lg text-white">
                 Place Your Ad Here
               </NavLink>
               </>}

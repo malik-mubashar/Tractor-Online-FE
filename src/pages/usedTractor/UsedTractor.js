@@ -1,12 +1,20 @@
 import React, { useState, useEffect, useContext } from "react";
 import Select from "react-select";
-import { Navbar, Nav, Image, NavDropdown,Form, Button, Modal } from "react-bootstrap";
+import {
+  Navbar,
+  Nav,
+  Image,
+  NavDropdown,
+  Form,
+  Button,
+  Modal,
+} from "react-bootstrap";
 import Ads from "../../assets/img/ads.png";
 import Buyers from "../../assets/img/buyers.png";
 import Sell from "../../assets/img/sell.png";
 import FeaturedProducts from "../LandingPage/FeaturedProducts";
 import FeaturedTractor from "../LandingPage/FeaturedTractor";
-import { NavLink, useHistory,Link } from "react-router-dom";
+import { NavLink, useHistory, Link, useLocation } from "react-router-dom";
 import "../Categories/SideMenue.css";
 import Logo from "../../assets/img/tractoronline.png";
 import { city } from "../../API/City/CityApis";
@@ -14,8 +22,8 @@ import { prodApi } from "../../API/ProdCategoriesApis";
 import Icofont from "react-icofont";
 import * as Icon from "react-feather";
 import toast from "react-hot-toast";
-import {RootContext} from "../../context/RootContext"
-import {user} from "../../API/User/index"
+import { RootContext } from "../../context/RootContext";
+import { user } from "../../API/User/index";
 
 function MyVerticallyCenteredModal(props) {
   const [password, setPassword] = useState();
@@ -23,72 +31,76 @@ function MyVerticallyCenteredModal(props) {
   const [signUp, setSignUp] = useState(false);
   const [passwordType, setPasswordType] = useState("password");
   let history = useHistory();
-    const [passwordInput, setPasswordInput] = useState("");
-    const { currentUser, setCurrentUser, signUpMessage, setSignUpMessage } = useContext(RootContext);
-    const [alertMessage, setAlertMessage]  = useState('Confirmation Mail mail sent to your Email Address. Kindly Confirm Your email to continue..')
-    const [alertType, setAlertType] = useState('alert-success')
-    
+  const [passwordInput, setPasswordInput] = useState("");
+  const {
+    currentUser,
+    setCurrentUser,
+    signUpMessage,
+    setSignUpMessage,
+  } = useContext(RootContext);
+  const [alertMessage, setAlertMessage] = useState(
+    "Confirmation Mail mail sent to your Email Address. Kindly Confirm Your email to continue.."
+  );
+  const [alertType, setAlertType] = useState("alert-success");
 
+  const onLoginHandler = async (e) => {
+    e.preventDefault();
+    const loadingToastId = toast.loading("Loading..!");
 
-    const onLoginHandler = async (e) => {
-      e.preventDefault();
-      const loadingToastId = toast.loading("Loading..!");
-  
-      try {
-        const result = await user.login(email, password);
-        console.log(result);
-        //success
-        if (result.error === false) {
-          toast.dismiss(loadingToastId);
-  
-          toast.success('welcome')
-          setCurrentUser({
+    try {
+      const result = await user.login(email, password);
+      console.log(result);
+      //success
+      if (result.error === false) {
+        toast.dismiss(loadingToastId);
+
+        toast.success("welcome");
+        setCurrentUser({
+          ...result.data.data,
+          accessToken: result.headers["access-token"],
+          client: result.headers["client"],
+          uid: result.headers["uid"],
+        });
+
+        localStorage.setItem(
+          "currentUser",
+          JSON.stringify({
             ...result.data.data,
             accessToken: result.headers["access-token"],
             client: result.headers["client"],
-            uid: result.headers["uid"]
-          });
-  
-          localStorage.setItem(
-            "currentUser",
-            JSON.stringify({
-              ...result.data.data,
-              accessToken: result.headers["access-token"],
-              client: result.headers["client"],
-              uid: result.headers["uid"]
-            })
-          );
-          localStorage.setItem("headers", JSON.stringify(result.headers));
-          history.push("/sell-tractor");
-          setSignUpMessage(false)
-        }
-  
-        //error
-        if (result.error === true) {
-          toast.dismiss(loadingToastId);
-          // toast.error('Login failed');
-          setAlertMessage(result.data.errors[0])
-          setSignUpMessage(true)
-          setAlertType('alert-danger')
-        }
-      } catch (error) {
-        toast.dismiss(loadingToastId);
-  
-        console.error(error);
+            uid: result.headers["uid"],
+          })
+        );
+        localStorage.setItem("headers", JSON.stringify(result.headers));
+        history.push("/sell-tractor");
+        setSignUpMessage(false);
       }
-    };
 
-    const handlePasswordChange =(evnt)=>{
-        setPasswordInput(evnt.target.value);
-    }
-    const togglePassword =()=>{
-      if(passwordType==="password")
-      {
-       setPasswordType("text")
-       return;
+      //error
+      if (result.error === true) {
+        toast.dismiss(loadingToastId);
+        // toast.error('Login failed');
+        setAlertMessage(result.data.errors[0]);
+        setSignUpMessage(true);
+        setAlertType("alert-danger");
       }
-      setPasswordType("password")
+    } catch (error) {
+      toast.dismiss(loadingToastId);
+
+      console.error(error);
     }
+  };
+
+  const handlePasswordChange = (evnt) => {
+    setPasswordInput(evnt.target.value);
+  };
+  const togglePassword = () => {
+    if (passwordType === "password") {
+      setPasswordType("text");
+      return;
+    }
+    setPasswordType("password");
+  };
   return (
     <Modal
       {...props}
@@ -98,12 +110,12 @@ function MyVerticallyCenteredModal(props) {
     >
       <Modal.Header closeButton>
         <Modal.Title id="contained-modal-title-vcenter">
-          {signUp ? "Sign Up" : "Login" }
+          {signUp ? "Sign Up" : "Login"}
         </Modal.Title>
       </Modal.Header>
       <Modal.Body>
         <div className="form-content p-0">
-          {signUp ?
+          {signUp ? (
             <Form>
               <Form.Group>
                 <Form.Label>Email Address</Form.Label>
@@ -186,7 +198,7 @@ function MyVerticallyCenteredModal(props) {
                 </Link>
               </div>
             </Form>
-          :
+          ) : (
             <Form>
               <Form.Group>
                 <Form.Label>Email address</Form.Label>
@@ -201,19 +213,15 @@ function MyVerticallyCenteredModal(props) {
                   type={passwordType}
                   onChange={(event) => setPassword(event.target.value)}
                 />
-                <i className="password-icons cursor-pointer" onClick={togglePassword}>
-                  {
-                    passwordType==="password"?
-                      <Icofont
-                        icon="eye"
-                        className="icofont-2x"
-                      />
-                    :
-                      <Icofont
-                        icon="eye-blocked"
-                        className="icofont-2x"
-                      />
-                  }
+                <i
+                  className="password-icons cursor-pointer"
+                  onClick={togglePassword}
+                >
+                  {passwordType === "password" ? (
+                    <Icofont icon="eye" className="icofont-2x" />
+                  ) : (
+                    <Icofont icon="eye-blocked" className="icofont-2x" />
+                  )}
                 </i>
               </Form.Group>
               <div className="text-center">
@@ -225,12 +233,10 @@ function MyVerticallyCenteredModal(props) {
                 >
                   Log In
                 </Button>
-                <Link to="/signup/">
-                  Don't Have an Account?
-                </Link>
+                <Link to="/signup/">Don't Have an Account?</Link>
               </div>
             </Form>
-          }
+          )}
         </div>
       </Modal.Body>
       <Modal.Footer>
@@ -249,6 +255,7 @@ export default function UsedTractor() {
   const [cities, setCities] = useState("");
   const [minPrice, setMinPrice] = useState();
   const [modalShow, setModalShow] = useState(false);
+  const search = useLocation().search;
 
   const getAllCity = async () => {
     const result = await city.getAllCity();
@@ -280,6 +287,7 @@ export default function UsedTractor() {
     { label: "600000", value: "600000" },
     { label: "700000", value: "700000" },
   ]);
+  const [heading, setHeading] = useState("");
 
   useEffect(() => {
     if (minPrice) {
@@ -300,14 +308,43 @@ export default function UsedTractor() {
 
   useEffect(() => {
     getAllCity();
+    var type = new URLSearchParams(search).get("type");
+    if (type === "used-tractor") {
+      setHeading("Used Tractors");
+    } else if (type === "new-tractor") {
+      setHeading("New Tractors");
+    }
+    else if (type === "used-machinery") {
+      setHeading("Used Agriculture Machinery");
+    }
+    else if (type === "new-machinery") {
+      setHeading("New Agriculture Machinery");
+    }
+    else if (type === "tractor-accessories") {
+      setHeading("Tractor & Machinery parts and Acessories");
+    }
+    else if (type === "seed&fertilizers") {
+      setHeading("Seed and Fertilizers");
+    }
+    else if (type === "plants&horticulture") {
+      setHeading("Plants and Horticulture");
+    }
+    else if (type === "tractor-on-rent") {
+      setHeading("Tractor and Machinery on Rent");
+    }
+    else if (type === "laser-lever") {
+      setHeading("Laser and Leveler on rent");
+    }
+    else {
+      setHeading("Not Found")
+    }
   }, []);
 
-  function postAdd(){
-    if (localStorage.currentUser === undefined){
-      setModalShow(true)
-    }
-    else{
-      history.push('/used-tractor/sell/')
+  function postAdd() {
+    if (localStorage.currentUser === undefined) {
+      setModalShow(true);
+    } else {
+      history.push("/used-tractor/sell/");
     }
   }
 
@@ -315,7 +352,7 @@ export default function UsedTractor() {
     <div className="usedTractorMain">
       <div className="usedTractorsContainer">
         <div className="container">
-          <h1>Find Used Tractors in Pakistan</h1>
+          <h1>Find {heading} in Pakistan</h1>
           <p>With thousand of Tractors,we have just the right one for you</p>
         </div>
       </div>
@@ -404,7 +441,9 @@ export default function UsedTractor() {
             <div>
               <Image src={Sell} alt="Logo" height="80px" width="80px" />
               <h5>Sell Faster</h5>
-              <p>Sell your tractor at a higher price and faster than competitors.</p>
+              <p>
+                Sell your tractor at a higher price and faster than competitors.
+              </p>
             </div>
           </div>
           <MyVerticallyCenteredModal
@@ -412,7 +451,10 @@ export default function UsedTractor() {
             onHide={() => setModalShow(false)}
           />
           <div className="col-3 text-center align-items-center justify-content-center d-flex">
-            <button onClick={ () => postAdd()} className="btn btn-danger btn-lg text-white mr-2">
+            <button
+              onClick={() => postAdd()}
+              className="btn btn-danger btn-lg text-white mr-2"
+            >
               Post An Ad
             </button>
           </div>

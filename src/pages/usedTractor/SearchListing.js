@@ -1,4 +1,4 @@
-import React, { useState ,useEffect} from "react";
+import React, { useState, useEffect } from "react";
 import {
   Row,
   Col,
@@ -16,14 +16,15 @@ import {
   BrowserView,
   MobileView,
   isBrowser,
-  isMobile
+  isMobile,
 } from "react-device-detect";
 import * as Icon from "react-feather";
 import { useHistory } from "react-router-dom";
 import CustomPopover from "./CustomPopover";
 import { productApis } from "../../API/ProductApis";
+import TractorClipart from "../../assets/svg/tractor-logo.svg";
 
-export default function SearchListing({products}) {
+export default function SearchListing({ products }) {
   const [showNumberWarning, setShowNumberWarning] = useState(true);
   let history = useHistory();
   const [openShowPhone, setOpenShowPhone] = useState(false);
@@ -67,8 +68,12 @@ export default function SearchListing({products}) {
             </div>
 
             {!isMobile && (
-              <div className="col-md-4 mt5 text-right ex" >
-                <div className="btn-group" data-toggle="buttons-radio"   style={{ marginTop: "10px" }}>
+              <div className="col-md-4 mt5 text-right ex">
+                <div
+                  className="btn-group"
+                  data-toggle="buttons-radio"
+                  style={{ marginTop: "10px" }}
+                >
                   <BootstrapSwitchButton
                     className="col-md-8 d-flex"
                     checked={true}
@@ -77,11 +82,10 @@ export default function SearchListing({products}) {
                     onlabel="Grid"
                     offlabel="List"
                     onChange={(checked) => {
-                      if (checked){
-                        setGridOrList("list")
-                      }
-                      else{
-                        setGridOrList("grid")
+                      if (checked) {
+                        setGridOrList("list");
+                      } else {
+                        setGridOrList("grid");
                       }
                     }}
                   />
@@ -91,104 +95,123 @@ export default function SearchListing({products}) {
           </div>
         </div>
         <div className={gridOrList === "list" ? "" : "row"}>
-            {products.map((item) => {
-              return (
-                <>
-                  <div className={`${gridOrList === "list" ? "" : "col-4"}`}>
-                    <div
-                      className={`listCard mb-3 ${
-                        gridOrList === "list" ? "list" : "d-block"
-                      } ${isMobile ? "d-block" : null}`}
-                    >
-                      <img
-                        // className="card-img-top"
-                        // className={gridOrList==='list'?'list':'grid'}
-                        src={item.cover_photo_path}
-                        alt="Card"
-                        style={{ width: "200px", height: "140px" }}
-                      />
-                      <div style={{ width: "100%" }}>
-                        <div
-                          className={gridOrList === "list" ? "d-flex justify-content-between" : "mt-2"}
+          {products.map((item) => {
+            return (
+              <>
+                <div className={`${gridOrList === "list" ? "" : "col-4"}`}>
+                  <div
+                    className={`listCard mb-3 ${
+                      gridOrList === "list" ? "list" : "d-block"
+                    } ${isMobile ? "d-block" : null}`}
+                  >
+                    <img
+                      // className="card-img-top"
+                      // className={gridOrList==='list'?'list':'grid'}
+                      src={item.cover_photo_path}
+                      alt="Card"
+                      style={{ width: "200px", height: "140px" }}
+                    />
+                    <div style={{ width: "100%" }}>
+                      <div
+                        className={
+                          gridOrList === "list"
+                            ? "d-flex justify-content-between"
+                            : "mt-2"
+                        }
+                      >
+                        <h5
+                          className={
+                            gridOrList === "list"
+                              ? "cursor-pointer ml-3"
+                              : "cursor-pointer"
+                          }
+                          onClick={() => {
+                            history.push("/add-details");
+                          }}
                         >
-                          <h5
-                            className={gridOrList === "list" ? "cursor-pointer ml-3" : "cursor-pointer"}
-                            onClick={() => {
-                              history.push("/add-details");
-                            }}
+                          {item.title}
+                        </h5>
+                        <h5
+                          className={
+                            gridOrList === "list"
+                              ? "cursor-pointer ml-3"
+                              : "cursor-pointer"
+                          }
+                        >
+                          PKR {item.price}
+                        </h5>
+                      </div>
+                      <p className={gridOrList === "list" ? " ml-3" : null}>
+                        {item.location}
+                      </p>
+                      <p style={{ paddingLeft: "8px" }}>
+                        2008 | 111,123 km | Petrol | 2700cc | Automatic | 4.5
+                        Grade
+                      </p>
+                      <div
+                        className={`card-text ${
+                          isMobile ? "" : gridOrList === "list" ? "d-flex" : ""
+                        } `}
+                        style={{ justifyContent: "space-between" }}
+                      >
+                        <small
+                          className="text-muted"
+                          style={{ paddingLeft: "8px" }}
+                        >
+                          Last updated 3 mins ago
+                        </small>
+                        <div className="d-flex">
+                          <button
+                            className="mr-3 btn btn-outline-primary p-1"
+                            type="submit"
                           >
-                            {item.title}
-                          </h5>
-                          <h5
-                          className={gridOrList === "list" ? "cursor-pointer ml-3" : "cursor-pointer"}
-                          >PKR {item.price}</h5>
-                        </div>
-                        <p className={gridOrList === "list" ? " ml-3" : null}>{item.location}</p>
-                        <p style={{paddingLeft:"8px"}}>
-                          2008 | 111,123 km | Petrol | 2700cc | Automatic | 4.5
-                          Grade
-                        </p>
-                        <div
-                          className={`card-text ${
-                            isMobile
-                              ? ""
-                              : gridOrList === "list"
-                              ? "d-flex"
-                              : ""
-                          } `}
-                          style={{ justifyContent: "space-between" }}
-                        >
-                          <small className="text-muted" style={{paddingLeft:"8px"}}>
-                            Last updated 3 mins ago
-                          </small>
-                          <div className="d-flex">
-                            <button className="mr-3 btn btn-outline-primary p-1" type="submit">
-                              <Icon.Heart
+                            <Icon.Heart
+                              style={{ height: "14px" }}
+                              className="icon"
+                            />
+                          </button>
+                          {showNumberWarning ? (
+                            <button
+                              onClick={() => {
+                                setOpenShowPhone(true);
+                                setShowNumberWarning(false);
+                              }}
+                              className="btn-success"
+                              type="submit"
+                            >
+                              <Icon.PhoneCall
                                 style={{ height: "14px" }}
                                 className="icon"
                               />
+                              Show Phone Number
                             </button>
-                            {showNumberWarning ? (
-                              <button
-                                onClick={() => {
-                                  setOpenShowPhone(true);
-                                  setShowNumberWarning(false);
-                                }}
-                                className="btn-success"
-                                type="submit"
-                              >
-                                <Icon.PhoneCall
-                                  style={{ height: "14px" }}
-                                  className="icon"
-                                />
-                                Show Phone Number
-                              </button>
-                            ) : (
-                              <>
-
-                                <CustomPopover />
-                              </>
-                            )}
-                          </div>
+                          ) : (
+                            <>
+                              <CustomPopover />
+                            </>
+                          )}
                         </div>
                       </div>
                     </div>
                   </div>
-                </>
-              );
-            })}
+                </div>
+              </>
+            );
+          })}
         </div>
-        <div className="pagination">
+        {/* <div className="pagination">
           <span className="mx-auto">
             1&nbsp;2&nbsp;3&nbsp;4&nbsp;&nbsp;...&nbsp;&nbsp;Next
             &nbsp;&nbsp;Last
           </span>
-        </div>
+        </div> */}
         <div className="sellAdd clearfix text-center p20 mt-70">
           <img
             alt="Post an Ad"
-            src="https://wsa4.pakwheels.com/assets/sell-car-bf334aeb9cf3001080a3e887d51a3b32.png"
+            src={TractorClipart}
             title="Post an Ad"
+            height="80px"
+            width="80px"
           />
 
           <h3 className="title">

@@ -46,6 +46,7 @@ import tick from "../../assets/svg/tick-symbol.svg";
 // import cellPhoneSvg from "../../assets/svg/cellPhone.svg";
 import { productApis } from "../../API/ProductApis";
 import { useParams } from "react-router";
+import TractorClipart from "../../assets/svg/tractor-logo.svg"
 
 export default function AddDetails() {
   const { id } = useParams();
@@ -484,7 +485,9 @@ export default function AddDetails() {
               <div className="sellAdd clearfix text-center p20 mt-70">
                 <img
                   alt="Post an Ad"
-                  src="https://wsa4.pakwheels.com/assets/sell-car-bf334aeb9cf3001080a3e887d51a3b32.png"
+                  src={TractorClipart}
+                  height="80px"
+                  width="80px"
                   title="Post an Ad"
                 />
 
@@ -504,7 +507,7 @@ export default function AddDetails() {
                     href="/used-tractor/sell"
                     className="btn btn-success sign-in-comp"
                   >
-                    Sell Your Car
+                    Sell Your Tractor
                   </a>
                   <img
                     alt="Post an Ad Right"
