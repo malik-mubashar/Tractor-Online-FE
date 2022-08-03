@@ -50,8 +50,8 @@ class Navigation extends React.Component {
   onSideMenuHandler = (activeColor) => {
     this.setState({ menuColor: activeColor });
   };
-
   render() {
+		console.log('userProfilePicture',this.props.userProfilePicture)
     return (
       <div className="page-wrapper">
         <Navbar fixed="top" className="top-menu">
@@ -228,7 +228,7 @@ class Navigation extends React.Component {
                 title={
                   <div className="menu-profile">
                     <span className="name">Welcome </span>
-                    <Image src={profile} alt="Profile Image" roundedCircle />
+                    <Image src={this.props.profilePic&&this.props.profilePic} alt="Profile Imagew" roundedCircle />
                   </div>
                 }
                 id="basic-nav-dropdown"
@@ -251,6 +251,7 @@ class Navigation extends React.Component {
                     localStorage.setItem("currentUser", null);
                     localStorage.setItem("user", null);
 										localStorage.setItem("headers", null);
+										// this.props.setUserProfilePicture(null);
 										// window.location.reload();
 									}}
 									

@@ -1,8 +1,16 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
 import React, { useEffect, useContext, useState } from "react";
 import "../../components/Navigation/Navigation.css";
-import { Navbar, Nav, Image, NavDropdown,Form, Button, Modal } from "react-bootstrap";
-import { NavLink, useHistory,Link } from "react-router-dom";
+import {
+  Navbar,
+  Nav,
+  Image,
+  NavDropdown,
+  Form,
+  Button,
+  Modal,
+} from "react-bootstrap";
+import { NavLink, useHistory, Link } from "react-router-dom";
 import DropDownTopbar from "./DropDownTopbar";
 import "../Categories/SideMenue.css";
 import Logo from "../../assets/img/tractoronline.png";
@@ -11,9 +19,9 @@ import { prodApi } from "../../API/ProdCategoriesApis";
 import Icofont from "react-icofont";
 import * as Icon from "react-feather";
 import toast from "react-hot-toast";
-import {RootContext} from "../../context/RootContext"
-import {user} from "../../API/User/index"
-
+import { RootContext } from "../../context/RootContext";
+import { user } from "../../API/User/index";
+import noProfilePicture from "../../assets/svg/no-profile-picture.svg";
 
 function MyVerticallyCenteredModal(props) {
   const [password, setPassword] = useState();
@@ -21,72 +29,76 @@ function MyVerticallyCenteredModal(props) {
   const [signUp, setSignUp] = useState(false);
   const [passwordType, setPasswordType] = useState("password");
   let history = useHistory();
-    const [passwordInput, setPasswordInput] = useState("");
-    const { currentUser, setCurrentUser, signUpMessage, setSignUpMessage } = useContext(RootContext);
-    const [alertMessage, setAlertMessage]  = useState('Confirmation Mail mail sent to your Email Address. Kindly Confirm Your email to continue..')
-    const [alertType, setAlertType] = useState('alert-success')
-    
+  const [passwordInput, setPasswordInput] = useState("");
+  const {
+    currentUser,
+    setCurrentUser,
+    signUpMessage,
+    setSignUpMessage,
+  } = useContext(RootContext);
+  const [alertMessage, setAlertMessage] = useState(
+    "Confirmation Mail mail sent to your Email Address. Kindly Confirm Your email to continue.."
+  );
+  const [alertType, setAlertType] = useState("alert-success");
 
+  const onLoginHandler = async (e) => {
+    e.preventDefault();
+    const loadingToastId = toast.loading("Loading..!");
 
-    const onLoginHandler = async (e) => {
-      e.preventDefault();
-      const loadingToastId = toast.loading("Loading..!");
-  
-      try {
-        const result = await user.login(email, password);
-        console.log(result);
-        //success
-        if (result.error === false) {
-          toast.dismiss(loadingToastId);
-  
-          toast.success('welcome')
-          setCurrentUser({
+    try {
+      const result = await user.login(email, password);
+      console.log(result);
+      //success
+      if (result.error === false) {
+        toast.dismiss(loadingToastId);
+
+        toast.success("welcome");
+        setCurrentUser({
+          ...result.data.data,
+          accessToken: result.headers["access-token"],
+          client: result.headers["client"],
+          uid: result.headers["uid"],
+        });
+
+        localStorage.setItem(
+          "currentUser",
+          JSON.stringify({
             ...result.data.data,
             accessToken: result.headers["access-token"],
             client: result.headers["client"],
-            uid: result.headers["uid"]
-          });
-  
-          localStorage.setItem(
-            "currentUser",
-            JSON.stringify({
-              ...result.data.data,
-              accessToken: result.headers["access-token"],
-              client: result.headers["client"],
-              uid: result.headers["uid"]
-            })
-          );
-          localStorage.setItem("headers", JSON.stringify(result.headers));
-          history.push("/sell-tractor");
-          setSignUpMessage(false)
-        }
-  
-        //error
-        if (result.error === true) {
-          toast.dismiss(loadingToastId);
-          // toast.error('Login failed');
-          setAlertMessage(result.data.errors[0])
-          setSignUpMessage(true)
-          setAlertType('alert-danger')
-        }
-      } catch (error) {
-        toast.dismiss(loadingToastId);
-  
-        console.error(error);
+            uid: result.headers["uid"],
+          })
+        );
+        localStorage.setItem("headers", JSON.stringify(result.headers));
+        history.push("/sell-tractor");
+        setSignUpMessage(false);
       }
-    };
 
-    const handlePasswordChange =(evnt)=>{
-        setPasswordInput(evnt.target.value);
-    }
-    const togglePassword =()=>{
-      if(passwordType==="password")
-      {
-       setPasswordType("text")
-       return;
+      //error
+      if (result.error === true) {
+        toast.dismiss(loadingToastId);
+        // toast.error('Login failed');
+        setAlertMessage(result.data.errors[0]);
+        setSignUpMessage(true);
+        setAlertType("alert-danger");
       }
-      setPasswordType("password")
+    } catch (error) {
+      toast.dismiss(loadingToastId);
+
+      console.error(error);
     }
+  };
+
+  const handlePasswordChange = (evnt) => {
+    setPasswordInput(evnt.target.value);
+  };
+  const togglePassword = () => {
+    if (passwordType === "password") {
+      setPasswordType("text");
+      return;
+    }
+    setPasswordType("password");
+  };
   return (
     <Modal
       {...props}
@@ -96,12 +108,12 @@ function MyVerticallyCenteredModal(props) {
     >
       <Modal.Header closeButton>
         <Modal.Title id="contained-modal-title-vcenter">
-          {signUp ? "Sign Up" : "Login" }
+          {signUp ? "Sign Up" : "Login"}
         </Modal.Title>
       </Modal.Header>
       <Modal.Body>
         <div className="form-content p-0">
-          {signUp ?
+          {signUp ? (
             <Form>
               <Form.Group>
                 <Form.Label>Email Address</Form.Label>
@@ -184,7 +196,7 @@ function MyVerticallyCenteredModal(props) {
                 </Link>
               </div>
             </Form>
-          :
+          ) : (
             <Form>
               <Form.Group>
                 <Form.Label>Email address</Form.Label>
@@ -199,19 +211,15 @@ function MyVerticallyCenteredModal(props) {
                   type={passwordType}
                   onChange={(event) => setPassword(event.target.value)}
                 />
-                <i className="password-icons cursor-pointer" onClick={togglePassword}>
-                  {
-                    passwordType==="password"?
-                      <Icofont
-                        icon="eye"
-                        className="icofont-2x"
-                      />
-                    :
-                      <Icofont
-                        icon="eye-blocked"
-                        className="icofont-2x"
-                      />
-                  }
+                <i
+                  className="password-icons cursor-pointer"
+                  onClick={togglePassword}
+                >
+                  {passwordType === "password" ? (
+                    <Icofont icon="eye" className="icofont-2x" />
+                  ) : (
+                    <Icofont icon="eye-blocked" className="icofont-2x" />
+                  )}
                 </i>
               </Form.Group>
               <div className="text-center">
@@ -223,12 +231,10 @@ function MyVerticallyCenteredModal(props) {
                 >
                   Log In
                 </Button>
-                <Link to="/signup/">
-                  Don't Have an Account?
-                </Link>
+                <Link to="/signup/">Don't Have an Account?</Link>
               </div>
             </Form>
-          }
+          )}
         </div>
       </Modal.Body>
       <Modal.Footer>
@@ -238,10 +244,8 @@ function MyVerticallyCenteredModal(props) {
   );
 }
 
-
-
-
 const Topbar = () => {
+  const { setUserProfilePicture, userProfilePicture } = useContext(RootContext);
 
   const [modalShow, setModalShow] = React.useState(false);
   const history = useHistory();
@@ -276,7 +280,16 @@ const Topbar = () => {
 
   return (
     <Navbar fixed="top" className="top-menu landingTopbar">
-      <Image onClick={() => {history.push("/")}} className="cursor-pointer" src={Logo} height="30px" width="160px" alt="Profile Image" />
+      <Image
+        onClick={() => {
+          history.push("/");
+        }}
+        className="cursor-pointer"
+        src={Logo}
+        height="30px"
+        width="160px"
+        alt="Profile Image"
+      />
       <Navbar.Collapse id="basic-navbar-nav" className="ml-5 pl-5">
         {productCategories &&
           productCategories.map((item, i) => {
@@ -318,9 +331,13 @@ const Topbar = () => {
 
         {localStorage.currentUser !== undefined ? (
           <>
+            {/* login case */}
             <Nav className="ml-auto right-nav">
               <ul className="navbar-nav mr-auto">
-                <NavLink to ="/sell-tractor/" className="btn btn-danger btn-lg text-white mr-2">
+                <NavLink
+                  to="/sell-tractor/"
+                  className="btn btn-danger btn-lg text-white mr-2"
+                >
                   Post An Ad
                 </NavLink>
                 <NavDropdown
@@ -330,11 +347,20 @@ const Topbar = () => {
                         Welcome{" "}
                         {profile && profile.name ? profile.name : "user name"}{" "}
                       </span>
-											<Image
-												// src={profile}
-												alt="Profile Image"
-												roundedCircle
-											/>
+
+                      {userProfilePicture && userProfilePicture !== null ? (
+                        <Image
+                          src={userProfilePicture}
+                          alt="Profile Image"
+                          roundedCircle
+                        />
+                      ) : (
+                        <Image
+                          src={noProfilePicture}
+                          alt="no Profile Image"
+                          roundedCircle
+                        />
+                      )}
                     </div>
                   }
                   id="basic-nav-dropdown"
@@ -356,6 +382,8 @@ const Topbar = () => {
                       localStorage.setItem("currentUser", null);
                       localStorage.setItem("user", null);
                       localStorage.setItem("headers", null);
+											setUserProfilePicture(null);
+											// history.push('/')
                     }}
                   >
                     <Icon.LogOut className="icon" />
@@ -381,13 +409,17 @@ const Topbar = () => {
           </>
         ) : (
           <>
+            {/* logout case */}
             <Nav className="ml-auto right-nav">
               <ul className="navbar-nav mr-auto">
-              <MyVerticallyCenteredModal
-                show={modalShow}
-                onHide={() => setModalShow(false)}
-              />
-                <button onClick={ () => setModalShow(true)} className="btn btn-danger btn-lg text-white mr-2">
+                <MyVerticallyCenteredModal
+                  show={modalShow}
+                  onHide={() => setModalShow(false)}
+                />
+                <button
+                  onClick={() => setModalShow(true)}
+                  className="btn btn-danger btn-lg text-white mr-2"
+                >
                   Post An Ad
                 </button>
                 <div
