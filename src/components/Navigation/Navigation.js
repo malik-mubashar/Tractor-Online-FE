@@ -28,12 +28,13 @@ import user2 from "../../assets/img/user/user2.jpg";
 import user3 from "../../assets/img/user/user3.jpg";
 import { RootContext } from "../../context/RootContext";
 
-const Navigation = ({ profilePic, onClick }) => {
+const Navigation = ({onClick }) => {
 	const {
     currentUser,
     setCurrentUser,
     signUpMessage,
-    setUserProfilePicture,
+		setUserProfilePicture,
+		userProfilePicture
   } = useContext(RootContext);
 	const history=useHistory()
   const[state,setState] =useState( {
@@ -235,7 +236,7 @@ const Navigation = ({ profilePic, onClick }) => {
                 title={
                   <div className="menu-profile">
                     <span className="name">Welcome </span>
-                    <Image src={profilePic&&profilePic} alt="Profile Imagew" roundedCircle />
+                    <Image src={userProfilePicture&&userProfilePicture} alt="ProfileImage" roundedCircle />
                   </div>
                 }
                 id="basic-nav-dropdown"
@@ -258,14 +259,24 @@ const Navigation = ({ profilePic, onClick }) => {
                     localStorage.setItem("user", null);
 										localStorage.setItem("headers", null);
 										setUserProfilePicture(null);
-										history.push('/')
+										setCurrentUser(null)
+										 history.push('/')
 										
 									}}
 									
                 >
                   <Icon.LogOut className="icon" />
                   Logout
-                </button>
+								</button>
+								<button
+                  // to="/"
+                  className="dropdown-item"
+									onClick={()=>{history.push('/')}}
+									
+                >
+                  <Icon.LogOut className="icon" />
+                  Landing Page
+								</button>
               </NavDropdown>
             </Nav>
           </Navbar.Collapse>

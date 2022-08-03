@@ -5,13 +5,14 @@ export const RootContext = React.createContext();
 export default ({ children }) => {
 	/*****getting values from local storage if any***************************/
 	const prevUser = JSON.parse(window.localStorage.getItem("currentUser")) || null;
+	const prevUserProfilePicture = JSON.parse(window.localStorage.getItem("userProfilePicture")) || null;
 
 	/*****setting values from local storage to constants*******************/
 	const [currentUser, setCurrentUser] = useState(prevUser);
 	const [signUpMessage, setSignUpMessage] = useState(false);
 	const [showLoader, setShowLoader] = useState(false);
 	const [landingPageSearchOptions, setLandingPageSearchOptions] = useState({});
-	const [userProfilePicture, setUserProfilePicture] = useState(null);
+	const [userProfilePicture, setUserProfilePicture] = useState(prevUserProfilePicture);
 
 	/*****************************************************************/
 
