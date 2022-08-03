@@ -77,7 +77,7 @@ export default function DropDownTopbar({
               <ul className="list-unstyled col-6 p-0 border-right">
                 {productHead.map((item, i) => (
                   <li className="dropdown-list" key={i}>
-                    <Link to="/used-tractor/search" className="d-flex pl-1 dropdown-link">
+                    <Link to={item.link} className="d-flex pl-1 dropdown-link">
                       <Icofont
                         icon={item.icon}
                         height="10px"
@@ -114,13 +114,10 @@ export default function DropDownTopbar({
                   </li>
                 ))}
               </ul> */}
-              
               <ul className="list-unstyled col-3 border-right text-center">
                 <li className="mb-3">
-                  <Link to="/">
-                    <Icon.MapPin className="icon mr-2" />
-                    <strong>Popular Cities</strong>
-                  </Link>
+                  <Icon.MapPin className="icon mr-2" />
+                  <strong>Popular Cities</strong>
                 </li>
                 {cities &&
                   cities.map((item, i) => (
