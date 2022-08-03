@@ -323,10 +323,10 @@ export default function UsedTractor() {
     else if (type === "tractor-accessories") {
       setHeading("Tractor & Machinery parts and Acessories");
     }
-    else if (type === "seed&fertilizers") {
+    else if (type === "seed-fertilizers") {
       setHeading("Seed and Fertilizers");
     }
-    else if (type === "plants&horticulture") {
+    else if (type === "plants-horticulture") {
       setHeading("Plants and Horticulture");
     }
     else if (type === "tractor-on-rent") {
