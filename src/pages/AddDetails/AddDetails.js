@@ -69,6 +69,7 @@ export default function AddDetails() {
   };
 
   const [visible, setVisible] = useState(true);
+  const [userData, setUserData] = useState("");
   const [product, setProduct] = useState([]);
   useEffect(() => {
     handleGetProductDetails();
@@ -77,38 +78,15 @@ export default function AddDetails() {
     const result = await productApis.getProductDetails(id);
     if (result.error === false) {
       setProduct(result.data && result.data.data);
+      setUserData(result.data && result.data.data.user)
       console.log("showproducts", result.data && result.data.data);
       GROUP2 = result.data.data.active_images_path;
     }
   };
-  console.log("product.acacac", product.active_images_path);
   return (
     //sidebar
     <div className="addDetails">
       <div className="remove-section">
-        <ul id="scroll-sidebar" className="nav scroll-nav affix-top">
-          <li className="active">
-            <a href="#scroll_car_info">
-              <i className="fa fa-caret-right"></i>Tractor Info
-            </a>
-          </li>
-          <li className="">
-            <a href="#scroll_car_detail">
-              <i className="fa fa-caret-right"></i>Tractor Details
-            </a>
-          </li>
-          <li className="">
-            <a href="#scroll_seller_comments">
-              <i className="fa fa-caret-right"></i>Seller's Comments
-            </a>
-          </li>
-          <li className="">
-            <a href="#scroll_similar_ads">
-              <i className="fa fa-caret-right"></i>Similar Ads
-            </a>
-          </li>
-        </ul>
-        {/* /////// */}
 
         <div className="container">
           <img
@@ -149,19 +127,8 @@ export default function AddDetails() {
                         alt="Profile Image"
                         className="d-flex justify-content-center m-auto"
                       />{" "}
-                      {product.location}
+                      {product.city}
                     </a>
-                    {"  "} {"|"}
-                    <span className="time d-flex">
-                      <Image
-                        src={cellPhoneSvg}
-                        height="20px"
-                        width="30px"
-                        alt="Profile Image"
-                        className="d-flex justify-content-center m-auto"
-                      />{" "}
-                      <a href="/main/apps">Added via Phone</a>
-                    </span>
                   </p>
                 </div>
                 <div className="right-img pull-right">
@@ -554,15 +521,8 @@ export default function AddDetails() {
                 <div className="">
                   <div className="priceBox">
                     <strong className="genericGreen">
-                      PKR 19.1 <span>lacs</span>
+                      PKR {product.price}
                     </strong>
-                    <br />
-                    <a
-                      href="/car-loan-calculator/search/?car_finance_lead%5Baddress%5D=&amp;car_finance_lead%5Bage%5D=&amp;car_finance_lead%5Bbank_id%5D=&amp;car_finance_lead%5Bcar_loan_id%5D=31&amp;car_finance_lead%5Bcity%5D=&amp;car_finance_lead%5Bcity_area_id%5D=&amp;car_finance_lead%5Bcity_id%5D=&amp;car_finance_lead%5Bcnic%5D=&amp;car_finance_lead%5Bcomment%5D=&amp;car_finance_lead%5Bcurrent_bank%5D=&amp;car_finance_lead%5Bdate%5D=&amp;car_finance_lead%5Bdisposition%5D=&amp;car_finance_lead%5Bdown_payment%5D=15.0&amp;car_finance_lead%5Bin_debt%5D=&amp;car_finance_lead%5Bis_filler%5D=&amp;car_finance_lead%5Bmedium_id%5D=&amp;car_finance_lead%5Bmobile%5D=&amp;car_finance_lead%5Bmodel_year%5D=2021&amp;car_finance_lead%5Bname%5D=&amp;car_finance_lead%5Boccupation%5D=&amp;car_finance_lead%5Bprice%5D=1910000&amp;car_finance_lead%5Bprocessing_period%5D=&amp;car_finance_lead%5Breason%5D=&amp;car_finance_lead%5Bsalary%5D=&amp;car_finance_lead%5Bsource%5D=&amp;car_finance_lead%5Bstatus%5D=&amp;car_finance_lead%5Btenure%5D=7&amp;car_finance_lead%5Btime_to_call%5D=&amp;car_finance_lead%5Bused_car_id%5D=&amp;car_finance_lead%5Bvehicle_intent%5D=&amp;type=used-car"
-                      className="fs12 fwb genericGreen mt5 pointer"
-                    >
-                      <u>PKR 34,782/Month</u>
-                    </a>
                   </div>
 
                   <div className="btn btn-large btn-block btn-success buttonDiv">
@@ -610,8 +570,8 @@ export default function AddDetails() {
                     />
                   </div>
                   <div className="col-md-9">
-                    <div>Shawzawr</div>
-                    <div>Member Since Nov 16, 2019</div>
+                    <div>{ userData.name }</div>
+                    <div>Member Since { userData.created_at && userData.created_at.split("T")[0]}</div>
                   </div>
                 </div>
                 <div className="justify-content-center d-flex mt-3 mb-3">
