@@ -122,7 +122,7 @@ const SellTractor = () => {
                   value="Continue"
                   className="btn btn-success btn-lg"
 									type="submit"
-									onClick={()=>{history.push('/used-tractors/sell/post-ad')}}
+									onClick={()=>{history.push('/used-tractor/sell/post-ad')}}
                 />
                 <p className="generic-red mt10 fs12">
                   * By clicking "Continue" you are agreeing to the{" "}

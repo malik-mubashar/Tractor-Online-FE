@@ -11,6 +11,7 @@ export default ({ children }) => {
 	const [signUpMessage, setSignUpMessage] = useState(false);
 	const [showLoader, setShowLoader] = useState(false);
 	const [landingPageSearchOptions, setLandingPageSearchOptions] = useState({});
+	const [userProfilePicture, setUserProfilePicture] = useState(null);
 
 	/*****************************************************************/
 
@@ -36,7 +37,9 @@ export default ({ children }) => {
 		showLoader,
 		setShowLoader,
 		landingPageSearchOptions,
-		setLandingPageSearchOptions
+		setLandingPageSearchOptions,
+		userProfilePicture,
+		setUserProfilePicture
 	};
 	/*******************************************************************/
 

@@ -8,7 +8,7 @@ import FeaturedNewTractor from "./FeaturedNewTractor";
 import { isMobile } from "react-device-detect";
 import DeskTopBanner from "./DeskTopBanner";
 import CategoriesNavBar from "../Categories/index";
-import TractorSaleAd from "./TractorSaleAd";
+import TractorSaleAd from "./TractorSale";
 import { city } from "../../API/City/CityApis";
 import toast from "react-hot-toast";
 import { brandApis } from "../../API/BrandsApis";

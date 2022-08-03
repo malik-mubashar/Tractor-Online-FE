@@ -203,7 +203,7 @@ export default function SearchListing({products}) {
               src="https://wsa4.pakwheels.com/assets/sell-ad-point-left-fcc7bca4d40628d7945426ecf5a2ef00.png"
             />
             <a
-              href="/used-tractors/sell"
+              href="/used-tractor/sell"
               className="btn btn-success sign-in-comp"
             >
               Tractors for Sale{" "}

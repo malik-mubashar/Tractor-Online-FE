@@ -151,17 +151,17 @@ const AppRouter = () => {
               <UsedTractorSearch />
             </Layout>
           </Route>
-          <Route exact path="/used-tractors/">
+          <Route exact path="/used-tractor/">
             <Layout>
               <UsedTractor />
             </Layout>
           </Route>
-          <Route exact path="/used-tractors/sell">
+          <Route exact path="/used-tractor/sell">
             <Layout>
               <SellTractor />
             </Layout>
           </Route>
-          <UnProtectedRoute exact path="/used-tractors/sell/post-ad">
+          <UnProtectedRoute exact path="/used-tractor/sell/post-ad">
             {/* <Layout> */}
               <PostAd />
             {/* </Layout> */}

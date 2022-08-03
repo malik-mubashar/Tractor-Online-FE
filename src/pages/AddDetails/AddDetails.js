@@ -534,7 +534,7 @@ export default function AddDetails() {
                   />
                   <a
                     style={{ color: "white" }}
-                    href="/used-tractors/sell"
+                    href="/used-tractor/sell"
                     className="btn btn-success sign-in-comp"
                   >
                     Sell Your Car

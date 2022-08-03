@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext, useEffect, useState } from "react";
 import Navigation from "../../components/Navigation/Navigation";
 import { Row, Breadcrumb, Col } from "react-bootstrap";
 import Footer from "../Footer/Footer";
@@ -7,48 +7,68 @@ import TotalOrders from "../../components/Dashboard/Sales/TotalOrders";
 import PendingOrders from "../../components/Dashboard/Sales/PendingOrders";
 import CompletedOrders from "../../components/Dashboard/Sales/CompletedOrders";
 import Loader from "../../components/Common/Loader";
+import toast from "react-hot-toast";
+import { user } from "../../API/User";
+import { RootContext } from "../../context/RootContext";
 
-class Dashboard extends React.Component {
-  state = {
+const Dashboard = () => {
+	const { currentUser ,userProfilePicture, setUserProfilePicture} = useContext(RootContext);
+
+  const [state,setState] =useState( {
     sideMenu: true,
     loading: true
+	});
+	useEffect(() => {
+		if (userProfilePicture == null) {
+			handlePersonalDetail();
+		}
+	}, [])
+	const [profilePic,setProfilePic]=useState()
+	const handlePersonalDetail = async () => {
+		const loadingToastId = toast.loading("Loading..!");
+
+		const result = await user.findUser(currentUser);
+		if (result.error === false) {
+			toast.dismiss(loadingToastId);
+			setUserProfilePicture(result.data.profile_path)
+			setProfilePic(result.data.profile_path) 
+		}
   };
 
   // Loading icon false after DOM loaded
-  componentDidMount() {
-    this.myInterval = setInterval(() => {
-      this.setState({ loading: false });
-    }, 1000);
-  }
+  // componentDidMount() {
+  //   this.myInterval = setInterval(() => {
+  //     this.setState({ loading: false });
+  //   }, 1000);
+  // }
 
-  componentWillUnmount() {
-    clearInterval(this.myInterval);
-  }
+  // componentWillUnmount() {
+  //   clearInterval(this.myInterval);
+  // }
 
   // Toggle side bar menu
-  _onSideMenu = (active) => {
-    this.setState({ sideMenu: active });
+  const _onSideMenu = (active) => {
+    setState({ ...state,sideMenu: active });
   };
 
-  render() {
-    let loader = null;
-    if (this.state.loading) {
-      loader = <Loader message="Loading..." />;
-    }
+    // let loader = null;
+    // if (this.state.loading) {
+    //   loader = <Loader message="Loading..." />;
+    // }
 
     return (
       <div className="page-wrapper">
         {/* Navigation */}
-        <Navigation onClick={this._onSideMenu} />
+				<Navigation profilePic={ profilePic}  onClick={()=>{_onSideMenu()}} />
         {/* End Navigation */}
 
         <div
           className={`main-content d-flex flex-column ${
-            this.state.sideMenu ? "hide-sidemenu" : ""
+            state.sideMenu ? "hide-sidemenu" : ""
           }`}
         >
           {/* Loader */}
-          {loader}
+          {/* {loader} */}
           {/* End Loader */}
 
           {/* Breadcrumb */}
@@ -80,7 +100,7 @@ class Dashboard extends React.Component {
             <Col sm={6} lg={3}>
               {/* File path: src/components/Dashboard/Sales/PendingOrders.js */}
               <PendingOrders />
-            </Col>
+						</Col>
           </Row>
 
           {/* Footer */}
@@ -90,7 +110,6 @@ class Dashboard extends React.Component {
         </div>
       </div>
     );
-  }
 }
 
 export default Dashboard;
