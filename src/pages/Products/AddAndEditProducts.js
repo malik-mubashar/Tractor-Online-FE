@@ -38,7 +38,7 @@ export default function AddAndEditProduct({
       required: productsState && productsState.isAddProduct ? true : false,
     },
     { name: "icon", required: false },
-    { name: "link", required: false },
+    // { name: "link", required: false },
     { name: "description", required: false },
     { name: "price", required: false },
     { name: "brand_id", required: true },
@@ -46,7 +46,7 @@ export default function AddAndEditProduct({
   const [fieldsWithError, setFieldsWithError] = useState({
     description: false,
     icon: false,
-    link: false,
+    // link: false,
     product_category_id: false,
     status: false,
     title: false,
@@ -270,7 +270,7 @@ export default function AddAndEditProduct({
       formData.append("description", productsState.description);
       formData.append("price", productsState.price);
       formData.append("location", productsState.location);
-      formData.append("link", productsState.link);
+      // formData.append("link", productsState.link);
       formData.append("extra_fields", JSON.stringify(extraFieldsData));
       formData.append("featured", productsState.featured);
       formData.append("brand_id", productsState.brand_id);
@@ -478,7 +478,7 @@ export default function AddAndEditProduct({
                   />
                 </div>
                 <Form.Group controlId="formBasicComments">
-                  <Form.Label>Location</Form.Label>
+                  <Form.Label>Address</Form.Label>
                   <Form.Control
                     className={
                       fieldsWithError.location === true ? "border-danger" : ""
@@ -486,11 +486,11 @@ export default function AddAndEditProduct({
                     defaultValue={productsState.location}
                     name="location"
                     type="text"
-                    placeholder="location"
+                    placeholder="Address"
                     onChange={(e) => handleChange(e)}
                   />
                 </Form.Group>
-                <Form.Group controlId="formBasicComments">
+                {/* <Form.Group controlId="formBasicComments">
                   <Form.Label>link</Form.Label>
                   <Form.Control
                     className={
@@ -502,7 +502,7 @@ export default function AddAndEditProduct({
                     placeholder="link"
                     onChange={(e) => handleChange(e)}
                   />
-                </Form.Group>
+                </Form.Group> */}
                 <Form.Group controlId="formGridState">
                   <Form.Label>Product Brand</Form.Label>
                   <Form.Control
@@ -548,7 +548,7 @@ export default function AddAndEditProduct({
                     name="product_type"
                   >
                     <option>Please select Product Type....</option>
-                    <option value="used">Used</option>
+                    {/* <option value="used">Used</option> */}
                     <option value="popular">Popular</option>
                     <option value="upcoming">Upcoming</option>
                     <option value="newly_launched">Newly Launched</option>

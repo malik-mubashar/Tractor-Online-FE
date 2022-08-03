@@ -253,8 +253,8 @@ const Topbar = () => {
   const [profile, setProfile] = useState();
   const [cities, setCities] = useState([]);
   const [brands, setBrands] = useState();
-  useEffect(() => {
-    handleGetAllCategories();
+	useEffect(() => {
+		handleGetAllCategories();
     handleGetAllCities();
     handleGetAllProductCategories();
   }, []);
@@ -329,7 +329,7 @@ const Topbar = () => {
           </div>
         </div>
 
-        {localStorage.currentUser !== undefined ? (
+        {(localStorage.currentUser !== undefined &&localStorage.currentUser !== null) ? (
           <>
             {/* login case */}
             <Nav className="ml-auto right-nav">

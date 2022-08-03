@@ -1,5 +1,5 @@
-import React from "react";
-import { withRouter, Link, NavLink } from "react-router-dom";
+import React, { useContext, useState } from "react";
+import { withRouter, Link, NavLink, useHistory } from "react-router-dom";
 import * as Icon from "react-feather";
 import "./Navigation.css";
 
@@ -26,32 +26,39 @@ import profile from "../../assets/img/profile.jpg";
 import user1 from "../../assets/img/user/user1.jpg";
 import user2 from "../../assets/img/user/user2.jpg";
 import user3 from "../../assets/img/user/user3.jpg";
+import { RootContext } from "../../context/RootContext";
 
-class Navigation extends React.Component {
-  state = {
+const Navigation = ({ profilePic, onClick }) => {
+	const {
+    currentUser,
+    setCurrentUser,
+    signUpMessage,
+    setUserProfilePicture,
+  } = useContext(RootContext);
+	const history=useHistory()
+  const[state,setState] =useState( {
     sideMenu: false,
     term: "",
     menuColor: true
+  });
+
+  const _toggleClass = () => {
+    const currentSideMenu = state.sideMenu;
+    setState({ ...state,sideMenu: !currentSideMenu });
+    onClick(state.sideMenu);
   };
 
-  _toggleClass = () => {
-    const currentSideMenu = this.state.sideMenu;
-    this.setState({ sideMenu: !currentSideMenu });
-    this.props.onClick(this.state.sideMenu);
-  };
-
-  _handleSubmit = (event) => {
+  const _handleSubmit = (event) => {
     event.preventDefault();
-    if (this.state.term) {
-      this.props.history.push("/search/");
+    if (state.term) {
+      history.push("/search/");
     }
   };
 
-  onSideMenuHandler = (activeColor) => {
-    this.setState({ menuColor: activeColor });
+  const onSideMenuHandler = (activeColor) => {
+    setState({ menuColor: activeColor });
   };
-  render() {
-		console.log('userProfilePicture',this.props.userProfilePicture)
+  
     return (
       <div className="page-wrapper">
         <Navbar fixed="top" className="top-menu">
@@ -63,9 +70,9 @@ class Navigation extends React.Component {
           {/* Burger menu */}
           <div
             className={`burger-menu ${
-              this.state.sideMenu ? "" : "toggle-menu"
+              state.sideMenu ? "" : "toggle-menu"
             }`}
-            onClick={this._toggleClass}
+            onClick={()=>_toggleClass()}
           >
             <span className="top-bar"></span>
             <span className="middle-bar"></span>
@@ -76,13 +83,13 @@ class Navigation extends React.Component {
           <Navbar.Collapse id="basic-navbar-nav">
             <Form
               className="nav-search-form d-none d-sm-block"
-              onSubmit={this._handleSubmit}
+              onSubmit={()=>_handleSubmit()}
               action="/search/"
             >
               <FormControl
                 type="text"
-                value={this.state.term}
-                onChange={(e) => this.setState({ term: e.target.value })}
+                value={state.term}
+                onChange={(e) => setState({...state, term: e.target.value })}
                 placeholder="Search..."
               />
 
@@ -228,7 +235,7 @@ class Navigation extends React.Component {
                 title={
                   <div className="menu-profile">
                     <span className="name">Welcome </span>
-                    <Image src={this.props.profilePic&&this.props.profilePic} alt="Profile Imagew" roundedCircle />
+                    <Image src={profilePic&&profilePic} alt="Profile Imagew" roundedCircle />
                   </div>
                 }
                 id="basic-nav-dropdown"
@@ -243,32 +250,32 @@ class Navigation extends React.Component {
                   Edit Profile
                 </NavLink>
 
-                <NavLink
-                  to="/"
+                <button
+                  // to="/"
                   className="dropdown-item"
 									onClick={() => {
-										// setCurrentUser(null) for now i am refresing the page to get local storage right value
                     localStorage.setItem("currentUser", null);
                     localStorage.setItem("user", null);
 										localStorage.setItem("headers", null);
-										// this.props.setUserProfilePicture(null);
-										// window.location.reload();
+										setUserProfilePicture(null);
+										history.push('/')
+										
 									}}
 									
                 >
                   <Icon.LogOut className="icon" />
                   Logout
-                </NavLink>
+                </button>
               </NavDropdown>
             </Nav>
           </Navbar.Collapse>
         </Navbar>
 
         {/* Side Menu File Path: src/components/Navigation/SideMenu/SideMenu.js */}
-        {!this.state.menuColor ? (
-          <SideMenuDark sideMenu={this.state.sideMenu} />
+        {!state.menuColor ? (
+          <SideMenuDark sideMenu={state.sideMenu} />
         ) : (
-          <SideMenuLight sideMenu={this.state.sideMenu} />
+          <SideMenuLight sideMenu={state.sideMenu} />
         )}
 
         {/*  */}
@@ -277,7 +284,7 @@ class Navigation extends React.Component {
         {/* <ColorSwitch onClick={this.onSideMenuHandler} /> */}
       </div>
     );
-  }
+
 }
 
 export default withRouter(Navigation);
