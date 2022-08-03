@@ -307,7 +307,7 @@ export default function UsedTractor() {
       setModalShow(true)
     }
     else{
-      history.push('/sell-tractor/')
+      history.push('/used-tractors/sell/')
     }
   }
 

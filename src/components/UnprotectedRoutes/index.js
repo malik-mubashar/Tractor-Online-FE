@@ -12,7 +12,7 @@ const UnProtectedRoute = ({ children, ...routeProps }) => {
     <Route
       {...routeProps}
 			render={() => {
-        if (user!= null && location.pathname=='/login/') {
+        if (user!= null && (location.pathname=='/login/'||location.pathname=='/login')) {
 					history.push('/dashboard')
         }
         else {
