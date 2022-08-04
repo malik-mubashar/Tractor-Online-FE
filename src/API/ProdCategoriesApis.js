@@ -55,6 +55,7 @@ class ProdCategories {
         link: prodCategoriesState.link,
 				description: prodCategoriesState.description,
 				active_image: prodCategoriesState.image,
+				is_option:prodCategoriesState.is_option,
 
       },
     })

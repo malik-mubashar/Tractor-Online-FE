@@ -211,8 +211,12 @@ export default function AddAndEditProdCategories({
 								
 								<Form.Group controlId="formBasicComments" className="d-flex">
                   <Form.Label>Is Option</Form.Label>
-                  <Form.Check
-                    defaultValue={prodCategoriesState.is_option}
+									<Form.Check
+										 defaultChecked={
+                      prodCategoriesState && prodCategoriesState.is_option == true
+                        ? true
+                        : false
+                    }
                     name="is_option"
 										placeholder="Link"
 										className="ml-4"
