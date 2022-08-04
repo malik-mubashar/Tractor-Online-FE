@@ -4,8 +4,10 @@ import "react-multi-carousel/lib/styles.css";
 import { Link } from "react-router-dom";
 import { productApis } from "../../API/ProductApis";
 import { useHistory } from "react-router-dom";
+import Alert from 'react-bootstrap/Alert';
 
-export default function FeaturedProducts({ title, link }) {
+
+export default function FeaturedProducts({ title, link,prodCategoryId }) {
   const [products, setProducts] = useState([]);
   const history = useHistory()
 
@@ -13,9 +15,17 @@ export default function FeaturedProducts({ title, link }) {
     handleGetAllProducts();
   }, []);
   const handleGetAllProducts = async () => {
-    const result = await productApis.getAllProducts();
-    if (result.error === false) {
-      setProducts(result.data && result.data.data);
+    const result = await productApis.getAllProducts( "nil",
+    "nil",
+     "nil",
+    true,
+    "nil",
+    "nil",
+    prodCategoryId);
+		if (result.error === false) {
+			console.log(`${prodCategoryId}`,result)
+			setProducts(result.data && result.data.data);
+			
     }
   };
  
@@ -63,7 +73,7 @@ console.log('mbmbproducts',products)
         dotListClass="custom-dot-list-style"
         itemClass="carousel-item-padding-40-px"
       >
-        { products &&
+        { products &&products.length>0?
           products.map((item, i) => {
           return(
             <div className="featured-card bg-white border-radius cursor-pointer h-100" key={i}>
@@ -77,11 +87,19 @@ console.log('mbmbproducts',products)
                 <p className="mb-0 pl-2 text-success border-radius">
                   {item.price}
                 </p>
-                <p className="pl-2 border-radius">{item.location}</p>
+								<p className="pl-2 border-radius">{item.city}</p>
+								<span className="featuredBand">Featured</span>
+
               </Link>
             </div>
         );
-      })}
+					}) : <div className="d-flex">
+						{/* <h4 className="mx-auto">No Featured {title}</h4> */}
+					 <Alert key={'warning'} variant={'warning'}>
+					 No Featured {title}
+        </Alert>
+					</div>
+					}
       </Carousel>
     </div>
   );

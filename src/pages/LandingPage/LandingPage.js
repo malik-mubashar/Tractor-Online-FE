@@ -13,16 +13,26 @@ import { city } from "../../API/City/CityApis";
 import toast from "react-hot-toast";
 import { brandApis } from "../../API/BrandsApis";
 import FeaturedTractor from "./FeaturedTractor";
+import { prodApi } from "../../API/ProdCategoriesApis";
 
 const LandingPage = () => {
   const [cities, setCities] = useState([]);
   const [brands, setBrands] = useState([]);
+  const [productCategories, setProductCategories] = useState([]);
   const [brandsForCategories, setBrandsForCategories] = useState([]);
 
   useEffect(() => {
     getAllCity();
     getBrands(1, "", 10000000);
+    handleGetAllCategories();
   }, []);
+  const handleGetAllCategories = async () => {
+    const result = await prodApi.getAllProductCategories();
+    if (result.error === false) {
+      console.log("qwe", result.data.data);
+      setProductCategories(result.data && result.data.data);
+    }
+  };
 
   const getBrands = async (page, mainSearch, noOfRec) => {
     const loadingToastId = toast.loading("Loading..!");
@@ -66,7 +76,8 @@ const LandingPage = () => {
       {!isMobile && (
         <>
           {" "}
-          <DeskTopBanner cities={cities} />
+					<DeskTopBanner cities={cities} />
+					{/* our main side bar on landing page */}
           <div className="d-flex p-2 mt-2">
             <div className="col-12 ">
               <CategoriesNavBar />
@@ -88,28 +99,38 @@ const LandingPage = () => {
             <ExploreProducts />
           </div>
         </div>
+        {productCategories &&
+          productCategories.map((prodCategory, i) => {
+            return (
+              <>
+                <div className={`${i % 2 == 0 ? "" : "bg-white"}`}>
+                  <div className="container-lg py-4 ">
+                    <FeaturedProducts
+                      title={`Featured ${prodCategory.title}`}
+                      link={`View all Featured ${prodCategory.title}.`}
+                      prodCategoryId={prodCategory.id}
+                    />
+                  </div>
+                </div>
+              </>
+            );
+          })}
 
-        <div className="container-lg py-4">
-          <FeaturedProducts
-            title="Managed By TractorOnline"
-            link="View all TractorOnline-managed properties."
-          />
-        </div>
-        <div className="bg-white">
+        {/* <div className="bg-white">
           <div className="container-lg py-4">
             <FeaturedTractor
               title="Used Tractor For Sale Featured"
               link="See all of the featured used tractors."
             />
           </div>
-        </div>
+        </div> */}
 
-        <div className="container-lg py-4 mt-2">
+        {/* <div className="container-lg py-4 mt-2">
           <FeaturedNewTractor
             title="New Tractors Featured"
             link="all tractors are available to view"
           />
-        </div>
+        </div> */}
         <div className="container-lg py-4">
           <NewTractor brands={brands} />
         </div>

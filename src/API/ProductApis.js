@@ -5,9 +5,8 @@ var user = JSON.parse(window.localStorage.getItem("currentUser")) || null;
 Headers = {
   ...Headers,
   "Access-Control-Allow-Origin": "*",
-  mode: "no-cors"
+  mode: "no-cors",
 };
-
 
 class Products {
   deleteProduct = async (id) => {
@@ -50,7 +49,7 @@ class Products {
         uid: `${user.uid}`,
         mode: "no-cors",
       },
-			data: formData
+      data: formData,
     })
       .then((result) => {
         return {
@@ -65,8 +64,7 @@ class Products {
         };
       });
   };
-	addProduct = async (productsState,formData) => {
-
+  addProduct = async (productsState, formData) => {
     return axios({
       method: "post",
       url: `${process.env.REACT_APP_API_LOCAL_PATH}products`,
@@ -81,8 +79,7 @@ class Products {
         mode: "no-cors",
       },
 
-    	data: formData,
-      
+      data: formData,
     })
       .then((result) => {
         return {
@@ -98,7 +95,7 @@ class Products {
       });
   };
 
-	getProducts = async (page, searchString, noOfRec) => {
+  getProducts = async (page, searchString, noOfRec) => {
     return axios({
       method: "get",
       url: `${process.env.REACT_APP_API_LOCAL_PATH}products?page=${page}&q%5Btitle_or_status_or_description_or_location_cont%5D=${searchString}&no_of_record=${noOfRec}`,
@@ -122,7 +119,7 @@ class Products {
           data: error.response.data,
         };
       });
-	};
+  };
   getProductDetails = async (id) => {
     return axios({
       method: "get",
@@ -141,13 +138,20 @@ class Products {
           data: error.response.data,
         };
       });
-	};
-  getAllProducts = async (city='nil',priceRangeTo='nil',priceRangefrom = 'nil',featured='nil',title='nil',brand='nil') => {
-
+  };
+  getAllProducts = async (
+    city = "nil",
+    priceRangeTo = "nil",
+    priceRangefrom = "nil",
+    featured = "nil",
+    title = "nil",
+    brand = "nil",
+    productCategoryId = "nil"
+  ) => {
     return axios({
       method: "get",
-      url: `${process.env.REACT_APP_API_LOCAL_PATH}get_products?featured=${featured}&price_lt=${priceRangeTo}&price_gt=${priceRangefrom}&city=${city}&brand_id=${brand}&title=${title}`,
-      headers: Headers
+      url: `${process.env.REACT_APP_API_LOCAL_PATH}get_products?featured=${featured}&price_lt=${priceRangeTo}&price_gt=${priceRangefrom}&city=${city}&brand_id=${brand}&title=${title}&product_category_id=${productCategoryId}`,
+      headers: Headers,
     })
       .then((result) => {
         return {
@@ -161,13 +165,12 @@ class Products {
           data: error.response.data,
         };
       });
-	};
-	getNewProducts = async (newly_launched,featured) => {
-		 
+  };
+  getNewProducts = async (newly_launched, featured) => {
     return axios({
       method: "get",
       url: `${process.env.REACT_APP_API_LOCAL_PATH}get_products?product_type=${newly_launched}&featured=${featured}`,
-      headers: Headers
+      headers: Headers,
     })
       .then((result) => {
         return {
@@ -181,13 +184,12 @@ class Products {
           data: error.response.data,
         };
       });
-	};
-  getUsedProducts = async (used,featured) => {
-		 
+  };
+  getUsedProducts = async (used, featured) => {
     return axios({
       method: "get",
       url: `${process.env.REACT_APP_API_LOCAL_PATH}get_products?product_type=${used}&featured=${featured}`,
-      headers: Headers
+      headers: Headers,
     })
       .then((result) => {
         return {
@@ -201,13 +203,12 @@ class Products {
           data: error.response.data,
         };
       });
-	};
+  };
   getPopularProducts = async (popular, featured) => {
-		 
     return axios({
       method: "get",
       url: `${process.env.REACT_APP_API_LOCAL_PATH}get_products?product_type=${popular}&featured=${featured}`,
-      headers: Headers
+      headers: Headers,
     })
       .then((result) => {
         return {
@@ -221,13 +222,12 @@ class Products {
           data: error.response.data,
         };
       });
-	};
-  getFeaturedProducts = async (feature , featured) => {
-		 
+  };
+  getFeaturedProducts = async (feature, featured) => {
     return axios({
       method: "get",
       url: `${process.env.REACT_APP_API_LOCAL_PATH}get_products?product_type=${feature}&featured=${featured}`,
-      headers: Headers
+      headers: Headers,
     })
       .then((result) => {
         return {
@@ -241,13 +241,12 @@ class Products {
           data: error.response.data,
         };
       });
-	};
-  getUpcomingProducts = async (upcoming,featured) => {
-		 
+  };
+  getUpcomingProducts = async (upcoming, featured) => {
     return axios({
       method: "get",
       url: `${process.env.REACT_APP_API_LOCAL_PATH}get_products?product_type=${upcoming}&featured=${featured}`,
-      headers: Headers
+      headers: Headers,
     })
       .then((result) => {
         return {
@@ -261,9 +260,8 @@ class Products {
           data: error.response.data,
         };
       });
-	};
-	getProductsPdf = async (searchString) => {
-		 
+  };
+  getProductsPdf = async (searchString) => {
     return axios({
       method: "get",
       url: `${process.env.REACT_APP_API_LOCAL_PATH}products.pdf?q%5Btitle_or_status_or_description_or_location_cont%5D=${searchString}`,
@@ -287,10 +285,9 @@ class Products {
           data: error.response.data,
         };
       });
-	};
-	
-	getProductsCsv = async (searchString) => {
-		 
+  };
+
+  getProductsCsv = async (searchString) => {
     return axios({
       method: "get",
       url: `${process.env.REACT_APP_API_LOCAL_PATH}products.csv?q%5Btitle_or_status_or_description_or_location_cont%5D=${searchString}`,

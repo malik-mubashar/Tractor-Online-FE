@@ -20,14 +20,14 @@ const CategoriesNavBar = () => {
           <SideMenue />
         </div>
         <div className="col-lg-9 col-12 p-4 mt-4">
-          <div className="category-menu">
+          {/* <div className="category-menu">
             <div className="category-title  p-2">
-              <Icon.List className="icon" /> Categories
+              <Icon.List className="icon" /> Categories down
               <div className="category-drop-down">
                  <SideMenue />
               </div>
             </div>
-          </div>
+          </div> */}
           <div className="col-12  mb-4 category-section-slider p-0 border-radius">
             <MainCategory src="https://static.vecteezy.com/system/resources/previews/003/417/794/non_2x/farming-landing-page-web-banner-background-vector.jpg" />
           </div>
