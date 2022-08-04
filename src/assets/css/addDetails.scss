@@ -150,8 +150,8 @@
 
 .extraFieldsContainer{
     position: absolute;
-    bottom: 0;
-    left: 195px;
+    bottom: 0px;
+    left: -250px;
     z-index: 1070;
     width: 250px;
     background-color: #fff;
@@ -445,7 +445,11 @@
 .mt10 {
   margin-top: 10px !important;
 }
+}
 
-
-
+.phone_no_truncate{
+  width: 50px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
