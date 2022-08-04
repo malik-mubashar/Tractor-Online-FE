@@ -248,6 +248,7 @@ function MyVerticallyCenteredModal(props) {
 
 export default function UsedTractor() {
   const history = useHistory();
+
   const { setLandingPageSearchOptions } = useContext(RootContext);
 
   const [tractorModel, setTractorModel] = useState("");
@@ -256,6 +257,8 @@ export default function UsedTractor() {
   const [minPrice, setMinPrice] = useState();
   const [modalShow, setModalShow] = useState(false);
   const search = useLocation().search;
+  var type = new URLSearchParams(search).get("type");
+
 
   const getAllCity = async () => {
     const result = await city.getAllCity();
@@ -308,7 +311,6 @@ export default function UsedTractor() {
 
   useEffect(() => {
     getAllCity();
-    var type = new URLSearchParams(search).get("type");
     if (type === "used-tractor") {
       setHeading("Used Tractors");
     } else if (type === "new-tractor") {
@@ -347,7 +349,7 @@ export default function UsedTractor() {
       history.push("/used-tractor/sell/");
     }
   }
-
+console.log("window.location.href",window.location.href)
   return (
     <div className="usedTractorMain">
       <div className="usedTractorsContainer">
@@ -415,7 +417,7 @@ export default function UsedTractor() {
                   priceRangeFrom: minPrice || "nil",
                   title: tractorModel || "nil",
                 });
-                history.push("/used-tractor/search");
+                 history.push(`/used-tractor/search?type=${type}`);
               }}
             >
               Search
