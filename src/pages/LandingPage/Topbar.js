@@ -295,7 +295,13 @@ const Topbar = () => {
         {productCategories &&
           productCategories.map((item, i) => {
             return (
+
               <div key={i}>
+                 <Nav.Link
+                href={item.link}
+                className="d-flex w-100 dropdown-button-category "
+                key={i}
+              >
                 {i < 5 ? (
                   <DropDownTopbar
                     title={item.title}
@@ -304,6 +310,7 @@ const Topbar = () => {
                     brands={item.category_brands}
                   />
                 ) : null}
+                </Nav.Link>
               </div>
             );
           })}
