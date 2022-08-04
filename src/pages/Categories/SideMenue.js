@@ -79,7 +79,8 @@ const SideMenue = () => {
                   title={item.title}
                   cities={cities}
                   brands={item.category_brands}
-                  dropDownIcon={true}
+									dropDownIcon={true}
+									productCategory={item}
                 />
               </Nav.Link>
             </div>

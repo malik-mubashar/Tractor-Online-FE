@@ -307,7 +307,9 @@ const Topbar = () => {
                     title={item.title}
                     productHead={item.product_category_heads}
                     cities={cities}
-                    brands={item.category_brands}
+										brands={item.category_brands}
+										productCategory={item}
+										
                   />
                 ) : null}
                 </Nav.Link>
@@ -344,7 +346,7 @@ const Topbar = () => {
             {/* login case */}
             <Nav className="ml-auto right-nav">
               <ul className="navbar-nav mr-auto">
-                <NavLink to ="/used-tractors/sell/" className="btn btn-danger btn-lg text-white mr-2">
+                <NavLink to ="/used-tractor/sell/" className="btn btn-danger btn-lg text-white mr-2">
                   Post An Ad
                 </NavLink>
                 <NavDropdown
