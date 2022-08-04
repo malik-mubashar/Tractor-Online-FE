@@ -311,7 +311,8 @@ export default function ProdCategories() {
                                           link: prod.link,
                                           status: prod.status,
                                           description: prod.description,
-                                          prodCategoryId: prod.id,
+																					prodCategoryId: prod.id,
+																					is_option:prod.is_option
                                         });
                                       }}
                                       className="text-success mr-2 icon wh-15 mt-minus-3"
