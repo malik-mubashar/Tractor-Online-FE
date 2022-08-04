@@ -169,7 +169,7 @@ export default function Footer() {
                       <h5 className="text-white">TractorOnline.com</h5>
                     </li>
                     <li className="mt-1">
-                      <a href="/" className="footer-link">
+                      <a href="/browse-us" className="footer-link">
                         About TractorOnline.com
                       </a>
                     </li>

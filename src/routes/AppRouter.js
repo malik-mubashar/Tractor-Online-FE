@@ -52,6 +52,7 @@ import Alerts from "../pages/PostAd/myAlerts";
 import Ads from "../pages/PostAd/myAds";
 import UsedTractor from "../pages/usedTractor/UsedTractor";
 import BrandDetails from "../pages/LandingPage/BrandDetails/brandDetails";
+import BrowseUs from "../pages/BrowseUs";
 
 
 const AppRouter = () => {
@@ -146,7 +147,7 @@ const AppRouter = () => {
               <ProductMappings />
             </DashboardLayout>
 					</ProtectedRoute>
-          <Route exact path="/used-tractor/search">
+          <Route exact path="/used-tractor/search" >
             <Layout>
               <UsedTractorSearch />
             </Layout>
@@ -165,6 +166,11 @@ const AppRouter = () => {
             {/* <Layout> */}
               <PostAd />
             {/* </Layout> */}
+          </UnProtectedRoute>
+          <UnProtectedRoute exact path="/browse-us">
+          <Layout>
+              <BrowseUs />
+            </Layout>
           </UnProtectedRoute>
           <UnProtectedRoute exact path="/users/my-ads">
             <Layout>
@@ -225,6 +231,7 @@ const AppRouter = () => {
               <Profile />
             </DashboardLayout>
           </ProtectedRoute>
+          
           <ProtectedRoute exact path="/profile-settings/">
             <DashboardLayout>
               <ProfileSettings />
