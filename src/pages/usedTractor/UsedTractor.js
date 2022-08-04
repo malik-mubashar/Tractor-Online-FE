@@ -257,7 +257,7 @@ export default function UsedTractor() {
   const [minPrice, setMinPrice] = useState();
   const [modalShow, setModalShow] = useState(false);
   const search = useLocation().search;
-  var type = new URLSearchParams(search).get("type");
+  var category = new URLSearchParams(search).get("category");
 
 
   const getAllCity = async () => {
@@ -311,30 +311,30 @@ export default function UsedTractor() {
 
   useEffect(() => {
     getAllCity();
-    if (type === "used-tractor") {
+    if (category === "used-tractor") {
       setHeading("Used Tractors");
-    } else if (type === "new-tractor") {
+    } else if (category === "new-tractor") {
       setHeading("New Tractors");
     }
-    else if (type === "used-machinery") {
+    else if (category === "used-machinery") {
       setHeading("Used Agriculture Machinery");
     }
-    else if (type === "new-machinery") {
+    else if (category === "new-machinery") {
       setHeading("New Agriculture Machinery");
     }
-    else if (type === "tractor-accessories") {
+    else if (category === "tractor-accessories") {
       setHeading("Tractor & Machinery parts and Acessories");
     }
-    else if (type === "seed-fertilizers") {
+    else if (category === "seed-fertilizers") {
       setHeading("Seed and Fertilizers");
     }
-    else if (type === "plants-horticulture") {
+    else if (category === "plants-horticulture") {
       setHeading("Plants and Horticulture");
     }
-    else if (type === "tractor-on-rent") {
+    else if (category === "tractor-on-rent") {
       setHeading("Tractor and Machinery on Rent");
     }
-    else if (type === "laser-lever") {
+    else if (category === "laser-lever") {
       setHeading("Laser and Leveler on rent");
     }
     else {
@@ -417,7 +417,7 @@ console.log("window.location.href",window.location.href)
                   priceRangeFrom: minPrice || "nil",
                   title: tractorModel || "nil",
                 });
-                 history.push(`/used-tractor/search?type=${type}`);
+                 history.push(`/used-tractor/search?category=${category}`);
               }}
             >
               Search
