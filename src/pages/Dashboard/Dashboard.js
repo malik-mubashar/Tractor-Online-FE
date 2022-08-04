@@ -29,7 +29,7 @@ const Dashboard = () => {
 		const result = await user.findUser(currentUser);
 		if (result.error === false) {
 			toast.dismiss(loadingToastId);
-			localStorage.setItem('userProfilePicture',JSON.stringify(result.data.profile_path))
+			localStorage.setItem('userProfilePicture',JSON.stringify(result.data.profile_path||null))
 			setUserProfilePicture(result.data.profile_path)
 
 		}
