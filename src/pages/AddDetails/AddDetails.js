@@ -1,14 +1,5 @@
 import React, { useState, useEffect } from "react";
 import {
-  Navbar,
-  Nav,
-  NavDropdown,
-  Container,
-  Row,
-  Col,
-  Form,
-  FormControl,
-  Button,
   Image,
 } from "react-bootstrap";
 // import ImageGallery from "react-image-gallery";
@@ -46,7 +37,8 @@ import tick from "../../assets/svg/tick-symbol.svg";
 // import cellPhoneSvg from "../../assets/svg/cellPhone.svg";
 import { productApis } from "../../API/ProductApis";
 import { useParams } from "react-router";
-import TractorClipart from "../../assets/svg/tractor-logo.svg"
+import TractorClipart from "../../assets/svg/tractor-logo.svg";
+import Icofont from "react-icofont";
 
 export default function AddDetails() {
   const { id } = useParams();
@@ -71,6 +63,7 @@ export default function AddDetails() {
 
   const [visible, setVisible] = useState(true);
   const [userData, setUserData] = useState("");
+  const [isPhoneAgree, setIsPhoneAgree] = useState(false);
   const [product, setProduct] = useState([]);
   useEffect(() => {
     handleGetProductDetails();
@@ -90,11 +83,6 @@ export default function AddDetails() {
       <div className="remove-section">
 
         <div className="container">
-          <img
-            style={{ width: "100%" }}
-            alt="add"
-            src={"https://tpc.googlesyndication.com/simgad/5923361064753698031"}
-          />
           <div className="breadcrumbWrapper">
             <ul className="breadcrumb bread">
               <li>
@@ -276,64 +264,64 @@ export default function AddDetails() {
                     </tr>
                   </tbody>
                 </table>
-                {/* inception add */}
-                <div className="inspection  clearfix mb40 ">
-                  <div id="" className="row">
-                    <div className="col-7">
-                      <h6 className="mt0 mb10 title">
-                        Never buy a used Tractor without{" "}
-                        <strong className="generic-blue show fs24">
-                          TractorOnline{" "}
-                          <span className="generic-red">
-                            Tractor Inspection<span></span>
-                          </span>
-                        </strong>
-                      </h6>
-                      <p className="fs18 mb10">
-                        Over 200 checkpoints will be used to inspect the
-                        tractor.{" "}
-                      </p>
-                      <ul className="list-unstyled list-inline fs16 mb15">
-                        <li>
-                          <i className="fa fa-tick generic-green"></i> Engine
-                        </li>
-                        <li>
-                          <i className="fa fa-tick generic-green"></i>{" "}
-                          Suspension
-                        </li>
-                        <li>
-                          <i className="fa fa-tick generic-green"></i> Exterior
-                        </li>
-                        <li>
-                          <i className="fa fa-tick generic-green"></i> Interior
-                        </li>
-                      </ul>
-                      <a
-                        href="#"
-                        className="btn btn-lg btn-success "
-                        style={{ color: "white" }}
-                      >
-                        Inspection Schedule
-                      </a>
-                      <br />
-                      <a
-                        href="/products/tractoronline-inspection"
-                        id=""
-                        className="ib mt15 fs18"
-                      >
-                        Learn More
-                      </a>
-                    </div>
-                    <div className="right-img pull-right">
-                      <img
-                        alt="Tractor Inspection Rate"
-                        src={product.cover_photo_path}
-                        width="266"
-                      />
+                {/* inception add 
+                  <div className="inspection  clearfix mb40 ">
+                    <div id="" className="row">
+                      <div className="col-7">
+                        <h6 className="mt0 mb10 title">
+                          Never buy a used Tractor without{" "}
+                          <strong className="generic-blue show fs24">
+                            TractorOnline{" "}
+                            <span className="generic-red">
+                              Tractor Inspection<span></span>
+                            </span>
+                          </strong>
+                        </h6>
+                        <p className="fs18 mb10">
+                          Over 200 checkpoints will be used to inspect the
+                          tractor.{" "}
+                        </p>
+                        <ul className="list-unstyled list-inline fs16 mb15">
+                          <li>
+                            <i className="fa fa-tick generic-green"></i> Engine
+                          </li>
+                          <li>
+                            <i className="fa fa-tick generic-green"></i>{" "}
+                            Suspension
+                          </li>
+                          <li>
+                            <i className="fa fa-tick generic-green"></i> Exterior
+                          </li>
+                          <li>
+                            <i className="fa fa-tick generic-green"></i> Interior
+                          </li>
+                        </ul>
+                        <a
+                          href="#"
+                          className="btn btn-lg btn-success "
+                          style={{ color: "white" }}
+                        >
+                          Inspection Schedule
+                        </a>
+                        <br />
+                        <a
+                          href="/products/tractoronline-inspection"
+                          id=""
+                          className="ib mt15 fs18"
+                        >
+                          Learn More
+                        </a>
+                      </div>
+                      <div className="right-img pull-right">
+                        <img
+                          alt="Tractor Inspection Rate"
+                          src={product.cover_photo_path}
+                          width="266"
+                        />
+                      </div>
                     </div>
                   </div>
-                </div>
-
+                */}
                 {/* car details */}
                 <div className="mt-4">
                   <div className="row">
@@ -390,95 +378,97 @@ export default function AddDetails() {
                     </div>
                   </div>
                 </div>
-                {/* car features */}
-                <div className="carFeature">
-                  <h5 className="mb-4 mt-3">Tractor Features</h5>
-                  <div className="row mb-2">
-                    <div className="col-lg-4 d-flex">
-                      <Image
-                        src={radio}
-                        height="20px"
-                        width="30px"
-                        alt="Profile Image"
-                        className="d-flex justify-content-center"
-                      />
-                      AM/FM Radio
+                {/* car features 
+                  <div className="carFeature">
+                    <h5 className="mb-4 mt-3">Tractor Features</h5>
+                    <div className="row mb-2">
+                      <div className="col-lg-4 d-flex">
+                        <Image
+                          src={radio}
+                          height="20px"
+                          width="30px"
+                          alt="Profile Image"
+                          className="d-flex justify-content-center"
+                        />
+                        AM/FM Radio
+                      </div>
+                      <div className="col-lg-4 d-flex">
+                        <Image
+                          src={airBag}
+                          height="20px"
+                          width="30px"
+                          alt="Profile Image"
+                          className="d-flex justify-content-center"
+                        />
+                        Air Bags
+                      </div>
+                      <div className="col-lg-4 d-flex">
+                        <Image
+                          src={carAC}
+                          height="20px"
+                          width="30px"
+                          alt="Profile Image"
+                          className="d-flex justify-content-center"
+                        />
+                        Air Conditioning
+                      </div>
                     </div>
-                    <div className="col-lg-4 d-flex">
-                      <Image
-                        src={airBag}
-                        height="20px"
-                        width="30px"
-                        alt="Profile Image"
-                        className="d-flex justify-content-center"
-                      />
-                      Air Bags
+                    <div className="row mb-2">
+                      <div className="col-lg-4 d-flex">
+                        <Image
+                          src={key}
+                          height="20px"
+                          width="30px"
+                          alt="Profile Image"
+                          className="d-flex justify-content-center"
+                        />
+                        Immobilizer Key
+                      </div>
+                      <div className="col-lg-4 d-flex">
+                        <Image
+                          src={remoteKey}
+                          height="20px"
+                          width="30px"
+                          alt="Profile Image"
+                          className="d-flex justify-content-center"
+                        />
+                        Keyless Entry
+                      </div>
+                      <div className="col-lg-4 d-flex">
+                        <Image
+                          src={carDoor}
+                          height="20px"
+                          width="30px"
+                          alt="Profile Image"
+                          className="d-flex justify-content-center"
+                        />
+                        Power Locks
+                      </div>
                     </div>
-                    <div className="col-lg-4 d-flex">
-                      <Image
-                        src={carAC}
-                        height="20px"
-                        width="30px"
-                        alt="Profile Image"
-                        className="d-flex justify-content-center"
-                      />
-                      Air Conditioning
+                    <div className="row mb-2">
+                      <div className="col-lg-4 d-flex">
+                        <Image
+                          src={steering}
+                          height="20px"
+                          width="30px"
+                          alt="Profile Image"
+                          className="d-flex justify-content-center"
+                        />
+                        Power Steering
+                      </div>
                     </div>
                   </div>
-                  <div className="row mb-2">
-                    <div className="col-lg-4 d-flex">
-                      <Image
-                        src={key}
-                        height="20px"
-                        width="30px"
-                        alt="Profile Image"
-                        className="d-flex justify-content-center"
-                      />
-                      Immobilizer Key
-                    </div>
-                    <div className="col-lg-4 d-flex">
-                      <Image
-                        src={remoteKey}
-                        height="20px"
-                        width="30px"
-                        alt="Profile Image"
-                        className="d-flex justify-content-center"
-                      />
-                      Keyless Entry
-                    </div>
-                    <div className="col-lg-4 d-flex">
-                      <Image
-                        src={carDoor}
-                        height="20px"
-                        width="30px"
-                        alt="Profile Image"
-                        className="d-flex justify-content-center"
-                      />
-                      Power Locks
-                    </div>
+                */}
+                {/* Sellers comment 
+                  <div className="sellersComment">
+                    <h5 className="mb-4 mt-3">Tractor Specifications</h5>
+                    <p>Model 2021 Dec Registered 2022 Mahindra</p>
+                    <p>As new as a tractor, this is a brand new product.</p>
+                    <p>There isn't a scratch on the tract.</p>
+                    <p>Orignal Documents</p>
+                    <p>Orignal 2 krys</p>
                   </div>
-                  <div className="row mb-2">
-                    <div className="col-lg-4 d-flex">
-                      <Image
-                        src={steering}
-                        height="20px"
-                        width="30px"
-                        alt="Profile Image"
-                        className="d-flex justify-content-center"
-                      />
-                      Power Steering
-                    </div>
-                  </div>
-                </div>
-                {/* Sellers comment */}
-                <div className="sellersComment">
-                  <h5 className="mb-4 mt-3">Tractor Specifications</h5>
-                  <p>Model 2021 Dec Registered 2022 Mahindra</p>
-                  <p>As new as a tractor, this is a brand new product.</p>
-                  <p>There isn't a scratch on the tract.</p>
-                  <p>Orignal Documents</p>
-                  <p>Orignal 2 krys</p>
-                </div>
+                */}
               </div>
 
               {/*add at bottom  */}
@@ -528,17 +518,14 @@ export default function AddDetails() {
                     </strong>
                   </div>
 
-                  <div className="btn btn-large btn-block btn-success buttonDiv">
+                  <div className={`btn  ${ true ? "btn-outline-success" : "btn-success" } btn-block btn-large buttonDiv`}>
                     <span className="d-flex">
-                      <Image
-                        src={call}
-                        height="20px"
-                        width="30px"
-                        alt="Profile Image"
-                        className="d-flex justify-content-center"
+                      <Icofont
+                        icon="phone"
+                        className="icofont-2x"
                       />
-                      <div>
-                        <span className="ml-1">03090814...</span>
+                      <div className="ml-3">
+                        <span className="ml-1 phone_no_truncate">{product.phone_no}</span>
                         <div>Show Phone Number</div>
                       </div>
                     </span>
@@ -550,7 +537,7 @@ export default function AddDetails() {
                       height="20px"
                       width="30px"
                       alt="Profile Image"
-                      className="d-flex justify-content-center "
+                      className="d-flex justify-content-center"
                     />{" "}
                     Send Message
                   </div>
@@ -573,8 +560,8 @@ export default function AddDetails() {
                     />
                   </div>
                   <div className="col-md-9">
-                    <div>{ userData.name }</div>
-                    <div>Member Since { userData.created_at && userData.created_at.split("T")[0]}</div>
+                    <div>{ userData && userData.name }</div>
+                    <div>Member Since { userData && userData.created_at.split("T")[0]}</div>
                   </div>
                 </div>
                 <div className="justify-content-center d-flex mt-3 mb-3">

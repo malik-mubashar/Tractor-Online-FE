@@ -166,14 +166,14 @@
   cursor: pointer;
 }
 .carousel-control-prev {
-  left: -20px !important;
+  left: 0px !important;
   width: 5% !important;
   background-color: rgba(26, 26, 26, .3);
   border-top-right-radius: 50%;
   border-bottom-right-radius: 50%;
 }
 .carousel-control-next {
-  right: -20px !important;
+  right: 0px !important;
   width: 5% !important;
   background-color: rgba(26, 26, 26, .3);
   border-top-left-radius: 50%;
@@ -597,7 +597,7 @@
 
 .password-icons{
   position: absolute;
-  top: 30px;
+  top: 45px;
   right: 10px;
 }
 
