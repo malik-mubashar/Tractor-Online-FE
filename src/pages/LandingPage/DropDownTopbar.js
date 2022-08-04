@@ -1,9 +1,8 @@
 import React, { useEffect, useState } from "react";
 import * as Icon from "react-feather";
 import Icofont from "react-icofont";
-import { Link } from "react-router-dom";
-import { useHistory } from "react-router-dom";
-
+import { useHistory, NavLink, Link } from "react-router-dom";
+import { Nav } from "react-bootstrap";
 
 export default function DropDownTopbar({
   title,
@@ -16,6 +15,7 @@ export default function DropDownTopbar({
   productHead,
   cities,
   brands,
+  link
 }) {
   const history = useHistory();
 
@@ -48,7 +48,7 @@ export default function DropDownTopbar({
   return (
     <div>
       <div className={`${!dropDownIcon ? " dropdown-button p-2" : "p-2"}`} title={title}>
-        <span>{title}</span>
+        <a href={link}><span>{title}</span></a>
           { productHead.length > 0?
             (
               <>

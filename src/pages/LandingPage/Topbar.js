@@ -297,20 +297,15 @@ const Topbar = () => {
             return (
 
               <div key={i}>
-                 <Nav.Link
-                href={item.link}
-                className="d-flex w-100 dropdown-button-category "
-                key={i}
-              >
                 {i < 5 ? (
                   <DropDownTopbar
+                    link = {item.link}
                     title={item.title}
                     productHead={item.product_category_heads}
                     cities={cities}
                     brands={item.category_brands}
                   />
                 ) : null}
-                </Nav.Link>
               </div>
             );
           })}
@@ -329,7 +324,9 @@ const Topbar = () => {
                 return (
                   <div key={i}>
                     {i > 4 ? (
-                      <div className="p-2 dropdown-link">{item.title}</div>
+                      <Nav.Link href={item.link}>
+                        <div className="p-2 dropdown-link">{item.title}</div>
+                      </Nav.Link>
                     ) : null}
                   </div>
                 );
