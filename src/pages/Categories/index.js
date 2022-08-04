@@ -34,18 +34,18 @@ const CategoriesNavBar = () => {
           <div className="col-12 category-hot-product border-radius">
             <div className="col-lg-4 text-center align-middle">
               <div style={{paddingTop: "50px"}}>
-                <h4 className="mt-4 text-white">More Exclusive Deals</h4>
+                <h4 className="mt-5 text-white">More Exclusive Deals</h4>
                 <span className="text-white mb-2">
                   Combine with your coupon to save even more!
                 </span>
-                <Button
+                {/*<Button
                   variant="success"
                   size="lg"
                   className="mr-2 rmb-5 font-weight-bold"
                 >
                   Claim PKR 823
                   <Icon.ChevronRight className="icon ml-4 font-weight-bold" />
-                </Button>
+                </Button>*/}
               </div>
             </div>
             <div className="col-lg-8 hot-slider">

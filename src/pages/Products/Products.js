@@ -85,7 +85,8 @@ export default function Products() {
     price: '',
     location: '',
     link: '',
-    city: ''
+    city: '',
+    phone_no: '',
   });
 
   const handleSearch = (searchString) => {
@@ -262,16 +263,19 @@ export default function Products() {
                       <Table className="m-0" responsive>
                         <thead>
                           <tr>
-                            <th>title</th>
+                            <th>Cover Photo</th>
+                            <th>Title</th>
+                            <th>Brand</th>
+                            <th>Price</th>
+                            <th>City</th>
+                            <th>Address</th>
+                            <th>Phone Number</th>
+                            <th>Featured</th>
                             <th>Status</th>
                             <th>Description</th>
-                            <th>Price</th>
-                            <th>featured</th>
-                            <th>Brand</th>
-                            <th>Location</th>
-                            <th>Link</th>
-                            <th>Product Type</th>
-                            <th>Extra Fields</th>
+                            {/*<th>Link</th>*/}
+                            {/*<th>Product Type</th>*/}
+                            <th>More Information</th>
                             <th className="text-center">Action</th>
                           </tr>
                         </thead>
@@ -280,33 +284,43 @@ export default function Products() {
                           {productsState.products &&
                             productsState.products.map((product, idx) => (
                               <tr key={idx}>
+                                <td>
+                                <Image
+                                  src={product.cover_photo_path && product.cover_photo_path}
+                                  height="40px"
+                                  width="40px"
+                                  alt="No Cover photo"
+                                />
+                                </td>
                                 <td>{product.title && product.title}</td>
+                                <td>{product && product.brand && product.brand.title}</td>
+                                <td>{product.price && product.price}</td>
+                                <td>{product.city && product.city}</td>
+                                <td>{product.location && product.location}</td>
+                                <td>{product.phone_no && product.phone_no}</td>
+                                <td>{product.featured && product.featured?'YES':''}</td>
                                 <td>{product.status && product.status}</td>
                                 <td>
                                   {product.description && product.description}
                                 </td>
-                                <td>{product.price && product.price}</td>
-                                <td>{product.featured && product.featured?'YES':''}</td>
-                                <td>{product && product.brand && product.brand.title}</td>
-                                <td>{product.location && product.location}</td>
-                                <td>{product.link && product.link}</td>
-                                <td>{product.product_type && product.product_type}</td>
+                                {/*<td>{product.link && product.link}</td>*/}
+                                {/*<td>{product.product_type && product.product_type}</td>*/}
                                 <td>
                                   <div>
                                     <div className="btn btn-outline-success extraFieldsBtn relative">
-                                      Hover me to view Extra Fields
+                                      Hover me to view Extra Info
                                       <div className="extraFieldsContainer">
-                                        <div className="popover-header bg-info">All Extra Fields</div>
+                                        <div className="popover-header bg-info">All Extra Info</div>
                                           <div className="popover-body">
                                             {product.extra_fields && Object.entries(product.extra_fields).length > 0 ?
                                               <>
                                                 {product.extra_fields && Object.entries(product.extra_fields).map((item, i) =>{
                                                   return (
-                                                    <>
+                                                    <div key={i}>
                                                     {i+1}.<span className="ml-1"><b>{item[0]}</b></span>:
                                                     <span className="ml-1">{item[1]}</span>
                                                     <div></div>
-                                                    </>
+                                                    </div>
                                                   )
                                                 }
                                                 )}

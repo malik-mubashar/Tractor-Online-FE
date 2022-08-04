@@ -42,6 +42,7 @@ export default function AddAndEditProduct({
     { name: "description", required: false },
     { name: "price", required: false },
     { name: "brand_id", required: true },
+    { name: "phone_no", required: true }
   ];
   const [fieldsWithError, setFieldsWithError] = useState({
     description: false,
@@ -50,6 +51,7 @@ export default function AddAndEditProduct({
     product_category_id: false,
     status: false,
     title: false,
+    phone_no: false,
   });
   const doValidation = () => {
     var tempFieldsWithError = {};
@@ -270,6 +272,7 @@ export default function AddAndEditProduct({
       formData.append("description", productsState.description);
       formData.append("price", productsState.price);
       formData.append("location", productsState.location);
+      formData.append("phone_no", productsState.phone_no);
       // formData.append("link", productsState.link);
       formData.append("extra_fields", JSON.stringify(extraFieldsData));
       formData.append("featured", productsState.featured);
@@ -277,9 +280,9 @@ export default function AddAndEditProduct({
       formData.append("user_id", user.id);
       formData.append("city", productsState.city);
       formData.append("product_category_id", productsState.product_category_id);
-      if (productsState.product_type !== undefined) {
-        formData.append("product_type", productsState.product_type);
-      }
+      //if (productsState.product_type !== undefined) {
+        //formData.append("product_type", productsState.product_type);
+      //}
 
       if (productsState.isAddProduct) {
         try {
@@ -433,21 +436,97 @@ export default function AddAndEditProduct({
                     onChange={(e) => handleChange(e)}
                   />
                 </Form.Group>
-                <Form.Group controlId="formBasicComments">
-                  <Form.Label>Description</Form.Label>
-                  <Form.Control
-                    className={
-                      fieldsWithError.description === true
-                        ? "border-danger"
-                        : ""
-                    }
-                    defaultValue={productsState.description}
-                    name="description"
-                    type="text"
-                    placeholder="description"
-                    onChange={(e) => handleChange(e)}
-                  />
-                </Form.Group>
+                {productsState && productsState.isAddProduct ? (
+                  <Form.Group controlId="formGridState">
+                    <Form.Label>Product Category</Form.Label>
+                    <Form.Control
+                      className={
+                        fieldsWithError.product_category_id === true
+                          ? "border-danger"
+                          : ""
+                      }
+                      as="select"
+                      onChange={(e) => handleProductCategoryChange(e)}
+                      name="product_category_id"
+                    >
+                      <option key="blankChoice" hidden value>
+                        -- Select Product Category --
+                      </option>
+                      {productMappings &&
+                        productMappings.map((item) => {
+                          return (
+                            <option value={item.product_category.id} key={item.product_category.id}>
+                              {item.product_category.title}
+                            </option>
+                          );
+                        })}
+                    </Form.Control>
+                  </Form.Group>
+                ) : null}
+                <div className="bg-light p-4 mt-2">
+                  <div className="d-flex">
+                    <Form.Group className="mt-1" controlId="formBasicComments">
+                      <Form.Label>More information about product.</Form.Label>
+                    </Form.Group>
+                    {/* <Icofont
+                      icon="plus text-success"
+                      className="icofont-2x ml-2 cursor-pointer"
+                      onClick={(e) => addExtraFields(e)}
+                    /> */}
+                  </div>
+                  {extraFieldsArr &&
+                    extraFieldsArr.map((item, i) => {
+                      return (
+                        <div className="mt-1" key={i}>
+                          {/*
+                            <div>
+                              <Icofont
+                                icon="close text-danger float-right mt-2 pt-4 cursor-pointer"
+                                className="icofont-2x"
+                                value={i}
+                                onClick={(e) => removeExtraFields(e, item.id)}
+                              />
+                            </div>
+                          */}
+                          {/* <div className="col-6">
+                            <Form.Group
+                              className="mt-1"
+                              controlId="formBasicComments"
+                            >
+                              <Form.Label>
+                                Add extra Product heading.
+                              </Form.Label>
+                              <Form.Control
+                                onChange={(e) => handleExtraField(e, item.id)}
+                                name="extra_fields_key"
+                                type="text"
+                                disabled={true}
+                                placeholder="Add product heading...."
+                                value={item && item.key}
+                              />
+                            </Form.Group>
+                          </div> */}
+                          <div className="col-12">
+                            <Form.Group
+                              className="mt-1"
+                              controlId="formBasicComments"
+                            >
+                              <Form.Label>
+                                {item && item.key}
+                              </Form.Label>
+                              <Form.Control
+                                value={item && item.value}
+                                onChange={(e) => handleExtraField(e, item.id)}
+                                name="extra_fields_value"
+                                type="text"
+                                placeholder="Add product information...."
+                              />
+                            </Form.Group>
+                          </div>
+                        </div>
+                      );
+                    })}
+                </div>
                 <Form.Group controlId="formBasicComments">
                   <Form.Label>Price</Form.Label>
                   <Form.Control
@@ -477,6 +556,19 @@ export default function AddAndEditProduct({
                     clearable={false}
                   />
                 </div>
+                <Form.Group controlId="formBasicComments">
+                  <Form.Label>Phone Number</Form.Label>
+                  <Form.Control
+                    className={
+                      fieldsWithError.phone_no === true ? "border-danger" : ""
+                    }
+                    defaultValue={productsState.phone_no}
+                    name="phone_no"
+                    type="text"
+                    placeholder="Phone Number"
+                    onChange={(e) => handleChange(e)}
+                  />
+                </Form.Group>
                 <Form.Group controlId="formBasicComments">
                   <Form.Label>Address</Form.Label>
                   <Form.Control
@@ -534,7 +626,7 @@ export default function AddAndEditProduct({
                       })}
                   </Form.Control>
                 </Form.Group>
-                <Form.Group controlId="formGridproduct">
+                {/*<Form.Group controlId="formGridproduct">
                   <Form.Label>Product Type</Form.Label>
                   <Form.Control
                     className={
@@ -548,32 +640,12 @@ export default function AddAndEditProduct({
                     name="product_type"
                   >
                     <option>Please select Product Type....</option>
-                    {/* <option value="used">Used</option> */}
+                    <option value="used">Used</option>
                     <option value="popular">Popular</option>
                     <option value="upcoming">Upcoming</option>
                     <option value="newly_launched">Newly Launched</option>
                   </Form.Control>
-                </Form.Group>
-                <Form.Group className="d-flex mt-3" controlId="formGridproduct">
-                  <Form.Label>Is Featured</Form.Label>
-                  <Form.Check
-                    type="checkbox"
-                    className="ml-4"
-                    defaultChecked={
-                      productsState && productsState.featured == true
-                        ? true
-                        : false
-                    }
-                    // value={productsState.product_type}
-                    onChange={(e) => {
-                      setProductsState({
-                        ...productsState,
-                        featured: e.currentTarget.checked,
-                      });
-                    }}
-                    name="featured"
-                  ></Form.Check>
-                </Form.Group>
+                </Form.Group>*/}
                 <Form.Group controlId="formGridState">
                   <Form.Label>Status</Form.Label>
                   <Form.Control
@@ -590,94 +662,42 @@ export default function AddAndEditProduct({
                     <option value="deleted">deleted</option>
                   </Form.Control>
                 </Form.Group>
-                {productsState && productsState.isAddProduct ? (
-                  <Form.Group controlId="formGridState">
-                    <Form.Label>Product Category</Form.Label>
-                    <Form.Control
-                      className={
-                        fieldsWithError.product_category_id === true
-                          ? "border-danger"
-                          : ""
-                      }
-                      as="select"
-                      onChange={(e) => handleProductCategoryChange(e)}
-                      name="product_category_id"
-                    >
-                      <option key="blankChoice" hidden value>
-                        -- Select Product Category --
-                      </option>
-                      {productMappings &&
-                        productMappings.map((item) => {
-                          return (
-                            <option value={item.product_category.id} key={item.product_category.id}>
-                              {item.product_category.title}
-                            </option>
-                          );
-                        })}
-                    </Form.Control>
-                  </Form.Group>
-                ) : null}
-                <div className="d-flex">
-                  <Form.Group className="mt-1" controlId="formBasicComments">
-                    <Form.Label>Add more information about product.</Form.Label>
-                  </Form.Group>
-                  {/* <Icofont
-                    icon="plus text-success"
-                    className="icofont-2x ml-2 cursor-pointer"
-                    onClick={(e) => addExtraFields(e)}
-                  /> */}
-                </div>
-                {extraFieldsArr &&
-                  extraFieldsArr.map((item, i) => {
-                    return (
-                      <div className="mt-3">
-                        <div>
-                          {/* <Icofont
-                            icon="close text-danger float-right mt-2 pt-4 cursor-pointer"
-                            className="icofont-2x"
-                            value={i}
-                            onClick={(e) => removeExtraFields(e, item.id)}
-                          /> */}
-                        </div>
-                        <div className="row">
-                          <div className="col-6">
-                            <Form.Group
-                              className="mt-1"
-                              controlId="formBasicComments"
-                            >
-                              <Form.Label>
-                                Add extra Product heading.
-                              </Form.Label>
-                              <Form.Control
-                                onChange={(e) => handleExtraField(e, item.id)}
-                                name="extra_fields_key"
-                                type="text"
-                                placeholder="Add product heading...."
-                                value={item && item.key}
-                              />
-                            </Form.Group>
-                          </div>
-                          <div className="col-6">
-                            <Form.Group
-                              className="mt-1"
-                              controlId="formBasicComments"
-                            >
-                              <Form.Label>
-                                Add extra Product information.
-                              </Form.Label>
-                              <Form.Control
-                                value={item && item.value}
-                                onChange={(e) => handleExtraField(e, item.id)}
-                                name="extra_fields_value"
-                                type="text"
-                                placeholder="Add product information...."
-                              />
-                            </Form.Group>
-                          </div>
-                        </div>
-                      </div>
-                    );
-                  })}
+                <Form.Group className="d-flex mt-3" controlId="formGridproduct">
+                  <Form.Label>Is Featured</Form.Label>
+                  <Form.Check
+                    type="checkbox"
+                    className="ml-4 mt-2"
+                    defaultChecked={
+                      productsState && productsState.featured == true
+                        ? true
+                        : false
+                    }
+                    // value={productsState.product_type}
+                    onChange={(e) => {
+                      setProductsState({
+                        ...productsState,
+                        featured: e.currentTarget.checked,
+                      });
+                    }}
+                    name="featured"
+                  ></Form.Check>
+                </Form.Group>
+                <Form.Group controlId="formBasicComments">
+                  <Form.Label>Description</Form.Label>
+                  <Form.Control
+                    className={
+                      fieldsWithError.description === true
+                        ? "border-danger"
+                        : ""
+                    }
+                    defaultValue={productsState.description}
+                    name="description"
+                    as="textarea"
+                    rows={3}
+                    placeholder="description"
+                    onChange={(e) => handleChange(e)}
+                  />
+                </Form.Group>
                 <div className="form-group preview row mt-4">
                   {file &&
                     file.length > 0 &&
@@ -685,7 +705,7 @@ export default function AddAndEditProduct({
                       return (
                         <div
                           key={item}
-                          className="col-12 col-lg-1 cover-photo-container"
+                          className="col-12 col-lg-1 cover-photo-container mt-3"
                         >
                           <img
                             className="cover_image_select"
