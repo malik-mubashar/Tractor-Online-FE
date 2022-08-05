@@ -48,7 +48,12 @@ const searchAble = ({ cities }) => {
       });
       setMinPriceOptions(temp);
     }
-  }, [maxPrice]);
+	}, [maxPrice]);
+	console.log('{city}',city,)
+	console.log('{maxPrice}',maxPrice)
+	console.log('{minPrice}',  minPrice)
+	console.log('{makeOrModel}',makeOrModel)
+	
   return (
     <>
       <ul className="list-unstyled search-front clearfix d-flex justify-content-center d-flex">
@@ -71,7 +76,7 @@ const searchAble = ({ cities }) => {
           <Select
             className="ui-autocomplete-input form-control searchAble border-right "
             options={cities}
-            //setValue={setCity}
+            // setValue={setCity}
             label="Select City"
             value={city}
             placeholder="Select City"
@@ -87,7 +92,7 @@ const searchAble = ({ cities }) => {
             label="Select Min Price "
             value={minPrice}
             placeholder="Select Min Price"
-            onChange={(e) => {if(e){setCity(e.label)}}}
+            onChange={(e) => {if(e){setMinPrice(e.label)}}}
             clearable={false}
           />
         </li>
@@ -99,7 +104,7 @@ const searchAble = ({ cities }) => {
             label="Select Max Price"
             placeholder="Select Max Price"
             value={maxPrice}
-            onChange={(e) => {if(e){setCity(e.label)}}}
+            onChange={(e) => {setMaxPrice(e.label)}}
             clearable={false}
           />
         </li>
@@ -108,13 +113,14 @@ const searchAble = ({ cities }) => {
             className="btn-success p-1  searchAble border-right-radius"
 						type="submit"
 						onClick={() => {
+							debugger;
 							setLandingPageSearchOptions({
 								city: city || 'nil',
 								priceRangeTo: maxPrice || 'nil',
 								priceRangeFrom: minPrice || 'nil',
 								title: makeOrModel || 'nil'
 							});
-							history.push('/used-tractor/search')
+							history.push(`/used-tractor/search?city=${city||'nil'}&priceRangeTo=${maxPrice||'nil'}&priceRangeFrom=${minPrice||'nil'}&title=${makeOrModel||'nil'}`)
 						}}
           >
             <Icon.Search className="icon" />

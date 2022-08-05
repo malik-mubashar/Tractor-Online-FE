@@ -15,10 +15,9 @@ export default function AddAndEditProduct({
   setProductsState,
   getProducts,
 }) {
-
   const [brands, setBrands] = useState();
   const [productMappings, setProductMappings] = useState([]);
-	const myRefname = useRef(null);
+  const myRefname = useRef(null);
   const [file, setFile] = useState([]);
   const [cities, setCities] = useState([]);
   const [extraFieldsArr, setExtraFieldsArr] = useState([
@@ -42,7 +41,7 @@ export default function AddAndEditProduct({
     { name: "description", required: false },
     { name: "price", required: false },
     { name: "brand_id", required: true },
-    { name: "phone_no", required: true }
+    { name: "phone_no", required: true },
   ];
   const [fieldsWithError, setFieldsWithError] = useState({
     description: false,
@@ -100,8 +99,6 @@ export default function AddAndEditProduct({
     return isValidationFailed;
   };
 
-
-
   const getProductMappings = async (page, mainSearch, noOfRec) => {
     const loadingToastId = toast.loading("Loading..!");
 
@@ -116,9 +113,7 @@ export default function AddAndEditProduct({
       if (result.error == false && result.data.status == "success") {
         toast.dismiss(loadingToastId);
 
-        setProductMappings(
-					result.data.data
-        );
+        setProductMappings(result.data.data);
       } else {
         toast.dismiss(loadingToastId);
         console.error(result.data);
@@ -136,7 +131,6 @@ export default function AddAndEditProduct({
     });
   }
 
-
   function uploadSingleFile(e) {
     let ImagesArray = Object.entries(e.target.files).map((e) =>
       URL.createObjectURL(e[1])
@@ -151,16 +145,15 @@ export default function AddAndEditProduct({
   }
   useEffect(() => {
     getAllCity();
-		getBrands(1, "", 100000000);
-		getProductMappings(1, "", 1000000);
-
+    getBrands(1, "", 100000000);
+    getProductMappings(1, "", 1000000);
   }, []);
 
   useEffect(() => {
     if (productsState.isEditProduct === true) {
-			getExtraFields(productsState.extra_fields)
+      getExtraFields(productsState.extra_fields);
     }
-	}, [productsState.extra_fields]);
+  }, [productsState.extra_fields]);
 
   const getAllCity = async () => {
     const result = await city.getAllCities();
@@ -173,21 +166,21 @@ export default function AddAndEditProduct({
     setCities(tempArray);
   };
 
-	const getExtraFields = (extraFieldObject) => {
-		if (Object.entries(extraFieldObject).length > 0) {
-			let tempExtraFieldsArr = [];
-			Object.entries(extraFieldObject).forEach((item, i) => {
-				tempExtraFieldsArr.push({
-					id:
-						new Date().getTime().toString() +
-						Math.floor(Math.random() * 1000000),
-					key: item[0],
-					value: item[1],
-				});
-			});
-			setExtraFieldsArr(tempExtraFieldsArr);
-		}
-	}
+  const getExtraFields = (extraFieldObject) => {
+    if (Object.entries(extraFieldObject).length > 0) {
+      let tempExtraFieldsArr = [];
+      Object.entries(extraFieldObject).forEach((item, i) => {
+        tempExtraFieldsArr.push({
+          id:
+            new Date().getTime().toString() +
+            Math.floor(Math.random() * 1000000),
+          key: item[0],
+          value: item[1],
+        });
+      });
+      setExtraFieldsArr(tempExtraFieldsArr);
+    }
+  };
   const getBrands = async (page, mainSearch, noOfRec) => {
     const loadingToastId = toast.loading("Loading..!");
 
@@ -275,13 +268,19 @@ export default function AddAndEditProduct({
       formData.append("phone_no", productsState.phone_no);
       // formData.append("link", productsState.link);
       formData.append("extra_fields", JSON.stringify(extraFieldsData));
+      debugger;
       formData.append("featured", productsState.featured);
       formData.append("brand_id", productsState.brand_id);
       formData.append("user_id", user.id);
       formData.append("city", productsState.city);
-      formData.append("product_category_id", productsState.product_category_id);
+      if (productsState.isAddProduct) {
+        formData.append(
+          "product_category_id",
+          productsState.product_category_id
+        );
+      }
       //if (productsState.product_type !== undefined) {
-        //formData.append("product_type", productsState.product_type);
+      //formData.append("product_type", productsState.product_type);
       //}
 
       if (productsState.isAddProduct) {
@@ -397,18 +396,18 @@ export default function AddAndEditProduct({
       }
       setExtraFieldsArr(tempExtraFieldsArr);
     }
-	};
-	
-	const handleProductCategoryChange = (e) => {
-		handleChange(e)
-		console.log(extraFieldsArr)
-		console.log(productsState)
-		console.log(productMappings)
-		var temp=	productMappings.find((item)=>{
-			return(item.product_category.id==e.target.value)
-		})
-		getExtraFields(temp.extra_fields)
-	}
+  };
+
+  const handleProductCategoryChange = (e) => {
+    handleChange(e);
+    console.log(extraFieldsArr);
+    console.log(productsState);
+    console.log(productMappings);
+    var temp = productMappings.find((item) => {
+      return item.product_category.id == e.target.value;
+    });
+    getExtraFields(temp.extra_fields);
+  };
 
   return (
     <div className="mb-4">
@@ -455,7 +454,10 @@ export default function AddAndEditProduct({
                       {productMappings &&
                         productMappings.map((item) => {
                           return (
-                            <option value={item.product_category.id} key={item.product_category.id}>
+                            <option
+                              value={item.product_category.id}
+                              key={item.product_category.id}
+                            >
                               {item.product_category.title}
                             </option>
                           );
@@ -511,9 +513,7 @@ export default function AddAndEditProduct({
                               className="mt-1"
                               controlId="formBasicComments"
                             >
-                              <Form.Label>
-                                {item && item.key}
-                              </Form.Label>
+                              <Form.Label>{item && item.key}</Form.Label>
                               <Form.Control
                                 value={item && item.value}
                                 onChange={(e) => handleExtraField(e, item.id)}
@@ -542,17 +542,20 @@ export default function AddAndEditProduct({
                 </Form.Group>
                 <div className="addEditProd">
                   <Form.Label>City</Form.Label>
-                  <Select className="ui-autocomplete-input form-control searchAble border-right "
+                  <Select
+                    className="ui-autocomplete-input form-control searchAble border-right "
                     options={cities}
                     //setValue={setCountry}
                     name="city"
                     label="Select City"
                     value={productsState.city}
                     placeholder="Select City"
-                    onChange={(e) => {setProductsState({
-                      ...productsState,
-                      city: e.title,
-                    });}}
+                    onChange={(e) => {
+                      setProductsState({
+                        ...productsState,
+                        city: e.title,
+                      });
+                    }}
                     clearable={false}
                   />
                 </div>

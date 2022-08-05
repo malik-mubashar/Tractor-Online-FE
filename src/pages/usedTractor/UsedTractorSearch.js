@@ -21,22 +21,30 @@ export default function UsedTractorSearch() {
   const search = useLocation().search;
 
   useEffect(() => {
-    handleGetAllProducts();
+    // handleGetAllProducts();
 		GetPopularCities();
 		console.log('asd',landingPageSearchOptions)
-		if (Object.keys(landingPageSearchOptions).length > 0) {
-			setSearchFilters({
-				...landingPageSearchOptions
-			});
-			handleGetAllProducts(landingPageSearchOptions.city, landingPageSearchOptions.priceRangeTo, landingPageSearchOptions.priceRangeFrom, landingPageSearchOptions.featured, landingPageSearchOptions.title);;
-    }
-		var featured = new URLSearchParams(search).get('featured');
-		if (featured) {
+		// if (Object.keys(landingPageSearchOptions).length > 0) {
+		// 	setSearchFilters({
+		// 		...landingPageSearchOptions
+		// 	});
+		// 	handleGetAllProducts(landingPageSearchOptions.city, landingPageSearchOptions.priceRangeTo, landingPageSearchOptions.priceRangeFrom, landingPageSearchOptions.featured, landingPageSearchOptions.title);;
+    // }
+		var featured = new URLSearchParams(search).get('featured')||'nil';
+		//landing page search options
+		var city = new URLSearchParams(search).get('city')||'nil';
+		var priceRangeTo = new URLSearchParams(search).get('priceRangeTo')||'nil';
+		var priceRangeFrom = new URLSearchParams(search).get('priceRangeFrom')||'nil';
+		var title = new URLSearchParams(search).get('title')||'nil';
+		debugger;
 			setSearchFilters({
 				...searchFilters,
-				featured:true
+				featured: featured==='true'?true:'nil',
+				city: city,
+				priceRangeFrom: priceRangeFrom,
+				priceRangeTo: priceRangeTo,
+				title:title
 			})
-		}
 	}, []);
 	
 
