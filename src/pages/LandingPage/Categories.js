@@ -3,14 +3,11 @@ import Carousel from "react-bootstrap/Carousel";
 import { Col, Tabs, Tab, Image } from "react-bootstrap";
 import { useHistory } from "react-router-dom";
 import { city } from "../../API/City/CityApis";
-import { RootContext } from "../../context/RootContext";
 
 export default function Categories({ brands, brandsForCategories }) {
   let history = useHistory();
   const [cities, setCities] = useState("");
-  const [citySelected, setCitySelected] = useState("");
   const [citiesForCarousel, setCitiesForCarousel] = useState();
-  const { setLandingPageSearchOptions } = useContext(RootContext);
   useEffect(() => {
     handleGetAllCities();
   }, []);
@@ -48,7 +45,7 @@ export default function Categories({ brands, brandsForCategories }) {
                             {item.map((item2, i) => (
                               <li key={i} className="col-4 col-lg-2 mt-4">
                                 <span
-                                  onClick={() => history.push("/")}
+                                  onClick={() => history.push(`/used-tractor/search?brand=${item2.id}`)}
                                   title="Toyota for sale in Pakistan"
                                 >
                                   <img
@@ -81,13 +78,7 @@ export default function Categories({ brands, brandsForCategories }) {
                                 <span
                                   className="text-dark"
                                   onClick={() => {
-                                    setLandingPageSearchOptions({
-                                      city:item2.title  || "nil",
-                                      priceRangeTo: "nil",
-                                      priceRangeFrom: "nil",
-                                      title: "nil",
-                                    });
-                                    history.push("/used-tractor/search");
+                                    history.push(`/used-tractor/search?city=${item2.title}`);
                                   }}
                                 >
                                   {item2.title}
