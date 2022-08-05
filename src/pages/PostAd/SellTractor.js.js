@@ -7,7 +7,7 @@ import { useHistory } from "react-router-dom";
 const SellTractor = () => {
 	const history =useHistory()
   return (
-    <div className="sell-tractor">
+    <div className="sell-tractor mt-4">
       <section>
         <div className="container">
           <div className="well p40">
@@ -152,7 +152,7 @@ const SellTractor = () => {
           </div>
         </div>
       </section>
-      <div>
+      {/* <div>
         <section>
           <div className="container">
             <h2>Why Sell Your Tractor on TractorOnline?</h2>
@@ -209,8 +209,8 @@ const SellTractor = () => {
             </div>
           </div>
         </section>
-      </div>
-      <section>
+      </div> */}
+      {/* <section>
         <div className="container">
           <h2>5 Simple Steps to Sell Your Tractor</h2>
           <div className="row inspection-work-points sell-it-work-points mt30 fs16">
@@ -235,8 +235,10 @@ const SellTractor = () => {
             </div>
           </div>
         </div>
-      </section>
-      <section>
+      </section> */}
+
+      
+      {/* <section>
         <div className="container">
           <h2>Interesting Tips</h2>
           <div
@@ -293,51 +295,10 @@ const SellTractor = () => {
             </div>
           </div>
         </div>
-      </section>
-      <section>
+      </section> */}
+      {/* <section>
         <div className="container">
-          <script type="application/ld+json">
-            {/* {
-  "@context": "https://schema.org",
-  "@type": "VideoObject",
-  "name": "Post Ad on PakWheels | Sell Your Car | Sell Used Car",
-  "description": "How to post an Ad on pakwheels",
-  "author": "PakWheels",
-  "uploadDate": "14 May 2020",
-  "thumbnailUrl": "https://img.youtube.com/vi/cXS9eq-Wb4w/hqdefault.jpg",
-  "url": "https://www.youtube.com/watch?v=cXS9eq-Wb4w",
-  "contentUrl": "https://www.youtube.com/embed/cXS9eq-Wb4w",
-  "datePublished": "14 May 2020",
-  "dateModified": "14 May 2020",
-  "publisher": {
-    "@context": "http://schema.org",
-    "@type": "Organization",
-    "url": "https://www.pakwheels.com/",
-    "logo": {
-      "@context": "http://schema.org",
-      "@type": "ImageObject",
-      "url": "https://wsa3.pakwheels.com/assets/post-an-ad-on-pakwheels-29b01817fee959357e6cad88ebe0570e.png"
-    },
-    "description": "Watch our guide on how to post an add on PakWheels to sell your car online. Sell used car by posting free ad. Click on Sell, add description of your car. Add your car images from different angles, and add features like make, model, variant, mileage, color etc. Select a price and add an active phone number. Your ad is ready to be published for free",
-    "name": "PakWheels.com",
-    "sameAs": [
-      "https://www.facebook.com/pakwheels",
-      "https://twitter.com/pakwheels",
-      "https://instagram.com/pakwheels",
-      "https://plus.google.com/+pakwheels"
-    ],
-    "contactPoint": [
-      {
-        "@type": "ContactPoint",
-        "telephone": "+92-042-111-943-357",
-        "contactType": "customer service",
-        "contactOption": "TollFree",
-        "areaServed": "PK"
-      }
-    ]
-  }
-} */}
-          </script>
+          
           <h2>Watch Our Seller Guide</h2>
           <iframe
             width="1000"
@@ -348,8 +309,8 @@ const SellTractor = () => {
             allowfullscreen=""
           ></iframe>
         </div>
-      </section>
-      <section>
+      </section> */}
+      {/* <section>
         <div className="container">
           <h2>Used Tractor Selling Tips and Advices</h2>
           <div className="row">
@@ -439,8 +400,8 @@ const SellTractor = () => {
             </div>
           </div>
         </div>
-      </section>
-      <section>
+      </section> */}
+      {/* <section>
         <div
           className="container faqs"
           itemscope=""
@@ -663,9 +624,9 @@ const SellTractor = () => {
         </div>
       </section>
       <section>
-        <div class="container">
+        <div className="container">
           <div
-            class="gen_desc_large active "
+            className="gen_desc_large active "
             id="introduction"
             itemprop="description"
           >
@@ -827,7 +788,7 @@ const SellTractor = () => {
             </p>
           </div>
         </div>
-      </section>
+      </section> */}
     </div>
   );
 };
