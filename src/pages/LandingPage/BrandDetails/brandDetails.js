@@ -88,7 +88,7 @@ const brandDetails = () => {
             brandProducts.map((item) => (
               <div className="col-3 mt-3" key={item.id}>
                 <div className="category p-3">
-                  <Link to="/">
+                  <Link to={`/add-details/${item.id}`}>
                   <img
                         src={item.cover_photo_path}
                         alt="Card"

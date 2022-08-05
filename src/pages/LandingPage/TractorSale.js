@@ -256,7 +256,7 @@ const TractorSaleAd = () => {
               </h3>
             </div>
             <div className="col-lg-6 col-12 mt-4 line or">
-              <h2>Place an ad on TractorOnline.com</h2>
+              <h2>Place an ad on TractorOnline</h2>
               <ul>
                 <li>
                   <i className="fa fa-tick"></i>In three simple steps, you can
