@@ -218,10 +218,10 @@ class ProdCategories {
 				});
 		};
 	
-		getAllProductCategories = async () => {
+		getAllProductCategories = async (is_option) => {
 			return axios({
 				method: "get",
-				url: `${process.env.REACT_APP_API_LOCAL_PATH}categories_list`,
+				url: `${process.env.REACT_APP_API_LOCAL_PATH}categories_list?is_option=${is_option}`,
 			})
 				.then((result) => {
 					return {

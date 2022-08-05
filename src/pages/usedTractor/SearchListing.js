@@ -24,7 +24,7 @@ import CustomPopover from "./CustomPopover";
 import { productApis } from "../../API/ProductApis";
 import TractorClipart from "../../assets/svg/tractor-logo.svg";
 
-export default function SearchListing({ products }) {
+export default function SearchListing({ products,pagination,noOfRec,handleGetAllProducts,searchFilters }) {
   const [showNumberWarning, setShowNumberWarning] = useState(true);
   let history = useHistory();
   const [openShowPhone, setOpenShowPhone] = useState(false);
@@ -205,6 +205,146 @@ export default function SearchListing({ products }) {
             &nbsp;&nbsp;Last
           </span>
         </div> */}
+				{pagination && pagination && (
+                      <div>
+                        <span>Rows per page</span>
+												<span className="mx-4">
+                          <b>{pagination.from}-{pagination.to}{" "}</b>
+                          of <b>{pagination.count}</b>{' '}Results
+                        </span>
+
+                        <button
+                          className={`pagination-button ${
+                            pagination.page == 1 ? "disabled" : ""
+                          }`}
+                          onClick={() => {
+														handleGetAllProducts(
+															1,
+															noOfRec,
+															searchFilters.city,
+															searchFilters.priceRangeTo,
+															searchFilters.priceRangeFrom,
+															searchFilters.featured,
+															searchFilters.title,
+															searchFilters.brand,
+															searchFilters.categoryId
+														);
+                          }}
+                          type="button"
+                        >
+                          <span class="MuiIconButton-label">
+                            <svg
+                              class="MuiSvgIcon-root"
+                              focusable="false"
+                              viewBox="0 0 24 24"
+                              aria-hidden="true"
+                            >
+                              <path d="M18.41 16.59L13.82 12l4.59-4.59L17 6l-6 6 6 6zM6 6h2v12H6z"></path>
+                            </svg>
+                          </span>
+                        </button>
+                        <button
+                          className={`pagination-button ${
+                            pagination.page == 1 ? "disabled" : ""
+                          }`}
+                          onClick={() => {
+                            handleGetAllProducts(
+                              pagination.prev,
+															noOfRec,
+															searchFilters.city,
+															searchFilters.priceRangeTo,
+															searchFilters.priceRangeFrom,
+															searchFilters.featured,
+															searchFilters.title,
+															searchFilters.brand,
+															searchFilters.categoryId
+                            );
+                          }}
+                          type="button"
+                        >
+                          <span class="MuiIconButton-label">
+                            <svg
+                              class="MuiSvgIcon-root"
+                              focusable="false"
+                              viewBox="0 0 24 24"
+                              aria-hidden="true"
+                            >
+                              <path d="M15.41 16.59L10.83 12l4.58-4.59L14 6l-6 6 6 6 1.41-1.41z"></path>
+                            </svg>
+                          </span>
+                        </button>
+                        <button
+                          className={`pagination-button ${
+                            pagination.page ==
+                            pagination.last
+                              ? "disabled"
+                              : ""
+                          }`}
+                          tabindex="0"
+                          type="button"
+                          onClick={() => {
+                            handleGetAllProducts(
+                              pagination.next,
+															noOfRec,
+															searchFilters.city,
+															searchFilters.priceRangeTo,
+															searchFilters.priceRangeFrom,
+															searchFilters.featured,
+															searchFilters.title,
+															searchFilters.brand,
+															searchFilters.categoryId
+                            );
+                          }}
+                        >
+                          <span class="MuiIconButton-label">
+                            <svg
+                              class="MuiSvgIcon-root"
+                              focusable="false"
+                              viewBox="0 0 24 24"
+                              aria-hidden="true"
+                            >
+                              <path d="M8.59 16.59L13.17 12 8.59 7.41 10 6l6 6-6 6-1.41-1.41z"></path>
+                            </svg>
+                          </span>
+                          <span class="MuiTouchRipple-root"></span>
+                        </button>
+
+                        <button
+                          className={`pagination-button ${
+                            pagination.page ==
+                            pagination.last
+                              ? "disabled"
+                              : ""
+                          }`}
+                          tabindex="0"
+                          type="button"
+                          onClick={() => {
+                            handleGetAllProducts(
+                              pagination.last,
+															noOfRec,
+															searchFilters.city,
+															searchFilters.priceRangeTo,
+															searchFilters.priceRangeFrom,
+															searchFilters.featured,
+															searchFilters.title,
+															searchFilters.brand,
+															searchFilters.categoryId
+                            );
+                          }}
+                        >
+                          <span class="MuiIconButton-label">
+                            <svg
+                              class="MuiSvgIcon-root"
+                              focusable="false"
+                              viewBox="0 0 24 24"
+                              aria-hidden="true"
+                            >
+                              <path d="M5.59 7.41L10.18 12l-4.59 4.59L7 18l6-6-6-6zM16 6h2v12h-2z"></path>
+                            </svg>
+                          </span>
+                        </button>
+                      </div>
+                    )}
         <div className="sellAdd clearfix text-center p20 mt-70">
           <img
             alt="Post an Ad"

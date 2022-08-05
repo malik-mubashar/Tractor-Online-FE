@@ -21,31 +21,6 @@ export default function DropDownTopbar({
   const history = useHistory();
   // to={productCategory.title==='Used tractor'?`/used-tractor/search?category=used-tractor&city=${item.title}`:`/used-tractor/search?category=new-tractor&city=${item.title}`}
 
-  const usedTractorsSecond = [
-    {
-      heading: "Certified Tractors on TractorOnline.com",
-      subHeading:
-        "Tractors that have received the TractorOnline stamp of approval",
-      icon: "speed-meter",
-    },
-    {
-      heading: "Tractor inspection on TractorOnline",
-      subHeading: "Tractor with inspection reports from TractorOnline",
-      icon: "tick-mark",
-    },
-    {
-      heading: "TractorOnline sell it for me",
-      subHeading:
-        "Allow TractorOnline to handle the sale of your tractor for you.",
-      icon: "site-map",
-    },
-    {
-      heading: "Verification of Bid Sheet",
-      subHeading:
-        "For your piece of mind, we provide authentic auction sheets.",
-      icon: "data",
-    },
-  ];
 
   return (
     <div>
@@ -130,8 +105,8 @@ export default function DropDownTopbar({
                         <Link
                           to={
                             productCategory.title === "Used tractor"
-                              ? `/used-tractor/search?category=used-tractor&city=${item.title}`
-                              : `/used-tractor/search?category=new-tractor&city=${item.title}`
+                              ? `/used-tractor/search?category=${productCategory.id}&city=${item.title}`
+                              : `/used-tractor/search?category=${productCategory.id}&city=${item.title}`
                           }
                           className="dropdown-link"
                         >
@@ -154,8 +129,8 @@ export default function DropDownTopbar({
                         <Link
                           to={
                             productCategory.title === "Used tractor"
-                              ? `/used-tractor/search?category=used-tractor&brand=${item.title}`
-                              : `/used-tractor/search?category=new-tractor&brand=${item.title}`
+                              ? `/used-tractor/search?category=${productCategory.id}&brand=${item.id}`
+                              : `/used-tractor/search?category=${productCategory.id}&brand=${item.id}`
                           }
                           className="dropdown-link"
                           title="Used Cars for sale in Karachi"

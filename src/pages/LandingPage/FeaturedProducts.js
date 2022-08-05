@@ -15,9 +15,12 @@ export default function FeaturedProducts({ title, link,prodCategoryId }) {
     handleGetAllProducts();
   }, []);
   const handleGetAllProducts = async () => {
-    const result = await productApis.getAllProducts( "nil",
+		const result = await productApis.getAllProducts(
+			"1",
+		"1000000000",
+		"nil",
     "nil",
-     "nil",
+    "nil",
     true,
     "nil",
     "nil",

@@ -17,7 +17,10 @@ export default function UsedTractorSearch() {
   const [cities, setCities] = useState();
   const [priceRangeFrom, setPriceRangeFrom] = useState();
   const [priceRangeTo, setPriceRangeTo] = useState();
-	const { landingPageSearchOptions } = useContext(RootContext);
+  const [pagination, setPagination] = useState();
+	const { landingPageSearchOptions, setShowLoader } = useContext(RootContext);
+	const [noOfRec, setNoOfRec] = useState(10);
+
   const search = useLocation().search;
 
   useEffect(() => {
@@ -37,6 +40,8 @@ export default function UsedTractorSearch() {
 		var priceRangeTo = new URLSearchParams(search).get('priceRangeTo')||'nil';
 		var priceRangeFrom = new URLSearchParams(search).get('priceRangeFrom')||'nil';
 		var title = new URLSearchParams(search).get('title')||'nil';
+		var categoryId = new URLSearchParams(search).get('category')||'nil';
+		var brandId = new URLSearchParams(search).get('brand')||'nil';
 		debugger;
 			setSearchFilters({
 				...searchFilters,
@@ -44,7 +49,10 @@ export default function UsedTractorSearch() {
 				city: city,
 				priceRangeFrom: priceRangeFrom,
 				priceRangeTo: priceRangeTo,
-				title:title
+				title: title,
+				brand: brandId,
+				categoryId:categoryId
+				
 			})
 	}, []);
 	
@@ -57,28 +65,59 @@ export default function UsedTractorSearch() {
     }
   };
 
-  const handleGetAllProducts = async (
+	const handleGetAllProducts = async (
+		page = '1',
+		tempNoOfRec='10',
     city='nil',
     tempPriceRangeTo='nil',
 		tempPriceRangeFrom = 'nil',
 		featured = 'nil',
-		title='nil'
+		title = 'nil',
+		brand = 'nil',
+		categoryId='nil'
 		
-  ) => {
-    const result = await productApis.getAllProducts(city,tempPriceRangeTo,tempPriceRangeFrom,featured,title);
+	) => {
+		setShowLoader(true)
+		const result = await productApis.getAllProducts(
+			page,
+			tempNoOfRec,
+			city,
+			tempPriceRangeTo,
+			tempPriceRangeFrom,
+			featured,
+			title,
+			brand,
+			categoryId
+		);
     if (result.error === false) {
       setProducts(result.data && result.data.data);
-      console.log("products", result.data && result.data.data);
-    }
+			console.log("products", result.data && result.data.data);
+			setPagination(result.data.pagination)
+			setShowLoader(false);
+		}
+		if (result.error === true) {
+			setShowLoader(false);
+		}
   };
   useEffect(() => {
     if (searchFilters) {
-        handleGetAllProducts(searchFilters.city,searchFilters.priceRangeTo,searchFilters.priceRangeFrom,searchFilters.featured,searchFilters.title);
+			handleGetAllProducts(
+				1,
+				noOfRec,
+				searchFilters.city,
+				searchFilters.priceRangeTo,
+				searchFilters.priceRangeFrom,
+				searchFilters.featured,
+				searchFilters.title,
+				searchFilters.brand,
+				searchFilters.categoryId
+			);
     }
   }, [searchFilters]);
   console.log("searchFilters", searchFilters);
   console.log("priceRangeTo", priceRangeTo);
   console.log("priceRangeFrom", priceRangeFrom);
+  console.log("pagination",pagination);
   const history = useHistory();
   return (
     <>
@@ -118,10 +157,15 @@ export default function UsedTractorSearch() {
               <li>
                 <span itemProp="name">Used Tractor For Sale In Pakistan</span>
               </li>
-            </ul>
-            <div className="search-pagi-info">
-              <b>1&nbsp;-&nbsp;25</b> of <b>69412</b> Results
+						</ul>
+						{pagination &&
+						<div className="search-pagi-info">
+						<span className="mx-4">
+                          <b>{pagination.from}-{pagination.to}{" "}</b>
+                          of <b>{pagination.count}</b>{' '}Results
+                        </span>
             </div>
+						}
           </div>
           <div className="row">
             <div className="col-md-3">
@@ -136,7 +180,12 @@ export default function UsedTractorSearch() {
               />
             </div>
             <div className="col-md-9">
-              <SearchListing products={products} />
+							<SearchListing products={products}
+								pagination={pagination}
+								noOfRec={noOfRec}
+								handleGetAllProducts={handleGetAllProducts}
+								searchFilters={ searchFilters}
+							/>
             </div>
           </div>
         </div>
