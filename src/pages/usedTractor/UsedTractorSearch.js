@@ -30,6 +30,7 @@ export default function UsedTractorSearch() {
 		// 	});
 		// 	handleGetAllProducts(landingPageSearchOptions.city, landingPageSearchOptions.priceRangeTo, landingPageSearchOptions.priceRangeFrom, landingPageSearchOptions.featured, landingPageSearchOptions.title);;
     // }
+    debugger;
 		var featured = new URLSearchParams(search).get('featured')||'nil';
 		//landing page search options
 		var city = new URLSearchParams(search).get('city')||'nil';

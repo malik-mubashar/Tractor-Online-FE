@@ -1,14 +1,16 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useContext } from "react";
 import Carousel from "react-bootstrap/Carousel";
 import { Col, Tabs, Tab, Image } from "react-bootstrap";
 import { useHistory } from "react-router-dom";
 import { city } from "../../API/City/CityApis";
+import { RootContext } from "../../context/RootContext";
 
 export default function Categories({ brands, brandsForCategories }) {
   let history = useHistory();
-  const [cities, setCities] = useState();
+  const [cities, setCities] = useState("");
+  const [citySelected, setCitySelected] = useState("");
   const [citiesForCarousel, setCitiesForCarousel] = useState();
-
+  const { setLandingPageSearchOptions } = useContext(RootContext);
   useEffect(() => {
     handleGetAllCities();
   }, []);
@@ -18,14 +20,14 @@ export default function Categories({ brands, brandsForCategories }) {
     if (result.error === false) {
       setCities(result.data && result.data.data);
       let tempArr = [];
-          const chunkSize =12
-          debugger;
-          for (let i = 0; i < result.data.data.length; i += chunkSize) {
-            const chunk = result.data.data.slice(i, i + chunkSize);
-            tempArr.push(chunk);
-          }
-          setCitiesForCarousel(tempArr)
-		}
+      const chunkSize = 12;
+      debugger;
+      for (let i = 0; i < result.data.data.length; i += chunkSize) {
+        const chunk = result.data.data.slice(i, i + chunkSize);
+        tempArr.push(chunk);
+      }
+      setCitiesForCarousel(tempArr);
+    }
   };
 
   return (
@@ -44,9 +46,7 @@ export default function Categories({ brands, brandsForCategories }) {
                         <Carousel.Item>
                           <ul className="browse-listing row p-0">
                             {item.map((item2, i) => (
-                              <li key={i}
-                                className="col-4 col-lg-2 mt-4"
-                              >
+                              <li key={i} className="col-4 col-lg-2 mt-4">
                                 <span
                                   onClick={() => history.push("/")}
                                   title="Toyota for sale in Pakistan"
@@ -69,7 +69,7 @@ export default function Categories({ brands, brandsForCategories }) {
 
                 <Tab eventKey="City" title="City">
                   <Carousel>
-									{citiesForCarousel &&
+                    {citiesForCarousel &&
                       citiesForCarousel.map((item) => (
                         <Carousel.Item>
                           <ul className="browse-listing row p-0">
@@ -80,7 +80,15 @@ export default function Categories({ brands, brandsForCategories }) {
                               >
                                 <span
                                   className="text-dark"
-                                  onClick={() => history.push("/")}
+                                  onClick={() => {
+                                    setLandingPageSearchOptions({
+                                      city:item2.title  || "nil",
+                                      priceRangeTo: "nil",
+                                      priceRangeFrom: "nil",
+                                      title: "nil",
+                                    });
+                                    history.push("/used-tractor/search");
+                                  }}
                                 >
                                   {item2.title}
                                 </span>

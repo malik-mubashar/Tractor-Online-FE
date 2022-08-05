@@ -50,29 +50,13 @@ const brandDetails = () => {
             <div className="col-md-3 text-center">
               <div>
                 <img
-                  alt="Suzuki Pakistan"
-                  className="opacity-60"
+                  alt="Pakistan"
                   itemprop="image"
                   src={brands.active_image_path}
                   title="Suzuki Pakistan"
                 />
               </div>
-              <div className="btn btn-link-outline fs12 mt10">
-                <a
-                  href="/used-cars/suzuki/32"
-                  className="ga-Model-write-review"
-                >
-                  Used Tractors for Sale
-                </a>
-              </div>
-              <div className="text-center">
-                <a
-                  href="/new-cars/pricelist/suzuki"
-                  className="ga-Model-write-review"
-                >
-                  Tractor Pricelist
-                </a>
-              </div>
+              
             </div>
             <div className="col-md-9">
               <p>
@@ -99,7 +83,7 @@ const brandDetails = () => {
       </section>
 
       <div className="container">
-        <div className="row">
+        <div className="row mb-4">
           {brandProducts &&
             brandProducts.map((item) => (
               <div className="col-3 mt-3" key={item.id}>
