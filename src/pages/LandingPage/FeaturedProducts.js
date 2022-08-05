@@ -96,7 +96,7 @@ console.log('mbmbproducts',products)
 					}) : <div className="d-flex">
 						{/* <h4 className="mx-auto">No Featured {title}</h4> */}
 					 <Alert key={'warning'} variant={'warning'}>
-					 No Featured {title}
+					 No {title}
         </Alert>
 					</div>
 					}

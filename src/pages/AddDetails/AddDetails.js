@@ -1,8 +1,5 @@
 import React, { useState, useEffect } from "react";
-import {
-  Image,
-} from "react-bootstrap";
-// import ImageGallery from "react-image-gallery";
+import { Image, Modal, Button, Form } from "react-bootstrap";
 import PT from "prop-types";
 import {
   LightgalleryProvider,
@@ -11,42 +8,21 @@ import {
   useLightgallery,
 } from "react-lightgallery";
 import "lightgallery.js/dist/css/lightgallery.css";
-import Footer from "../LandingPage/Footer";
 import { isMobile } from "react-device-detect";
-import cellPhoneSvg from "../../assets/svg/cellPhone.svg";
 import mapsBlack from "../../assets/svg/maps-black.svg";
-import call from "../../assets/svg/call.svg";
-import email from "../../assets/svg/email.svg";
-import profilePicture from "../../assets/svg/no-profile-picture.svg";
-import facebookSvg from "../../assets/svg/facebook-round-color.svg";
-import mobileRounded from "../../assets/svg/mobile-phone-round.svg";
 import calender from "../../assets/svg/calendar-line.svg";
 import meter from "../../assets/svg/speedometer.svg";
 import transmission from "../../assets/svg/6-speed-manual-transmission.svg";
 import petrol from "../../assets/svg/gas-station.svg";
-import radio from "../../assets/svg/radio-fm.svg";
-import airBag from "../../assets/svg/car-seat-belt.svg";
-import carDoor from "../../assets/svg/car-door.svg";
-// import carAC from "../../assets/svg/car-seat-belt.svg";
-import flag from "../../assets/svg/black-flag.svg";
-import remoteKey from "../../assets/svg/remote-car-key.svg";
-import key from "../../assets/svg/vehicle-key.svg";
-import carAC from "../../assets/svg/air-conditioner.svg";
-import steering from "../../assets/svg/steering-wheel.svg";
-import tick from "../../assets/svg/tick-symbol.svg";
-// import cellPhoneSvg from "../../assets/svg/cellPhone.svg";
 import { productApis } from "../../API/ProductApis";
 import { useParams } from "react-router";
 import TractorClipart from "../../assets/svg/tractor-logo.svg";
 import Icofont from "react-icofont";
+import Buyers from "../../assets/img/buyers.png";
+import FeaturedProducts from "../LandingPage/FeaturedProducts";
 
 export default function AddDetails() {
   const { id } = useParams();
-  console.log("idasd", id);
-
-  var GROUP2 = [
-    
-  ];
 
   const PhotoItem = ({ image, thumb, group }) => (
     <div style={{ maxWidth: "250px", width: "200px", padding: "5px" }}>
@@ -63,20 +39,61 @@ export default function AddDetails() {
 
   const [visible, setVisible] = useState(true);
   const [userData, setUserData] = useState("");
+  const [userProfile, setUserProfile] = useState("");
   const [isPhoneAgree, setIsPhoneAgree] = useState(false);
+  const [showModal, setShowModal] = useState(false);
+  const [showReportModal, setShowReportModal] = useState(false);
   const [product, setProduct] = useState([]);
+  const [customReport, setCustomReport] = useState(false);
+  const radioValuesArr = [
+    {heading: "Duplicate", text: "A similar listing has previously been posted."},
+    {heading: "Spam", text: "It's a Spam Ad"},
+    {heading: "Wrong Contact Info", text: "Contact information is wrong."},
+    {heading: "Sold Already", text: "This item has already been sold by the seller."},
+    {heading: "Fake Ads", text: "The item is fake, the phone number is fake, the details are false, etc."},
+    {heading: "Wrong Category", text: "This category is inappropriate for it."},
+    {heading: "Prohibited/Explicit Content", text: "It contains vulgar language, pornographic or explicit content, etc."},
+    {heading: "Other", text: ""}
+  ]
+
   useEffect(() => {
     handleGetProductDetails();
   }, []);
+
   const handleGetProductDetails = async () => {
     const result = await productApis.getProductDetails(id);
     if (result.error === false) {
       setProduct(result.data && result.data.data);
-      setUserData(result.data && result.data.data.user)
-      console.log("showproducts", result.data && result.data.data);
-      GROUP2 = result.data.data.active_images_path;
+      setUserData(result.data && result.data.data.user);
+      setUserProfile(result.data && result.data.profile)
     }
   };
+
+  function handleReport(e){
+    if (e.target.value === "Other"){
+      setCustomReport(true)
+    }
+    else{
+      setCustomReport(false)
+    }
+  }
+
+  const handleClose = () => {
+    setShowModal(false);
+    setShowReportModal(false);
+  }
+
+  function phoneAgree(){
+    setIsPhoneAgree(true)
+    setShowModal(false)
+  }
+
+  function phoneAgreeModalHandle(){
+    if (!isPhoneAgree){
+      setShowModal(true)
+    }
+  }
+
   return (
     //sidebar
     <div className="addDetails">
@@ -108,7 +125,7 @@ export default function AddDetails() {
                 <div className="">
                   <h3>{product.title} </h3>
                   <p className="detail-sub-heading d-flex">
-                    <a href="#" className="d-flex">
+                    <a href="/" className="d-flex">
                       <Image
                         src={mapsBlack}
                         height="20px"
@@ -120,7 +137,7 @@ export default function AddDetails() {
                     </a>
                   </p>
                 </div>
-                <div className="right-img pull-right">
+                <div className="right-img pull-right cover-photo-zoom">
                       <img
                         alt="Tractor Inspection Rate"
                         src={product.cover_photo_path}
@@ -128,23 +145,8 @@ export default function AddDetails() {
                         height="100%"
                       />
                     </div>
-                  
                 <div className="imageGallery">
                   <div className="content">
-                    {/* <button
-                      className="button is-light"
-                      style={{
-                        position: "absolute",
-                      }}
-                      onClick={() => setVisible(!visible)}
-                    >
-                      {visible ? (
-                        <i className="fas fa-eye-slash" />
-                      ) : (
-                        <i className="fas fa-eye" />
-                      )}
-                    </button> */}
-
                     <div>
                       {visible ? (
                         <LightgalleryProvider
@@ -185,7 +187,7 @@ export default function AddDetails() {
                     </div>
                   </div>
                 </div>
-                {/* after image gallery */}
+                {/* after image gallery 
                 <table
                   width="100%"
                   className="table table-bordered text-center table-engine-detail fs16"
@@ -263,212 +265,45 @@ export default function AddDetails() {
                       </td>
                     </tr>
                   </tbody>
-                </table>
-                {/* inception add 
-                  <div className="inspection  clearfix mb40 ">
-                    <div id="" className="row">
-                      <div className="col-7">
-                        <h6 className="mt0 mb10 title">
-                          Never buy a used Tractor without{" "}
-                          <strong className="generic-blue show fs24">
-                            TractorOnline{" "}
-                            <span className="generic-red">
-                              Tractor Inspection<span></span>
-                            </span>
-                          </strong>
-                        </h6>
-                        <p className="fs18 mb10">
-                          Over 200 checkpoints will be used to inspect the
-                          tractor.{" "}
-                        </p>
-                        <ul className="list-unstyled list-inline fs16 mb15">
-                          <li>
-                            <i className="fa fa-tick generic-green"></i> Engine
-                          </li>
-                          <li>
-                            <i className="fa fa-tick generic-green"></i>{" "}
-                            Suspension
-                          </li>
-                          <li>
-                            <i className="fa fa-tick generic-green"></i> Exterior
-                          </li>
-                          <li>
-                            <i className="fa fa-tick generic-green"></i> Interior
-                          </li>
-                        </ul>
-                        <a
-                          href="#"
-                          className="btn btn-lg btn-success "
-                          style={{ color: "white" }}
-                        >
-                          Inspection Schedule
-                        </a>
-                        <br />
-                        <a
-                          href="/products/tractoronline-inspection"
-                          id=""
-                          className="ib mt15 fs18"
-                        >
-                          Learn More
-                        </a>
-                      </div>
-                      <div className="right-img pull-right">
-                        <img
-                          alt="Tractor Inspection Rate"
-                          src={product.cover_photo_path}
-                          width="266"
-                        />
-                      </div>
-                    </div>
-                  </div>
-                */}
+                </table>*/}
                 {/* car details */}
                 <div className="mt-4">
+                  <h3 className="mt-3">Product Information:</h3>
                   <div className="row">
-                    <div className="col-lg-6 carDetail">
-                      <div className="borderTop d-flex">
-                        <p> Registered In</p>
-                        <p> Punjab</p>
-                      </div>
-                    </div>
-                    <div className="col-lg-6 carDetail">
-                      <div className="borderTop d-flex">
-                        <p> Color In</p>
-                        <p> White</p>
-                      </div>
-                    </div>
-                  </div>
-
-                  <div className="row">
-                    <div className="col-lg-6 carDetail">
-                      <div className="borderTop d-flex">
-                        <p> Assembly</p>
-                        <p> Local</p>
-                      </div>
-                    </div>
-                    <div className="col-lg-6 carDetail">
-                      <div className="borderTop d-flex">
-                        <p> Engine Capacity</p>
-                        <p> 660 cc</p>
-                      </div>
-                    </div>
-                  </div>
-
-                  <div className="row">
-                    <div className="col-lg-6 carDetail">
-                      <div className="borderTop d-flex">
-                        <p> Body Type</p>
-                        <p> Hatchback</p>
-                      </div>
-                    </div>
-                    <div className="col-lg-6 carDetail">
-                      <div className="borderTop d-flex">
-                        <p> Last Updated:</p>
-                        <p> Jun 09, 2022</p>
-                      </div>
-                    </div>
-                  </div>
-
-                  <div className="row">
-                    <div className="col-lg-6 carDetail">
-                      <div className="borderTop d-flex">
-                        <p> Ad Ref #</p>
-                        <p> 6279348</p>
-                      </div>
-                    </div>
+                    {product.extra_fields &&
+                      Object.entries(product.extra_fields)
+                        .length > 0 ? (
+                        <>
+                          {product.extra_fields &&
+                            Object.entries(
+                              product.extra_fields
+                            ).map((item, i) => {
+                              return (
+                                <div className="col-lg-6 carDetail">
+                                  <div className="borderTop d-flex">
+                                  <p>{item[0]}</p>
+                                  <p>{item[1]}</p>
+                                  </div>
+                                </div>
+                              );
+                            })}
+                        </>
+                      ) : (
+                        <div className="text-danger text-center">
+                          No Record Found...
+                        </div>
+                    )}
                   </div>
                 </div>
-                {/* car features 
-                  <div className="carFeature">
-                    <h5 className="mb-4 mt-3">Tractor Features</h5>
-                    <div className="row mb-2">
-                      <div className="col-lg-4 d-flex">
-                        <Image
-                          src={radio}
-                          height="20px"
-                          width="30px"
-                          alt="Profile Image"
-                          className="d-flex justify-content-center"
-                        />
-                        AM/FM Radio
-                      </div>
-                      <div className="col-lg-4 d-flex">
-                        <Image
-                          src={airBag}
-                          height="20px"
-                          width="30px"
-                          alt="Profile Image"
-                          className="d-flex justify-content-center"
-                        />
-                        Air Bags
-                      </div>
-                      <div className="col-lg-4 d-flex">
-                        <Image
-                          src={carAC}
-                          height="20px"
-                          width="30px"
-                          alt="Profile Image"
-                          className="d-flex justify-content-center"
-                        />
-                        Air Conditioning
-                      </div>
-                    </div>
-                    <div className="row mb-2">
-                      <div className="col-lg-4 d-flex">
-                        <Image
-                          src={key}
-                          height="20px"
-                          width="30px"
-                          alt="Profile Image"
-                          className="d-flex justify-content-center"
-                        />
-                        Immobilizer Key
-                      </div>
-                      <div className="col-lg-4 d-flex">
-                        <Image
-                          src={remoteKey}
-                          height="20px"
-                          width="30px"
-                          alt="Profile Image"
-                          className="d-flex justify-content-center"
-                        />
-                        Keyless Entry
-                      </div>
-                      <div className="col-lg-4 d-flex">
-                        <Image
-                          src={carDoor}
-                          height="20px"
-                          width="30px"
-                          alt="Profile Image"
-                          className="d-flex justify-content-center"
-                        />
-                        Power Locks
-                      </div>
-                    </div>
-                    <div className="row mb-2">
-                      <div className="col-lg-4 d-flex">
-                        <Image
-                          src={steering}
-                          height="20px"
-                          width="30px"
-                          alt="Profile Image"
-                          className="d-flex justify-content-center"
-                        />
-                        Power Steering
-                      </div>
-                    </div>
-                  </div>
-                */}
-                {/* Sellers comment 
-                  <div className="sellersComment">
-                    <h5 className="mb-4 mt-3">Tractor Specifications</h5>
-                    <p>Model 2021 Dec Registered 2022 Mahindra</p>
-                    <p>As new as a tractor, this is a brand new product.</p>
-                    <p>There isn't a scratch on the tract.</p>
-                    <p>Orignal Documents</p>
-                    <p>Orignal 2 krys</p>
-                  </div>
-                */}
+                <h3 className="mt-3">Product Description:</h3>
+                <p>
+                  {
+                    product.description ?
+                      <p>{product.description}</p>
+                    :
+                      <strong className="text-danger">No Description</strong>
+                  }
+                </p>
               </div>
 
               {/*add at bottom  */}
@@ -518,28 +353,27 @@ export default function AddDetails() {
                     </strong>
                   </div>
 
-                  <div className={`btn  ${ true ? "btn-outline-success" : "btn-success" } btn-block btn-large buttonDiv`}>
+                  <div 
+                    className={`btn  ${ isPhoneAgree ? "phoneNumberDisabledBtn" : "btn-success" } btn-block btn-large buttonDiv`}
+                    onClick={phoneAgreeModalHandle}
+                  >
                     <span className="d-flex">
                       <Icofont
                         icon="phone"
-                        className="icofont-2x"
+                        className="icofont-2x mt-1"
                       />
                       <div className="ml-3">
-                        <span className="ml-1 phone_no_truncate">{product.phone_no}</span>
-                        <div>Show Phone Number</div>
+                        {
+                          isPhoneAgree ?
+                          <h3 className={`ml-1`}>{product.phone_no}</h3>
+                          :
+                            <div>
+                              <span className={`ml-1 ${ isPhoneAgree ? "" : "phone_no_truncate"}`}>{product.phone_no}</span>
+                              <div>Show Phone Number</div>
+                            </div>
+                        }
                       </div>
                     </span>
-                  </div>
-
-                  <div className="btn btn-link-outline btn-lg btn-block sendMessageButton mt-20 d-flex">
-                    <Image
-                      src={email}
-                      height="20px"
-                      width="30px"
-                      alt="Profile Image"
-                      className="d-flex justify-content-center"
-                    />{" "}
-                    Send Message
                   </div>
                 </div>
               </div>
@@ -550,46 +384,19 @@ export default function AddDetails() {
                   Seller Information
                 </div>
                 <div className="row">
-                  <div className="col-md-3">
+                  <div className="col-md-4">
                     <Image
-                      src={profilePicture}
+                      src={userProfile}
                       height="70px"
-                      width="120px"
-                      alt="Profile Image"
-                      className="mt-2"
+                      width="70px"
+                      alt="No Profile Image"
+                      className="mt-2 rounded-circle"
                     />
                   </div>
-                  <div className="col-md-9">
-                    <div>{ userData && userData.name }</div>
-                    <div>Member Since { userData && userData.created_at.split("T")[0]}</div>
+                  <div className="col-md-8">
+                    <div className="mt-3"><strong>{ userData && userData.name }</strong></div>
+                    <div>Member Since { userData && userData.created_at}</div>
                   </div>
-                </div>
-                <div className="justify-content-center d-flex mt-3 mb-3">
-                  <Image
-                    src={mobileRounded}
-                    height="40px"
-                    width="80px"
-                    alt="Profile Image"
-                    className="d-flex justify-content-center"
-                  />
-                  <Image
-                    src={email}
-                    height="40px"
-                    width="80px"
-                    alt="Profile Image"
-                    className="d-flex justify-content-center"
-                  />
-                  <Image
-                    src={facebookSvg}
-                    height="40px"
-                    width="80px"
-                    alt="Profile Image"
-                    className="d-flex justify-content-center"
-                  />
-                </div>
-                <div className="justify-content-center">
-                  <h6>See if</h6>
-                  <a href="google.com">Connect with Facebook</a>
                 </div>
               </div>
 
@@ -600,114 +407,126 @@ export default function AddDetails() {
                 </div>
                 <div className="row">
                   <ol>
-                    <li>Meet the seller at a secure location.</li>
-                    <li>Cash transactions should be avoided.</li>
-                    <li>Beware of proposals that are too good to be true.</li>
+                    <li>Meet the seller in a safe area.</li>
+                    <li>There should be no cash transactions.</li>
+                    <li>Be wary of offers that seem unrealistic.</li>
                   </ol>
                 </div>
               </div>
-              <a
-                href="google.com"
-                className="d-flex justify-content-center mb10 mt30 btn btn-link-outline btn-sm btn-block fs14 notifyAsSold mt-3"
+              <button
+                className=" btn btn-outline-danger btn-block btn-large mt-2 d-flex"
+                onClick={() => setShowReportModal(true)}
               >
-                <Image
-                  src={tick}
-                  height="20px"
-                  width="40px"
-                  alt="Profile Image"
-                  className=""
+                <Icofont
+                  icon="exclamation-circle"
+                  className="icofont-2x mt-1"
                 />
-                Notify As Sold
-              </a>
-              <a
-                href="google.com.PK"
-                className="d-flex justify-content-center mb10 mt30 btn btn-link-outline btn-sm btn-block fs14 notifyAsSold mt-2"
-              >
-                <Image
-                  src={flag}
-                  height="20px"
-                  width="40px"
-                  alt="Profile Image"
-                  className=""
-                />
-                Report This Ad
-              </a>
+                <h5 className="mt-1 ml-3">Report This Ad</h5>
+              </button>
             </div>
           </div>
-          <div className="similarAd">
-            <div>
-              <h3>SIMILAR ADS</h3>
-            </div>
-            <div className={`${isMobile ? "" : "d-flex"} mt-2`}>
-              {[1, 2, 3, 4].map((x) => {
-                return (
-                  <>
-                    <div className="listCard d-block">
-                      <Image
-                        src={
-                          "https://images.freeimages.com/images/large-previews/bf5/tractor-1533535.jpg"
-                        }
-                        height="200px"
-                        width="150px"
-                        alt="Profile Image"
-                        className=""
-                      />
-                      <div>Suzuki Alto Vxr</div>
-                      <div>PKR 1915000</div>
-                      <div>Lahore</div>
+          {/* Report About Ad Modal*/}
+          <Modal size="lg" show={showReportModal} onHide={handleClose}>
+            <Modal.Header closeButton>
+              <Modal.Title>Tell us what is wrong with this ad.</Modal.Title>
+            </Modal.Header>
+            <Modal.Body>
+              <Form>
+                {radioValuesArr.map( (item, i) => {
+                  return(
+                    <div key={i}>
+                      <input type="radio" className="report-radio-size" id={item.heading} name="report-radio" value={item.heading} onChange={(e) => {handleReport(e)}} />
+                      <label for={item.heading} className="ml-2" ><h6><strong>{item.heading}: </strong>{item.text}</h6></label>
                     </div>
-                  </>
-                );
-              })}
-            </div>
-          </div>
-          <div className={`notifyMe mt-4 mb-4 ${isMobile ? "" : "d-flex"}`}>
-            <div className="col-lg-3" style={{ color: "#233d7b" }}>
-              <Image
-                src={cellPhoneSvg}
-                height="30px"
-                width="20px"
-                alt="Profile Image"
-                className=""
-              />
-              Notify Me
-              <div>
-                Set up a search alert for Mahindra in Lahore, and we'll send you
-                relevant results.
+                    )
+                  })}
+                  {customReport ?
+                    <>
+                      <Form.Control
+                        name="description"
+                        as="textarea"
+                        rows={3}
+                        placeholder="Reason of Report"
+                        />
+                    </>
+                  :
+                    null
+                  }
+              </Form>
+            </Modal.Body>
+            <Modal.Footer>
+              <Button variant="danger" onClick={handleClose}>
+                Report
+              </Button>
+            </Modal.Footer>
+          </Modal>
+
+          {/* Show Phone Number Modal*/}
+          <Modal show={showModal} onHide={handleClose}>
+            <Modal.Body>
+              <div className="d-flex">
+                <Icofont
+                  icon="close-line"
+                  className="icofont-2x ml-auto cursor-pointer"
+                  onClick={handleClose}
+                />
               </div>
-            </div>
-            <div className="col-lg-3">
-              Email
-              <input className="form-control" type="email" />
-            </div>
-            <div className="col-lg-3">
-              Frequency
-              <select className="form-control mb-2" id="sortby" name="sortby">
-                <option value="bumped_at-desc" selected="selected">
-                  Updated Date: Recent First
-                </option>
-                <option value="bumped_at-asc">
-                  Updated Date: Oldest First
-                </option>
-                <option value="price-asc">Price: Low to High</option>
-                <option value="price-desc">Price: High to Low</option>
-                <option value="model_year-desc">
-                  Model Year: Latest First
-                </option>
-                <option value="model_year-asc">Model Year: Oldest First</option>
-                <option value="mileage-asc">Mileage: Low to High</option>
-                <option value="mileage-desc">Mileage: High to Low</option>
-              </select>
-            </div>
-            <div className="col-lg-3">
-              <input
-                className="btn btn-info btn-large btn-block btn-create mt-2"
-                name="commit"
-                style={{ display: "inline-block" }}
-                type="submit"
-                value="Submit"
-              />
-            </div>
+              <div className="text-center">
+                <Image src={Buyers} alt="Logo" height="80px" width="80px" />
+              </div>
+              <h4 className="text-center">
+                Advice for Safe Dealing
+              </h4>
+              <div className="">
+                <div className="row my-3">
+                  <div className="col-1 ml-auto">
+                    <Icofont
+                      icon="not-allowed"
+                      className="icofont-2x"
+                    />
+                  </div>
+                  <div className="col-6 mr-auto">
+                    <strong>Never pay for anything in advance.</strong>
+                  </div>
+                </div>
+                <div className="row my-3">
+                  <div className="col-1 ml-auto">
+                    <Icofont
+                      icon="code-not-allowed"
+                      className="icofont-2x"
+                    />
+                  </div>
+                  <div className="col-6 mr-auto">
+                    <strong>Keep your personal details to yourself.</strong>
+                  </div>
+                </div>
+                <div className="row my-3">
+                  <div className="col-1 ml-auto">
+                    <Icofont
+                      icon="flag"
+                      className="icofont-2x"
+                    />
+                  </div>
+                  <div className="col-6 mr-auto">
+                    <strong>Inform TractorOnline about any untrustworthy users.</strong>
+                  </div>
+                </div>
+                <div className="text-center">
+                  <Button variant="primary" onClick={phoneAgree}>
+                    Continue
+                  </Button>
+                </div>
+              </div>
+            </Modal.Body>
+          </Modal>
+        </div>
+        <div className="bg-white my-4">
+          <div className="container-lg py-4 ">
+            <FeaturedProducts
+              title={`SIMILAR ADS`}
+              link={``}
+              prodCategoryId={product.product_category_id}
+            />
           </div>
         </div>
       </div>
