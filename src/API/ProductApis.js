@@ -139,7 +139,9 @@ class Products {
         };
       });
   };
-  getAllProducts = async (
+	getAllProducts = async (
+		page = '1',
+		noOfRec='1000000000',
     city = "nil",
     priceRangeTo = "nil",
     priceRangefrom = "nil",
@@ -150,7 +152,7 @@ class Products {
   ) => {
     return axios({
       method: "get",
-      url: `${process.env.REACT_APP_API_LOCAL_PATH}get_products?featured=${featured}&price_lt=${priceRangeTo}&price_gt=${priceRangefrom}&city=${city}&brand_id=${brand}&title=${title}&product_category_id=${productCategoryId}`,
+      url: `${process.env.REACT_APP_API_LOCAL_PATH}get_products?page=${page}&no_of_record=${noOfRec}&featured=${featured}&price_lt=${priceRangeTo}&price_gt=${priceRangefrom}&city=${city}&brand_id=${brand}&title=${title}&product_category_id=${productCategoryId}`,
       headers: Headers,
     })
       .then((result) => {

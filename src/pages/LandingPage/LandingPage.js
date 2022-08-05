@@ -27,7 +27,7 @@ const LandingPage = () => {
     handleGetAllCategories();
   }, []);
   const handleGetAllCategories = async () => {
-    const result = await prodApi.getAllProductCategories();
+    const result = await prodApi.getAllProductCategories(true);
     if (result.error === false) {
       console.log("qwe", result.data.data);
       setProductCategories(result.data && result.data.data);
