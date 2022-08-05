@@ -1,23 +1,25 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import team from "../assets/img/team.jpg"
 
 const AboutUs = () => {
   return (
     <div className="container">
       <h1>About Us</h1>
       <p>
-        Founded in 2003, TractorOnline.com has become Pakistan’s #1 automotive
-        portal. Since its inception, TractorOnline.com has helped millions of
-        Pakistanis buy &amp; sell automobiles, read automotive reviews and news,
-        check automotive prices and find solutions to all of their automotive
-        needs. Today, TractorOnline.com is the first name that comes to mind if
-        anyone is looking for a solution to their automotive needs.
+        TractorOnline.com, which was established in 2021, is now Pakistan's top
+        automotive portal. Millions of Pakistanis have used TractorOnline.com to
+        buy and sell cars, read reviews and news about cars, compare car prices,
+        and get answers to all of their automotive needs since the site's
+        establishment. Today, whenever somebody is looking for a service to meet
+        their automobile needs, TractorOnline.com is the first name that comes
+        to mind.
       </p>
       <p>
-        TractorOnline.com gets over 25 million visitors annually who view more
-        than 250 million pages on the website. In last year alone, close to 50%
-        of Pakistan’s internet population visited TractorOnline.com to buy and
-        sell over 400,000 vehicles.&nbsp;
+        More than 250 million pages are viewed on TractorOnline.com each year by
+        its over 25 million visitors. Nearly 50% of Pakistan's internet users
+        visited TractorOnline.com just last year to buy and sell over 400,000
+        vehicles..&nbsp;
       </p>
       <img
         alt="About-cover-photo"
@@ -26,26 +28,26 @@ const AboutUs = () => {
         style={{ width: "100%" }}
       />
       <p>
-        This kind of success has made TractorOnline.com a prominent name in the
-        global e-commerce and classifieds sectors and helped raise USD 3.5
-        million in its first round of funding.&nbsp;
+        With this kind of accomplishment, TractorOnline.com has become
+        well-known in the international e-commerce and classifieds sectors and
+        was able to raise USD 3.5 million in its initial round of funding.&nbsp;
       </p>
       <p>
-        TractorOnline.com is not only a hub where buyers and sellers can
-        interact, but it is also a comprehensive automotive portal with a forum
-        dedicated to all automotive discussions, a blog that keeps the users up
-        to date with the latest happenings in the auto industry of Pakistan and
-        the world at large. There is also a separate review section for all the{" "}
-        tractors available in Pakistan and much more!
+        TractorOnline.com is not only a place where buyers and sellers can
+        connect; it is also a full automotive platform with a forum for all
+        automotive discussions and a blog that informs visitors of the most
+        recent developments in the global and Pakistani auto industries.
+        Additionally, there is a separate review section with information on all
+        of the tractors offered in Pakistan.
       </p>
       <p>
-        At TractorOnline.com, we believe that it is our duty to provide our
-        visitors with the best online experience and this is what our mission
-        speaks of - to revolutionize and continuously add value to the way
-        people buy and sell vehicles online, in Pakistan. We aim to provide our
-        users with the most comprehensive automotive knowledge with respect to
-        Pakistan and the world alike and help them develop a sense of belonging
-        in the automotive community. Our motto reflects our vision:&nbsp;
+        Our objective at TractorOnline.com is to innovate and continually
+        improve the way people purchase and sell cars online in Pakistan. We
+        feel it is our responsibility to offer our guests the greatest online
+        experience. In order to enable our users feel a sense of community
+        within the automotive industry, we strive to offer the most thorough
+        automotive knowledge regarding Pakistan and the rest of the world. Our
+        motto sums up our mission.:&nbsp;
       </p>
       <p className="text-center">
         <span className="blockquote">
@@ -53,26 +55,25 @@ const AboutUs = () => {
         </span>
       </p>
       <h3>The Team</h3>
-      
+
       <div className="container">
         <div className="row">
           {/* {brandProducts &&
             brandProducts.map((item) => ( */}
-              <div className="col-3 mt-3" >
-                <div className="category p-3">
-                  <Link to="/">
-                  <img
-                        src="https://wsa1.pakwheels.com/assets/about-us/hanif-bhatti-ac556b9b565888fff8b92c93f868f267.jpg"
-                        alt="Card"
-                        style={{ width: "100%", height: "160px" }}
-                      />
-                      
-                    <h5 className="nomargin">Name</h5>
-                    <p className="pl-2 border-radius">Lahore</p>
-                  </Link>
-                </div>
-              </div>
-        
+          <div className="col-3 mt-3">
+            <div className="category p-3">
+              <Link to="/">
+                <img
+                  src={team}
+                  alt="Card"
+                  style={{ width: "100%", height: "160px" }}
+                />
+
+                <h5 className="nomargin">Name</h5>
+                <p className="pl-2 border-radius">Lahore</p>
+              </Link>
+            </div>
+          </div>
         </div>
       </div>
     </div>
