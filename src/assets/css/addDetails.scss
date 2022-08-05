@@ -456,3 +456,28 @@
   overflow: hidden;
   text-overflow: ellipsis;
 }
+
+.phoneNumberDisabledBtn{
+  border-color: #28a745;
+  color: #28a745;
+  cursor: not-allowed !important;
+}
+.phoneNumberDisabledBtn:hover{
+  border-color: #28a745;
+  color: #28a745;
+  cursor: not-allowed !important;
+}
+.report-radio-size{
+  height: 20px;
+  width: 20px;
+}
+.cover-photo-zoom {
+  overflow: hidden;
+}
+.cover-photo-zoom img {
+  width: 100%;
+  transition: 0.5s all ease-in-out;
+}
+.cover-photo-zoom:hover img{
+  transform: scale(1.5);
+}
