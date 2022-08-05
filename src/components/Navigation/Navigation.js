@@ -235,8 +235,15 @@ const Navigation = ({onClick }) => {
               <NavDropdown
                 title={
                   <div className="menu-profile">
-                    <span className="name">Welcome </span>
-                    <Image src={userProfilePicture&&userProfilePicture} alt="ProfileImage" roundedCircle />
+										<span className="name">Welcome </span>
+										{
+											userProfilePicture && (userProfilePicture != null && userProfilePicture !== undefined) ?
+												<Image src={userProfilePicture && userProfilePicture} alt="ProfileImage" roundedCircle />
+												:
+											<Image src={user1} alt="ProfileImage" roundedCircle />
+
+												
+										}
                   </div>
                 }
                 id="basic-nav-dropdown"

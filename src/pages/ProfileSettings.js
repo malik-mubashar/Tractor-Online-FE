@@ -10,6 +10,8 @@ import { city } from "../API/City/CityApis";
 import { country } from "../API/Country/CountryApis";
 import { languageApis } from "../API/LanguagesApis ";
 import toast from "react-hot-toast";
+import noProfilePicture from "../assets/svg/no-profile-picture.svg";
+
 const ProfileSettings = () => {
   const { currentUser } = useContext(RootContext);
   const [userPersonalDetail, setUserPersonalDetail] = useState(currentUser);
@@ -247,8 +249,10 @@ const ProfileSettings = () => {
                 Change Password
               </Button>
               <Form>
-                <Form.Group controlId="formBasicComments">
-                  <Image
+								<Form.Group controlId="formBasicComments">
+									{(profilePic || fileDataURL) ?
+										
+										<Image
                     src={fileDataURL ? fileDataURL : profilePic}
                     roundedCircle
                     alt="User Image"
@@ -256,7 +260,18 @@ const ProfileSettings = () => {
                     height="100px"
                     className="m-2"
                     as={Col}
-                  />
+										/>
+										:
+										<Image
+                    src={noProfilePicture}
+                    roundedCircle
+                    alt="User Image"
+                    width="100px"
+                    height="100px"
+                    className="m-2"
+                    as={Col}
+                  />}
+                 
                   <Form.Group as={Col} className="mt-4">
                     <Form.Label>Upload New Picture</Form.Label>
                     <Form.Control

@@ -378,7 +378,11 @@ export default function Products() {
                                       extra_fields: product.extra_fields,
                                       productId: product.id,
                                       brand: product.brand,
-                                      brand_id: product.brand_id,
+																			brand_id: product.brand_id,
+																			city:product.city,
+																			price:product.price,
+																			phone_no:product.phone_no,
+																			location:product.location,
                                     });
                                   }}
                                   className="text-success mr-2 icon wh-15 mt-minus-3"
