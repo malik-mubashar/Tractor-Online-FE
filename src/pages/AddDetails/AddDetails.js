@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { Image, Modal, Button, Form } from "react-bootstrap";
 import PT from "prop-types";
 import {
@@ -20,6 +20,8 @@ import TractorClipart from "../../assets/svg/tractor-logo.svg";
 import Icofont from "react-icofont";
 import Buyers from "../../assets/img/buyers.png";
 import FeaturedProducts from "../LandingPage/FeaturedProducts";
+import Loader from "../../components/Common/Loader";
+import { RootContext } from "../../context/RootContext";
 
 export default function AddDetails() {
   const { id } = useParams();
@@ -55,17 +57,20 @@ export default function AddDetails() {
     {heading: "Prohibited/Explicit Content", text: "It contains vulgar language, pornographic or explicit content, etc."},
     {heading: "Other", text: ""}
   ]
+  const { setShowLoader } = useContext(RootContext);
 
   useEffect(() => {
+    setShowLoader(true)
     handleGetProductDetails();
-  }, []);
+  }, [id]);
 
   const handleGetProductDetails = async () => {
     const result = await productApis.getProductDetails(id);
     if (result.error === false) {
       setProduct(result.data && result.data.data);
       setUserData(result.data && result.data.data.user);
-      setUserProfile(result.data && result.data.profile)
+      setUserProfile(result.data && result.data.profile);
+      setShowLoader(false);
     }
   };
 
@@ -97,6 +102,7 @@ export default function AddDetails() {
   return (
     //sidebar
     <div className="addDetails">
+      <Loader />
       <div className="remove-section">
 
         <div className="container">

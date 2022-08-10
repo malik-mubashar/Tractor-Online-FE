@@ -1,0 +1,59 @@
+.sell-tractor{
+
+  .pre-sell-select>li+li:before {
+    height: 2px;
+    margin-top: 40px;
+    margin-bottom: 40px;
+  }
+
+  .pitching-widgets>li+li:before {
+    content: '';
+    display: block;
+    background-color: #e6e6e6;
+  }
+  .pre-sell-select>li+li:after {
+    font-size: 22px;
+    top: 41px;
+  }
+  .pitching-widgets>li+li:after {
+    content: 'OR';
+    background-color: #fff;
+    font-weight: 700;
+    position: absolute;
+    left: 50%;
+    color: #7b8397;
+    padding: 0 10px;
+    margin-top: -17px;
+    margin-right: 0;
+    margin-bottom: 0;
+    margin-left: -27px;
+  }
+
+  .pitching-widgets>li+li {
+    position: relative;
+  }
+
+  .pre-sell-select>li {
+    display: inline-block;
+    width: 100%;
+  }
+
+  .checkbox-size{
+    height: 30px;
+    width: 30px;
+  }
+
+}
+
+.cursor-not-allowed{
+  cursor: not-allowed;
+}
+
+.post-add-images-logo {
+  padding: 10px;
+  background-color: rgba(128, 128, 128, 0.1);
+  border-radius: 50%;
+}
+.post-ad-heading{
+  color: #233d7b;
+}

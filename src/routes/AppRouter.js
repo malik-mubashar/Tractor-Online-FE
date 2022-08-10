@@ -22,6 +22,7 @@ import "../assets/css/usedTractor.scss";
 import "../assets/css/addDetails.scss";
 import "../assets/css/Loader.scss";
 import "../assets/css/usedTractors.scss";
+import "../assets/css/sellTractor.scss";
 import ProtectedRoute from "../components/ProtectedRoutes/index";
 import UnProtectedRoute from "../components/UnprotectedRoutes/index";
 
@@ -163,9 +164,9 @@ const AppRouter = () => {
             </Layout>
           </Route>
           <UnProtectedRoute exact path="/used-tractor/sell/post-ad">
-            {/* <Layout> */}
+            <Layout>
               <PostAd />
-            {/* </Layout> */}
+            </Layout>
           </UnProtectedRoute>
           <UnProtectedRoute exact path="/browse-us">
           <Layout>
