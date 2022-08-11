@@ -326,9 +326,9 @@ const Topbar = () => {
                 return (
                   <div key={i}>
                     {i > 4 ? (
-                      <Nav.Link href={item.link}>
+                      <Link to={item.link}>
                         <div className="p-2 dropdown-link">{item.title}</div>
-                      </Nav.Link>
+                      </Link>
                     ) : null}
                   </div>
                 );
@@ -343,9 +343,9 @@ const Topbar = () => {
             {/* login case */}
             <Nav className="ml-auto right-nav">
               <ul className="navbar-nav mr-auto">
-                <NavLink to ="/used-tractor/sell/" className="btn btn-danger btn-lg text-white mr-2">
+                <Link to ="/used-tractor/sell/" className="btn btn-danger btn-lg text-white mr-2">
                   Post An Ad
-                </NavLink>
+                </Link>
                 <NavDropdown
                   title={
                     <div className="menu-profile">

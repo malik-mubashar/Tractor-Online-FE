@@ -331,7 +331,7 @@ export default function UsedTractor() {
     } else {
       setHeading("Not Found");
     }
-  }, []);
+  }, [category]);
 
   function postAdd() {
     if (localStorage.currentUser === undefined) {

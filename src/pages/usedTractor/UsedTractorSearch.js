@@ -217,7 +217,7 @@ useEffect(() => {
       </section>
     
    
-      <div className="bloodyButton">
+      {/* <div className="bloodyButton">
         {isMobile ? (
           <a
             href="/used-cars/sell"
@@ -228,7 +228,9 @@ useEffect(() => {
           >
             <p className="mt-3 text-white"> Sell</p>
           </a>
-        ) : (
+        ) : 
+        
+        (
           <a
             href="/used-cars/sell"
             className="sell-bar-fixed sell-floating-btn sign-in-comp"
@@ -246,8 +248,9 @@ useEffect(() => {
             </span>
             <p className="mt-3 text-white"> Sell My Tractor</p>
           </a>
-        )}
-      </div>
+        )
+        }
+      </div> */}
      
     </>
   );
