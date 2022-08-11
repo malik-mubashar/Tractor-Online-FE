@@ -2,8 +2,10 @@ import React from "react";
 
 const terms = () => {
   return (
-    <div>
-      <h1 className="text-center">Terms of Service</h1>
+    <div className="privacy-container mb-5">
+       <div className="container">
+      <h1 className="mt-3">Terms of Service</h1>
+      </div>
       <div className="card container">
         <h3 className="mb-3">Acknowledgment</h3>
         <p>
