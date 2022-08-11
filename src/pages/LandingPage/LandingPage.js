@@ -49,7 +49,8 @@ const LandingPage = () => {
         for (let i = 0; i < result.data.data.length; i += chunkSize) {
           const chunk = result.data.data.slice(i, i + chunkSize);
           tempArr.push(chunk);
-        }
+				}
+				console.log('brandsForCategories',tempArr)
         setBrandsForCategories(tempArr);
       } else {
         toast.dismiss(loadingToastId);

@@ -138,14 +138,14 @@ class ProdCategories {
       });
 	};
   getProdCategoriesList = async (page, searchString, noOfRec) => {
-		 
+		debugger;
     return axios({
       method: "get",
       url: `${process.env.REACT_APP_API_LOCAL_PATH}product_categories/categories_list`,
       headers: Headers
     })
 			.then((result) => {
-				 
+				debugger;
         return {
           error: false,
           data: result.data,
