@@ -11,6 +11,7 @@ import { productApis } from "../../API/ProductApis";
 import { city } from "../../API/City/CityApis";
 import { RootContext } from "../../context/RootContext";
 
+
 export default function UsedTractorSearch() {
   const [products, setProducts] = useState([]);
   const [searchFilters, setSearchFilters] = useState();
@@ -20,9 +21,11 @@ export default function UsedTractorSearch() {
   const [pagination, setPagination] = useState();
 	const { landingPageSearchOptions, setShowLoader } = useContext(RootContext);
 	const [noOfRec, setNoOfRec] = useState(10);
+  const [heading, setHeading] = useState("");
 
   const search = useLocation().search;
-
+  var category = new URLSearchParams(search).get("category");
+ 
   useEffect(() => {
     // handleGetAllProducts();
 		GetPopularCities();
@@ -56,7 +59,29 @@ export default function UsedTractorSearch() {
 			})
 	}, []);
 	
-
+useEffect(() => {
+  if (category === "used-tractor") {
+    setHeading("Used Tractors");
+  } else if (category === "new-tractor") {
+    setHeading("New Tractors");
+  } else if (category === "used-machinery") {
+    setHeading("Used Agriculture Machinery");
+  } else if (category === "new-machinery") {
+    setHeading("New Agriculture Machinery");
+  } else if (category === "tractor-accessories") {
+    setHeading("Tractor & Machinery parts and Acessories");
+  } else if (category === "seed-fertilizers") {
+    setHeading("Seed and Fertilizers");
+  } else if (category === "plants-horticulture") {
+    setHeading("Plants and Horticulture");
+  } else if (category === "tractor-on-rent") {
+    setHeading("Tractor and Machinery on Rent");
+  } else if (category === "laser-lever") {
+    setHeading("Laser and Leveler on rent");
+  } else {
+    setHeading("Not Found");
+  }
+}, [])
   const GetPopularCities = async () => {
     const result = await city.getPopularCity("popular");
 
@@ -129,7 +154,7 @@ export default function UsedTractorSearch() {
             src={"https://tpc.googlesyndication.com/simgad/5923361064753698031"}
             className="mt-5"
           />
-          <h3 className="pageHeading">Used Tractor for sale</h3>
+          <h3 className="pageHeading">{heading} for sale</h3>
           <div className="searchCounterWrapper">
             <ul className="breadcrumb bread">
               <li>
@@ -146,16 +171,16 @@ export default function UsedTractorSearch() {
               <li>
                 <a>
                   <span
-                    onClick={() => history.push("/used-tractor/search")}
+                    onClick={() => history.goBack()}
                     className="cursor-pointer"
                     itemProp="name"
                   >
-                    Used Tractor /
+                    {heading} /
                   </span>
                 </a>
               </li>
               <li>
-                <span itemProp="name">Used Tractor For Sale In Pakistan</span>
+                <span itemProp="name">{heading} In Pakistan</span>
               </li>
 						</ul>
 						{pagination &&

@@ -101,7 +101,7 @@ export default function AddDetails() {
 
   return (
     //sidebar
-    <div className="addDetails">
+    <div className="addDetails pt-3">
       <Loader />
       <div className="remove-section">
 

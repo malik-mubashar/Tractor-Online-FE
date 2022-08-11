@@ -43,7 +43,7 @@ const brandDetails = () => {
   };
 
   return (
-    <div className="post-ad">
+    <div className="post-ad pt-3">
       <section>
         <div className="well p30 mb40">
           <div className="row">

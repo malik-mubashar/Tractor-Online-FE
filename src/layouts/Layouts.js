@@ -16,7 +16,7 @@ const Layout = (props) => {
       <main>
         <div className="">
           {!isMobile ? <Topbar /> : <MobileBanner />}
-          <div style={{marginTop: "5rem"}}>
+          <div style={{marginTop: "4rem"}}>
             {props.children}
           </div>
           {isMobile ? <MobileBannerFooter /> : <Footer />}
