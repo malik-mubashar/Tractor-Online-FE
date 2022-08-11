@@ -140,9 +140,6 @@ class Brands {
       url: `${process.env.REACT_APP_API_LOCAL_PATH}brands?page=${page}&q%5Btitle_or_status_or_link_or_description_cont%5D=${searchString}&no_of_record=${noOfRec}`,
       headers: {
         "Content-Type": "application/json;",
-        "access-token": `${user.accessToken}`,
-        client: `${user.client}`,
-        uid: `${user.uid}`,
         mode: "no-cors",
       },
     })
