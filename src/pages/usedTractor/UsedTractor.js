@@ -467,19 +467,12 @@ export default function UsedTractor() {
           </div>
         </div>
       </div>
-      <div className="bg-white">
-        <div className="container-lg py-4">
-          <FeaturedTractor
-            title="Used Tractor For Sale Featured"
-            link="See all of the featured used tractors."
-          />
-        </div>
-      </div>
-      <div className="mt-3">
-        <div className="container-lg py-4">
+      <div className="bg-white my-4">
+        <div className="container-lg py-4 ">
           <FeaturedProducts
-            title="Managed By TractorOnline"
-            link="View all TractorOnline-managed properties."
+            title={category?prodCategories && prodCategories.find((cate)=>cate.id==category).title:'Products'}
+            link={``}
+            prodCategoryId={category}
           />
         </div>
       </div>

@@ -90,7 +90,12 @@ console.log('mbmbproducts',products)
                   {item.price}
                 </p>
 								<p className="pl-2 border-radius">{item.city}</p>
-								<span className="featuredBand">Featured</span>
+                {
+                  item.featured ?
+                    <span className="featuredBand">Featured</span>
+                  :
+                  null
+                }
 
               </Link>
             </div>
