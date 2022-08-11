@@ -6,7 +6,7 @@ import { city } from "../../API/City/CityApis";
 import { Button, Col, Form, Row } from "react-bootstrap";
 import Select from "react-select";
 
-const postad = (props) => {
+const postad = () => {
 
   const [cities, setCities] = useState([]);
   const [productsState, setProductsState] = useState({
@@ -22,6 +22,10 @@ const postad = (props) => {
     city: "",
     phone_no: "",
   });
+
+  useEffect(() => {
+    getAllCity()
+  }, []);
 
   const getAllCity = async () => {
     const result = await city.getAllCities();
@@ -52,10 +56,10 @@ const postad = (props) => {
         <h3 className="post-ad-heading">Car Information</h3>
         <b>(All fields marked with * are mandatory)</b>
         <div className="row">
-          <div>
+          <div className="col-3 text-right">
             <Form.Label>City</Form.Label>
           </div>
-          <div className="addEditProd">
+          <div className="addEditProd col-4">
             <Select
               className="ui-autocomplete-input form-control searchAble border-right "
               options={cities}
@@ -65,6 +69,7 @@ const postad = (props) => {
               value={productsState.city}
               placeholder="Select City"
               onChange={(e) => {
+                if (e)
                 setProductsState({
                   ...productsState,
                   city: e.title,
@@ -73,6 +78,10 @@ const postad = (props) => {
               clearable={false}
             />
           </div>
+          <div className="col-5">
+            We don't permit advertising messages that aren't relevant to the advertisement.
+          </div>
+          To receive more sincere responses, please enter a reasonable price.
         </div>
       </div>
     </>

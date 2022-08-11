@@ -7,13 +7,14 @@ import { useHistory } from "react-router-dom";
 import Alert from 'react-bootstrap/Alert';
 
 
-export default function FeaturedProducts({ title, link,prodCategoryId }) {
+export default function FeaturedProducts({ title, link, prodCategoryId }) {
   const [products, setProducts] = useState([]);
   const history = useHistory()
 
   useEffect(() => {
     handleGetAllProducts();
-  }, []);
+  }, [prodCategoryId]);
+
   const handleGetAllProducts = async () => {
 		const result = await productApis.getAllProducts(
 			"1",
@@ -26,12 +27,10 @@ export default function FeaturedProducts({ title, link,prodCategoryId }) {
     "nil",
     prodCategoryId);
 		if (result.error === false) {
-			console.log(`${prodCategoryId}`,result)
 			setProducts(result.data && result.data.data);
-			
     }
   };
- 
+
 
   const responsive = {
     desktop: {
