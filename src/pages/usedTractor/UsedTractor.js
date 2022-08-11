@@ -256,9 +256,14 @@ export default function UsedTractor() {
   const [cities, setCities] = useState("");
   const [minPrice, setMinPrice] = useState();
   const [modalShow, setModalShow] = useState(false);
+  const [prodCategories, setProdCategories] = useState();
   const search = useLocation().search;
   var category = new URLSearchParams(search).get("category");
-
+	useEffect(() => {
+	
+		handleGetAllProductCategories()
+	}, [])
+	
   const getAllCity = async () => {
     const result = await city.getAllCity();
     const tempArray = [];
@@ -268,6 +273,14 @@ export default function UsedTractor() {
         tempArray.push({ ...item, label: item.title, value: item.title })
       );
     setCities(tempArray);
+	};
+	const handleGetAllProductCategories = async () => {
+    
+    const result = await prodApi.getAllProductCategories();
+    if(result.error=== false){
+      setProdCategories(result.data && result.data.data);
+    
+    }
   };
 
   const [maxPrice, setMaxPrice] = useState();
@@ -310,28 +323,28 @@ export default function UsedTractor() {
 
   useEffect(() => {
     getAllCity();
-    if (category === "used-tractor") {
-      setHeading("Used Tractors");
-    } else if (category === "new-tractor") {
-      setHeading("New Tractors");
-    } else if (category === "used-machinery") {
-      setHeading("Used Agriculture Machinery");
-    } else if (category === "new-machinery") {
-      setHeading("New Agriculture Machinery");
-    } else if (category === "tractor-accessories") {
-      setHeading("Tractor & Machinery parts and Acessories");
-    } else if (category === "seed-fertilizers") {
-      setHeading("Seed and Fertilizers");
-    } else if (category === "plants-horticulture") {
-      setHeading("Plants and Horticulture");
-    } else if (category === "tractor-on-rent") {
-      setHeading("Tractor and Machinery on Rent");
-    } else if (category === "laser-lever") {
-      setHeading("Laser and Leveler on rent");
-    } else {
-      setHeading("Not Found");
-    }
-  }, [category]);
+    // if (category === "used-tractor") {
+    //   setHeading("Used Tractors");
+    // } else if (category === "new-tractor") {
+    //   setHeading("New Tractors");
+    // } else if (category === "used-machinery") {
+    //   setHeading("Used Agriculture Machinery");
+    // } else if (category === "new-machinery") {
+    //   setHeading("New Agriculture Machinery");
+    // } else if (category === "tractor-accessories") {
+    //   setHeading("Tractor & Machinery parts and Acessories");
+    // } else if (category === "seed-fertilizers") {
+    //   setHeading("Seed and Fertilizers");
+    // } else if (category === "plants-horticulture") {
+    //   setHeading("Plants and Horticulture");
+    // } else if (category === "tractor-on-rent") {
+    //   setHeading("Tractor and Machinery on Rent");
+    // } else if (category === "laser-lever") {
+    //   setHeading("Laser and Leveler on rent");
+    // } else {
+    //   setHeading("Not Found");
+    // }
+  }, []);
 
   function postAdd() {
     if (localStorage.currentUser === undefined) {
@@ -341,11 +354,12 @@ export default function UsedTractor() {
     }
   }
   console.log("window.location.href", window.location.href);
+  console.log("category", category);
   return (
     <div className="usedTractorMain pt-3">
       <div className="usedTractorsContainer">
         <div className="container">
-          <h1>Find {heading} in Pakistan</h1>
+          <h1>Find {prodCategories && prodCategories.find((cate)=>cate.id==category).title} in Pakistan</h1>
           <p>With thousand of Tractors,we have just the right one for you</p>
         </div>
       </div>

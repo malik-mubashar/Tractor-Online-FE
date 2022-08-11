@@ -1,7 +1,10 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Form, FormControl } from "react-bootstrap";
 import SelectSearch from "./SelectSearch";
 import { MDBAccordion, MDBAccordionItem } from "mdb-react-ui-kit";
+import { prodApi } from "../../API/ProdCategoriesApis";
+import toast from "react-hot-toast";
+import { brandApis } from "../../API/BrandsApis";
 
 export default function SideSearch({
   setSearchFilters,
@@ -10,7 +13,9 @@ export default function SideSearch({
   priceRangeFrom,
   setPriceRangeFrom,
   priceRangeTo,
-  setPriceRangeTo,
+	setPriceRangeTo,
+	brands,
+	prodCategories
 }) {
   const make = ["balarus", "messy"];
   const priceRangeFromOption = [
@@ -31,9 +36,13 @@ export default function SideSearch({
     { label: "500000", value: "500000" },
     { label: "600000", value: "600000" },
     { label: "700000", value: "700000" },
-	];
-	
+  ];
 
+
+
+
+  console.log("searchFilters", searchFilters);
+  console.log("brands", brands);
   return (
     <>
       <MDBAccordion alwaysOpen initialActive={1}>
@@ -48,28 +57,90 @@ export default function SideSearch({
                           <li className="d-flex" key={i}>
                             {item[0]}
                             <span class="ml-auto">
-														<i class="fa fa-times-circle" onClick={()=>setSearchFilters({...searchFilters,[item[0]]:'nil'})}></i>
+                              <i
+                                class="fa fa-times-circle"
+                                onClick={() =>
+                                  setSearchFilters({
+                                    ...searchFilters,
+                                    [item[0]]: "nil",
+                                  })
+                                }
+                              ></i>
                             </span>
                           </li>
                         ) : null
-											) : item[1] !== 'nil' &&
-												(item[0] === "priceRangeFrom" ||
-                        item[0] === "priceRangeTo") ? (
-														item[0] === "priceRangeFrom" ? (
-															<li className="d-flex" key={i}>
-                          Price Range ${searchFilters.priceRangeFrom} to ${searchFilters.priceRangeTo}
-															<span class="ml-auto">
-																<i class="fa fa-times-circle" onClick={()=>setSearchFilters({...searchFilters,priceRangeTo:'nil',priceRangeFrom:'nil'})}></i>
-															</span>
-														</li>
+                      ) : item[1] !== "nil" &&
+                        (item[0] === "priceRangeFrom" ||
+                          item[0] === "priceRangeTo") ? (
+                        item[0] === "priceRangeFrom" ? (
+                          <li className="d-flex" key={i}>
+                            Price Range ${searchFilters.priceRangeFrom} to $
+                            {searchFilters.priceRangeTo}
+                            <span class="ml-auto">
+                              <i
+                                class="fa fa-times-circle"
+                                onClick={() =>
+                                  setSearchFilters({
+                                    ...searchFilters,
+                                    priceRangeTo: "nil",
+                                    priceRangeFrom: "nil",
+                                  })
+                                }
+                              ></i>
+                            </span>
+                          </li>
                         ) : null
-                      ) : (item[1]!=='nil'&&
+                      ) : item[1] !== "nil" && item[0] === "categoryId" ? (
                         <li className="d-flex" key={i}>
-                          {item[1]}
+                          {prodCategories &&
+                            prodCategories.find((cate) => cate.id == item[1])
+                              .title}
                           <span class="ml-auto">
-                            <i class="fa fa-times-circle" onClick={()=>setSearchFilters({...searchFilters,[item[0]]:'nil'})}></i>
+                            <i
+                              class="fa fa-times-circle"
+                              onClick={() =>
+                                setSearchFilters({
+                                  ...searchFilters,
+                                  [item[0]]: "nil",
+                                })
+                              }
+                            ></i>
                           </span>
                         </li>
+                      ) : item[1] !== "nil" && item[0] === "brand" ? (
+                        <li className="d-flex" key={i}>
+                            {brands &&
+                            brands.find((brand) => brand.id == item[1])
+                              .title}
+                          <span class="ml-auto">
+                            <i
+                              class="fa fa-times-circle"
+                              onClick={() =>
+                                setSearchFilters({
+                                  ...searchFilters,
+                                  [item[0]]: "nil",
+                                })
+                              }
+                            ></i>
+                          </span>
+                        </li>
+                      ) : (
+                        item[1] !== "nil" && (
+                          <li className="d-flex" key={i}>
+                            {item[1]}
+                            <span class="ml-auto">
+                              <i
+                                class="fa fa-times-circle"
+                                onClick={() =>
+                                  setSearchFilters({
+                                    ...searchFilters,
+                                    [item[0]]: "nil",
+                                  })
+                                }
+                              ></i>
+                            </span>
+                          </li>
+                        )
                       )}
                     </>
                   );
@@ -112,8 +183,10 @@ export default function SideSearch({
                         <input
                           type="radio"
                           name="city"
-													value={item.title}
-													checked={searchFilters&&searchFilters.city === item.title}
+                          value={item.title}
+                          checked={
+                            searchFilters && searchFilters.city === item.title
+                          }
                           onChange={(e) => {
                             setSearchFilters({
                               ...searchFilters,
@@ -139,8 +212,8 @@ export default function SideSearch({
                     <li title="Cars for Sale in Lahore, Pakistan">
                       <label className="filter-check clearfix">
                         <input
-													type="radio"
-													checked={searchFilters&&searchFilters.make === item}
+                          type="radio"
+                          checked={searchFilters && searchFilters.make === item}
                           value={item}
                           onChange={(e) => {
                             setSearchFilters({

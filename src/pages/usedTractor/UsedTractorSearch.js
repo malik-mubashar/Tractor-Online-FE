@@ -10,6 +10,9 @@ import { useHistory, useLocation } from "react-router-dom";
 import { productApis } from "../../API/ProductApis";
 import { city } from "../../API/City/CityApis";
 import { RootContext } from "../../context/RootContext";
+import toast from "react-hot-toast";
+import { brandApis } from "../../API/BrandsApis";
+import { prodApi } from "../../API/ProdCategoriesApis";
 
 
 export default function UsedTractorSearch() {
@@ -24,19 +27,12 @@ export default function UsedTractorSearch() {
   const [heading, setHeading] = useState("");
 
   const search = useLocation().search;
-  var category = new URLSearchParams(search).get("category");
+	var category = new URLSearchParams(search).get("category");
+	const [prodCategories, setProdCategories] = useState();
+  const [brands, setBrands] = useState();
  
   useEffect(() => {
-    // handleGetAllProducts();
-		GetPopularCities();
-		console.log('asd',landingPageSearchOptions)
-		// if (Object.keys(landingPageSearchOptions).length > 0) {
-		// 	setSearchFilters({
-		// 		...landingPageSearchOptions
-		// 	});
-		// 	handleGetAllProducts(landingPageSearchOptions.city, landingPageSearchOptions.priceRangeTo, landingPageSearchOptions.priceRangeFrom, landingPageSearchOptions.featured, landingPageSearchOptions.title);;
-    // }
-    debugger;
+		GetPopularCities();	
 		var featured = new URLSearchParams(search).get('featured')||'nil';
 		//landing page search options
 		var city = new URLSearchParams(search).get('city')||'nil';
@@ -45,7 +41,6 @@ export default function UsedTractorSearch() {
 		var title = new URLSearchParams(search).get('title')||'nil';
 		var categoryId = new URLSearchParams(search).get('category')||'nil';
 		var brandId = new URLSearchParams(search).get('brand')||'nil';
-		debugger;
 			setSearchFilters({
 				...searchFilters,
 				featured: featured==='true'?true:'nil',
@@ -58,30 +53,60 @@ export default function UsedTractorSearch() {
 				
 			})
 	}, []);
+	useEffect(() => {
+    handleGetAllProductCategories();
+    getBrands(1, "", 10000000000);
+  }, []);
+  const getBrands = async (page, mainSearch, noOfRec) => {
+    const loadingToastId = toast.loading("Loading..!");
+
+    try {
+      const result = await brandApis.getBrands(page, mainSearch, noOfRec);
+
+      if (result.error == false && result.data.status == "success") {
+        toast.dismiss(loadingToastId);
+
+        setBrands(result.data.data);
+      } else {
+        toast.dismiss(loadingToastId);
+        console.error(result.data);
+      }
+    } catch (error) {
+      toast.dismiss(loadingToastId);
+      console.error(error);
+    }
+  };
+
+  const handleGetAllProductCategories = async () => {
+    const result = await prodApi.getAllProductCategories();
+    if (result.error === false) {
+      setProdCategories(result.data && result.data.data);
+    }
+  };
 	
-useEffect(() => {
-  if (category === "used-tractor") {
-    setHeading("Used Tractors");
-  } else if (category === "new-tractor") {
-    setHeading("New Tractors");
-  } else if (category === "used-machinery") {
-    setHeading("Used Agriculture Machinery");
-  } else if (category === "new-machinery") {
-    setHeading("New Agriculture Machinery");
-  } else if (category === "tractor-accessories") {
-    setHeading("Tractor & Machinery parts and Acessories");
-  } else if (category === "seed-fertilizers") {
-    setHeading("Seed and Fertilizers");
-  } else if (category === "plants-horticulture") {
-    setHeading("Plants and Horticulture");
-  } else if (category === "tractor-on-rent") {
-    setHeading("Tractor and Machinery on Rent");
-  } else if (category === "laser-lever") {
-    setHeading("Laser and Leveler on rent");
-  } else {
-    setHeading("Not Found");
-  }
-}, [])
+// useEffect(() => {
+//   if (category === "used-tractor") {
+//     setHeading("Used Tractors");
+//   } else if (category === "new-tractor") {
+//     setHeading("New Tractors");
+//   } else if (category === "used-machinery") {
+//     setHeading("Used Agriculture Machinery");
+//   } else if (category === "new-machinery") {
+//     setHeading("New Agriculture Machinery");
+//   } else if (category === "tractor-accessories") {
+//     setHeading("Tractor & Machinery parts and Acessories");
+//   } else if (category === "seed-fertilizers") {
+//     setHeading("Seed and Fertilizers");
+//   } else if (category === "plants-horticulture") {
+//     setHeading("Plants and Horticulture");
+//   } else if (category === "tractor-on-rent") {
+//     setHeading("Tractor and Machinery on Rent");
+//   } else if (category === "laser-lever") {
+//     setHeading("Laser and Leveler on rent");
+//   } else {
+//     setHeading("Not Found");
+//   }
+// }, [])
   const GetPopularCities = async () => {
     const result = await city.getPopularCity("popular");
 
@@ -154,7 +179,7 @@ useEffect(() => {
             src={"https://tpc.googlesyndication.com/simgad/5923361064753698031"}
             className="mt-5"
           />
-          <h3 className="pageHeading">{heading} for sale</h3>
+          <h3 className="pageHeading">{category?prodCategories && prodCategories.find((cate)=>cate.id==category).title:'Products'} for sale</h3>
           <div className="searchCounterWrapper">
             <ul className="breadcrumb bread">
               <li>
@@ -175,12 +200,12 @@ useEffect(() => {
                     className="cursor-pointer"
                     itemProp="name"
                   >
-                    {heading} /
+                    {category?prodCategories && prodCategories.find((cate)=>cate.id==category).title:'Products'} /
                   </span>
                 </a>
               </li>
               <li>
-                <span itemProp="name">{heading} In Pakistan</span>
+                <span itemProp="name">{category?prodCategories && prodCategories.find((cate)=>cate.id==category).title:'Products'} In Pakistan</span>
               </li>
 						</ul>
 						{pagination &&
@@ -194,14 +219,16 @@ useEffect(() => {
           </div>
           <div className="row">
             <div className="col-md-3">
-              <SideSearch
-                setSearchFilters={setSearchFilters}
-                searchFilters={searchFilters}
-                cities={cities}
-                priceRangeFrom={priceRangeFrom}
-                setPriceRangeFrom={setPriceRangeFrom}
-                priceRangeTo={priceRangeTo}
-                setPriceRangeTo={setPriceRangeTo}
+							<SideSearch
+								setSearchFilters={setSearchFilters}
+								searchFilters={searchFilters}
+								cities={cities}
+								priceRangeFrom={priceRangeFrom}
+								setPriceRangeFrom={setPriceRangeFrom}
+								priceRangeTo={priceRangeTo}
+								setPriceRangeTo={setPriceRangeTo}
+								brands={ brands}
+								prodCategories={prodCategories}
               />
             </div>
             <div className="col-md-9">
