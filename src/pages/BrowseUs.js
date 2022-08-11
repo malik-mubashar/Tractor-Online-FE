@@ -1,6 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import team from "../assets/img/team.jpg"
+import tractorStock from "../assets/img/tractorStock.jpg"
 
 const AboutUs = () => {
   return (
@@ -9,7 +10,7 @@ const AboutUs = () => {
       <p>
         TractorOnline.com, which was established in 2021, is now Pakistan's top
         automotive portal. Millions of Pakistanis have used TractorOnline.com to
-        buy and sell cars, read reviews and news about cars, compare car prices,
+        buy and sell tractors, read reviews and news about tractors, compare tractor prices,
         and get answers to all of their automotive needs since the site's
         establishment. Today, whenever somebody is looking for a service to meet
         their automobile needs, TractorOnline.com is the first name that comes
@@ -24,8 +25,8 @@ const AboutUs = () => {
       <img
         alt="About-cover-photo"
         className="mb30"
-        src="https://wsa3.pakwheels.com/assets/about-us/about-cover-photo-f430cd6d72868ef1635fa565d0214048.jpg"
-        style={{ width: "100%" }}
+        src={tractorStock}
+        style={{ width: "100%",height:"100%"}}
       />
       <p>
         With this kind of accomplishment, TractorOnline.com has become
