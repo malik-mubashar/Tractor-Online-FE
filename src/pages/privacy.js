@@ -2,10 +2,12 @@ import React from "react";
 
 const privacy = () => {
   return (
-    <div>
-      <h1 className="text-center">Privacy Policy</h1>
-      <div className="card container">
-        <p>
+    <div className="privacy-container mb-5">
+      <div className="container">
+        <h1 className=" mt-3">Privacy Policy</h1>
+      </div>
+      <div className="card container ">
+        <p className="mt-3">
           We've gathered all the information you need about how we handle your
           personal data and your associated rights for you in our user privacy.
         </p>
