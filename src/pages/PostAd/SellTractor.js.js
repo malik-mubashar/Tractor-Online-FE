@@ -7,7 +7,7 @@ import { useHistory } from "react-router-dom";
 const SellTractor = () => {
 	const history =useHistory()
   return (
-    <div className="sell-tractor mt-4">
+    <div className="sell-tractor mt-4 pt-3">
       <section>
         <div className="container">
           <div className="card my-4">

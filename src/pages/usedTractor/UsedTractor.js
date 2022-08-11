@@ -259,7 +259,6 @@ export default function UsedTractor() {
   const search = useLocation().search;
   var category = new URLSearchParams(search).get("category");
 
-
   const getAllCity = async () => {
     const result = await city.getAllCity();
     const tempArray = [];
@@ -315,30 +314,22 @@ export default function UsedTractor() {
       setHeading("Used Tractors");
     } else if (category === "new-tractor") {
       setHeading("New Tractors");
-    }
-    else if (category === "used-machinery") {
+    } else if (category === "used-machinery") {
       setHeading("Used Agriculture Machinery");
-    }
-    else if (category === "new-machinery") {
+    } else if (category === "new-machinery") {
       setHeading("New Agriculture Machinery");
-    }
-    else if (category === "tractor-accessories") {
+    } else if (category === "tractor-accessories") {
       setHeading("Tractor & Machinery parts and Acessories");
-    }
-    else if (category === "seed-fertilizers") {
+    } else if (category === "seed-fertilizers") {
       setHeading("Seed and Fertilizers");
-    }
-    else if (category === "plants-horticulture") {
+    } else if (category === "plants-horticulture") {
       setHeading("Plants and Horticulture");
-    }
-    else if (category === "tractor-on-rent") {
+    } else if (category === "tractor-on-rent") {
       setHeading("Tractor and Machinery on Rent");
-    }
-    else if (category === "laser-lever") {
+    } else if (category === "laser-lever") {
       setHeading("Laser and Leveler on rent");
-    }
-    else {
-      setHeading("Not Found")
+    } else {
+      setHeading("Not Found");
     }
   }, []);
 
@@ -349,9 +340,9 @@ export default function UsedTractor() {
       history.push("/used-tractor/sell/");
     }
   }
-console.log("window.location.href",window.location.href)
+  console.log("window.location.href", window.location.href);
   return (
-    <div className="usedTractorMain">
+    <div className="usedTractorMain pt-3">
       <div className="usedTractorsContainer">
         <div className="container">
           <h1>Find {heading} in Pakistan</h1>
@@ -417,7 +408,7 @@ console.log("window.location.href",window.location.href)
                   priceRangeFrom: minPrice || "nil",
                   title: tractorModel || "nil",
                 });
-                 history.push(`/used-tractor/search?category=${category}`);
+                history.push(`/used-tractor/search?category=${category}`);
               }}
             >
               Search

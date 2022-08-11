@@ -54,7 +54,8 @@ import Ads from "../pages/PostAd/myAds";
 import UsedTractor from "../pages/usedTractor/UsedTractor";
 import BrandDetails from "../pages/LandingPage/BrandDetails/brandDetails";
 import BrowseUs from "../pages/BrowseUs";
-
+import Privacy from "../pages/privacy";
+import Terms from "../pages/terms";
 
 const AppRouter = () => {
   return (
@@ -156,6 +157,17 @@ const AppRouter = () => {
           <Route exact path="/used-tractor/">
             <Layout>
               <UsedTractor />
+            </Layout>
+          </Route>
+          <Route exact path="/privacy-policy/">
+            <Layout>
+              <Privacy />
+            </Layout>
+          </Route>
+
+          <Route exact path="/terms/">
+            <Layout>
+              <Terms />
             </Layout>
           </Route>
           <Route exact path="/used-tractor/sell">
