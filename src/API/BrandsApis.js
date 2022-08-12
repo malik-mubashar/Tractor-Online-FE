@@ -144,14 +144,12 @@ class Brands {
       },
     })
 			.then((result) => {
-				debugger;
         return {
           error: false,
           data: result.data,
         };
       })
 			.catch((error) => {
-				debugger;
         return {
           error: true,
           data: error.response.data,
