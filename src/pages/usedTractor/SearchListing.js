@@ -1,30 +1,20 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import {
-  Row,
   Col,
-  Breadcrumb,
-  Card,
-  Button,
-  ListGroup,
-  ListGroupItem,
   Modal,
   Image,
+  Button
 } from "react-bootstrap";
 import BootstrapSwitchButton from "bootstrap-switch-button-react";
-
-import {
-  BrowserView,
-  MobileView,
-  isBrowser,
-  isMobile,
-} from "react-device-detect";
+import Icofont from "react-icofont";
+import { isMobile } from "react-device-detect";
 import * as Icon from "react-feather";
 import { useHistory } from "react-router-dom";
 import CustomPopover from "./CustomPopover";
-import { productApis } from "../../API/ProductApis";
 import TractorClipart from "../../assets/svg/tractor-logo.svg";
+import Buyers from "../../assets/img/buyers.png";
 
-export default function SearchListing({ products,pagination,noOfRec,handleGetAllProducts,searchFilters }) {
+export default function SearchListing({ products, pagination, noOfRec, handleGetAllProducts, searchFilters }) {
   const [showNumberWarning, setShowNumberWarning] = useState(true);
   let history = useHistory();
   const [openShowPhone, setOpenShowPhone] = useState(false);
@@ -32,10 +22,7 @@ export default function SearchListing({ products,pagination,noOfRec,handleGetAll
   const [gridOrList, setGridOrList] = useState("list");
   const onShowPhoneModelClose = () => {
     setOpenShowPhone(false);
-    console.log("ping");
   };
-
-  console.log(openShowPhone);
 
   return (
     <>
@@ -77,8 +64,8 @@ export default function SearchListing({ products,pagination,noOfRec,handleGetAll
                   <BootstrapSwitchButton
                     className="col-md-8 d-flex"
                     checked={true}
-                    onstyle="outline-danger"
-                    offstyle="outline-info"
+                    onstyle="danger"
+                    offstyle="info"
                     onlabel="Grid"
                     offlabel="List"
                     onChange={(checked) => {
@@ -105,11 +92,14 @@ export default function SearchListing({ products,pagination,noOfRec,handleGetAll
                     } ${isMobile ? "d-block" : null}`}
                   >
                     <img
-                      // className="card-img-top"
+                      className="cursor-pointer"
                       // className={gridOrList==='list'?'list':'grid'}
                       src={item.cover_photo_path}
                       alt="Card"
                       style={{ width: "200px", height: "140px" }}
+                      onClick={() => {
+                        history.push(`/add-details/${item.id}`);
+                      }}
                     />
                     <div style={{ width: "100%" }}>
                       <div
@@ -126,7 +116,7 @@ export default function SearchListing({ products,pagination,noOfRec,handleGetAll
                               : "cursor-pointer"
                           }
                           onClick={() => {
-                            history.push("/add-details");
+                            history.push(`/add-details/${item.id}`);
                           }}
                         >
                           {item.title}
@@ -137,26 +127,50 @@ export default function SearchListing({ products,pagination,noOfRec,handleGetAll
                               ? "cursor-pointer ml-3"
                               : "cursor-pointer"
                           }
+                          onClick={() => {
+                            history.push(`/add-details/${item.id}`);
+                          }}
                         >
                           PKR {item.price}
                         </h5>
                       </div>
                       <p className={gridOrList === "list" ? " ml-3" : null}>
-                        {item.location}
+                        <Icofont
+                          icon="location-pin"
+                          className="icofont text-primary mr-1"
+                        />
+                        {item.city}
                       </p>
-                      <p style={{ paddingLeft: "8px" }}>
-                        2008 | 111,123 km | Petrol | 2700cc | Automatic | 4.5
-                        Grade
+                      <p className={gridOrList === "list" ? " ml-3" : null}>
+                        {item.extra_fields &&
+                          Object.entries(item.extra_fields)
+                            .length > 0 ? (
+                            <>
+                              {item.extra_fields &&
+                                Object.entries(
+                                  item.extra_fields
+                                ).map((item, i) => {
+                                  return (
+                                    <>
+                                      <span>{item[1]}</span> {" "}| {" "}
+                                    </>
+                                  );
+                                })}
+                            </>
+                          ) : (
+                            <div className="text-danger text-center">
+                              No Record Found...
+                            </div>
+                        )}
                       </p>
                       <div
-                        className={`card-text ${
+                        className={`card-text ${gridOrList === "list" ? " ml-3" : null} ${
                           isMobile ? "" : gridOrList === "list" ? "d-flex" : ""
                         } `}
                         style={{ justifyContent: "space-between" }}
                       >
                         <small
                           className="text-muted"
-                          style={{ paddingLeft: "8px" }}
                         >
                           Last updated 3 mins ago
                         </small>
@@ -174,7 +188,6 @@ export default function SearchListing({ products,pagination,noOfRec,handleGetAll
                             <button
                               onClick={() => {
                                 setOpenShowPhone(true);
-                                setShowNumberWarning(false);
                               }}
                               className="btn-success"
                               type="submit"
@@ -187,7 +200,7 @@ export default function SearchListing({ products,pagination,noOfRec,handleGetAll
                             </button>
                           ) : (
                             <>
-                              <CustomPopover />
+                              <CustomPopover phoneNo={item.phone_no} />
                             </>
                           )}
                         </div>
@@ -381,61 +394,61 @@ export default function SearchListing({ products,pagination,noOfRec,handleGetAll
 
       {/* Modal */}
       <Modal show={openShowPhone} onHide={onShowPhoneModelClose}>
-        <Modal.Header closeButton>
-          <Modal.Title id="example-custom-modal-styling-title ">
-            Tips for safe deal
-          </Modal.Title>
-        </Modal.Header>
-
-        <Modal.Body className="justify-content-center mx-auto">
-          <Image
-            src="https://wsa4.pakwheels.com/assets/tips-for-safe-deal-00805d1034ee7600820049c852bd6163.svg"
-            height="40px"
-            width="60px"
-            alt="Profile Image"
-            className="d-flex justify-content-center m-auto"
-          />
-          <p className="">
-            <Image
-              src="https://wsa1.pakwheels.com/assets/tip-for-safe-deal-1-a3f472bbbc5249edca9fd01f449f98c3.svg"
-              height="40px"
-              width="60px"
-              alt="Profile Image"
-              className="mx-auto"
-            />
-            Never make payments in advance.
-          </p>
-          <p className="">
-            <Image
-              src="https://wsa3.pakwheels.com/assets/tip-for-safe-deal-2-b8b8dded80b193b4de603dd617fd42db.svg"
-              height="40px"
-              width="60px"
-              alt="Profile Image"
-              className="mx-auto"
-            />
-            Do not share unnecessary personal information.
-          </p>
-          <p className="">
-            <Image
-              src="https://wsa4.pakwheels.com/assets/tip-for-safe-deal-3-1c4abd79f231a47a7c82cac9fa27e543.svg"
-              height="40px"
-              width="60px"
-              alt="Profile Image"
-              className="mx-auto"
-            />
-            Report suspicious users to Pakwheels.
-          </p>
-          <p className="">
-            <Image
-              src="https://wsa3.pakwheels.com/assets/tip-for-safe-deal-4-fd729119f3d0eab6cf43ca7c7f27b6ce.svg"
-              height="40px"
-              width="60px"
-              alt="Profile Image"
-              className="mx-auto"
-            />
-            Use PakWheels Car Inspection Service to avoid fraud.
-          </p>
-        </Modal.Body>
+        <Modal.Body>
+              <div className="d-flex">
+                <Icofont
+                  icon="close-line"
+                  className="icofont-2x ml-auto cursor-pointer"
+                  onClick={ () => {setOpenShowPhone(false)}}
+                />
+              </div>
+              <div className="text-center">
+                <Image src={Buyers} alt="Logo" height="80px" width="80px" />
+              </div>
+              <h4 className="text-center">
+                Advice for Safe Dealing
+              </h4>
+              <div className="">
+                <div className="row my-3">
+                  <div className="col-1 ml-auto">
+                    <Icofont
+                      icon="not-allowed"
+                      className="icofont-2x"
+                    />
+                  </div>
+                  <div className="col-6 mr-auto">
+                    <strong>Never pay for anything in advance.</strong>
+                  </div>
+                </div>
+                <div className="row my-3">
+                  <div className="col-1 ml-auto">
+                    <Icofont
+                      icon="code-not-allowed"
+                      className="icofont-2x"
+                    />
+                  </div>
+                  <div className="col-6 mr-auto">
+                    <strong>Keep your personal details to yourself.</strong>
+                  </div>
+                </div>
+                <div className="row my-3">
+                  <div className="col-1 ml-auto">
+                    <Icofont
+                      icon="flag"
+                      className="icofont-2x"
+                    />
+                  </div>
+                  <div className="col-6 mr-auto">
+                    <strong>Inform TractorOnline about any untrustworthy users.</strong>
+                  </div>
+                </div>
+                <div className="text-center">
+                  <Button variant="primary" onClick={ () => {setShowNumberWarning(false); setOpenShowPhone(false)}}>
+                    Continue
+                  </Button>
+                </div>
+              </div>
+            </Modal.Body>
       </Modal>
     </>
   );

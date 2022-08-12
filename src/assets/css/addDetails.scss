@@ -481,3 +481,6 @@
 .cover-photo-zoom:hover img{
   transform: scale(1.5);
 }
+.switch.btn.on.btn-danger, .switch.btn.off.btn-info{
+  width: 70px !important;
+}
