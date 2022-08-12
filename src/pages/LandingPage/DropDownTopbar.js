@@ -51,7 +51,7 @@ export default function DropDownTopbar({
           >
             {productHead ? (
               <>
-                <ul className="list-unstyled col-6 p-0 border-right">
+                <ul className="list-unstyled col-7 p-0 border-right">
                   {productHead.map((item, i) => (
                     <li className="dropdown-list" key={i}>
                       <Link
@@ -94,7 +94,7 @@ export default function DropDownTopbar({
                   </li>
                 ))}
               </ul> */}
-                <ul className="list-unstyled col-3 border-right text-center">
+                <ul className="list-unstyled col-5 text-center">
                   <li className="mb-3">
                     <Icon.MapPin className="icon mr-2" />
                     <strong>Popular Cities</strong>
@@ -115,7 +115,7 @@ export default function DropDownTopbar({
                       </li>
                     ))}
                 </ul>
-                <ul className="list-unstyled col-3  text-center">
+                {/*<ul className="list-unstyled col-3  text-center">
                   <li className="mb-3">
                     <Link to="/">
                       <Icon.Trello className="icon mr-2" />
@@ -139,7 +139,7 @@ export default function DropDownTopbar({
                         </Link>
                       </li>
                     ))}
-                </ul>
+                </ul>*/}
               </>
             ) : null}
           </div>

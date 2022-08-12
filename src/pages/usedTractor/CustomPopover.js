@@ -3,30 +3,34 @@ import { Button, OverlayTrigger, Popover } from 'react-bootstrap';
 import * as Icon from "react-feather";
 
 
-export default function CustomPopover() {
-  
+export default function CustomPopover({phoneNo}) {
+
 	return (
 		<>
 				<OverlayTrigger
 						trigger="click"
 						key={'bottom'}
 						placement={'bottom'}
+						rootClose
 						overlay={
 							<Popover id={`popover-positioned-${'bottom'}`} title={`Popover ${'bottom'}`}>
-								<strong>Holy guacamole!</strong> Check this info.
-                </Popover>
+								<Popover.Header as="h3">{`Phone Number`}</Popover.Header>
+								<Popover.Body>
+                	<strong>{phoneNo}</strong>
+              	</Popover.Body>
+							</Popover>
 						}
 					>
 					 <button
-                                className="btn-success"
-                                type="submit"
-                              >
-                                <Icon.PhoneCall
-                                  style={{ height: "14px" }}
-                                  className="icon"
-                                />
-                                Show Phone Number
-																</button>
+						className="btn-success"
+						type="submit"
+					>
+						<Icon.PhoneCall
+							style={{ height: "14px" }}
+							className="icon"
+						/>
+						Show Phone Number
+					</button>
 					</OverlayTrigger>
 		</>
 	)
