@@ -11,6 +11,7 @@ export default ({ children }) => {
 	const [currentUser, setCurrentUser] = useState(prevUser);
 	const [signUpMessage, setSignUpMessage] = useState(false);
 	const [showLoader, setShowLoader] = useState(false);
+	const [showPasswordModel, setShowPasswordModel] = useState(false);
 	const [landingPageSearchOptions, setLandingPageSearchOptions] = useState({});
 	const [userProfilePicture, setUserProfilePicture] = useState(prevUserProfilePicture);
 
@@ -40,7 +41,9 @@ export default ({ children }) => {
 		landingPageSearchOptions,
 		setLandingPageSearchOptions,
 		userProfilePicture,
-		setUserProfilePicture
+		setUserProfilePicture,
+		showPasswordModel,
+		setShowPasswordModel
 	};
 	/*******************************************************************/
 
