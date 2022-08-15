@@ -7,7 +7,6 @@ import toast from "react-hot-toast";
 import { brandApis } from "../../API/BrandsApis";
 import { useHistory } from "react-router-dom";
 
-
 export default function SideSearch({
   setSearchFilters,
   cities,
@@ -15,11 +14,11 @@ export default function SideSearch({
   priceRangeFrom,
   setPriceRangeFrom,
   priceRangeTo,
-	setPriceRangeTo,
-	brands,
-	prodCategories
+  setPriceRangeTo,
+  brands,
+  prodCategories,
 }) {
-	const history = useHistory();
+  const history = useHistory();
   const make = ["balarus", "messy"];
   const priceRangeFromOption = [
     { label: "10000", value: "10000" },
@@ -41,9 +40,6 @@ export default function SideSearch({
     { label: "700000", value: "700000" },
   ];
 
-
-
-
   console.log("searchFilters", searchFilters);
   console.log("brands", brands);
   return (
@@ -62,12 +58,20 @@ export default function SideSearch({
                             <span class="ml-auto">
                               <i
                                 class="fa fa-times-circle"
-                                onClick={() =>
+                                onClick={() => {
+                                  history.push(
+                                    `/used-tractor/search?${new URLSearchParams(
+                                      {
+                                        ...searchFilters,
+                                        [item[0]]: "nil",
+                                      }
+                                    ).toString()}`
+                                  );
                                   setSearchFilters({
                                     ...searchFilters,
                                     [item[0]]: "nil",
-                                  })
-                                }
+                                  });
+                                }}
                               ></i>
                             </span>
                           </li>
@@ -82,13 +86,21 @@ export default function SideSearch({
                             <span class="ml-auto">
                               <i
                                 class="fa fa-times-circle"
-                                onClick={() =>
+                                onClick={() => {
+                                  history.push(
+                                    `/used-tractor/search?${new URLSearchParams(
+                                      {
+                                        ...searchFilters,
+                                        [item[0]]: "nil",
+                                      }
+                                    ).toString()}`
+                                  );
                                   setSearchFilters({
                                     ...searchFilters,
                                     priceRangeTo: "nil",
                                     priceRangeFrom: "nil",
-                                  })
-                                }
+                                  });
+                                }}
                               ></i>
                             </span>
                           </li>
@@ -101,29 +113,40 @@ export default function SideSearch({
                           <span class="ml-auto">
                             <i
                               class="fa fa-times-circle"
-                              onClick={() =>
+                              onClick={() => {
+                                history.push(
+                                  `/used-tractor/search?${new URLSearchParams({
+                                    ...searchFilters,
+                                    [item[0]]: "nil",
+                                  }).toString()}`
+                                );
                                 setSearchFilters({
                                   ...searchFilters,
                                   [item[0]]: "nil",
-                                })
-                              }
+                                });
+                              }}
                             ></i>
                           </span>
                         </li>
                       ) : item[1] !== "nil" && item[0] === "brand" ? (
                         <li className="d-flex" key={i}>
-                            {brands &&
-                            brands.find((brand) => brand.id == item[1])
-                              }
+                          {brands &&
+                            brands.find((brand) => brand.id == item[1])}
                           <span class="ml-auto">
                             <i
                               class="fa fa-times-circle"
-                              onClick={() =>
+                              onClick={() => {
+                                history.push(
+                                  `/used-tractor/search?${new URLSearchParams({
+                                    ...searchFilters,
+                                    [item[0]]: "nil",
+                                  }).toString()}`
+                                );
                                 setSearchFilters({
                                   ...searchFilters,
                                   [item[0]]: "nil",
-                                })
-                              }
+                                });
+                              }}
                             ></i>
                           </span>
                         </li>
@@ -134,12 +157,20 @@ export default function SideSearch({
                             <span class="ml-auto">
                               <i
                                 class="fa fa-times-circle"
-                                onClick={() =>
+                                onClick={() => {
+                                  history.push(
+                                    `/used-tractor/search?${new URLSearchParams(
+                                      {
+                                        ...searchFilters,
+                                        [item[0]]: "nil",
+                                      }
+                                    ).toString()}`
+                                  );
                                   setSearchFilters({
                                     ...searchFilters,
                                     [item[0]]: "nil",
-                                  })
-                                }
+                                  });
+                                }}
                               ></i>
                             </span>
                           </li>
@@ -190,24 +221,20 @@ export default function SideSearch({
                           checked={
                             searchFilters && searchFilters.city === item.title
                           }
-													onChange={(e) => {
-														history.push(`/used-tractor/search?${new URLSearchParams({
-															city: e.target.value,
-															featured: searchFilters.featured,
-															priceRangeFrom: searchFilters.priceRangeFrom,
-															priceRangeTo: searchFilters.priceRangeTo,
-															title: searchFilters.title,
-															category: searchFilters.category,
-															brand: searchFilters.brand
-														})
-															.toString()}`)
+                          onChange={(e) => {
+                            history.push(
+                              `/used-tractor/search?${new URLSearchParams({
+                                ...searchFilters,
+                                city: e.target.value,
+                              }).toString()}`
+                            );
                             setSearchFilters({
                               ...searchFilters,
                               city: e.target.value,
                             });
                           }}
                         />
-                        {item.title}
+                       <span className="ml-1 my-1"> {item.title}</span>
                         <span className="pull-right count"></span>
                       </label>
                     </li>
@@ -228,18 +255,13 @@ export default function SideSearch({
                           type="radio"
                           checked={searchFilters && searchFilters.make === item}
                           value={item}
-													onChange={(e) => {
-														history.push(`/used-tractor/search?${new URLSearchParams({
-															city: searchFilters.city,
-															make:e.target.value,
-															featured: searchFilters.featured,
-															priceRangeFrom: searchFilters.priceRangeFrom,
-															priceRangeTo: searchFilters.priceRangeTo,
-															title: searchFilters.title,
-															category: searchFilters.category,
-															brand: searchFilters.brand
-														})
-															.toString()}`)
+                          onChange={(e) => {
+                            history.push(
+                              `/used-tractor/search?${new URLSearchParams({
+                                ...searchFilters,
+                                make: e.target.value,
+                              }).toString()}`
+                            );
                             setSearchFilters({
                               ...searchFilters,
                               make: e.target.value,
@@ -260,18 +282,13 @@ export default function SideSearch({
             <input
               type="checkbox"
               value="featured"
-							onChange={(e) => {
-								history.push(`/used-tractor/search?${new URLSearchParams({
-									city: searchFilters.city,
-									featured:e.target.value,
-									make: searchFilters.make,
-									priceRangeFrom: searchFilters.priceRangeFrom,
-									priceRangeTo: searchFilters.priceRangeTo,
-									title: searchFilters.title,
-									category: searchFilters.category,
-									brand: searchFilters.brand
-								})
-									.toString()}`)
+              onChange={(e) => {
+                history.push(
+                  `/used-tractor/search?${new URLSearchParams({
+                    ...searchFilters,
+                    featured: e.target.value,
+                  }).toString()}`
+                );
                 setSearchFilters({
                   ...searchFilters,
                   featured: e.target.checked,
@@ -307,25 +324,20 @@ export default function SideSearch({
                   className="btn btn-primary refine-go"
                   type="submit"
                   value="Go"
-									onClick={() => {
-										history.push(`/used-tractor/search?${new URLSearchParams({
-											city: searchFilters.city,
-											featured:searchFilters.featured,
-											make: searchFilters.make,
-											priceRangeFrom: searchFilters.priceRangeFrom,
-											priceRangeTo: searchFilters.priceRangeTo,
-											title: searchFilters.title,
-											category: searchFilters.category,
-											brand: searchFilters.brand
-										})
-											.toString()}`)
+                  onClick={() => {
+                    history.push(
+                      `/used-tractor/search?${new URLSearchParams({
+                        ...searchFilters,
+                        priceRangeFrom: priceRangeFrom,
+                        priceRangeTo: priceRangeTo,
+                      }).toString()}`
+                    );
                     setSearchFilters({
                       ...searchFilters,
                       priceRangeTo: priceRangeTo,
                       priceRangeFrom: priceRangeFrom,
-                    })
-									}
-                  }
+                    });
+                  }}
                 />
               </li>
             </ul>

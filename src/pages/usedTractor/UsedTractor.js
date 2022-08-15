@@ -323,27 +323,6 @@ export default function UsedTractor() {
 
   useEffect(() => {
     getAllCity();
-    // if (category === "used-tractor") {
-    //   setHeading("Used Tractors");
-    // } else if (category === "new-tractor") {
-    //   setHeading("New Tractors");
-    // } else if (category === "used-machinery") {
-    //   setHeading("Used Agriculture Machinery");
-    // } else if (category === "new-machinery") {
-    //   setHeading("New Agriculture Machinery");
-    // } else if (category === "tractor-accessories") {
-    //   setHeading("Tractor & Machinery parts and Acessories");
-    // } else if (category === "seed-fertilizers") {
-    //   setHeading("Seed and Fertilizers");
-    // } else if (category === "plants-horticulture") {
-    //   setHeading("Plants and Horticulture");
-    // } else if (category === "tractor-on-rent") {
-    //   setHeading("Tractor and Machinery on Rent");
-    // } else if (category === "laser-lever") {
-    //   setHeading("Laser and Leveler on rent");
-    // } else {
-    //   setHeading("Not Found");
-    // }
   }, []);
 
   function postAdd() {
@@ -422,7 +401,9 @@ export default function UsedTractor() {
                   priceRangeFrom: minPrice || "nil",
                   title: tractorModel || "nil",
                 });
-                history.push(`/used-tractor/search?category=${category}`);
+								// history.push(`/used-tractor/search?category=${category}`);
+								history.push(`/used-tractor/search?category=${category}&city=${citySelected||'nil'}&priceRangeTo=${maxPrice||'nil'}&priceRangeFrom=${minPrice||'nil'}&title=${tractorModel||'nil'}`)
+
               }}
             >
               Search
