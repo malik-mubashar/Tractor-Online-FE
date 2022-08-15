@@ -111,7 +111,7 @@ export default function DropDown({
                       </li>
                     ))}
                 </ul>
-                {/*<ul className="list-unstyled col-3  text-center">
+                {/* <ul className="list-unstyled col-3  text-center">
                   <li className="mb-3">
                     <Link to="/">
                       <Icon.Trello className="icon mr-2" />
@@ -135,7 +135,7 @@ export default function DropDown({
                         </Link>
                       </li>
                     ))}
-                </ul>*/}
+                </ul> */}
               </>
             ) : null}
           </div>

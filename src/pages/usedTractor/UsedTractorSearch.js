@@ -49,9 +49,19 @@ export default function UsedTractorSearch() {
 				priceRangeTo: priceRangeTo,
 				title: title,
 				brand: brandId,
-				categoryId:categoryId
+				category: categoryId,
+				make:'nil'
 				
 			})
+		debugger;
+			// var url = new URL(window.location.href);
+
+			// If your expected result is "http://foo.bar/?x=1&y=2&x=42"
+			// url.searchParams.append('x', 42);
+		// debugger;
+			// If your expected result is "http://foo.bar/?x=42&y=2"
+			// url.searchParams.set('x', 42);
+			
 	}, []);
 	useEffect(() => {
     handleGetAllProductCategories();
@@ -84,29 +94,7 @@ export default function UsedTractorSearch() {
     }
   };
 	
-// useEffect(() => {
-//   if (category === "used-tractor") {
-//     setHeading("Used Tractors");
-//   } else if (category === "new-tractor") {
-//     setHeading("New Tractors");
-//   } else if (category === "used-machinery") {
-//     setHeading("Used Agriculture Machinery");
-//   } else if (category === "new-machinery") {
-//     setHeading("New Agriculture Machinery");
-//   } else if (category === "tractor-accessories") {
-//     setHeading("Tractor & Machinery parts and Acessories");
-//   } else if (category === "seed-fertilizers") {
-//     setHeading("Seed and Fertilizers");
-//   } else if (category === "plants-horticulture") {
-//     setHeading("Plants and Horticulture");
-//   } else if (category === "tractor-on-rent") {
-//     setHeading("Tractor and Machinery on Rent");
-//   } else if (category === "laser-lever") {
-//     setHeading("Laser and Leveler on rent");
-//   } else {
-//     setHeading("Not Found");
-//   }
-// }, [])
+
   const GetPopularCities = async () => {
     const result = await city.getPopularCity("popular");
 
@@ -124,7 +112,7 @@ export default function UsedTractorSearch() {
 		featured = 'nil',
 		title = 'nil',
 		brand = 'nil',
-		categoryId='nil'
+		category='nil'
 		
 	) => {
 		setShowLoader(true)
@@ -137,7 +125,7 @@ export default function UsedTractorSearch() {
 			featured,
 			title,
 			brand,
-			categoryId
+			category
 		);
     if (result.error === false) {
       setProducts(result.data && result.data.data);
@@ -160,7 +148,7 @@ export default function UsedTractorSearch() {
 				searchFilters.featured,
 				searchFilters.title,
 				searchFilters.brand,
-				searchFilters.categoryId
+				searchFilters.category
 			);
     }
   }, [searchFilters]);
