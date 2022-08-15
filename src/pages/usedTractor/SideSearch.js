@@ -5,6 +5,8 @@ import { MDBAccordion, MDBAccordionItem } from "mdb-react-ui-kit";
 import { prodApi } from "../../API/ProdCategoriesApis";
 import toast from "react-hot-toast";
 import { brandApis } from "../../API/BrandsApis";
+import { useHistory } from "react-router-dom";
+
 
 export default function SideSearch({
   setSearchFilters,
@@ -17,6 +19,7 @@ export default function SideSearch({
 	brands,
 	prodCategories
 }) {
+	const history = useHistory();
   const make = ["balarus", "messy"];
   const priceRangeFromOption = [
     { label: "10000", value: "10000" },
@@ -90,7 +93,7 @@ export default function SideSearch({
                             </span>
                           </li>
                         ) : null
-                      ) : item[1] !== "nil" && item[0] === "categoryId" ? (
+                      ) : item[1] !== "nil" && item[0] === "category" ? (
                         <li className="d-flex" key={i}>
                           {prodCategories &&
                             prodCategories.find((cate) => cate.id == item[1])
@@ -111,7 +114,7 @@ export default function SideSearch({
                         <li className="d-flex" key={i}>
                             {brands &&
                             brands.find((brand) => brand.id == item[1])
-                              .title}
+                              }
                           <span class="ml-auto">
                             <i
                               class="fa fa-times-circle"
@@ -187,7 +190,17 @@ export default function SideSearch({
                           checked={
                             searchFilters && searchFilters.city === item.title
                           }
-                          onChange={(e) => {
+													onChange={(e) => {
+														history.push(`/used-tractor/search?${new URLSearchParams({
+															city: e.target.value,
+															featured: searchFilters.featured,
+															priceRangeFrom: searchFilters.priceRangeFrom,
+															priceRangeTo: searchFilters.priceRangeTo,
+															title: searchFilters.title,
+															category: searchFilters.category,
+															brand: searchFilters.brand
+														})
+															.toString()}`)
                             setSearchFilters({
                               ...searchFilters,
                               city: e.target.value,
@@ -215,7 +228,18 @@ export default function SideSearch({
                           type="radio"
                           checked={searchFilters && searchFilters.make === item}
                           value={item}
-                          onChange={(e) => {
+													onChange={(e) => {
+														history.push(`/used-tractor/search?${new URLSearchParams({
+															city: searchFilters.city,
+															make:e.target.value,
+															featured: searchFilters.featured,
+															priceRangeFrom: searchFilters.priceRangeFrom,
+															priceRangeTo: searchFilters.priceRangeTo,
+															title: searchFilters.title,
+															category: searchFilters.category,
+															brand: searchFilters.brand
+														})
+															.toString()}`)
                             setSearchFilters({
                               ...searchFilters,
                               make: e.target.value,
@@ -223,7 +247,7 @@ export default function SideSearch({
                           }}
                         />
                         {item}
-                        <span className="pull-right count">14256</span>
+                        <span className="pull-right count"></span>
                       </label>
                     </li>
                   </>
@@ -236,7 +260,18 @@ export default function SideSearch({
             <input
               type="checkbox"
               value="featured"
-              onChange={(e) => {
+							onChange={(e) => {
+								history.push(`/used-tractor/search?${new URLSearchParams({
+									city: searchFilters.city,
+									featured:e.target.value,
+									make: searchFilters.make,
+									priceRangeFrom: searchFilters.priceRangeFrom,
+									priceRangeTo: searchFilters.priceRangeTo,
+									title: searchFilters.title,
+									category: searchFilters.category,
+									brand: searchFilters.brand
+								})
+									.toString()}`)
                 setSearchFilters({
                   ...searchFilters,
                   featured: e.target.checked,
@@ -272,12 +307,24 @@ export default function SideSearch({
                   className="btn btn-primary refine-go"
                   type="submit"
                   value="Go"
-                  onClick={() =>
+									onClick={() => {
+										history.push(`/used-tractor/search?${new URLSearchParams({
+											city: searchFilters.city,
+											featured:searchFilters.featured,
+											make: searchFilters.make,
+											priceRangeFrom: searchFilters.priceRangeFrom,
+											priceRangeTo: searchFilters.priceRangeTo,
+											title: searchFilters.title,
+											category: searchFilters.category,
+											brand: searchFilters.brand
+										})
+											.toString()}`)
                     setSearchFilters({
                       ...searchFilters,
                       priceRangeTo: priceRangeTo,
                       priceRangeFrom: priceRangeFrom,
                     })
+									}
                   }
                 />
               </li>

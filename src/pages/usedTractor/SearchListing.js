@@ -82,7 +82,7 @@ export default function SearchListing({ products, pagination, noOfRec, handleGet
           </div>
         </div>
         <div className={gridOrList === "list" ? "" : "row"}>
-          {products.map((item) => {
+          {products && products.length>0? products.map((item) => {
             return (
               <>
                 <div className={`${gridOrList === "list" ? "" : "col-4"}`}>
@@ -210,7 +210,9 @@ export default function SearchListing({ products, pagination, noOfRec, handleGet
                 </div>
               </>
             );
-          })}
+					}) : <div style={{ "textAlign": "center", "background": "white", "fontSize": "x-large" }}>
+						No Products</div>}
+						
         </div>
         {/* <div className="pagination">
           <span className="mx-auto">
