@@ -198,6 +198,9 @@
   overflow: hidden;
   text-overflow: ellipsis;
 }
+.user{
+  margin-top: 7rem !important;
+}
 .post-ad{
   .container {
     margin-right: auto;
@@ -212,9 +215,7 @@
     content: " ";
     display: table;
   }
-  .mb40 {
-    margin-bottom: 40px !important;
-  }
+ 
   .well, .latest-reviews .form-horizontal {
     padding: 29px;
     margin-bottom: 0px;
@@ -260,9 +261,7 @@
   .pull-left {
     float: left !important;
   }
-  .fs12 {
-    font-size: 12px;
-  }
+ 
 
 
   .dashboard-nav {
@@ -390,9 +389,7 @@
     display: block;
     padding: 10px 0;
   }
-  .col-md-9 {
-    width: 75%;
-  }
+  
   .dashboard-profile h2 {
     margin: 11px 0 0;
     color: #223c7a;
@@ -426,13 +423,7 @@
     display: table;
   }
 
-  .text-right {
-    text-align: right;
-  }
 
-  .mb20 {
-      margin-bottom: 20px !important;
-  }
   .search-page-new ul.search-results {
     margin: 0;
     list-style: none;
@@ -442,12 +433,7 @@
     padding-left: 0;
     list-style: none;
   }
-  .mt10 {
-    margin-top: 10px !important;
-  }
-  .mb10{
-    margin-bottom: 10px !important;
-  }
+  
 }
 
 .phone_no_truncate{

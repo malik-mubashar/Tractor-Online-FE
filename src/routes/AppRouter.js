@@ -29,7 +29,7 @@ import UnProtectedRoute from "../components/UnprotectedRoutes/index";
 import Layout from "../layouts/Layouts";
 import AddDetails from "../pages/AddDetails/AddDetails";
 import City from "../pages/City/City";
-import toast, { Toaster } from 'react-hot-toast';
+import toast, { Toaster } from "react-hot-toast";
 import Country from "../pages/Country/Country";
 import ProdCategories from "../pages/ProductCategories/ProdCategories";
 import ProdSubCategories from "../pages/ProductSubCategories /ProdSubCategories";
@@ -44,11 +44,10 @@ import Models from "../pages/Models/Models";
 import Budgets from "../pages/Models copy/Budgets";
 import DashboardLayout from "../layouts/DashboardLayout";
 import SellTractor from "../pages/PostAd/SellTractor.js";
-import PostAd from "../pages/PostAd/post-ad"
+import PostAd from "../pages/PostAd/post-ad";
 import ProductMappings from "../pages/Product Mapping/ProductMappings";
 import Loader from "../pages/Loader";
 import SavedAds from "../pages/PostAd/saved-ads";
-import Rides from "../pages/PostAd/myRides";
 import Alerts from "../pages/PostAd/myAlerts";
 import Ads from "../pages/PostAd/myAds";
 import UsedTractor from "../pages/usedTractor/UsedTractor";
@@ -56,11 +55,12 @@ import BrandDetails from "../pages/LandingPage/BrandDetails/brandDetails";
 import BrowseUs from "../pages/BrowseUs";
 import Privacy from "../pages/privacy";
 import Terms from "../pages/terms";
+import Users from "../pages/PostAd/users"
 
 const AppRouter = () => {
   return (
-		<>
-			<Toaster />
+    <>
+      <Toaster />
       <Loader />
       <BrowserRouter>
         <Switch>
@@ -72,84 +72,84 @@ const AppRouter = () => {
           </Route>
           <UnProtectedRoute exact path="/login">
             <Login />
-					</UnProtectedRoute>
-					{/* /// */}
-					<ProtectedRoute exact path="/city">
+          </UnProtectedRoute>
+          {/* /// */}
+          <ProtectedRoute exact path="/city">
             <DashboardLayout>
               <City />
             </DashboardLayout>
-					</ProtectedRoute>
-					<ProtectedRoute exact path="/country">
+          </ProtectedRoute>
+          <ProtectedRoute exact path="/country">
             <DashboardLayout>
               <Country />
             </DashboardLayout>
-					</ProtectedRoute>
-					<ProtectedRoute exact path="/productCategoryHeads">
+          </ProtectedRoute>
+          <ProtectedRoute exact path="/productCategoryHeads">
             <DashboardLayout>
               <ProdCategoryHeads />
             </DashboardLayout>
-					</ProtectedRoute>
-					<ProtectedRoute exact path="/categoryBrands">
+          </ProtectedRoute>
+          <ProtectedRoute exact path="/categoryBrands">
             <DashboardLayout>
               <CategoryBrands />
             </DashboardLayout>
-					</ProtectedRoute>
-					<ProtectedRoute exact path="/brands">
+          </ProtectedRoute>
+          <ProtectedRoute exact path="/brands">
             <DashboardLayout>
               <Brands />
             </DashboardLayout>
-					</ProtectedRoute>
-					<ProtectedRoute exact path="/models">
+          </ProtectedRoute>
+          <ProtectedRoute exact path="/models">
             <DashboardLayout>
               <Models />
             </DashboardLayout>
-					</ProtectedRoute>
-					<ProtectedRoute exact path="/budgets">
+          </ProtectedRoute>
+          <ProtectedRoute exact path="/budgets">
             <DashboardLayout>
               <Budgets />
             </DashboardLayout>
-					</ProtectedRoute>
-					<ProtectedRoute exact path="/productCategories">
+          </ProtectedRoute>
+          <ProtectedRoute exact path="/productCategories">
             <DashboardLayout>
               <ProdCategories />
             </DashboardLayout>
-					</ProtectedRoute>
+          </ProtectedRoute>
 
-					<ProtectedRoute exact path="/languages">
+          <ProtectedRoute exact path="/languages">
             <DashboardLayout>
               <Languages />
             </DashboardLayout>
-					</ProtectedRoute>
+          </ProtectedRoute>
 
-					<ProtectedRoute exact path="/productSubCategories">
+          <ProtectedRoute exact path="/productSubCategories">
             <DashboardLayout>
               <ProdSubCategories />
             </DashboardLayout>
-					</ProtectedRoute>
+          </ProtectedRoute>
 
-					<ProtectedRoute exact path="/products">
+          <ProtectedRoute exact path="/products">
             <DashboardLayout>
               <Products />
             </DashboardLayout>
-					</ProtectedRoute>
+          </ProtectedRoute>
 
-					<ProtectedRoute exact path="/roles">
+          <ProtectedRoute exact path="/roles">
             <DashboardLayout>
               <Roles />
             </DashboardLayout>
-					</ProtectedRoute>
+          </ProtectedRoute>
 
-					<ProtectedRoute exact path="/userRoles">
+          <ProtectedRoute exact path="/userRoles">
             <DashboardLayout>
               <UserRoles />
             </DashboardLayout>
-					</ProtectedRoute>
-					<ProtectedRoute exact path="/product-mappings">
+          </ProtectedRoute>
+          <ProtectedRoute exact path="/product-mappings">
             <DashboardLayout>
               <ProductMappings />
             </DashboardLayout>
-					</ProtectedRoute>
-          <Route exact path="/used-tractor/search" >
+          </ProtectedRoute>
+          <Route exact path="/used-tractor/search">
             <Layout>
               <UsedTractorSearch />
             </Layout>
@@ -181,38 +181,37 @@ const AppRouter = () => {
             </Layout>
           </UnProtectedRoute>
           <UnProtectedRoute exact path="/browse-us">
-          <Layout>
+            <Layout>
               <BrowseUs />
+            </Layout>
+          </UnProtectedRoute>
+          <UnProtectedRoute exact path="/users">
+            <Layout>
+              <Users />
             </Layout>
           </UnProtectedRoute>
           <UnProtectedRoute exact path="/users/my-ads">
             <Layout>
-              <PostAd>
-                <Ads/>
-                </PostAd>
+              <Users>
+              <Ads />
+              </Users> 
             </Layout>
           </UnProtectedRoute>
           <UnProtectedRoute exact path="/users/saved-ads">
             <Layout>
-              <PostAd>
+              <Users>
               <SavedAds />
-              </PostAd>
+              </Users>
             </Layout>
           </UnProtectedRoute>
-          <UnProtectedRoute exact path="/alerts">
+          <UnProtectedRoute exact path="/my-messages">
             <Layout>
-              <PostAd>
+              <Users>
               <Alerts />
-              </PostAd>
+              </Users>
             </Layout>
           </UnProtectedRoute>
-          <UnProtectedRoute exact path="/rides/my_rides">
-            <Layout>
-              <PostAd>
-              <Rides />
-              </PostAd>
-            </Layout>
-          </UnProtectedRoute>
+        
           <UnProtectedRoute exact path="/add-details/:id">
             <Layout>
               <AddDetails />
@@ -220,9 +219,7 @@ const AppRouter = () => {
           </UnProtectedRoute>
           <UnProtectedRoute exact path="/brandDetails/:id">
             <Layout>
-              
               <BrandDetails />
-             
             </Layout>
           </UnProtectedRoute>
           <UnProtectedRoute exact path="/signup/">
@@ -244,7 +241,7 @@ const AppRouter = () => {
               <Profile />
             </DashboardLayout>
           </ProtectedRoute>
-          
+
           <ProtectedRoute exact path="/profile-settings/">
             <DashboardLayout>
               <ProfileSettings />

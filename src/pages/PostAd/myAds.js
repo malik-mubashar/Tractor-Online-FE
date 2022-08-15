@@ -1,34 +1,30 @@
-import React from 'react'
+import React from "react";
+import { Tabs, Tab } from "react-bootstrap";
 
 const myAds = () => {
   return (
-    <div className="post-ad">
-        <div className="row search-page-new">
-        <div className="col-md-3">
-          <ul className="nav nav-tabs nav-stacked dashboard-subnav">
-            <li className="active">
-              <a href="/users/my-ads">Active (0)</a>
-            </li>
-            <li className="">
-              <a href="/users/my-ads/st_pending">Pending (0)</a>
-            </li>
-            <li className="">
-              <a href="/users/my-ads/st_removed">Removed (0)</a>
-            </li>
 
-
-          </ul>
-        </div>
-        <div className="col-md-9">
-            <div className="tab-content well">
-              <h4 className="text-center">
-                No Active Ads
-              </h4>
+    <div className="mb-4">
+    <div className="">
+      <div className="tabs-style-three">
+        <Tabs defaultActiveKey="Active" id="uncontrolled-tab-example">
+          <Tab eventKey="Active" title="Active">
+          
+            <h4 className="text-center">No Active Ads</h4>
+          
+            </Tab>
+            <Tab eventKey="Removed" title="Removed">
+              </Tab>
+            </Tabs>
             </div>
+          </div>
         </div>
-      </div>
-    </div>
-  )
-}
+      
+    
+     
+      
+  
+  );
+};
 
 export default myAds;

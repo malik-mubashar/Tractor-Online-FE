@@ -13,7 +13,7 @@ import toast from "react-hot-toast";
 import noProfilePicture from "../assets/svg/no-profile-picture.svg";
 
 const ProfileSettings = () => {
-  const { currentUser } = useContext(RootContext);
+  const { currentUser, showPasswordModel, setShowPasswordModel } = useContext(RootContext);
   const [userPersonalDetail, setUserPersonalDetail] = useState(currentUser);
   const [sideMenue, setSideMenu] = useState();
   const [fileDataURL, setFileDataURL] = useState(null);
@@ -216,7 +216,7 @@ const ProfileSettings = () => {
   };
 
   const modalClose = () => {
-    setModalShow(!modalShow);
+    setShowPasswordModel(!showPasswordModel);
   };
 
   return (
@@ -463,7 +463,7 @@ const ProfileSettings = () => {
         </Row>
         <PasswordResetModal
           modalClose={modalClose}
-          modalShow={modalShow}
+          modalShow={showPasswordModel}
           updatePassword={updatePassword}
           handleUpdatePassword={handleUpdatePassword}
         />
