@@ -41,19 +41,19 @@ const users = (props) => {
               </p>
               <ul className="dashboard-nav">
                 <li>
-                  <a href="/users/my-ads">
+                  <Link to="/users/my-ads">
                     <i className="icofont-bullhorn">My Ads</i>
-                  </a>
+                  </Link>
                 </li>
                 <li>
-                  <a href="/users/saved-ads">
+                  <Link to="/users/saved-ads">
                     <i className="icofont-heart">My Saved Ads</i>
-                  </a>
+                  </Link>
                 </li>
                 <li>
-                  <a href="/my-messages">
+                  <Link to="/my-messages">
                     <i className="icofont-ui-message">My Messages</i>
-                  </a>
+                  </Link>
                 </li>
               </ul>
             </div>
