@@ -16,13 +16,14 @@ export default function DropDown({
   cities,
   brands,
   productCategory,
+  categoryLink
 }) {
   const history = useHistory();
 
   return (
     <div>
       <div className={`${!dropDownIcon ? " dropdown-button p-1" : "p-1"}`}>
-        {title}
+        <span onClick={()=> history.push(categoryLink)}>{title}</span>
         {/* { productHead.length > 0? 
             (
               <>
