@@ -98,7 +98,7 @@ const SellTractor = () => {
                           * Service available only in Karachi, Lahore, Islamabad
                           and Rawalpindi
                         </p>*/}
-                        <p className="text-info">Coming Soon...</p>
+                        <h2 className="text-danger mt-4">Coming Soon...</h2>
                     </div>
                     <div className="col-4">
                       <img
