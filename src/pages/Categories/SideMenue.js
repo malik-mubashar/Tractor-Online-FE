@@ -52,11 +52,10 @@ const SideMenue = () => {
           return (
             <div key={i}>
               <Nav.Link
-                onClick={()=> history.push(item.link)}
                 className="d-flex w-100 dropdown-button-category "
                 key={i}
               >
-								<span className="user-pic">
+								<span className="user-pic" onClick={()=> history.push(item.link)}>
 									{
 										item.active_image_path !== undefined ?
 										<Image
@@ -75,6 +74,7 @@ const SideMenue = () => {
 									}
                 </span>
                 <DropDown
+                  categoryLink = {item.link}
                   productHead={item.product_category_heads}
                   title={item.title}
                   cities={cities}
