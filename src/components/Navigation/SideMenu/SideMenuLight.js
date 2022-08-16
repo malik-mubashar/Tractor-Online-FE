@@ -69,7 +69,7 @@ class SideMenuLight extends React.Component {
                 id="basic-nav-dropdown"
 							>
 								<NavLink
-                  to="/products/"
+                  to="/dashboard/products/"
                   className="dropdown-item"
                   
                 >
@@ -77,7 +77,7 @@ class SideMenuLight extends React.Component {
                   Products
                 </NavLink>
                 <NavLink
-                  to="/productCategories/"
+                  to="/dashboard/productCategories/"
                   className="dropdown-item"
                   
                 >
@@ -85,7 +85,7 @@ class SideMenuLight extends React.Component {
                   Product Categories
                 </NavLink>
                 <NavLink
-                  to="/categoryBrands/"
+                  to="/dashboard/categoryBrands/"
                   className="dropdown-item"
                   
                 >
@@ -93,7 +93,7 @@ class SideMenuLight extends React.Component {
                   category Brands
                 </NavLink>
                 <NavLink
-                  to="/productSubCategories"
+                  to= "/dashboard/productSubCategories"
                   className="dropdown-item"
                   
                 >
@@ -102,7 +102,7 @@ class SideMenuLight extends React.Component {
                 </NavLink>
 
                 <NavLink
-                  to="/productCategoryHeads/"
+                  to="/dashboard/productCategoryHeads/"
                   className="dropdown-item"
                   
                 >
@@ -110,34 +110,34 @@ class SideMenuLight extends React.Component {
                   Categories Head
                 </NavLink>
 
-                <NavLink to="/brands" className="dropdown-item" >
+                <NavLink to= "/dashboard/brands" className="dropdown-item" >
                   <Icon.Plus className="icon" />
                   Brands
 								</NavLink>
-                <NavLink to="/product-mappings" className="dropdown-item" >
+                <NavLink to= "/dashboard/product-mappings" className="dropdown-item" >
                   <Icon.Plus className="icon" />
                   Product Mappings
 								</NavLink>
-								<NavLink to="/models" className="dropdown-item" >
+								<NavLink to= "/dashboard/models" className="dropdown-item" >
                   <Icon.Plus className="icon" />
                   Models
 								</NavLink>
-								<NavLink to="/city" className="dropdown-item" >
+								<NavLink to= "/dashboard/city" className="dropdown-item" >
                   <Icon.Plus className="icon" />
                   City
 								</NavLink>
-								<NavLink to="/budgets" className="dropdown-item" >
+								<NavLink to= "/dashboard/budgets" className="dropdown-item" >
                   <Icon.Plus className="icon" />
                   Budgets
                 </NavLink>
 
-								<NavLink to="/roles" className="dropdown-item" >
+								<NavLink to= "/dashboard/roles" className="dropdown-item" >
                   <Icon.Plus className="icon" />
                   Roles
                 </NavLink>
 
                 <NavLink
-                  to="/country"
+                  to= "/dashboard/country"
                   className="dropdown-item"
                   
                 >
@@ -146,7 +146,7 @@ class SideMenuLight extends React.Component {
                 </NavLink>
 
                 <NavLink
-                  to="/languages/"
+                  to="/dashboard/languages/"
                   className="dropdown-item"
                   
                 >
@@ -155,7 +155,7 @@ class SideMenuLight extends React.Component {
 								</NavLink>
 								
 								<NavLink
-                  to="/userRoles/"
+                  to="/dashboard/userRoles/"
                   className="dropdown-item"
                   
                 >

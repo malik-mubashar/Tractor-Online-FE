@@ -52,7 +52,7 @@ const Navigation = ({onClick }) => {
   const _handleSubmit = (event) => {
     event.preventDefault();
     if (state.term) {
-      history.push("/search/");
+      history.push( "/dashboard/search");
     }
   };
 
@@ -85,7 +85,7 @@ const Navigation = ({onClick }) => {
             <Form
               className="nav-search-form d-none d-sm-block"
               onSubmit={()=>_handleSubmit()}
-              action="/search/"
+              action= "/dashboard/search"
             >
               <FormControl
                 type="text"

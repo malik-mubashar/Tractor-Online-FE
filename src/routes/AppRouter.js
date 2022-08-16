@@ -74,66 +74,66 @@ const AppRouter = () => {
             <Login />
           </UnProtectedRoute>
           {/* /// */}
-          <ProtectedRoute exact path="/city">
+          <ProtectedRoute exact path= "/dashboard/city">
             <DashboardLayout>
               <City />
             </DashboardLayout>
           </ProtectedRoute>
-          <ProtectedRoute exact path="/country">
+          <ProtectedRoute exact path= "/dashboard/country">
             <DashboardLayout>
               <Country />
             </DashboardLayout>
           </ProtectedRoute>
-          <ProtectedRoute exact path="/productCategoryHeads">
+          <ProtectedRoute exact path= "/dashboard/productCategoryHeads">
             <DashboardLayout>
               <ProdCategoryHeads />
             </DashboardLayout>
           </ProtectedRoute>
-          <ProtectedRoute exact path="/categoryBrands">
+          <ProtectedRoute exact path= "/dashboard/categoryBrands">
             <DashboardLayout>
               <CategoryBrands />
             </DashboardLayout>
           </ProtectedRoute>
-          <ProtectedRoute exact path="/brands">
+          <ProtectedRoute exact path= "/dashboard/brands">
             <DashboardLayout>
               <Brands />
             </DashboardLayout>
           </ProtectedRoute>
-          <ProtectedRoute exact path="/models">
+          <ProtectedRoute exact path= "/dashboard/models">
             <DashboardLayout>
               <Models />
             </DashboardLayout>
           </ProtectedRoute>
-          <ProtectedRoute exact path="/budgets">
+          <ProtectedRoute exact path= "/dashboard/budgets">
             <DashboardLayout>
               <Budgets />
             </DashboardLayout>
           </ProtectedRoute>
-          <ProtectedRoute exact path="/productCategories">
+          <ProtectedRoute exact path= "/dashboard/productCategories">
             <DashboardLayout>
               <ProdCategories />
             </DashboardLayout>
           </ProtectedRoute>
 
-          <ProtectedRoute exact path="/languages">
+          <ProtectedRoute exact path= "/dashboard/languages">
             <DashboardLayout>
               <Languages />
             </DashboardLayout>
           </ProtectedRoute>
 
-          <ProtectedRoute exact path="/productSubCategories">
+          <ProtectedRoute exact path= "/dashboard/productSubCategories">
             <DashboardLayout>
               <ProdSubCategories />
             </DashboardLayout>
           </ProtectedRoute>
 
-          <ProtectedRoute exact path="/products">
+          <ProtectedRoute exact path= "/dashboard/products">
             <DashboardLayout>
               <Products />
             </DashboardLayout>
           </ProtectedRoute>
 
-          <ProtectedRoute exact path="/roles">
+          <ProtectedRoute exact path= "/dashboard/roles">
             <DashboardLayout>
               <Roles />
             </DashboardLayout>
@@ -144,7 +144,7 @@ const AppRouter = () => {
               <UserRoles />
             </DashboardLayout>
           </ProtectedRoute>
-          <ProtectedRoute exact path="/product-mappings">
+          <ProtectedRoute exact path= "/dashboard/product-mappings">
             <DashboardLayout>
               <ProductMappings />
             </DashboardLayout>
@@ -248,7 +248,7 @@ const AppRouter = () => {
             </DashboardLayout>
           </ProtectedRoute>
 
-          <ProtectedRoute exact path="/search/">
+          <ProtectedRoute exact path= "/dashboard/search">
             <DashboardLayout>
               <Search />
             </DashboardLayout>

@@ -32,13 +32,14 @@ const Login = () => {
       //success
 			if (result.error === false) {
 				toast.dismiss(loadingToastId);
-
+				console.log('currentUser',result)
         toast.success('welcome')
         setCurrentUser({
           ...result.data.data,
           accessToken: result.headers["access-token"],
           client: result.headers["client"],
-          uid: result.headers["uid"]
+					uid: result.headers["uid"],
+					role:result.data.role
         });
 
         localStorage.setItem(
@@ -47,17 +48,24 @@ const Login = () => {
             ...result.data.data,
             accessToken: result.headers["access-token"],
             client: result.headers["client"],
-            uid: result.headers["uid"]
+						uid: result.headers["uid"],
+						role:result.data.role
+
           })
         );
-				debugger;
+				 
 
-				debugger;
+				 
 				if (cookies.get('placeAdClicked') == 'true') {
 					cookies.remove('placeAdClicked')
-					history.push("/sell-tractor");
+					history.push("/sell");
 				} else {
-					history.push("/dashboard");
+					if (result.data.role[0].name == 'admin') {
+						history.push("/dashboard");
+					} else {
+						history.push("/");
+						
+					}
 				}
         setSignUpMessage(false)
       }

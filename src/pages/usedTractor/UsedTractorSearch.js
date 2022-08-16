@@ -16,12 +16,14 @@ import { prodApi } from "../../API/ProdCategoriesApis";
 
 
 export default function UsedTractorSearch() {
+  const history = useHistory();
+
   const [products, setProducts] = useState([]);
   const [searchFilters, setSearchFilters] = useState();
   const [cities, setCities] = useState();
   const [priceRangeFrom, setPriceRangeFrom] = useState();
   const [priceRangeTo, setPriceRangeTo] = useState();
-  const [pagination, setPagination] = useState();
+	const [pagination, setPagination] = useState();
 	const { landingPageSearchOptions, setShowLoader } = useContext(RootContext);
 	const [noOfRec, setNoOfRec] = useState(10);
   const [heading, setHeading] = useState("");
@@ -29,8 +31,8 @@ export default function UsedTractorSearch() {
   const search = useLocation().search;
 	var category = new URLSearchParams(search).get("category");
 	const [prodCategories, setProdCategories] = useState();
-  const [brands, setBrands] = useState();
- 
+	const [brands, setBrands] = useState();
+
   useEffect(() => {
 		GetPopularCities();	
 		var featured = new URLSearchParams(search).get('featured')||'nil';
@@ -40,7 +42,7 @@ export default function UsedTractorSearch() {
 		var priceRangeFrom = new URLSearchParams(search).get('priceRangeFrom')||'nil';
 		var title = new URLSearchParams(search).get('title')||'nil';
 		var categoryId = new URLSearchParams(search).get('category')||'nil';
-		var brandId = new URLSearchParams(search).get('brand')||'nil';
+		var brandId = new URLSearchParams(search).get('brand') || 'nil';
 			setSearchFilters({
 				...searchFilters,
 				featured: featured==='true'?true:'nil',
@@ -51,22 +53,15 @@ export default function UsedTractorSearch() {
 				brand: brandId,
 				category: categoryId,
 				make:'nil'
-				
 			})
-		debugger;
-			// var url = new URL(window.location.href);
+		 
+	}, [search]);
 
-			// If your expected result is "http://foo.bar/?x=1&y=2&x=42"
-			// url.searchParams.append('x', 42);
-		// debugger;
-			// If your expected result is "http://foo.bar/?x=42&y=2"
-			// url.searchParams.set('x', 42);
-			
-	}, []);
 	useEffect(() => {
     handleGetAllProductCategories();
     getBrands(1, "", 10000000000);
-  }, []);
+	}, []);
+	
   const getBrands = async (page, mainSearch, noOfRec) => {
     const loadingToastId = toast.loading("Loading..!");
 
@@ -156,7 +151,6 @@ export default function UsedTractorSearch() {
   console.log("priceRangeTo", priceRangeTo);
   console.log("priceRangeFrom", priceRangeFrom);
   console.log("pagination",pagination);
-  const history = useHistory();
   return (
     <>
       <section>
@@ -167,7 +161,7 @@ export default function UsedTractorSearch() {
             src={"https://tpc.googlesyndication.com/simgad/5923361064753698031"}
             className="mt-5"
           />
-          <h3 className="pageHeading">{category?prodCategories && prodCategories.find((cate)=>cate.id==category).title:'Products'} for sale</h3>
+          <h3 className="pageHeading">{category&&category!='nil'?prodCategories && prodCategories.find((cate)=>cate.id==category).title:'Products'} for sale</h3>
           <div className="searchCounterWrapper">
             <ul className="breadcrumb bread">
               <li>
@@ -188,12 +182,12 @@ export default function UsedTractorSearch() {
                     className="cursor-pointer"
                     itemProp="name"
                   >
-                    {category?prodCategories && prodCategories.find((cate)=>cate.id==category).title:'Products'} /
+                    {category &&category!='nil'?prodCategories && prodCategories.find((cate)=>cate.id==category).title:'Products'} /
                   </span>
                 </a>
               </li>
               <li>
-                <span itemProp="name">{category?prodCategories && prodCategories.find((cate)=>cate.id==category).title:'Products'} In Pakistan</span>
+                <span itemProp="name">{category&&category!='nil'?prodCategories && prodCategories.find((cate)=>cate.id==category).title:'Products'} In Pakistan</span>
               </li>
 						</ul>
 						{pagination &&

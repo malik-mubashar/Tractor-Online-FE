@@ -55,7 +55,6 @@ const Dashboard = () => {
     // if (this.state.loading) {
     //   loader = <Loader message="Loading..." />;
     // }
-		console.log('userProfilePicture',userProfilePicture)
 
 
     return (

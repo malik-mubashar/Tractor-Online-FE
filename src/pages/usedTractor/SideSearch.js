@@ -186,7 +186,7 @@ export default function SideSearch({
           <Form
             className="nav-search-form row"
             // onSubmit={this._handleSubmit}
-            // action="/search/"
+            // action= "/dashboard/search"
           >
             <FormControl
               type="text"

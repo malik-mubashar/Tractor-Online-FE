@@ -41,9 +41,9 @@ export default function Footer() {
     const result = await city.getPopularCity("popular");
     setCities(result.data && result.data.data);
   };
-  const getBrands =async (page, mainSearch, noOfRec) =>{
+  const getBrands = async (page, mainSearch, noOfRec) => {
     const result = await brandApis.getBrands(page, mainSearch, noOfRec);
-    setBrandsForCategories(result.data.data && result.data.data);
+    setBrandsForCategories(result.data && result.data.data);
   };
   return (
     <div>
@@ -61,17 +61,20 @@ export default function Footer() {
                       <h5 className="text-white">Tractors By Make</h5>
                     </li>
                     {brandsForCategories &&
-                      brandsForCategories.map((item,i) => {
-                    return(
-                    <li className="mt-1">
-                      <div key={i}>
-                      <Nav.Link href={`/used-tractor/search?brand=${item.id}`} className="footer-link">
-                      {item.title}
-                      </Nav.Link>
-                      </div>
-                    </li>
-                    );
-                  })}
+                      brandsForCategories.map((item, i) => {
+                        return (
+                          <li className="mt-1">
+                            <div key={i}>
+                              <Nav.Link
+                                href={`/used-tractor/search?brand=${item.id}`}
+                                className="footer-link"
+                              >
+                                {item.title}
+                              </Nav.Link>
+                            </div>
+                          </li>
+                        );
+                      })}
 
                     {/* <li className="mt-1">
                       <a href="/" className="footer-link">
@@ -115,17 +118,21 @@ export default function Footer() {
                     </li>
                     {cities &&
                       cities.map((item, i) => {
-                        return(
-                        <li className="mt-1">
-                          <div key={i}>
-                         <Nav.Link href={`/used-tractor/search?city=${item.title}`}
-                        className="footer-link"
-                      
-                      >
-                            {item.title}
-                          </Nav.Link>
-                          </div>
-                        </li>
+                        return (
+                          <li className="mt-1">
+                            <div key={i}>
+                              <span
+                                onClick={() => {
+                                  history.push(
+                                    `/used-tractor/search?city=${item.title}`
+                                  );
+                                }}
+                                className="footer-link"
+                              >
+                                {item.title}
+                              </span>
+                            </div>
+                          </li>
                         );
                       })}
                     {/* <li className="mt-1">
