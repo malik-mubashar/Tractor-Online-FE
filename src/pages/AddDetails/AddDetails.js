@@ -287,8 +287,8 @@ export default function AddDetails() {
                               return (
                                 <div className="col-lg-6 carDetail">
                                   <div className="borderTop d-flex">
-                                  <p>{item[0]}</p>
-                                  <p>{item[1]}</p>
+                                  <b>{item[0]}:</b>
+                                  <p className="ml-2">{item[1]}</p>
                                   </div>
                                 </div>
                               );

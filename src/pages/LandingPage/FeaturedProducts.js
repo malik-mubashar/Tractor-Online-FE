@@ -55,7 +55,7 @@ console.log('mbmbproducts',products)
     <div>
       <div className="d-flex justify-content-between">
         <h2>{title}</h2>
-        <a className="text-info text-capitalize">{link}</a>
+        <Link className="text-info text-capitalize" to={`used-tractor/search?category=${prodCategoryId}`} >{link}</Link>
       </div>
       <Carousel
         swipeable={false}
