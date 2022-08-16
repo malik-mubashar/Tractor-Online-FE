@@ -18,7 +18,7 @@ export default function Categories({ brands, brandsForCategories }) {
       setCities(result.data && result.data.data);
       let tempArr = [];
       const chunkSize = 12;
-      debugger;
+       
       for (let i = 0; i < result.data.data.length; i += chunkSize) {
         const chunk = result.data.data.slice(i, i + chunkSize);
         tempArr.push(chunk);

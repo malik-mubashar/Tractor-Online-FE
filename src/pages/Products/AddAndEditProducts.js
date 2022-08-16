@@ -268,7 +268,7 @@ export default function AddAndEditProduct({
       formData.append("phone_no", productsState.phone_no);
       // formData.append("link", productsState.link);
       formData.append("extra_fields", JSON.stringify(extraFieldsData));
-      debugger;
+       
       formData.append("featured", productsState.featured);
       formData.append("brand_id", productsState.brand_id);
       formData.append("user_id", user.id);

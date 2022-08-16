@@ -113,7 +113,7 @@ const searchAble = ({ cities }) => {
             className="btn-success p-1  searchAble border-right-radius"
 						type="submit"
 						onClick={() => {
-							debugger;
+							 
 							setLandingPageSearchOptions({
 								city: city || 'nil',
 								priceRangeTo: maxPrice || 'nil',

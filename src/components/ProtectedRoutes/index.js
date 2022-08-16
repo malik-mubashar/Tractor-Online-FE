@@ -13,12 +13,20 @@ const ProtectedRoute = ({ children, ...routeProps }) => {
   return (
     <Route
       {...routeProps}
-      render={() => {
+			render={() => {
+				debugger;
         if (currentUser == null) {
-          history.push('/login')
+					history.push('/login')
+					debugger;
         }
-        else {
-          return children
+				else {
+					if (currentUser.role[0].name === 'admin') {
+						return children
+					} else {
+						if (window.location.pathname.includes('/dashboard')) {
+							history.push('/')
+						}
+					}
         }
       }}
     />

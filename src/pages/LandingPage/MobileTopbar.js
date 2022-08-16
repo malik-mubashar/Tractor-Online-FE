@@ -44,7 +44,7 @@ const MobileTopbar = () => {
           </div>
         </div>
 
-        <Form className="nav-search-form d-sm-block relative" action="/search/">
+        <Form className="nav-search-form d-sm-block relative" action= "/dashboard/search">
           <FormControl
             type="text"
             placeholder="Search..."
