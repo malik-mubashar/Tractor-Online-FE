@@ -41,7 +41,6 @@ export default function SideSearch({
   ];
 
   console.log("searchFilters", searchFilters);
-  console.log("brands", brands);
   return (
     <>
       <MDBAccordion alwaysOpen initialActive={1}>
@@ -108,7 +107,7 @@ export default function SideSearch({
                       ) : item[1] !== "nil" && item[0] === "category" ? (
                         <li className="d-flex" key={i}>
                           {prodCategories &&
-                            prodCategories.find((cate) => cate.id == item[1])
+                            prodCategories.find((cate) => cate.id.toString() == item[1])
                               .title}
                           <span class="ml-auto">
                             <i
@@ -131,7 +130,7 @@ export default function SideSearch({
                       ) : item[1] !== "nil" && item[0] === "brand" ? (
                         <li className="d-flex" key={i}>
                           {brands &&
-                            brands.find((brand) => brand.id == item[1])}
+                            brands.find((brand) => brand.id.toString() == item[1]).title}
                           <span class="ml-auto">
                             <i
                               class="fa fa-times-circle"
