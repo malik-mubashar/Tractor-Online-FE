@@ -1,28 +1,30 @@
-import React from "react";
+import React, { useContext } from "react";
+import { RootContext } from "../context/RootContext";
 
 const terms = () => {
+  const { websiteName } = useContext(RootContext);
   return (
     <div className="privacy-container mb-5">
-       <div className="container">
-      <h1 className="mt-3">Terms of Service</h1>
+      <div className="container">
+        <h1 className="mt-3">Terms of Service</h1>
       </div>
       <div className="card container">
         <h3 className="mb-3">Acknowledgment</h3>
         <p>
           The terms listed below must be accepted as the sole basis for using
-          this website and for hiring tractoronline.com to provide any services
+          this website and for hiring {websiteName}.com to provide any services
           if you desire to do so. Do not use this website or hire
-          TractorOnline.com for any services if you do not agree to any of the
+          {websiteName}.com for any services if you do not agree to any of the
           terms. You understand and acknowledge that this Agreement's terms and
           conditions strictly control your use of the Website (as defined
           below).
         </p>
         <h3 className="mb-3">Introductions</h3>
         <p>
-          Trcatoronline (Private) Limited (hereinafter referred to as
-          "TractorOnline" or "we" or "us" or "our") extends a warm welcome to
-          you at TractorOline for conducting your car search and gaining access
-          to all the products available, such as automotive-related items,
+          Trcatoronline (Private) Limited (hereinafter referred to as "
+          {websiteName}" or "we" or "us" or "our") extends a warm welcome to you
+          at TractorOline for conducting your car search and gaining access to
+          all the products available, such as automotive-related items,
           transaction services for buying and selling cars, forums, services for
           inspecting cars, auto parts and accessories, etc.
         </p>
@@ -34,14 +36,14 @@ const terms = () => {
           IN PERSON, VIA ELECTRONIC MEANS, OR VIA DIGITAL MEANS.
         </p>
         <p>
-          TractorOnline (Private) Limited, a business legally incorporated in
+          {websiteName} (Private) Limited, a business legally incorporated in
           Pakistan with its registered office at the 2nd Floor of the Saeed
           Allam Tower in the 37-Commercial Zone of Liberty Market in Gulberg,
-          Lahore, is the owner of the domain name www.TractorOnline.com. These
-          terms of use of the TractorOnline.com website, mobile site, and mobile
-          applications (individually and collectively, "Website" or
-          "TractorOnline.com") are between TractorOnline and any visitors to or
-          registered users of the TractorOnline.com website (hereinafter
+          Lahore, is the owner of the domain name www.{websiteName}.com. These
+          terms of use of the {websiteName}.com website, mobile site, and mobile
+          applications (individually and collectively, "Website" or "
+          {websiteName}.com") are between {websiteName} and any visitors to or
+          registered users of the {websiteName}.com website (hereinafter
           referred to as "you" or "your" or "yourself" or "user" or "customer").
           They outline the conditions under which PakWheels.com grants you
           access to the website for the purpose ("Services", and more
@@ -65,15 +67,15 @@ const terms = () => {
           terms of use by using our website or using any of our services.
         </p>
         <p>
-          Additionally, TractorOnline retains the right to restrict or limit
+          Additionally, {websiteName} retains the right to restrict or limit
           your access to the Website, as well as to terminate your access to the
           Website and refuse any services or other products that are made
           available via or at our website, without assigning any reason
-          whatsoever. In addition to any other remedy available to TractorOnline
+          whatsoever. In addition to any other remedy available to {websiteName}
           for accessing and using the website or using any of our services
           through the website in violation of any of the terms and conditions of
           the terms of use, this agreement, any other applicable law, or both,
-          TractorOnline reserves the right to suspend or terminate its services.
+          {websiteName} reserves the right to suspend or terminate its services.
         </p>
         <h3 className="mb-3">Important</h3>
         <p>
@@ -82,7 +84,7 @@ const terms = () => {
           information supplied on or through a website is solely offered for
           informational purposes and is not meant to provide you with any kind
           of certification, guarantee, or warranty. It also does not replace
-          specialized financial, legal, tax, or other advice. TractorOnline
+          specialized financial, legal, tax, or other advice. {websiteName}
           disclaims all responsibility and liability for any transaction between
           users of the website.
         </p>
@@ -99,7 +101,7 @@ const terms = () => {
           moving forward.
         </p>
         <p>
-          TractorOnline may from time to time supplement its terms of use with
+          {websiteName} may from time to time supplement its terms of use with
           additional terms pertaining to particular content, and before
           downloading and installing the mobile app, you may also be required to
           abide by additional terms of third parties, such as those from the
@@ -111,12 +113,12 @@ const terms = () => {
           Right of terminate/suspend/discontinue of any service
         </h3>
         <p>
-          TractorOnline retains the right to change, suspend, stop, or cease any
+          {websiteName} retains the right to change, suspend, stop, or cease any
           section or service at any time and without prior warning. Without
-          prior warning, TractorOnline retains the right to change or update the
+          prior warning, {websiteName} retains the right to change or update the
           information on the Website. You acknowledge that in the event that
-          TractorOnline modifies, suspends, or terminates the Website, it shall
-          not be liable to you or any third person. TractorOnline retains the
+          {websiteName} modifies, suspends, or terminates the Website, it shall
+          not be liable to you or any third person. {websiteName} retains the
           right to end any service agreement at any time, without giving the
           user any prior warning or explanation. Any unpaid payments associated
           with the service agreement must be paid by the user within the
@@ -173,7 +175,7 @@ const terms = () => {
             The user agrees not to make any attempt to gain unauthorized access
             to another user's account, the website, any of its components or
             features, any other systems or networks connected to it, or any
-            computer resources or servers of TractorOnline that are used to
+            computer resources or servers of {websiteName} that are used to
             connect to the website and deliver the services. You may not use
             automatic methods, such as robots, deep links, page scrapers, or any
             other automated means, to access the website, its features, or any
@@ -183,10 +185,10 @@ const terms = () => {
             violates the terms of the agreement by using the website or its
             material for any illegal or otherwise prohibited purpose, or by
             encouraging others to engage in illegal behavior or other action
-            that violates the rights of TractorOnline or other third parties;
+            that violates the rights of {websiteName} or other third parties;
           </li>
           <li>
-            You must not say or do anything that could damage TractorOnline's
+            You must not say or do anything that could damage {websiteName}'s
             reputation or the reputation of its customers or sellers on the
             website or elsewhere. This includes making any disparaging remarks
             about us or the brand name, trade name, or domain name we use. The
@@ -221,13 +223,13 @@ const terms = () => {
           suspend your membership in the site and refuse to grant you or any
           person acting on your behalf access to the Site if your listing,
           posting, comment, or information violates any provision of this
-          Agreement or the TractorOnline listing policy.
+          Agreement or the {websiteName} listing policy.
         </p>
         <h3 className="mb-3">Tractor transaction services</h3>
         <p>
           These terms apply to the cars purchased and sold through
-          TractorOnline's "Sell it for me" and "Buy it for me" services,
-          together referred to as TractorOnline car transaction services.
+          {websiteName}'s "Sell it for me" and "Buy it for me" services,
+          together referred to as {websiteName} car transaction services.
         </p>
         <p>
           Customer acknowledges and agrees that the Company's position in the
@@ -239,32 +241,32 @@ const terms = () => {
           and the buyer.
         </p>
         <p>
-          Customer understands and accepts that TractorOnline shall not be
+          Customer understands and accepts that {websiteName} shall not be
           liable for the timely completion of any ownership transfer, insurance,
           or other paperwork necessary to transfer ownership of vehicles
-          purchased through TractorOnline's car transaction services.
+          purchased through {websiteName}'s car transaction services.
           Additionally, the Company shall not be held liable for any litigation,
           dispute, or objection resulting from or connected with the transfer of
           ownership registration from the relevant authority, insurance, or any
           other documents pertaining to the vehicles that may be required by
           applicable law of the relevant motor vehicle registration authority.
-          TractorOnline will bill the buyer and seller the agreed-upon sum for
+          {websiteName} will bill the buyer and seller the agreed-upon sum for
           service fees/commissions, any taxes, and other fees; these fees are
           non-refundable.
         </p>
         <h3 className="mb-3">Feature Ads charges</h3>
         <ul>
           <li>
-            TractorOnline charges non-refundable fees for the services of
+            {websiteName} charges non-refundable fees for the services of
             running feature adverts in various places on the website.
           </li>
           <li>
-            The price to post an advertisement on TractorOnline is determined by
+            The price to post an advertisement on {websiteName} is determined by
             the feature ad package you choose and the rates listed on
-            TractorOnline.com.
+            {websiteName}.com.
           </li>
           <li>
-            Without previous warning, TractorOnline reserves the right to modify
+            Without previous warning, {websiteName} reserves the right to modify
             feature ad pricing at any time.
           </li>
           <li>
@@ -272,36 +274,36 @@ const terms = () => {
           </li>
           <li>
             Different payment methods are also accepted online or through
-            TractorOnline.com for payments. Despite our best efforts to maintain
+            {websiteName}.com for payments. Despite our best efforts to maintain
             the security of your online transaction, we are unable to and
             decline to accept responsibility for any loss or harm you may have
             as a result of utilizing the online payment method.
           </li>
         </ul>
-        <h3 className="mb-3">TractorOnline vehicles inspection services</h3>
+        <h3 className="mb-3">{websiteName} vehicles inspection services</h3>
         <p>
           The following terms and conditions are accepted by you if you schedule
-          a vehicle inspection through TractorOnline inspection service:
+          a vehicle inspection through {websiteName} inspection service:
         </p>
         <ul>
           <li>
             You agree to pay the fee amount plus all relevant taxes in
             accordance with the vehicle inspection rates listed on PakWheels.com
-            in exchange for TractorOnline inspection service providing you with
+            in exchange for {websiteName} inspection service providing you with
             the vehicle inspection services, including the issuance of an
             inspection report.
           </li>
           <li>
-            The TractorOnline inspection report may be connected to the vehicle
-            ad and made publicly accessible under the TractorOnline terms and
+            The {websiteName} inspection report may be connected to the vehicle
+            ad and made publicly accessible under the {websiteName} terms and
             conditions.
           </li>
           <li>
             The inspection service fees are subject to change at any time and
-            without previous notification at TractorOnline.
+            without previous notification at {websiteName}.
           </li>
           <li>
-            You agree that while TractorOnline inspectors employ recognized
+            You agree that while {websiteName} inspectors employ recognized
             techniques for fault finding, not all issues with a vehicle may be
             discovered using these techniques. The model and state of the
             vehicle at the time of the inspection should also be taken into
@@ -309,21 +311,21 @@ const terms = () => {
           </li>
           <li>
             You must submit an inspection service request at least twenty-four
-            hours in advance. Following your request, TractorOnline will get in
+            hours in advance. Following your request, {websiteName} will get in
             touch with you to arrange the vehicle's inspection time and place
             based on the technical staff's availability.
           </li>
           <li>
             If you intend to cancel a scheduled inspection service,
-            TractorOnline will assess the appropriate cancellation fee if you do
-            so with less than or equal to 12 hours' notice. TractorOnline
+            {websiteName} will assess the appropriate cancellation fee if you do
+            so with less than or equal to 12 hours' notice. {websiteName}
             reserves the right to charge a cancellation fee along with
             travelling expenses on the spot or to be deducted from the advance
             payment if you cancel the inspection service on the spot for any
             reason.
           </li>
           <li>
-            As part of the inspection service process, TractorOnline inspection
+            As part of the inspection service process, {websiteName} inspection
             service does not construct, erect, dismantle, or damage any
             structure, fixture, assembly, component, or internal/external
             mechanics of the vehicle.
@@ -335,7 +337,7 @@ const terms = () => {
           <li>
             Any hidden flaws in the vehicle that are found after the inspection
             that were not immediately obvious to the naked eye are not the
-            responsibility of TractorOnline.
+            responsibility of {websiteName}.
           </li>
           <li>
             Only the vehicle's present condition as of the inspection will be
@@ -343,22 +345,22 @@ const terms = () => {
             buyer to visually inspect the car when it is being sold.
           </li>
           <li>
-            The inspection report from TractorOnline is only valid for that
-            specific time period, and TractorOnline will not be held liable for
+            The inspection report from {websiteName} is only valid for that
+            specific time period, and {websiteName} will not be held liable for
             any alterations that were made to the vehicle after the examination.
           </li>
           <li>
             Regarding the nature, dependability, correctness, or completeness of
-            any information in the report, TractorOnline inspection service
+            any information in the report, {websiteName} inspection service
             makes no guarantees.
           </li>
           <li>
-            The TractorOnline inspection service does not involve a road test,
+            The {websiteName} inspection service does not involve a road test,
             but one can be done with your permission. In that case, you will be
             solely responsible for any damage the vehicle may sustain.
           </li>
           <li>
-            Even with your permission, TractorOnline inspection service will not
+            Even with your permission, {websiteName} inspection service will not
             conduct a road test on any vehicle that the inspector determines
             does not appear to be in a roadworthy condition. Additionally, the
             local area's speed limit is the only one that is checked for
@@ -370,21 +372,21 @@ const terms = () => {
             specified location and time.
           </li>
           <li>
-            The vehicle inspection report is created and given by TractorOnline
+            The vehicle inspection report is created and given by {websiteName}
             inspection service for the use of the individual listed on the
-            report. Without TractorOnline's prior approval, the inspection
+            report. Without {websiteName}'s prior approval, the inspection
             report cannot be used as legal evidence in any court or authority.
           </li>
           <li>
-            The inspection report created by TractorOnline will continue to be
-            its property, and TractorOnline may choose to publish the report.
+            The inspection report created by {websiteName} will continue to be
+            its property, and {websiteName} may choose to publish the report.
           </li>
           <li>
-            The inspection report created by TractorOnline will continue to be
-            its property, and TractorOnline may choose to publish the report.
-            You granted permission for TractorOnline to use or publish the
+            The inspection report created by {websiteName} will continue to be
+            its property, and {websiteName} may choose to publish the report.
+            You granted permission for {websiteName} to use or publish the
             inspection report on a website for a car sales network in
-            conjunction with an item listing when you used TractorOnline
+            conjunction with an item listing when you used {websiteName}
             inspection service.
           </li>
         </ul>
@@ -392,14 +394,14 @@ const terms = () => {
           No guarantee of increase in advertisers’ business{" "}
         </h3>
         <p>
-          The leads generated by TractorOnline are not guaranteed to result in
+          The leads generated by {websiteName} are not guaranteed to result in
           business. If no business is generated for the advertiser through
-          premium ads on the website, TractorOnline will not be held responsible
-          or liable in any way. Advertiser is aware of TractorOnline's one and
+          premium ads on the website, {websiteName} will not be held responsible
+          or liable in any way. Advertiser is aware of {websiteName}'s one and
           only responsibility, which is to post the premium ads on the Website
           in the way specified by these conditions. The advertiser is
           responsible for the information's/accuracy, content's and
-          TractorOnline will not be held liable for any exaggerated claims made
+          {websiteName} will not be held liable for any exaggerated claims made
           by the advertising.
         </p>
         <h3 className="mb-3">
@@ -407,20 +409,20 @@ const terms = () => {
         </h3>
         <p>
           All intellectual property rights in the Website and the service are
-          owned by TractorOnline, including without limitation the selection and
+          owned by {websiteName}, including without limitation the selection and
           arrangement of the design, content, graphics, advertisements,
           user-uploaded photos, vehicle descriptions, and vehicle inspection
           results. Any intellectual property rights infringement resulting from
           content posted on, transmitted through, or products offered on
-          TractorOnline.com by users or other third parties is not the
-          responsibility of TractorOnline. If any content or other content you
+          {websiteName}.com by users or other third parties is not the
+          responsibility of {websiteName}. If any content or other content you
           believe to be infringing on your intellectual property rights or the
           intellectual property rights of the owner on whose behalf you are
-          authorized to act, you may write to us at support@TractorOnline.com
+          authorized to act, you may write to us at support@{websiteName}.com
           and request that we remove the infringing Content in a good faith
           request.
         </p>
-        <h3 className="mb-3">Abusing TractorOnline</h3>
+        <h3 className="mb-3">Abusing {websiteName}</h3>
         <p>
           In addition to other remedies, we may restrict, suspend, or terminate
           your user account(s) and access to our services, limit or prohibit
@@ -432,8 +434,8 @@ const terms = () => {
         </p>
         <ul>
           <li>
-            We believe that by enforcing such restrictions, the TractorOnline
-            community will be more secure or that our or another TractorOnline
+            We believe that by enforcing such restrictions, the {websiteName}
+            community will be more secure or that our or another {websiteName}
             user's exposure to financial liabilities will be lessened.
           </li>
           <li>
@@ -467,20 +469,20 @@ const terms = () => {
           moral rights you may have in the content against us, our sublicensees,
           or our assignees, to the fullest extent permissible by applicable law.
           You also agree to waive any other intellectual property rights you may
-          have in the material. TractorOnline expressly disclaims any and all
+          have in the material. {websiteName} expressly disclaims any and all
           duty in relation to user content and does not support any content or
           any opinion, statement, recommendation, or advice contained therein.
-          After two warnings, TractorOnline reserves the right to delete the
+          After two warnings, {websiteName} reserves the right to delete the
           offending content, list the offender, or permanently block him.
         </p>
         <h3 className="mb-3">Limitation of liability </h3>
         <p>
-          Despite anything to the contrary in the agreement(s), TractorOnline,
+          Despite anything to the contrary in the agreement(s), {websiteName},
           its subsidiaries or affiliates and their respective officers,
           directors, employees, partners or suppliers will not be liable for any
           punitive damages of any kind resulting from the use of or inability to
-          use TractorOnline services, resulting from any goods or services
-          purchased. TractorOnline disclaims all responsibility for any
+          use {websiteName} services, resulting from any goods or services
+          purchased. {websiteName} disclaims all responsibility for any
           financial or other losses incurred by you as a result of:
         </p>
         <ul>
@@ -490,7 +492,7 @@ const terms = () => {
             website is interrupted or makes mistakes in its functioning.
           </li>
           <li>
-            While TractorOnline will use reasonable efforts to keep viruses off
+            While {websiteName} will use reasonable efforts to keep viruses off
             the Website, it cannot guarantee this exclusion and no liability for
             viruses is accepted. Therefore, it is advised that the user take all
             necessary precautions before downloading any data or other materials
@@ -498,23 +500,23 @@ const terms = () => {
           </li>
           <li>
             When a user makes a financial or other decision, they acknowledge
-            that TractorOnline is not responsible for ensuring that the material
+            that {websiteName} is not responsible for ensuring that the material
             on the website is not inappropriate material and that they do so at
             their own risk.
           </li>
           <li>
             No matter if the service disruption was planned or not,
-            TractorOnline will not be held responsible.
+            {websiteName} will not be held responsible.
           </li>
           <li>
             Any breach of its obligations under this agreement that is caused
             directly or indirectly by a malfunction or interruption of
             third-party software or services is not the responsibility of
-            TractorOnline.
+            {websiteName}.
           </li>
           <li>
-            While TractorOnline makes a good faith attempt to ensure the
-            accuracy of the information presented on our website, TractorOnline
+            While {websiteName} makes a good faith attempt to ensure the
+            accuracy of the information presented on our website, {websiteName}
             has no control over such third-party content and is therefore exempt
             from liability for any loss or harm arising from the use of such
             third-party content.
@@ -525,9 +527,9 @@ const terms = () => {
             products, and services made available to you through the Website are
             provided "as is" and without any express or implied warranties of
             any kind. In relation to the Website and your use of it,
-            TractorOnline and all of its officers, directors, employees, and
+            {websiteName} and all of its officers, directors, employees, and
             agents make no representations or guarantees, either express or
-            implied. TractorOnline makes no guarantees or representations
+            implied. {websiteName} makes no guarantees or representations
             regarding the timeliness, accuracy, completeness, or reliability of
             the information supplied by this website or any third-party content
             linked to it.
@@ -542,20 +544,20 @@ const terms = () => {
             third party.
           </p>
           <p>
-            Except as expressly stated on this website, TractorOnline disclaims
+            Except as expressly stated on this website, {websiteName} disclaims
             all warranties of any kind, express or implied, including without
             limitation any warranty of merchantability, fitness for a particular
-            purpose, or non-infringement. TractorOnline also makes no warranty
+            purpose, or non-infringement. {websiteName} also makes no warranty
             or representation about the accuracy or reliability of any
-            information obtained through TractorOnline services, about any
-            products or services bought or obtained through TractorOnline
+            information obtained through {websiteName} services, about any
+            products or services bought or obtained through {websiteName}
             services, about any advice or information obtained from third
-            parties through TractorOnline services, or about any other matter.
+            parties through {websiteName} services, or about any other matter.
             The exclusion may not apply to you because applicable law may not
             permit the exclusion of implied guarantees.
           </p>
           <p>
-            Additionally, you acknowledge and agree that TractorOnline will not
+            Additionally, you acknowledge and agree that {websiteName} will not
             be a party to or in any way be responsible for overseeing any
             transaction between you and/or other users and/or third-party
             providers of products or services. This includes any product or
@@ -567,7 +569,7 @@ const terms = () => {
           </p>
           <h3 className="mb-3">Governing law &jurisdiction</h3>
           <p>
-            Except that TractorOnline may take legal action against the user in
+            Except that {websiteName} may take legal action against the user in
             any appropriate jurisdiction to enforce its rights, this agreement
             shall be governed by and construed in accordance with the laws of
             Pakistan, and the user submits to the exclusive jurisdiction of the
@@ -578,15 +580,15 @@ const terms = () => {
             You agree to fully reimburse us (as well as our officers, directors,
             agents, subsidiaries, joint ventures, and employees) for any losses
             or expenses we incur as a result of any violation by you of this
-            user agreement, your improper use of TractorOnline services, or your
+            user agreement, your improper use of {websiteName} services, or your
             violation of the law or the rights of a third party. This includes
             reasonable legal fees.
           </p>
           <h3 className="mb-3">Legal disputes</h3>
           <p>
-            If a disagreement develops between you and TractorOnline, we firmly
+            If a disagreement develops between you and {websiteName}, we firmly
             advise you to attempt to resolve it by first getting in touch with
-            us at support@TractorOnline.com. As an alternative to litigation, we
+            us at support@{websiteName}.com. As an alternative to litigation, we
             will examine requests that are fair and seek to resolve the conflict
             through mediation or arbitration. Any claim, controversy, or other
             issue arising out of or related to this user agreement shall be
@@ -617,14 +619,14 @@ const terms = () => {
             any way to disputes with one or more users.
           </p>
           <p>
-            By publishing the updated terms on www.TractorOnline.com, we reserve
+            By publishing the updated terms on www.{websiteName}.com, we reserve
             the right to change this user agreement at any moment. All modified
             terms will take effect immediately by default. After these terms
             have been modified, if you use our services, you are deemed to have
             accepted them.
           </p>
           <p>
-            If TractorOnline fails to perform its obligations under this
+            If {websiteName} fails to perform its obligations under this
             agreement due to events beyond its reasonable control, such as acts
             of God, governmental actions, or rules and regulations of any
             supranational or governmental authority, it will not be held
@@ -632,15 +634,15 @@ const terms = () => {
             be deemed to be in default.
           </p>
           <p>
-            TractorOnline always makes sure that the listed items don't violate
+            {websiteName} always makes sure that the listed items don't violate
             any third-party trademark, copyright, or other intellectual property
-            rights. Please email us at support@TractorOnline.com if you think
+            rights. Please email us at support@{websiteName}.com if you think
             your intellectual property rights have been violated, and we will
             look into it.
           </p>
           <p>
             All policies and the user agreement constitute the whole agreement
-            between you and TractorOnline and supersede all prior agreements and
+            between you and {websiteName} and supersede all prior agreements and
             understandings between the parties.
           </p>
         </ul>

@@ -232,6 +232,7 @@ function MyVerticallyCenteredModal(props) {
 
 const TractorSaleAd = () => {
   const [modalShow, setModalShow] = React.useState(false);
+  const { websiteName } = useContext(RootContext);
 
   function postAdd () {
     if (localStorage.currentUser === undefined){
@@ -251,12 +252,12 @@ const TractorSaleAd = () => {
           <div className="home-widgets row">
             <div className="home-widgets-title w-full-lg">
               <h3>
-                TractorOnline is the best place to sell your tractor for the
+                {websiteName} is the best place to sell your tractor for the
                 best price.
               </h3>
             </div>
             <div className="col-lg-6 col-12 mt-4 line or">
-              <h2>Place an ad on TractorOnline</h2>
+              <h2>Place an ad on {websiteName}</h2>
               <ul>
                 <li>
                   <i className="fa fa-tick"></i>In three simple steps, you can
@@ -286,7 +287,7 @@ const TractorSaleAd = () => {
              
             </div>
             <div className="col-lg-6 col-12 mt-4">
-              <h2>Sell It For Me on TractorOnline</h2>
+              <h2>Sell It For Me on {websiteName}</h2>
               <ul>
                 <li>
                   <i className="fa fa-tick"></i>Your Tractor Will Be Sold by a

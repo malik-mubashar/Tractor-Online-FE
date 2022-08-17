@@ -1,9 +1,10 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { Nav } from "react-bootstrap";
 import { Link, useHistory } from "react-router-dom";
 import { prodApi } from "../../API/ProdCategoriesApis";
 import { city } from "../../API/City/CityApis";
 import { brandApis } from "../../API/BrandsApis";
+import { RootContext } from "../../context/RootContext";
 
 export default function Footer() {
   const responsive = {
@@ -27,7 +28,7 @@ export default function Footer() {
   const [cities, setCities] = useState("");
   const [brandsForCategories, setBrandsForCategories] = useState([]);
   let history = useHistory();
-
+  const { websiteName } = useContext(RootContext);
   useEffect(() => {
     handleGetAllCategories();
     handleGetAllCities();
@@ -187,7 +188,7 @@ export default function Footer() {
                 <div className="col-md-3">
                   <ul className="nomargin footer-links list-unstyled">
                     <li className="mt-1">
-                      <h5 className="text-white">Explore TractorOnline</h5>
+                      <h5 className="text-white">Explore {websiteName}</h5>
                     </li>
                     {productCategories &&
                       productCategories.map((item, i) => {
@@ -206,11 +207,11 @@ export default function Footer() {
                 <div className="col-md-2">
                   <ul className="nomargin footer-links list-unstyled">
                     <li className="mt-1">
-                      <h5 className="text-white">TractorOnline.com</h5>
+                      <h5 className="text-white">{websiteName}.com</h5>
                     </li>
                     <li className="mt-1">
                       <a href="/browse-us" className="footer-link">
-                        About TractorOnline.com
+                        About {websiteName}.com
                       </a>
                     </li>
                     <li className="mt-1">
@@ -257,7 +258,7 @@ export default function Footer() {
                 <div className="col-md-12">
                   <ul className="nomargin footer-links list-unstyled">
                     <li className="mt-1">
-                      <h5 className="text-white">Sell On TractorOnline</h5>
+                      <h5 className="text-white">Sell On {websiteName}</h5>
                     </li>
                     <li className="mt-1">
                       <a href="/" className="footer-link">
@@ -278,7 +279,7 @@ export default function Footer() {
           <hr className="dark" />
 
           <div className="copyright footer-links mt30">
-            Copyright © 2003 - 2022 TractorOnline (Pvt) Ltd. - All Rights
+            Copyright © 2003 - 2022 {websiteName} (Pvt) Ltd. - All Rights
             Reserved.
             <a href="/terms" rel="nofollow" title="Terms of Service">
               Terms of Service
@@ -290,7 +291,7 @@ export default function Footer() {
           </div>
 
           <p className="copyright mt5">
-            Reproduction of material from any TractorOnline.com pages without
+            Reproduction of material from any {websiteName}.com pages without
             permission is strictly prohibited.
           </p>
         </div>

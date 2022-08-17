@@ -1,25 +1,27 @@
-import React from "react";
+import React, { useContext } from "react";
 import { Link } from "react-router-dom";
 import team from "../assets/img/team.jpg"
 import tractorStock from "../assets/img/tractorStock.jpg"
+import { RootContext } from "../context/RootContext";
 
 const AboutUs = () => {
+  const { websiteName } = useContext(RootContext);
   return (
-    <div className="container">
+    <div className="card container">
       <h1>About Us</h1>
       <p>
-        TractorOnline.com, which was established in 2021, is now Pakistan's top
-        automotive portal. Millions of Pakistanis have used TractorOnline.com to
+        {websiteName}.com, which was established in 2021, is now Pakistan's top
+        automotive portal. Millions of Pakistanis have used {websiteName}.com to
         buy and sell tractors, read reviews and news about tractors, compare tractor prices,
         and get answers to all of their automotive needs since the site's
         establishment. Today, whenever somebody is looking for a service to meet
-        their automobile needs, TractorOnline.com is the first name that comes
+        their automobile needs, {websiteName}.com is the first name that comes
         to mind.
       </p>
       <p>
-        More than 250 million pages are viewed on TractorOnline.com each year by
+        More than 250 million pages are viewed on {websiteName}.com each year by
         its over 25 million visitors. Nearly 50% of Pakistan's internet users
-        visited TractorOnline.com just last year to buy and sell over 400,000
+        visited {websiteName}.com just last year to buy and sell over 400,000
         vehicles..&nbsp;
       </p>
       <img
@@ -29,12 +31,12 @@ const AboutUs = () => {
         style={{ width: "100%",height:"100%"}}
       />
       <p>
-        With this kind of accomplishment, TractorOnline.com has become
+        With this kind of accomplishment, {websiteName}.com has become
         well-known in the international e-commerce and classifieds sectors and
         was able to raise USD 3.5 million in its initial round of funding.&nbsp;
       </p>
       <p>
-        TractorOnline.com is not only a place where buyers and sellers can
+        {websiteName}.com is not only a place where buyers and sellers can
         connect; it is also a full automotive platform with a forum for all
         automotive discussions and a blog that informs visitors of the most
         recent developments in the global and Pakistani auto industries.
@@ -42,7 +44,7 @@ const AboutUs = () => {
         of the tractors offered in Pakistan.
       </p>
       <p>
-        Our objective at TractorOnline.com is to innovate and continually
+        Our objective at {websiteName}.com is to innovate and continually
         improve the way people purchase and sell cars online in Pakistan. We
         feel it is our responsibility to offer our guests the greatest online
         experience. In order to enable our users feel a sense of community

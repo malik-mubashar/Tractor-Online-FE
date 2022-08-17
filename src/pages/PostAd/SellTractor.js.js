@@ -1,11 +1,13 @@
-import React from "react";
+import React, { useContext } from "react";
 import postAdLogo from "../../assets/img/postAd.png";
 import postInspect from "../../assets/img/postInspection.png";
 import Icofont from "react-icofont";
 import { useHistory } from "react-router-dom";
+import { RootContext } from "../../context/RootContext";
 
 const SellTractor = () => {
-	const history =useHistory()
+	const history =useHistory();
+  const { websiteName } = useContext(RootContext);
   return (
     <div className="sell-tractor mt-4 pt-3">
       <section>
@@ -27,7 +29,7 @@ const SellTractor = () => {
                   </div>
                   <div className="col-7">
                     <h3 className="">
-                      Post your Ad on TractorOnline
+                      Post your Ad on {websiteName}
                     </h3>
                     <ul className="list-unstyled fs14">
                       <li>
@@ -69,7 +71,7 @@ const SellTractor = () => {
                     </div>
                     <div className="col-7">
                         <h3>
-                          Try TractorOnline Sell It For Me
+                          Try {websiteName} Sell It For Me
                         </h3>
                         <ul className="list-unstyled fs14">
                           <li>
