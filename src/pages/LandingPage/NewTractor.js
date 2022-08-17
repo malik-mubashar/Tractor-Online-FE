@@ -6,7 +6,7 @@ const NewTractor = ({brands}) => {
   return (
     <>
       <div className="container-lg mt-5 py-4">
-        <h2 className="text-center">Make a New Tractor</h2>
+        <h2 className="text-center">Brands</h2>
 				<div className="row mt-4" >
         {brands.map((item) => (
             <ul className="make-list col-sm-2 list-unstyled new-car-list" key={item.id}>

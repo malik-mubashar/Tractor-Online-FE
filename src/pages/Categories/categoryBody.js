@@ -28,7 +28,7 @@ const Categories = () => {
               className="d-block w-100 m-auto justify-content-center border-radius "
               src={item}
               alt="First slide"
-              height={"500px"}
+              height={"550px"}
             />
           </Carousel.Item>
         )

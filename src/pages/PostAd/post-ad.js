@@ -3,13 +3,18 @@ import UploadPhotoLogo from "../../assets/img/upload-photos-logo.png"
 import ProductsLogo from "../../assets/img/products-logo.png"
 import PriceLogo from "../../assets/img/price-logo.png"
 import { city } from "../../API/City/CityApis";
-import { Button, Col, Form, Row } from "react-bootstrap";
+import { Button, Form, Modal } from "react-bootstrap";
 import Select from "react-select";
 import Icofont from "react-icofont";
+import { productMappingApis } from "../../API/ProductMappingApis";
+import { prodApi } from "../../API/ProdCategoriesApis";
 
 const postad = () => {
 
   const [cities, setCities] = useState([]);
+  const [showCategoryModel, setShowCategoryModel] = useState(true);
+  const [productMappings, setProductMappings] = useState([]);
+  const [prodCategories, setProdCategories ] = useState([]);
   const [productsState, setProductsState] = useState({
     isEditProduct: false,
     isAddProduct: false,
@@ -36,7 +41,24 @@ const postad = () => {
 
   useEffect(() => {
     getAllCity()
+    getProdCategories(1, "", 10000000000,true);
   }, []);
+
+  const getProdCategories = async (page, mainSearch, noOfRec,isOption) => {
+    try {
+      const result = await prodApi.getProdCategories(page, mainSearch, noOfRec,isOption);
+      if (result.error == false && result.data.status == "success") {
+				setProdCategories(result.data.data)
+      } else {
+        console.error(result.data);
+      }
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  const handleCloseCategoryModel = () => setShowCategoryModel(false);
+  const handleShowCategoryModel = () => setShowCategoryModel(true);
 
   const getAllCity = async () => {
     const result = await city.getAllCities();
@@ -47,6 +69,25 @@ const postad = () => {
         tempArray.push({ ...item, label: item.title, value: item.title })
       );
     setCities(tempArray);
+  };
+
+  const getProductMappings = async (page, mainSearch, noOfRec) => {
+    try {
+      const result = await productMappingApis.getProductMappings(
+        page,
+        mainSearch,
+        noOfRec
+      );
+
+      if (result.error == false && result.data.status == "success") {
+
+        setProductMappings(result.data.data);
+      } else {
+        console.error(result.data);
+      }
+    } catch (error) {
+      console.error(error);
+    }
   };
 
   function handleChange(evt) {
@@ -241,6 +282,38 @@ const postad = () => {
           </div>
         </div>
       </div>
+
+      <Modal
+        show={showCategoryModel}
+        onHide={handleCloseCategoryModel}
+        backdrop="static"
+        keyboard={false}
+        size="lg"
+      >
+        <Modal.Header>
+          <Modal.Title>Select Product Category</Modal.Title>
+        </Modal.Header>
+        <Modal.Body style={{height: '600px'}} className="overflow-auto">
+        <div className="row">
+          {prodCategories &&
+            prodCategories.map(
+                (item, idx) => (
+                  <div className="col-6">
+                    <div className="d-flex align-items-center product-cat-select-btns my-2">
+                      <img src={item.active_image_path} alt="category" className="rounded" height="100px" width="100px" />
+                      <h5 className="ml-2">{item.title}</h5>
+                    </div>
+                  </div>
+                )
+            )
+          }
+        </div>
+        </Modal.Body>
+        <Modal.Footer>
+          <Button variant="primary">Continue</Button>
+        </Modal.Footer>
+      </Modal>
+
     </>
   );
 };

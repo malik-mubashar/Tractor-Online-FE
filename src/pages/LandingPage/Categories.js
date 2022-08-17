@@ -43,7 +43,7 @@ export default function Categories({ brands, brandsForCategories }) {
                         <Carousel.Item>
                           <ul className="browse-listing row p-0">
                             {item.map((item2, i) => (
-                              <li key={i} className="col-4 col-lg-2 mt-4">
+                              <li key={i} className="col-sm-12 col-md-6 col-lg-2 mt-4">
                                 <span
                                   onClick={() => history.push(`/used-tractor/search?brand=${item2.id}`)}
                                   title="Toyota for sale in Pakistan"

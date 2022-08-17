@@ -311,41 +311,6 @@ export default function AddDetails() {
                   }
                 </p>
               </div>
-
-              {/*add at bottom  */}
-              <div className="sellAdd clearfix text-center p20 mt-70">
-                <img
-                  alt="Post an Ad"
-                  src={TractorClipart}
-                  height="80px"
-                  width="80px"
-                  title="Post an Ad"
-                />
-
-                <h3 className="title">
-                  Post an ad for <span className="generic-red">FREE</span>
-                </h3>
-                <p className="mt10 mb5 fs16">
-                  Sell it to tens of thousands of people in less time.{" "}
-                </p>
-                <div>
-                  <img
-                    alt="Post an Ad Left"
-                    src="https://wsa4.pakwheels.com/assets/sell-ad-point-left-fcc7bca4d40628d7945426ecf5a2ef00.png"
-                  />
-                  <a
-                    style={{ color: "white" }}
-                    href="/used-tractor/sell"
-                    className="btn btn-success sign-in-comp"
-                  >
-                    Sell Your Tractor
-                  </a>
-                  <img
-                    alt="Post an Ad Right"
-                    src="https://wsa4.pakwheels.com/assets/sell-ad-point-right-630620add9bbdd27360acdfcf98d0608.png"
-                  />
-                </div>
-              </div>
             </div>
 
             {/* right side */}
@@ -389,7 +354,7 @@ export default function AddDetails() {
                 <div className="sellerInfoBoxHeading mb-2">
                   Seller Information
                 </div>
-                <div className="row">
+                <div className="d-flex align-items-center">
                   <div className="col-md-4">
                     <Image
                       src={userProfile}
@@ -400,7 +365,7 @@ export default function AddDetails() {
                     />
                   </div>
                   <div className="col-md-8">
-                    <div className="mt-3"><strong>{ userData && userData.name }</strong></div>
+                    <div><strong>{ userData && userData.name }</strong></div>
                     <div>Member Since { userData && userData.created_at}</div>
                   </div>
                 </div>
@@ -412,7 +377,7 @@ export default function AddDetails() {
                   Transactional safety tips{" "}
                 </div>
                 <div className="row">
-                  <ol>
+                  <ol className="ml-3">
                     <li>Meet the seller in a safe area.</li>
                     <li>There should be no cash transactions.</li>
                     <li>Be wary of offers that seem unrealistic.</li>
@@ -429,6 +394,39 @@ export default function AddDetails() {
                 />
                 <h5 className="mt-1 ml-3">Report This Ad</h5>
               </button>
+              <div className="sellAdd clearfix text-center p20 mt-70">
+                <img
+                  alt="Post an Ad"
+                  src={TractorClipart}
+                  height="80px"
+                  width="80px"
+                  title="Post an Ad"
+                />
+
+                <h3 className="title">
+                  Post an ad for <span className="generic-red">FREE</span>
+                </h3>
+                <p className="mt10 mb5 fs16">
+                  Sell it to tens of thousands of people in less time.{" "}
+                </p>
+                <div>
+                  <img
+                    alt="Post an Ad Left"
+                    src="https://wsa4.pakwheels.com/assets/sell-ad-point-left-fcc7bca4d40628d7945426ecf5a2ef00.png"
+                  />
+                  <a
+                    style={{ color: "white" }}
+                    href="/used-tractor/sell"
+                    className="btn btn-success sign-in-comp"
+                  >
+                    Sell Your Tractor
+                  </a>
+                  <img
+                    alt="Post an Ad Right"
+                    src="https://wsa4.pakwheels.com/assets/sell-ad-point-right-630620add9bbdd27360acdfcf98d0608.png"
+                  />
+                </div>
+              </div>
             </div>
           </div>
           {/* Report About Ad Modal*/}
