@@ -72,7 +72,7 @@
   user-select: none;
 }
 .search-classified-text {
-  padding-top: 120px;
+  padding-top: 0px;
   line-height: 22px;
   position: relative;
   z-index: 6;
@@ -147,6 +147,8 @@
 }
 .browse-listing {
   list-style: none;
+  height: 500px;
+  overflow: auto;
 }
 .browse-listing li span {
   color: #545454;

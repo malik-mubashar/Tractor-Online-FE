@@ -39,7 +39,6 @@ export default function FeaturedTractor({ title, link }) {
     <div>
       <div className="d-flex justify-content-between">
         <h2>{title}</h2>
-        <a className="text-info text-capitalize">{link}</a>
       </div>
       <Carousel
         swipeable={false}

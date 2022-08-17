@@ -132,7 +132,7 @@ const LandingPage = () => {
             link="all tractors are available to view"
           />
         </div> */}
-        <div className="container-lg py-4">
+        <div className="bg-white">
           <NewTractor brands={brands} />
         </div>
       </div>
