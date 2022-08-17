@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import {
   Col,
   Modal,
@@ -13,6 +13,7 @@ import { useHistory } from "react-router-dom";
 import CustomPopover from "./CustomPopover";
 import TractorClipart from "../../assets/svg/tractor-logo.svg";
 import Buyers from "../../assets/img/buyers.png";
+import { RootContext } from "../../context/RootContext";
 
 export default function SearchListing({ products, pagination, noOfRec, handleGetAllProducts, searchFilters }) {
   const [showNumberWarning, setShowNumberWarning] = useState(true);
@@ -23,6 +24,7 @@ export default function SearchListing({ products, pagination, noOfRec, handleGet
   const onShowPhoneModelClose = () => {
     setOpenShowPhone(false);
   };
+  const { websiteName } = useContext(RootContext);
 
   return (
     <>
@@ -441,7 +443,7 @@ export default function SearchListing({ products, pagination, noOfRec, handleGet
                     />
                   </div>
                   <div className="col-6 mr-auto">
-                    <strong>Inform TractorOnline about any untrustworthy users.</strong>
+                    <strong>Inform {websiteName} about any untrustworthy users.</strong>
                   </div>
                 </div>
                 <div className="text-center">

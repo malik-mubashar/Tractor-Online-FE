@@ -1,39 +1,41 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import FertilizerLogo from "../../assets/img/fertilizers.png";
 import TractorLogo from "../../assets/img/tractorLogo.png";
 import SpareParts from "../../assets/img/spareparts.jpg";
 import plants from "../../assets/img/plants.jpg";
 import { Image } from "react-bootstrap";
+import { RootContext } from "../../context/RootContext";
 
 
 export default function ExploreProducts() {
+  const { websiteName } = useContext(RootContext);
   const [index, setIndex] = useState([
     {
-      heading: 'TractorOnline, please sell it for me.',
+      heading: `${websiteName}, please sell it for me.`,
       image: TractorLogo,
-      text: 'Allow TractorOnline to sell your tractor for you.',
+      text: `Allow ${websiteName} to sell your tractor for you.`,
     },
     {
-      heading: 'TractorOnline, buy Fertilizers.',
+      heading: `${websiteName}, buy Fertilizers.`,
       image: FertilizerLogo,
       text: 'You can buy fertilizers as well.',
     },
     {
-      heading: 'TractorOnline, please sell it for me.',
+      heading: `${websiteName}, please sell it for me.`,
       image: SpareParts,
-      text: 'TractorOnline to sell Spare Parts for you.',
+      text: `${websiteName} to sell Spare Parts for you.`,
     },
     {
-      heading: 'TractorOnline, please sell it for me.',
+      heading: `${websiteName}, please sell it for me.`,
       image: plants,
-      text: 'TractorOnline to sell Plants for you.',
+      text: `${websiteName} to sell Plants for you.`,
     }
   ]);
 
   return (
     <div>
       <div className="container-lg">
-        <h2 className="landing-hading text-center">TractorOnline Products </h2>
+        <h2 className="landing-hading text-center">{websiteName} Products </h2>
         <div className="row space-between">
           {index.map((option, index) => (
             <div className="col-md-6 p-3" key={index}>

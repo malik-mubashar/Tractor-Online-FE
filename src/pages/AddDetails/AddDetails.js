@@ -57,7 +57,7 @@ export default function AddDetails() {
     {heading: "Prohibited/Explicit Content", text: "It contains vulgar language, pornographic or explicit content, etc."},
     {heading: "Other", text: ""}
   ]
-  const { setShowLoader } = useContext(RootContext);
+  const { setShowLoader, websiteName } = useContext(RootContext);
 
   useEffect(() => {
     setShowLoader(true)

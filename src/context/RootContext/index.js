@@ -6,6 +6,7 @@ export default ({ children }) => {
 	/*****getting values from local storage if any***************************/
 	const prevUser = JSON.parse(window.localStorage.getItem("currentUser")) || null;
 	const prevUserProfilePicture = JSON.parse(window.localStorage.getItem("userProfilePicture")) || null;
+	// const prevWebsiteName = JSON.parse(window.localStorage.getItem("websiteName")) || null;
 
 	/*****setting values from local storage to constants*******************/
 	const [currentUser, setCurrentUser] = useState(prevUser);
@@ -14,6 +15,7 @@ export default ({ children }) => {
 	const [showPasswordModel, setShowPasswordModel] = useState(false);
 	const [landingPageSearchOptions, setLandingPageSearchOptions] = useState({});
 	const [userProfilePicture, setUserProfilePicture] = useState(prevUserProfilePicture);
+	const [websiteName, setWebsiteName] = useState('');
 
 	/*****************************************************************/
 
@@ -28,6 +30,10 @@ export default ({ children }) => {
 	}, [
 		currentUser,
 	]);
+	// useEffect(() =>{
+	// 	localStorage.setItem("websiteName", JSON.stringify(websiteName));
+
+	// },[websiteName])
 	/*******************************************************************/
 
 	/*****all root context variables and function ********************/
@@ -43,7 +49,9 @@ export default ({ children }) => {
 		userProfilePicture,
 		setUserProfilePicture,
 		showPasswordModel,
-		setShowPasswordModel
+		setShowPasswordModel,
+		websiteName,
+		setWebsiteName
 	};
 	/*******************************************************************/
 
