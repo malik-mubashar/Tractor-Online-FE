@@ -154,7 +154,7 @@ export default function City() {
       console.error(e);
     }
   };
-
+console.log("cityState",cityState)
   return (
     <>
       <>

@@ -38,7 +38,7 @@ import Languages from "../pages/Languages/Languages";
 import Products from "../pages/Products/Products";
 import Roles from "../pages/Roles/Roles";
 import UserRoles from "../pages/UserRoles/UserRoles";
-import CategoryBrands from "../pages/CategoryBrands/CategoryBrands";
+// import CategoryBrands from "../pages/CategoryBrands/CategoryBrands";
 import Brands from "../pages/Brands/Brands";
 import Models from "../pages/Models/Models";
 import Budgets from "../pages/Models copy/Budgets";
@@ -89,11 +89,11 @@ const AppRouter = () => {
               <ProdCategoryHeads />
             </DashboardLayout>
           </ProtectedRoute>
-          <ProtectedRoute exact path= "/dashboard/categoryBrands">
+          {/* <ProtectedRoute exact path= "/dashboard/categoryBrands">
             <DashboardLayout>
               <CategoryBrands />
             </DashboardLayout>
-          </ProtectedRoute>
+          </ProtectedRoute> */}
           <ProtectedRoute exact path= "/dashboard/brands">
             <DashboardLayout>
               <Brands />
