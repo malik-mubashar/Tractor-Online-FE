@@ -245,15 +245,7 @@ const MobileFooter = () => {
  
     
   
-    function postAdd () {
-      if (localStorage.currentUser === undefined){
-        setModalShow(true)
-        
-      }
-      else{
-  
-      }
-    }
+    
   return (
     <div className="overflow-x-hidden">
       <div className="bottom-nav css-de1c49">
@@ -261,17 +253,26 @@ const MobileFooter = () => {
           <Image src={HomeSelected} alt="" width="100%" height="18px" />
           <span className="generic-link Mui-selected css-1lnpzxd">Home</span>
         </button>
-        <MyVerticallyCenteredModal
+        {localStorage.currentUser === undefined ?<>       <MyVerticallyCenteredModal
                 show={modalShow}
                 onHide={() => setModalShow(false)}
               />
-        <button className="css-4g4bsj" onClick={ () => {postAdd()}}>
+        <button className="css-4g4bsj" onClick={ () => setModalShow(true)}>
+          <Image src={MyAdsSelected} alt="" width="100%" height="18px" />
+          
+            
+         
+          <span className="css-1lnpzxd">My Ads</span>
+        </button></>:<>
+        <button className="css-4g4bsj" onClick={ () => history.push("/used-tractor/sell")}>
           <Image src={MyAdsSelected} alt="" width="100%" height="18px" />
           
             
          
           <span className="css-1lnpzxd">My Ads</span>
         </button>
+        </>
+}
 
         
         <div>

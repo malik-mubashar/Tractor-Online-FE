@@ -6,20 +6,20 @@ import MobileFooter from "../pages/LandingPage/MobileFooter";
 import { isMobile } from "react-device-detect";
 import MobileBannerFooter from "../pages/LandingPage/MobileBannerFooter";
 import Topbar from "../pages/LandingPage/Topbar";
-import { websiteName } from "../API/websiteNameApi";
+import { websiteNameApi } from "../API/websiteNameApi";
 import { RootContext } from "../context/RootContext";
 
 const Layout = (props) => {
-  const { setWebsiteName } = useContext(RootContext)
+  const { websiteName, setWebsiteName } = useContext(RootContext)
   useEffect(() => {
     window.scrollTo(0, 0);
-    getWebsiteName();
+    if(websiteName !== undefined){
+      getWebsiteName();
+    }
   }, []);
   const getWebsiteName = async () => {
-    
-    const result = await websiteName.getWebsiteName();
+    const result = await websiteNameApi.getWebsiteName();
     if(result.error=== false){
-      debugger
       setWebsiteName(result.data && result.data.data[0].title);
     }
   };
