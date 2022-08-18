@@ -37,11 +37,23 @@ function MyVerticallyCenteredModal(props) {
     setCurrentUser,
     signUpMessage,
     setSignUpMessage,
+    setUserProfilePicture,
+    userProfilePicture
   } = useContext(RootContext);
   const [alertMessage, setAlertMessage] = useState(
     "Confirmation Mail mail sent to your Email Address. Kindly Confirm Your email to continue.."
   );
   const [alertType, setAlertType] = useState("alert-success");
+
+  const handlePersonalDetail = async (currentUser) => {
+    const loadingToastId = toast.loading("Loading..!");
+    const result = await user.findUser(currentUser);
+    if (result.error === false) {
+      toast.dismiss(loadingToastId);
+      localStorage.setItem('userProfilePicture',JSON.stringify(result.data.profile_path||null))
+      setUserProfilePicture(result.data.profile_path)
+    }
+  };
 
   const onLoginHandler = async (e) => {
     e.preventDefault();
@@ -71,8 +83,15 @@ function MyVerticallyCenteredModal(props) {
             uid: result.headers["uid"],
           })
         );
+        if (userProfilePicture == null) {
+          handlePersonalDetail({ ...result.data.data,
+            accessToken: result.headers["access-token"],
+            client: result.headers["client"],
+            uid: result.headers["uid"],
+            role:result.data.role});
+        }
         localStorage.setItem("headers", JSON.stringify(result.headers));
-        history.push("/sell-tractor");
+        history.push("/used-tractor/sell");
         setSignUpMessage(false);
       }
 

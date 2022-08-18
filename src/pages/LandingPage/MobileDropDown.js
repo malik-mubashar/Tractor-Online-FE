@@ -1,16 +1,16 @@
-import React, { useEffect, useState } from "react";
-import { Image } from "react-bootstrap";
-import Button from "react-bootstrap/Button";
-import Modal from "react-bootstrap/Modal";
+import React, { useEffect, useState, useContext } from "react";
+import { Image, Modal } from "react-bootstrap";
 import Icofont from "react-icofont";
-import { useHistory } from "react-router-dom";
+import { useHistory, Link } from "react-router-dom";
 import { prodApi } from "../../API/ProdCategoriesApis";
-import streeingWheel from "../../assets/svg/steering-wheel.svg";
+import { RootContext } from "../../context/RootContext";
 
 const MobileDropDown = ({ show, setShow }) => {
   const [fullscreen, setFullscreen] = useState(true);
   const [productCategories, setProductCategories] = useState();
+  const { userProfilePicture, currentUser, setUserProfilePicture, setCurrentUser } = useContext(RootContext)
   let history = useHistory();
+
   function handleShow(breakpoint) {
     setFullscreen(breakpoint);
   }
@@ -22,6 +22,16 @@ const MobileDropDown = ({ show, setShow }) => {
     const result = await prodApi.getAllProductCategories();
     setProductCategories(result.data && result.data.data);
   };
+
+  function accordionHandle(e){
+    var content = e.currentTarget.nextElementSibling;
+    if (content.style.maxHeight){
+      content.style.maxHeight = null;
+    } else {
+      content.style.maxHeight = content.scrollHeight + "px";
+    }
+  }
+
   return (
     <>
       <Modal show={show} fullscreen={fullscreen} onHide={() => setShow(false)}>
@@ -31,22 +41,63 @@ const MobileDropDown = ({ show, setShow }) => {
         <Modal.Body>
           <div className="more">
             <div className="nav-container">
-              <nav className="MuiList-root MuiList-padding css-1ontqvh">
-                <div className="profile-header">
-                  <h2 className="mt0 mb5">Profile</h2>
-                  <p className="fs12 mb10">
-                    Sign in to start selling or buying vehicles
-                  </p>
-                  <button className="btn btn-outline btn-lg">Sign Up</button>
-                  <button className="btn btn-primary btn-lg">Sign In</button>
-                </div>
+              <nav>
+                {
+                  currentUser === undefined || currentUser === null ?
+                    (<div className="profile-header">
+                      <p className="my-2">
+                        Sign in to start selling or buying Products
+                      </p>
+                      <Link to="/signup" className="btn mr-2">Sign Up</Link>
+                      <Link to="/login" className="btn btn-primary">Sign In</Link>
+                    </div>)
+                  :
+                    (<div className="text-center mb-4">
+                      <h2 className="">Profile</h2>
+                      <div>
+                        <img src={userProfilePicture} alt="profile" style={{borderRadius: '50%'}} height="150px" width="150px" />
+                      </div>
+                      <h3 className="my-3">{currentUser.name}</h3>
+                      <button 
+                        className="btn"
+                        onClick={() => {
+                          localStorage.setItem("currentUser", null);
+                          localStorage.setItem("user", null);
+                          localStorage.setItem("headers", null);
+                          setUserProfilePicture(null);
+                          setCurrentUser(null)
+                          history.push('/')
+                          setShow(false)
+                        }}
+                      >
+                        <Icofont
+                          icon="exit"
+                          className="icofont mr-1"
+                        />
+                        Logout
+                      </button>
+                    </div>)
+                }
 
                 <h3>Categories</h3>
                 {productCategories &&
                   productCategories.map((item, i) => {
                     return (
                       <div key={i}>
-                        <li className="list">
+                        <li className="list"
+                          onClick={(e) =>
+                            {
+                              if (item.product_category_heads.length > 0)
+                              {
+                                accordionHandle(e)
+                              }
+                              else{
+                                history.push(item.link)
+                                setShow(false)
+                              }
+                            }
+                          }
+                        >
                           <span
                             className="user-pic"
                             onClick={() => history.push(item.link)}
@@ -59,17 +110,12 @@ const MobileDropDown = ({ show, setShow }) => {
                                 width={"24px"}
                               />
                             ) : (
-                              <Image
-                                src={streeingWheel}
-                                alt="icon"
-                                roundedCircle
-                                width={"34px"}
-                              />
+                              null
                             )}
                           </span>
 
-                          <div className="nav-list-super mob-drop">
-                            <span className=" nav-list-item  css-1i35o1r">
+                          <div className="mob-drop">
+                            <span className="ml-2">
                               {item.title}
                             </span>
                           </div>
@@ -84,95 +130,37 @@ const MobileDropDown = ({ show, setShow }) => {
                             </>
                           ) : null}
                         </li>
-                        {/* {item.product_category_heads ?(
-                          <>
-                            <div className="nav-list-super mob-drop">
-                            <span className=" nav-list-item  css-1i35o1r">
-                            {item.product_sub_categories !== null &&
-                            item.product_sub_categories !== undefined &&
-                            item.product_sub_categories.map((y, j) => {
-                              return <p key={j}>{y.title}</p>;
-                            })}
-                            </span>
-                          </div>
-                          </>
-                        ):null} */}
-                        {/* <li className="list">
-                          <img
-                            src="https://lite2.pakwheels.com/app/6.0.68/assets/images/menu-new/New-Car.svg"
-                            width="20"
-                          />
-                          <div className="nav-list-super mob-drop">
-                            <span className="nav-list-item  css-1i35o1r">
-                              New Tractors
-                            </span>
-                          </div>
-                        </li>
-
-                        <li className="list">
-                          <img
-                            src="https://lite2.pakwheels.com/app/6.0.68/assets/images/menu-new/Parts-Line.svg"
-                            width="20"
-                          />
-                          <div className="nav-list-super mob-drop">
-                            <span className="nav-list-item  css-1i35o1r">
-                              Accessories
-                            </span>
-                          </div>
-                        </li> */}
+                        {item.product_category_heads.length > 0 ? (
+                            <div className="content">
+                              {item.product_category_heads.map((item, i) => (
+                                <div className="" key={i}>
+                                  <Link
+                                    to={item.link}
+                                    onClick={()=> setShow(false)}
+                                    className="d-flex align-items-center p-2"
+                                  >
+                                    <Icofont
+                                      icon={item.icon}
+                                      className="icofont col-2"
+                                      style={{fontSize: '1.4rem'}}
+                                    />
+                                    <div className="col-10 p-0">
+                                      <strong>{item.title}</strong>
+                                      {item.product_sub_categories !== null &&
+                                        item.product_sub_categories !== undefined &&
+                                        item.product_sub_categories.map((y, j) => {
+                                          return <p key={j} className="mb-0">{y.title}</p>;
+                                        })}
+                                    </div>
+                                  </Link>
+                                </div>
+                              ))}
+                            </div>
+                          ) : null
+                        }
                       </div>
                     );
                   })}
-                <h3>Others</h3>
-                <li className="list">
-                  <img
-                    src="https://lite2.pakwheels.com/app/6.0.68/assets/images/menu-new/Blog.svg"
-                    width="20"
-                  />
-                  <div className="nav-list-super mob-drop">
-                    <span className="nav-list-item  css-1i35o1r">Blog</span>
-                  </div>
-                </li>
-                <li className="list">
-                  <img
-                    src="https://lite2.pakwheels.com/app/6.0.68/assets/images/menu-new/Videos.svg"
-                    width="20"
-                  />
-                  <div className="nav-list-super mob-drop">
-                    <span className="nav-list-item  css-1i35o1r">Videos</span>
-                  </div>
-                </li>
-                <li className="list">
-                  <img
-                    src="https://lite2.pakwheels.com/app/6.0.68/assets/images/menu-new/Chat.svg"
-                    width="20"
-                  />
-                  <div className="nav-list-super mob-drop">
-                    <span className="nav-list-item  css-1i35o1r">Forums</span>
-                  </div>
-                </li>
-                <li className="list">
-                  <img
-                    src="https://lite2.pakwheels.com/app/6.0.68/assets/images/menu-new/Cool-Rides.svg"
-                    width="20"
-                  />
-                  <div className="nav-list-super mob-drop">
-                    <span className="nav-list-item  css-1i35o1r">
-                      Cool Rides
-                    </span>
-                  </div>
-                </li>
-                <li className="list">
-                  <img
-                    src="https://lite2.pakwheels.com/app/6.0.68/assets/images/menu-new/Import.svg"
-                    width="20"
-                  />
-                  <div className="nav-list-super mob-drop">
-                    <span className="nav-list-item  css-1i35o1r">
-                      Tractor Import
-                    </span>
-                  </div>
-                </li>
               </nav>
             </div>
           </div>

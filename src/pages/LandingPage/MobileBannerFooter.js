@@ -7,7 +7,7 @@ export default function MobileBannerFooter() {
         <div className="footer-bottom">
           <div className="footer-links">
             <Link to="/browse-us">About</Link>
-            <Link to="/">Products</Link>
+            <Link to="/used-tractor/search">Products</Link>
             <Link to="/browse-us">Contact</Link>
             <Link to="/privacy-policy">Privacy</Link>
             <Link to="/terms">Terms</Link>
