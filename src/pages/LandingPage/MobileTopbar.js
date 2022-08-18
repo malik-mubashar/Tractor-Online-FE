@@ -11,6 +11,7 @@ const MobileTopbar = () => {
     <>
       <div className={`dashboard-carousel p-3 `}>
         <Image
+          onClick={() => history.push("/")}
           src={Logo}
           height="20px"
           width="100px"
@@ -20,7 +21,7 @@ const MobileTopbar = () => {
         <div className="d-flex mt-2 mb-2 justify-content-between text-align-center align-content-center p-2">
           <div className="col-4 p-0 mobile-tabs">
             <span
-              onClick={() => history.push("/usedtractor")}
+              onClick={() => history.push("/used-tractor/search?category=22")}
               className="btn btn-info rounded p-2 w-100 "
             >
               Used Tractor
@@ -28,7 +29,7 @@ const MobileTopbar = () => {
           </div>
           <div className="col-4 p-0 mobile-tabs">
             <span
-              onClick={() => history.push("/new/tractor")}
+              onClick={() => history.push("/used-tractor/search?category=23")}
               className="btn btn-info rounded p-2 w-100"
             >
               New Tractor
@@ -36,7 +37,7 @@ const MobileTopbar = () => {
           </div>
           <div className="col-4 p-0 mobile-tabs">
             <span
-              onClick={() => history.push("/autoparts/")}
+              onClick={() => history.push("/used-tractor?category=26")}
               className="btn btn-info rounded p-2 w-100"
             >
               Auto Parts
@@ -44,7 +45,10 @@ const MobileTopbar = () => {
           </div>
         </div>
 
-        <Form className="nav-search-form d-sm-block relative" action= "/dashboard/search">
+        <Form
+          className="nav-search-form d-sm-block relative"
+          action="/dashboard/search"
+        >
           <FormControl
             type="text"
             placeholder="Search..."

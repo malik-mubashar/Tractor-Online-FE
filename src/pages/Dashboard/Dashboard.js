@@ -12,28 +12,10 @@ import { user } from "../../API/User";
 import { RootContext } from "../../context/RootContext";
 
 const Dashboard = () => {
-	const { currentUser ,userProfilePicture, setUserProfilePicture} = useContext(RootContext);
-
   const [state,setState] =useState( {
     sideMenu: true,
     loading: true
 	});
-	useEffect(() => {
-		if (userProfilePicture == null) {
-			handlePersonalDetail();
-		}
-	}, [])
-	const handlePersonalDetail = async () => {
-		const loadingToastId = toast.loading("Loading..!");
-
-		const result = await user.findUser(currentUser);
-		if (result.error === false) {
-			toast.dismiss(loadingToastId);
-			localStorage.setItem('userProfilePicture',JSON.stringify(result.data.profile_path||null))
-			setUserProfilePicture(result.data.profile_path)
-
-		}
-  };
 
   // Loading icon false after DOM loaded
   // componentDidMount() {

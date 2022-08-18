@@ -27,4 +27,4 @@ class WebsiteName {
   };
 }
 
-export let websiteName = new WebsiteName();
+export let websiteNameApi = new WebsiteName();

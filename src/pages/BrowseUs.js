@@ -7,6 +7,7 @@ import { RootContext } from "../context/RootContext";
 const AboutUs = () => {
   const { websiteName } = useContext(RootContext);
   return (
+    <div className="user privacy-container">
     <div className="card container">
       <h1>About Us</h1>
       <p>
@@ -79,6 +80,7 @@ const AboutUs = () => {
           </div>
         </div>
       </div>
+    </div>
     </div>
   );
 };
