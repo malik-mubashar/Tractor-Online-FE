@@ -155,13 +155,13 @@ export default function UsedTractorSearch() {
     <>
       <section>
         <div className="container">
-          <img
+          {/* <img
             style={{ width: "100%" }}
             alt="add"
             src={"https://tpc.googlesyndication.com/simgad/5923361064753698031"}
             className="mt-5"
-          />
-          <h3 className="pageHeading">{category&&category!='nil'?prodCategories && prodCategories.find((cate)=>cate.id==category).title:'Products'} for sale</h3>
+          /> */}
+          <h3 className="pageHeading mt-5 pt-5">{category&&category!='nil'?prodCategories && prodCategories.find((cate)=>cate.id==category).title:'Products'} for sale</h3>
           <div className="searchCounterWrapper">
             <ul className="breadcrumb bread">
               <li>
