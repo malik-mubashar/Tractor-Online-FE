@@ -279,9 +279,6 @@ export default function AddAndEditProduct({
           productsState.product_category_id
         );
       }
-      //if (productsState.product_type !== undefined) {
-      //formData.append("product_type", productsState.product_type);
-      //}
 
       if (productsState.isAddProduct) {
         try {
@@ -333,28 +330,6 @@ export default function AddAndEditProduct({
     }
   };
 
-  // function addExtraFields(e) {
-  //   let idThatNeverRepeat = parseInt(
-  //     new Date().getTime().toString() + Math.floor(Math.random() * 1000000)
-  //   );
-  //   var arr = [...extraFieldsArr];
-  //   arr.push({
-  //     id: idThatNeverRepeat,
-  //     key: null,
-  //     value: null,
-  //   });
-  //   setExtraFieldsArr(arr);
-  // }
-
-  // function removeExtraFields(e, id) {
-  //   var arr = [...extraFieldsArr];
-  //   setExtraFieldsArr(
-  //     arr.filter((item, index) => {
-  //       return item.id != id;
-  //     })
-  //   );
-  // }
-  //////////////////////////////////
   const handleExtraField = (event, id) => {
     let tempExtraFieldsArr = [...extraFieldsArr];
     if (event.target.name == "extra_fields_key") {
@@ -402,7 +377,7 @@ export default function AddAndEditProduct({
     handleChange(e);
     console.log(extraFieldsArr);
     console.log(productsState);
-    console.log(productMappings);
+    console.log('productMappings',productMappings);
     var temp = productMappings.find((item) => {
       return item.product_category.id == e.target.value;
     });
@@ -470,44 +445,11 @@ export default function AddAndEditProduct({
                     <Form.Group className="mt-1" controlId="formBasicComments">
                       <Form.Label>More information about product.</Form.Label>
                     </Form.Group>
-                    {/* <Icofont
-                      icon="plus text-success"
-                      className="icofont-2x ml-2 cursor-pointer"
-                      onClick={(e) => addExtraFields(e)}
-                    /> */}
                   </div>
                   {extraFieldsArr &&
                     extraFieldsArr.map((item, i) => {
                       return (
                         <div className="mt-1" key={i}>
-                          {/*
-                            <div>
-                              <Icofont
-                                icon="close text-danger float-right mt-2 pt-4 cursor-pointer"
-                                className="icofont-2x"
-                                value={i}
-                                onClick={(e) => removeExtraFields(e, item.id)}
-                              />
-                            </div>
-                          */}
-                          {/* <div className="col-6">
-                            <Form.Group
-                              className="mt-1"
-                              controlId="formBasicComments"
-                            >
-                              <Form.Label>
-                                Add extra Product heading.
-                              </Form.Label>
-                              <Form.Control
-                                onChange={(e) => handleExtraField(e, item.id)}
-                                name="extra_fields_key"
-                                type="text"
-                                disabled={true}
-                                placeholder="Add product heading...."
-                                value={item && item.key}
-                              />
-                            </Form.Group>
-                          </div> */}
                           <div className="col-12">
                             <Form.Group
                               className="mt-1"
@@ -585,19 +527,6 @@ export default function AddAndEditProduct({
                     onChange={(e) => handleChange(e)}
                   />
                 </Form.Group>
-                {/* <Form.Group controlId="formBasicComments">
-                  <Form.Label>link</Form.Label>
-                  <Form.Control
-                    className={
-                      fieldsWithError.link === true ? "border-danger" : ""
-                    }
-                    defaultValue={productsState.link}
-                    name="link"
-                    type="text"
-                    placeholder="link"
-                    onChange={(e) => handleChange(e)}
-                  />
-                </Form.Group> */}
                 <Form.Group controlId="formGridState">
                   <Form.Label>Product Brand</Form.Label>
                   <Form.Control
