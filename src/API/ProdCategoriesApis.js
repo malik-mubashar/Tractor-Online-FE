@@ -36,7 +36,17 @@ class ProdCategories {
         };
       });
   };
-  updateProdCategory = async (prodCategoriesState) => {
+	updateProdCategory = async (prodCategoriesState) => {
+		let formData = new FormData();
+		formData.append("is_option", prodCategoriesState.is_option);
+		formData.append("title", prodCategoriesState.title);
+		formData.append("link", prodCategoriesState.link);
+		formData.append("status", prodCategoriesState.status);
+		formData.append("description", prodCategoriesState.description);
+		if (prodCategoriesState.image) {
+			formData.append("image", prodCategoriesState.image);
+		}
+		formData.append("brand_id", prodCategoriesState.brand_id);
     return axios({
       method: "put",
       url: `${process.env.REACT_APP_API_LOCAL_PATH}product_categories/${prodCategoriesState.prodCategoryId}`,
@@ -49,15 +59,7 @@ class ProdCategories {
         uid: `${user.uid}`,
         mode: "no-cors",
       },
-			data: {
-        title: prodCategoriesState.title,
-        status: prodCategoriesState.status,
-        link: prodCategoriesState.link,
-				description: prodCategoriesState.description,
-				active_image: prodCategoriesState.image,
-				is_option:prodCategoriesState.is_option,
-
-      },
+			data:formData,
     })
       .then((result) => {
         return {
@@ -73,6 +75,14 @@ class ProdCategories {
       });
   };
 	addProdCategory = async (prodCategoriesState) => {
+		let formData = new FormData();
+		formData.append("is_option", prodCategoriesState.is_option);
+		formData.append("title", prodCategoriesState.title);
+		formData.append("link", prodCategoriesState.link);
+		formData.append("status", prodCategoriesState.status);
+		formData.append("description", prodCategoriesState.description);
+		formData.append("image", prodCategoriesState.image);
+		formData.append("brand_id", prodCategoriesState.brand_id);
     return axios({
       method: "post",
       url: `${process.env.REACT_APP_API_LOCAL_PATH}product_categories`,
@@ -85,14 +95,7 @@ class ProdCategories {
         uid: `${user.uid}`,
         mode: "no-cors",
       },
-			data: {
-				is_option:prodCategoriesState.is_option,
-        title: prodCategoriesState.title,
-        status: prodCategoriesState.status,
-        link: prodCategoriesState.link,
-        description: prodCategoriesState.description,
-        active_image: prodCategoriesState.image,
-      },
+			data:formData,
     })
       .then((result) => {
         return {

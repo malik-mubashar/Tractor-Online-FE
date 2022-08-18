@@ -56,7 +56,7 @@ const searchAble = ({ cities }) => {
 	
   return (
     <>
-      <ul className="list-unstyled search-front clearfix d-flex justify-content-center d-flex">
+      <ul className="list-unstyled search-front clearfix d-flex justify-content-center d-flex mainSearch">
         <li className="home-autocomplete-field">
           <input
             data-autocomplete-class="home-autocomplete"
@@ -74,24 +74,20 @@ const searchAble = ({ cities }) => {
         </li>
         <li className="col-2 px-0">
           <Select
-            className="ui-autocomplete-input form-control searchAble border-right "
+            // className="ui-autocomplete-input form-control searchAble border-right "
             options={cities}
             // setValue={setCity}
             label="Select City"
-            value={city}
-            placeholder="Select City"
+            // value={city}
             onChange={(e) => {if(e){setCity(e.label)}}}
             clearable={false}
           />
         </li>
         <li className="col-1 px-0">
           <Select
-            className="ui-autocomplete-input form-control searchAble border-right"
+            // className="ui-autocomplete-input form-control searchAble border-right"
             options={minPriceOptions}
-            // setValue={setMinPrice}
             label="Select Min Price "
-            value={minPrice}
-            placeholder="Select Min Price"
             onChange={(e) => {if(e){setMinPrice(e.label)}}}
             clearable={false}
           />
@@ -100,10 +96,7 @@ const searchAble = ({ cities }) => {
           <Select
             className="ui-autocomplete-input form-control searchAble border-right"
             options={maxPriceOptions}
-            // setValue={setMaxPrice}
             label="Select Max Price"
-            placeholder="Select Max Price"
-            value={maxPrice}
             onChange={(e) => {setMaxPrice(e.label)}}
             clearable={false}
           />

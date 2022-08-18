@@ -19,7 +19,6 @@ const Layout = (props) => {
     
     const result = await websiteName.getWebsiteName();
     if(result.error=== false){
-      debugger
       setWebsiteName(result.data && result.data.data[0].title);
     }
   };

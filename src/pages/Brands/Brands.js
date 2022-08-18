@@ -317,7 +317,9 @@ export default function Brands() {
                                           link: brand.link,
                                           status: brand.status,
                                           description: brand.description,
-                                          brandId: brand.id,
+																					brandId: brand.id,
+																					product_categories: brand.product_categories,
+																					product_category_id: brand.product_categories.map((item)=>item.id)
                                         });
                                       }}
                                       className="text-success mr-2 icon wh-15 mt-minus-3"

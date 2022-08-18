@@ -2,17 +2,52 @@ import React, { useEffect, useState } from "react";
 import { Button, Col, Form, Row } from "react-bootstrap";
 import toast, { Toaster } from "react-hot-toast";
 import { prodApi } from "../../API/ProdCategoriesApis";
+import Select from "react-select";
+import { brandApis } from "../../API/BrandsApis";
 
 export default function AddAndEditProdCategories({
   prodCategoriesState,
   setProdCategoriesState,
   getProdCategories,
 }) {
+  const [optionsForMultiSelect, setOptionsForMultiSelect] = useState();
+  useEffect(() => {
+    getBrands(1, "", 10000000000);
+  }, []);
+  const getBrands = async (page, mainSearch, noOfRec) => {
+    const loadingToastId = toast.loading("Loading..!");
+
+    try {
+      const result = await brandApis.getBrands(page, mainSearch, noOfRec);
+      if (result.error == false && result.data.status == "success") {
+        toast.dismiss(loadingToastId);
+        // setBrands(result.data.data);
+        var tempArr = [];
+        result.data.data.forEach((brand) => {
+          tempArr.push({
+            value: brand.id,
+            label: brand.title,
+          });
+        });
+        setOptionsForMultiSelect(tempArr);
+      } else {
+        toast.dismiss(loadingToastId);
+        console.error(result.data);
+      }
+    } catch (error) {
+      toast.dismiss(loadingToastId);
+      console.error(error);
+    }
+  };
+
   const fieldsMap = [
     { name: "title", required: true },
     { name: "status", required: true },
     { name: "link", required: false },
-    { name: "description", required: false },
+		{ name: "description", required: false },
+		{ name: "image", required: prodCategoriesState.isAddProdCategory?true:false },
+
+		
   ];
   const [fieldsWithError, setFieldsWithError] = useState({
     description: false,
@@ -26,8 +61,8 @@ export default function AddAndEditProdCategories({
       console.log(prodCategoriesState);
       if (
         prodCategoriesState[fieldDetail.name] == undefined ||
-				prodCategoriesState[fieldDetail.name] == "" ||
-				prodCategoriesState[fieldDetail.name] == null
+        prodCategoriesState[fieldDetail.name] == "" ||
+        prodCategoriesState[fieldDetail.name] == null
       ) {
         if (fieldDetail.required === true) {
           tempFieldsWithError = {
@@ -52,7 +87,7 @@ export default function AddAndEditProdCategories({
         }
       }
     });
-		console.log("tempFieldsWithError", tempFieldsWithError);
+    console.log("tempFieldsWithError", tempFieldsWithError);
 
     var isValidationFailed = false;
     setFieldsWithError(tempFieldsWithError);
@@ -119,11 +154,18 @@ export default function AddAndEditProdCategories({
         } catch (error) {
           console.error(error);
         }
-      } 
-    }else {
-			toast.error("Validation Failed");
-		}
+      }
+    } else {
+      toast.error("Validation Failed");
+    }
   };
+  const handleTypeSelect = () => {};
+
+  const options = [
+    { value: "chocolate", label: "Chocolate" },
+    { value: "strawberry", label: "Strawberry" },
+    { value: "vanilla", label: "Vanilla" },
+  ];
   console.log("asdasd", prodCategoriesState);
   return (
     <div className="mb-4 mt-5">
@@ -142,8 +184,8 @@ export default function AddAndEditProdCategories({
               <Form>
                 <Form.Group controlId="formBasicName">
                   <Form.Label>Title</Form.Label>
-									<Form.Control
-										 className={
+                  <Form.Control
+                    className={
                       fieldsWithError.title === true ? "border-danger" : ""
                     }
                     defaultValue={prodCategoriesState.title}
@@ -153,13 +195,37 @@ export default function AddAndEditProdCategories({
                     onChange={(e) => handleChange(e)}
                   />
                 </Form.Group>
+                <Form.Group>
+                  <Form.Label>
+                    Select Brands that are associated with current category
+                  </Form.Label>
+                  <Select
+                    // defaultValue={[colourOptions[2], colourOptions[3]]}
+										defaultValue={prodCategoriesState && prodCategoriesState.brands&& prodCategoriesState.brands.map((item) => {
+                    	return {value:item.id,label:item.title}
+                    })}
+                    isMulti
+                    name="colors"
+                    onChange={(selectedOption) => {
+                      setProdCategoriesState({
+                        ...prodCategoriesState,
+                        brand_id: selectedOption.map((item) => item.value),
+                      });
+                    }}
+                    options={optionsForMultiSelect}
+                    className="basic-multi-select"
+                    classNamePrefix="select"
+                  />
+                </Form.Group>
 
                 <Form.Group>
                   <Form.Label>Upload New Picture</Form.Label>
-                  <Form.Control
+									<Form.Control
+										 className={
+                      fieldsWithError.image === true ? "border-danger form-control" : "form-control"
+                    }
                     type="file"
                     placeholder=""
-                    className="form-control"
                     multiple
                     onChange={(e) => {
                       handlePictureUpload(e.target.files[0]);
@@ -180,16 +246,16 @@ export default function AddAndEditProdCategories({
 
                 <Form.Group controlId="formGridState">
                   <Form.Label>Status</Form.Label>
-									<Form.Control
-										 className={
+                  <Form.Control
+                    className={
                       fieldsWithError.status === true ? "border-danger" : ""
                     }
                     as="select"
                     value={prodCategoriesState.status}
                     onChange={(e) => handleChange(e)}
                     name="status"
-									>
-										<option key="blankChoice" hidden value>
+                  >
+                    <option key="blankChoice" hidden value>
                       -- Select Product Status --
                     </option>
                     <option value="active">active</option>
@@ -207,23 +273,26 @@ export default function AddAndEditProdCategories({
                     placeholder="Link"
                     onChange={(e) => handleChange(e)}
                   />
-								</Form.Group>
-								
-								<Form.Group controlId="formBasicComments" className="d-flex">
+                </Form.Group>
+
+                <Form.Group controlId="formBasicComments" className="d-flex">
                   <Form.Label>Is Option</Form.Label>
-									<Form.Check
-										 defaultChecked={
-                      prodCategoriesState && prodCategoriesState.is_option == true
+                  <Form.Check
+                    defaultChecked={
+                      prodCategoriesState &&
+                      prodCategoriesState.is_option == true
                         ? true
                         : false
                     }
                     name="is_option"
-										placeholder="Link"
-										className="ml-4"
-										onChange={(e) =>{ setProdCategoriesState({
-											...prodCategoriesState,
-											[e.target.name]: e.target.checked,
-										});} }
+                    placeholder="Link"
+                    className="ml-4 mt-2"
+                    onChange={(e) => {
+                      setProdCategoriesState({
+                        ...prodCategoriesState,
+                        [e.target.name]: e.target.checked,
+                      });
+                    }}
                   />
                 </Form.Group>
 
@@ -251,8 +320,8 @@ export default function AddAndEditProdCategories({
                 >
                   Cancel
                 </Button>
-								<Button
-									className=" mt-3"
+                <Button
+                  className=" mt-3"
                   onClick={() => {
                     addProdCategory();
                   }}
