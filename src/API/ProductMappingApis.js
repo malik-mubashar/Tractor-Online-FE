@@ -149,6 +149,32 @@ class ProductMapping {
       });
 	};
 
+	getMappingForPostAd = async (id) => {
+    return axios({
+      method: "get",
+      url: `${process.env.REACT_APP_API_LOCAL_PATH}get_mappings?product_category_id=${id}`,
+      headers: {
+        "Content-Type": "application/json;",
+        "access-token": `${user.accessToken}`,
+        client: `${user.client}`,
+        uid: `${user.uid}`,
+        mode: "no-cors",
+      },
+    })
+      .then((result) => {
+        return {
+          error: false,
+          data: result.data,
+        };
+      })
+      .catch((error) => {
+        return {
+          error: true,
+          data: error.response.data,
+        };
+      });
+	};
+
  
 	getProductMappingsPdf = async (searchString) => {
 		 

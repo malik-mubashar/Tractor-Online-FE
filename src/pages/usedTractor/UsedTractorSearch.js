@@ -29,7 +29,7 @@ export default function UsedTractorSearch() {
   const [heading, setHeading] = useState("");
 
   const search = useLocation().search;
-	var category = new URLSearchParams(search).get("category");
+	var category = new URLSearchParams(search).get("category")||'nil';
 	const [prodCategories, setProdCategories] = useState();
 	const [brands, setBrands] = useState();
 
@@ -161,7 +161,7 @@ export default function UsedTractorSearch() {
             src={"https://tpc.googlesyndication.com/simgad/5923361064753698031"}
             className="mt-5"
           /> */}
-          <h3 className="pageHeading mt-5 pt-5">{category&&category!='nil'?prodCategories && prodCategories.find((cate)=>cate.id==category).title:'Products'} for sale</h3>
+          <h3 className="pageHeading mt-5 pt-5">{category&&category!=='nil'?prodCategories && prodCategories.find((cate)=>cate.id==category).title:'Products'} for sale</h3>
           <div className="searchCounterWrapper">
             <ul className="breadcrumb bread">
               <li>
@@ -182,12 +182,12 @@ export default function UsedTractorSearch() {
                     className="cursor-pointer"
                     itemProp="name"
                   >
-                    {category &&category!='nil'?prodCategories && prodCategories.find((cate)=>cate.id==category).title:'Products'} /
+                    {category &&category!=='nil'?prodCategories && prodCategories.find((cate)=>cate.id==category).title:'Products'} /
                   </span>
                 </a>
               </li>
               <li>
-                <span itemProp="name">{category&&category!='nil'?prodCategories && prodCategories.find((cate)=>cate.id==category).title:'Products'} In Pakistan</span>
+                <span itemProp="name">{category&&category!=='nil'?prodCategories && prodCategories.find((cate)=>cate.id==category).title:'Products'} In Pakistan</span>
               </li>
 						</ul>
 						{pagination &&

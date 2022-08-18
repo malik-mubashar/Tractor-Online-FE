@@ -378,9 +378,7 @@ export default function UsedTractor() {
               <Select
                 className="fieldHeight"
                 options={cities}
-                //setValue={setCity}
                 label="Select City"
-                value={citySelected}
                 placeholder="Select City"
                 onChange={(e) => setCitySelected(e.label)}
                 clearable={false}
@@ -390,9 +388,7 @@ export default function UsedTractor() {
               <Select
                 className="col-6 px-0 fieldHeight"
                 options={minPriceOptions}
-                // setValue={setMinPrice}
                 label="Select Min Price "
-                value={minPrice}
                 placeholder="Select Min Price"
                 onChange={(e) => setMinPrice(e.label)}
                 clearable={false}
@@ -400,10 +396,8 @@ export default function UsedTractor() {
               <Select
                 className="col-6 px-0 fieldHeight"
                 options={maxPriceOptions}
-                // setValue={setMaxPrice}
                 label="Select Max Price"
                 placeholder="Select Max Price"
-                value={maxPrice}
                 onChange={(e) => setMaxPrice(e.label)}
                 clearable={false}
               />
