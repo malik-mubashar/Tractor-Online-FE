@@ -49,7 +49,6 @@ export default function FeaturedProducts({ title, link, prodCategoryId }) {
       slidesToSlide: 1, // optional, default to 1.
     },
   };
-console.log('mbmbproducts',products)
 
   return (
     <div>

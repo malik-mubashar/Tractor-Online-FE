@@ -16,7 +16,7 @@ export default function AddAndEditCountry({
   const doValidation = () => {
     var tempFieldsWithError = {};
     fieldsMap.forEach((fieldDetail) => {
-      console.log(countryState);
+      
       if (
         countryState[fieldDetail.name] == undefined ||
         countryState[fieldDetail.name] == "" ||
@@ -46,16 +46,16 @@ export default function AddAndEditCountry({
       }
     });
 
-    console.log("tempFieldsWithError", tempFieldsWithError);
+    
     var isValidationFailed = false;
-    console.log(tempFieldsWithError);
+    
     setFieldsWithError(tempFieldsWithError);
     Object.values(tempFieldsWithError).forEach((item) => {
       if (item === true) {
         isValidationFailed = true;
       }
     });
-    console.log("isValidationFailed", isValidationFailed);
+ ;
 
     return isValidationFailed;
   };
@@ -120,7 +120,7 @@ export default function AddAndEditCountry({
       toast.error("Validation Failed");
     }
   };
-  console.log(countryState);
+ 
   return (
     <div className="mb-4">
       {/* Basic Forms */}

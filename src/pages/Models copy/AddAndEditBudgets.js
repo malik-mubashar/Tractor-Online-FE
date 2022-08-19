@@ -28,7 +28,6 @@ export default function AddAndEditBudgets({
 	const doValidation = () => {
     var tempFieldsWithError = {};
     fieldsMap.forEach((fieldDetail) => {
-      console.log(budgetsState);
       if (
         budgetsState[fieldDetail.name] == undefined ||
 				budgetsState[fieldDetail.name] == "" ||
@@ -58,19 +57,16 @@ export default function AddAndEditBudgets({
       }
     });
 
-		console.log("tempFieldsWithError", tempFieldsWithError);
 		if (budgetsState.isEditCategoryBrand === true) {
 			tempFieldsWithError.image = false 
 		}
     var isValidationFailed = false;
-    console.log(tempFieldsWithError);
     setFieldsWithError(tempFieldsWithError);
     Object.values(tempFieldsWithError).forEach((item) => {
       if (item === true) {
         isValidationFailed = true;
       }
     });
-    console.log("isValidationFailed", isValidationFailed);
 
     return isValidationFailed;
   };
@@ -101,7 +97,6 @@ export default function AddAndEditBudgets({
 		 
 				
         const result = await budgetApis.addBudget(budgetsState);
-        console.log(result);
         if (result.error === false) {
           toast.dismiss(loadingToastId);
           toast.success("Budget created!");
@@ -141,7 +136,6 @@ export default function AddAndEditBudgets({
 		toast.error("Validation Failed");
 	}
   };
-  console.log("asdasd", budgetsState);
   return (
     <div className="mb-4 mt-5">
       {/* Basic Forms */}

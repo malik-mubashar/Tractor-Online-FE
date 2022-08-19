@@ -27,7 +27,6 @@ export default function ProductMappings() {
   const getProductMappings = async (page, mainSearch, noOfRec) => {
     const loadingToastId = toast.loading("Loading..!");
 
-    console.log(page);
     try {
       const result = await productMappingApis.getProductMappings(
         page,
@@ -65,7 +64,6 @@ export default function ProductMappings() {
         toast.success("Successfully deleted!");
         getProductMappings(1, "", 10);
       }
-      console.log(result);
     } catch (error) {
       console.error(error);
     }
@@ -131,7 +129,7 @@ export default function ProductMappings() {
         window.open(`${result.data.file_path}`, "_blank");
       } else {
         toast.dismiss(loadingToastId);
-        console.log("error");
+        
       }
     } catch (e) {
       toast.dismiss(loadingToastId);
@@ -151,7 +149,6 @@ export default function ProductMappings() {
         window.open(`${result.data.file_path}`, "_blank");
       } else {
         toast.dismiss(loadingToastId);
-        console.log("error");
       }
     } catch (e) {
       toast.dismiss(loadingToastId);
@@ -159,7 +156,7 @@ export default function ProductMappings() {
     }
   };
 
-  console.log("productMappingsState in index", productMappingsState);
+ 
   return (
     <>
       <>

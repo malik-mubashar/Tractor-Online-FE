@@ -20,7 +20,7 @@ export default function AddAndEditLanguage({
 	const doValidation = () => {
     var tempFieldsWithError = {};
     fieldsMap.forEach((fieldDetail) => {
-      console.log(languagesState);
+    
       if (
         languagesState[fieldDetail.name] == undefined ||
 				languagesState[fieldDetail.name] == "" ||
@@ -54,16 +54,16 @@ export default function AddAndEditLanguage({
       }
     });
      
-    console.log("tempFieldsWithError", tempFieldsWithError);
+
     var isValidationFailed = false;
-    console.log(tempFieldsWithError);
+   
     setFieldsWithError(tempFieldsWithError);
     Object.values(tempFieldsWithError).forEach((item) => {
       if (item === true) {
         isValidationFailed = true;
       }
     });
-    console.log("isValidationFailed", isValidationFailed);
+  
 
     return isValidationFailed;
   };
@@ -83,7 +83,7 @@ export default function AddAndEditLanguage({
     if (languagesState.isAddLanguage) {
       try {
         const result = await languageApis.addLanguage(languagesState);
-        console.log(result);
+       
         if (result.error == false) {
           toast.dismiss(loadingToastId);
           toast.success("City created!");
@@ -117,7 +117,7 @@ export default function AddAndEditLanguage({
 		toast.error("Validation Failed");
 	}
   };
-  console.log(languagesState);
+  
   return (
     <div className="mb-4">
       {/* Basic Forms */}

@@ -60,7 +60,6 @@ function MyVerticallyCenteredModal(props) {
 
     try {
       const result = await user.login(email, password);
-      console.log(result);
       //success
       if (result.error === false) {
         toast.dismiss(loadingToastId);
@@ -297,7 +296,6 @@ const Topbar = () => {
     const result = await prodApi.getAllProductCategories();
     setProductCategories(result.data && result.data.data);
 	};
-	console.log('userProfilePicture',userProfilePicture)
 
   return (
     <Navbar fixed="top" className="top-menu landingTopbar">

@@ -124,7 +124,6 @@ const postad = () => {
 	const doValidation = () => {
     var tempFieldsWithError = {};
     fieldsMap.forEach((fieldDetail) => {
-      console.log(postAddState);
       if (
         postAddState[fieldDetail.name] == undefined ||
         postAddState[fieldDetail.name] == "" ||
@@ -154,16 +153,13 @@ const postad = () => {
       }
     });
 
-    console.log("tempFieldsWithError", tempFieldsWithError);
     var isValidationFailed = false;
-    console.log(tempFieldsWithError);
     setFieldsWithError(tempFieldsWithError);
     Object.values(tempFieldsWithError).forEach((item) => {
       if (item === true) {
         isValidationFailed = true;
       }
     });
-    console.log("isValidationFailed", isValidationFailed);
 
     return isValidationFailed;
   };
@@ -262,7 +258,6 @@ const postad = () => {
         [item.key]: item.value,
       };
     });
-    console.log("..extraFieldsObj..", extraFieldsObj);
     return extraFieldsObj;
 	};
 	const addProduct = async (params) => {
@@ -308,7 +303,6 @@ const postad = () => {
       if (postAddState.isAddProduct) {
         try {
           const result = await productApis.addProduct(postAddState, formData);
-          console.log(result);
           if (result.error == false) {
             toast.dismiss(loadingToastId);
             toast.success("Product created!");
@@ -332,9 +326,7 @@ const postad = () => {
     let ImagesArray = Object.entries(e.target.files).map((e) =>
       URL.createObjectURL(e[1])
     );
-    console.log(ImagesArray);
     setFile([...ImagesArray]);
-    console.log("file", file);
     setPostAddState({
       ...postAddState,
       images: e.target.files,
@@ -365,9 +357,7 @@ const postad = () => {
       ...postAddState,
       images: fileListArr,
     });
-    console.log(s);
   }
-	console.log('postAddState', postAddState);
   return (
     <>
       <div className="card text-center my-4 py-4">

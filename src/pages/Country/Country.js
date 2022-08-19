@@ -126,7 +126,7 @@ export default function Country() {
         window.open(`${result.data.file_path}`, "_blank");
       } else {
         toast.dismiss(loadingToastId);
-        console.log("error");
+        
         toast.error("error");
       }
     } catch (e) {
@@ -148,7 +148,7 @@ export default function Country() {
         window.open(`${result.data.file_path}`, "_blank");
       } else {
         toast.dismiss(loadingToastId);
-        console.log("error");
+        
       }
     } catch (e) {
       toast.dismiss(loadingToastId);
@@ -156,8 +156,7 @@ export default function Country() {
     }
   };
 
-  console.log("CountryState in index", countryState);
-  console.log("CountryState in index", noOfRec);
+ 
   return (
     <>
       <>

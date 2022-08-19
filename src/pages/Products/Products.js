@@ -29,7 +29,7 @@ export default function Products() {
   const getProducts = async (page, mainSearch, noOfRec) => {
     const loadingToastId = toast.loading("Loading..!");
 
-    console.log(page);
+   
     try {
       const result = await productApis.getProducts(page, mainSearch, noOfRec);
 
@@ -68,7 +68,7 @@ export default function Products() {
         toast.success("Successfully deleted!");
         getProducts(1, "", 10);
       }
-      console.log(result);
+     
     } catch (error) {
       console.error(error);
     }
@@ -132,7 +132,7 @@ export default function Products() {
         window.open(`${result.data.file_path}`, "_blank");
       } else {
         toast.dismiss(loadingToastId);
-        console.log("error");
+        
       }
     } catch (e) {
       toast.dismiss(loadingToastId);
@@ -150,7 +150,7 @@ export default function Products() {
         window.open(`${result.data.file_path}`, "_blank");
       } else {
         toast.dismiss(loadingToastId);
-        console.log("error");
+      
       }
     } catch (e) {
       toast.dismiss(loadingToastId);
@@ -158,7 +158,6 @@ export default function Products() {
     }
   };
 
-  console.log("productsState in index", productsState);
   return (
     <>
       <>

@@ -66,7 +66,7 @@ export default function AddAndEditCategoryBrands({
   const doValidation = () => {
     var tempFieldsWithError = {};
     fieldsMap.forEach((fieldDetail) => {
-      console.log(categoryBrandsState);
+     
       if (
         categoryBrandsState[fieldDetail.name] == undefined ||
 				categoryBrandsState[fieldDetail.name] == "" ||
@@ -96,19 +96,19 @@ export default function AddAndEditCategoryBrands({
       }
     });
 
-		console.log("tempFieldsWithError", tempFieldsWithError);
+		
 		if (categoryBrandsState.isEditCategoryBrand === true) {
 			tempFieldsWithError.image = false 
 		}
     var isValidationFailed = false;
-    console.log(tempFieldsWithError);
+    
     setFieldsWithError(tempFieldsWithError);
     Object.values(tempFieldsWithError).forEach((item) => {
       if (item === true) {
         isValidationFailed = true;
       }
     });
-    console.log("isValidationFailed", isValidationFailed);
+    
 
     return isValidationFailed;
   };
@@ -121,7 +121,7 @@ export default function AddAndEditCategoryBrands({
           const result = await categoryBrandsApis.addCategoryBrand(
             categoryBrandsState
           );
-          console.log(result);
+       
           if (result.error === false) {
             toast.dismiss(loadingToastId);
             toast.success("Category Category created!");
@@ -166,8 +166,7 @@ export default function AddAndEditCategoryBrands({
       toast.error("Validation Failed");
     }
   };
-  console.log("asdasd", categoryBrandsState);
-  console.log("asdasd", productCategories);
+ 
   return (
     <div className="mb-4 mt-5">
       {/* Basic Forms */}

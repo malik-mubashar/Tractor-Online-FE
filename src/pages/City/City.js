@@ -31,7 +31,7 @@ export default function City() {
   const getCities = async (page, mainSearch, noOfRec) => {
     const loadingToastId = toast.loading("Loading..!");
 
-    console.log(page);
+  
     try {
       const result = await city.getCities(page, mainSearch, noOfRec);
       if (result.error == false && result.data.status == "success") {
@@ -73,7 +73,7 @@ export default function City() {
         toast.success("Successfully deleted!");
         getCities(1, "", 10);
       }
-      console.log(result);
+   
     } catch (error) {
       console.error(error);
     }
@@ -128,7 +128,7 @@ export default function City() {
         window.open(`${result.data.file_path}`, "_blank");
       } else {
         toast.dismiss(loadingToastId);
-        console.log("error");
+      
       }
     } catch (e) {
       toast.dismiss(loadingToastId);
@@ -147,14 +147,14 @@ export default function City() {
         window.open(`${result.data.file_path}`, "_blank");
       } else {
         toast.dismiss(loadingToastId);
-        console.log("error");
+       
       }
     } catch (e) {
       toast.dismiss(loadingToastId);
       console.error(e);
     }
   };
-console.log("cityState",cityState)
+
   return (
     <>
       <>

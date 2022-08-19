@@ -75,7 +75,7 @@ export default function ProdSubCategories() {
         toast.dismiss(loadingToastId);
         toast.error("can not delete!");
       }
-      console.log(result);
+      
     } catch (error) {
       console.error(error);
     }
@@ -139,7 +139,7 @@ export default function ProdSubCategories() {
         window.open(`${result.data.file_path}`, "_blank");
       } else {
         toast.dismiss(loadingToastId);
-        console.log("error");
+       
         toast.error("error");
       }
     } catch (e) {
@@ -161,14 +161,13 @@ export default function ProdSubCategories() {
         window.open(`${result.data.file_path}`, "_blank");
       } else {
         toast.dismiss(loadingToastId);
-        console.log("error");
+     
       }
     } catch (e) {
       toast.dismiss(loadingToastId);
       console.error(e);
     }
   };
-console.log('prodSubCategoriesState',prodSubCategoriesState)
   return (
     <>
       <>

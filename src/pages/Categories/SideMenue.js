@@ -44,7 +44,7 @@ const SideMenue = () => {
     const result = await prodApi.getAllProductCategories();
     setProductCategories(result.data && result.data.data);
 	};
-	console.log('productCategories',productCategories)
+
   return (
     <Nav defaultActiveKey="/" className="flex-column categoryNavbar">
       {productCategories &&

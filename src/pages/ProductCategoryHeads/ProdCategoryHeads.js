@@ -78,7 +78,7 @@ export default function ProdCategoryHeads() {
         getProdCategoryHeads(1, "", 10);
 			}
 			
-      console.log(result);
+    
     } catch (error) {
       console.error(error);
     }
@@ -138,7 +138,6 @@ export default function ProdCategoryHeads() {
         window.open(`${result.data.file_path}`, "_blank");
       } else {
         toast.dismiss(loadingToastId);
-        console.log("error");
         toast.error("error");
       }
     } catch (e) {
@@ -162,14 +161,12 @@ export default function ProdCategoryHeads() {
         window.open(`${result.data.file_path}`, "_blank");
       } else {
         toast.dismiss(loadingToastId);
-        console.log("error");
       }
     } catch (e) {
       toast.dismiss(loadingToastId);
       console.error(e);
     }
   };
-  console.log("asd,asd", prodCategoryHeadsState);
 
   return (
     <>

@@ -49,7 +49,7 @@ function MyVerticallyCenteredModal(props) {
 
     try {
       const result = await user.login(email, password);
-      console.log(result);
+    
       //success
       if (result.error === false) {
         toast.dismiss(loadingToastId);

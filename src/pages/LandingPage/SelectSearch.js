@@ -5,7 +5,7 @@ import 'react-virtualized/styles.css';
 import 'react-virtualized-select/styles.css';
 
 const SelectSearch = ({ options, label, value, setValue }) => {
-  console.log("options   -------------------", options)
+
   return (
     <VirtualizedSelect
       options={options}

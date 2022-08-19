@@ -29,7 +29,7 @@ const LandingPage = () => {
   const handleGetAllCategories = async () => {
     const result = await prodApi.getAllProductCategories(true);
     if (result.error === false) {
-      console.log("qwe", result.data.data);
+      
       setProductCategories(result.data && result.data.data);
     }
   };
@@ -50,7 +50,7 @@ const LandingPage = () => {
           const chunk = result.data.data.slice(i, i + chunkSize);
           tempArr.push(chunk);
 				}
-				console.log('brandsForCategories',tempArr)
+			
         setBrandsForCategories(tempArr);
       } else {
         toast.dismiss(loadingToastId);

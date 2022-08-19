@@ -72,7 +72,6 @@ export default function AddAndEditProdCategoryHeads({
   const doValidation = () => {
     var tempFieldsWithError = {};
     fieldsMap.forEach((fieldDetail) => {
-      console.log(prodCategoryHeadsState);
       if (
         prodCategoryHeadsState[fieldDetail.name] == undefined ||
 				prodCategoryHeadsState[fieldDetail.name] == "" ||
@@ -106,16 +105,14 @@ export default function AddAndEditProdCategoryHeads({
       }
     });
      
-    console.log("tempFieldsWithError", tempFieldsWithError);
+    
     var isValidationFailed = false;
-    console.log(tempFieldsWithError);
     setFieldsWithError(tempFieldsWithError);
     Object.values(tempFieldsWithError).forEach((item) => {
       if (item === true) {
         isValidationFailed = true;
       }
     });
-    console.log("isValidationFailed", isValidationFailed);
 
     return isValidationFailed;
   };
@@ -130,7 +127,7 @@ export default function AddAndEditProdCategoryHeads({
           const result = await prodCategoryHeadsApi.addProdCategoryHead(
             prodCategoryHeadsState
           );
-          console.log(result);
+         
           if (result.error == false) {
             toast.dismiss(loadingToastId);
             toast.success("Product Category created!");
@@ -169,7 +166,6 @@ export default function AddAndEditProdCategoryHeads({
       toast.error("Validation Failed");
     }
   };
-  console.log("prodCategoryHeadsState", prodCategoryHeadsState);
   return (
     <div className="mb-4 mt-5">
       {/* Basic Forms */}
