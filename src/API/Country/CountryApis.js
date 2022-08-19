@@ -2,7 +2,7 @@ import axios from "axios";
 
 //no_of_record=5&page=2
 // var user = JSON.parse(window.localStorage.getItem("currentUser")) || null;
-// console.log('userinIndex',user)
+
  
 class Country {
 

@@ -30,7 +30,7 @@ export default function Roles() {
   const getRoles = async (page, mainSearch, noOfRec) => {
     const loadingToastId = toast.loading("Loading..!");
 
-    console.log(page);
+  
     try {
       const result = await roleApis.getRoles(page, mainSearch, noOfRec);
       if (result.error == false && result.data.status == "success") {
@@ -71,7 +71,7 @@ export default function Roles() {
         toast.success("Successfully deleted!");
         getRoles(1, "", 10);
       }
-      console.log(result);
+     
     } catch (error) {
       console.error(error);
     }
@@ -130,7 +130,7 @@ export default function Roles() {
         window.open(`${result.data.file_path}`, "_blank");
       } else {
         toast.dismiss(loadingToastId);
-        console.log("error");
+      
         toast.error("error");
       }
     } catch (e) {
@@ -154,7 +154,7 @@ export default function Roles() {
         window.open(`${result.data.file_path}`, "_blank");
       } else {
         toast.dismiss(loadingToastId);
-        console.log("error");
+       
       }
     } catch (e) {
       toast.dismiss(loadingToastId);
@@ -162,8 +162,7 @@ export default function Roles() {
     }
   };
 
-  console.log("rolesState in index", rolesState);
-  console.log("rolesState in index", noOfRec);
+ 
   return (
     <>
       <>

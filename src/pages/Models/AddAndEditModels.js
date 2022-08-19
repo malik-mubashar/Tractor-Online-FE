@@ -55,7 +55,6 @@ export default function AddAndEditModels({
   const doValidation = () => {
     var tempFieldsWithError = {};
     fieldsMap.forEach((fieldDetail) => {
-      console.log(modelsState);
       if (
         modelsState[fieldDetail.name] == undefined ||
 				modelsState[fieldDetail.name] == "" ||
@@ -85,19 +84,16 @@ export default function AddAndEditModels({
       }
     });
 
-    console.log("tempFieldsWithError", tempFieldsWithError);
     if (modelsState.isEditCategoryBrand === true) {
       tempFieldsWithError.image = false;
     }
     var isValidationFailed = false;
-    console.log(tempFieldsWithError);
     setFieldsWithError(tempFieldsWithError);
     Object.values(tempFieldsWithError).forEach((item) => {
       if (item === true) {
         isValidationFailed = true;
       }
     });
-    console.log("isValidationFailed", isValidationFailed);
 
     return isValidationFailed;
   };
@@ -122,7 +118,6 @@ export default function AddAndEditModels({
       if (modelsState.isAddModel) {
         try {
           const result = await modelApis.addModel(modelsState);
-          console.log(result);
           if (result.error === false) {
             toast.dismiss(loadingToastId);
             toast.success("Model created!");
@@ -162,7 +157,6 @@ export default function AddAndEditModels({
       toast.error("Validation Failed");
     }
   };
-  console.log("asdasd", modelsState);
   return (
     <div className="mb-4 mt-5">
       {/* Basic Forms */}

@@ -124,7 +124,6 @@ export default function UsedTractorSearch() {
 		);
     if (result.error === false) {
       setProducts(result.data && result.data.data);
-			console.log("products", result.data && result.data.data);
 			setPagination(result.data.pagination)
 			setShowLoader(false);
 		}
@@ -147,10 +146,7 @@ export default function UsedTractorSearch() {
 			);
     }
   }, [searchFilters]);
-  console.log("searchFilters", searchFilters);
-  console.log("priceRangeTo", priceRangeTo);
-  console.log("priceRangeFrom", priceRangeFrom);
-  console.log("pagination",pagination);
+
   return (
     <>
       <section>

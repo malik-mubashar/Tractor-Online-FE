@@ -55,7 +55,7 @@ export default function AddAndEditProduct({
   const doValidation = () => {
     var tempFieldsWithError = {};
     fieldsMap.forEach((fieldDetail) => {
-      console.log(productsState);
+     
       if (
         productsState[fieldDetail.name] == undefined ||
         productsState[fieldDetail.name] == "" ||
@@ -85,16 +85,16 @@ export default function AddAndEditProduct({
       }
     });
 
-    console.log("tempFieldsWithError", tempFieldsWithError);
+    
     var isValidationFailed = false;
-    console.log(tempFieldsWithError);
+  
     setFieldsWithError(tempFieldsWithError);
     Object.values(tempFieldsWithError).forEach((item) => {
       if (item === true) {
         isValidationFailed = true;
       }
     });
-    console.log("isValidationFailed", isValidationFailed);
+   
 
     return isValidationFailed;
   };
@@ -102,7 +102,6 @@ export default function AddAndEditProduct({
   const getProductMappings = async (page, mainSearch, noOfRec) => {
     const loadingToastId = toast.loading("Loading..!");
 
-    console.log(page);
     try {
       const result = await productMappingApis.getProductMappings(
         page,
@@ -135,9 +134,9 @@ export default function AddAndEditProduct({
     let ImagesArray = Object.entries(e.target.files).map((e) =>
       URL.createObjectURL(e[1])
     );
-    console.log(ImagesArray);
+   
     setFile([...ImagesArray]);
-    console.log("file", file);
+    
     setProductsState({
       ...productsState,
       images: e.target.files,
@@ -209,7 +208,7 @@ export default function AddAndEditProduct({
       ...productsState,
       images: fileListArr,
     });
-    console.log(s);
+  
   }
 
   function selectCoverPhoto(e, item, index) {
@@ -235,7 +234,7 @@ export default function AddAndEditProduct({
         [item.key]: item.value,
       };
     });
-    console.log("..extraFieldsObj..", extraFieldsObj);
+    
     return extraFieldsObj;
   };
 
@@ -283,7 +282,7 @@ export default function AddAndEditProduct({
       if (productsState.isAddProduct) {
         try {
           const result = await productApis.addProduct(productsState, formData);
-          console.log(result);
+         
           if (result.error == false) {
             toast.dismiss(loadingToastId);
             toast.success("Product created!");
@@ -375,9 +374,6 @@ export default function AddAndEditProduct({
 
   const handleProductCategoryChange = (e) => {
     handleChange(e);
-    console.log(extraFieldsArr);
-    console.log(productsState);
-    console.log('productMappings',productMappings);
     var temp = productMappings.find((item) => {
       return item.product_category.id == e.target.value;
     });

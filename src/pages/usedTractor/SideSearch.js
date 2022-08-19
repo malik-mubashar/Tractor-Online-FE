@@ -40,7 +40,6 @@ export default function SideSearch({
     { label: "700000", value: "700000" },
   ];
 
-  console.log("searchFilters", searchFilters);
   return (
     <>
       <MDBAccordion alwaysOpen initialActive={1}>

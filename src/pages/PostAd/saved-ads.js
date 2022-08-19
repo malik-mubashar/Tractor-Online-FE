@@ -16,7 +16,6 @@ const savedAds = () => {
 
   const onShowPhoneModelClose = () => {
     setOpenShowPhone(false);
-    console.log("ping");
   };
 
 

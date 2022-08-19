@@ -77,7 +77,6 @@ export default function AddAndEditProductMappings({
         [item.key]: item.value,
       };
     });
-    console.log("..extraFieldsObj..", extraFieldsObj);
     return extraFieldsObj;
   };
   const addProductMapping = async (params) => {
@@ -197,7 +196,6 @@ export default function AddAndEditProductMappings({
     }
   };
 
-  console.log("extraFieldsArr", extraFieldsArr);
   return (
     <div className="mb-4">
       {/* Basic Forms */}

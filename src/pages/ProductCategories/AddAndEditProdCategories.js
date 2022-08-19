@@ -58,7 +58,6 @@ export default function AddAndEditProdCategories({
   const doValidation = () => {
     var tempFieldsWithError = {};
     fieldsMap.forEach((fieldDetail) => {
-      console.log(prodCategoriesState);
       if (
         prodCategoriesState[fieldDetail.name] == undefined ||
         prodCategoriesState[fieldDetail.name] == "" ||
@@ -87,7 +86,7 @@ export default function AddAndEditProdCategories({
         }
       }
     });
-    console.log("tempFieldsWithError", tempFieldsWithError);
+    
 
     var isValidationFailed = false;
     setFieldsWithError(tempFieldsWithError);
@@ -96,7 +95,7 @@ export default function AddAndEditProdCategories({
         isValidationFailed = true;
       }
     });
-    console.log("isValidationFailed", isValidationFailed);
+   
 
     return isValidationFailed;
   };
@@ -122,7 +121,7 @@ export default function AddAndEditProdCategories({
       if (prodCategoriesState.isAddProdCategory) {
         try {
           const result = await prodApi.addProdCategory(prodCategoriesState);
-          console.log(result);
+         
           if (result.error == false) {
             toast.dismiss(loadingToastId);
             toast.success("Product Category created!");
@@ -166,7 +165,7 @@ export default function AddAndEditProdCategories({
     { value: "strawberry", label: "Strawberry" },
     { value: "vanilla", label: "Vanilla" },
   ];
-  console.log("asdasd", prodCategoriesState);
+  
   return (
     <div className="mb-4 mt-5">
       {/* Basic Forms */}

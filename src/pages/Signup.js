@@ -50,7 +50,7 @@ const SignUp = () => {
       //error
 			if (result.error === true) {
 
-				console.log('result', result)
+				
 				setSignUpMessage(result.data.errors.full_messages)
 				setAlertMessage(result.data.errors.full_messages)
         setAlertType('alert-danger')

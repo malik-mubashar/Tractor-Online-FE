@@ -67,7 +67,7 @@ export default function AddAndEditBrands({
   const doValidation = () => {
     var tempFieldsWithError = {};
     fieldsMap.forEach((fieldDetail) => {
-      console.log(brandsState);
+    
       if (
         brandsState[fieldDetail.name] == undefined ||
         brandsState[fieldDetail.name] == ""
@@ -96,19 +96,18 @@ export default function AddAndEditBrands({
       }
     });
 
-    console.log("tempFieldsWithError", tempFieldsWithError);
+    
     if (brandsState.isEditCategoryBrand === true) {
       tempFieldsWithError.image = false;
     }
     var isValidationFailed = false;
-    console.log(tempFieldsWithError);
     setFieldsWithError(tempFieldsWithError);
     Object.values(tempFieldsWithError).forEach((item) => {
       if (item === true) {
         isValidationFailed = true;
       }
     });
-    console.log("isValidationFailed", isValidationFailed);
+    
 
     return isValidationFailed;
   };
@@ -133,7 +132,7 @@ export default function AddAndEditBrands({
       if (brandsState.isAddBrand) {
         try {
           const result = await brandApis.addBrand(brandsState);
-          console.log(result);
+         
           if (result.error === false) {
             toast.dismiss(loadingToastId);
             toast.success("Brand created!");
@@ -174,8 +173,7 @@ export default function AddAndEditBrands({
     }
   };
 
-  console.log("optionsForMultiSelect", optionsForMultiSelect);
-  console.log("asdasd", brandsState);
+ 
   return (
     <div className="mb-4 mt-5">
       {/* Basic Forms */}

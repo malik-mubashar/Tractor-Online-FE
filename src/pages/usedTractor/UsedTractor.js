@@ -61,7 +61,7 @@ function MyVerticallyCenteredModal(props) {
 
     try {
       const result = await user.login(email, password);
-      console.log(result);
+     
       //success
       if (result.error === false) {
         toast.dismiss(loadingToastId);
@@ -351,8 +351,7 @@ export default function UsedTractor() {
       history.push("/used-tractor/sell/");
     }
   }
-  console.log("window.location.href", window.location.href);
-  console.log("category", category);
+
   return (
     <div className="usedTractorMain pt-3">
       <div className="usedTractorsContainer">

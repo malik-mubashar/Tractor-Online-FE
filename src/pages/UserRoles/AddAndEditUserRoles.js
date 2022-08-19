@@ -51,7 +51,7 @@ export default function AddAndEditUserRoles({
     if (userRolesState.isAddUserRole) {
       try {
         const result = await userRolesApis.addUserRole(userRolesState);
-        console.log(result);
+       
         if (result.error == false) {
           toast.dismiss(loadingToastId);
           toast.success("City created!");
@@ -82,7 +82,7 @@ export default function AddAndEditUserRoles({
       }
     }
   };
-  console.log(userRolesState);
+
   return (
     <div className="mb-4">
       {/* Basic Forms */}

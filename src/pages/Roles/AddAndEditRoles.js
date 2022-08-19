@@ -26,7 +26,7 @@ export default function AddAndEditRole({
   const doValidation = () => {
     var tempFieldsWithError = {};
     fieldsMap.forEach((fieldDetail) => {
-      console.log(rolesState);
+    
       if (
         rolesState[fieldDetail.name] == undefined ||
         rolesState[fieldDetail.name] == ""
@@ -55,16 +55,16 @@ export default function AddAndEditRole({
       }
     });
 
-    console.log("tempFieldsWithError", tempFieldsWithError);
+   
     var isValidationFailed = false;
-    console.log(tempFieldsWithError);
+   
     setFieldsWithError(tempFieldsWithError);
     Object.values(tempFieldsWithError).forEach((item) => {
       if (item === true) {
         isValidationFailed = true;
       }
     });
-    console.log("isValidationFailed", isValidationFailed);
+    
 
     return isValidationFailed;
   };
@@ -75,7 +75,7 @@ export default function AddAndEditRole({
       if (rolesState.isAddRole) {
         try {
           const result = await roleApis.addRole(rolesState);
-          console.log(result);
+       
           if (result.error == false) {
             toast.dismiss(loadingToastId);
             toast.success("City created!");
@@ -109,7 +109,7 @@ export default function AddAndEditRole({
       toast.error("Validation Failed");
     }
   };
-  console.log(rolesState);
+ 
   return (
     <div className="mb-4">
       {/* Basic Forms */}

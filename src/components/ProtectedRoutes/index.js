@@ -28,7 +28,7 @@ const ProtectedRoute = ({ children, ...routeProps }) => {
 						}
 					} else {
 						history.push('/')
-						console.log('currentUser.role[0]',currentUser.role[0])
+						
 					}
         }
       }}

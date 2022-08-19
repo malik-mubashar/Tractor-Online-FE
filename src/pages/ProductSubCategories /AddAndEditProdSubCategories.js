@@ -32,7 +32,7 @@ export default function AddAndEditProdSubCategories({
   const doValidation = () => {
     var tempFieldsWithError = {};
     fieldsMap.forEach((fieldDetail) => {
-      console.log(prodSubCategoriesState);
+     
       if (
         prodSubCategoriesState[fieldDetail.name] == undefined ||
         prodSubCategoriesState[fieldDetail.name] == ""
@@ -62,19 +62,19 @@ export default function AddAndEditProdSubCategories({
       }
     });
 
-    console.log("tempFieldsWithError", tempFieldsWithError);
+  
     if (prodSubCategoriesState.isEditCategoryBrand === true) {
       tempFieldsWithError.image = false;
     }
     var isValidationFailed = false;
-    console.log(tempFieldsWithError);
+   
     setFieldsWithError(tempFieldsWithError);
     Object.values(tempFieldsWithError).forEach((item) => {
       if (item === true) {
         isValidationFailed = true;
       }
     });
-    console.log("isValidationFailed", isValidationFailed);
+  
 
     return isValidationFailed;
   };
@@ -131,7 +131,7 @@ export default function AddAndEditProdSubCategories({
           const result = await prodSubApi.addProdSubCategory(
             prodSubCategoriesState
           );
-          console.log(result);
+         
           if (result.error == false) {
             toast.dismiss(loadingToastId);
             toast.success("Product Category created!");

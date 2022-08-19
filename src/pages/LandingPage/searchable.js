@@ -49,10 +49,7 @@ const searchAble = ({ cities }) => {
       setMinPriceOptions(temp);
     }
 	}, [maxPrice]);
-	console.log('{city}',city,)
-	console.log('{maxPrice}',maxPrice)
-	console.log('{minPrice}',  minPrice)
-	console.log('{makeOrModel}',makeOrModel)
+	
 	
   return (
     <>

@@ -33,7 +33,7 @@ export default function Languages() {
   const getLanguages = async (page, mainSearch, noOfRec) => {
     const loadingToastId = toast.loading("Loading..!");
 
-    console.log(page);
+  
     try {
       const result = await languageApis.getLanguages(page, mainSearch, noOfRec);
       if (result.error == false && result.data.status == "success") {
@@ -74,7 +74,7 @@ export default function Languages() {
         toast.success("Successfully deleted!");
         getLanguages(1, "", 10);
       }
-      console.log(result);
+      
     } catch (error) {
       console.error(error);
     }
@@ -139,7 +139,7 @@ export default function Languages() {
         window.open(`${result.data.file_path}`, "_blank");
       } else {
         toast.dismiss(loadingToastId);
-        console.log("error");
+        
         toast.error("error");
       }
     } catch (e) {
@@ -163,7 +163,6 @@ export default function Languages() {
         window.open(`${result.data.file_path}`, "_blank");
       } else {
         toast.dismiss(loadingToastId);
-        console.log("error");
       }
     } catch (e) {
       toast.dismiss(loadingToastId);
@@ -171,8 +170,6 @@ export default function Languages() {
     }
   };
 
-  console.log("languagesState in index", languagesState);
-  console.log("languagesState in index", noOfRec);
   return (
     <>
       <>

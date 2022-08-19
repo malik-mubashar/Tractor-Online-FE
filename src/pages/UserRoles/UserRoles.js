@@ -20,7 +20,7 @@ import AddAndEditUserRoles from "./AddAndEditUserRoles";
 
 export default function UserRoles() {
 	var user = JSON.parse(window.localStorage.getItem("currentUser")) || null;
-	console.log('user',user)
+
   const [paginationNumbers, setPaginationNumbers] = useState();
   const [noOfRec, setNoOfRec] = useState(10);
   const [mainSearchString, setMainSearchString] = useState("");
@@ -31,7 +31,7 @@ export default function UserRoles() {
   const getUserRoles = async (page, mainSearch, noOfRec) => {
     const loadingToastId = toast.loading("Loading..!");
 
-    console.log(page);
+
     try {
       const result = await userRolesApis.getUserRoles(page, mainSearch, noOfRec);
 			if (result.error == false && result.data.status == "success") {
@@ -73,7 +73,7 @@ export default function UserRoles() {
         toast.success("Successfully deleted!");
         getUserRoles(1, "", 10);
       }
-      console.log(result);
+     
     } catch (error) {
       console.error(error);
     }
@@ -119,8 +119,7 @@ export default function UserRoles() {
     }
   };
 
-  console.log("userRolesState in index", userRolesState);
-	console.log("userRolesState in index", noOfRec);
+
 	
   return (
     <>

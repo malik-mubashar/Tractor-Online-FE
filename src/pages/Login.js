@@ -40,11 +40,11 @@ const Login = () => {
 
     try {
       const result = await user.login(email, password);
-      console.log(result);
+   
       //success
 			if (result.error === false) {
 				toast.dismiss(loadingToastId);
-				console.log('currentUser',result)
+				
         toast.success('welcome')
         setCurrentUser({
           ...result.data.data,

@@ -30,7 +30,7 @@ export default function AddAndEditCity({ cityState, setCityState, getCities }) {
 	const doValidation = () => {
     var tempFieldsWithError = {};
     fieldsMap.forEach((fieldDetail) => {
-      console.log(cityState);
+     
       if (
         cityState[fieldDetail.name] == undefined ||
 				cityState[fieldDetail.name] == "" ||
@@ -60,19 +60,18 @@ export default function AddAndEditCity({ cityState, setCityState, getCities }) {
       }
     });
 
-		console.log("tempFieldsWithError", tempFieldsWithError);
+		
 		if (cityState.isEditCategoryBrand === true) {
 			tempFieldsWithError.image = false 
 		}
     var isValidationFailed = false;
-    console.log(tempFieldsWithError);
+   
     setFieldsWithError(tempFieldsWithError);
     Object.values(tempFieldsWithError).forEach((item) => {
       if (item === true) {
         isValidationFailed = true;
       }
     });
-    console.log("isValidationFailed", isValidationFailed);
 
     return isValidationFailed;
   };
@@ -83,7 +82,7 @@ export default function AddAndEditCity({ cityState, setCityState, getCities }) {
     if (cityState.isAddCity) {
       try {
         const result = await city.addCity(cityState.title, cityState.comments, cityState.image);
-        console.log(result);
+       
         if ((result.error == false)) {
           toast.dismiss(loadingToastId);
           toast.success("City created!");
@@ -121,7 +120,7 @@ export default function AddAndEditCity({ cityState, setCityState, getCities }) {
 		toast.error("Validation Failed");
 	}
   };
-  console.log(cityState);
+ 
   return (
     <div className="mb-4">
       {/* Basic Forms */}
