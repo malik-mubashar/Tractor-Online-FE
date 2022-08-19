@@ -34,7 +34,8 @@ const postad = () => {
     price: "",
     location: "",
     link: "",
-    city: "",
+		city: "",
+		images:[],
     phone_no: "",
   });
   const fieldsMap = [
@@ -262,8 +263,8 @@ const postad = () => {
     if (!doValidation()) {
       var user = JSON.parse(window.localStorage.getItem("currentUser")) || null;
 
-      let extraFieldsData = getExtraFieldDataForApi();
-      const loadingToastId = toast.loading("Loading..!");
+			let extraFieldsData = getExtraFieldDataForApi();
+			setShowLoader(true)
       let formData = new FormData();
 
       if (postAddState.images !== undefined) {
@@ -301,16 +302,16 @@ const postad = () => {
         try {
           const result = await productApis.addProduct(postAddState, formData);
           if (result.error == false) {
-            toast.dismiss(loadingToastId);
-            toast.success("Product created!");
+						setShowLoader(false);
+            toast.success("Add Posted!");
           }
           if (result.error === true) {
-            toast.dismiss(loadingToastId);
-            toast.error("error");
+						setShowLoader(false);
+            toast.error("Error !");
           }
         } catch (error) {
-          toast.dismiss(loadingToastId);
-          toast.error("error");
+					setShowLoader(false);
+          toast.error("Error !");
           console.error(error);
         }
       }
@@ -326,11 +327,12 @@ const postad = () => {
     setFile([...file, ...ImagesArray]);
     setPostAddState({
       ...postAddState,
-      images: e.target.files,
+      images: [...postAddState.images,...e.target.files],
     });
     if (ImagesArray.length > 0) {
       setIsImgSelected(true);
-    }
+		}
+		debugger;
   }
   function selectCoverPhoto(e, item, index) {
     const input = document.getElementById("multi-img-field");
@@ -347,12 +349,13 @@ const postad = () => {
       cover_photo: fileListArr[index],
     });
   }
-  function deleteFile(e) {
+	function deleteFile(e) {
+		debugger;
     const s = file.filter((item, index) => index !== e);
     setFile(s);
     const input = document.getElementById("multi-img-field");
     const fileListArr = Array.from(input.files);
-    fileListArr.splice(e, e); // here u remove the file
+    fileListArr.filter((item, index) => index !== e); // here u remove the file
     if (file.length === 1) {
       setIsImgSelected(false);
     }
@@ -360,7 +363,8 @@ const postad = () => {
       ...postAddState,
       images: fileListArr,
     });
-  }
+	}
+	console.log('postAddState', postAddState.images);
   return (
     <>
       <div className="card text-center my-4 py-4">
