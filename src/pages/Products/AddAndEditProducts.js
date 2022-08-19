@@ -483,10 +483,8 @@ export default function AddAndEditProduct({
                   <Select
                     className="ui-autocomplete-input form-control searchAble border-right "
                     options={cities}
-                    //setValue={setCountry}
                     name="city"
                     label="Select City"
-                    value={productsState.city}
                     placeholder="Select City"
                     onChange={(e) => {
                       setProductsState({

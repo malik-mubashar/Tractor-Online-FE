@@ -324,7 +324,7 @@ export default function Products() {
                               <td>
                                 <div>
                                   <div className="btn btn-outline-success extraFieldsBtn relative">
-                                    Hover me to view Extra Info
+                                    view Extra Info
                                     <div className="extraFieldsContainer">
                                       <div className="popover-header bg-info">
                                         All Extra Info
@@ -345,7 +345,7 @@ export default function Products() {
                                                       <b>{item[0]}</b>
                                                     </span>
                                                     :
-                                                    <span className="ml-1">
+                                                    <span className="ml-1" title={item[1]}>
                                                       {item[1]}
                                                     </span>
                                                     <div></div>

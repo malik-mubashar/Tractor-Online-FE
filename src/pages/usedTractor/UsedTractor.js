@@ -375,7 +375,7 @@ export default function UsedTractor() {
             </div>
             <div className="col-4">
               <Select
-                className="fieldHeight"
+                className="fieldHeight mainSearch"
                 options={cities}
                 label="Select City"
                 placeholder="Select City"
@@ -385,7 +385,7 @@ export default function UsedTractor() {
             </div>
             <div className="col-4 d-flex">
               <Select
-                className="col-6 px-0 fieldHeight"
+                className="col-6 px-0 fieldHeight mainSearch"
                 options={minPriceOptions}
                 label="Select Min Price "
                 placeholder="Select Min Price"
@@ -393,7 +393,7 @@ export default function UsedTractor() {
                 clearable={false}
               />
               <Select
-                className="col-6 px-0 fieldHeight"
+                className="col-6 px-0 fieldHeight mainSearch"
                 options={maxPriceOptions}
                 label="Select Max Price"
                 placeholder="Select Max Price"

@@ -131,7 +131,7 @@ const MobileDropDown = ({ show, setShow }) => {
                           ) : null}
                         </li>
                         {item.product_category_heads.length > 0 ? (
-                            <div className="content">
+                            <div className="content-mobile-collapse">
                               {item.product_category_heads.map((item, i) => (
                                 <div className="" key={i}>
                                   <Link
