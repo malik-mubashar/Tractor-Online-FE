@@ -48,19 +48,36 @@ export default function AddDetails() {
   const [product, setProduct] = useState([]);
   const [customReport, setCustomReport] = useState(false);
   const radioValuesArr = [
-    {heading: "Duplicate", text: "A similar listing has previously been posted."},
-    {heading: "Spam", text: "It's a Spam Ad"},
-    {heading: "Wrong Contact Info", text: "Contact information is wrong."},
-    {heading: "Sold Already", text: "This item has already been sold by the seller."},
-    {heading: "Fake Ads", text: "The item is fake, the phone number is fake, the details are false, etc."},
-    {heading: "Wrong Category", text: "This category is inappropriate for it."},
-    {heading: "Prohibited/Explicit Content", text: "It contains vulgar language, pornographic or explicit content, etc."},
-    {heading: "Other", text: ""}
-  ]
+    {
+      heading: "Duplicate",
+      text: "A similar listing has previously been posted.",
+    },
+    { heading: "Spam", text: "It's a Spam Ad" },
+    { heading: "Wrong Contact Info", text: "Contact information is wrong." },
+    {
+      heading: "Sold Already",
+      text: "This item has already been sold by the seller.",
+    },
+    {
+      heading: "Fake Ads",
+      text:
+        "The item is fake, the phone number is fake, the details are false, etc.",
+    },
+    {
+      heading: "Wrong Category",
+      text: "This category is inappropriate for it.",
+    },
+    {
+      heading: "Prohibited/Explicit Content",
+      text:
+        "It contains vulgar language, pornographic or explicit content, etc.",
+    },
+    { heading: "Other", text: "" },
+  ];
   const { setShowLoader, websiteName } = useContext(RootContext);
 
   useEffect(() => {
-    setShowLoader(true)
+    setShowLoader(true);
     handleGetProductDetails();
   }, [id]);
 
@@ -74,28 +91,27 @@ export default function AddDetails() {
     }
   };
 
-  function handleReport(e){
-    if (e.target.value === "Other"){
-      setCustomReport(true)
-    }
-    else{
-      setCustomReport(false)
+  function handleReport(e) {
+    if (e.target.value === "Other") {
+      setCustomReport(true);
+    } else {
+      setCustomReport(false);
     }
   }
 
   const handleClose = () => {
     setShowModal(false);
     setShowReportModal(false);
+  };
+
+  function phoneAgree() {
+    setIsPhoneAgree(true);
+    setShowModal(false);
   }
 
-  function phoneAgree(){
-    setIsPhoneAgree(true)
-    setShowModal(false)
-  }
-
-  function phoneAgreeModalHandle(){
-    if (!isPhoneAgree){
-      setShowModal(true)
+  function phoneAgreeModalHandle() {
+    if (!isPhoneAgree) {
+      setShowModal(true);
     }
   }
 
@@ -104,7 +120,6 @@ export default function AddDetails() {
     <div className="addDetails pt-3">
       <Loader />
       <div className="remove-section">
-
         <div className="container">
           <div className="breadcrumbWrapper">
             <ul className="breadcrumb bread">
@@ -144,13 +159,13 @@ export default function AddDetails() {
                   </p>
                 </div>
                 <div className="right-img pull-right cover-photo-zoom">
-                      <img
-                        alt="Tractor Inspection Rate"
-                        src={product.cover_photo_path}
-                        width="100%"
-                        height="100%"
-                      />
-                    </div>
+                  <img
+                    alt="Tractor Inspection Rate"
+                    src={product.cover_photo_path}
+                    width="100%"
+                    height="100%"
+                  />
+                </div>
                 <div className="imageGallery">
                   <div className="content">
                     <div>
@@ -184,7 +199,9 @@ export default function AddDetails() {
                             }}
                           >
                             {/* {GROUP2.map((p, idx) => ( */}
-                            {product&&product.active_images_path&& product.active_images_path.map((p, idx) => (
+                            {product &&
+                              product.active_images_path &&
+                              product.active_images_path.map((p, idx) => (
                                 <PhotoItem key={idx} image={p} group="group2" />
                               ))}
                           </div>
@@ -193,122 +210,40 @@ export default function AddDetails() {
                     </div>
                   </div>
                 </div>
-                {/* after image gallery 
-                <table
-                  width="100%"
-                  className="table table-bordered text-center table-engine-detail fs16"
-                >
-                  <tbody>
-                    <tr>
-                      <td>
-                        <span className="mx-auto mt-3">
-                          <Image
-                            src={calender}
-                            height="20px"
-                            width="30px"
-                            alt="Profile Image"
-                            className="d-flex justify-content-center "
-                          />
-                          <p>
-                            <a
-                              href="/used-cars/2021/651422"
-                              title="Year 2021 Cars for sale in Pakistan"
-                            >
-                              2021
-                            </a>
-                          </p>
-                        </span>
-                      </td>
-                      <td>
-                        <span className="mx-auto mt-3">
-                          <Image
-                            src={meter}
-                            height="20px"
-                            width="30px"
-                            alt="Profile Image"
-                            className="d-flex justify-content-center m-auto"
-                          />{" "}
-                          <p>4,100 km</p>
-                        </span>
-                      </td>
-                      <td>
-                        <span className="mx-auto mt-3">
-                          <Image
-                            src={petrol}
-                            height="20px"
-                            width="30px"
-                            alt="Profile Image"
-                            className="d-flex justify-content-center m-auto"
-                          />{" "}
-                          <p>
-                            <a
-                              href="/used-cars/petrol/57338"
-                              title="Petrol Cars for Sale in Pakistan"
-                            >
-                              Petrol
-                            </a>
-                          </p>
-                        </span>
-                      </td>
-                      <td>
-                        <span className="mx-auto mt-3">
-                          <Image
-                            src={transmission}
-                            height="20px"
-                            width="30px"
-                            alt="Profile Image"
-                            className="d-flex justify-content-center m-auto"
-                          />{" "}
-                          <p>
-                            <a
-                              href="/used-cars/manual/2112427"
-                              title="Manual Cars for Sale in Pakistan"
-                            >
-                              Manual
-                            </a>
-                          </p>
-                        </span>
-                      </td>
-                    </tr>
-                  </tbody>
-                </table>*/}
-                {/* car details */}
                 <div className="mt-4">
                   <h3 className="mt-3">Product Information:</h3>
                   <div className="row">
                     {product.extra_fields &&
-                      Object.entries(product.extra_fields)
-                        .length > 0 ? (
-                        <>
-                          {product.extra_fields &&
-                            Object.entries(
-                              product.extra_fields
-                            ).map((item, i) => {
+                    Object.entries(product.extra_fields).length > 0 ? (
+                      <>
+                        {product.extra_fields &&
+                          Object.entries(product.extra_fields).map(
+                            (item, i) => {
                               return (
                                 <div className="col-lg-6 carDetail">
                                   <div className="borderTop d-flex">
-                                  <b>{item[0]}:</b>
-                                  <p className="ml-2">{item[1]}</p>
+                                    <b>{item[0]}:</b>
+                                    <p className="ml-2">{item[1]}</p>
                                   </div>
                                 </div>
                               );
-                            })}
-                        </>
-                      ) : (
-                        <div className="text-danger text-center">
-                          No Record Found...
-                        </div>
+                            }
+                          )}
+                      </>
+                    ) : (
+                      <div className="text-danger text-center">
+                        No Record Found...
+                      </div>
                     )}
                   </div>
                 </div>
                 <h3 className="mt-3">Product Description:</h3>
                 <p>
-                  {
-                    product.description ?
-                      <p>{product.description}</p>
-                    :
-                      <strong className="text-danger">No Description</strong>
-                  }
+                  {product.description ? (
+                    <p>{product.description}</p>
+                  ) : (
+                    <strong className="text-danger">No Description</strong>
+                  )}
                 </p>
               </div>
             </div>
@@ -324,25 +259,29 @@ export default function AddDetails() {
                     </strong>
                   </div>
 
-                  <div 
-                    className={`btn  ${ isPhoneAgree ? "phoneNumberDisabledBtn" : "btn-success" } btn-block btn-large buttonDiv`}
+                  <div
+                    className={`btn  ${
+                      isPhoneAgree ? "phoneNumberDisabledBtn" : "btn-success"
+                    } btn-block btn-large buttonDiv`}
                     onClick={phoneAgreeModalHandle}
                   >
                     <span className="d-flex">
-                      <Icofont
-                        icon="phone"
-                        className="icofont-2x mt-1"
-                      />
+                      <Icofont icon="phone" className="icofont-2x mt-1" />
                       <div className="ml-3">
-                        {
-                          isPhoneAgree ?
+                        {isPhoneAgree ? (
                           <h3 className={`ml-1`}>{product.phone_no}</h3>
-                          :
-                            <div>
-                              <span className={`ml-1 ${ isPhoneAgree ? "" : "phone_no_truncate"}`}>{product.phone_no}</span>
-                              <div>Show Phone Number</div>
-                            </div>
-                        }
+                        ) : (
+                          <div>
+                            <span
+                              className={`ml-1 ${
+                                isPhoneAgree ? "" : "phone_no_truncate"
+                              }`}
+                            >
+                              {product.phone_no}
+                            </span>
+                            <div>Show Phone Number</div>
+                          </div>
+                        )}
                       </div>
                     </span>
                   </div>
@@ -365,8 +304,10 @@ export default function AddDetails() {
                     />
                   </div>
                   <div className="col-md-8">
-                    <div><strong>{ userData && userData.name }</strong></div>
-                    <div>Member Since { userData && userData.created_at}</div>
+                    <div>
+                      <strong>{userData && userData.name}</strong>
+                    </div>
+                    <div>Member Since {userData && userData.created_at}</div>
                   </div>
                 </div>
               </div>
@@ -436,26 +377,38 @@ export default function AddDetails() {
             </Modal.Header>
             <Modal.Body>
               <Form>
-                {radioValuesArr.map( (item, i) => {
-                  return(
+                {radioValuesArr.map((item, i) => {
+                  return (
                     <div key={i}>
-                      <input type="radio" className="report-radio-size" id={item.heading} name="report-radio" value={item.heading} onChange={(e) => {handleReport(e)}} />
-                      <label for={item.heading} className="ml-2" ><h6><strong>{item.heading}: </strong>{item.text}</h6></label>
+                      <input
+                        type="radio"
+                        className="report-radio-size"
+                        id={item.heading}
+                        name="report-radio"
+                        value={item.heading}
+                        onChange={(e) => {
+                          handleReport(e);
+                        }}
+                      />
+                      <label for={item.heading} className="ml-2">
+                        <h6>
+                          <strong>{item.heading}: </strong>
+                          {item.text}
+                        </h6>
+                      </label>
                     </div>
-                    )
-                  })}
-                  {customReport ?
-                    <>
-                      <Form.Control
-                        name="description"
-                        as="textarea"
-                        rows={3}
-                        placeholder="Reason of Report"
-                        />
-                    </>
-                  :
-                    null
-                  }
+                  );
+                })}
+                {customReport ? (
+                  <>
+                    <Form.Control
+                      name="description"
+                      as="textarea"
+                      rows={3}
+                      placeholder="Reason of Report"
+                    />
+                  </>
+                ) : null}
               </Form>
             </Modal.Body>
             <Modal.Footer>
@@ -478,16 +431,11 @@ export default function AddDetails() {
               <div className="text-center">
                 <Image src={Buyers} alt="Logo" height="80px" width="80px" />
               </div>
-              <h4 className="text-center">
-                Advice for Safe Dealing
-              </h4>
+              <h4 className="text-center">Advice for Safe Dealing</h4>
               <div className="">
                 <div className="row my-3">
                   <div className="col-1 ml-auto">
-                    <Icofont
-                      icon="not-allowed"
-                      className="icofont-2x"
-                    />
+                    <Icofont icon="not-allowed" className="icofont-2x" />
                   </div>
                   <div className="col-6 mr-auto">
                     <strong>Never pay for anything in advance.</strong>
@@ -495,10 +443,7 @@ export default function AddDetails() {
                 </div>
                 <div className="row my-3">
                   <div className="col-1 ml-auto">
-                    <Icofont
-                      icon="code-not-allowed"
-                      className="icofont-2x"
-                    />
+                    <Icofont icon="code-not-allowed" className="icofont-2x" />
                   </div>
                   <div className="col-6 mr-auto">
                     <strong>Keep your personal details to yourself.</strong>
@@ -506,13 +451,12 @@ export default function AddDetails() {
                 </div>
                 <div className="row my-3">
                   <div className="col-1 ml-auto">
-                    <Icofont
-                      icon="flag"
-                      className="icofont-2x"
-                    />
+                    <Icofont icon="flag" className="icofont-2x" />
                   </div>
                   <div className="col-6 mr-auto">
-                    <strong>Inform TractorOnline about any untrustworthy users.</strong>
+                    <strong>
+                      Inform TractorOnline about any untrustworthy users.
+                    </strong>
                   </div>
                 </div>
                 <div className="text-center">

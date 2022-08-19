@@ -14,21 +14,9 @@ import Cookies from 'universal-cookie';
 const Login = () => {
 	const cookies = new Cookies();
 
-  const { currentUser, setCurrentUser, signUpMessage, setSignUpMessage,userProfilePicture, setUserProfilePicture } = useContext(RootContext);
+  const { currentUser, setCurrentUser, signUpMessage, setSignUpMessage } = useContext(RootContext);
   const [alertMessage, setAlertMessage]  = useState('Confirmation Mail mail sent to your Email Address. Kindly Confirm Your email to continue..')
   const [alertType, setAlertType] = useState('alert-success')
-
-
-	const handlePersonalDetail = async (currentUser) => {
-		const loadingToastId = toast.loading("Loading..!");
-
-		const result = await user.findUser(currentUser);
-		if (result.error === false) {
-			toast.dismiss(loadingToastId);
-			localStorage.setItem('userProfilePicture',JSON.stringify(result.data.profile_path||null))
-			setUserProfilePicture(result.data.profile_path)
-		}
-  };
 
 
   const [email, setEmail] = useState();
@@ -40,11 +28,9 @@ const Login = () => {
 
     try {
       const result = await user.login(email, password);
-   
       //success
 			if (result.error === false) {
 				toast.dismiss(loadingToastId);
-				
         toast.success('welcome')
         setCurrentUser({
           ...result.data.data,
@@ -65,13 +51,9 @@ const Login = () => {
 
           })
         );
-        if (userProfilePicture == null) {
-          handlePersonalDetail({ ...result.data.data,
-            accessToken: result.headers["access-token"],
-            client: result.headers["client"],
-						uid: result.headers["uid"],
-						role:result.data.role});
-        }
+				 
+
+				 
 				if (cookies.get('placeAdClicked') == 'true') {
 					cookies.remove('placeAdClicked')
 					history.push("/sell");
@@ -80,7 +62,6 @@ const Login = () => {
 						history.push("/dashboard");
 					} else {
 						history.push("/");
-						
 					}
 				}
         setSignUpMessage(false)

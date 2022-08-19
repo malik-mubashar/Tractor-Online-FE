@@ -79,8 +79,8 @@ export default function SideSearch({
                           item[0] === "priceRangeTo") ? (
                         item[0] === "priceRangeFrom" ? (
                           <li className="d-flex" key={i}>
-                            Price Range ${searchFilters.priceRangeFrom} to $
-                            {searchFilters.priceRangeTo}
+                            Price Range {searchFilters.priceRangeFrom} to {' '}
+                            {searchFilters.priceRangeTo} PKR
                             <span class="ml-auto">
                               <i
                                 class="fa fa-times-circle"
@@ -284,7 +284,7 @@ export default function SideSearch({
                 history.push(
                   `/used-tractor/search?${new URLSearchParams({
                     ...searchFilters,
-                    featured: e.target.value,
+                    featured: e.target.checked,
                   }).toString()}`
                 );
                 setSearchFilters({
