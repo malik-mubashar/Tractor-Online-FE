@@ -35,6 +35,7 @@ export default function UsedTractorSearch() {
 
   useEffect(() => {
 		GetPopularCities();	
+		debugger;
 		var featured = new URLSearchParams(search).get('featured')||'nil';
 		//landing page search options
 		var city = new URLSearchParams(search).get('city')||'nil';
@@ -67,7 +68,7 @@ export default function UsedTractorSearch() {
 
     try {
       const result = await brandApis.getBrands(page, mainSearch, noOfRec);
-
+			console.log('19 debug', result.data.data);
       if (result.error == false && result.data.status == "success") {
         toast.dismiss(loadingToastId);
 
@@ -83,7 +84,9 @@ export default function UsedTractorSearch() {
   };
 
   const handleGetAllProductCategories = async () => {
-    const result = await prodApi.getAllProductCategories();
+		const result = await prodApi.getAllProductCategories();
+		console.log('19 debug', result.data.data);
+		
     if (result.error === false) {
       setProdCategories(result.data && result.data.data);
     }
@@ -92,6 +95,7 @@ export default function UsedTractorSearch() {
 
   const GetPopularCities = async () => {
     const result = await city.getPopularCity("popular");
+		console.log('19 debug', result.data.data);
 
     if (result.error === false) {
       setCities(result.data && result.data.data);
@@ -122,17 +126,22 @@ export default function UsedTractorSearch() {
 			brand,
 			category
 		);
-    if (result.error === false) {
+		if (result.error === false) {
+			debugger;
+			console.log('19 debug', result.data.data);
+
       setProducts(result.data && result.data.data);
 			setPagination(result.data.pagination)
 			setShowLoader(false);
 		}
 		if (result.error === true) {
+			debugger;
 			setShowLoader(false);
 		}
   };
   useEffect(() => {
-    if (searchFilters) {
+		if (searchFilters) {
+			debugger;
 			handleGetAllProducts(
 				1,
 				noOfRec,
@@ -177,7 +186,8 @@ export default function UsedTractorSearch() {
                     onClick={() => history.goBack()}
                     className="cursor-pointer"
                     itemProp="name"
-                  >
+									>
+										{console.log('category asd',category) }
                     {category &&category!=='nil'?prodCategories && prodCategories.find((cate)=>cate.id==category).title:'Products'} /
                   </span>
                 </a>
@@ -220,43 +230,6 @@ export default function UsedTractorSearch() {
           </div>
         </div>
       </section>
-    
-   
-      {/* <div className="bloodyButton">
-        {isMobile ? (
-          <a
-            href="/used-cars/sell"
-            className="sell-bar-fixed sell-floating-btn sign-in-comp"
-            target="_blank"
-            onClick="trackEvents('UsedCars','Sellform','From - Search');"
-            style={{ width: "50px" }}
-          >
-            <p className="mt-3 text-white"> Sell</p>
-          </a>
-        ) : 
-        
-        (
-          <a
-            href="/used-cars/sell"
-            className="sell-bar-fixed sell-floating-btn sign-in-comp"
-            target="_blank"
-            onClick="trackEvents('UsedCars','Sellform','From - Search');"
-          >
-            <span className="sell-icons">
-              <Image
-                src={tractorSVG}
-                height="40px"
-                width="60px"
-                alt="Profile Image"
-                className="d-flex justify-content-center m-auto"
-              />{" "}
-            </span>
-            <p className="mt-3 text-white"> Sell My Tractor</p>
-          </a>
-        )
-        }
-      </div> */}
-     
     </>
   );
 }

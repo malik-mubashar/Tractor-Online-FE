@@ -19,7 +19,6 @@ export default function SideSearch({
   prodCategories,
 }) {
   const history = useHistory();
-  const make = ["balarus", "messy"];
   const priceRangeFromOption = [
     { label: "10000", value: "10000" },
     { label: "20000", value: "20000" },
@@ -39,7 +38,6 @@ export default function SideSearch({
     { label: "600000", value: "600000" },
     { label: "700000", value: "700000" },
   ];
-
   return (
     <>
       <MDBAccordion alwaysOpen initialActive={1}>
@@ -241,32 +239,32 @@ export default function SideSearch({
               })}
           </ul>
         </MDBAccordionItem>
-        <MDBAccordionItem collapseId={3} headerTitle="MAKE">
+        <MDBAccordionItem collapseId={3} headerTitle="BRAND">
           <ul className="list-unstyled ">
-            {make &&
-              make.map((item) => {
+            {brands &&
+              brands.map((item) => {
                 return (
-                  <>
+									<>
                     <li title="Cars for Sale in Lahore, Pakistan">
                       <label className="filter-check clearfix">
                         <input
                           type="radio"
-                          checked={searchFilters && searchFilters.make === item}
-                          value={item}
+                          checked={searchFilters && searchFilters.brand.toString() === item.id.toString()}
+                          value={item.id}
                           onChange={(e) => {
-                            history.push(
-                              `/used-tractor/search?${new URLSearchParams({
-                                ...searchFilters,
-                                make: e.target.value,
-                              }).toString()}`
-                            );
-                            setSearchFilters({
-                              ...searchFilters,
-                              make: e.target.value,
+														setSearchFilters({
+															...searchFilters,
+                              brand: e.target.value,
                             });
+														history.push(
+															`/used-tractor/search?${new URLSearchParams({
+																...searchFilters,
+																brand: e.target.value,
+															}).toString()}`
+														);
                           }}
                         />
-                        {item}
+                        {item.title}
                         <span className="pull-right count"></span>
                       </label>
                     </li>
@@ -343,5 +341,6 @@ export default function SideSearch({
         </MDBAccordionItem>
       </MDBAccordion>
     </>
-  );
+	);
+	
 }
