@@ -1,10 +1,10 @@
 {
-  "main.css": "/static/css/main.5a1ad18d.chunk.css",
-  "main.js": "/static/js/main.0305a47f.chunk.js",
-  "main.js.map": "/static/js/main.0305a47f.chunk.js.map",
+  "main.css": "/static/css/main.1b5b6847.chunk.css",
+  "main.js": "/static/js/main.41086ac7.chunk.js",
+  "main.js.map": "/static/js/main.41086ac7.chunk.js.map",
   "static/css/1.73b24307.chunk.css": "/static/css/1.73b24307.chunk.css",
-  "static/js/1.7461f80e.chunk.js": "/static/js/1.7461f80e.chunk.js",
-  "static/js/1.7461f80e.chunk.js.map": "/static/js/1.7461f80e.chunk.js.map",
+  "static/js/1.9711d099.chunk.js": "/static/js/1.9711d099.chunk.js",
+  "static/js/1.9711d099.chunk.js.map": "/static/js/1.9711d099.chunk.js.map",
   "runtime~main.js": "/static/js/runtime~main.229c360f.js",
   "runtime~main.js.map": "/static/js/runtime~main.229c360f.js.map",
   "static/media/csv2.svg": "/static/media/csv2.cc06ed8f.svg",
@@ -45,9 +45,9 @@
   "static/media/6-speed-manual-transmission.svg": "/static/media/6-speed-manual-transmission.d1c3c7a6.svg",
   "static/media/gas-station.svg": "/static/media/gas-station.2bb15d9f.svg",
   "static/media/price-logo.png": "/static/media/price-logo.0dcade10.png",
-  "static/css/main.5a1ad18d.chunk.css.map": "/static/css/main.5a1ad18d.chunk.css.map",
+  "static/css/main.1b5b6847.chunk.css.map": "/static/css/main.1b5b6847.chunk.css.map",
   "static/css/1.73b24307.chunk.css.map": "/static/css/1.73b24307.chunk.css.map",
   "index.html": "/index.html",
-  "precache-manifest.ad041b2c36b6b52e2b3083616b9d398c.js": "/precache-manifest.ad041b2c36b6b52e2b3083616b9d398c.js",
+  "precache-manifest.b1ad516493fabff790223c5238e4a9f7.js": "/precache-manifest.b1ad516493fabff790223c5238e4a9f7.js",
   "service-worker.js": "/service-worker.js"
 }
