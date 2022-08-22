@@ -11,6 +11,8 @@ import Buyers from "../../assets/img/buyers.png";
 import { RootContext } from "../../context/RootContext";
 import LoginModel from "../LoginModel";
 import { Link } from "react-router-dom";
+import { productApis } from "../../API/ProductApis";
+import toast, { Toaster } from "react-hot-toast";
 
 export default function SearchListing({
   products,
@@ -23,11 +25,43 @@ export default function SearchListing({
   let history = useHistory();
   const [openShowPhone, setOpenShowPhone] = useState(false);
   const [modalShow, setModalShow] = React.useState(false);
+  const [redirect, setRedirect] = useState('/used-tractor/sell')
   const [gridOrList, setGridOrList] = useState("list");
   const onShowPhoneModelClose = () => {
     setOpenShowPhone(false);
   };
-  const { websiteName } = useContext(RootContext);
+  const { websiteName, currentUser } = useContext(RootContext);
+
+  function handleFavouriteAd(e){
+    if(currentUser === undefined || currentUser === null){
+      setModalShow(true);
+      setRedirect(null);
+    }
+    else{
+      var product_id = e.currentTarget.value;
+      var user_id = currentUser.id
+      favourite_ad(product_id, user_id)
+    }
+
+  }
+
+  const favourite_ad = async (product_id, user_id) => {
+    const loadingToastId = toast.loading("Loading..!");
+    try {
+      const result = await productApis.favouriteAds(product_id, user_id);
+      if (result.error === false) {
+        toast.success(result.data.notice);
+        toast.dismiss(loadingToastId);
+        // setBrands(result.data.data);
+      } else {
+        toast.dismiss(loadingToastId);
+        console.error(result.data);
+      }
+    } catch (error) {
+      toast.dismiss(loadingToastId);
+      console.error(error);
+    }
+  };
 
   return (
     <>
@@ -185,13 +219,23 @@ export default function SearchListing({
                           </small>
                           <div className="d-flex">
                             <button
-                              className="mr-3 btn btn-outline-primary p-1"
+                              className="mr-3 btn p-2"
                               type="submit"
+                              value={item.id}
+                              onClick={ (e) => handleFavouriteAd(e)}
                             >
-                              <Icon.Heart
-                                style={{ height: "14px" }}
-                                className="icon"
-                              />
+                              {item.favourite ?
+                                <Icofont
+                                  icon="heart"
+                                  className="icofont text-danger"
+                                  style={{fontSize: '17px'}}
+                                />
+                              :
+                                <Icon.Heart
+                                  style={{ height: "16px", width: '16px' }}
+                                  className="icon"
+                                />
+                              }
                             </button>
                             {showNumberWarning ? (
                               <button
@@ -250,7 +294,7 @@ export default function SearchListing({
 
             <button
               className={`pagination-button ${
-                pagination.page == 1 ? "disabled" : ""
+                pagination.page === 1 ? "disabled" : ""
               }`}
               onClick={() => {
                 handleGetAllProducts(
@@ -280,7 +324,7 @@ export default function SearchListing({
             </button>
             <button
               className={`pagination-button ${
-                pagination.page == 1 ? "disabled" : ""
+                pagination.page === 1 ? "disabled" : ""
               }`}
               onClick={() => {
                 handleGetAllProducts(
@@ -310,7 +354,7 @@ export default function SearchListing({
             </button>
             <button
               className={`pagination-button ${
-                pagination.page == pagination.last ? "disabled" : ""
+                pagination.page === pagination.last ? "disabled" : ""
               }`}
               tabindex="0"
               type="button"
@@ -343,7 +387,7 @@ export default function SearchListing({
 
             <button
               className={`pagination-button ${
-                pagination.page == pagination.last ? "disabled" : ""
+                pagination.page === pagination.last ? "disabled" : ""
               }`}
               tabindex="0"
               type="button"
@@ -397,7 +441,7 @@ export default function SearchListing({
                 <LoginModel
                   show={modalShow}
                   onHide={() => setModalShow(false)}
-                  redirect="/used-tractor/sell"
+                  redirect={redirect}
                 />
                 <button
                   style={{ color: "white" }}

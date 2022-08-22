@@ -76,7 +76,9 @@ const LoginModel = (props) => {
           });
         }
         localStorage.setItem("headers", JSON.stringify(result.headers));
-        history.push(props && props.redirect);
+        if (props.redirect !== null){
+          history.push(props && props.redirect);
+        }
       }
 
       //error
