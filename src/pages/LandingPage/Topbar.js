@@ -22,249 +22,15 @@ import toast from "react-hot-toast";
 import { RootContext } from "../../context/RootContext";
 import { user } from "../../API/User/index";
 import noProfilePicture from "../../assets/svg/no-profile-picture.svg";
-
-function MyVerticallyCenteredModal(props) {
-  const [password, setPassword] = useState();
-  const [email, setEmail] = useState();
-  const [signUp, setSignUp] = useState(false);
-  const [passwordType, setPasswordType] = useState("password");
-  let history = useHistory();
-  const [passwordInput, setPasswordInput] = useState("");
-  const {
-    currentUser,
-    setCurrentUser,
-    signUpMessage,
-    setSignUpMessage,
-    userProfilePicture,
-    setUserProfilePicture
-  } = useContext(RootContext);
-  const [alertMessage, setAlertMessage] = useState(
-    "Confirmation Mail mail sent to your Email Address. Kindly Confirm Your email to continue.."
-  );
-  const [alertType, setAlertType] = useState("alert-success");
-
-  const handlePersonalDetail = async (currentUser) => {
-		const loadingToastId = toast.loading("Loading..!");
-
-		const result = await user.findUser(currentUser);
-		if (result.error === false) {
-			toast.dismiss(loadingToastId);
-			localStorage.setItem('userProfilePicture',JSON.stringify(result.data.profile_path||null))
-			setUserProfilePicture(result.data.profile_path)
-		}
-  };
-
-  const onLoginHandler = async (e) => {
-    e.preventDefault();
-    const loadingToastId = toast.loading("Loading..!");
-
-    try {
-      const result = await user.login(email, password);
-      //success
-      if (result.error === false) {
-        toast.dismiss(loadingToastId);
-
-        toast.success("welcome");
-        setCurrentUser({
-          ...result.data.data,
-          accessToken: result.headers["access-token"],
-          client: result.headers["client"],
-          uid: result.headers["uid"],
-        });
-
-        localStorage.setItem(
-          "currentUser",
-          JSON.stringify({
-            ...result.data.data,
-            accessToken: result.headers["access-token"],
-            client: result.headers["client"],
-            uid: result.headers["uid"],
-          })
-        );
-        if (userProfilePicture == null) {
-          handlePersonalDetail({ ...result.data.data,
-            accessToken: result.headers["access-token"],
-            client: result.headers["client"],
-						uid: result.headers["uid"],
-						role:result.data.role});
-        }
-        localStorage.setItem("headers", JSON.stringify(result.headers));
-        history.push("/used-tractor/sell");
-        setSignUpMessage(false);
-      }
-
-      //error
-      if (result.error === true) {
-        toast.dismiss(loadingToastId);
-        // toast.error('Login failed');
-        setAlertMessage(result.data.errors[0]);
-        setSignUpMessage(true);
-        setAlertType("alert-danger");
-      }
-    } catch (error) {
-      toast.dismiss(loadingToastId);
-
-      console.error(error);
-    }
-  };
-
-  const handlePasswordChange = (evnt) => {
-    setPasswordInput(evnt.target.value);
-  };
-  const togglePassword = () => {
-    if (passwordType === "password") {
-      setPasswordType("text");
-      return;
-    }
-    setPasswordType("password");
-  };
-  return (
-    <Modal
-      {...props}
-      size="md"
-      aria-labelledby="contained-modal-title-vcenter"
-      centered
-    >
-      <Modal.Header closeButton>
-        <Modal.Title id="contained-modal-title-vcenter">
-          {signUp ? "Sign Up" : "Login"}
-        </Modal.Title>
-      </Modal.Header>
-      <Modal.Body>
-        <div className="form-content p-0">
-          {signUp ? (
-            <Form>
-              <Form.Group>
-                <Form.Label>Email Address</Form.Label>
-                <Form.Control
-                  type="email"
-                  onChange={(event) => {
-                    setEmail(event.target.value);
-                  }}
-                />
-              </Form.Group>
-
-              <Form.Group>
-                <Form.Label>Full Name</Form.Label>
-                <Form.Control
-                  type="text"
-                  onChange={(event) => {
-                    // setFullName(event.target.value);
-                  }}
-                />
-              </Form.Group>
-
-              <Form.Group className="relative">
-                <Form.Label>Password</Form.Label>
-                <Form.Control
-                  type={passwordType}
-                  onChange={(event) => {
-                    setPassword(event.target.value);
-                  }}
-                />
-                {/* <i className="password-icons cursor-pointer" onClick={togglePassword}>
-                {
-                  passwordType==="password"?
-                    <Icofont
-                      icon="eye"
-                      className="icofont-2x"
-                    />
-                  :
-                    <Icofont
-                      icon="eye-blocked"
-                      className="icofont-2x"
-                    />
-                }
-              </i> */}
-              </Form.Group>
-
-              <Form.Group className="relative">
-                <Form.Label>Confirm Password</Form.Label>
-                <Form.Control
-                  // type={confirmPasswordType}
-                  onChange={(event) => {
-                    // setConfirmPassword(event.target.value);
-                  }}
-                />
-                {/* <i className="password-icons cursor-pointer" onClick={confirmTogglePassword}>
-                {
-                  confirmPasswordType==="password"?
-                    <Icofont
-                      icon="eye"
-                      className="icofont-2x"
-                    />
-                  :
-                    <Icofont
-                      icon="eye-blocked"
-                      className="icofont-2x"
-                    />
-                }
-              </i> */}
-              </Form.Group>
-              {/* {error ? (
-                <span className="text-danger">{error}</span>
-              ) : (
-                ""
-              )} */}
-              <div className="text-center">
-                <Button variant="primary" className="mb-2">
-                  Sign Up
-                </Button>
-                <Link to="/login/" className="">
-                  Already have an Account?
-                </Link>
-              </div>
-            </Form>
-          ) : (
-            <Form>
-              <Form.Group>
-                <Form.Label>Email address</Form.Label>
-                <Form.Control
-                  type="email"
-                  onChange={(event) => setEmail(event.target.value)}
-                />
-              </Form.Group>
-              <Form.Group className="relative">
-                <Form.Label>Password</Form.Label>
-                <Form.Control
-                  type={passwordType}
-                  onChange={(event) => setPassword(event.target.value)}
-                />
-                <i
-                  className="password-icons cursor-pointer"
-                  onClick={togglePassword}
-                >
-                  {passwordType === "password" ? (
-                    <Icofont icon="eye" className="icofont-2x" />
-                  ) : (
-                    <Icofont icon="eye-blocked" className="icofont-2x" />
-                  )}
-                </i>
-              </Form.Group>
-              <div className="text-center">
-                <Button
-                  className="mb-2"
-                  variant="primary"
-                  type="submit"
-                  onClick={onLoginHandler}
-                >
-                  Log In
-                </Button>
-                <Link to="/signup/">Don't Have an Account?</Link>
-              </div>
-            </Form>
-          )}
-        </div>
-      </Modal.Body>
-      <Modal.Footer>
-        <Button onClick={props.onHide}>Close</Button>
-      </Modal.Footer>
-    </Modal>
-  );
-}
+import LoginModel from "../LoginModel";
 
 const Topbar = () => {
-  const { setUserProfilePicture, userProfilePicture,currentUser,setCurrentUser } = useContext(RootContext);
+  const {
+    setUserProfilePicture,
+    userProfilePicture,
+    currentUser,
+    setCurrentUser,
+  } = useContext(RootContext);
 
   const [modalShow, setModalShow] = React.useState(false);
   const history = useHistory();
@@ -272,8 +38,8 @@ const Topbar = () => {
   const [profile, setProfile] = useState();
   const [cities, setCities] = useState([]);
   const [brands, setBrands] = useState();
-	useEffect(() => {
-		handleGetAllCategories();
+  useEffect(() => {
+    handleGetAllCategories();
     handleGetAllCities();
     handleGetAllProductCategories();
   }, []);
@@ -295,7 +61,7 @@ const Topbar = () => {
   const handleGetAllCategories = async () => {
     const result = await prodApi.getAllProductCategories();
     setProductCategories(result.data && result.data.data);
-	};
+  };
 
   return (
     <Navbar fixed="top" className="top-menu landingTopbar">
@@ -313,17 +79,15 @@ const Topbar = () => {
         {productCategories &&
           productCategories.map((item, i) => {
             return (
-
               <div key={i}>
                 {i < 5 ? (
                   <DropDownTopbar
-                    link = {item.link}
+                    link={item.link}
                     title={item.title}
                     productHead={item.product_category_heads}
                     cities={cities}
-										brands={item.category_brands}
-										productCategory={item}
-										
+                    brands={item.category_brands}
+                    productCategory={item}
                   />
                 ) : null}
               </div>
@@ -354,14 +118,16 @@ const Topbar = () => {
           </div>
         </div>
 
-				{/* {(localStorage.currentUser !== undefined && localStorage.currentUser !== null) ? ( */}
-        {(currentUser != undefined &&currentUser != null) ? (
-					
+        {/* {(localStorage.currentUser !== undefined && localStorage.currentUser !== null) ? ( */}
+        {currentUser != undefined && currentUser != null ? (
           <>
             {/* login case */}
             <Nav className="ml-auto right-nav">
               <ul className="navbar-nav mr-auto">
-                <Link to ="/used-tractor/sell/" className="btn btn-danger btn-lg text-white mr-2">
+                <Link
+                  to="/used-tractor/sell/"
+                  className="btn btn-danger btn-lg text-white mr-2"
+                >
                   Post An Ad
                 </Link>
                 <NavDropdown
@@ -374,7 +140,7 @@ const Topbar = () => {
 
                       {userProfilePicture && userProfilePicture !== null ? (
                         <Image
-                          src={userProfilePicture&&userProfilePicture}
+                          src={userProfilePicture && userProfilePicture}
                           alt="Profile Image"
                           roundedCircle
                         />
@@ -400,15 +166,14 @@ const Topbar = () => {
                   </NavLink>
 
                   <button
-                    
                     className="dropdown-item"
                     onClick={() => {
                       localStorage.setItem("currentUser", null);
                       localStorage.setItem("user", null);
                       localStorage.setItem("headers", null);
-											setUserProfilePicture(null);
-											setCurrentUser(null)
-											history.push('/')
+                      setUserProfilePicture(null);
+                      setCurrentUser(null);
+                      history.push("/");
                     }}
                   >
                     <Icon.LogOut className="icon" />
@@ -437,9 +202,10 @@ const Topbar = () => {
             {/* logout case */}
             <Nav className="ml-auto right-nav">
               <ul className="navbar-nav mr-auto">
-                <MyVerticallyCenteredModal
+                <LoginModel
                   show={modalShow}
                   onHide={() => setModalShow(false)}
+                  redirect="/used-tractor/sell"
                 />
                 <button
                   onClick={() => setModalShow(true)}

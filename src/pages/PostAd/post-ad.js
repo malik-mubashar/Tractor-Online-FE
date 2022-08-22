@@ -28,14 +28,14 @@ const postad = () => {
   const [showModelError, setShowModelError] = useState(false);
   const [isImgSelected, setIsImgSelected] = useState(false);
   const [postAddState, setPostAddState] = useState({
-    isAddProduct:true,
+    isAddProduct: true,
     status: "active",
     description: "",
     price: "",
     location: "",
     link: "",
-		city: "",
-		images:[],
+    city: "",
+    images: [],
     phone_no: "",
   });
   const fieldsMap = [
@@ -263,8 +263,8 @@ const postad = () => {
     if (!doValidation()) {
       var user = JSON.parse(window.localStorage.getItem("currentUser")) || null;
 
-			let extraFieldsData = getExtraFieldDataForApi();
-			setShowLoader(true)
+      let extraFieldsData = getExtraFieldDataForApi();
+      setShowLoader(true);
       let formData = new FormData();
 
       if (postAddState.images !== undefined) {
@@ -302,15 +302,15 @@ const postad = () => {
         try {
           const result = await productApis.addProduct(postAddState, formData);
           if (result.error == false) {
-						setShowLoader(false);
+            setShowLoader(false);
             toast.success("Add Posted!");
           }
           if (result.error === true) {
-						setShowLoader(false);
+            setShowLoader(false);
             toast.error("Error !");
           }
         } catch (error) {
-					setShowLoader(false);
+          setShowLoader(false);
           toast.error("Error !");
           console.error(error);
         }
@@ -327,12 +327,11 @@ const postad = () => {
     setFile([...file, ...ImagesArray]);
     setPostAddState({
       ...postAddState,
-      images: [...postAddState.images,...e.target.files],
+      images: [...postAddState.images, ...e.target.files],
     });
     if (ImagesArray.length > 0) {
       setIsImgSelected(true);
-		}
-		debugger;
+    }
   }
   function selectCoverPhoto(e, item, index) {
     const input = document.getElementById("multi-img-field");
@@ -349,8 +348,7 @@ const postad = () => {
       cover_photo: fileListArr[index],
     });
   }
-	function deleteFile(e) {
-		debugger;
+  function deleteFile(e) {
     const s = file.filter((item, index) => index !== e);
     setFile(s);
     const input = document.getElementById("multi-img-field");
@@ -363,8 +361,7 @@ const postad = () => {
       ...postAddState,
       images: fileListArr,
     });
-	}
-	console.log('postAddState', postAddState.images);
+  }
   return (
     <>
       <div className="card text-center my-4 py-4">
@@ -584,9 +581,7 @@ const postad = () => {
       <div className="container card my-4 p-5">
         <h3 className="post-ad-heading">Upload Photos</h3>
         <div className="my-2">
-          <div
-            className={`upload-image-container`}
-          >
+          <div className={`upload-image-container`}>
             <input
               ref={myRefname}
               type="file"
@@ -619,14 +614,12 @@ const postad = () => {
                 </div>
               </div>
               <div className="row">
-                {isImgSelected ?
+                {isImgSelected ? (
                   <p className="text-primary">
-                    Please Select an image for cover photo, Otherwise first image
-                    will be your cover photo for your ad.
+                    Please Select an image for cover photo, Otherwise first
+                    image will be your cover photo for your ad.
                   </p>
-                :
-                  null
-                }
+                ) : null}
                 {file &&
                   file.length > 0 &&
                   file.map((item, index) => {
@@ -756,7 +749,7 @@ const postad = () => {
                         "product-cat-select-btns"
                       );
                     }}
-                    className=" d-flex align-items-center product-cat-select-btns my-2"
+                    className="px-2 d-flex align-items-center product-cat-select-btns my-2"
                   >
                     <img
                       src={item.active_image_path}
@@ -765,7 +758,7 @@ const postad = () => {
                       height="100px"
                       width="100px"
                     />
-                    <h5 className="ml-2">{item.title}</h5>
+                    <h5 className="ml-3">{item.title}</h5>
                   </div>
                 </div>
               ))}
@@ -776,7 +769,7 @@ const postad = () => {
             onClick={() => {
               handleCategoryClick();
             }}
-            // disabled={postAddState.product_category_id ? false : true}
+            disabled={postAddState.product_category_id ? false : true}
             variant="primary"
           >
             Continue

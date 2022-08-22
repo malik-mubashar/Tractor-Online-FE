@@ -8,12 +8,7 @@ import {
   useLightgallery,
 } from "react-lightgallery";
 import "lightgallery.js/dist/css/lightgallery.css";
-import { isMobile } from "react-device-detect";
 import mapsBlack from "../../assets/svg/maps-black.svg";
-import calender from "../../assets/svg/calendar-line.svg";
-import meter from "../../assets/svg/speedometer.svg";
-import transmission from "../../assets/svg/6-speed-manual-transmission.svg";
-import petrol from "../../assets/svg/gas-station.svg";
 import { productApis } from "../../API/ProductApis";
 import { useParams } from "react-router";
 import TractorClipart from "../../assets/svg/tractor-logo.svg";
@@ -22,6 +17,8 @@ import Buyers from "../../assets/img/buyers.png";
 import FeaturedProducts from "../LandingPage/FeaturedProducts";
 import Loader from "../../components/Common/Loader";
 import { RootContext } from "../../context/RootContext";
+import LoginModel from "../LoginModel";
+import { Link } from "react-router-dom";
 
 export default function AddDetails() {
   const { id } = useParams();
@@ -47,6 +44,7 @@ export default function AddDetails() {
   const [showReportModal, setShowReportModal] = useState(false);
   const [product, setProduct] = useState([]);
   const [customReport, setCustomReport] = useState(false);
+  const [modalShow, setModalShow] = React.useState(false);
   const radioValuesArr = [
     {
       heading: "Duplicate",
@@ -74,7 +72,7 @@ export default function AddDetails() {
     },
     { heading: "Other", text: "" },
   ];
-  const { setShowLoader, websiteName } = useContext(RootContext);
+  const { setShowLoader, websiteName, currentUser } = useContext(RootContext);
 
   useEffect(() => {
     setShowLoader(true);
@@ -344,9 +342,7 @@ export default function AddDetails() {
                   title="Post an Ad"
                 />
 
-                <h3 className="title">
-                  Post an ad for <span className="generic-red">FREE</span>
-                </h3>
+                <h3 className="title">Post an ad for FREE</h3>
                 <p className="mt10 mb5 fs16">
                   Sell it to tens of thousands of people in less time.{" "}
                 </p>
@@ -355,13 +351,31 @@ export default function AddDetails() {
                     alt="Post an Ad Left"
                     src="https://wsa4.pakwheels.com/assets/sell-ad-point-left-fcc7bca4d40628d7945426ecf5a2ef00.png"
                   />
-                  <a
-                    style={{ color: "white" }}
-                    href="/used-tractor/sell"
-                    className="btn btn-success sign-in-comp"
-                  >
-                    Sell Your Tractor
-                  </a>
+                  {localStorage.currentUser === undefined ? (
+                    <>
+                      <LoginModel
+                        show={modalShow}
+                        onHide={() => setModalShow(false)}
+                        redirect="/used-tractor/sell"
+                      />
+                      <button
+                        style={{ color: "white" }}
+                        onClick={() => setModalShow(true)}
+                        className="btn btn-success sign-in-comp"
+                      >
+                        Sell Your Tractor
+                      </button>
+                    </>
+                  ) : (
+                    <Link
+                      style={{ color: "white" }}
+                      to="/used-tractor/sell"
+                      className="btn btn-success sign-in-comp"
+                    >
+                      Sell Your Tractor
+                    </Link>
+                  )}
+
                   <img
                     alt="Post an Ad Right"
                     src="https://wsa4.pakwheels.com/assets/sell-ad-point-right-630620add9bbdd27360acdfcf98d0608.png"

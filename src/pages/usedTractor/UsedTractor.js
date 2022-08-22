@@ -24,246 +24,7 @@ import * as Icon from "react-feather";
 import toast from "react-hot-toast";
 import { RootContext } from "../../context/RootContext";
 import { user } from "../../API/User/index";
-
-function MyVerticallyCenteredModal(props) {
-  const [password, setPassword] = useState();
-  const [email, setEmail] = useState();
-  const [signUp, setSignUp] = useState(false);
-  const [passwordType, setPasswordType] = useState("password");
-  let history = useHistory();
-  const [passwordInput, setPasswordInput] = useState("");
-  const {
-    currentUser,
-    setCurrentUser,
-    signUpMessage,
-    setSignUpMessage,
-    setUserProfilePicture,
-    userProfilePicture
-  } = useContext(RootContext);
-  const [alertMessage, setAlertMessage] = useState(
-    "Confirmation Mail mail sent to your Email Address. Kindly Confirm Your email to continue.."
-  );
-  const [alertType, setAlertType] = useState("alert-success");
-
-  const handlePersonalDetail = async (currentUser) => {
-    const loadingToastId = toast.loading("Loading..!");
-    const result = await user.findUser(currentUser);
-    if (result.error === false) {
-      toast.dismiss(loadingToastId);
-      localStorage.setItem('userProfilePicture',JSON.stringify(result.data.profile_path||null))
-      setUserProfilePicture(result.data.profile_path)
-    }
-  };
-
-  const onLoginHandler = async (e) => {
-    e.preventDefault();
-    const loadingToastId = toast.loading("Loading..!");
-
-    try {
-      const result = await user.login(email, password);
-     
-      //success
-      if (result.error === false) {
-        toast.dismiss(loadingToastId);
-
-        toast.success("welcome");
-        setCurrentUser({
-          ...result.data.data,
-          accessToken: result.headers["access-token"],
-          client: result.headers["client"],
-          uid: result.headers["uid"],
-        });
-
-        localStorage.setItem(
-          "currentUser",
-          JSON.stringify({
-            ...result.data.data,
-            accessToken: result.headers["access-token"],
-            client: result.headers["client"],
-            uid: result.headers["uid"],
-          })
-        );
-        if (userProfilePicture == null) {
-          handlePersonalDetail({ ...result.data.data,
-            accessToken: result.headers["access-token"],
-            client: result.headers["client"],
-            uid: result.headers["uid"],
-            role:result.data.role});
-        }
-        localStorage.setItem("headers", JSON.stringify(result.headers));
-        history.push("/used-tractor/sell");
-        setSignUpMessage(false);
-      }
-
-      //error
-      if (result.error === true) {
-        toast.dismiss(loadingToastId);
-        // toast.error('Login failed');
-        setAlertMessage(result.data.errors[0]);
-        setSignUpMessage(true);
-        setAlertType("alert-danger");
-      }
-    } catch (error) {
-      toast.dismiss(loadingToastId);
-
-      console.error(error);
-    }
-  };
-
-  const handlePasswordChange = (evnt) => {
-    setPasswordInput(evnt.target.value);
-  };
-  const togglePassword = () => {
-    if (passwordType === "password") {
-      setPasswordType("text");
-      return;
-    }
-    setPasswordType("password");
-  };
-  return (
-    <Modal
-      {...props}
-      size="md"
-      aria-labelledby="contained-modal-title-vcenter"
-      centered
-    >
-      <Modal.Header closeButton>
-        <Modal.Title id="contained-modal-title-vcenter">
-          {signUp ? "Sign Up" : "Login"}
-        </Modal.Title>
-      </Modal.Header>
-      <Modal.Body>
-        <div className="form-content p-0">
-          {signUp ? (
-            <Form>
-              <Form.Group>
-                <Form.Label>Email Address</Form.Label>
-                <Form.Control
-                  type="email"
-                  onChange={(event) => {
-                    setEmail(event.target.value);
-                  }}
-                />
-              </Form.Group>
-
-              <Form.Group>
-                <Form.Label>Full Name</Form.Label>
-                <Form.Control
-                  type="text"
-                  onChange={(event) => {
-                    // setFullName(event.target.value);
-                  }}
-                />
-              </Form.Group>
-
-              <Form.Group className="relative">
-                <Form.Label>Password</Form.Label>
-                <Form.Control
-                  type={passwordType}
-                  onChange={(event) => {
-                    setPassword(event.target.value);
-                  }}
-                />
-                {/* <i className="password-icons cursor-pointer" onClick={togglePassword}>
-                {
-                  passwordType==="password"?
-                    <Icofont
-                      icon="eye"
-                      className="icofont-2x"
-                    />
-                  :
-                    <Icofont
-                      icon="eye-blocked"
-                      className="icofont-2x"
-                    />
-                }
-              </i> */}
-              </Form.Group>
-
-              <Form.Group className="relative">
-                <Form.Label>Confirm Password</Form.Label>
-                <Form.Control
-                  // type={confirmPasswordType}
-                  onChange={(event) => {
-                    // setConfirmPassword(event.target.value);
-                  }}
-                />
-                {/* <i className="password-icons cursor-pointer" onClick={confirmTogglePassword}>
-                {
-                  confirmPasswordType==="password"?
-                    <Icofont
-                      icon="eye"
-                      className="icofont-2x"
-                    />
-                  :
-                    <Icofont
-                      icon="eye-blocked"
-                      className="icofont-2x"
-                    />
-                }
-              </i> */}
-              </Form.Group>
-              {/* {error ? (
-                <span className="text-danger">{error}</span>
-              ) : (
-                ""
-              )} */}
-              <div className="text-center">
-                <Button variant="primary" className="mb-2">
-                  Sign Up
-                </Button>
-                <Link to="/login/" className="">
-                  Already have an Account?
-                </Link>
-              </div>
-            </Form>
-          ) : (
-            <Form>
-              <Form.Group>
-                <Form.Label>Email address</Form.Label>
-                <Form.Control
-                  type="email"
-                  onChange={(event) => setEmail(event.target.value)}
-                />
-              </Form.Group>
-              <Form.Group className="relative">
-                <Form.Label>Password</Form.Label>
-                <Form.Control
-                  type={passwordType}
-                  onChange={(event) => setPassword(event.target.value)}
-                />
-                <i
-                  className="password-icons cursor-pointer"
-                  onClick={togglePassword}
-                >
-                  {passwordType === "password" ? (
-                    <Icofont icon="eye" className="icofont-2x" />
-                  ) : (
-                    <Icofont icon="eye-blocked" className="icofont-2x" />
-                  )}
-                </i>
-              </Form.Group>
-              <div className="text-center">
-                <Button
-                  className="mb-2"
-                  variant="primary"
-                  type="submit"
-                  onClick={onLoginHandler}
-                >
-                  Log In
-                </Button>
-                <Link to="/signup/">Don't Have an Account?</Link>
-              </div>
-            </Form>
-          )}
-        </div>
-      </Modal.Body>
-      <Modal.Footer>
-        <Button onClick={props.onHide}>Close</Button>
-      </Modal.Footer>
-    </Modal>
-  );
-}
+import LoginModel from "../LoginModel";
 
 export default function UsedTractor() {
   const history = useHistory();
@@ -278,11 +39,10 @@ export default function UsedTractor() {
   const [prodCategories, setProdCategories] = useState();
   const search = useLocation().search;
   var category = new URLSearchParams(search).get("category");
-	useEffect(() => {
-	
-		handleGetAllProductCategories()
-	}, [])
-	
+  useEffect(() => {
+    handleGetAllProductCategories();
+  }, []);
+
   const getAllCity = async () => {
     const result = await city.getAllCity();
     const tempArray = [];
@@ -292,13 +52,11 @@ export default function UsedTractor() {
         tempArray.push({ ...item, label: item.title, value: item.title })
       );
     setCities(tempArray);
-	};
-	const handleGetAllProductCategories = async () => {
-    
+  };
+  const handleGetAllProductCategories = async () => {
     const result = await prodApi.getAllProductCategories();
-    if(result.error=== false){
+    if (result.error === false) {
       setProdCategories(result.data && result.data.data);
-    
     }
   };
 
@@ -356,7 +114,12 @@ export default function UsedTractor() {
     <div className="usedTractorMain pt-3">
       <div className="usedTractorsContainer">
         <div className="container">
-          <h1>Find {prodCategories && prodCategories.find((cate)=>cate.id==category).title} in Pakistan</h1>
+          <h1>
+            Find{" "}
+            {prodCategories &&
+              prodCategories.find((cate) => cate.id == category).title}{" "}
+            in Pakistan
+          </h1>
           <p>With thousand of Tractors,we have just the right one for you</p>
         </div>
       </div>
@@ -413,9 +176,13 @@ export default function UsedTractor() {
                   priceRangeFrom: minPrice || "nil",
                   title: tractorModel || "nil",
                 });
-								// history.push(`/used-tractor/search?category=${category}`);
-								history.push(`/used-tractor/search?category=${category}&city=${citySelected||'nil'}&priceRangeTo=${maxPrice||'nil'}&priceRangeFrom=${minPrice||'nil'}&title=${tractorModel||'nil'}`)
-
+                // history.push(`/used-tractor/search?category=${category}`);
+                history.push(
+                  `/used-tractor/search?category=${category}&city=${citySelected ||
+                    "nil"}&priceRangeTo=${maxPrice ||
+                    "nil"}&priceRangeFrom=${minPrice ||
+                    "nil"}&title=${tractorModel || "nil"}`
+                );
               }}
             >
               Search
@@ -446,9 +213,10 @@ export default function UsedTractor() {
               </p>
             </div>
           </div>
-          <MyVerticallyCenteredModal
+          <LoginModel
             show={modalShow}
             onHide={() => setModalShow(false)}
+            redirect="/used-tractor/sell"
           />
           <div className="col-3 text-center align-items-center justify-content-center d-flex">
             <button
@@ -463,7 +231,12 @@ export default function UsedTractor() {
       <div className="bg-white my-4">
         <div className="container-lg py-4 ">
           <FeaturedProducts
-            title={category?prodCategories && prodCategories.find((cate)=>cate.id==category).title:'Products'}
+            title={
+              category
+                ? prodCategories &&
+                  prodCategories.find((cate) => cate.id == category).title
+                : "Products"
+            }
             link={``}
             prodCategoryId={category}
           />

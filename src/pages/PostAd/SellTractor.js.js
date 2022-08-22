@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 import postAdLogo from "../../assets/img/postAd.png";
 import postInspect from "../../assets/img/postInspection.png";
 import Icofont from "react-icofont";
@@ -6,8 +6,15 @@ import { useHistory } from "react-router-dom";
 import { RootContext } from "../../context/RootContext";
 
 const SellTractor = () => {
-	const history =useHistory();
-  const { websiteName } = useContext(RootContext);
+  const history = useHistory();
+  const { websiteName, currentUser } = useContext(RootContext);
+
+  useEffect(() => {
+    if (currentUser === undefined || currentUser == null) {
+      history.push("/");
+    }
+  }, []);
+
   return (
     <div className="sell-tractor mt-4 pt-3">
       <section>
@@ -28,16 +35,14 @@ const SellTractor = () => {
                     />
                   </div>
                   <div className="col-7">
-                    <h3 className="">
-                      Post your Ad on {websiteName}
-                    </h3>
+                    <h3 className="">Post your Ad on {websiteName}</h3>
                     <ul className="list-unstyled fs14">
                       <li>
                         <Icofont
                           icon="tick-mark text-success"
                           className="icofont-2x"
                         />
-                        Free Ad Posting in 3 Simple Steps
+                        Free Ad Posting in 2 Simple Steps
                       </li>
                       <li>
                         <Icofont
@@ -70,37 +75,35 @@ const SellTractor = () => {
                       />
                     </div>
                     <div className="col-7">
-                        <h3>
-                          Try {websiteName} Sell It For Me
-                        </h3>
-                        <ul className="list-unstyled fs14">
-                          <li>
-                            <Icofont
-                              icon="tick-mark text-success"
-                              className="icofont-2x"
-                            />
-                            Dedicated Sales Expert to Sell Your Tractor
-                          </li>
-                          <li>
-                            <Icofont
-                              icon="tick-mark text-success"
-                              className="icofont-2x"
-                            />
-                            We Bargain on Your Behalf and Share the Best Offer
-                          </li>
-                          <li>
-                            <Icofont
-                              icon="tick-mark text-success"
-                              className="icofont-2x"
-                            />
-                            We ensure Safe &amp; Secure Transaction
-                          </li>
-                        </ul>
-                        {/*<p className="generic-red mt10 fs12">
+                      <h3>Try {websiteName} Sell It For Me</h3>
+                      <ul className="list-unstyled fs14">
+                        <li>
+                          <Icofont
+                            icon="tick-mark text-success"
+                            className="icofont-2x"
+                          />
+                          Dedicated Sales Expert to Sell Your Tractor
+                        </li>
+                        <li>
+                          <Icofont
+                            icon="tick-mark text-success"
+                            className="icofont-2x"
+                          />
+                          We Bargain on Your Behalf and Share the Best Offer
+                        </li>
+                        <li>
+                          <Icofont
+                            icon="tick-mark text-success"
+                            className="icofont-2x"
+                          />
+                          We ensure Safe &amp; Secure Transaction
+                        </li>
+                      </ul>
+                      {/*<p className="generic-red mt10 fs12">
                           * Service available only in Karachi, Lahore, Islamabad
                           and Rawalpindi
                         </p>*/}
-                        <h2 className="text-danger mt-4">Coming Soon...</h2>
+                      <h2 className="text-danger mt-4">Coming Soon...</h2>
                     </div>
                     <div className="col-4">
                       <img
@@ -117,21 +120,27 @@ const SellTractor = () => {
                   name="Submit"
                   value="Continue"
                   className="btn btn-success btn-lg"
-									type="submit"
-									onClick={()=>{history.push('/used-tractor/sell/post-ad')}}
+                  type="submit"
+                  onClick={() => {
+                    history.push("/used-tractor/sell/post-ad");
+                  }}
                 />
                 <p className="text-danger mt-3">
                   * By clicking "Continue" you are agreeing to the{" "}
                   <span
                     className="text-decoration-underline text-danger cursor-pointer"
-                    onClick={()=>{history.push('/terms')}}
+                    onClick={() => {
+                      history.push("/terms");
+                    }}
                   >
                     terms of service
-                  </span>
-                  {" "}and{" "}
+                  </span>{" "}
+                  and{" "}
                   <span
                     className="text-decoration-underline text-danger cursor-pointer"
-                    onClick={()=>{history.push('/privacy-policy')}}
+                    onClick={() => {
+                      history.push("/privacy-policy");
+                    }}
                   >
                     privacy policy.
                   </span>

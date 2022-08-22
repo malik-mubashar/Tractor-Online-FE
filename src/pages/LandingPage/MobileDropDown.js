@@ -4,8 +4,9 @@ import Icofont from "react-icofont";
 import { useHistory, Link } from "react-router-dom";
 import { prodApi } from "../../API/ProdCategoriesApis";
 import { RootContext } from "../../context/RootContext";
+import LoginModel from "../LoginModel";
 
-const MobileDropDown = ({ show, setShow }) => {
+const MobileDropDown = ({ show, setShow, setModalShow }) => {
   const [fullscreen, setFullscreen] = useState(true);
   const [productCategories, setProductCategories] = useState();
   const { userProfilePicture, currentUser, setUserProfilePicture, setCurrentUser } = useContext(RootContext)
@@ -48,8 +49,7 @@ const MobileDropDown = ({ show, setShow }) => {
                       <p className="my-2">
                         Sign in to start selling or buying Products
                       </p>
-                      <Link to="/signup" className="btn mr-2">Sign Up</Link>
-                      <Link to="/login" className="btn btn-primary">Sign In</Link>
+                      <Link onClick={() => {setModalShow(true); setShow(false)}} className="btn btn-primary">Sign In</Link>
                     </div>)
                   :
                     (<div className="text-center mb-4">

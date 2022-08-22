@@ -1,10 +1,5 @@
 import React, { useContext, useState } from "react";
-import {
-  Col,
-  Modal,
-  Image,
-  Button
-} from "react-bootstrap";
+import { Col, Modal, Image, Button } from "react-bootstrap";
 import BootstrapSwitchButton from "bootstrap-switch-button-react";
 import Icofont from "react-icofont";
 import { isMobile } from "react-device-detect";
@@ -14,12 +9,20 @@ import CustomPopover from "./CustomPopover";
 import TractorClipart from "../../assets/svg/tractor-logo.svg";
 import Buyers from "../../assets/img/buyers.png";
 import { RootContext } from "../../context/RootContext";
+import LoginModel from "../LoginModel";
+import { Link } from "react-router-dom";
 
-export default function SearchListing({ products, pagination, noOfRec, handleGetAllProducts, searchFilters }) {
+export default function SearchListing({
+  products,
+  pagination,
+  noOfRec,
+  handleGetAllProducts,
+  searchFilters,
+}) {
   const [showNumberWarning, setShowNumberWarning] = useState(true);
   let history = useHistory();
   const [openShowPhone, setOpenShowPhone] = useState(false);
-
+  const [modalShow, setModalShow] = React.useState(false);
   const [gridOrList, setGridOrList] = useState("list");
   const onShowPhoneModelClose = () => {
     setOpenShowPhone(false);
@@ -37,7 +40,6 @@ export default function SearchListing({ products, pagination, noOfRec, handleGet
                 className="form-control col-7 mb-2"
                 id="sortby"
                 name="sortby"
-                onChange={(e) => console.log(e)}
               >
                 <option value="bumped_at-desc" selected="selected">
                   Updated Date: Recent First
@@ -84,137 +86,151 @@ export default function SearchListing({ products, pagination, noOfRec, handleGet
           </div>
         </div>
         <div className={gridOrList === "list" ? "" : "row"}>
-          {products && products.length>0? products.map((item) => {
-            return (
-              <>
-                <div className={`${gridOrList === "list" ? "" : "col-4"}`}>
-                  <div
-                    className={`listCard mb-3 ${
-                      gridOrList === "list" ? "list" : "d-block"
-                    } ${isMobile ? "d-block" : null}`}
-                  >
-                    <img
-                      className="cursor-pointer"
-                      // className={gridOrList==='list'?'list':'grid'}
-                      src={item.cover_photo_path}
-                      alt="Card"
-                      style={{ width: "200px", height: "140px" }}
-                      onClick={() => {
-                        history.push(`/add-details/${item.id}`);
-                      }}
-                    />
-                    <div style={{ width: "100%" }}>
-                      <div
-                        className={
-                          gridOrList === "list"
-                            ? "d-flex justify-content-between"
-                            : "mt-2"
-                        }
-                      >
-                        <h5
+          {products && products.length > 0 ? (
+            products.map((item) => {
+              return (
+                <>
+                  <div className={`${gridOrList === "list" ? "" : "col-4"}`}>
+                    <div
+                      className={`listCard mb-3 ${
+                        gridOrList === "list" ? "list" : "d-block"
+                      } ${isMobile ? "d-block" : null}`}
+                    >
+                      <img
+                        className="cursor-pointer"
+                        // className={gridOrList==='list'?'list':'grid'}
+                        src={item.cover_photo_path}
+                        alt="Card"
+                        style={{ width: "200px", height: "140px" }}
+                        onClick={() => {
+                          history.push(`/add-details/${item.id}`);
+                        }}
+                      />
+                      <div style={{ width: "100%" }}>
+                        <div
                           className={
                             gridOrList === "list"
-                              ? "cursor-pointer ml-3"
-                              : "cursor-pointer"
+                              ? "d-flex justify-content-between"
+                              : "mt-2"
                           }
-                          onClick={() => {
-                            history.push(`/add-details/${item.id}`);
-                          }}
                         >
-                          {item.title}
-                        </h5>
-                        <h5
-                          className={
-                            gridOrList === "list"
-                              ? "cursor-pointer ml-3"
-                              : "cursor-pointer"
-                          }
-                          onClick={() => {
-                            history.push(`/add-details/${item.id}`);
-                          }}
-                        >
-                          PKR {item.price}
-                        </h5>
-                      </div>
-                      <p className={gridOrList === "list" ? " ml-3" : null}>
-                        <Icofont
-                          icon="location-pin"
-                          className="icofont text-primary mr-1"
-                        />
-                        {item.city}
-                      </p>
-                      <p className={gridOrList === "list" ? " ml-3" : null}>
-                        {item.extra_fields &&
-                          Object.entries(item.extra_fields)
-                            .length > 0 ? (
+                          <h5
+                            className={
+                              gridOrList === "list"
+                                ? "cursor-pointer ml-3"
+                                : "cursor-pointer truncate-search-page"
+                            }
+                            title={item.title}
+                            onClick={() => {
+                              history.push(`/add-details/${item.id}`);
+                            }}
+                          >
+                            {item.title}
+                          </h5>
+                          <h5
+                            className={
+                              gridOrList === "list"
+                                ? "cursor-pointer ml-3"
+                                : "cursor-pointer"
+                            }
+                            onClick={() => {
+                              history.push(`/add-details/${item.id}`);
+                            }}
+                          >
+                            PKR {item.price}
+                          </h5>
+                        </div>
+                        <p className={gridOrList === "list" ? " ml-3" : null}>
+                          <Icofont
+                            icon="location-pin"
+                            className="icofont text-primary mr-1"
+                          />
+                          {item.city}
+                        </p>
+                        <p className={gridOrList === "list" ? " ml-3" : 'truncate-search-page'}>
+                          {item.extra_fields &&
+                          Object.entries(item.extra_fields).length > 0 ? (
                             <>
                               {item.extra_fields &&
-                                Object.entries(
-                                  item.extra_fields
-                                ).map((item, i) => {
-                                  return (
-                                    <>
-                                      <span>{item[1]}</span> {" "}| {" "}
-                                    </>
-                                  );
-                                })}
+                                Object.entries(item.extra_fields).map(
+                                  (item, i) => {
+                                    return (
+                                      <>
+                                        <span>{item[1]} |{" "}</span>
+                                      </>
+                                    );
+                                  }
+                                )}
                             </>
                           ) : (
                             <div className="text-danger text-center">
                               No Record Found...
                             </div>
-                        )}
-                      </p>
-                      <div
-                        className={`card-text ${gridOrList === "list" ? " ml-3" : null} ${
-                          isMobile ? "" : gridOrList === "list" ? "d-flex" : ""
-                        } `}
-                        style={{ justifyContent: "space-between" }}
-                      >
-                        <small
-                          className="text-muted"
+                          )}
+                        </p>
+                        <div
+                          className={`card-text ${
+                            gridOrList === "list" ? " ml-3" : null
+                          } ${
+                            isMobile
+                              ? ""
+                              : gridOrList === "list"
+                              ? "d-flex"
+                              : ""
+                          } `}
+                          style={{ justifyContent: "space-between" }}
                         >
-                          Last updated 3 mins ago
-                        </small>
-                        <div className="d-flex">
-                          <button
-                            className="mr-3 btn btn-outline-primary p-1"
-                            type="submit"
-                          >
-                            <Icon.Heart
-                              style={{ height: "14px" }}
-                              className="icon"
-                            />
-                          </button>
-                          {showNumberWarning ? (
+                          <small className="text-muted">
+                            Last updated {item.updated_at.split(",")[0]} ago
+                          </small>
+                          <div className="d-flex">
                             <button
-                              onClick={() => {
-                                setOpenShowPhone(true);
-                              }}
-                              className="btn-success"
+                              className="mr-3 btn btn-outline-primary p-1"
                               type="submit"
                             >
-                              <Icon.PhoneCall
+                              <Icon.Heart
                                 style={{ height: "14px" }}
                                 className="icon"
                               />
-                              Show Phone Number
                             </button>
-                          ) : (
-                            <>
-                              <CustomPopover phoneNo={item.phone_no} />
-                            </>
-                          )}
+                            {showNumberWarning ? (
+                              <button
+                                onClick={() => {
+                                  setOpenShowPhone(true);
+                                }}
+                                className="btn-success"
+                                type="submit"
+                              >
+                                <Icon.PhoneCall
+                                  style={{ height: "14px" }}
+                                  className="icon"
+                                />
+                                Show Phone Number
+                              </button>
+                            ) : (
+                              <>
+                                <CustomPopover phoneNo={item.phone_no} />
+                              </>
+                            )}
+                          </div>
                         </div>
                       </div>
                     </div>
                   </div>
-                </div>
-              </>
-            );
-					}) : <div style={{ "textAlign": "center", "background": "white", "fontSize": "x-large" }}>
-						No Products</div>}
-						
+                </>
+              );
+            })
+          ) : (
+            <div
+              style={{
+                textAlign: "center",
+                background: "white",
+                fontSize: "x-large",
+              }}
+            >
+              No Products
+            </div>
+          )}
         </div>
         {/* <div className="pagination">
           <span className="mx-auto">
@@ -222,146 +238,142 @@ export default function SearchListing({ products, pagination, noOfRec, handleGet
             &nbsp;&nbsp;Last
           </span>
         </div> */}
-				{pagination && pagination && (
-                      <div>
-                        <span>Rows per page</span>
-												<span className="mx-4">
-                          <b>{pagination.from}-{pagination.to}{" "}</b>
-                          of <b>{pagination.count}</b>{' '}Results
-                        </span>
+        {pagination && pagination && (
+          <div>
+            <span>Rows per page</span>
+            <span className="mx-4">
+              <b>
+                {pagination.from}-{pagination.to}{" "}
+              </b>
+              of <b>{pagination.count}</b> Results
+            </span>
 
-                        <button
-                          className={`pagination-button ${
-                            pagination.page == 1 ? "disabled" : ""
-                          }`}
-                          onClick={() => {
-														handleGetAllProducts(
-															1,
-															noOfRec,
-															searchFilters.city,
-															searchFilters.priceRangeTo,
-															searchFilters.priceRangeFrom,
-															searchFilters.featured,
-															searchFilters.title,
-															searchFilters.brand,
-															searchFilters.categoryId
-														);
-                          }}
-                          type="button"
-                        >
-                          <span class="MuiIconButton-label">
-                            <svg
-                              class="MuiSvgIcon-root"
-                              focusable="false"
-                              viewBox="0 0 24 24"
-                              aria-hidden="true"
-                            >
-                              <path d="M18.41 16.59L13.82 12l4.59-4.59L17 6l-6 6 6 6zM6 6h2v12H6z"></path>
-                            </svg>
-                          </span>
-                        </button>
-                        <button
-                          className={`pagination-button ${
-                            pagination.page == 1 ? "disabled" : ""
-                          }`}
-                          onClick={() => {
-                            handleGetAllProducts(
-                              pagination.prev,
-															noOfRec,
-															searchFilters.city,
-															searchFilters.priceRangeTo,
-															searchFilters.priceRangeFrom,
-															searchFilters.featured,
-															searchFilters.title,
-															searchFilters.brand,
-															searchFilters.categoryId
-                            );
-                          }}
-                          type="button"
-                        >
-                          <span class="MuiIconButton-label">
-                            <svg
-                              class="MuiSvgIcon-root"
-                              focusable="false"
-                              viewBox="0 0 24 24"
-                              aria-hidden="true"
-                            >
-                              <path d="M15.41 16.59L10.83 12l4.58-4.59L14 6l-6 6 6 6 1.41-1.41z"></path>
-                            </svg>
-                          </span>
-                        </button>
-                        <button
-                          className={`pagination-button ${
-                            pagination.page ==
-                            pagination.last
-                              ? "disabled"
-                              : ""
-                          }`}
-                          tabindex="0"
-                          type="button"
-                          onClick={() => {
-                            handleGetAllProducts(
-                              pagination.next,
-															noOfRec,
-															searchFilters.city,
-															searchFilters.priceRangeTo,
-															searchFilters.priceRangeFrom,
-															searchFilters.featured,
-															searchFilters.title,
-															searchFilters.brand,
-															searchFilters.categoryId
-                            );
-                          }}
-                        >
-                          <span class="MuiIconButton-label">
-                            <svg
-                              class="MuiSvgIcon-root"
-                              focusable="false"
-                              viewBox="0 0 24 24"
-                              aria-hidden="true"
-                            >
-                              <path d="M8.59 16.59L13.17 12 8.59 7.41 10 6l6 6-6 6-1.41-1.41z"></path>
-                            </svg>
-                          </span>
-                          <span class="MuiTouchRipple-root"></span>
-                        </button>
+            <button
+              className={`pagination-button ${
+                pagination.page == 1 ? "disabled" : ""
+              }`}
+              onClick={() => {
+                handleGetAllProducts(
+                  1,
+                  noOfRec,
+                  searchFilters.city,
+                  searchFilters.priceRangeTo,
+                  searchFilters.priceRangeFrom,
+                  searchFilters.featured,
+                  searchFilters.title,
+                  searchFilters.brand,
+                  searchFilters.categoryId
+                );
+              }}
+              type="button"
+            >
+              <span class="MuiIconButton-label">
+                <svg
+                  class="MuiSvgIcon-root"
+                  focusable="false"
+                  viewBox="0 0 24 24"
+                  aria-hidden="true"
+                >
+                  <path d="M18.41 16.59L13.82 12l4.59-4.59L17 6l-6 6 6 6zM6 6h2v12H6z"></path>
+                </svg>
+              </span>
+            </button>
+            <button
+              className={`pagination-button ${
+                pagination.page == 1 ? "disabled" : ""
+              }`}
+              onClick={() => {
+                handleGetAllProducts(
+                  pagination.prev,
+                  noOfRec,
+                  searchFilters.city,
+                  searchFilters.priceRangeTo,
+                  searchFilters.priceRangeFrom,
+                  searchFilters.featured,
+                  searchFilters.title,
+                  searchFilters.brand,
+                  searchFilters.categoryId
+                );
+              }}
+              type="button"
+            >
+              <span class="MuiIconButton-label">
+                <svg
+                  class="MuiSvgIcon-root"
+                  focusable="false"
+                  viewBox="0 0 24 24"
+                  aria-hidden="true"
+                >
+                  <path d="M15.41 16.59L10.83 12l4.58-4.59L14 6l-6 6 6 6 1.41-1.41z"></path>
+                </svg>
+              </span>
+            </button>
+            <button
+              className={`pagination-button ${
+                pagination.page == pagination.last ? "disabled" : ""
+              }`}
+              tabindex="0"
+              type="button"
+              onClick={() => {
+                handleGetAllProducts(
+                  pagination.next,
+                  noOfRec,
+                  searchFilters.city,
+                  searchFilters.priceRangeTo,
+                  searchFilters.priceRangeFrom,
+                  searchFilters.featured,
+                  searchFilters.title,
+                  searchFilters.brand,
+                  searchFilters.categoryId
+                );
+              }}
+            >
+              <span class="MuiIconButton-label">
+                <svg
+                  class="MuiSvgIcon-root"
+                  focusable="false"
+                  viewBox="0 0 24 24"
+                  aria-hidden="true"
+                >
+                  <path d="M8.59 16.59L13.17 12 8.59 7.41 10 6l6 6-6 6-1.41-1.41z"></path>
+                </svg>
+              </span>
+              <span class="MuiTouchRipple-root"></span>
+            </button>
 
-                        <button
-                          className={`pagination-button ${
-                            pagination.page ==
-                            pagination.last
-                              ? "disabled"
-                              : ""
-                          }`}
-                          tabindex="0"
-                          type="button"
-                          onClick={() => {
-                            handleGetAllProducts(
-                              pagination.last,
-															noOfRec,
-															searchFilters.city,
-															searchFilters.priceRangeTo,
-															searchFilters.priceRangeFrom,
-															searchFilters.featured,
-															searchFilters.title,
-															searchFilters.brand,
-															searchFilters.categoryId
-                            );
-                          }}
-                        >
-                          <span class="MuiIconButton-label">
-                            <svg
-                              class="MuiSvgIcon-root"
-                              focusable="false"
-                              viewBox="0 0 24 24"
-                              aria-hidden="true"
-                            >
-                              <path d="M5.59 7.41L10.18 12l-4.59 4.59L7 18l6-6-6-6zM16 6h2v12h-2z"></path>
-                            </svg>
-                          </span>
-                        </button>
-                      </div>
-                    )}
+            <button
+              className={`pagination-button ${
+                pagination.page == pagination.last ? "disabled" : ""
+              }`}
+              tabindex="0"
+              type="button"
+              onClick={() => {
+                handleGetAllProducts(
+                  pagination.last,
+                  noOfRec,
+                  searchFilters.city,
+                  searchFilters.priceRangeTo,
+                  searchFilters.priceRangeFrom,
+                  searchFilters.featured,
+                  searchFilters.title,
+                  searchFilters.brand,
+                  searchFilters.categoryId
+                );
+              }}
+            >
+              <span class="MuiIconButton-label">
+                <svg
+                  class="MuiSvgIcon-root"
+                  focusable="false"
+                  viewBox="0 0 24 24"
+                  aria-hidden="true"
+                >
+                  <path d="M5.59 7.41L10.18 12l-4.59 4.59L7 18l6-6-6-6zM16 6h2v12h-2z"></path>
+                </svg>
+              </span>
+            </button>
+          </div>
+        )}
         <div className="sellAdd clearfix text-center p20 mt-70">
           <img
             alt="Post an Ad"
@@ -371,9 +383,7 @@ export default function SearchListing({ products, pagination, noOfRec, handleGet
             width="80px"
           />
 
-          <h3 className="title">
-            Post an ad for <span className="generic-red">FREE</span>
-          </h3>
+          <h3 className="title">Post an ad for FREE</h3>
           <p className="mt10 mb5 fs16">
             Sell it to thousands of people in a shorter period of time.
           </p>
@@ -382,12 +392,31 @@ export default function SearchListing({ products, pagination, noOfRec, handleGet
               alt="Post an Ad Left"
               src="https://wsa4.pakwheels.com/assets/sell-ad-point-left-fcc7bca4d40628d7945426ecf5a2ef00.png"
             />
-            <a
-              href="/used-tractor/sell"
-              className="btn btn-success sign-in-comp"
-            >
-              Tractors for Sale{" "}
-            </a>
+            {localStorage.currentUser === undefined ? (
+              <>
+                <LoginModel
+                  show={modalShow}
+                  onHide={() => setModalShow(false)}
+                  redirect="/used-tractor/sell"
+                />
+                <button
+                  style={{ color: "white" }}
+                  onClick={() => setModalShow(true)}
+                  className="btn btn-success sign-in-comp"
+                >
+                  Sell Your Tractor
+                </button>
+              </>
+            ) : (
+              <Link
+                style={{ color: "white" }}
+                to="/used-tractor/sell"
+                className="btn btn-success sign-in-comp"
+              >
+                Sell Your Tractor
+              </Link>
+            )}
+
             <img
               alt="Post an Ad Right"
               src="https://wsa4.pakwheels.com/assets/sell-ad-point-right-630620add9bbdd27360acdfcf98d0608.png"
@@ -399,60 +428,59 @@ export default function SearchListing({ products, pagination, noOfRec, handleGet
       {/* Modal */}
       <Modal show={openShowPhone} onHide={onShowPhoneModelClose}>
         <Modal.Body>
-              <div className="d-flex">
-                <Icofont
-                  icon="close-line"
-                  className="icofont-2x ml-auto cursor-pointer"
-                  onClick={ () => {setOpenShowPhone(false)}}
-                />
+          <div className="d-flex">
+            <Icofont
+              icon="close-line"
+              className="icofont-2x ml-auto cursor-pointer"
+              onClick={() => {
+                setOpenShowPhone(false);
+              }}
+            />
+          </div>
+          <div className="text-center">
+            <Image src={Buyers} alt="Logo" height="80px" width="80px" />
+          </div>
+          <h4 className="text-center">Advice for Safe Dealing</h4>
+          <div className="">
+            <div className="row my-3">
+              <div className="col-1 ml-auto">
+                <Icofont icon="not-allowed" className="icofont-2x" />
               </div>
-              <div className="text-center">
-                <Image src={Buyers} alt="Logo" height="80px" width="80px" />
+              <div className="col-6 mr-auto">
+                <strong>Never pay for anything in advance.</strong>
               </div>
-              <h4 className="text-center">
-                Advice for Safe Dealing
-              </h4>
-              <div className="">
-                <div className="row my-3">
-                  <div className="col-1 ml-auto">
-                    <Icofont
-                      icon="not-allowed"
-                      className="icofont-2x"
-                    />
-                  </div>
-                  <div className="col-6 mr-auto">
-                    <strong>Never pay for anything in advance.</strong>
-                  </div>
-                </div>
-                <div className="row my-3">
-                  <div className="col-1 ml-auto">
-                    <Icofont
-                      icon="code-not-allowed"
-                      className="icofont-2x"
-                    />
-                  </div>
-                  <div className="col-6 mr-auto">
-                    <strong>Keep your personal details to yourself.</strong>
-                  </div>
-                </div>
-                <div className="row my-3">
-                  <div className="col-1 ml-auto">
-                    <Icofont
-                      icon="flag"
-                      className="icofont-2x"
-                    />
-                  </div>
-                  <div className="col-6 mr-auto">
-                    <strong>Inform {websiteName} about any untrustworthy users.</strong>
-                  </div>
-                </div>
-                <div className="text-center">
-                  <Button variant="primary" onClick={ () => {setShowNumberWarning(false); setOpenShowPhone(false)}}>
-                    Continue
-                  </Button>
-                </div>
+            </div>
+            <div className="row my-3">
+              <div className="col-1 ml-auto">
+                <Icofont icon="code-not-allowed" className="icofont-2x" />
               </div>
-            </Modal.Body>
+              <div className="col-6 mr-auto">
+                <strong>Keep your personal details to yourself.</strong>
+              </div>
+            </div>
+            <div className="row my-3">
+              <div className="col-1 ml-auto">
+                <Icofont icon="flag" className="icofont-2x" />
+              </div>
+              <div className="col-6 mr-auto">
+                <strong>
+                  Inform {websiteName} about any untrustworthy users.
+                </strong>
+              </div>
+            </div>
+            <div className="text-center">
+              <Button
+                variant="primary"
+                onClick={() => {
+                  setShowNumberWarning(false);
+                  setOpenShowPhone(false);
+                }}
+              >
+                Continue
+              </Button>
+            </div>
+          </div>
+        </Modal.Body>
       </Modal>
     </>
   );
