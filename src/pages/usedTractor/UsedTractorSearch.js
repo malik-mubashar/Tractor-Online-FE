@@ -14,7 +14,6 @@ import toast from "react-hot-toast";
 import { brandApis } from "../../API/BrandsApis";
 import { prodApi } from "../../API/ProdCategoriesApis";
 
-
 export default function UsedTractorSearch() {
   const history = useHistory();
 
@@ -23,52 +22,50 @@ export default function UsedTractorSearch() {
   const [cities, setCities] = useState();
   const [priceRangeFrom, setPriceRangeFrom] = useState();
   const [priceRangeTo, setPriceRangeTo] = useState();
-	const [pagination, setPagination] = useState();
-	const { landingPageSearchOptions, setShowLoader } = useContext(RootContext);
-	const [noOfRec, setNoOfRec] = useState(10);
+  const [pagination, setPagination] = useState();
+  const { landingPageSearchOptions, setShowLoader } = useContext(RootContext);
+  const [noOfRec, setNoOfRec] = useState(10);
   const [heading, setHeading] = useState("");
 
   const search = useLocation().search;
-	var category = new URLSearchParams(search).get("category")||'nil';
-	const [prodCategories, setProdCategories] = useState();
-	const [brands, setBrands] = useState();
+  var category = new URLSearchParams(search).get("category") || "nil";
+  const [prodCategories, setProdCategories] = useState();
+  const [brands, setBrands] = useState();
 
   useEffect(() => {
-		GetPopularCities();	
-		debugger;
-		var featured = new URLSearchParams(search).get('featured')||'nil';
-		//landing page search options
-		var city = new URLSearchParams(search).get('city')||'nil';
-		var priceRangeTo = new URLSearchParams(search).get('priceRangeTo')||'nil';
-		var priceRangeFrom = new URLSearchParams(search).get('priceRangeFrom')||'nil';
-		var title = new URLSearchParams(search).get('title')||'nil';
-		var categoryId = new URLSearchParams(search).get('category')||'nil';
-		var brandId = new URLSearchParams(search).get('brand') || 'nil';
-			setSearchFilters({
-				...searchFilters,
-				featured: featured==='true'?true:'nil',
-				city: city,
-				priceRangeFrom: priceRangeFrom,
-				priceRangeTo: priceRangeTo,
-				title: title,
-				brand: brandId,
-				category: categoryId,
-				make:'nil'
-			})
-		 
-	}, [search]);
+    GetPopularCities();
+    var featured = new URLSearchParams(search).get("featured") || "nil";
+    //landing page search options
+    var city = new URLSearchParams(search).get("city") || "nil";
+    var priceRangeTo = new URLSearchParams(search).get("priceRangeTo") || "nil";
+    var priceRangeFrom =
+      new URLSearchParams(search).get("priceRangeFrom") || "nil";
+    var title = new URLSearchParams(search).get("title") || "nil";
+    var categoryId = new URLSearchParams(search).get("category") || "nil";
+    var brandId = new URLSearchParams(search).get("brand") || "nil";
+    setSearchFilters({
+      ...searchFilters,
+      featured: featured === "true" ? true : "nil",
+      city: city,
+      priceRangeFrom: priceRangeFrom,
+      priceRangeTo: priceRangeTo,
+      title: title,
+      brand: brandId,
+      category: categoryId,
+      make: "nil",
+    });
+  }, [search]);
 
-	useEffect(() => {
+  useEffect(() => {
     handleGetAllProductCategories();
     getBrands(1, "", 10000000000);
-	}, []);
-	
+  }, []);
+
   const getBrands = async (page, mainSearch, noOfRec) => {
     const loadingToastId = toast.loading("Loading..!");
 
     try {
       const result = await brandApis.getBrands(page, mainSearch, noOfRec);
-			console.log('19 debug', result.data.data);
       if (result.error == false && result.data.status == "success") {
         toast.dismiss(loadingToastId);
 
@@ -84,75 +81,66 @@ export default function UsedTractorSearch() {
   };
 
   const handleGetAllProductCategories = async () => {
-		const result = await prodApi.getAllProductCategories();
-		console.log('19 debug', result.data.data);
-		
+    const result = await prodApi.getAllProductCategories();
+
     if (result.error === false) {
       setProdCategories(result.data && result.data.data);
     }
   };
-	
 
   const GetPopularCities = async () => {
     const result = await city.getPopularCity("popular");
-		console.log('19 debug', result.data.data);
 
     if (result.error === false) {
       setCities(result.data && result.data.data);
     }
   };
 
-	const handleGetAllProducts = async (
-		page = '1',
-		tempNoOfRec='10',
-    city='nil',
-    tempPriceRangeTo='nil',
-		tempPriceRangeFrom = 'nil',
-		featured = 'nil',
-		title = 'nil',
-		brand = 'nil',
-		category='nil'
-		
-	) => {
-		setShowLoader(true)
-		const result = await productApis.getAllProducts(
-			page,
-			tempNoOfRec,
-			city,
-			tempPriceRangeTo,
-			tempPriceRangeFrom,
-			featured,
-			title,
-			brand,
-			category
-		);
-		if (result.error === false) {
-			debugger;
-			console.log('19 debug', result.data.data);
-
+  const handleGetAllProducts = async (
+    page = "1",
+    tempNoOfRec = "10",
+    city = "nil",
+    tempPriceRangeTo = "nil",
+    tempPriceRangeFrom = "nil",
+    featured = "nil",
+    title = "nil",
+    brand = "nil",
+    category = "nil"
+  ) => {
+    setShowLoader(true);
+    const result = await productApis.getAllProducts(
+      page,
+      tempNoOfRec,
+      city,
+      tempPriceRangeTo,
+      tempPriceRangeFrom,
+      featured,
+      title,
+      brand,
+      category
+    );
+    if (result.error === false) {
       setProducts(result.data && result.data.data);
-			setPagination(result.data.pagination)
-			setShowLoader(false);
-		}
-		if (result.error === true) {
-			debugger;
-			setShowLoader(false);
-		}
+      setPagination(result.data.pagination);
+      setShowLoader(false);
+    }
+    if (result.error === true) {
+      setShowLoader(false);
+    }
   };
   useEffect(() => {
-		if (searchFilters) {
-			debugger;
-			handleGetAllProducts(
-				1,
-				noOfRec,
-				searchFilters.city,
-				searchFilters.priceRangeTo,
-				searchFilters.priceRangeFrom,
-				searchFilters.featured,
-				searchFilters.title,
-				searchFilters.brand,
-				searchFilters.category
-			);
+    if (searchFilters) {
+      handleGetAllProducts(
+        1,
+        noOfRec,
+        searchFilters.city,
+        searchFilters.priceRangeTo,
+        searchFilters.priceRangeFrom,
+        searchFilters.featured,
+        searchFilters.title,
+        searchFilters.brand,
+        searchFilters.category
+      );
     }
   }, [searchFilters]);
 
@@ -166,7 +154,13 @@ export default function UsedTractorSearch() {
             src={"https://tpc.googlesyndication.com/simgad/5923361064753698031"}
             className="mt-5"
           /> */}
-          <h3 className="pageHeading mt-5 pt-5">{category&&category!=='nil'?prodCategories && prodCategories.find((cate)=>cate.id==category).title:'Products'} for sale</h3>
+          <h3 className="pageHeading mt-5 pt-5">
+            {category && category !== "nil"
+              ? prodCategories &&
+                prodCategories.find((cate) => cate.id == category).title
+              : "Products"}{" "}
+            for sale
+          </h3>
           <div className="searchCounterWrapper">
             <ul className="breadcrumb bread">
               <li>
@@ -186,46 +180,58 @@ export default function UsedTractorSearch() {
                     onClick={() => history.goBack()}
                     className="cursor-pointer"
                     itemProp="name"
-									>
-										{console.log('category asd',category) }
-                    {category &&category!=='nil'?prodCategories && prodCategories.find((cate)=>cate.id==category).title:'Products'} /
+                  >
+                    {category && category !== "nil"
+                      ? prodCategories &&
+                        prodCategories.find((cate) => cate.id == category).title
+                      : "Products"}{" "}
+                    /
                   </span>
                 </a>
               </li>
               <li>
-                <span itemProp="name">{category&&category!=='nil'?prodCategories && prodCategories.find((cate)=>cate.id==category).title:'Products'} In Pakistan</span>
+                <span itemProp="name">
+                  {category && category !== "nil"
+                    ? prodCategories &&
+                      prodCategories.find((cate) => cate.id == category).title
+                    : "Products"}{" "}
+                  In Pakistan
+                </span>
               </li>
-						</ul>
-						{pagination &&
-						<div className="search-pagi-info">
-						<span className="mx-4">
-                          <b>{pagination.from}-{pagination.to}{" "}</b>
-                          of <b>{pagination.count}</b>{' '}Results
-                        </span>
-            </div>
-						}
+            </ul>
+            {pagination && (
+              <div className="search-pagi-info">
+                <span className="mx-4">
+                  <b>
+                    {pagination.from}-{pagination.to}{" "}
+                  </b>
+                  of <b>{pagination.count}</b> Results
+                </span>
+              </div>
+            )}
           </div>
           <div className="row">
             <div className="col-md-3">
-							<SideSearch
-								setSearchFilters={setSearchFilters}
-								searchFilters={searchFilters}
-								cities={cities}
-								priceRangeFrom={priceRangeFrom}
-								setPriceRangeFrom={setPriceRangeFrom}
-								priceRangeTo={priceRangeTo}
-								setPriceRangeTo={setPriceRangeTo}
-								brands={ brands}
-								prodCategories={prodCategories}
+              <SideSearch
+                setSearchFilters={setSearchFilters}
+                searchFilters={searchFilters}
+                cities={cities}
+                priceRangeFrom={priceRangeFrom}
+                setPriceRangeFrom={setPriceRangeFrom}
+                priceRangeTo={priceRangeTo}
+                setPriceRangeTo={setPriceRangeTo}
+                brands={brands}
+                prodCategories={prodCategories}
               />
             </div>
             <div className="col-md-9">
-							<SearchListing products={products}
-								pagination={pagination}
-								noOfRec={noOfRec}
-								handleGetAllProducts={handleGetAllProducts}
-								searchFilters={ searchFilters}
-							/>
+              <SearchListing
+                products={products}
+                pagination={pagination}
+                noOfRec={noOfRec}
+                handleGetAllProducts={handleGetAllProducts}
+                searchFilters={searchFilters}
+              />
             </div>
           </div>
         </div>

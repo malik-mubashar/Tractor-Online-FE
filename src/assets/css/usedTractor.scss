@@ -54,15 +54,7 @@ a {
   margin-top: 50px;
 }
 .priceRange {
-  .selectSearchContainer {
-    .Select-control {
-      height: 36px !important;
-      border-radius: 0px;
-      min-width: 60px;
-      padding-top: 5px;
-      border: 1px solid #ccc !important;
-    }
-  }
+  
   input {
     padding: 10px !important;
     border-radius: 0 !important;
@@ -103,4 +95,15 @@ a {
     // box-shadow: 1px 1px 4px rgb(0 0 0 / 20%);
     line-height: normal;
   }
+}
+
+.search-filter-container{
+  .collapse{
+    height: auto !important;
+  }
+}
+.truncate-search-page{
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }

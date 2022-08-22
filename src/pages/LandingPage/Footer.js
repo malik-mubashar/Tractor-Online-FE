@@ -5,6 +5,7 @@ import { prodApi } from "../../API/ProdCategoriesApis";
 import { city } from "../../API/City/CityApis";
 import { brandApis } from "../../API/BrandsApis";
 import { RootContext } from "../../context/RootContext";
+import LoginModel from "../LoginModel";
 
 export default function Footer() {
   const responsive = {
@@ -27,8 +28,9 @@ export default function Footer() {
   const [productCategories, setProductCategories] = useState();
   const [cities, setCities] = useState("");
   const [brandsForCategories, setBrandsForCategories] = useState([]);
+  const [modalShow, setModalShow] = React.useState(false);
   let history = useHistory();
-  const { websiteName } = useContext(RootContext);
+  const { websiteName, currentUser } = useContext(RootContext);
   useEffect(() => {
     handleGetAllCategories();
     handleGetAllCities();
@@ -67,12 +69,12 @@ export default function Footer() {
                           <li className="mt-1">
                             <div key={i}>
                               {i < 5 ? (
-                                <Nav.Link
-                                  href={`/used-tractor/search?brand=${item.id}`}
+                                <Link
+                                  to={`/used-tractor/search?brand=${item.id}`}
                                   className="footer-link"
                                 >
                                   {item.title}
-                                </Nav.Link>
+                                </Link>
                               ) : null}
                             </div>
                           </li>
@@ -94,7 +96,10 @@ export default function Footer() {
                           <li className="mt-1">
                             <div key={i}>
                               {i < 5 ? (
-                                <Link to={`/used-tractor/search?city=${item.title}`} className="footer-link">
+                                <Link
+                                  to={`/used-tractor/search?city=${item.title}`}
+                                  className="footer-link"
+                                >
                                   {item.title}
                                 </Link>
                               ) : null}
@@ -141,7 +146,7 @@ export default function Footer() {
                       <h5 className="text-white">{websiteName}.com</h5>
                     </li>
                     <li className="mt-1">
-                      <Link to ="/browse-us" className="footer-link">
+                      <Link to="/browse-us" className="footer-link">
                         About {websiteName}.com
                       </Link>
                     </li>
@@ -151,14 +156,30 @@ export default function Footer() {
                       </Link>
                     </li>
                     <li className="mt-1">
-                      <a href="/" className="footer-link">
-                        Advertise With Us
-                      </a>
+                      {currentUser ? (
+                        <Link to="/used-tractor/sell" className="footer-link">
+                          Advertise With Us
+                        </Link>
+                      ) : (
+                        <>
+                          <Link
+                            onClick={() => setModalShow(true)}
+                            className="footer-link"
+                          >
+                            Advertise With Us
+                          </Link>
+                          <LoginModel
+                            show={modalShow}
+                            onHide={() => setModalShow(false)}
+                            redirect="/used-tractor/sell"
+                          />
+                        </>
+                      )}
                     </li>
                     <li className="mt-1">
-                      <a href="/" className="footer-link">
+                      <Link to="/contact-us" className="footer-link">
                         Contact Us
-                      </a>
+                      </Link>
                     </li>
                   </ul>
                 </div>
