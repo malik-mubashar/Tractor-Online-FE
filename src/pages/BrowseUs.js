@@ -7,7 +7,7 @@ import { RootContext } from "../context/RootContext";
 const AboutUs = () => {
   const { websiteName } = useContext(RootContext);
   return (
-    <div className="user privacy-container">
+    <div className="user privacy-container mb-5">
     <div className="card container">
       <h1>About Us</h1>
       <p>
@@ -54,16 +54,15 @@ const AboutUs = () => {
         motto sums up our mission.:&nbsp;
       </p>
       <p className="text-center">
-        <span className="blockquote">
-          <strong>“THINK TRACTOR, THINK TRACTORONLINE!”</strong>
-        </span>
+   
+          <h1>“THINK TRACTOR, THINK TRACTORONLINE!”</h1>
+        
       </p>
-      <h3>The Team</h3>
+      {/* <h3>The Team</h3>
 
       <div className="container">
         <div className="row">
-          {/* {brandProducts &&
-            brandProducts.map((item) => ( */}
+          
           <div className="col-3 mt-3">
             <div className="category p-3">
               <Link to="/">
@@ -79,7 +78,8 @@ const AboutUs = () => {
             </div>
           </div>
         </div>
-      </div>
+      </div> */}
+      
     </div>
     </div>
   );

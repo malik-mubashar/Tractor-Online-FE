@@ -56,6 +56,7 @@ import BrowseUs from "../pages/BrowseUs";
 import Privacy from "../pages/privacy";
 import Terms from "../pages/terms";
 import Users from "../pages/PostAd/users"
+import ContactUs from "../pages/contactUs";
 
 const AppRouter = () => {
   return (
@@ -183,6 +184,11 @@ const AppRouter = () => {
           <UnProtectedRoute exact path="/browse-us">
             <Layout>
               <BrowseUs />
+            </Layout>
+          </UnProtectedRoute>
+          <UnProtectedRoute exact path="/contact-us">
+            <Layout>
+              <ContactUs />
             </Layout>
           </UnProtectedRoute>
           <UnProtectedRoute exact path="/users">
