@@ -2,7 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 export default function MobileBannerFooter() {
   return (
-    <div>
+    <div className="text-center">
       <div className="mobile-footer">
         <div className="footer-bottom">
           <div className="footer-links">
@@ -13,7 +13,7 @@ export default function MobileBannerFooter() {
             <Link to="/terms">Terms</Link>
           </div>
           <p className="copy">
-            Copyright Ⓒ 2003 - 2022 TractorOnline (Pvt) Ltd. - All Rights
+            Copyright Ⓒ 2022 - 2022 TractorOnline (Pvt) Ltd. - All Rights
             Reserved.
           </p>
         </div>
