@@ -7,6 +7,7 @@ import { prodApi } from "../../API/ProdCategoriesApis";
 import toast from "react-hot-toast";
 import { brandApis } from "../../API/BrandsApis";
 import { useHistory } from "react-router-dom";
+import CreatableSelect from "react-select/creatable";
 
 export default function SideSearch({
   setSearchFilters,
@@ -19,6 +20,7 @@ export default function SideSearch({
   brands,
   prodCategories,
 }) {
+	const [searchWord,setSearchWord]=useState()
   const history = useHistory();
   const priceRangeFromOption = [
     { label: "10000", value: "10000" },
@@ -39,6 +41,8 @@ export default function SideSearch({
     { label: "600000", value: "600000" },
     { label: "700000", value: "700000" },
   ];
+
+
   return (
     <>
       <MDBAccordion alwaysOpen initialActive={1}>
@@ -58,12 +62,10 @@ export default function SideSearch({
                                   class="fa fa-times-circle"
                                   onClick={() => {
                                     history.push(
-                                      `/products/search?${new URLSearchParams(
-                                        {
-                                          ...searchFilters,
-                                          [item[0]]: "nil",
-                                        }
-                                      ).toString()}`
+                                      `/products/search?${new URLSearchParams({
+                                        ...searchFilters,
+                                        [item[0]]: "nil",
+                                      }).toString()}`
                                     );
                                     setSearchFilters({
                                       ...searchFilters,
@@ -86,12 +88,10 @@ export default function SideSearch({
                                   class="fa fa-times-circle"
                                   onClick={() => {
                                     history.push(
-                                      `/products/search?${new URLSearchParams(
-                                        {
-                                          ...searchFilters,
-                                          [item[0]]: "nil",
-                                        }
-                                      ).toString()}`
+                                      `/products/search?${new URLSearchParams({
+                                        ...searchFilters,
+                                        [item[0]]: "nil",
+                                      }).toString()}`
                                     );
                                     setSearchFilters({
                                       ...searchFilters,
@@ -114,12 +114,10 @@ export default function SideSearch({
                                 class="fa fa-times-circle"
                                 onClick={() => {
                                   history.push(
-                                    `/products/search?${new URLSearchParams(
-                                      {
-                                        ...searchFilters,
-                                        [item[0]]: "nil",
-                                      }
-                                    ).toString()}`
+                                    `/products/search?${new URLSearchParams({
+                                      ...searchFilters,
+                                      [item[0]]: "nil",
+                                    }).toString()}`
                                   );
                                   setSearchFilters({
                                     ...searchFilters,
@@ -140,12 +138,10 @@ export default function SideSearch({
                                 class="fa fa-times-circle"
                                 onClick={() => {
                                   history.push(
-                                    `/products/search?${new URLSearchParams(
-                                      {
-                                        ...searchFilters,
-                                        [item[0]]: "nil",
-                                      }
-                                    ).toString()}`
+                                    `/products/search?${new URLSearchParams({
+                                      ...searchFilters,
+                                      [item[0]]: "nil",
+                                    }).toString()}`
                                   );
                                   setSearchFilters({
                                     ...searchFilters,
@@ -164,12 +160,10 @@ export default function SideSearch({
                                   class="fa fa-times-circle"
                                   onClick={() => {
                                     history.push(
-                                      `/products/search?${new URLSearchParams(
-                                        {
-                                          ...searchFilters,
-                                          [item[0]]: "nil",
-                                        }
-                                      ).toString()}`
+                                      `/products/search?${new URLSearchParams({
+                                        ...searchFilters,
+                                        [item[0]]: "nil",
+                                      }).toString()}`
                                     );
                                     setSearchFilters({
                                       ...searchFilters,
@@ -189,23 +183,33 @@ export default function SideSearch({
           </MDBAccordionItem>
         </div>
         <MDBAccordionItem collapseId={2} headerTitle="SEARCH BY KEYWORD">
-          <Form
-            className="nav-search-form row"
-            // onSubmit={this._handleSubmit}
-            // action= "/dashboard/search"
-          >
+          <Form className="nav-search-form row">
             <FormControl
               type="text"
               className="col-10"
-              // value={this.state.term}
-              // onChange={(e) => this.setState({ term: e.target.value })}
+             onChange={(e)=>{
+							setSearchWord(e.target.value == "" ? "nil" : e.target.value)
+						 }}
               placeholder="Search..."
-            />
+						/>
+						
 
             <input
               className="btn btn-primary refine-go col-2 p-0"
               type="submit"
-              value="Go"
+							value="Go"
+							onChange={(e) => {
+                history.push(
+                  `/products/search?${new URLSearchParams({
+                    ...searchFilters,
+                    title: searchWord,
+                  }).toString()}`
+                );
+                setSearchFilters({
+                  ...searchFilters,
+                  title: searchWord,
+                });
+              }}
             />
           </Form>
         </MDBAccordionItem>
@@ -313,26 +317,46 @@ export default function SideSearch({
         <MDBAccordionItem collapseId={4} headerTitle="PRICE RANGE">
           <div className="priceRange">
             <div className="row">
-              <Select
+     
+              <CreatableSelect
                 className="col-5 my-2 px-0 fieldHeight mainSearch"
-                options={priceRangeFromOption}
-                label="From"
+                isClearable
                 placeholder="From"
-                onChange={(e) => setPriceRangeFrom(e.label)}
-                clearable={false}
+                label="From"
+                onChange={(e) => {
+                  if (e == null) {
+                    setPriceRangeFrom("nil");
+                  } else {
+										setPriceRangeFrom(e.label);
+										if (priceRangeTo === undefined) {
+											setPriceRangeTo("99999999")
+										}
+                  }
+                }}
+                options={priceRangeFromOption}
               />
-              <Select
+
+              <CreatableSelect
                 className="col-5 my-2 px-0 fieldHeight mainSearch"
-                options={priceRangeToOption}
+                isClearable
                 label="To"
                 placeholder="To"
-                onChange={(e) => setPriceRangeTo(e.label)}
-                clearable={false}
+                onChange={(e) => {
+                    if (e == null) {
+                      setPriceRangeTo("nil");
+										} else {
+											setPriceRangeTo(e.label);
+											if (priceRangeFrom === undefined) {
+												setPriceRangeFrom("1")
+											}
+                    }
+                }}
+                options={priceRangeToOption}
               />
               <button
                 className="btn btn-primary col-2 p-0"
                 style={{ height: "50px", marginTop: "9px" }}
-                onClick={() => {
+								onClick={() => {
                   history.push(
                     `/products/search?${new URLSearchParams({
                       ...searchFilters,
