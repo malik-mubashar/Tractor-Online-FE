@@ -19,7 +19,6 @@ export default function DropDown({
   categoryLink
 }) {
   const history = useHistory();
-
   return (
     <div>
       <div className={`${!dropDownIcon ? " dropdown-button p-1" : "p-1"}`}>
@@ -45,7 +44,7 @@ export default function DropDown({
           >
             {productHead ? (
               <>
-                <ul className="list-unstyled col-7 p-0 border-right">
+                <ul className="list-unstyled col-5 p-0 border-right">
                   {productHead.map((item, i) => (
                     <li className="dropdown-list" key={i}>
                       <Link
@@ -89,7 +88,7 @@ export default function DropDown({
                 ))}
               </ul> */}
 
-                <ul className="list-unstyled col-5 text-center">
+                <ul className="list-unstyled col-3 text-center">
                   <li className="mb-3">
                     <Link to="/">
                       <Icon.MapPin className="icon mr-2" />
@@ -112,7 +111,7 @@ export default function DropDown({
                       </li>
                     ))}
                 </ul>
-                {/* <ul className="list-unstyled col-3  text-center">
+                <ul className="list-unstyled col-3  text-center">
                   <li className="mb-3">
                     <Link to="/">
                       <Icon.Trello className="icon mr-2" />
@@ -120,9 +119,12 @@ export default function DropDown({
                     </Link>
                   </li>
 
-                  {brands &&
-                    brands.map((item, i) => (
-                      <li key={i}>
+									{productCategory && productCategory.brands &&
+										productCategory.brands.length>0?
+										
+
+                    productCategory.brands.map((item, i) => (
+                      <li key={item.id}>
                         <Link
                           to={
                             productCategory.title === "Used tractor"
@@ -135,8 +137,10 @@ export default function DropDown({
                           <p className="city-name">{item.title}</p>
                         </Link>
                       </li>
-                    ))}
-                </ul> */}
+										))
+									:'No Brand Found'
+									}
+                </ul>
               </>
             ) : null}
           </div>

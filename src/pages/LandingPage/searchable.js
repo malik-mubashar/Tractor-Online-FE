@@ -4,9 +4,12 @@ import * as Icon from "react-feather";
 import { useHistory } from "react-router-dom";
 import Select from "react-select";
 import { RootContext } from "../../context/RootContext";
+
+import CreatableSelect from "react-select/creatable";
+
 const searchAble = ({ cities }) => {
-	const history = useHistory();
-	const { setLandingPageSearchOptions } = useContext(RootContext);
+  const history = useHistory();
+  const { setLandingPageSearchOptions } = useContext(RootContext);
 
   const [makeOrModel, setTractorModel] = useState("");
   const [city, setCity] = useState("");
@@ -14,8 +17,7 @@ const searchAble = ({ cities }) => {
 
   const [maxPrice, setMaxPrice] = useState();
   const [minPriceOptions, setMinPriceOptions] = useState([
-
-		{ label: "10000", value: "10000" },
+    { label: "10000", value: "10000" },
     { label: "20000", value: "20000" },
     { label: "30000", value: "30000" },
     { label: "40000", value: "40000" },
@@ -24,7 +26,7 @@ const searchAble = ({ cities }) => {
     { label: "70000", value: "70000" },
   ]);
   const [maxPriceOptions, setMaxPriceOptions] = useState([
-		{ label: "100000", value: "100000" },
+    { label: "100000", value: "100000" },
     { label: "200000", value: "200000" },
     { label: "300000", value: "300000" },
     { label: "400000", value: "400000" },
@@ -48,9 +50,8 @@ const searchAble = ({ cities }) => {
       });
       setMinPriceOptions(temp);
     }
-	}, [maxPrice]);
-	
-	
+  }, [maxPrice]);
+
   return (
     <>
       <ul className="list-unstyled search-front clearfix d-flex justify-content-center d-flex mainSearch">
@@ -76,42 +77,79 @@ const searchAble = ({ cities }) => {
             // setValue={setCity}
             label="Select City"
             // value={city}
-            onChange={(e) => {if(e){setCity(e.label)}}}
+            onChange={(e) => {
+              if (e) {
+                setCity(e.label);
+              }
+            }}
             clearable={false}
           />
         </li>
         <li className="col-1 px-0">
-          <Select
+          {/* <Select
             // className="ui-autocomplete-input form-control searchAble border-right"
             options={minPriceOptions}
             label="Select Min Price "
-            onChange={(e) => {if(e){setMinPrice(e.label)}}}
+            onChange={(e) => {
+              if (e) {
+                setMinPrice(e.label);
+              }
+            }}
             clearable={false}
+					/> */}
+					<CreatableSelect
+						isClearable
+						label="Select Min Price "
+            onChange={(e) => {
+							if ((e == null)) {
+								setMinPrice('nil')
+              } else {
+                setMinPrice(e.label);
+              }
+            }}
+            options={minPriceOptions}
           />
         </li>
         <li className="col-1 px-0">
-          <Select
+          <CreatableSelect
+            isClearable
+            onChange={(e) => {
+							if ((e == null)) {
+								setMaxPrice('nil')
+              } else {
+                setMaxPrice(e.label);
+              }
+            }}
+            options={maxPriceOptions}
+          />
+          {/* <Select
             className="ui-autocomplete-input form-control searchAble border-right"
             options={maxPriceOptions}
             label="Select Max Price"
-            onChange={(e) => {setMaxPrice(e.label)}}
+            onChange={(e) => {
+              setMaxPrice(e.label);
+            }}
             clearable={false}
-          />
+          /> */}
         </li>
         <li>
           <button
             className="btn-success p-1  searchAble border-right-radius"
-						type="submit"
-						onClick={() => {
-							 
-							setLandingPageSearchOptions({
-								city: city || 'nil',
-								priceRangeTo: maxPrice || 'nil',
-								priceRangeFrom: minPrice || 'nil',
-								title: makeOrModel || 'nil'
-							});
-							history.push(`/products/search?city=${city||'nil'}&priceRangeTo=${maxPrice||'nil'}&priceRangeFrom=${minPrice||'nil'}&title=${makeOrModel||'nil'}`)
-						}}
+            type="submit"
+            onClick={() => {
+              setLandingPageSearchOptions({
+                city: city || "nil",
+                priceRangeTo: maxPrice || "nil",
+                priceRangeFrom: minPrice || "nil",
+                title: makeOrModel || "nil",
+              });
+              history.push(
+                `/products/search?city=${city ||
+                  "nil"}&priceRangeTo=${maxPrice ||
+                  "nil"}&priceRangeFrom=${minPrice ||
+                  "nil"}&title=${makeOrModel || "nil"}`
+              );
+            }}
           >
             <Icon.Search className="icon" />
           </button>

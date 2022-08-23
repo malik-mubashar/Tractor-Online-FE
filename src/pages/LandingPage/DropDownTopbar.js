@@ -51,7 +51,7 @@ export default function DropDownTopbar({
           >
             {productHead ? (
               <>
-                <ul className="list-unstyled col-7 p-0 border-right">
+                <ul className="list-unstyled col-5 p-0 border-right">
                   {productHead.map((item, i) => (
                     <li className="dropdown-list" key={i}>
                       <Link
@@ -94,7 +94,7 @@ export default function DropDownTopbar({
                   </li>
                 ))}
               </ul> */}
-                <ul className="list-unstyled col-5 text-center">
+                <ul className="list-unstyled col-3 text-center">
                   <li className="mb-3">
                     <Icon.MapPin className="icon mr-2" />
                     <strong>Popular Cities</strong>
@@ -115,7 +115,7 @@ export default function DropDownTopbar({
                       </li>
                     ))}
                 </ul>
-                {/* <ul className="list-unstyled col-3  text-center">
+                <ul className="list-unstyled col-3  text-center">
                   <li className="mb-3">
                     <Link to="/">
                       <Icon.Trello className="icon mr-2" />
@@ -123,9 +123,12 @@ export default function DropDownTopbar({
                     </Link>
                   </li>
 
-                  {brands &&
-                    brands.map((item, i) => (
-                      <li key={i}>
+									{productCategory && productCategory.brands &&
+										productCategory.brands.length>0?
+										
+
+                    productCategory.brands.map((item, i) => (
+                      <li key={item.id}>
                         <Link
                           to={
                             productCategory.title === "Used tractor"
@@ -138,8 +141,10 @@ export default function DropDownTopbar({
                           <p className="city-name">{item.title}</p>
                         </Link>
                       </li>
-                    ))}
-                </ul> */}
+										))
+									:'No Brand Found'
+									}
+                </ul>
               </>
             ) : null}
           </div>
