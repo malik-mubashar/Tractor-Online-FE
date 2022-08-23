@@ -45,7 +45,7 @@ export default function Categories({ brands, brandsForCategories }) {
                             {item.map((item2, i) => (
                               <li key={i} className="col-sm-12 col-md-6 col-lg-2 mt-4">
                                 <span
-                                  onClick={() => history.push(`/used-tractor/search?brand=${item2.id}`)}
+                                  onClick={() => history.push(`/products/search?brand=${item2.id}`)}
                                   title="Toyota for sale in Pakistan"
                                 >
                                   <img
@@ -78,7 +78,7 @@ export default function Categories({ brands, brandsForCategories }) {
                                 <span
                                   className="text-dark"
                                   onClick={() => {
-                                    history.push(`/used-tractor/search?city=${item2.title}`);
+                                    history.push(`/products/search?city=${item2.title}`);
                                   }}
                                 >
                                   {item2.title}

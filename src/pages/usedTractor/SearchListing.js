@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useState, useEffect } from "react";
 import { Col, Modal, Image, Button } from "react-bootstrap";
 import BootstrapSwitchButton from "bootstrap-switch-button-react";
 import Icofont from "react-icofont";
@@ -12,7 +12,7 @@ import { RootContext } from "../../context/RootContext";
 import LoginModel from "../LoginModel";
 import { Link } from "react-router-dom";
 import { productApis } from "../../API/ProductApis";
-import toast, { Toaster } from "react-hot-toast";
+import toast from "react-hot-toast";
 
 export default function SearchListing({
   products,
@@ -25,32 +25,43 @@ export default function SearchListing({
   let history = useHistory();
   const [openShowPhone, setOpenShowPhone] = useState(false);
   const [modalShow, setModalShow] = React.useState(false);
-  const [redirect, setRedirect] = useState('/used-tractor/sell')
+  const [redirect, setRedirect] = useState("/product/sell");
   const [gridOrList, setGridOrList] = useState("list");
+  const [productUpdate, setProductUpdate] = useState(products);
   const onShowPhoneModelClose = () => {
     setOpenShowPhone(false);
   };
   const { websiteName, currentUser } = useContext(RootContext);
 
-  function handleFavouriteAd(e){
-    if(currentUser === undefined || currentUser === null){
+  useEffect(() => {
+    setProductUpdate(products);
+  }, [products]);
+
+  function handleFavouriteAd(e) {
+    if (currentUser === undefined || currentUser === null) {
       setModalShow(true);
       setRedirect(null);
+    } else {
+      var product = e;
+      var user_id = currentUser.id;
+      favourite_ad(product, user_id);
     }
-    else{
-      var product_id = e.currentTarget.value;
-      var user_id = currentUser.id
-      favourite_ad(product_id, user_id)
-    }
-
   }
 
-  const favourite_ad = async (product_id, user_id) => {
+  const favourite_ad = async (product, user_id) => {
     const loadingToastId = toast.loading("Loading..!");
     try {
-      const result = await productApis.favouriteAds(product_id, user_id);
+      const result = await productApis.favouriteAds(product.id, user_id);
       if (result.error === false) {
         toast.success(result.data.notice);
+        setProductUpdate((products) =>
+          products.map((pr) => {
+            if (pr.id === product.id) {
+              return { ...pr, favourite: !pr.favourite };
+            }
+            return pr;
+          })
+        );
         toast.dismiss(loadingToastId);
         // setBrands(result.data.data);
       } else {
@@ -120,8 +131,8 @@ export default function SearchListing({
           </div>
         </div>
         <div className={gridOrList === "list" ? "" : "row"}>
-          {products && products.length > 0 ? (
-            products.map((item) => {
+          {productUpdate && productUpdate.length > 0 ? (
+            productUpdate.map((item) => {
               return (
                 <>
                   <div className={`${gridOrList === "list" ? "" : "col-4"}`}>
@@ -181,7 +192,13 @@ export default function SearchListing({
                           />
                           {item.city}
                         </p>
-                        <p className={gridOrList === "list" ? " ml-3" : 'truncate-search-page'}>
+                        <p
+                          className={
+                            gridOrList === "list"
+                              ? " ml-3"
+                              : "truncate-search-page"
+                          }
+                        >
                           {item.extra_fields &&
                           Object.entries(item.extra_fields).length > 0 ? (
                             <>
@@ -190,7 +207,7 @@ export default function SearchListing({
                                   (item, i) => {
                                     return (
                                       <>
-                                        <span>{item[1]} |{" "}</span>
+                                        <span>{item[1]} | </span>
                                       </>
                                     );
                                   }
@@ -221,21 +238,21 @@ export default function SearchListing({
                             <button
                               className="mr-3 btn p-2"
                               type="submit"
-                              value={item.id}
-                              onClick={ (e) => handleFavouriteAd(e)}
+                              // value={item}
+                              onClick={() => handleFavouriteAd(item)}
                             >
-                              {item.favourite ?
+                              {item.favourite ? (
                                 <Icofont
                                   icon="heart"
                                   className="icofont text-danger"
-                                  style={{fontSize: '17px'}}
+                                  style={{ fontSize: "17px" }}
                                 />
-                              :
+                              ) : (
                                 <Icon.Heart
-                                  style={{ height: "16px", width: '16px' }}
+                                  style={{ height: "16px", width: "16px" }}
                                   className="icon"
                                 />
-                              }
+                              )}
                             </button>
                             {showNumberWarning ? (
                               <button
@@ -454,7 +471,7 @@ export default function SearchListing({
             ) : (
               <Link
                 style={{ color: "white" }}
-                to="/used-tractor/sell"
+                to="/product/sell"
                 className="btn btn-success sign-in-comp"
               >
                 Sell Your Tractor

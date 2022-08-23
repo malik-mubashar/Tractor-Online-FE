@@ -19,7 +19,7 @@ export default function DropDownTopbar({
   productCategory,
 }) {
   const history = useHistory();
-  // to={productCategory.title==='Used tractor'?`/used-tractor/search?category=used-tractor&city=${item.title}`:`/used-tractor/search?category=new-tractor&city=${item.title}`}
+  // to={productCategory.title==='Used tractor'?`/product/search?category=product&city=${item.title}`:`/product/search?category=new-tractor&city=${item.title}`}
 
 
   return (
@@ -105,8 +105,8 @@ export default function DropDownTopbar({
                         <Link
                           to={
                             productCategory.title === "Used tractor"
-                              ? `/used-tractor/search?category=${productCategory.id}&city=${item.title}`
-                              : `/used-tractor/search?category=${productCategory.id}&city=${item.title}`
+                              ? `/products/search?category=${productCategory.id}&city=${item.title}`
+                              : `/products/search?category=${productCategory.id}&city=${item.title}`
                           }
                           className="dropdown-link"
                         >
@@ -129,8 +129,8 @@ export default function DropDownTopbar({
                         <Link
                           to={
                             productCategory.title === "Used tractor"
-                              ? `/used-tractor/search?category=${productCategory.id}&brand=${item.id}`
-                              : `/used-tractor/search?category=${productCategory.id}&brand=${item.id}`
+                              ? `/products/search?category=${productCategory.id}&brand=${item.id}`
+                              : `/products/search?category=${productCategory.id}&brand=${item.id}`
                           }
                           className="dropdown-link"
                           title="Used Cars for sale in Karachi"

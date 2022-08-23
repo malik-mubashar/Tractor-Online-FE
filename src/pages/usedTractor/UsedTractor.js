@@ -106,7 +106,7 @@ export default function UsedTractor() {
     if (localStorage.currentUser === undefined) {
       setModalShow(true);
     } else {
-      history.push("/used-tractor/sell/");
+      history.push("/product/sell/");
     }
   }
 
@@ -176,9 +176,9 @@ export default function UsedTractor() {
                   priceRangeFrom: minPrice || "nil",
                   title: tractorModel || "nil",
                 });
-                // history.push(`/used-tractor/search?category=${category}`);
+                // history.push(`/products/search?category=${category}`);
                 history.push(
-                  `/used-tractor/search?category=${category}&city=${citySelected ||
+                  `/products/search?category=${category}&city=${citySelected ||
                     "nil"}&priceRangeTo=${maxPrice ||
                     "nil"}&priceRangeFrom=${minPrice ||
                     "nil"}&title=${tractorModel || "nil"}`
@@ -216,7 +216,7 @@ export default function UsedTractor() {
           <LoginModel
             show={modalShow}
             onHide={() => setModalShow(false)}
-            redirect="/used-tractor/sell"
+            redirect="/product/sell"
           />
           <div className="col-3 text-center align-items-center justify-content-center d-flex">
             <button

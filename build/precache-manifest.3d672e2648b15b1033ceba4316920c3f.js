@@ -1,11 +1,11 @@
 self.__precacheManifest = [
   {
-    "revision": "15576f2425f3519b7330",
+    "revision": "83de0490b0d296f27a02",
     "url": "/static/css/main.aa5f44c3.chunk.css"
   },
   {
-    "revision": "15576f2425f3519b7330",
-    "url": "/static/js/main.15576f24.chunk.js"
+    "revision": "83de0490b0d296f27a02",
+    "url": "/static/js/main.83de0490.chunk.js"
   },
   {
     "revision": "1ea2095345e12d943c04",
@@ -152,12 +152,12 @@ self.__precacheManifest = [
     "url": "/static/media/tractor-1.4c1fc34b.svg"
   },
   {
-    "revision": "23586afcbed34f110de70937470877cf",
-    "url": "/static/media/LineIcons.23586afc.eot"
-  },
-  {
     "revision": "6e9fb56e13ffdf56a053e86545cafe3e",
     "url": "/static/media/LineIcons.6e9fb56e.ttf"
+  },
+  {
+    "revision": "23586afcbed34f110de70937470877cf",
+    "url": "/static/media/LineIcons.23586afc.eot"
   },
   {
     "revision": "6106e3e25c6e52ebdceb846dc3f717b0",
@@ -184,7 +184,7 @@ self.__precacheManifest = [
     "url": "/static/media/price-logo.0dcade10.png"
   },
   {
-    "revision": "05951225ba350596d54e48c98eccaa52",
+    "revision": "bf7d7ed25b6b1cf6fa85c2d2f94e043c",
     "url": "/index.html"
   }
 ];

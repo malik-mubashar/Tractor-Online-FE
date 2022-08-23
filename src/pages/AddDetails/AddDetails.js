@@ -356,7 +356,7 @@ export default function AddDetails() {
                       <LoginModel
                         show={modalShow}
                         onHide={() => setModalShow(false)}
-                        redirect="/used-tractor/sell"
+                        redirect="/product/sell"
                       />
                       <button
                         style={{ color: "white" }}
@@ -369,7 +369,7 @@ export default function AddDetails() {
                   ) : (
                     <Link
                       style={{ color: "white" }}
-                      to="/used-tractor/sell"
+                      to="/product/sell"
                       className="btn btn-success sign-in-comp"
                     >
                       Sell Your Tractor

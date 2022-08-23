@@ -54,7 +54,7 @@ export default function FeaturedProducts({ title, link, prodCategoryId }) {
     <div>
       <div className="d-flex justify-content-between">
         <h2>{title}</h2>
-        <Link className="text-info text-capitalize" to={`used-tractor/search?category=${prodCategoryId}`} >{link}</Link>
+        <Link className="text-info text-capitalize" to={`products/search?category=${prodCategoryId}`} >{link}</Link>
       </div>
       <Carousel
         swipeable={false}

@@ -58,7 +58,7 @@ export default function SideSearch({
                                   class="fa fa-times-circle"
                                   onClick={() => {
                                     history.push(
-                                      `/used-tractor/search?${new URLSearchParams(
+                                      `/products/search?${new URLSearchParams(
                                         {
                                           ...searchFilters,
                                           [item[0]]: "nil",
@@ -86,7 +86,7 @@ export default function SideSearch({
                                   class="fa fa-times-circle"
                                   onClick={() => {
                                     history.push(
-                                      `/used-tractor/search?${new URLSearchParams(
+                                      `/products/search?${new URLSearchParams(
                                         {
                                           ...searchFilters,
                                           [item[0]]: "nil",
@@ -114,7 +114,7 @@ export default function SideSearch({
                                 class="fa fa-times-circle"
                                 onClick={() => {
                                   history.push(
-                                    `/used-tractor/search?${new URLSearchParams(
+                                    `/products/search?${new URLSearchParams(
                                       {
                                         ...searchFilters,
                                         [item[0]]: "nil",
@@ -140,7 +140,7 @@ export default function SideSearch({
                                 class="fa fa-times-circle"
                                 onClick={() => {
                                   history.push(
-                                    `/used-tractor/search?${new URLSearchParams(
+                                    `/products/search?${new URLSearchParams(
                                       {
                                         ...searchFilters,
                                         [item[0]]: "nil",
@@ -164,7 +164,7 @@ export default function SideSearch({
                                   class="fa fa-times-circle"
                                   onClick={() => {
                                     history.push(
-                                      `/used-tractor/search?${new URLSearchParams(
+                                      `/products/search?${new URLSearchParams(
                                         {
                                           ...searchFilters,
                                           [item[0]]: "nil",
@@ -230,7 +230,7 @@ export default function SideSearch({
                           }
                           onChange={(e) => {
                             history.push(
-                              `/used-tractor/search?${new URLSearchParams({
+                              `/products/search?${new URLSearchParams({
                                 ...searchFilters,
                                 city: e.target.value,
                               }).toString()}`
@@ -272,7 +272,7 @@ export default function SideSearch({
                               brand: e.target.value,
                             });
                             history.push(
-                              `/used-tractor/search?${new URLSearchParams({
+                              `/products/search?${new URLSearchParams({
                                 ...searchFilters,
                                 brand: e.target.value,
                               }).toString()}`
@@ -295,7 +295,7 @@ export default function SideSearch({
               style={{ height: "20px", width: "20px" }}
               onChange={(e) => {
                 history.push(
-                  `/used-tractor/search?${new URLSearchParams({
+                  `/products/search?${new URLSearchParams({
                     ...searchFilters,
                     featured: e.target.checked,
                   }).toString()}`
@@ -334,7 +334,7 @@ export default function SideSearch({
                 style={{ height: "50px", marginTop: "9px" }}
                 onClick={() => {
                   history.push(
-                    `/used-tractor/search?${new URLSearchParams({
+                    `/products/search?${new URLSearchParams({
                       ...searchFilters,
                       priceRangeFrom: priceRangeFrom,
                       priceRangeTo: priceRangeTo,

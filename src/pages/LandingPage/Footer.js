@@ -70,7 +70,7 @@ export default function Footer() {
                             <div key={i}>
                               {i < 5 ? (
                                 <Link
-                                  to={`/used-tractor/search?brand=${item.id}`}
+                                  to={`/products/search?brand=${item.id}`}
                                   className="footer-link"
                                 >
                                   {item.title}
@@ -97,7 +97,7 @@ export default function Footer() {
                             <div key={i}>
                               {i < 5 ? (
                                 <Link
-                                  to={`/used-tractor/search?city=${item.title}`}
+                                  to={`/products/search?city=${item.title}`}
                                   className="footer-link"
                                 >
                                   {item.title}
@@ -106,7 +106,7 @@ export default function Footer() {
                               {/* <span
                                 onClick={() => {
                                   history.push(
-                                    `/used-tractor/search?city=${item.title}`
+                                    `/products/search?city=${item.title}`
                                   );
                                 }}
                                 className="footer-link"
@@ -151,13 +151,13 @@ export default function Footer() {
                       </Link>
                     </li>
                     <li className="mt-1">
-                      <Link to="/used-tractor/search" className="footer-link">
+                      <Link to="/products/search" className="footer-link">
                         Our Products
                       </Link>
                     </li>
                     <li className="mt-1">
                       {currentUser ? (
-                        <Link to="/used-tractor/sell" className="footer-link">
+                        <Link to="/products/sell" className="footer-link">
                           Advertise With Us
                         </Link>
                       ) : (
@@ -171,7 +171,7 @@ export default function Footer() {
                           <LoginModel
                             show={modalShow}
                             onHide={() => setModalShow(false)}
-                            redirect="/used-tractor/sell"
+                            redirect="/products/sell"
                           />
                         </>
                       )}

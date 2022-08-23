@@ -122,7 +122,7 @@ const SellTractor = () => {
                   className="btn btn-success btn-lg"
                   type="submit"
                   onClick={() => {
-                    history.push("/used-tractor/sell/post-ad");
+                    history.push("/product/sell/post-ad");
                   }}
                 />
                 <p className="text-danger mt-3">

@@ -18,7 +18,7 @@ const DeskTopBanner = ({ cities }) => {
         <SearchAble 
         cities={cities}
         />
-        <Button onClick={()=>{history.push('/used-tractor/search')}} className="mt-2 mr-2 d-flex justify-content-center m-auto bg-transparent border border-white">
+        <Button onClick={()=>{history.push('/products/search')}} className="mt-2 mr-2 d-flex justify-content-center m-auto bg-transparent border border-white">
           {"Advanced Filter >>"}
         </Button>
       </div>
