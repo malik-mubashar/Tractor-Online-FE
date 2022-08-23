@@ -2,7 +2,7 @@ import React, { useEffect, useState, useContext } from "react";
 import { RootContext } from "../../context/RootContext";
 import toast from "react-hot-toast";
 import { user } from "../../API/User/index";
-import { Link } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 
 const users = (props) => {
   const { currentUser, setShowPasswordModel } = useContext(RootContext);
@@ -26,7 +26,7 @@ const users = (props) => {
     <div className="user container">
       <div className="post-ad">
         <div className="user-ads mb-40">
-          <div className="well mb40">
+          <div className=" well mb40">
             <div className="dashboard-profile clearfix">
               <img
                 className="profile-photo pull-left"
@@ -39,21 +39,21 @@ const users = (props) => {
                 &nbsp; &nbsp;| &nbsp; &nbsp;
                 <Link to="/profile-settings/" onClick={() => {setShowPasswordModel(true)}}>Change Password</Link>
               </p>
-              <ul className="dashboard-nav">
-                <li>
-                  <Link to="/users/my-ads">
+              <ul className="dashboard-nav col-12 ">
+                <li className="">
+                  <NavLink to="/users/my-ads" activeClassName="navlink-active">
                     <i className="icofont-bullhorn">My Ads</i>
-                  </Link>
+                  </NavLink>
                 </li>
-                <li>
-                  <Link to="/users/saved-ads">
+                <li >
+                  <NavLink to="/users/saved-ads" activeClassName="navlink-active">
                     <i className="icofont-heart">My Saved Ads</i>
-                  </Link>
+                  </NavLink>
                 </li>
                 <li>
-                  <Link to="/my-messages">
+                  <NavLink  to="/users/my-messages" activeClassName="navlink-active">
                     <i className="icofont-ui-message">My Messages</i>
-                  </Link>
+                  </NavLink>
                 </li>
               </ul>
             </div>

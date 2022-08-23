@@ -75,7 +75,7 @@ const brandDetails = () => {
         <div className="row mb-4">
           {brandProducts &&
             brandProducts.map((item) => (
-              <div className="col-3 mt-3" key={item.id}>
+              <div className="col-lg-3 col-md-6 col-12 mt-3" key={item.id}>
                 <div className="category p-3">
                   <Link to={`/add-details/${item.id}`}>
                     <img

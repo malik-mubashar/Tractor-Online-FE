@@ -210,7 +210,7 @@ const AppRouter = () => {
               </Users>
             </Layout>
           </UnProtectedRoute>
-          <UnProtectedRoute exact path="/my-messages">
+          <UnProtectedRoute exact path="/users/my-messages">
             <Layout>
               <Users>
               <Alerts />
