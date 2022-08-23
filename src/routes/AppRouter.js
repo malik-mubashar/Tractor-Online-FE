@@ -191,26 +191,26 @@ const AppRouter = () => {
               <ContactUs />
             </Layout>
           </UnProtectedRoute>
-          <UnProtectedRoute exact path="/users">
+          <UnProtectedRoute exact path="/profile">
             <Layout>
               <Users />
             </Layout>
           </UnProtectedRoute>
-          <UnProtectedRoute exact path="/users/my-ads">
+          <UnProtectedRoute exact path="/profile/my-ads">
             <Layout>
               <Users>
               <Ads />
               </Users> 
             </Layout>
           </UnProtectedRoute>
-          <UnProtectedRoute exact path="/users/saved-ads">
+          <UnProtectedRoute exact path="/profile/saved-ads">
             <Layout>
               <Users>
               <SavedAds />
               </Users>
             </Layout>
           </UnProtectedRoute>
-          <UnProtectedRoute exact path="/users/my-messages">
+          <UnProtectedRoute exact path="/profile/my-messages">
             <Layout>
               <Users>
               <Alerts />
@@ -242,11 +242,11 @@ const AppRouter = () => {
             <Dashboard />
           </ProtectedRoute>
 
-          <ProtectedRoute exact path="/profile/">
+          {/* <ProtectedRoute exact path="/profile/">
             <DashboardLayout>
               <Profile />
             </DashboardLayout>
-          </ProtectedRoute>
+          </ProtectedRoute> */}
 
           <ProtectedRoute exact path="/profile-settings/">
             <DashboardLayout>

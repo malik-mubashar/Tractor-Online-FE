@@ -1,29 +1,15 @@
 import React, { useState, useEffect, useContext } from "react";
 import Select from "react-select";
-import {
-  Navbar,
-  Nav,
-  Image,
-  NavDropdown,
-  Form,
-  Button,
-  Modal,
-} from "react-bootstrap";
+import { Image, Form } from "react-bootstrap";
 import Ads from "../../assets/img/ads.png";
 import Buyers from "../../assets/img/buyers.png";
 import Sell from "../../assets/img/sell.png";
 import FeaturedProducts from "../LandingPage/FeaturedProducts";
-import FeaturedTractor from "../LandingPage/FeaturedTractor";
-import { NavLink, useHistory, Link, useLocation } from "react-router-dom";
+import { useHistory, useLocation } from "react-router-dom";
 import "../Categories/SideMenue.css";
-import Logo from "../../assets/img/tractoronline.png";
 import { city } from "../../API/City/CityApis";
 import { prodApi } from "../../API/ProdCategoriesApis";
-import Icofont from "react-icofont";
-import * as Icon from "react-feather";
-import toast from "react-hot-toast";
 import { RootContext } from "../../context/RootContext";
-import { user } from "../../API/User/index";
 import LoginModel from "../LoginModel";
 
 export default function UsedTractor() {
@@ -79,7 +65,6 @@ export default function UsedTractor() {
     { label: "600000", value: "600000" },
     { label: "700000", value: "700000" },
   ]);
-  const [heading, setHeading] = useState("");
 
   useEffect(() => {
     if (minPrice) {
@@ -126,7 +111,7 @@ export default function UsedTractor() {
       <div className="container">
         <div className="searchCard card">
           <div className="row mt-3">
-            <div className="col-4">
+            <div className="col-12 col-lg-4 my-2">
               <Form.Group>
                 <Form.Control
                   className="searchTitle fieldHeight"
@@ -136,7 +121,7 @@ export default function UsedTractor() {
                 />
               </Form.Group>
             </div>
-            <div className="col-4">
+            <div className="col-12 col-lg-4 my-2">
               <Select
                 className="fieldHeight mainSearch"
                 options={cities}
@@ -146,7 +131,7 @@ export default function UsedTractor() {
                 clearable={false}
               />
             </div>
-            <div className="col-4 d-flex">
+            <div className="col-12 col-lg-4 my-2 d-flex">
               <Select
                 className="col-6 px-0 fieldHeight mainSearch"
                 options={minPriceOptions}
@@ -167,7 +152,7 @@ export default function UsedTractor() {
           </div>
           <div className="d-flex mt-4">
             <button
-              className="btn btn-success col-2 ml-auto mr-2"
+              className="btn btn-success col-12 col-lg-2 ml-auto mr-2"
               type="submit"
               onClick={() => {
                 setLandingPageSearchOptions({
@@ -190,21 +175,21 @@ export default function UsedTractor() {
           </div>
         </div>
         <div className="container row ml-4">
-          <div className="col-3 text-center align-items-center justify-content-center d-flex">
+          <div className="col-12 col-lg-3 text-center align-items-center justify-content-center d-flex">
             <div>
               <Image src={Ads} alt="Logo" height="80px" width="80px" />
               <h5>Free Ad</h5>
               <p>In 30 seconds, post a free ad for your tractor.</p>
             </div>
           </div>
-          <div className="col-3 text-center align-items-center justify-content-center d-flex">
+          <div className="col-12 col-lg-3 text-center align-items-center justify-content-center d-flex">
             <div>
               <Image src={Buyers} alt="Logo" height="80px" width="80px" />
               <h5>Genuine Buyers</h5>
               <p>Receive genuine offers from confirmed purchasers.</p>
             </div>
           </div>
-          <div className="col-3 text-center align-items-center justify-content-center d-flex">
+          <div className="col-12 col-lg-3 text-center align-items-center justify-content-center d-flex">
             <div>
               <Image src={Sell} alt="Logo" height="80px" width="80px" />
               <h5>Sell Faster</h5>
@@ -218,7 +203,7 @@ export default function UsedTractor() {
             onHide={() => setModalShow(false)}
             redirect="/product/sell"
           />
-          <div className="col-3 text-center align-items-center justify-content-center d-flex">
+          <div className="col-12 col-lg-3 text-center align-items-center justify-content-center d-flex">
             <button
               onClick={() => postAdd()}
               className="btn btn-danger btn-lg text-white mr-2"
