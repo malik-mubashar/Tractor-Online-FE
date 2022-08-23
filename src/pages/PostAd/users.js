@@ -29,6 +29,7 @@ const users = (props) => {
           <div className=" well mb40">
             <div className="dashboard-profile clearfix">
               <img
+                alt="Profile"
                 className="profile-photo pull-left"
                 src={profile && profile.profile_path}
               ></img>
@@ -41,18 +42,18 @@ const users = (props) => {
               </p>
               <ul className="dashboard-nav col-12 ">
                 <li className="">
-                  <NavLink to="/users/my-ads" activeClassName="navlink-active">
-                    <i className="icofont-bullhorn">My Ads</i>
+                  <NavLink to="/profile/my-ads" activeClassName="navlink-active">
+                    <i className="icofont-bullhorn"><span className="ml-2">My Ads</span></i>
                   </NavLink>
                 </li>
                 <li >
-                  <NavLink to="/users/saved-ads" activeClassName="navlink-active">
-                    <i className="icofont-heart">My Saved Ads</i>
+                  <NavLink to="/profile/saved-ads" activeClassName="navlink-active">
+                    <i className="icofont-heart"><span className="ml-2">My Saved Ads</span></i>
                   </NavLink>
                 </li>
                 <li>
-                  <NavLink  to="/users/my-messages" activeClassName="navlink-active">
-                    <i className="icofont-ui-message">My Messages</i>
+                  <NavLink  to="/profile/my-messages" activeClassName="navlink-active">
+                    <i className="icofont-ui-message"><span className="ml-2">My Messages</span></i>
                   </NavLink>
                 </li>
               </ul>

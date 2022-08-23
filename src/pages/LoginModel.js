@@ -55,6 +55,7 @@ const LoginModel = (props) => {
           accessToken: result.headers["access-token"],
           client: result.headers["client"],
           uid: result.headers["uid"],
+          role: result.data.role,
         });
 
         localStorage.setItem(
@@ -64,6 +65,7 @@ const LoginModel = (props) => {
             accessToken: result.headers["access-token"],
             client: result.headers["client"],
             uid: result.headers["uid"],
+            role: result.data.role,
           })
         );
         if (userProfilePicture == null) {
@@ -76,7 +78,7 @@ const LoginModel = (props) => {
           });
         }
         localStorage.setItem("headers", JSON.stringify(result.headers));
-        if (props.redirect !== null){
+        if (props.redirect !== null) {
           history.push(props && props.redirect);
         }
       }
