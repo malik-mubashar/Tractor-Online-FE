@@ -40,7 +40,7 @@ const TractorSaleAd = () => {
                   <LoginModel
                     show={modalShow}
                     onHide={() => setModalShow(false)}
-                    redirect="/used-tractor/sell"
+                    redirect="/product/sell"
                   />
                   <button
                     onClick={() => setModalShow(true)}
@@ -52,7 +52,7 @@ const TractorSaleAd = () => {
               ) : (
                 <>
                   <NavLink
-                    to="/used-tractor/sell"
+                    to="/product/sell"
                     className="btn btn-danger btn-lg text-white"
                   >
                     Place Your Ad Here

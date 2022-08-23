@@ -125,7 +125,7 @@ const Topbar = () => {
             <Nav className="ml-auto right-nav">
               <ul className="navbar-nav mr-auto">
                 <Link
-                  to="/used-tractor/sell/"
+                  to="/product/sell/"
                   className="btn btn-danger btn-lg text-white mr-2"
                 >
                   Post An Ad
@@ -205,7 +205,7 @@ const Topbar = () => {
                 <LoginModel
                   show={modalShow}
                   onHide={() => setModalShow(false)}
-                  redirect="/used-tractor/sell"
+                  redirect="/product/sell"
                 />
                 <button
                   onClick={() => setModalShow(true)}

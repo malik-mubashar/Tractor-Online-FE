@@ -1,7 +1,7 @@
 {
   "main.css": "/static/css/main.aa5f44c3.chunk.css",
-  "main.js": "/static/js/main.15576f24.chunk.js",
-  "main.js.map": "/static/js/main.15576f24.chunk.js.map",
+  "main.js": "/static/js/main.83de0490.chunk.js",
+  "main.js.map": "/static/js/main.83de0490.chunk.js.map",
   "static/css/1.2628ff89.chunk.css": "/static/css/1.2628ff89.chunk.css",
   "static/js/1.1ea20953.chunk.js": "/static/js/1.1ea20953.chunk.js",
   "static/js/1.1ea20953.chunk.js.map": "/static/js/1.1ea20953.chunk.js.map",
@@ -41,9 +41,9 @@
   "static/media/style.css": "/static/media/LineIcons.a0ed6adf.svg",
   "static/media/lightgallery.css": "/static/media/lg.2ec2cb21.svg",
   "static/media/price-logo.png": "/static/media/price-logo.0dcade10.png",
-  "static/css/1.2628ff89.chunk.css.map": "/static/css/1.2628ff89.chunk.css.map",
   "static/css/main.aa5f44c3.chunk.css.map": "/static/css/main.aa5f44c3.chunk.css.map",
+  "static/css/1.2628ff89.chunk.css.map": "/static/css/1.2628ff89.chunk.css.map",
   "index.html": "/index.html",
-  "precache-manifest.16f7aa755c200372d765a0537d6cebe0.js": "/precache-manifest.16f7aa755c200372d765a0537d6cebe0.js",
+  "precache-manifest.3d672e2648b15b1033ceba4316920c3f.js": "/precache-manifest.3d672e2648b15b1033ceba4316920c3f.js",
   "service-worker.js": "/service-worker.js"
 }

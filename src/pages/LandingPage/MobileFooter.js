@@ -59,10 +59,10 @@ const MobileFooter = () => {
             className="bottom-nav-sell-blue"
             onClick={() => {
               if (currentUser === undefined || currentUser === null) {
-                setRedirect("/used-tractor/sell");
+                setRedirect("/product/sell");
                 setModalShow(true);
               } else {
-                history.push("/used-tractor/sell");
+                history.push("/product/sell");
               }
             }}
           >

@@ -21,7 +21,7 @@ const MobileTopbar = () => {
         <div className="d-flex mt-2 mb-2 justify-content-between text-align-center align-content-center p-2">
           <div className="col-4 p-0 mobile-tabs">
             <span
-              onClick={() => history.push("/used-tractor/search?category=22")}
+              onClick={() => history.push("/products/search?category=22")}
               className="btn btn-info rounded p-2 w-100 "
             >
               Used Tractor
@@ -29,7 +29,7 @@ const MobileTopbar = () => {
           </div>
           <div className="col-4 p-0 mobile-tabs">
             <span
-              onClick={() => history.push("/used-tractor/search?category=23")}
+              onClick={() => history.push("/products/search?category=23")}
               className="btn btn-info rounded p-2 w-100"
             >
               New Tractor
@@ -37,7 +37,7 @@ const MobileTopbar = () => {
           </div>
           <div className="col-4 p-0 mobile-tabs">
             <span
-              onClick={() => history.push("/used-tractor?category=26")}
+              onClick={() => history.push("/products?category=26")}
               className="btn btn-info rounded p-2 w-100"
             >
               Auto Parts

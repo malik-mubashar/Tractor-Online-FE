@@ -150,12 +150,12 @@ const AppRouter = () => {
               <ProductMappings />
             </DashboardLayout>
           </ProtectedRoute>
-          <Route exact path="/used-tractor/search">
+          <Route exact path="/products/search">
             <Layout>
               <UsedTractorSearch />
             </Layout>
           </Route>
-          <Route exact path="/used-tractor/">
+          <Route exact path="/products/">
             <Layout>
               <UsedTractor />
             </Layout>
@@ -171,12 +171,12 @@ const AppRouter = () => {
               <Terms />
             </Layout>
           </Route>
-          <Route exact path="/used-tractor/sell">
+          <Route exact path="/product/sell">
             <Layout>
               <SellTractor />
             </Layout>
           </Route>
-          <UnProtectedRoute exact path="/used-tractor/sell/post-ad">
+          <UnProtectedRoute exact path="/product/sell/post-ad">
             <Layout>
               <PostAd />
             </Layout>

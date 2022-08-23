@@ -110,7 +110,7 @@ const searchAble = ({ cities }) => {
 								priceRangeFrom: minPrice || 'nil',
 								title: makeOrModel || 'nil'
 							});
-							history.push(`/used-tractor/search?city=${city||'nil'}&priceRangeTo=${maxPrice||'nil'}&priceRangeFrom=${minPrice||'nil'}&title=${makeOrModel||'nil'}`)
+							history.push(`/products/search?city=${city||'nil'}&priceRangeTo=${maxPrice||'nil'}&priceRangeFrom=${minPrice||'nil'}&title=${makeOrModel||'nil'}`)
 						}}
           >
             <Icon.Search className="icon" />
