@@ -117,7 +117,9 @@ export default function UsedTractorSearch() {
       featured,
       title,
       brand,
-      category
+      category,
+      'active',
+      'nil'
     );
     if (result.error === false) {
       setProducts(result.data && result.data.data);
@@ -175,19 +177,20 @@ export default function UsedTractorSearch() {
                 </a>
               </li>
               <li>
-                <a>
-                  <span
-                    onClick={() => history.goBack()}
-                    className="cursor-pointer"
-                    itemProp="name"
-                  >
-                    {category && category !== "nil"
-                      ? prodCategories &&
-                        prodCategories.find((cate) => cate.id == category).title
-                      : "Products"}{" "}
-                    /
-                  </span>
-                </a>
+                {
+                  category && category !== "nil" ?
+                  <a>
+                    <span
+                      onClick={() => history.push(`/products?category=${prodCategories.find((cate) => cate.id == category).id}`)}
+                      className="cursor-pointer"
+                      itemProp="name"
+                    >
+                        {prodCategories && prodCategories.find((cate) => cate.id == category).title} {'/'}
+                    </span>
+                  </a>
+                  :
+                  null
+                }
               </li>
               <li>
                 <span itemProp="name">

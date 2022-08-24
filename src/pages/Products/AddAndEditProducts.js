@@ -583,9 +583,8 @@ export default function AddAndEditProduct({
                     onChange={(e) => handleChange(e)}
                     name="status"
                   >
-                    <option value="active">active</option>
-                    <option value="passive">passive</option>
-                    <option value="deleted">deleted</option>
+                    <option value="active">Active</option>
+                    <option value="inactive">In-active</option>
                   </Form.Control>
                 </Form.Group>
                 <Form.Group className="d-flex mt-3" controlId="formGridproduct">
