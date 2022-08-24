@@ -15,7 +15,6 @@ const ProtectedRoute = ({ children, ...routeProps }) => {
         if (currentUser && currentUser == null) {
           history.push("/login");
         } else {
-          debugger;
           if (currentUser && currentUser.role && currentUser.role[0]) {
             if (currentUser && currentUser.role[0].name === "admin") {
               return children;

@@ -6,7 +6,7 @@ import {
     Modal
   } from "react-bootstrap";
 
-const PasswordResetModal = ({modalClose,modalShow,updatePassword,handleUpdatePassword})=>{
+const PasswordResetModal = ({modalClose,modalShow,updatePassword,handleUpdatePassword,handleSave})=>{
     return(<>
         <Modal
         show={modalShow}
@@ -70,7 +70,7 @@ const PasswordResetModal = ({modalClose,modalShow,updatePassword,handleUpdatePas
           <Button variant="danger" onClick={modalClose}>
             Cancel
           </Button>
-          <Button variant="success" onClick={modalClose}>
+          <Button variant="success" onClick={handleSave}>
             Save
           </Button>
         </Modal.Footer>

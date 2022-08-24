@@ -24,7 +24,7 @@ const users = (props) => {
 
   return (
     <div className="user container">
-      <div className="post-ad">
+      <div className="user-profile">
         <div className="user-ads mb-40">
           <div className=" well mb40">
             <div className="dashboard-profile clearfix">

@@ -137,6 +137,73 @@ class User {
           data: error.response.data
         };
       });
+	};
+	changePassword = async (updatePassword) => {
+	const tempCurrentUser = JSON.parse(window.localStorage.getItem("currentUser")) || null;
+
+		debugger;
+    return axios({
+      method: "put",
+      url: `${process.env.REACT_APP_API_LOCAL_PATH}auth/password`,
+      headers: {
+        "Content-Type": "application/json; charset=utf-8",
+        "Access-Control-Allow-Origin": "*",
+        "access-token": `${tempCurrentUser.accessToken}`,
+        "client": `${tempCurrentUser.client}`,
+        "uid": `${tempCurrentUser.uid}`,
+        mode: "no-cors"
+      },
+      data: {
+        current_password:updatePassword.current_password,
+        password: updatePassword.new_password,
+        password_confirmation: updatePassword.confirm_password
+      }
+    })
+			.then((result) => {
+				debugger;
+        return {
+          error: false,
+          data: result.data,
+        };
+      })
+			.catch((error) => {
+				debugger;
+        return {
+          error: true,
+          data: error.response.data
+        };
+      });
+	};
+	
+	signout = async (updatePassword) => {
+	const tempCurrentUser = JSON.parse(window.localStorage.getItem("currentUser")) || null;
+
+		debugger;
+    return axios({
+      method: "delete",
+      url: `${process.env.REACT_APP_API_LOCAL_PATH}auth/sign_out`,
+      headers: {
+        "Content-Type": "application/json; charset=utf-8",
+        "Access-Control-Allow-Origin": "*",
+        "access-token": `${tempCurrentUser.accessToken}`,
+        "client": `${tempCurrentUser.client}`,
+        "uid": `${tempCurrentUser.uid}`,
+        mode: "no-cors"
+      },
+      data: {}
+    })
+      .then((result) => {
+        return {
+          error: false,
+          data: result.data,
+        };
+      })
+      .catch((error) => {
+        return {
+          error: true,
+          data: error.response.data
+        };
+      });
   };
 
 	profile = async (editProfile, personal_id,tempCurrentUser) => {
