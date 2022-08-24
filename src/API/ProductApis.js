@@ -152,7 +152,34 @@ class Products {
         };
       });
   };
-
+  getfavouriteProducts = async () => {
+    return axios({
+      method: "get",
+      url: `${process.env.REACT_APP_API_LOCAL_PATH}favourite_products`,
+      headers: {
+        "Content-Type": "application/json; charset=utf-8",
+        "Access-Control-Allow-Origin": "*",
+        "Access-Control-Allow-Headers": "*",
+        "access-token": `${user.accessToken}`,
+        client: `${user.client}`,
+        uid: `${user.uid}`,
+        mode: "no-cors",
+      },
+     
+    })
+      .then((result) => {
+        return {
+          error: false,
+          data: result.data,
+        };
+      })
+      .catch((error) => {
+        return {
+          error: true,
+          data: error.response.data,
+        };
+      });
+  };
   getProductDetails = async (id) => {
     return axios({
       method: "get",
