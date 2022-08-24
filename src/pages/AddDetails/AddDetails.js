@@ -26,7 +26,7 @@ export default function AddDetails() {
   const PhotoItem = ({ image, thumb, group }) => (
     <div style={{ maxWidth: "250px", width: "200px", padding: "5px" }}>
       <LightgalleryItem group={group} src={image} thumb={thumb}>
-        <img src={image} style={{ width: "100%" }} />
+        <img alt="img" src={image} style={{ width: "100%" }} />
       </LightgalleryItem>
     </div>
   );
@@ -72,7 +72,7 @@ export default function AddDetails() {
     },
     { heading: "Other", text: "" },
   ];
-  const { setShowLoader, websiteName, currentUser } = useContext(RootContext);
+  const { setShowLoader } = useContext(RootContext);
 
   useEffect(() => {
     setShowLoader(true);
@@ -122,14 +122,14 @@ export default function AddDetails() {
           <div className="breadcrumbWrapper">
             <ul className="breadcrumb bread">
               <li>
-                <a>
+                <Link to='/' className="text-dark">
                   <span itemProp="name">Home /</span>
-                </a>
+                </Link>
               </li>
               <li>
-                <a>
+                <Link to={`/products?category=${product.product_category_id}`} className="text-dark">
                   <span itemProp="name">Used Tractor /</span>
-                </a>
+                </Link>
               </li>
               <li>
                 <span itemProp="name">Used Tractor For Sale In Pakistan</span>
@@ -144,7 +144,7 @@ export default function AddDetails() {
                 <div className="">
                   <h3>{product.title} </h3>
                   <p className="detail-sub-heading d-flex">
-                    <a href="/" className="d-flex">
+                    <div className="d-flex text-primary cursor-pointer">
                       <Image
                         src={mapsBlack}
                         height="20px"
@@ -153,7 +153,7 @@ export default function AddDetails() {
                         className="d-flex justify-content-center m-auto"
                       />{" "}
                       {product.city}
-                    </a>
+                    </div>
                   </p>
                 </div>
                 <div className="right-img pull-right cover-photo-zoom">
@@ -211,6 +211,24 @@ export default function AddDetails() {
                 <div className="mt-4">
                   <h3 className="mt-3">Product Information:</h3>
                   <div className="row">
+                    <div className="col-lg-6 carDetail">
+                      <div className="borderTop d-flex align-items-center">
+                        <b>Brand:</b>
+                        <p className="ml-2">{product.brand && product.brand.title}</p>
+                      </div>
+                    </div>
+                    <div className="col-lg-6 carDetail">
+                      <div className="borderTop d-flex align-items-center">
+                        <b>Product Category:</b>
+                        <p className="ml-2">{product.product_category && product.product_category.title}</p>
+                      </div>
+                    </div>
+                    <div className="col-lg-6 carDetail">
+                      <div className="borderTop d-flex align-items-center">
+                        <b>Address:</b>
+                        <p className="ml-2">{product.location}</p>
+                      </div>
+                    </div>
                     {product.extra_fields &&
                     Object.entries(product.extra_fields).length > 0 ? (
                       <>
@@ -219,7 +237,7 @@ export default function AddDetails() {
                             (item, i) => {
                               return (
                                 <div className="col-lg-6 carDetail">
-                                  <div className="borderTop d-flex">
+                                  <div className="borderTop d-flex align-items-center">
                                     <b>{item[0]}:</b>
                                     <p className="ml-2">{item[1]}</p>
                                   </div>

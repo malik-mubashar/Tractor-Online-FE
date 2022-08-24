@@ -69,31 +69,10 @@ export default function DropDown({
                     </li>
                   ))}
                 </ul>
-                {/* <ul className="list-unstyled col-4 p-0 border-right">
-                {usedTractorsSecond.map((item, i) => (
-                  <li className="dropdown-list" key={i}>
-                    <Link to="/" className="d-flex pl-1 dropdown-link">
-                      <Icofont
-                        icon={item.icon}
-                        height="10px"
-                        width="10px"
-                        className="icofont-2x ml-2 col-2 p-0"
-                      />
-                      <div className="col-10 p-0">
-                        <strong>{item.heading}</strong>
-                        <p>{item.subHeading}</p>
-                      </div>
-                    </Link>
-                  </li>
-                ))}
-              </ul> */}
-
-                <ul className="list-unstyled col-3 text-center">
-                  <li className="mb-3">
-                    <Link to="/">
-                      <Icon.MapPin className="icon mr-2" />
-                      <strong>Popular Cities</strong>
-                    </Link>
+                <ul className="list-unstyled col-3 text-center border-right">
+                  <li className="mb-3 text-dark">
+                    <Icon.MapPin className="icon mr-2" />
+                    <strong>Popular Cities</strong>
                   </li>
                   {cities &&
                     cities.map((item, i) => (
@@ -111,18 +90,14 @@ export default function DropDown({
                       </li>
                     ))}
                 </ul>
-                <ul className="list-unstyled col-3  text-center">
-                  <li className="mb-3">
-                    <Link to="/">
-                      <Icon.Trello className="icon mr-2" />
-                      <strong>Popular Brands</strong>
-                    </Link>
+                <ul className="list-unstyled col-3 text-center text-dark">
+                  <li className="mb-3 text-dark">
+                    <Icon.Trello className="icon mr-2" />
+                    <strong>Popular Brands</strong>
                   </li>
 
 									{productCategory && productCategory.brands &&
 										productCategory.brands.length>0?
-										
-
                     productCategory.brands.map((item, i) => (
                       <li key={item.id}>
                         <Link

@@ -76,25 +76,7 @@ export default function DropDownTopbar({
                     </li>
                   ))}
                 </ul>
-                {/* <ul className="list-unstyled col-4 p-0 border-right">
-                {usedTractorsSecond.map((item, i) => (
-                  <li className="dropdown-list" key={i}>
-                    <Link to="/" className="d-flex pl-1 dropdown-link">
-                      <Icofont
-                        icon={item.icon}
-                        height="10px"
-                        width="10px"
-                        className="icofont-2x ml-2 col-2 p-0"
-                      />
-                      <div className="col-10 p-0">
-                        <strong>{item.heading}</strong>
-                        <p>{item.subHeading}</p>
-                      </div>
-                    </Link>
-                  </li>
-                ))}
-              </ul> */}
-                <ul className="list-unstyled col-3 text-center">
+                <ul className="list-unstyled col-3 text-center border-right">
                   <li className="mb-3">
                     <Icon.MapPin className="icon mr-2" />
                     <strong>Popular Cities</strong>
@@ -103,11 +85,7 @@ export default function DropDownTopbar({
                     cities.map((item, i) => (
                       <li key={i}>
                         <Link
-                          to={
-                            productCategory.title === "Used tractor"
-                              ? `/products/search?category=${productCategory.id}&city=${item.title}`
-                              : `/products/search?category=${productCategory.id}&city=${item.title}`
-                          }
+                          to={`/products/search?category=${productCategory.id}&city=${item.title}`}
                           className="dropdown-link"
                         >
                           <p className="city-name">{item.title}</p>
@@ -115,26 +93,18 @@ export default function DropDownTopbar({
                       </li>
                     ))}
                 </ul>
-                <ul className="list-unstyled col-3  text-center">
+                <ul className="list-unstyled col-4  text-center">
                   <li className="mb-3">
-                    <Link to="/">
-                      <Icon.Trello className="icon mr-2" />
-                      <strong>Popular Brands</strong>
-                    </Link>
+                    <Icon.Trello className="icon mr-2" />
+                    <strong>Popular Brands</strong>
                   </li>
 
 									{productCategory && productCategory.brands &&
 										productCategory.brands.length>0?
-										
-
                     productCategory.brands.map((item, i) => (
                       <li key={item.id}>
                         <Link
-                          to={
-                            productCategory.title === "Used tractor"
-                              ? `/products/search?category=${productCategory.id}&brand=${item.id}`
-                              : `/products/search?category=${productCategory.id}&brand=${item.id}`
-                          }
+                          to={`/products/search?category=${productCategory.id}&brand=${item.id}`}
                           className="dropdown-link"
                           title="Used Cars for sale in Karachi"
                         >

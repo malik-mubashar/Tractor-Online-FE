@@ -107,3 +107,8 @@ a {
   overflow: hidden;
   text-overflow: ellipsis;
 }
+.price-field-in-search{
+  .css-tlfecz-indicatorContainer, .css-1gtu0rj-indicatorContainer{
+    display: none !important;
+  }
+}

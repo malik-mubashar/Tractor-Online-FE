@@ -199,15 +199,25 @@ export default function SearchListing({
                               : "truncate-search-page"
                           }
                         >
+                          <span><b>Brand:</b> {item.brand && item.brand.title}</span> {' | '}
+                          <span><b>Category:</b> {item.product_category && item.product_category.title}</span>
+                        </p>
+                        <p
+                          className={
+                            gridOrList === "list"
+                              ? " ml-3"
+                              : "truncate-search-page"
+                          }
+                        >
                           {item.extra_fields &&
                           Object.entries(item.extra_fields).length > 0 ? (
                             <>
                               {item.extra_fields &&
                                 Object.entries(item.extra_fields).map(
-                                  (item, i) => {
+                                  (item2, i) => {
                                     return (
                                       <>
-                                        <span>{item[1]} | </span>
+                                        <span>{item2[1]}{i+1 < (Object.keys(item.extra_fields).length) ?  <b className="mx-1">|</b> : null} </span>
                                       </>
                                     );
                                   }

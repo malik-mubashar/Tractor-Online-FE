@@ -25,7 +25,10 @@ export default function FeaturedProducts({ title, link, prodCategoryId }) {
     true,
     "nil",
     "nil",
-    prodCategoryId);
+    prodCategoryId,
+    'active',
+    'nil'
+    );
 		if (result.error === false) {
 			setProducts(result.data && result.data.data);
     }

@@ -90,7 +90,8 @@ export default function SideSearch({
                                     history.push(
                                       `/products/search?${new URLSearchParams({
                                         ...searchFilters,
-                                        [item[0]]: "nil",
+                                        priceRangeFrom: "nil",
+                                        priceRangeTo: 'nil'
                                       }).toString()}`
                                     );
                                     setSearchFilters({
@@ -319,7 +320,7 @@ export default function SideSearch({
             <div className="row">
      
               <CreatableSelect
-                className="col-5 my-2 px-0 fieldHeight mainSearch"
+                className="col-5 my-2 px-0 fieldHeight mainSearch price-field-in-search"
                 isClearable
                 placeholder="From"
                 label="From"
@@ -337,7 +338,7 @@ export default function SideSearch({
               />
 
               <CreatableSelect
-                className="col-5 my-2 px-0 fieldHeight mainSearch"
+                className="col-5 my-2 px-0 fieldHeight mainSearch price-field-in-search"
                 isClearable
                 label="To"
                 placeholder="To"

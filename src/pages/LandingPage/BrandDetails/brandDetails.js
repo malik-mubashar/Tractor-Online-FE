@@ -28,7 +28,9 @@ const brandDetails = () => {
       "nil",
       "nil",
       id,
-      "nil"
+      "nil",
+      'active',
+      'nil'
     );
     if (result.error === false) {
       setBrandProducts(result.data && result.data.data);
