@@ -5,15 +5,22 @@ import Footer from "./Footer/Footer";
 import { user } from "../API/User/index";
 import { RootContext } from "../context/RootContext";
 import { useHistory } from "react-router-dom";
-import PasswordResetModal from "./Modals/PasswordReset";
+import PasswordResetModal from "./Modals/PasswordResetModal";
 import { city } from "../API/City/CityApis";
 import { country } from "../API/Country/CountryApis";
 import { languageApis } from "../API/LanguagesApis ";
 import toast from "react-hot-toast";
 import noProfilePicture from "../assets/svg/no-profile-picture.svg";
+import Select from "react-select";
 
 const ProfileSettings = () => {
-  const { currentUser, showPasswordModel, setShowPasswordModel } = useContext(RootContext);
+  const {
+    setCurrentUser,
+    currentUser,
+    showPasswordModel,
+    setShowPasswordModel,
+    setShowLoader,
+  } = useContext(RootContext);
   const [userPersonalDetail, setUserPersonalDetail] = useState(currentUser);
   const [sideMenue, setSideMenu] = useState();
   const [fileDataURL, setFileDataURL] = useState(null);
@@ -89,7 +96,14 @@ const ProfileSettings = () => {
       const res = await city.getAllCities();
       if (res.error === false) {
         toast.dismiss(loadingToastId);
-        setCities(res.data.data);
+        debugger;
+        const tempArray = [];
+        res &&
+          res.data &&
+          res.data.data.map((item) =>
+            tempArray.push({ ...item, label: item.title, value: item.title })
+          );
+        setCities(tempArray);
       } else if (res.error === true) {
         toast.error("error getting cities");
         toast.dismiss(loadingToastId);
@@ -218,7 +232,60 @@ const ProfileSettings = () => {
   const modalClose = () => {
     setShowPasswordModel(!showPasswordModel);
   };
+  const handleSave = () => {
+    if (updatePassword.new_password == updatePassword.confirm_password) {
+      handleChangePassword(updatePassword);
+    } else {
+      toast.error("Password Did not match");
+    }
+  };
 
+  const handleChangePassword = async (temp) => {
+    setShowLoader(true);
+    try {
+      const result = await user.changePassword(temp);
+      debugger;
+      if (
+        result.error == false &&
+        result.data.message === "Your password has been successfully updated."
+      ) {
+        setShowLoader(false);
+        toast.success("Password Updated successfully");
+        handleSignout();
+      } else {
+        setShowLoader(false);
+        toast.error(result.data.errors.full_messages[0]);
+        console.error(result.data);
+      }
+    } catch (error) {
+      setShowLoader(false);
+      console.error(error);
+    }
+  };
+
+  const handleSignout = async () => {
+    setShowLoader(true);
+    try {
+      const result = await user.signout();
+      if (result.error == false && result.data.success == true) {
+        setShowLoader(false);
+        toast.success("signed out");
+        localStorage.clear();
+        setCurrentUser(null);
+        history.push("/login");
+      } else {
+        setShowLoader(false);
+
+        toast.error("sign out error");
+        console.error(result.data);
+      }
+    } catch (error) {
+      setShowLoader(false);
+
+      toast.error("sign out error");
+      console.error(error);
+    }
+  };
   return (
     <>
       <div className="page-wrapper">
@@ -249,29 +316,29 @@ const ProfileSettings = () => {
                 Change Password
               </Button>
               <Form>
-								<Form.Group controlId="formBasicComments">
-									{(profilePic || fileDataURL) ?
-										
-										<Image
-                    src={fileDataURL ? fileDataURL : profilePic}
-                    roundedCircle
-                    alt="User Image"
-                    width="100px"
-                    height="100px"
-                    className="m-2"
-                    as={Col}
-										/>
-										:
-										<Image
-                    src={noProfilePicture}
-                    roundedCircle
-                    alt="User Image"
-                    width="100px"
-                    height="100px"
-                    className="m-2"
-                    as={Col}
-                  />}
-                 
+                <Form.Group controlId="formBasicComments">
+                  {profilePic || fileDataURL ? (
+                    <Image
+                      src={fileDataURL ? fileDataURL : profilePic}
+                      roundedCircle
+                      alt="User Image"
+                      width="100px"
+                      height="100px"
+                      className="m-2"
+                      as={Col}
+                    />
+                  ) : (
+                    <Image
+                      src={noProfilePicture}
+                      roundedCircle
+                      alt="User Image"
+                      width="100px"
+                      height="100px"
+                      className="m-2"
+                      as={Col}
+                    />
+                  )}
+
                   <Form.Group as={Col} className="mt-4">
                     <Form.Label>Upload New Picture</Form.Label>
                     <Form.Control
@@ -287,109 +354,109 @@ const ProfileSettings = () => {
                 </Form.Group>
 
                 <Form.Group controlId="formBasicComments">
-                    <Form.Group as={Col}>
-                      <Form.Label>Name</Form.Label>
-                      <Form.Control
-                        type="text"
-                        placeholder=""
-                        value={editProfile.name ? editProfile.name : ""}
-                        onChange={(e) => {
-                          handleUpdateProfile(e.target.value, "name");
-                        }}
-                      />
-                    </Form.Group>
-                    <Form.Group as={Col}>
-                      <Form.Label>User Name</Form.Label>
-                      <Form.Control
-                        type="text"
-                        placeholder=" "
-                        value={editProfile.username ? editProfile.username : ""}
-                        onChange={(e) => {
-                          handleUpdateProfile(e.target.value, "username");
-                        }}
-                      />
-                    </Form.Group>
-                    <Form.Group as={Col}>
-                      <Form.Label>Email</Form.Label>
-                      <Form.Control
-                        type="text"
-                        placeholder=""
-                        disabled={true}
-                        value={editProfile.email ? editProfile.email : ""}
-                      />
-                    </Form.Group>
+                  <Form.Group as={Col}>
+                    <Form.Label>Name</Form.Label>
+                    <Form.Control
+                      type="text"
+                      placeholder=""
+                      value={editProfile.name ? editProfile.name : ""}
+                      onChange={(e) => {
+                        handleUpdateProfile(e.target.value, "name");
+                      }}
+                    />
+                  </Form.Group>
+                  <Form.Group as={Col}>
+                    <Form.Label>User Name</Form.Label>
+                    <Form.Control
+                      type="text"
+                      placeholder=" "
+                      value={editProfile.username ? editProfile.username : ""}
+                      onChange={(e) => {
+                        handleUpdateProfile(e.target.value, "username");
+                      }}
+                    />
+                  </Form.Group>
+                  <Form.Group as={Col}>
+                    <Form.Label>Email</Form.Label>
+                    <Form.Control
+                      type="text"
+                      placeholder=""
+                      disabled={true}
+                      value={editProfile.email ? editProfile.email : ""}
+                    />
+                  </Form.Group>
+                </Form.Group>
+
+                <Form.Group>
+                  <Form.Group as={Col} controlId="ControlSelect1">
+                    <Form.Label>Gender</Form.Label>
+                    <Form.Control
+                      as="select"
+                      value={editProfile.gender ? editProfile.gender : ""}
+                      onChange={(e) => {
+                        handleUpdateProfile(e.target.value, "gender");
+                      }}
+                    >
+                      <option value="male">Male</option>
+                      <option value="female">Female</option>
+                      <option value="others">Others</option>
+                    </Form.Control>
+                  </Form.Group>
+                  <Form.Group as={Col}>
+                    <Form.Label>Date Of Birth</Form.Label>
+                    <Form.Control
+                      type="date"
+                      name="dob"
+                      placeholder="Date of Birth"
+                      value={editProfile.birthDay ? editProfile.birthDay : ""}
+                      onChange={(e) => {
+                        handleUpdateProfile(e.target.value, "birthDay");
+                      }}
+                    />
+                  </Form.Group>
+                </Form.Group>
+
+                <Form.Group>
+                  <Form.Group as={Col}>
+                    <Form.Label>Phone</Form.Label>
+                    <Form.Control
+                      type="text"
+                      placeholder=""
+                      value={editProfile.phone ? editProfile.phone : ""}
+                      onChange={(e) => {
+                        handleUpdateProfile(e.target.value, "phone");
+                      }}
+                    />
                   </Form.Group>
 
-                  <Form.Group>
-                    <Form.Group as={Col} controlId="ControlSelect1">
-                      <Form.Label>Gender</Form.Label>
-                      <Form.Control
-                        as="select"
-                        value={editProfile.gender ? editProfile.gender : ""}
-                        onChange={(e) => {
-                          handleUpdateProfile(e.target.value, "gender");
-                        }}
-                      >
-                        <option value="male">Male</option>
-                        <option value="female">Female</option>
-                        <option value="others">Others</option>
-                      </Form.Control>
-                    </Form.Group>
-                    <Form.Group as={Col}>
-                      <Form.Label>Date Of Birth</Form.Label>
-                      <Form.Control
-                        type="date"
-                        name="dob"
-                        placeholder="Date of Birth"
-                        value={editProfile.birthDay ? editProfile.birthDay : ""}
-                        onChange={(e) => {
-                          handleUpdateProfile(e.target.value, "birthDay");
-                        }}
-                      />
-                    </Form.Group>
+                  <Form.Group as={Col} controlId="formGridLanguage">
+                    <Form.Label>Language</Form.Label>
+                    <Form.Control
+                      as="select"
+                      value={editProfile.language ? editProfile.language : ""}
+                      onChange={(e) => {
+                        handleUpdateProfile(e.target.value, "language");
+                      }}
+                    >
+                      <option key="blankChoice" hidden value>
+                        -- Select Language --
+                      </option>
+                      {languageList ? (
+                        languageList.map((item) => {
+                          return (
+                            <>
+                              <option key={item.id}>{item.title}</option>
+                            </>
+                          );
+                        })
+                      ) : (
+                        <option>-- No option avaliable --</option>
+                      )}
+                    </Form.Control>
                   </Form.Group>
-
-                  <Form.Group>
-                    <Form.Group as={Col}>
-                      <Form.Label>Phone</Form.Label>
-                      <Form.Control
-                        type="text"
-                        placeholder=""
-                        value={editProfile.phone ? editProfile.phone : ""}
-                        onChange={(e) => {
-                          handleUpdateProfile(e.target.value, "phone");
-                        }}
-                      />
-                    </Form.Group>
-
-                    <Form.Group as={Col} controlId="formGridLanguage">
-                      <Form.Label>Language</Form.Label>
-                      <Form.Control
-                        as="select"
-                        value={editProfile.language ? editProfile.language : ""}
-                        onChange={(e) => {
-                          handleUpdateProfile(e.target.value, "language");
-                        }}
-                      >
-                        <option key="blankChoice" hidden value>
-                          -- Select Language --
-                        </option>
-                        {languageList ? (
-                          languageList.map((item) => {
-                            return (
-                              <>
-                                <option key={item.id}>{item.title}</option>
-                              </>
-                            );
-                          })
-                        ) : (
-                          <option>-- No option avaliable --</option>
-                        )}
-                      </Form.Control>
-                    </Form.Group>
-                  </Form.Group>
-                  <Form.Group>
-                    <Form.Group as={Col} controlId="formGridCity">
+                </Form.Group>
+                <Form.Group>
+                  {/* <Form.Group as={Col} controlId="formGridCity">
                       <Form.Label>Country</Form.Label>
                       <Form.Control
                         as="select"
@@ -415,48 +482,59 @@ const ProfileSettings = () => {
                           <option>-- No option avaliable --</option>
                         )}
                       </Form.Control>
-                    </Form.Group>
+                    </Form.Group> */}
 
-                    <Form.Group as={Col} controlId="formGridState">
-                      <Form.Label>city</Form.Label>
-                      <Form.Control
-                        as="select"
-                        value={editProfile.city ? editProfile.city : ""}
-                        onChange={(e) => {
-                          handleUpdateProfile(e.target.value, "city");
-                        }}
-                      >
-                        <option key="blankChoice" hidden value>
-                          Select City ....
-                        </option>
-                        {cities ? (
-                          cities.map((item, i) => {
-                            return (
-                              <>
-                                <option key={i}>{item.title}</option>
-                              </>
-                            );
-                          })
-                        ) : (
-                          <option>-- No option avaliable --</option>
-                        )}
-                      </Form.Control>
-                    </Form.Group>
+                  <Form.Group as={Col} controlId="formGridState">
+										<Form.Label>city</Form.Label>										
+                    <Select
+											value={editProfile&& {label: `${editProfile.city}`, value: `${editProfile.city}`}}
+                      options={cities}
+                      label="Select City"
+                      onChange={(e) => {
+                        if (e) {
+                          handleUpdateProfile(e.label, "city");
+                        }
+                      }}
+                      clearable={false}
+                    />
+                    {/* <Form.Control
+                      as="select"
+                      value={editProfile.city ? editProfile.city : ""}
+                      onChange={(e) => {
+                        handleUpdateProfile(e.target.value, "city");
+                      }}
+                    >
+                      <option key="blankChoice" hidden value>
+                        Select City ....
+                      </option>
+                      {cities ? (
+                        cities.map((item, i) => {
+                          return (
+                            <>
+                              <option key={i}>{item.title}</option>
+                            </>
+                          );
+                        })
+                      ) : (
+                        <option>-- No option avaliable --</option>
+                      )}
+                    </Form.Control> */}
                   </Form.Group>
+                </Form.Group>
 
-                  <div className="text-center d-flex justify-content-between mt-5">
-                    <div>
-                      <Button
-                        variant="danger"
-                        onClick={() => history.push("/profile/")}
-                      >
-                        Cancel
-                      </Button>
-                    </div>
-                    <div onClick={updateProfile}>
-                      <Button variant="success">Save Changes</Button>
-                    </div>
+                <div className="text-center d-flex justify-content-between mt-5">
+                  <div>
+                    <Button
+                      variant="danger"
+                      onClick={() => history.push("/profile/")}
+                    >
+                      Cancel
+                    </Button>
                   </div>
+                  <div onClick={updateProfile}>
+                    <Button variant="success">Save Changes</Button>
+                  </div>
+                </div>
               </Form>
             </div>
           </Col>
@@ -466,6 +544,7 @@ const ProfileSettings = () => {
           modalShow={showPasswordModel}
           updatePassword={updatePassword}
           handleUpdatePassword={handleUpdatePassword}
+          handleSave={handleSave}
         />
         {/* End Profile Settings */}
 

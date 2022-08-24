@@ -37,19 +37,12 @@ const Topbar = () => {
   const [productCategories, setProductCategories] = useState();
   const [profile, setProfile] = useState();
   const [cities, setCities] = useState([]);
-  const [brands, setBrands] = useState();
   useEffect(() => {
     handleGetAllCategories();
     handleGetAllCities();
-    handleGetAllProductCategories();
   }, []);
 
-  const handleGetAllProductCategories = async () => {
-    const result = await prodApi.getProdCategoriesList();
-    if (result.error === false) {
-      setBrands(result.data && result.data.data);
-    }
-  };
+
   const handleGetAllCities = async () => {
     const result = await city.getPopularCity("popular");
 
