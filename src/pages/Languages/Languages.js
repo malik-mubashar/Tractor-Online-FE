@@ -19,6 +19,7 @@ import AddAndEditLanguage from "./AddAndEditLanguage";
 import { languageApis } from "../../API/LanguagesApis ";
 import csvSvg from "../../assets/svg/csv2.svg";
 import pdfSvg from "../../assets/svg/pdf.svg";
+import Icofont from "react-icofont";
 
 
 
@@ -303,8 +304,10 @@ export default function Languages() {
                                     className="text-success mr-2 icon wh-15 mt-minus-3"
                                   />
                                   <Link className="text-danger mr-2">
-                                    <Icon.X
-                                      onClick={() => deleteLanguage(language.id)}
+                                    <Icofont icon="ui-delete"
+                                      onClick={() => 
+                                        { if (window.confirm('Are you sure you wish to delete this item?'))
+                                        deleteLanguage(language.id)}}
                                       className="icon wh-15 mt-minus-3"
                                     />
                                   </Link>

@@ -18,6 +18,7 @@ import { country } from "../../API/Country/CountryApis";
 import toast from "react-hot-toast";
 import csvSvg from "../../assets/svg/csv2.svg";
 import pdfSvg from "../../assets/svg/pdf.svg";
+import Icofont from "react-icofont";
 
 export default function Country() {
   const [paginationNumbers, setPaginationNumbers] = useState();
@@ -286,8 +287,10 @@ export default function Country() {
                                     className="text-success mr-2 icon wh-15 mt-minus-3"
                                   />
                                   <Link className="text-danger mr-2">
-                                    <Icon.X
-                                      onClick={() => deleteCountry(country.id)}
+                                    <Icofont icon="ui-delete"
+                                      onClick={() => 
+                                        { if (window.confirm('Are you sure you wish to delete this item?'))
+                                        deleteCountry(country.id)}}
                                       className="icon wh-15 mt-minus-3"
                                     />
                                   </Link>

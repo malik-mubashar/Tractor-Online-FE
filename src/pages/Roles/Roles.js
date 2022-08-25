@@ -18,6 +18,7 @@ import AddAndEditRole from "./AddAndEditRoles";
 import { roleApis } from "../../API/RolesApis";
 import csvSvg from "../../assets/svg/csv2.svg";
 import pdfSvg from "../../assets/svg/pdf.svg";
+import Icofont from "react-icofont";
 
 export default function Roles() {
   const [paginationNumbers, setPaginationNumbers] = useState();
@@ -292,8 +293,10 @@ export default function Roles() {
                                     className="text-success mr-2 icon wh-15 mt-minus-3"
                                   />
                                   <Link className="text-danger mr-2">
-                                    <Icon.X
-                                      onClick={() => deleteRole(role.id)}
+                                    <Icofont icon="ui-delete"
+                                      onClick={() => 
+                                        { if (window.confirm('Are you sure you wish to delete this item?'))
+                                        deleteRole(role.id)}}
                                       className="icon wh-15 mt-minus-3"
                                     />
                                   </Link>
