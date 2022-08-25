@@ -87,7 +87,8 @@ export default function Products() {
     location: "",
     link: "",
     city: "",
-    phone_no: "",
+		phone_no: "",
+		images:[]
   });
 
   const handleSearch = (searchString) => {
