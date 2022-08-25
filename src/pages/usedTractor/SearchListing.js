@@ -148,7 +148,7 @@ export default function SearchListing({
                         alt="Card"
                         style={{ width: "200px", height: "140px" }}
                         onClick={() => {
-                          history.push(`/add-details/${item.id}`);
+                          history.push(`/ad-details/${item.id}`);
                         }}
                       />
                       <div style={{ width: "100%" }}>
@@ -167,7 +167,7 @@ export default function SearchListing({
                             }
                             title={item.title}
                             onClick={() => {
-                              history.push(`/add-details/${item.id}`);
+                              history.push(`/ad-details/${item.id}`);
                             }}
                           >
                             {item.title}
@@ -179,7 +179,7 @@ export default function SearchListing({
                                 : "cursor-pointer"
                             }
                             onClick={() => {
-                              history.push(`/add-details/${item.id}`);
+                              history.push(`/ad-details/${item.id}`);
                             }}
                           >
                             PKR {item.price}
@@ -199,8 +199,15 @@ export default function SearchListing({
                               : "truncate-search-page"
                           }
                         >
-                          <span><b>Brand:</b> {item.brand && item.brand.title}</span> {' | '}
-                          <span><b>Category:</b> {item.product_category && item.product_category.title}</span>
+                          <span>
+                            <b>Brand:</b> {item.brand && item.brand.title}
+                          </span>{" "}
+                          {" | "}
+                          <span>
+                            <b>Category:</b>{" "}
+                            {item.product_category &&
+                              item.product_category.title}
+                          </span>
                         </p>
                         <p
                           className={
@@ -217,7 +224,14 @@ export default function SearchListing({
                                   (item2, i) => {
                                     return (
                                       <>
-                                        <span>{item2[1]}{i+1 < (Object.keys(item.extra_fields).length) ?  <b className="mx-1">|</b> : null} </span>
+                                        <span>
+                                          {item2[1]}
+                                          {i + 1 <
+                                          Object.keys(item.extra_fields)
+                                            .length ? (
+                                            <b className="mx-1">|</b>
+                                          ) : null}{" "}
+                                        </span>
                                       </>
                                     );
                                   }
@@ -269,7 +283,7 @@ export default function SearchListing({
                                 onClick={() => {
                                   setOpenShowPhone(true);
                                 }}
-                                className="btn-success"
+                                className="btn btn-success px-1"
                                 type="submit"
                               >
                                 <Icon.PhoneCall

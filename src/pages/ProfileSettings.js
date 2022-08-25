@@ -96,7 +96,6 @@ const ProfileSettings = () => {
       const res = await city.getAllCities();
       if (res.error === false) {
         toast.dismiss(loadingToastId);
-        debugger;
         const tempArray = [];
         res &&
           res.data &&
@@ -244,7 +243,6 @@ const ProfileSettings = () => {
     setShowLoader(true);
     try {
       const result = await user.changePassword(temp);
-      debugger;
       if (
         result.error == false &&
         result.data.message === "Your password has been successfully updated."

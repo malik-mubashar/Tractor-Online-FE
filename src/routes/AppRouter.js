@@ -218,7 +218,7 @@ const AppRouter = () => {
             </Layout>
           </UnProtectedRoute>
         
-          <UnProtectedRoute exact path="/add-details/:id">
+          <UnProtectedRoute exact path="/ad-details/:id">
             <Layout>
               <AddDetails />
             </Layout>
