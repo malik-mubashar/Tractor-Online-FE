@@ -346,8 +346,10 @@ const ProfileSettings = () => {
                       placeholder=""
                       className="form-control p-1"
                       multiple
+                      accept="image/x-png,image/gif,image/jpeg,image/jpg"
                       onChange={(e) => {
                         handleUpdateProfile(e.target.files[0], "image");
+                      
                       }}
                     />
                   </Form.Group>

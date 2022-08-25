@@ -18,6 +18,7 @@ import { prodSubApi } from "../../API/ProdSubCategoriesApis";
 import toast from "react-hot-toast";
 import csvSvg from "../../assets/svg/csv2.svg";
 import pdfSvg from "../../assets/svg/pdf.svg";
+import Icofont from "react-icofont";
 
 export default function ProdSubCategories() {
   const [paginationNumbers, setPaginationNumbers] = useState();
@@ -309,10 +310,11 @@ export default function ProdSubCategories() {
                                       className="text-success mr-2 icon wh-15 mt-minus-3"
                                     />
                                     <Link className="text-danger mr-2">
-                                      <Icon.X
+                                      <Icofont icon="ui-delete"
                                         onClick={() =>
+                                          { if (window.confirm('Are you sure you wish to delete this item?'))
                                           deleteProdSubCategory(prod.id)
-                                        }
+                                        }}
                                         className="icon wh-15 mt-minus-3"
                                       />
                                     </Link>

@@ -16,6 +16,7 @@ import toast from "react-hot-toast";
 // import AddAndEditUserRoles from "./AddAndEditUserUserRoles";
 import { userRolesApis } from "../../API/UserRolesApis";
 import AddAndEditUserRoles from "./AddAndEditUserRoles";
+import Icofont from "react-icofont";
 // import { userRoleApis } from "../../API/UserRolesApis";
 
 export default function UserRoles() {
@@ -224,8 +225,11 @@ export default function UserRoles() {
                                     className="text-success mr-2 icon wh-15 mt-minus-3"
                                   />
                                   <Link className="text-danger mr-2">
-                                    <Icon.X
-                                      onClick={() => deleteUserRole(userRole.id)}
+                                    <Icofont icon="ui-delete"
+                                    
+                                      onClick={() => 
+                                        { if (window.confirm('Are you sure you wish to delete this item?'))
+                                        deleteUserRole(userRole.id)}}
                                       className="icon wh-15 mt-minus-3"
                                     />
                                   </Link>

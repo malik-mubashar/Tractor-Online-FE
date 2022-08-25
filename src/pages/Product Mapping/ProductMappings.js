@@ -16,6 +16,7 @@ import csvSvg from "../../assets/svg/csv2.svg";
 import pdfSvg from "../../assets/svg/pdf.svg";
 import { productMappingApis } from "../../API/ProductMappingApis";
 import AddAndEditProductMappings from "./AddAndEditProductMapping";
+import Icofont from "react-icofont";
 
 export default function ProductMappings() {
   const [noOfRec, setNoOfRec] = useState(10);
@@ -336,10 +337,11 @@ export default function ProductMappings() {
                                     className="text-success mr-2 icon wh-15 mt-minus-3"
                                   />
                                   <Link className="text-danger mr-2">
-                                    <Icon.X
+                                    <Icofont icon="ui-delete"
                                       onClick={() =>
+                                        { if (window.confirm('Are you sure you wish to delete this item?'))
                                         deleteProductMapping(item.id)
-                                      }
+                                      }}
                                       className="icon wh-15 mt-minus-3"
                                     />
                                   </Link>

@@ -19,6 +19,7 @@ import toast from "react-hot-toast";
 import csvSvg from "../../assets/svg/csv2.svg";
 import pdfSvg from "../../assets/svg/pdf.svg";
 import { modelApis } from "../../API/ModelsApis";
+import Icofont from "react-icofont";
 // import { modelApis } from "../../API/ModelsApis";
 
 export default function Models() {
@@ -316,10 +317,11 @@ export default function Models() {
                                       className="text-success mr-2 icon wh-15 mt-minus-3"
                                     />
                                     <Link className="text-danger mr-2">
-                                      <Icon.X
+                                      <Icofont icon="ui-delete"
                                         onClick={() =>
+                                          { if (window.confirm('Are you sure you wish to delete this item?'))
                                           deleteModel(model.id)
-                                        }
+                                        }}
                                         className="icon wh-15 mt-minus-3"
                                       />
                                     </Link>

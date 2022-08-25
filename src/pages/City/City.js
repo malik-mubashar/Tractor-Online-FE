@@ -19,6 +19,7 @@ import { city } from "../../API/City/CityApis";
 import toast from "react-hot-toast";
 import csvSvg from "../../assets/svg/csv2.svg";
 import pdfSvg from "../../assets/svg/pdf.svg";
+import Icofont from "react-icofont";
 
 export default function City() {
   const [paginationNumbers, setPaginationNumbers] = useState();
@@ -284,8 +285,10 @@ export default function City() {
                                     className="text-success mr-2 icon wh-15 mt-minus-3"
                                   />
                                   <Link className="text-danger mr-2">
-                                    <Icon.X
-                                      onClick={() => deleteCity(city.id)}
+                                    <Icofont icon="ui-delete"
+                                      onClick={() => 
+                                        { if (window.confirm('Are you sure you wish to delete this item?'))
+                                        deleteCity(city.id)}}
                                       className="icon wh-15 mt-minus-3"
                                     />
                                   </Link>

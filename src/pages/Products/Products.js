@@ -17,11 +17,13 @@ import { productApis } from "../../API/ProductApis";
 import csvSvg from "../../assets/svg/csv2.svg";
 import pdfSvg from "../../assets/svg/pdf.svg";
 import { brandApis } from "../../API/BrandsApis";
+import Icofont from "react-icofont";
 
 export default function Products() {
   const [paginationNumbers, setPaginationNumbers] = useState();
   const [noOfRec, setNoOfRec] = useState(10);
   const [mainSearchString, setMainSearchString] = useState("");
+  
   useEffect(() => {
     getProducts(1, "", 10);
   }, []);
@@ -271,6 +273,7 @@ export default function Products() {
                           <th>Cover Photo</th>
                           <th>Title</th>
                           <th>Brand</th>
+                          <th>Categories</th>
                           <th>Price</th>
                           <th>City</th>
                           <th>Address</th>
@@ -306,6 +309,7 @@ export default function Products() {
                                   product.brand &&
                                   product.brand.title}
                               </td>
+                              <td>{product.product_category && product.product_category.title}</td>
                               <td>{product.price && product.price}</td>
                               <td>{product.city && product.city}</td>
                               <td>{product.location && product.location}</td>
@@ -387,8 +391,9 @@ export default function Products() {
                                   className="text-success mr-2 icon wh-15 mt-minus-3"
                                 />
                                 <Link className="text-danger mr-2">
-                                  <Icon.X
-                                    onClick={() => deleteProduct(product.id)}
+                                  <Icofont icon="ui-delete"
+                                  
+                                    onClick={() =>{ if (window.confirm('Are you sure you wish to delete this item?')) deleteProduct(product.id)}}
                                     className="icon wh-15 mt-minus-3"
                                   />
                                 </Link>
