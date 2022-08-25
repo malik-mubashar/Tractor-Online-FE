@@ -12,13 +12,14 @@ import { RootContext } from "../../context/RootContext";
 import toast from "react-hot-toast";
 import { productApis } from "../../API/ProductApis";
 import { brandApis } from "../../API/BrandsApis";
+import { useHistory } from "react-router-dom";
 
 const postad = () => {
   const myRefname = useRef(null);
 
   const { setShowLoader } = useContext(RootContext);
   const [extraFieldsArr, setExtraFieldsArr] = useState([]);
-
+	const history = useHistory();
   const [cities, setCities] = useState([]);
   const [brands, setBrands] = useState([]);
   const [showCategoryModel, setShowCategoryModel] = useState(true);
@@ -303,7 +304,8 @@ const postad = () => {
           const result = await productApis.addProduct(postAddState, formData);
           if (result.error == false) {
             setShowLoader(false);
-            toast.success("Add Posted!");
+						toast.success("Add Posted!");
+						history.push('/profile/my-ads')
           }
           if (result.error === true) {
             setShowLoader(false);
@@ -320,7 +322,7 @@ const postad = () => {
       toast("please enter the values in red fields");
     }
   };
-  function uploadFiles(e) {
+	function uploadFiles(e) {
     let ImagesArray = Object.entries(e.target.files).map((e) =>
       URL.createObjectURL(e[1])
     );
@@ -353,15 +355,21 @@ const postad = () => {
     setFile(s);
     const input = document.getElementById("multi-img-field");
     const fileListArr = Array.from(input.files);
-    fileListArr.filter((item, index) => index !== e); // here u remove the file
+		const templist = fileListArr.filter((item, index) => index !== e); // here u remove the file
+		const dataTransfer = new DataTransfer();
+		for (var i = 0; i < templist.length; i++){
+			dataTransfer.items.add(templist[i]);
+		}
+		input.files = dataTransfer.files;
+
     if (file.length === 1) {
       setIsImgSelected(false);
-    }
+		}
     setPostAddState({
       ...postAddState,
-      images: fileListArr,
+      images: templist,
     });
-  }
+	}
   return (
     <>
       <div className="card text-center my-4 py-4">

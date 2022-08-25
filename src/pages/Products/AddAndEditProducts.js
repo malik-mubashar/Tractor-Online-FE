@@ -130,16 +130,14 @@ export default function AddAndEditProduct({
     });
   }
 
-  function uploadSingleFile(e) {
+	function uploadSingleFile(e) {
     let ImagesArray = Object.entries(e.target.files).map((e) =>
       URL.createObjectURL(e[1])
     );
-   
-    setFile([...ImagesArray]);
-    
+    setFile([...file, ...ImagesArray]);
     setProductsState({
       ...productsState,
-      images: e.target.files,
+      images: [...productsState.images, ...e.target.files],
     });
   }
   useEffect(() => {
@@ -203,10 +201,18 @@ export default function AddAndEditProduct({
     setFile(s);
     const input = document.getElementById("multi-img-field");
     const fileListArr = Array.from(input.files);
-    fileListArr.splice(e, e); // here u remove the file
+		const templist = fileListArr.filter((item, index) => index !== e); // here u remove the file
+		const dataTransfer = new DataTransfer();
+		for (var i = 0; i < templist.length; i++){
+			dataTransfer.items.add(templist[i]);
+		}
+		input.files = dataTransfer.files;
+
+
+
     setProductsState({
       ...productsState,
-      images: fileListArr,
+      images: templist,
     });
   
   }
