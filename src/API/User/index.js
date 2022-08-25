@@ -140,8 +140,6 @@ class User {
 	};
 	changePassword = async (updatePassword) => {
 	const tempCurrentUser = JSON.parse(window.localStorage.getItem("currentUser")) || null;
-
-		debugger;
     return axios({
       method: "put",
       url: `${process.env.REACT_APP_API_LOCAL_PATH}auth/password`,
@@ -160,14 +158,12 @@ class User {
       }
     })
 			.then((result) => {
-				debugger;
         return {
           error: false,
           data: result.data,
         };
       })
 			.catch((error) => {
-				debugger;
         return {
           error: true,
           data: error.response.data
@@ -177,8 +173,6 @@ class User {
 	
 	signout = async (updatePassword) => {
 	const tempCurrentUser = JSON.parse(window.localStorage.getItem("currentUser")) || null;
-
-		debugger;
     return axios({
       method: "delete",
       url: `${process.env.REACT_APP_API_LOCAL_PATH}auth/sign_out`,

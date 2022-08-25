@@ -15,7 +15,6 @@ import TractorClipart from "../../assets/svg/tractor-logo.svg";
 import Icofont from "react-icofont";
 import Buyers from "../../assets/img/buyers.png";
 import FeaturedProducts from "../LandingPage/FeaturedProducts";
-import Loader from "../../components/Common/Loader";
 import { RootContext } from "../../context/RootContext";
 import LoginModel from "../LoginModel";
 import { Link } from "react-router-dom";
@@ -116,23 +115,31 @@ export default function AddDetails() {
   return (
     //sidebar
     <div className="addDetails pt-3">
-      <Loader />
       <div className="remove-section">
         <div className="container">
           <div className="breadcrumbWrapper">
             <ul className="breadcrumb bread">
               <li>
-                <Link to='/' className="text-dark">
+                <Link to="/" className="text-dark">
                   <span itemProp="name">Home /</span>
                 </Link>
               </li>
               <li>
-                <Link to={`/products?category=${product.product_category_id}`} className="text-dark">
-                  <span itemProp="name">Used Tractor /</span>
+                <Link
+                  to={`/products?category=${product.product_category_id}`}
+                  className="text-dark"
+                >
+                  <span itemProp="name">
+                    {product.product_category && product.product_category.title}{" "}
+                    /
+                  </span>
                 </Link>
               </li>
               <li>
-                <span itemProp="name">Used Tractor For Sale In Pakistan</span>
+                <span itemProp="name">
+                  {product.product_category && product.product_category.title}{" "}
+                  For Sale In Pakistan
+                </span>
               </li>
             </ul>
           </div>
@@ -214,13 +221,18 @@ export default function AddDetails() {
                     <div className="col-lg-6 carDetail">
                       <div className="borderTop d-flex align-items-center">
                         <b>Brand:</b>
-                        <p className="ml-2">{product.brand && product.brand.title}</p>
+                        <p className="ml-2">
+                          {product.brand && product.brand.title}
+                        </p>
                       </div>
                     </div>
                     <div className="col-lg-6 carDetail">
                       <div className="borderTop d-flex align-items-center">
                         <b>Product Category:</b>
-                        <p className="ml-2">{product.product_category && product.product_category.title}</p>
+                        <p className="ml-2">
+                          {product.product_category &&
+                            product.product_category.title}
+                        </p>
                       </div>
                     </div>
                     <div className="col-lg-6 carDetail">
