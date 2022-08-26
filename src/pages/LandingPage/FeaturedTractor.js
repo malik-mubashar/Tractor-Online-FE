@@ -61,7 +61,7 @@ export default function FeaturedTractor({ title, link }) {
         { usedProducts &&
           usedProducts.map((item, i) => {
           return(
-            <div className="featured-card bg-white border-radius cursor-pointer h-100" key={i}>
+            <div className="featured-card bg-white border-radius cursor-pointer h-100 relative" key={i}>
             <Link to ={`/ad-details/${item.id}`}>
               <img
                 className="card-img border-radius"

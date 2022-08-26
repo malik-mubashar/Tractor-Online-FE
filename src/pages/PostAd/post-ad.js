@@ -417,10 +417,10 @@ const postad = () => {
               />
             </Form.Group>
           </div>
-          <div className="col-5 d-flex">
+          <div className="col-5">
             <Icofont
               icon="light-bulb text-info"
-              className="icofont-2x col-2"
+              className="icofont-2x col-3"
               style={{ fontSize: "3rem" }}
             />
             <span className="col-10 mt-3">

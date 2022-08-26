@@ -46,7 +46,7 @@ const MobileFooter = () => {
           <>
             <button
               className="css-4g4bsj"
-              onClick={() => history.push("/users/my-ads")}
+              onClick={() => history.push("/profile/my-ads")}
             >
               <Image src={MyAdsSelected} alt="" width="100%" height="18px" />
               <span className="css-1lnpzxd">My Ads</span>
