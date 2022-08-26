@@ -15,7 +15,9 @@ export default function AddAndEditProduct({
   setProductsState,
   getProducts,
 }) {
+	var mutex = true;
   const [brands, setBrands] = useState();
+  const [picturesLoader, setPicturesLoader] = useState(false);
   const [productMappings, setProductMappings] = useState([]);
   const myRefname = useRef(null);
   const [file, setFile] = useState([]);
@@ -130,20 +132,58 @@ export default function AddAndEditProduct({
     });
   }
 
-	function uploadSingleFile(e) {
+	function uploadFiles(e,callFromFunction=false) {
+		if (callFromFunction) {
+			//this block will run only one time
+			mutex = false;
+			const input = document.getElementById("multi-img-field");
+			input.files = e.target.files;
+		}
     let ImagesArray = Object.entries(e.target.files).map((e) =>
       URL.createObjectURL(e[1])
     );
-    setFile([...file, ...ImagesArray]);
+		setFile([...file, ...ImagesArray]);
+		let temp = [...productsState.images, ...e.target.files];
     setProductsState({
       ...productsState,
-      images: [...productsState.images, ...e.target.files],
-    });
-  }
+      images: temp,
+		});
+		
+		const dataTransfer = new DataTransfer();
+		const input = document.getElementById("multi-img-field");
+		for (var i = 0; i < temp.length; i++) { 
+			dataTransfer.items.add(temp[i]);
+		}
+		input.files = dataTransfer.files;
+
+	}
+	const convertPicsUrlToFileList = async () => {
+		setPicturesLoader(true)
+		const dataTransfer = new DataTransfer();
+		for (var i = 0; i < productsState.imagesPath.length; i++) {
+			await fetch(productsState.imagesPath[i])
+				.then((res) => res.blob())
+				// eslint-disable-next-line no-loop-func
+				.then((myBlob) => {
+					const myFile = new File([myBlob], `image${i}.jpeg`, {
+						type: myBlob.type,
+					});
+					dataTransfer.items.add(myFile);
+				});
+		}
+		setPicturesLoader(false);
+		uploadFiles({
+			target: {
+			files:dataTransfer.files
+		}},true)
+	}
   useEffect(() => {
     getAllCity();
     getBrands(1, "", 100000000);
-    getProductMappings(1, "", 1000000);
+		getProductMappings(1, "", 1000000);
+		if (productsState.isEditProduct && productsState.imagesPath.length > 0) {
+			convertPicsUrlToFileList()
+		}
   }, []);
 
   useEffect(() => {
@@ -202,12 +242,15 @@ export default function AddAndEditProduct({
     const input = document.getElementById("multi-img-field");
     const fileListArr = Array.from(input.files);
 		const templist = fileListArr.filter((item, index) => index !== e); // here u remove the file
+
+		//for filtering images from for input element
 		const dataTransfer = new DataTransfer();
 		for (var i = 0; i < templist.length; i++){
 			dataTransfer.items.add(templist[i]);
 		}
+		//setting filtered images to input element
 		input.files = dataTransfer.files;
-
+		//////
 
 
     setProductsState({
@@ -629,7 +672,10 @@ export default function AddAndEditProduct({
                     onChange={(e) => handleChange(e)}
                   />
                 </Form.Group>
-                <div className="form-group preview row mt-4">
+								<div className="form-group preview row mt-4">
+									{
+										picturesLoader ===true && productsState.isEditProduct?'loading pictures ...':null
+									}
                   {file &&
                     file.length > 0 &&
                     file.map((item, index) => {
@@ -671,7 +717,7 @@ export default function AddAndEditProduct({
                     id="multi-img-field"
                     disabled={file && file.length === 5}
                     className="form-control d-none"
-                    onChange={uploadSingleFile}
+                    onChange={uploadFiles}
                     accept="image/x-png,image/gif,image/jpeg,image/jpg"
                     multiple
                   />
