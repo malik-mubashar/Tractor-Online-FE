@@ -1,11 +1,14 @@
-import React from "react";
+import React, { useState, useContext } from "react";
 import { useHistory } from "react-router-dom";
 import Logo from "../../assets/img/tractoronline.png";
-import { Form, FormControl, Button, Image } from "react-bootstrap";
+import { Form, Button, Image } from "react-bootstrap";
 import * as Icon from "react-feather";
+import { RootContext } from "../../context/RootContext";
 
 const MobileTopbar = () => {
   const history = useHistory();
+  const [tractorModel, setTractorModel] = useState("");
+  const { setLandingPageSearchOptions } = useContext(RootContext);
 
   return (
     <>
@@ -45,20 +48,31 @@ const MobileTopbar = () => {
           </div>
         </div>
 
-        <Form
+        <div
           className="nav-search-form d-sm-block relative"
-          action="/dashboard/search"
         >
-          <FormControl
+          <Form.Control
             type="text"
             placeholder="Search..."
             className="rounded"
+            onChange={(event) => setTractorModel(event.target.value)}
           />
 
-          <Button className="search-success" type="submit">
+          <Button
+            className="search-success"
+            onClick={() => {
+              setLandingPageSearchOptions({
+                title: tractorModel || "nil",
+              });
+              // history.push(`/products/search?category=${category}`);
+              history.push(
+                `/products/search?title=${tractorModel || "nil"}`
+              );
+            }}
+          >
             <Icon.Search className="icon" />
           </Button>
-        </Form>
+        </div>
       </div>
     </>
   );

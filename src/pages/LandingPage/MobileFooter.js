@@ -13,14 +13,19 @@ import LoginModel from "../LoginModel";
 const MobileFooter = () => {
   const [show, setShow] = useState(false);
   const [modalShow, setModalShow] = React.useState(false);
-  const [redirect, setRedirect] = useState("/users/my-ads");
+  const [redirect, setRedirect] = useState("/");
   let history = useHistory();
-  const {
-    currentUser,
-    setCurrentUser,
-    signUpMessage,
-    setSignUpMessage,
-  } = useContext(RootContext);
+  const { currentUser } = useContext(RootContext);
+
+  function redirectHandle(redirectUrl) {
+    setRedirect(redirectUrl)
+    if (currentUser === undefined || currentUser === null) {
+      setModalShow(true);
+      setRedirect(redirectUrl);
+    } else {
+      history.push(redirectUrl);
+    }
+  }
 
   return (
     <div className="overflow-x-hidden">
@@ -29,42 +34,15 @@ const MobileFooter = () => {
           <Image src={HomeSelected} alt="" width="100%" height="18px" />
           <span className="generic-link Mui-selected css-1lnpzxd">Home</span>
         </Link>
-        {localStorage.currentUser === undefined ? (
-          <>
-            {" "}
-            <LoginModel
-              show={modalShow}
-              onHide={() => setModalShow(false)}
-              redirect={redirect}
-            />
-            <Link className="css-4g4bsj" onClick={() => setModalShow(true)}>
-              <Image src={MyAdsSelected} alt="" width="100%" height="18px" />
-              <span className="css-1lnpzxd">My Ads</span>
-            </Link>
-          </>
-        ) : (
-          <>
-            <button
-              className="css-4g4bsj"
-              onClick={() => history.push("/profile/my-ads")}
-            >
-              <Image src={MyAdsSelected} alt="" width="100%" height="18px" />
-              <span className="css-1lnpzxd">My Ads</span>
-            </button>
-          </>
-        )}
+        <Link className="css-4g4bsj" onClick={() => redirectHandle('/profile/my-ads')}>
+          <Image src={MyAdsSelected} alt="" width="100%" height="18px" />
+          <span className="css-1lnpzxd">My Ads</span>
+        </Link>
 
         <div>
           <button
             className="bottom-nav-sell-blue"
-            onClick={() => {
-              if (currentUser === undefined || currentUser === null) {
-                setRedirect("/product/sell");
-                setModalShow(true);
-              } else {
-                history.push("/product/sell");
-              }
-            }}
+            onClick={() => redirectHandle("/product/sell")}
           >
             <Image src={AddSell} alt="" width="100%" height="18px" />
           </button>
@@ -72,9 +50,8 @@ const MobileFooter = () => {
           <div className="sell-text"> Sell</div>
         </div>
         <Link
-          to="/"
           className="css-4g4bsj"
-          onClick={() => history.push("/login/")}
+          onClick={() => redirectHandle('/profile/my-messages')}
         >
           <Image src={ChatSelected} alt="" width="100%" height="18px" />
           <span className="css-1lnpzxd">Chat</span>
@@ -91,9 +68,14 @@ const MobileFooter = () => {
         <LoginModel
           show={modalShow}
           onHide={() => setModalShow(false)}
-          redirect='/'
+          setModalShow={setModalShow}
+          redirect={redirect}
         />
-        <MobileDropDown show={show} setShow={setShow} setModalShow={setModalShow} />
+        <MobileDropDown
+          show={show}
+          setShow={setShow}
+          setModalShow={setModalShow}
+        />
       </div>
     </div>
   );

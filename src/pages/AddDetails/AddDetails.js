@@ -242,27 +242,16 @@ export default function AddDetails() {
                       </div>
                     </div>
                     {product.extra_fields &&
-                    Object.entries(product.extra_fields).length > 0 ? (
-                      <>
-                        {product.extra_fields &&
-                          Object.entries(product.extra_fields).map(
-                            (item, i) => {
-                              return (
-                                <div className="col-lg-6 carDetail">
-                                  <div className="borderTop d-flex align-items-center">
-                                    <b>{item[0]}:</b>
-                                    <p className="ml-2">{item[1]}</p>
-                                  </div>
-                                </div>
-                              );
-                            }
-                          )}
-                      </>
-                    ) : (
-                      <div className="text-danger text-center">
-                        No Record Found...
-                      </div>
-                    )}
+                      Object.entries(product.extra_fields).map((item, i) => {
+                        return (
+                          <div className="col-lg-6 carDetail">
+                            <div className="borderTop d-flex align-items-center">
+                              <b>{item[0]}:</b>
+                              <p className="ml-2">{item[1]}</p>
+                            </div>
+                          </div>
+                        );
+                      })}
                   </div>
                 </div>
                 <h3 className="mt-3">Product Description:</h3>
@@ -386,6 +375,7 @@ export default function AddDetails() {
                       <LoginModel
                         show={modalShow}
                         onHide={() => setModalShow(false)}
+                        setModalShow={setModalShow}
                         redirect="/product/sell"
                       />
                       <button
@@ -423,7 +413,7 @@ export default function AddDetails() {
               <Form>
                 {radioValuesArr.map((item, i) => {
                   return (
-                    <div key={i}>
+                    <div key={i} className="d-flex">
                       <input
                         type="radio"
                         className="report-radio-size"

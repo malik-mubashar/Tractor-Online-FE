@@ -54,7 +54,7 @@ const searchAble = ({ cities }) => {
 
   return (
     <>
-      <ul className="list-unstyled search-front clearfix d-flex justify-content-center d-flex mainSearch">
+      <ul className="list-unstyled search-front clearfix d-flex justify-content-center d-flex mainSearch mainSearchBorderSet">
         <li className="home-autocomplete-field">
           <input
             data-autocomplete-class="home-autocomplete"

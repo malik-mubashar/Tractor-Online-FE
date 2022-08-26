@@ -485,6 +485,7 @@ export default function SearchListing({
                 <LoginModel
                   show={modalShow}
                   onHide={() => setModalShow(false)}
+                  setModalShow={setModalShow}
                   redirect={redirect}
                 />
                 <button

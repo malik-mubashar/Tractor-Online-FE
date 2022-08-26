@@ -20,7 +20,7 @@ export default function SideSearch({
   brands,
   prodCategories,
 }) {
-	const [searchWord,setSearchWord]=useState()
+  const [searchWord, setSearchWord] = useState();
   const history = useHistory();
   const priceRangeFromOption = [
     { label: "10000", value: "10000" },
@@ -41,7 +41,6 @@ export default function SideSearch({
     { label: "600000", value: "600000" },
     { label: "700000", value: "700000" },
   ];
-
 
   return (
     <>
@@ -91,7 +90,7 @@ export default function SideSearch({
                                       `/products/search?${new URLSearchParams({
                                         ...searchFilters,
                                         priceRangeFrom: "nil",
-                                        priceRangeTo: 'nil'
+                                        priceRangeTo: "nil",
                                       }).toString()}`
                                     );
                                     setSearchFilters({
@@ -184,22 +183,19 @@ export default function SideSearch({
           </MDBAccordionItem>
         </div>
         <MDBAccordionItem collapseId={2} headerTitle="SEARCH BY KEYWORD">
-          <Form className="nav-search-form row">
+          <div className="nav-search-form row">
             <FormControl
               type="text"
               className="col-10"
-             onChange={(e)=>{
-							setSearchWord(e.target.value == "" ? "nil" : e.target.value)
-						 }}
+              onChange={(e) => {
+                setSearchWord(e.target.value == "" ? "nil" : e.target.value);
+              }}
               placeholder="Search..."
-						/>
-						
+            />
 
-            <input
+            <button
               className="btn btn-primary refine-go col-2 p-0"
-              type="submit"
-							value="Go"
-							onChange={(e) => {
+              onClick={(e) => {
                 history.push(
                   `/products/search?${new URLSearchParams({
                     ...searchFilters,
@@ -211,8 +207,10 @@ export default function SideSearch({
                   title: searchWord,
                 });
               }}
-            />
-          </Form>
+            >
+              Go
+            </button>
+          </div>
         </MDBAccordionItem>
         <MDBAccordionItem collapseId={3} headerTitle="CITY">
           <ul className="list-unstyled ">
@@ -318,7 +316,6 @@ export default function SideSearch({
         <MDBAccordionItem collapseId={4} headerTitle="PRICE RANGE">
           <div className="priceRange">
             <div className="row">
-     
               <CreatableSelect
                 className="col-5 my-2 px-0 fieldHeight mainSearch price-field-in-search"
                 isClearable
@@ -328,10 +325,10 @@ export default function SideSearch({
                   if (e == null) {
                     setPriceRangeFrom("nil");
                   } else {
-										setPriceRangeFrom(e.label);
-										if (priceRangeTo === undefined) {
-											setPriceRangeTo("99999999")
-										}
+                    setPriceRangeFrom(e.label);
+                    if (priceRangeTo === undefined) {
+                      setPriceRangeTo("99999999");
+                    }
                   }
                 }}
                 options={priceRangeFromOption}
@@ -343,21 +340,21 @@ export default function SideSearch({
                 label="To"
                 placeholder="To"
                 onChange={(e) => {
-                    if (e == null) {
-                      setPriceRangeTo("nil");
-										} else {
-											setPriceRangeTo(e.label);
-											if (priceRangeFrom === undefined) {
-												setPriceRangeFrom("1")
-											}
+                  if (e == null) {
+                    setPriceRangeTo("nil");
+                  } else {
+                    setPriceRangeTo(e.label);
+                    if (priceRangeFrom === undefined) {
+                      setPriceRangeFrom("1");
                     }
+                  }
                 }}
                 options={priceRangeToOption}
               />
               <button
                 className="btn btn-primary col-2 p-0"
                 style={{ height: "50px", marginTop: "9px" }}
-								onClick={() => {
+                onClick={() => {
                   history.push(
                     `/products/search?${new URLSearchParams({
                       ...searchFilters,

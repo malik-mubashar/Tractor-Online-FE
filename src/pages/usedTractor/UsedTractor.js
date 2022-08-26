@@ -201,6 +201,7 @@ export default function UsedTractor() {
           <LoginModel
             show={modalShow}
             onHide={() => setModalShow(false)}
+            setModalShow={setModalShow}
             redirect="/product/sell"
           />
           <div className="col-12 col-lg-3 text-center align-items-center justify-content-center d-flex">

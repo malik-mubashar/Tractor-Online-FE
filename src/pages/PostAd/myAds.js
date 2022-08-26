@@ -95,7 +95,7 @@ const myAds = () => {
                     activeProducts.map((item, i) => {
                       return (
                         <div className="col-lg-3 col-12" key={i}>
-                          <div className="listCard mb-3 d-block">
+                          <div className="listCard mb-3 d-block relative">
                             <img
                               src={item.cover_photo_path}
                               alt="Card"
@@ -210,7 +210,7 @@ const myAds = () => {
                     InactiveProducts.map((item, i) => {
                       return (
                         <div className="col-lg-3 col-12" key={i}>
-                          <div className="listCard mb-3 d-block">
+                          <div className="listCard mb-3 d-block relative">
                             <img
                               src={item.cover_photo_path}
                               alt="Card"
