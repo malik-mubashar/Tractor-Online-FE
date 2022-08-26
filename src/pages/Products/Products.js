@@ -159,7 +159,8 @@ export default function Products() {
       toast.dismiss(loadingToastId);
       console.error(e);
     }
-  };
+	};
+	console.log('productsState',productsState.images)
 
   return (
     <>
@@ -192,7 +193,9 @@ export default function Products() {
                       location: "",
                       link: "",
                       city: "",
-                      phone_no: "",
+											phone_no: "",
+											images: [],
+											title:''
                     });
                   }}
                 >
@@ -386,18 +389,19 @@ export default function Products() {
 																			city:product.city,
 																			price:product.price,
 																			phone_no:product.phone_no,
-																			location:product.location,
+																			location: product.location,
+																			imagesPath:product.active_images_path
                                     });
                                   }}
                                   className="text-success mr-2 icon wh-15 mt-minus-3"
                                 />
-                                <Link className="text-danger mr-2">
+                                <div className="text-danger mr-2">
                                   <Icofont icon="ui-delete"
                                   
                                     onClick={() =>{ if (window.confirm('Are you sure you wish to delete this item?')) deleteProduct(product.id)}}
                                     className="icon wh-15 mt-minus-3"
                                   />
-                                </Link>
+                                </div>
                               </td>
                             </tr>
                           ))}
@@ -422,9 +426,9 @@ export default function Products() {
                         }}
                         type="button"
                       >
-                        <span class="MuiIconButton-label">
+                        <span className="MuiIconButton-label">
                           <svg
-                            class="MuiSvgIcon-root"
+                            className="MuiSvgIcon-root"
                             focusable="false"
                             viewBox="0 0 24 24"
                             aria-hidden="true"
@@ -446,9 +450,9 @@ export default function Products() {
                         }}
                         type="button"
                       >
-                        <span class="MuiIconButton-label">
+                        <span className="MuiIconButton-label">
                           <svg
-                            class="MuiSvgIcon-root"
+                            className="MuiSvgIcon-root"
                             focusable="false"
                             viewBox="0 0 24 24"
                             aria-hidden="true"
@@ -464,7 +468,7 @@ export default function Products() {
                             ? "disabled"
                             : ""
                         }`}
-                        tabindex="0"
+                        tabIndex="0"
                         type="button"
                         onClick={() => {
                           getProducts(
@@ -474,9 +478,9 @@ export default function Products() {
                           );
                         }}
                       >
-                        <span class="MuiIconButton-label">
+                        <span className="MuiIconButton-label">
                           <svg
-                            class="MuiSvgIcon-root"
+                            className="MuiSvgIcon-root"
                             focusable="false"
                             viewBox="0 0 24 24"
                             aria-hidden="true"
@@ -484,7 +488,7 @@ export default function Products() {
                             <path d="M8.59 16.59L13.17 12 8.59 7.41 10 6l6 6-6 6-1.41-1.41z"></path>
                           </svg>
                         </span>
-                        <span class="MuiTouchRipple-root"></span>
+                        <span className="MuiTouchRipple-root"></span>
                       </button>
 
                       <button
@@ -494,7 +498,7 @@ export default function Products() {
                             ? "disabled"
                             : ""
                         }`}
-                        tabindex="0"
+                        tabIndex="0"
                         type="button"
                         onClick={() => {
                           getProducts(
@@ -504,9 +508,9 @@ export default function Products() {
                           );
                         }}
                       >
-                        <span class="MuiIconButton-label">
+                        <span className="MuiIconButton-label">
                           <svg
-                            class="MuiSvgIcon-root"
+                            className="MuiSvgIcon-root"
                             focusable="false"
                             viewBox="0 0 24 24"
                             aria-hidden="true"
