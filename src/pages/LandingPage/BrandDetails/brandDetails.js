@@ -57,7 +57,7 @@ const brandDetails = () => {
                   alt="Pakistan"
                   itemprop="image"
                   src={brands.active_image_path}
-                  title="Suzuki Pakistan"
+                  
                 />
               </div>
             </div>

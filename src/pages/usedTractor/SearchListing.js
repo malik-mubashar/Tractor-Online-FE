@@ -138,8 +138,8 @@ export default function SearchListing({
                   <div className={`${gridOrList === "list" ? "" : "col-4"}`}>
                     <div
                       className={`listCard mb-3 ${
-                        gridOrList === "list" ? "list" : "d-block"
-                      } ${isMobile ? "d-block" : null}`}
+                        gridOrList === "list" ? "list relative" : "d-block relative"
+                      } ${isMobile ? "d-block relative" : null}`}
                     >
                       <img
                         className="cursor-pointer"
@@ -184,6 +184,9 @@ export default function SearchListing({
                           >
                             PKR {item.price}
                           </h5>
+                          {item.featured ? (
+                            <span className="featuredBand">Featured</span>
+                          ) : null}
                         </div>
                         <p className={gridOrList === "list" ? " ml-3" : null}>
                           <Icofont

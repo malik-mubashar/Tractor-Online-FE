@@ -82,7 +82,7 @@ export default function FeaturedProducts({ title, link, prodCategoryId }) {
           products.map((item, i) => {
             return (
               <div
-                className="featured-card bg-white border-radius cursor-pointer h-100"
+                className="featured-card bg-white border-radius cursor-pointer h-100 relative"
                 key={i}
               >
                 <Link to={`/ad-details/${item.id}`}>

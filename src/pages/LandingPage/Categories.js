@@ -46,10 +46,10 @@ export default function Categories({ brands, brandsForCategories }) {
                               <li key={i} className="col-sm-12 col-md-6 col-lg-2 mt-4">
                                 <span
                                   onClick={() => history.push(`/products/search?brand=${item2.id}`)}
-                                  title="Toyota for sale in Pakistan"
+                                 
                                 >
                                   <img
-                                    alt="Toyota"
+                                    alt="Brands"
                                     height="150px"
                                     width="150px"
                                     src={item2.active_image_path}

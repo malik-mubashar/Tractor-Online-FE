@@ -34,7 +34,7 @@ const SellTractor = () => {
                       type="radio"
                     />
                   </div>
-                  <div className="col-7">
+                  <div className="col-12 col-sm-6 col-md-4 col-lg-7">
                     <h3 className="">Post your Ad on {websiteName}</h3>
                     <ul className="list-unstyled fs14">
                       <li>

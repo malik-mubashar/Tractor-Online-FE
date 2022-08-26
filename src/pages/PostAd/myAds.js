@@ -120,6 +120,9 @@ const myAds = () => {
                                 <h5 className={"cursor-pointer"}>
                                   PKR {item.price}
                                 </h5>
+                                {item.featured ? (
+                    <span className="featuredBand">Featured</span>
+                  ) : null}
                               </div>
                               <p>
                                 <Icofont
