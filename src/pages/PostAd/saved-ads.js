@@ -60,7 +60,7 @@ export default function savedAds({ products }) {
             return (
               <div className="col-lg-3 col-12">
                 <div
-                  className={`listCard mb-3 ${"d-block"} ${
+                  className={`listCard mb-3 relative ${"d-block"} ${
                     isMobile ? "d-block" : null
                   }`}
                 >

@@ -165,6 +165,7 @@ export default function Footer() {
                     <LoginModel
                       show={modalShow}
                       onHide={() => setModalShow(false)}
+                      setModalShow={setModalShow}
                       redirect="/products/sell"
                     />
                   </>

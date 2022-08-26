@@ -40,6 +40,7 @@ const TractorSaleAd = () => {
                   <LoginModel
                     show={modalShow}
                     onHide={() => setModalShow(false)}
+                    setModalShow={setModalShow}
                     redirect="/product/sell"
                   />
                   <button

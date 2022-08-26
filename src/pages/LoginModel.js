@@ -81,6 +81,7 @@ const LoginModel = (props) => {
         if (props.redirect !== null) {
           history.push(props && props.redirect);
         }
+        props.setModalShow(false)
       }
 
       //error
@@ -209,7 +210,7 @@ const LoginModel = (props) => {
         </div>
       </Modal.Body>
       <Modal.Footer>
-        <Button>Close</Button>
+        <Button onClick={props.onHide}>Close</Button>
       </Modal.Footer>
     </Modal>
   );
