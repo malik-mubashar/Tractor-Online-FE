@@ -160,7 +160,7 @@ export default function Products() {
       console.error(e);
     }
 	};
-	console.log('productsState',productsState.images)
+	console.log('productsState',productsState)
 
   return (
     <>
@@ -390,7 +390,8 @@ export default function Products() {
 																			price:product.price,
 																			phone_no:product.phone_no,
 																			location: product.location,
-																			imagesPath:product.active_images_path
+																			imagesPath: product.active_images_path,
+																			images: []
                                     });
                                   }}
                                   className="text-success mr-2 icon wh-15 mt-minus-3"
