@@ -301,7 +301,7 @@ export default function AddAndEditProduct({
         }
       }
 
-      if (productsState.cover_photo === undefined) {
+      if (productsState.cover_photo === undefined || productsState.cover_photo === null) {
         if (productsState.images !== undefined) {
           formData.append("cover_photo", productsState.images[0]);
         }
@@ -338,7 +338,20 @@ export default function AddAndEditProduct({
             setProductsState({
               ...productsState,
               isAddProduct: false,
-              isEditProduct: false,
+							isEditProduct: false,
+							products: null,
+							status: "active",
+							description: "",
+							price: "",
+							location: "",
+							link: "",
+							city: "",
+							phone_no: "",
+							images: [],
+							imagesPath: [],
+							title: '',
+							cover_photo:null
+							
             });
             getProducts(1, "", 10);
           }
@@ -356,13 +369,26 @@ export default function AddAndEditProduct({
           const result = await productApis.updateProduct(
             productsState,
             formData
-          );
+					);
+					debugger;
           if (result.error === false) {
             toast.success("Product updated!");
             toast.dismiss(loadingToastId);
             setProductsState({
               ...productsState,
-              isEditProduct: false,
+							isEditProduct: false,
+							products: null,
+							status: "active",
+							description: "",
+							price: "",
+							location: "",
+							link: "",
+							city: "",
+							phone_no: "",
+							images: [],
+							imagesPath: [],
+							title: '',
+							cover_photo:null
             });
             getProducts(1, "", 10);
           }
@@ -737,7 +763,15 @@ export default function AddAndEditProduct({
                     setProductsState({
                       ...productsState,
                       isAddProduct: false,
-                      isEditProduct: false,
+											isEditProduct: false,
+											status: "active",
+											description: "",
+											price: "",
+											location: "",
+											link: "",
+											city: "",
+											phone_no: "",
+											images:[]
                     })
                   }
                 >
