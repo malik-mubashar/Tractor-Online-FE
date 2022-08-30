@@ -19,6 +19,8 @@ import { RootContext } from "../../context/RootContext";
 import LoginModel from "../LoginModel";
 import { Link, useHistory } from "react-router-dom";
 import toast from "react-hot-toast";
+import RightArrow from '../../assets/img/right-arrow.png';
+import LeftArrow from '../../assets/img/left-arrow.png';
 
 export default function AddDetails() {
   const { id } = useParams();
@@ -410,7 +412,7 @@ export default function AddDetails() {
                 <div>
                   <img
                     alt="Post an Ad Left"
-                    src="https://wsa4.pakwheels.com/assets/sell-ad-point-left-fcc7bca4d40628d7945426ecf5a2ef00.png"
+                    src={LeftArrow}
                   />
                   <LoginModel
                     show={modalShowLogin}
@@ -428,14 +430,13 @@ export default function AddDetails() {
 
                   <img
                     alt="Post an Ad Right"
-                    src="https://wsa4.pakwheels.com/assets/sell-ad-point-right-630620add9bbdd27360acdfcf98d0608.png"
+                    src={RightArrow}
                   />
                 </div>
               </div>
             </div>
           </div>
           {/* Report About Ad Modal*/}
-          {localStorage.currentUser}
           <Modal size="lg" show={showReportModal} onHide={handleClose}>
             <Modal.Header closeButton>
               <Modal.Title>Tell us what is wrong with this ad.</Modal.Title>

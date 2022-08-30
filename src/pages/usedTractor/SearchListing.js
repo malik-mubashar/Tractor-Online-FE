@@ -13,6 +13,8 @@ import LoginModel from "../LoginModel";
 import { Link } from "react-router-dom";
 import { productApis } from "../../API/ProductApis";
 import toast from "react-hot-toast";
+import RightArrow from '../../assets/img/right-arrow.png';
+import LeftArrow from '../../assets/img/left-arrow.png';
 
 export default function SearchListing({
   products,
@@ -478,7 +480,7 @@ export default function SearchListing({
           <div>
             <img
               alt="Post an Ad Left"
-              src="https://wsa4.pakwheels.com/assets/sell-ad-point-left-fcc7bca4d40628d7945426ecf5a2ef00.png"
+              src={LeftArrow}
             />
             {localStorage.currentUser === undefined ? (
               <>
@@ -508,7 +510,7 @@ export default function SearchListing({
 
             <img
               alt="Post an Ad Right"
-              src="https://wsa4.pakwheels.com/assets/sell-ad-point-right-630620add9bbdd27360acdfcf98d0608.png"
+              src={RightArrow}
             />
           </div>
         </div>
