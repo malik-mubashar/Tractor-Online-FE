@@ -333,6 +333,44 @@ class Products {
         };
       });
   };
+
+  reportedAds = async (product_id, reason) => {
+    
+    return axios({
+      method: "post",
+      url: `${process.env.REACT_APP_API_LOCAL_PATH}reported_ads`,
+      headers: {
+        "Content-Type": "multipart/form-data",
+        "Access-Control-Allow-Origin": "*",
+        "Access-Control-Allow-Headers": "*",
+        "access-token": `${user.accessToken}`,
+        client: `${user.client}`,
+        uid: `${user.uid}`,
+        mode: "no-cors",
+      },
+      
+
+      data: {
+        product_id: product_id,
+        reason: reason
+      },
+      
+    })
+      .then((result) => {
+        return {
+          error: false,
+          data: result.data,
+        };
+      })
+      .catch((error) => {
+        return {
+          error: true,
+          data: error.response.data,
+        };
+      });
+  };
+
+
   getProductsPdf = async (searchString) => {
     return axios({
       method: "get",
