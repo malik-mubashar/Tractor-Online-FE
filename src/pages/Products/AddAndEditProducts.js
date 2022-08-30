@@ -15,7 +15,6 @@ export default function AddAndEditProduct({
   setProductsState,
   getProducts,
 }) {
-	var mutex = true;
   const [brands, setBrands] = useState();
   const [picturesLoader, setPicturesLoader] = useState(false);
   const [productMappings, setProductMappings] = useState([]);
@@ -135,7 +134,6 @@ export default function AddAndEditProduct({
 	function uploadFiles(e,callFromFunction=false) {
 		if (callFromFunction) {
 			//this block will run only one time
-			mutex = false;
 			const input = document.getElementById("multi-img-field");
 			input.files = e.target.files;
 		}
@@ -370,7 +368,6 @@ export default function AddAndEditProduct({
             productsState,
             formData
 					);
-					debugger;
           if (result.error === false) {
             toast.success("Product updated!");
             toast.dismiss(loadingToastId);

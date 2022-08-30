@@ -12,12 +12,15 @@ import { RootContext } from "../../context/RootContext";
 import toast from "react-hot-toast";
 import { productApis } from "../../API/ProductApis";
 import { brandApis } from "../../API/BrandsApis";
-import { useHistory } from "react-router-dom";
+import { useHistory, useParams } from "react-router-dom";
 
 const postad = () => {
+	
+	const { id } = useParams();
+
   const myRefname = useRef(null);
 
-  const { setShowLoader } = useContext(RootContext);
+  const { setShowLoader} = useContext(RootContext);
   const [extraFieldsArr, setExtraFieldsArr] = useState([]);
 	const history = useHistory();
   const [cities, setCities] = useState([]);
@@ -28,8 +31,9 @@ const postad = () => {
   const [file, setFile] = useState([]);
   const [showModelError, setShowModelError] = useState(false);
   const [isImgSelected, setIsImgSelected] = useState(false);
-  const [postAddState, setPostAddState] = useState({
-    isAddProduct: true,
+	const [postAddState, setPostAddState] = useState({
+		isEditAd:false,
+    isCreateAd: true,
     status: "active",
     description: "",
     price: "",
@@ -52,7 +56,8 @@ const postad = () => {
     { name: "price", required: false },
     { name: "brand_id", required: true },
     { name: "phone_no", required: true },
-  ];
+	];
+
 
   const [fieldsWithError, setFieldsWithError] = useState({
     description: false,
@@ -63,7 +68,35 @@ const postad = () => {
     title: false,
     phone_no: false,
   });
-
+	const handleGetProductDetails = async (id) => {
+		setShowLoader(true)
+    const result = await productApis.getProductDetails(id);
+		if (result.error === false) {
+			setPostAddState({
+				...postAddState,
+				...result.data.data,
+				productId:result.data.data.id
+			})
+			setShowLoader(false);
+			//because setstate is delaying
+			return {
+				...postAddState,
+				...result.data.data,
+				productId:result.data.data.id
+			}
+    }
+	};
+	useEffect(() => {
+		//here 
+		console.log(id)
+		if (id) {
+			getAdData()
+		}
+	}, [id])
+	const getAdData = async() => {
+		const result =await handleGetProductDetails(id)
+		convertPicsUrlToFileList(result)
+	}
   useEffect(() => {
     getBrands(1, "", 100000000);
 
@@ -293,13 +326,13 @@ const postad = () => {
       formData.append("brand_id", postAddState.brand_id);
       formData.append("user_id", user.id);
       formData.append("city", postAddState.city);
-      if (postAddState.isAddProduct) {
+      if (postAddState.isCreateAd) {
         formData.append(
           "product_category_id",
           postAddState.product_category_id
         );
       }
-      if (postAddState.isAddProduct) {
+      if (id===undefined) {
         try {
           const result = await productApis.addProduct(postAddState, formData);
           if (result.error == false) {
@@ -316,25 +349,78 @@ const postad = () => {
           toast.error("Error !");
           console.error(error);
         }
-      }
+			} else {
+				try {
+          const result = await productApis.updateProduct(
+            postAddState,
+            formData
+					);
+          if (result.error === false) {
+            toast.success("Ad updated!");
+						history.push('/profile/my-ads')
+         
+          }
+        } catch (error) {
+          toast.error("error");
+          console.error(error);
+        }
+			}
     } else {
       toast.error("Validation Failed..!");
       toast("please enter the values in red fields");
     }
-  };
-	function uploadFiles(e) {
+	};
+	const convertPicsUrlToFileList = async (tempState) => {
+		const dataTransfer = new DataTransfer();
+		for (var i = 0; i < tempState.active_images_path.length; i++) {
+			await fetch(tempState.active_images_path[i])
+				.then((res) => res.blob())
+				// eslint-disable-next-line no-loop-func
+				.then((myBlob) => {
+					const myFile = new File([myBlob], `image${i}.jpeg`, {
+						type: myBlob.type,
+					});
+					dataTransfer.items.add(myFile);
+				});
+		}
+		uploadFiles({
+			target: {
+			files:dataTransfer.files
+		}},true,tempState)
+	}
+	function uploadFiles(e, callFromFunction = false, tempPostAdState = null) {
+		// i used tempPostAdState because setState was not updating the value imidatly
+		if (callFromFunction) {
+			//this block will run only one time
+			const input = document.getElementById("multi-img-field");
+			input.files = e.target.files;
+		}
     let ImagesArray = Object.entries(e.target.files).map((e) =>
       URL.createObjectURL(e[1])
     );
-    setFile([...file, ...ImagesArray]);
-    setPostAddState({
-      ...postAddState,
-      images: [...postAddState.images, ...e.target.files],
-    });
-    if (ImagesArray.length > 0) {
-      setIsImgSelected(true);
-    }
-  }
+		setFile([...file, ...ImagesArray]);
+		let temp = [...postAddState.images, ...e.target.files];
+		if (callFromFunction) {
+			setPostAddState({
+			//this block will run only one time
+				...tempPostAdState,
+				images: temp,
+			});
+		} else {
+			setPostAddState({
+				...postAddState,
+				images: temp,
+			});
+		}
+		
+		const dataTransfer = new DataTransfer();
+		const input = document.getElementById("multi-img-field");
+		for (var i = 0; i < temp.length; i++) { 
+			dataTransfer.items.add(temp[i]);
+		}
+		input.files = dataTransfer.files;
+
+	}
   function selectCoverPhoto(e, item, index) {
     const input = document.getElementById("multi-img-field");
     const fileListArr = Array.from(input.files);
@@ -370,6 +456,9 @@ const postad = () => {
       images: templist,
     });
 	}
+	console.log('id  in sell tractor',id)
+	console.log('id  in sell tractor',postAddState)
+
   return (
     <>
       <div className="card text-center my-4 py-4">
@@ -757,7 +846,7 @@ const postad = () => {
                         "product-cat-select-btns"
                       );
                     }}
-                    className="px-2 d-flex align-items-center product-cat-select-btns my-2"
+                    className={`px-2 d-flex align-items-center ${postAddState.product_category_id==item.id?'product-cat-select-btns-active':'product-cat-select-btns'} my-2`}
                   >
                     <img
                       src={item.active_image_path}

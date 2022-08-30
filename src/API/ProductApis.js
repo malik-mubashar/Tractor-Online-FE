@@ -36,7 +36,7 @@ class Products {
         };
       });
   };
-  updateProduct = async (productsState, formData) => {
+updateProduct = async (productsState, formData) => {
     return axios({
       method: "put",
       url: `${process.env.REACT_APP_API_LOCAL_PATH}products/${productsState.productId}`,
@@ -332,9 +332,9 @@ class Products {
           data: error.response.data,
         };
       });
-  };
+	};
 
-  reportedAds = async (product_id, reason) => {
+	reportedAds = async (product_id, reason) => {
     
     return axios({
       method: "post",
@@ -370,7 +370,7 @@ class Products {
       });
   };
 
-
+	
   getProductsPdf = async (searchString) => {
     return axios({
       method: "get",
