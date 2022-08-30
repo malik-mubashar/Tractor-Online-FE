@@ -81,7 +81,7 @@ class ProdCategories {
 		formData.append("link", prodCategoriesState.link);
 		formData.append("status", prodCategoriesState.status);
 		formData.append("description", prodCategoriesState.description);
-		formData.append("image", prodCategoriesState.image);
+		formData.append("active_image", prodCategoriesState.image);
 		formData.append("brand_id", prodCategoriesState.brand_id);
     return axios({
       method: "post",

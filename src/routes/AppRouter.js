@@ -175,8 +175,13 @@ const AppRouter = () => {
             <Layout>
               <SellTractor />
             </Layout>
-          </Route>
+					</Route>
           <UnProtectedRoute exact path="/product/sell/post-ad">
+            <Layout>
+              <PostAd />
+            </Layout>
+					</UnProtectedRoute>
+					<UnProtectedRoute exact path="/product/sell/post-ad/:id">
             <Layout>
               <PostAd />
             </Layout>

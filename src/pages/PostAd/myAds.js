@@ -5,6 +5,8 @@ import { RootContext } from "../../context/RootContext";
 import Icofont from "react-icofont";
 import { useHistory } from "react-router-dom";
 import toast from "react-hot-toast";
+import * as Icon from "react-feather";
+
 
 const myAds = () => {
   const [activeProducts, setActiveProducts] = useState([]);
@@ -119,7 +121,7 @@ const myAds = () => {
                                 </h5>
                                 <h5 className={"cursor-pointer"}>
                                   PKR {item.price}
-                                </h5>
+																</h5>
                                 {item.featured ? (
                     <span className="featuredBand">Featured</span>
                   ) : null}
@@ -177,7 +179,7 @@ const myAds = () => {
                                     item.updated_at.split(",")[0]}{" "}
                                   ago
                                 </p>
-                                <div className="text-center">
+                                <div className="text-center d-flex">
                                   <button
                                     className="mr-3 btn btn-outline-danger"
                                     onClick={() => {
@@ -190,7 +192,16 @@ const myAds = () => {
                                     }}
                                   >
                                     Deactivate Ad
-                                  </button>
+																	</button>
+																	<button
+                                    className="mr-3 btn btn-outline-warning"
+                                    onClick={() => {
+																			history.push(`/product/sell/post-ad/${item.id}`)
+                                    }}
+																	>
+                                   		<Icon.Edit2 />
+																	</button>
+																	
                                 </div>
                               </div>
                             </div>
