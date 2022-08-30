@@ -44,7 +44,7 @@ class ProdCategories {
 		formData.append("status", prodCategoriesState.status);
 		formData.append("description", prodCategoriesState.description);
 		if (prodCategoriesState.image) {
-			formData.append("image", prodCategoriesState.image);
+			formData.append("active_image", prodCategoriesState.image);
 		}
 		formData.append("brand_id", prodCategoriesState.brand_id);
     return axios({

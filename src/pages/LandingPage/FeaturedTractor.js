@@ -70,7 +70,7 @@ export default function FeaturedTractor({ title, link }) {
               />
               <h4 className="mb-0 pl-2 border-radius productTitleTruncate" title={item.title}>{item.title}</h4>
               <p className="mb-0 pl-2 text-success border-radius">
-                {item.price}
+                PKR {item.price}
               </p>
               <p className="pl-2 border-radius">{item.location}</p>
               <span className="featuredBand">Featured</span>

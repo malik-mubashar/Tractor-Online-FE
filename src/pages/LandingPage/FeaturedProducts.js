@@ -98,7 +98,7 @@ export default function FeaturedProducts({ title, link, prodCategoryId }) {
                     {item.title}
                   </h4>
                   <p className="mb-0 pl-2 text-success border-radius">
-                    {item.price}
+                    PKR {item.price}
                   </p>
                   <p className="pl-2 border-radius">{item.city}</p>
                   {item.featured ? (
