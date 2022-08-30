@@ -264,7 +264,7 @@ export default function Languages() {
                         <FormControl
                           type="text"
                           onChange={(event) => handleSearch(event.target.value)}
-                          placeholder="Search..."
+                          placeholder="Search in Table"
                           style={{ marginTop: "-10px" }}
                         />
                       </Form>

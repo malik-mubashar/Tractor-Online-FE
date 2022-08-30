@@ -17,11 +17,12 @@ import Buyers from "../../assets/img/buyers.png";
 import FeaturedProducts from "../LandingPage/FeaturedProducts";
 import { RootContext } from "../../context/RootContext";
 import LoginModel from "../LoginModel";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
+import toast from "react-hot-toast";
 
 export default function AddDetails() {
   const { id } = useParams();
-
+  const history = useHistory();
   const PhotoItem = ({ image, thumb, group }) => (
     <div style={{ maxWidth: "250px", width: "200px", padding: "5px" }}>
       <LightgalleryItem group={group} src={image} thumb={thumb}>
@@ -44,6 +45,10 @@ export default function AddDetails() {
   const [product, setProduct] = useState([]);
   const [customReport, setCustomReport] = useState(false);
   const [modalShow, setModalShow] = React.useState(false);
+  const [modalShowLogin, setModalShowLogin] = React.useState(false);
+  const [reportAd, setReportAd] = useState("");
+  const [redirect, setRedirect] = useState('/product/sell')
+  const [reasonText, setReasonText] = useState('')
   const radioValuesArr = [
     {
       heading: "Duplicate",
@@ -87,12 +92,33 @@ export default function AddDetails() {
       setShowLoader(false);
     }
   };
+  const reported_ads = async () => {
+    const loadingToastId = toast.loading("Loading..!");
+    try {
+      const result = await productApis.reportedAds(product.id, reasonText);
+      if (result.error === false) {
+        toast.success(result.data.notice);
+        toast.dismiss(loadingToastId);
+        setReportAd(result.data && result.data.data);
+        
+      } else {
+        toast.dismiss(loadingToastId);
+        console.error(result.data);
+      }
+    } catch (error) {
+      toast.dismiss(loadingToastId);
+      console.error(error);
+    }
+    setShowReportModal(false)
+  };
 
   function handleReport(e) {
     if (e.target.value === "Other") {
       setCustomReport(true);
     } else {
+
       setCustomReport(false);
+      setReasonText(e.currentTarget.value)
     }
   }
 
@@ -100,6 +126,7 @@ export default function AddDetails() {
     setShowModal(false);
     setShowReportModal(false);
   };
+ 
 
   function phoneAgree() {
     setIsPhoneAgree(true);
@@ -109,6 +136,21 @@ export default function AddDetails() {
   function phoneAgreeModalHandle() {
     if (!isPhoneAgree) {
       setShowModal(true);
+    }
+  }
+
+  function HandleLogin (redirectUrl, sell) {
+    if(localStorage.currentUser === undefined){
+      setModalShowLogin(true)
+      setRedirect(redirectUrl)
+    }
+    else{
+      if (sell){
+        history.push('/product/sell')
+      }
+      else {
+        setShowReportModal(true)
+      }
     }
   }
 
@@ -344,7 +386,7 @@ export default function AddDetails() {
               </div>
               <button
                 className=" btn btn-outline-danger btn-block btn-large mt-2 d-flex"
-                onClick={() => setShowReportModal(true)}
+                onClick={() => HandleLogin(null, false)}
               >
                 <Icofont
                   icon="exclamation-circle"
@@ -370,31 +412,19 @@ export default function AddDetails() {
                     alt="Post an Ad Left"
                     src="https://wsa4.pakwheels.com/assets/sell-ad-point-left-fcc7bca4d40628d7945426ecf5a2ef00.png"
                   />
-                  {localStorage.currentUser === undefined ? (
-                    <>
-                      <LoginModel
-                        show={modalShow}
-                        onHide={() => setModalShow(false)}
-                        setModalShow={setModalShow}
-                        redirect="/product/sell"
-                      />
-                      <button
-                        style={{ color: "white" }}
-                        onClick={() => setModalShow(true)}
-                        className="btn btn-success sign-in-comp"
-                      >
-                        Sell Your Tractor
-                      </button>
-                    </>
-                  ) : (
-                    <Link
-                      style={{ color: "white" }}
-                      to="/product/sell"
-                      className="btn btn-success sign-in-comp"
-                    >
-                      Sell Your Tractor
-                    </Link>
-                  )}
+                  <LoginModel
+                    show={modalShowLogin}
+                    onHide={() => setModalShowLogin(false)}
+                    setModalShow={setModalShowLogin}
+                    redirect={redirect}
+                  />
+                  <button
+                    style={{ color: "white" }}
+                    onClick={() => HandleLogin('/product/sell', true)}
+                    className="btn btn-success sign-in-comp"
+                  >
+                    Sell Your Tractor
+                  </button>
 
                   <img
                     alt="Post an Ad Right"
@@ -405,6 +435,7 @@ export default function AddDetails() {
             </div>
           </div>
           {/* Report About Ad Modal*/}
+          {localStorage.currentUser}
           <Modal size="lg" show={showReportModal} onHide={handleClose}>
             <Modal.Header closeButton>
               <Modal.Title>Tell us what is wrong with this ad.</Modal.Title>
@@ -440,13 +471,16 @@ export default function AddDetails() {
                       as="textarea"
                       rows={3}
                       placeholder="Reason of Report"
+                      onChange={(e) => setReasonText(e.currentTarget.value)}
                     />
                   </>
                 ) : null}
               </Form>
             </Modal.Body>
             <Modal.Footer>
-              <Button variant="danger" onClick={handleClose}>
+              <Button variant="danger"
+                onClick={reported_ads}
+              >
                 Report
               </Button>
             </Modal.Footer>
