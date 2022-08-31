@@ -1,14 +1,25 @@
-import React, { useState, useContext } from "react";
-import { useHistory } from "react-router-dom";
+import React, { useState, useContext, useEffect } from "react";
+import { Link, useHistory } from "react-router-dom";
 import Logo from "../../assets/img/tractoronline.png";
 import { Form, Button, Image } from "react-bootstrap";
 import * as Icon from "react-feather";
 import { RootContext } from "../../context/RootContext";
+import { prodApi } from "../../API/ProdCategoriesApis";
 
 const MobileTopbar = () => {
   const history = useHistory();
+  const [productCategories, setProductCategories] = useState();
   const [tractorModel, setTractorModel] = useState("");
   const { setLandingPageSearchOptions } = useContext(RootContext);
+
+  useEffect(() => {
+    handleGetAllCategories();
+  }, []);
+
+  const handleGetAllCategories = async () => {
+    const result = await prodApi.getAllProductCategories();
+    setProductCategories(result.data && result.data.data);
+  };
 
   return (
     <>
@@ -21,36 +32,26 @@ const MobileTopbar = () => {
           alt="Profile Image"
           className="d-flex justify-content-center m-auto"
         />
-        <div className="d-flex mt-2 mb-2 justify-content-between text-align-center align-content-center p-2">
-          <div className="col-4 p-0 mobile-tabs">
-            <span
-              onClick={() => history.push("/products/search?category=22")}
-              className="btn btn-info rounded p-2 w-100 "
-            >
-              Used Tractor
-            </span>
+        <div className="d-flex mt-2 mb-2">
+          {productCategories &&
+            productCategories.map((item, i) => {
+              return (
+                <>
+                  {item.product_category_heads.length > 0 ? (
+                      <div className="col-6 p-0 mobile-tabs">
+                        <Link
+                          to={item.link}
+                          className="btn btn-info rounded p-2 w-100 "
+                        >
+                          {item.title}
+                        </Link>
+                      </div>
+                  ) : null}
+                </>
+              );
+            })}
           </div>
-          <div className="col-4 p-0 mobile-tabs">
-            <span
-              onClick={() => history.push("/products/search?category=23")}
-              className="btn btn-info rounded p-2 w-100"
-            >
-              New Tractor
-            </span>
-          </div>
-          <div className="col-4 p-0 mobile-tabs">
-            <span
-              onClick={() => history.push("/products?category=26")}
-              className="btn btn-info rounded p-2 w-100"
-            >
-              Auto Parts
-            </span>
-          </div>
-        </div>
-
-        <div
-          className="nav-search-form d-sm-block relative"
-        >
+        <div className="nav-search-form d-sm-block relative">
           <Form.Control
             type="text"
             placeholder="Search..."
@@ -65,9 +66,7 @@ const MobileTopbar = () => {
                 title: tractorModel || "nil",
               });
               // history.push(`/products/search?category=${category}`);
-              history.push(
-                `/products/search?title=${tractorModel || "nil"}`
-              );
+              history.push(`/products/search?title=${tractorModel || "nil"}`);
             }}
           >
             <Icon.Search className="icon" />

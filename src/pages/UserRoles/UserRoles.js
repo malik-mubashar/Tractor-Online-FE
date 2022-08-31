@@ -213,7 +213,7 @@ export default function UserRoles() {
                                 <td>{'admin'}</td>
                                 <td className="text-center">
                                   <Icon.Edit2
-                                    style={{ cursor: "pointer" }}
+               
                                     onClick={() => {
                                       setUserRolesState({
                                         ...userRolesState,
@@ -222,15 +222,15 @@ export default function UserRoles() {
                                         userRoleId: userRole.id,
                                       });
                                     }}
-                                    className="text-success mr-2 icon wh-15 mt-minus-3"
+                                    className="text-success mr-2 icon wh-15 mt-minus-3 cursor-pointer"
                                   />
                                   <Link className="text-danger mr-2">
                                     <Icofont icon="ui-delete"
-                                    
+                                
                                       onClick={() => 
                                         { if (window.confirm('Are you sure you wish to delete this item?'))
                                         deleteUserRole(userRole.id)}}
-                                      className="icon wh-15 mt-minus-3"
+                                      className="icon wh-15 mt-minus-3 cursor-pointer"
                                     />
                                   </Link>
                                 </td>

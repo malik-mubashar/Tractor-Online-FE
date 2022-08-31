@@ -32,13 +32,13 @@ class SideMenuLight extends React.Component {
                     <span className="title">
                       User
                       
-                      <Icofont icon="rounded-right" className="icon fr" />
+                      {/* <Icofont icon="rounded-right" className="icon fr" /> */}
                     </span>
                   </div>
                 }
                 id="basic-nav-dropdown"
               >
-                <NavLink to="/signup/" className="dropdown-item">
+                {/* <NavLink to="/signup/" className="dropdown-item">
                   <Icon.UserPlus className="icon" />
                   Sign Up
                 </NavLink>
@@ -49,7 +49,7 @@ class SideMenuLight extends React.Component {
                 <NavLink to="/forgot-password/" className="dropdown-item">
                   <Icon.Unlock className="icon" />
                   Forgot Password
-                </NavLink>
+                </NavLink> */}
               </NavDropdown>
 
               {/* <NavDropdown
@@ -191,10 +191,10 @@ class SideMenuLight extends React.Component {
                 <Icofont icon="building-alt" className="icon" />
                 <span className="title">City</span>
               </NavLink>
-              <NavLink to="/dashboard/budgets/" className="nav-link">
+              {/* <NavLink to="/dashboard/budgets/" className="nav-link">
                 <Icofont icon="bars" className="icon" />
                 <span className="title">Budgets</span>
-              </NavLink>
+              </NavLink> */}
               <NavLink to="/dashboard/roles/" className="nav-link">
                 <Icofont icon="users-alt-5" className="icon" />
                 <span className="title">Roles</span>

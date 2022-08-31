@@ -373,7 +373,7 @@ export default function Products() {
                               </td>
                               <td className="text-center">
                                 <Icon.Edit2
-                                  style={{ cursor: "pointer" }}
+                                 
                                   onClick={() => {
                                     setProductsState({
                                       ...productsState,
@@ -394,13 +394,14 @@ export default function Products() {
 																			images: []
                                     });
                                   }}
-                                  className="text-success mr-2 icon wh-15 mt-minus-3"
+                                  className="text-success mr-2 icon wh-15 mt-minus-3 cursor-pointer"
                                 />
                                 <div className="text-danger mr-2">
                                   <Icofont icon="ui-delete"
+                               
                                   
                                     onClick={() =>{ if (window.confirm('Are you sure you wish to delete this item?')) deleteProduct(product.id)}}
-                                    className="icon wh-15 mt-minus-3"
+                                    className="icon wh-15 mt-minus-3 cursor-pointer"
                                   />
                                 </div>
                               </td>
