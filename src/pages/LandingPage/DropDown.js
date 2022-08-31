@@ -22,7 +22,7 @@ export default function DropDown({
   return (
     <div>
       <div className={`${!dropDownIcon ? " dropdown-button p-1" : "p-1"}`}>
-        <span onClick={()=> history.push(categoryLink)}>{title}</span>
+        <span onClick={()=> history.push(categoryLink)} className="dropdown-link">{title}</span>
         {/* { productHead.length > 0? 
             (
               <>

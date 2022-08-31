@@ -46,7 +46,7 @@ const SideMenue = () => {
                 className="d-flex w-100 dropdown-button-category "
                 key={i}
               >
-								<span className="user-pic" onClick={()=> history.push(item.link)}>
+								<span className="user-pic dropdown-link" onClick={()=> history.push(item.link)}>
 									{
 										item.active_image_path !== undefined ?
 										<Image

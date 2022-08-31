@@ -28,7 +28,7 @@ export default function DropDownTopbar({
         className={`${!dropDownIcon ? " dropdown-button p-2" : "p-2"}`}
         title={title}
       >
-        <Link to={link}><span>{title}</span></Link>
+        <Link to={link}><span className="dropdown-link">{title}</span></Link>
         {productHead.length > 0 ? (
           <>
             <Icofont
