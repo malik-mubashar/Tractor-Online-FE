@@ -461,11 +461,11 @@ const postad = () => {
 
   return (
     <>
-      <div className="card text-center my-4 py-4">
+      <div className="card text-center my-4 p-4">
         <h2 className="post-ad-heading">
           2 Simple Steps to Sell Your Product!
         </h2>
-        <h5>It takes under a minute and is free.</h5>
+        <h5 className="px-3">It takes under a minute and is free.</h5>
         <div>
           <img
             className="post-add-images-logo mx-2"
@@ -485,14 +485,14 @@ const postad = () => {
           <b>Upload Photos</b>
         </div>
       </div>
-      <div className="container card my-4 p-5">
+      <div className="container card my-4 p-lg-5 p-3">
         <h3 className="post-ad-heading">Product Information</h3>
         <b>(All fields marked with * are mandatory)</b>
         <div className="row my-2">
-          <div className="col-3 text-right">
+          <div className="col-lg-3 col-12 text-lg-right">
             <Form.Label>Title</Form.Label>
           </div>
-          <div className="addEditProd col-4">
+          <div className="addEditProd col-lg-4 col-12">
             <Form.Group controlId="formBasicName">
               <Form.Control
                 className={
@@ -506,22 +506,22 @@ const postad = () => {
               />
             </Form.Group>
           </div>
-          <div className="col-5">
+          <div className="col-5 d-sm-none d-lg-block d-none">
             <Icofont
               icon="light-bulb text-info"
               className="icofont-2x col-3"
               style={{ fontSize: "3rem" }}
             />
-            <span className="col-10 mt-3">
+            <span className="col-9 mt-3">
               We don't allow duplicates of same ad.
             </span>
           </div>
         </div>
         <div className="row my-2">
-          <div className="col-3 text-right">
+          <div className="col-lg-3 col-12 text-lg-right">
             <Form.Label>Product Brand</Form.Label>
           </div>
-          <div className="addEditProd col-4">
+          <div className="addEditProd col-lg-4 col-12">
             <Form.Control
               className={
                 fieldsWithError.brand_id === true ? "border-danger" : ""
@@ -553,10 +553,10 @@ const postad = () => {
           </div>
         </div>
         <div className="row my-2">
-          <div className="col-3 text-right">
+          <div className="col-lg-3 col-12 text-lg-right">
             <Form.Label>City</Form.Label>
           </div>
-          <div className="addEditProd col-4">
+          <div className="addEditProd col-lg-4 col-12">
             <Select
               className="ui-autocomplete-input form-control searchAble"
               options={cities}
@@ -575,10 +575,10 @@ const postad = () => {
           </div>
         </div>
         <div className="row my-2">
-          <div className="col-3 text-right">
+          <div className="col-lg-3 col-12 text-lg-right">
             <Form.Label>Price</Form.Label>
           </div>
-          <div className="addEditProd col-4">
+          <div className="addEditProd col-lg-4 col-12">
             <Form.Control
               className={fieldsWithError.price === true ? "border-danger" : ""}
               defaultValue={postAddState.price}
@@ -588,7 +588,7 @@ const postad = () => {
               onChange={(e) => handleChange(e)}
             />
           </div>
-          <div className="col-5">
+          <div className="col-5 d-lg-block d-none">
             <Icofont
               icon="light-bulb text-info"
               className="icofont-2x col-3"
@@ -601,10 +601,10 @@ const postad = () => {
           </div>
         </div>
         <div className="row my-2">
-          <div className="col-3 text-right">
+          <div className="col-lg-3 col-12 text-lg-right">
             <Form.Label>Phone Number</Form.Label>
           </div>
-          <div className="addEditProd col-4">
+          <div className="addEditProd col-lg-4 col-12">
             <Form.Control
               className={
                 fieldsWithError.phone_no === true ? "border-danger" : ""
@@ -618,10 +618,10 @@ const postad = () => {
           </div>
         </div>
         <div className="row my-2">
-          <div className="col-3 text-right">
+          <div className="col-lg-3 col-12 text-lg-right">
             <Form.Label>Address</Form.Label>
           </div>
-          <div className="addEditProd col-4">
+          <div className="addEditProd col-lg-4 col-12">
             <Form.Control
               className={
                 fieldsWithError.location === true ? "border-danger" : ""
@@ -639,10 +639,10 @@ const postad = () => {
             {extraFieldsArr.map((item, i) => {
               return (
                 <div className="row my-2" key={i}>
-                  <div className="col-3 text-right">
+                  <div className="col-lg-3 col-12 text-lg-right">
                     <Form.Label>{item && item.key}</Form.Label>
                   </div>
-                  <div className="addEditProd col-4">
+                  <div className="addEditProd col-lg-4 col-12">
                     <Form.Control
                       value={item && item.value}
                       onChange={(e) => handleExtraField(e, item.id)}
@@ -657,10 +657,10 @@ const postad = () => {
           </div>
         )}
         <div className="row my-2">
-          <div className="col-3 text-right">
+          <div className="col-lg-3 col-12 text-lg-right">
             <Form.Label>Description</Form.Label>
           </div>
-          <div className="addEditProd col-8">
+          <div className="addEditProd col-lg-8 col-12">
             <Form.Control
               className={
                 fieldsWithError.description === true ? "border-danger" : ""
@@ -675,7 +675,7 @@ const postad = () => {
           </div>
         </div>
       </div>
-      <div className="container card my-4 p-5">
+      <div className="container card my-4 p-lg-5 p-3">
         <h3 className="post-ad-heading">Upload Photos</h3>
         <div className="my-2">
           <div className={`upload-image-container`}>
@@ -690,15 +690,15 @@ const postad = () => {
               multiple
             />
             <div>
-              <div className="d-flex text-center">
+              <div className="d-lg-flex justify-content-lg-center text-center">
                 <img
-                  className="post-add-images-logo mx-2 ml-auto mr-4"
+                  className="post-add-images-logo mx-2 mr-4"
                   src={UploadPhotoLogo}
                   height="70px"
                   width="70px"
                   alt="no"
                 />
-                <div className="mr-auto mt-2 text-center">
+                <div className="mt-2 text-center">
                   <button
                     className="btn btn-success mb-2"
                     onClick={() => {
@@ -789,7 +789,7 @@ const postad = () => {
           </div>
         </div>
       </div>
-      <div className="container text-right pr-0 mb-3">
+      <div className="container text-lg-right pr-0 mb-3">
         <Button
           onClick={() => {
             addProduct();
