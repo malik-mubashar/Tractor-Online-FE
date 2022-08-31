@@ -40,6 +40,7 @@ class ProdCategories {
 		let formData = new FormData();
 		formData.append("is_option", prodCategoriesState.is_option);
 		formData.append("title", prodCategoriesState.title);
+    formData.append("position", prodCategoriesState.position);
 		formData.append("link", prodCategoriesState.link);
 		formData.append("status", prodCategoriesState.status);
 		formData.append("description", prodCategoriesState.description);
@@ -47,6 +48,7 @@ class ProdCategories {
 			formData.append("image", prodCategoriesState.image);
 		}
 		formData.append("brand_id", prodCategoriesState.brand_id);
+   
     return axios({
       method: "put",
       url: `${process.env.REACT_APP_API_LOCAL_PATH}product_categories/${prodCategoriesState.prodCategoryId}`,
@@ -78,11 +80,13 @@ class ProdCategories {
 		let formData = new FormData();
 		formData.append("is_option", prodCategoriesState.is_option);
 		formData.append("title", prodCategoriesState.title);
+    formData.append("position", prodCategoriesState.position);
 		formData.append("link", prodCategoriesState.link);
 		formData.append("status", prodCategoriesState.status);
 		formData.append("description", prodCategoriesState.description);
 		formData.append("image", prodCategoriesState.image);
 		formData.append("brand_id", prodCategoriesState.brand_id);
+   
     return axios({
       method: "post",
       url: `${process.env.REACT_APP_API_LOCAL_PATH}product_categories`,
