@@ -269,6 +269,7 @@ export default function ProdCategories() {
                       <Table className="m-0" responsive>
                         <thead>
                           <tr>
+                            <th>#</th>
                             <th>Title</th>
                             <th>Link</th>
                             <th>Status</th>
@@ -283,6 +284,7 @@ export default function ProdCategories() {
                             prodCategoriesState.prodCategories.map(
                               (prod, idx) => (
                                 <tr key={idx}>
+                                  <td>{prod.position && prod.position}</td>
                                   <td>{prod.title && prod.title}</td>
                                   <td>{prod.link && prod.link}</td>
                                   <td>{prod.status && prod.status}</td>
@@ -303,7 +305,7 @@ export default function ProdCategories() {
                                   </td>
                                   <td className="text-center">
                                     <Icon.Edit2
-                                      style={{ cursor: "pointer" }}
+                                     
                                       onClick={() => {
                                         setProdCategoriesState({
                                           ...prodCategoriesState,
@@ -318,15 +320,16 @@ export default function ProdCategories() {
 																					brand_id: prod.brands.map((item)=>item.id)
                                         });
                                       }}
-                                      className="text-success mr-2 icon wh-15 mt-minus-3"
+                                      className="text-success mr-2 icon wh-15 mt-minus-3 cursor-pointer"
                                     />
                                     <Link className="text-danger mr-2">
                                       <Icofont icon="ui-delete"
+                                       
                                         onClick={() =>
                                           { if (window.confirm('Are you sure you wish to delete this item?'))
                                           deleteProdCategory(prod.id)
                                         }}
-                                        className="icon wh-15 mt-minus-3"
+                                        className="icon wh-15 mt-minus-3 cursor-pointer"
                                       />
                                     </Link>
                                   </td>

@@ -19,6 +19,7 @@ import toast from "react-hot-toast";
 import csvSvg from "../../assets/svg/csv2.svg";
 import pdfSvg from "../../assets/svg/pdf.svg";
 import { budgetApis } from "../../API/BudgetsApis";
+import Icofont from "react-icofont";
 // import { budgetApis } from "../../API/BudgetsApis";
 
 export default function Budgets() {
@@ -171,7 +172,7 @@ export default function Budgets() {
       <>
         <Navigation onClick={() => onSideMenu} />
         <div className="budgetPage">
-          <div className={`main-content d-flex flex-column`}>
+          {/* <div className={`main-content d-flex flex-column`}> */}
             {budgetsState.isViewBudget ? (
               <></>
             ) : budgetsState.isAddBudget === true ||
@@ -305,7 +306,7 @@ export default function Budgets() {
                                 </td>
                                 <td className="text-center">
                                   <Icon.Edit2
-                                    style={{ cursor: "pointer" }}
+                                    
                                     onClick={() => {
                                       setBudgetsState({
                                         ...budgetsState,
@@ -317,10 +318,11 @@ export default function Budgets() {
                                         budgetId: budget.id,
                                       });
                                     }}
-                                    className="text-success mr-2 icon wh-15 mt-minus-3"
+                                    className="text-success mr-2 icon wh-15 mt-minus-3 cursor-pointer"
                                   />
                                   <Link className="text-danger mr-2">
-                                    <Icon.X
+                                    <Icofont icon="ui-delete"
+                                     style={{ cursor: "pointer" }}
                                       onClick={() => deleteBudget(budget.id)}
                                       className="icon wh-15 mt-minus-3"
                                     />
@@ -448,7 +450,7 @@ export default function Budgets() {
                 </div>
               </>
             )}
-          </div>
+          {/* </div> */}
         </div>
       </>
     </>

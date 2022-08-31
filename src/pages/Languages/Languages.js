@@ -176,7 +176,7 @@ export default function Languages() {
       <>
         <Navigation onClick={() => onSideMenu} />
         <div className="cityPage">
-          <div className={`main-content d-flex flex-column`}>
+          {/* <div className={`main-content d-flex flex-column`}> */}
             {languagesState.isViewCity ? (
 								<></>
 						): languagesState.isAddLanguage === true ||
@@ -290,7 +290,7 @@ export default function Languages() {
                                 <td>{language.description && language.description}</td>
                                 <td className="text-center">
                                   <Icon.Edit2
-                                    style={{ cursor: "pointer" }}
+                                  
                                     onClick={() => {
                                       setLanguagesState({
                                         ...languagesState,
@@ -301,14 +301,14 @@ export default function Languages() {
                                         languageId: language.id,
                                       });
                                     }}
-                                    className="text-success mr-2 icon wh-15 mt-minus-3"
+                                    className="text-success mr-2 icon wh-15 mt-minus-3 cursor-pointer"
                                   />
                                   <Link className="text-danger mr-2">
                                     <Icofont icon="ui-delete"
                                       onClick={() => 
                                         { if (window.confirm('Are you sure you wish to delete this item?'))
                                         deleteLanguage(language.id)}}
-                                      className="icon wh-15 mt-minus-3"
+                                      className="icon wh-15 mt-minus-3 cursor-pointer"
                                     />
                                   </Link>
                                 </td>
@@ -433,7 +433,7 @@ export default function Languages() {
                 </div>
               </>
             )}
-          </div>
+          {/* </div> */}
         </div>
       </>
     </>
