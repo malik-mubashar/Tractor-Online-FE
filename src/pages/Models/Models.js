@@ -16,8 +16,8 @@ import {
 import AddAndEditModels from "./AddAndEditModels";
 // import { modelApis } from "../../API/ModelsApis";
 import toast from "react-hot-toast";
-import csvSvg from "../../assets/svg/csv2.svg";
-import pdfSvg from "../../assets/svg/pdf.svg";
+import csvSvg from "../../assets/svg/csv2.png";
+import pdfSvg from "../../assets/svg/pdf.png";
 import { modelApis } from "../../API/ModelsApis";
 import Icofont from "react-icofont";
 // import { modelApis } from "../../API/ModelsApis";
@@ -194,10 +194,10 @@ export default function Models() {
                       onClick={() => {
                         handleGetCsv();
                       }}
-                      className="clickableSvg"
+                      className="clickableSvg mr-2"
                       src={csvSvg}
-                      height="40px"
-                      width="60px"
+                      height="50px"
+                      width="50px"
                       alt="Profile Image"
                     />
                     <Image
@@ -206,8 +206,8 @@ export default function Models() {
                       }}
                       className="clickableSvg"
                       src={pdfSvg}
-                      height="40px"
-                      width="60px"
+                      height="50px"
+                      width="50px"
                       alt="Profile Image"
                     />
                   </div>
@@ -281,10 +281,7 @@ export default function Models() {
                                 <tr key={idx}>
 																	<td>
                                     <Image
-                                      onClick={() => {
-                                        handleGetCsv();
-                                      }}
-                                      className="clickableSvg"
+                              
                                       src={`${model.active_image_path}`}
                                       height="40px"
                                       width="60px"

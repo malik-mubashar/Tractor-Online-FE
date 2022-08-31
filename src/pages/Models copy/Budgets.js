@@ -16,8 +16,8 @@ import {
 import AddAndEditBudgets from "./AddAndEditBudgets";
 // import { budgetApis } from "../../API/BudgetsApis";
 import toast from "react-hot-toast";
-import csvSvg from "../../assets/svg/csv2.svg";
-import pdfSvg from "../../assets/svg/pdf.svg";
+import csvSvg from "../../assets/svg/csv2.png";
+import pdfSvg from "../../assets/svg/pdf.png";
 import { budgetApis } from "../../API/BudgetsApis";
 import Icofont from "react-icofont";
 // import { budgetApis } from "../../API/BudgetsApis";
@@ -203,10 +203,10 @@ export default function Budgets() {
                       onClick={() => {
                         handleGetCsv();
                       }}
-                      className="clickableSvg"
+                      className="clickableSvg mr-2"
                       src={csvSvg}
-                      height="40px"
-                      width="60px"
+                      height="50px"
+                      width="50px"
                       alt="Profile Image"
                     />
                     <Image
@@ -215,8 +215,8 @@ export default function Budgets() {
                       }}
                       className="clickableSvg"
                       src={pdfSvg}
-                      height="40px"
-                      width="60px"
+                      height="50px"
+                      width="50px"
                       alt="Profile Image"
                     />
                   </div>
@@ -287,10 +287,6 @@ export default function Budgets() {
                               <tr key={idx}>
                                 <td>
                                   <Image
-                                    onClick={() => {
-                                      handleGetCsv();
-                                    }}
-                                    className="clickableSvg"
                                     src={`${budget.active_image_path}`}
                                     height="40px"
                                     width="60px"

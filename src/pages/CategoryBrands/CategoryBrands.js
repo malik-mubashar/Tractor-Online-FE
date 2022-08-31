@@ -274,10 +274,6 @@ export default function CategoryBrands() {
 															<tr key={idx}>
 																<td>
                                     <Image
-                                      onClick={() => {
-                                        handleGetCsv();
-                                      }}
-                                      className="clickableSvg"
                                       src={`${category.active_image_path}`}
                                       height="40px"
                                       width="60px"
