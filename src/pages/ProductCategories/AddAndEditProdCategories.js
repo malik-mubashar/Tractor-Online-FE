@@ -43,6 +43,7 @@ export default function AddAndEditProdCategories({
   const fieldsMap = [
     { name: "title", required: true },
     { name: "status", required: true },
+    { name: "position", required: true },
     { name: "link", required: false },
 		{ name: "description", required: false },
 		{ name: "image", required: prodCategoriesState.isAddProdCategory?true:false },
@@ -54,6 +55,7 @@ export default function AddAndEditProdCategories({
     link: false,
     status: false,
     title: false,
+    position: false,
   });
   const doValidation = () => {
     var tempFieldsWithError = {};
@@ -158,6 +160,7 @@ export default function AddAndEditProdCategories({
       toast.error("Validation Failed");
     }
   };
+  console.log('prodCategoriesState',prodCategoriesState)
   const handleTypeSelect = () => {};
 
   const options = [
@@ -191,6 +194,17 @@ export default function AddAndEditProdCategories({
                     name="title"
                     type="text"
                     placeholder="Enter Product Category Name"
+                    onChange={(e) => handleChange(e)}
+                  />
+                   <Form.Label>Category Priority</Form.Label>
+                  <Form.Control
+                    className={
+                      fieldsWithError.position === true ? "border-danger" : ""
+                    }
+                    defaultValue={prodCategoriesState.position}
+                    name="position"
+                    type="number"
+                    placeholder="Enter Product Category Position"
                     onChange={(e) => handleChange(e)}
                   />
                 </Form.Group>
