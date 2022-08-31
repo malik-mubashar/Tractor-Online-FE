@@ -16,8 +16,8 @@ import {
 import AddAndEditProdCategoryHeads from "./AddAndEditProdCategoryHeads";
 import { prodCategoryHeadsApi } from "../../API/ProdCategoryHeadsApis";
 import toast from "react-hot-toast";
-import csvSvg from "../../assets/svg/csv2.svg";
-import pdfSvg from "../../assets/svg/pdf.svg";
+import csvSvg from "../../assets/svg/csv2.png";
+import pdfSvg from "../../assets/svg/pdf.png";
 import Icofont from "react-icofont";
 
 export default function ProdCategoryHeads() {
@@ -208,10 +208,10 @@ export default function ProdCategoryHeads() {
                       onClick={() => {
                         handleGetCsv();
                       }}
-                      className="clickableSvg"
+                      className="clickableSvg mr-2"
                       src={csvSvg}
-                      height="40px"
-                      width="60px"
+                      height="50px"
+                      width="50px"
                       alt="Profile Image"
                     />
                     <Image
@@ -220,8 +220,8 @@ export default function ProdCategoryHeads() {
                       }}
                       className="clickableSvg"
                       src={pdfSvg}
-                      height="40px"
-                      width="60px"
+                      height="50px"
+                      width="50px"
                       alt="Profile Image"
                     />
                   </div>

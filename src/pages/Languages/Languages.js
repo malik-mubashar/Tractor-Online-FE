@@ -17,8 +17,8 @@ import AddAndEditCity from "./AddAndEditLanguage";
 import toast from "react-hot-toast";
 import AddAndEditLanguage from "./AddAndEditLanguage";
 import { languageApis } from "../../API/LanguagesApis ";
-import csvSvg from "../../assets/svg/csv2.svg";
-import pdfSvg from "../../assets/svg/pdf.svg";
+import csvSvg from "../../assets/svg/csv2.png";
+import pdfSvg from "../../assets/svg/pdf.png";
 import Icofont from "react-icofont";
 
 
@@ -206,10 +206,10 @@ export default function Languages() {
                       onClick={() => {
                         handleGetCsv();
                       }}
-                      className="clickableSvg"
+                      className="clickableSvg mr-2"
                       src={csvSvg}
-                      height="40px"
-                      width="60px"
+                      height="50px"
+                      width="50px"
                       alt="Profile Image"
                     />
                     <Image
@@ -218,8 +218,8 @@ export default function Languages() {
                       }}
                       className="clickableSvg"
                       src={pdfSvg}
-                      height="40px"
-                      width="60px"
+                      height="50px"
+                      width="50px"
                       alt="Profile Image"
                     />
                   </div>
