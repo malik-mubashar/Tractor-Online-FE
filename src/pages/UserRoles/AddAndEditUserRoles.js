@@ -3,6 +3,9 @@ import { Button, Col, Form, Row } from "react-bootstrap";
 import toast, { Toaster } from "react-hot-toast";
 import { roleApis } from "../../API/RolesApis";
 import { userRolesApis } from "../../API/UserRolesApis";
+import Select from "react-select";
+import { user } from "../../API/User";
+
 // import { userRoleApis } from "../../API/UserRolesApis";
 
 export default function AddAndEditUserRoles({
@@ -11,10 +14,31 @@ export default function AddAndEditUserRoles({
   getUserRoles,
 }) {
   const [roles, setRoles] = useState();
+  const [users, setUsers] = useState();
+  const [optionsForMultiSelect, setOptionsForMultiSelect] = useState();
 
   useEffect(() => {
     getRoles();
+    getAllUsers();
   }, []);
+
+  const getAllUsers = async () => {
+    const loadingToastId = toast.loading("Loading..!");
+    try {
+      const result = await user.getAllUsers();
+      if (result.error === false) {
+        toast.dismiss(loadingToastId);
+
+        setUsers(result.data);
+      } else if (result.error === true) {
+        toast.dismiss(loadingToastId);
+        toast.error("error getting all users...!");
+      }
+    } catch (error) {
+      toast.dismiss(loadingToastId);
+      toast.error("error...!");
+    }
+  };
 
   const getRoles = async () => {
     const loadingToastId = toast.loading("Loading..!");
@@ -22,16 +46,18 @@ export default function AddAndEditUserRoles({
     try {
       const result = await roleApis.getRoles(1, "", 10000000);
       if (result.error === false) {
-         
+        debugger;
         toast.dismiss(loadingToastId);
 
         setRoles(result.data.data);
-        if (userRolesState.isAddUserRole) {
-          setUserRolesState({
-            ...userRolesState,
-            role_id: result.data.data[0].id,
+        var tempArr = [];
+        result.data.data.forEach((cate) => {
+          tempArr.push({
+            value: cate.id,
+            label: cate.name,
           });
-        }
+        });
+        setOptionsForMultiSelect(tempArr);
       }
     } catch (error) {
       toast.dismiss(loadingToastId);
@@ -51,10 +77,10 @@ export default function AddAndEditUserRoles({
     if (userRolesState.isAddUserRole) {
       try {
         const result = await userRolesApis.addUserRole(userRolesState);
-       
+
         if (result.error == false) {
           toast.dismiss(loadingToastId);
-          toast.success("City created!");
+          toast.success("User Role created!");
           setUserRolesState({
             ...userRolesState,
             isAddUserRole: false,
@@ -69,7 +95,7 @@ export default function AddAndEditUserRoles({
       try {
         const result = await userRolesApis.updateUserRole(userRolesState);
         if (result.error === false) {
-          toast.success("UserRole updated!");
+          toast.success("User Role updated!");
           toast.dismiss(loadingToastId);
           setUserRolesState({
             ...userRolesState,
@@ -82,7 +108,7 @@ export default function AddAndEditUserRoles({
       }
     }
   };
-
+console.log('all users',users)
   return (
     <div className="mb-4">
       {/* Basic Forms */}
@@ -98,34 +124,62 @@ export default function AddAndEditUserRoles({
                 </h5>
               </div>
               <Form>
-                <Form.Group controlId="formGridState">
-                  <Form.Label>Select Role</Form.Label>
+                <Form.Group>
+                  <Form.Label>
+                    Select Brands that are associated with current category
+                  </Form.Label>
+                  <Select
+                    defaultValue={
+                      userRolesState &&
+                      userRolesState.product_categories &&
+                      userRolesState.product_categories.map((item) => {
+                        return { value: item.id, label: item.title };
+                      })
+                    }
+                    isMulti
+                    name="colors"
+                    onChange={(selectedOption) => {
+                      setUserRolesState({
+                        ...userRolesState,
+                        role_id: selectedOption.map((item) => item.value),
+                      });
+                    }}
+                    options={optionsForMultiSelect}
+                    className="basic-multi-select"
+                    classNamePrefix="select"
+                  />
+								</Form.Group>
+								<Form.Group controlId="formGridState">
+                  <Form.Label>Select User</Form.Label>
                   <Form.Control
+                    // className={
+                    //   fieldsWithError.status === true ? "border-danger" : ""
+                    // }
                     as="select"
-                    value={userRolesState.status}
-                    onChange={(e) => handleChange(e)}
-                    name="role_id"
+                    // value={userRolesState.user}
+										onChange={(e) => {
+											debugger;
+											setUserRolesState({
+												...userRolesState,
+												userId: e.target.value
+											});
+										}}
+                    name="userId"
                   >
-                    {roles &&
-                      roles.map((item) => {
-                        return (
-                          <>
-                            <option
-                              selected={userRolesState.role_id == item.id}
-                              value={item.id}
-                            >
-                              {item.title}
-                            </option>
-                          </>
-                        );
-                      })}
+                    <option value hidden>
+                      -- Select User --
+										</option>
+										{users && users.map((user) => {
+											return 'asd'
+										})}
+                    <option value="active">active</option>
                     <option value="passive">passive</option>
                     <option value="deleted">deleted</option>
                   </Form.Control>
                 </Form.Group>
 
                 <Button
-                  className="mr-3"
+                  className="mr-3 mt-3"
                   variant="secondary"
                   onClick={() =>
                     setUserRolesState({
@@ -138,6 +192,7 @@ export default function AddAndEditUserRoles({
                   Cancel
                 </Button>
                 <Button
+                  className="mt-3"
                   onClick={() => {
                     addUserRole();
                   }}

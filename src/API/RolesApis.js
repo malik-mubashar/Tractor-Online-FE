@@ -77,7 +77,7 @@ class Roles {
         mode: "no-cors",
       },
 			data: {
-        title: rolesState.title,
+        name: rolesState.name,
         status: rolesState.status,
       },
     })

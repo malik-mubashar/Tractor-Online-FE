@@ -42,17 +42,22 @@ const Login = () => {
 		const loadingToastId = toast.loading("Loading..!");
 
     try {
-      const result = await user.login(email, password);
+			const result = await user.login(email, password);
+			debugger;
       //success
 			if (result.error === false) {
 				toast.dismiss(loadingToastId);
-        toast.success('welcome')
+				toast.success('welcome')
+				let userRoles = [];
+				result.data.role.forEach((item) => {
+					userRoles.push(item.name);
+				})
         setCurrentUser({
           ...result.data.data,
           accessToken: result.headers["access-token"],
           client: result.headers["client"],
 					uid: result.headers["uid"],
-					role:result.data.role
+					roles:userRoles
         });
 
         localStorage.setItem(
@@ -62,7 +67,7 @@ const Login = () => {
             accessToken: result.headers["access-token"],
             client: result.headers["client"],
 						uid: result.headers["uid"],
-						role:result.data.role
+						roles:userRoles
 
           })
         );
@@ -72,7 +77,7 @@ const Login = () => {
             accessToken: result.headers["access-token"],
             client: result.headers["client"],
             uid: result.headers["uid"],
-            role: result.data.role,
+            roles: userRoles,
           });
         }
 
@@ -80,7 +85,7 @@ const Login = () => {
 					cookies.remove('placeAdClicked')
 					history.push("/sell");
 				} else {
-					if (result.data.role[0].name == 'admin') {
+					if (userRoles.indexOf('admin')>-1) {
 						history.push("/dashboard");
 					} else {
 						history.push("/");

@@ -116,15 +116,16 @@ class ProdCategories {
   };
 
 	getProdCategories = async (page, searchString, noOfRec,isOption='nil') => {
-		 
+		var tempUser = JSON.parse(window.localStorage.getItem("currentUser")) || null;
+
     return axios({
       method: "get",
       url: `${process.env.REACT_APP_API_LOCAL_PATH}product_categories?page=${page}&q%5B${isOption!=='nil'?'is_option_eq%5D=true':`title_or_status_or_link_or_description_cont%5D=${searchString}&no_of_record=${noOfRec}`}`,
       headers: {
         "Content-Type": "application/json;",
-        "access-token": `${user.accessToken}`,
-        client: `${user.client}`,
-        uid: `${user.uid}`,
+        "access-token": `${tempUser.accessToken}`,
+        client: `${tempUser.client}`,
+        uid: `${tempUser.uid}`,
         mode: "no-cors",
       },
     })

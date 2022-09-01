@@ -45,17 +45,23 @@ const LoginModel = (props) => {
 
     try {
       const result = await user.login(email, password);
-      //success
+			debugger;
+      
+			//success
       if (result.error === false) {
         toast.dismiss(loadingToastId);
 
-        toast.success("welcome");
+				toast.success("welcome");
+				let userRoles = [];
+				result.data.role.forEach((item) => {
+					userRoles.push(item.name);
+				})
         setCurrentUser({
           ...result.data.data,
           accessToken: result.headers["access-token"],
           client: result.headers["client"],
           uid: result.headers["uid"],
-          role: result.data.role,
+          roles: userRoles,
         });
 
         localStorage.setItem(
@@ -65,7 +71,7 @@ const LoginModel = (props) => {
             accessToken: result.headers["access-token"],
             client: result.headers["client"],
             uid: result.headers["uid"],
-            role: result.data.role,
+            roles: userRoles,
           })
         );
         if (userProfilePicture == null) {
@@ -74,7 +80,7 @@ const LoginModel = (props) => {
             accessToken: result.headers["access-token"],
             client: result.headers["client"],
             uid: result.headers["uid"],
-            role: result.data.role,
+            roles: userRoles,
           });
         }
         localStorage.setItem("headers", JSON.stringify(result.headers));

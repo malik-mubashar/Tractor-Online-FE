@@ -33,7 +33,8 @@ export default function Roles() {
 
   
     try {
-      const result = await roleApis.getRoles(page, mainSearch, noOfRec);
+			const result = await roleApis.getRoles(page, mainSearch, noOfRec);
+			debugger;
       if (result.error == false && result.data.status == "success") {
         toast.dismiss(loadingToastId);
 
@@ -163,7 +164,7 @@ export default function Roles() {
     }
   };
 
- 
+ console.log(rolesState)
   return (
     <>
       <>
@@ -275,7 +276,7 @@ export default function Roles() {
                           {rolesState.roles &&
                             rolesState.roles.map((role, idx) => (
                               <tr key={idx}>
-                                <td>{role.title && role.title}</td>
+                                <td>{role.name && role.name}</td>
                                 <td>{role.status && role.status}</td>
                                 <td className="text-center">
                                   <Icon.Edit2

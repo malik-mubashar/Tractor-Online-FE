@@ -15,10 +15,10 @@ const ProtectedRoute = ({ children, ...routeProps }) => {
         if (currentUser && currentUser == null) {
           history.push("/login");
         } else {
-          if (currentUser && currentUser.role && currentUser.role[0]) {
-            if (currentUser && currentUser.role[0].name === "admin") {
+          if (currentUser && currentUser.roles ) {
+            if (currentUser && currentUser.roles.indexOf('admin')>-1) {
               return children;
-            } else if (currentUser && currentUser.role[0].name === "customer") {
+            } else if (currentUser && currentUser.roles.indexOf('customer')>-1) {
               if (window.location.pathname.includes("/profile-settings")) {
                 return children;
               }

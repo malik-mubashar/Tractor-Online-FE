@@ -15,13 +15,13 @@ export default function AddAndEditRole({
     });
   }
   const fieldsMap = [
-    { name: "title", required: true },
+    { name: "name", required: true },
     { name: "status", required: true },
   ];
 
   const [fieldsWithError, setFieldsWithError] = useState({
     status: false,
-    title: false,
+    name: false,
   });
   const doValidation = () => {
     var tempFieldsWithError = {};
@@ -130,7 +130,7 @@ export default function AddAndEditRole({
 												fieldsWithError.title === true ? "border-danger" : ""
 											}
                     defaultValue={rolesState.title}
-                    name="title"
+                    name="name"
                     type="text"
                     placeholder="Enter Role Name"
                     onChange={(e) => handleChange(e)}

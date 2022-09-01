@@ -140,7 +140,7 @@ const AppRouter = () => {
             </DashboardLayout>
           </ProtectedRoute>
 
-          <ProtectedRoute exact path="/userRoles">
+          <ProtectedRoute exact path="/dashboard/userRoles">
             <DashboardLayout>
               <UserRoles />
             </DashboardLayout>

@@ -63,7 +63,7 @@ class UserRoles {
       });
   };
 	addUserRole = async (rolesState) => {
-		 
+		debugger;
     return axios({
       method: "post",
       url: `${process.env.REACT_APP_API_LOCAL_PATH}users_roles`,
@@ -77,7 +77,7 @@ class UserRoles {
         mode: "no-cors",
       },
 			data: {
-        user_id:user.data.id ,
+        user_id:rolesState.userId ,
         role_id: rolesState.role_id,
       },
     })

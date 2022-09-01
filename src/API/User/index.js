@@ -257,7 +257,7 @@ class User {
 	};
 	uploadProfilePicture = async (picture) => {
 		const currentUser = JSON.parse(window.localStorage.getItem("currentUser")) || null;
-
+		debugger;
 		 
     return axios({
       method: "patch",
@@ -293,6 +293,35 @@ class User {
     return axios({
       method: "get",
       url: `${process.env.REACT_APP_API_LOCAL_PATH}app_users/${tempCurrentUser.id}`,
+			headers: {
+				"Content-Type": "application/json; charset=utf-8",
+        "Access-Control-Allow-Origin": "*",
+        "Access-Control-Allow-Headers": "*",
+        "access-token": `${tempCurrentUser.accessToken}`,
+        client: `${tempCurrentUser.client}`,
+        uid: `${tempCurrentUser.uid}`,
+        mode: "no-cors",
+			}
+    })
+      .then((result) => {
+        return {
+          error: false,
+          data: result.data.data
+        };
+      })
+      .catch((error) => {
+        return {
+          error: true,
+          data: error.response.data
+        };
+      });
+	};
+	getAllUsers = async () => {
+		const tempCurrentUser = JSON.parse(window.localStorage.getItem("currentUser"))
+		debugger;
+    return axios({
+      method: "get",
+      url: `${process.env.REACT_APP_API_LOCAL_PATH}app_users`,
 			headers: {
 				"Content-Type": "application/json; charset=utf-8",
         "Access-Control-Allow-Origin": "*",

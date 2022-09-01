@@ -121,7 +121,7 @@ export default function UserRoles() {
   };
 
 
-	
+console.log(userRolesState)	
   return (
     <>
       <>
@@ -209,8 +209,8 @@ export default function UserRoles() {
                           {userRolesState.userRoles &&
                             userRolesState.userRoles.map((userRole, idx) => (
                               <tr key={idx}>
-                                <td>{user.data.email && user.data.email}</td>
-                                <td>{'admin'}</td>
+                                <td>{userRole.user.email && userRole.user.email}</td>
+                                <td>{userRole.role.name && userRole.role.name}</td>
                                 <td className="text-center">
                                   <Icon.Edit2
                
@@ -298,7 +298,7 @@ export default function UserRoles() {
                               ? "disabled"
                               : ""
                           }`}
-                          tabindex="0"
+                          tabIndex="0"
                           type="button"
                           onClick={() => {
                             getUserRoles(
@@ -328,7 +328,7 @@ export default function UserRoles() {
                               ? "disabled"
                               : ""
                           }`}
-                          tabindex="0"
+                          tabIndex="0"
                           type="button"
                           onClick={() => {
                             getUserRoles(
