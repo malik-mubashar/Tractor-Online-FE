@@ -135,7 +135,7 @@ export default function AddAndEditCity({ cityState, setCityState, getCities }) {
               </div>
               <Form>
                 <Form.Group controlId="formBasicName">
-                  <Form.Label>Name</Form.Label>
+                  <Form.Label>Name <span className="required-field">*</span></Form.Label>
 									<Form.Control
 										className={
                       fieldsWithError.title === true ? "border-danger" : ""
@@ -178,7 +178,7 @@ export default function AddAndEditCity({ cityState, setCityState, getCities }) {
                       />
                     </Form.Group>
                 <Button
-                  className="mr-3"
+                  className="mr-3 mt-3"
                   variant="secondary"
                   onClick={() =>
                     setCityState({
@@ -190,7 +190,8 @@ export default function AddAndEditCity({ cityState, setCityState, getCities }) {
                 >
                    Cancel
                 </Button>
-                <Button
+								<Button
+									className="mt-3"
                   onClick={() => {
                     addCity();
                   }}

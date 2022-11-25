@@ -466,7 +466,7 @@ export default function AddAndEditProduct({
               </div>
               <Form>
                 <Form.Group controlId="formBasicName">
-                  <Form.Label>Title</Form.Label>
+                  <Form.Label>Title <span className="required-field">*</span></Form.Label>
                   <Form.Control
                     className={
                       fieldsWithError.title === true ? "border-danger" : ""
@@ -480,7 +480,7 @@ export default function AddAndEditProduct({
                 </Form.Group>
                 {productsState && productsState.isAddProduct ? (
                   <Form.Group controlId="formGridState">
-                    <Form.Label>Product Category</Form.Label>
+                    <Form.Label>Product Category <span className="required-field">*</span></Form.Label>
                     <Form.Control
                       className={
                         fieldsWithError.product_category_id === true
@@ -552,8 +552,12 @@ export default function AddAndEditProduct({
                 </Form.Group>
                 <div className="addEditProd">
                   <Form.Label>City</Form.Label>
-                  <Select
-                    className="ui-autocomplete-input form-control searchAble border-right "
+									<Select
+										defaultValue={{
+											value: productsState && productsState.city && productsState.city,
+											label: productsState && productsState.city && productsState.city,
+										}}
+										className="ui-autocomplete-input form-control searchAble border-right "
                     options={cities}
                     name="city"
                     label="Select City"
@@ -568,7 +572,7 @@ export default function AddAndEditProduct({
                   />
                 </div>
                 <Form.Group controlId="formBasicComments">
-                  <Form.Label>Phone Number</Form.Label>
+                  <Form.Label>Phone Number <span className="required-field">*</span></Form.Label>
                   <Form.Control
                     className={
                       fieldsWithError.phone_no === true ? "border-danger" : ""
@@ -594,7 +598,7 @@ export default function AddAndEditProduct({
                   />
                 </Form.Group>
                 <Form.Group controlId="formGridState">
-                  <Form.Label>Product Brand</Form.Label>
+                  <Form.Label>Product Brand <span className="required-field">*</span></Form.Label>
                   <Form.Control
                     className={
                       fieldsWithError.brand_id === true ? "border-danger" : ""

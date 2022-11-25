@@ -43,7 +43,7 @@ export default function AddAndEditProdCategories({
   const fieldsMap = [
     { name: "title", required: true },
     { name: "status", required: true },
-    { name: "position", required: true },
+    { name: "position", required: false },
     { name: "link", required: false },
 		{ name: "description", required: false },
 		{ name: "image", required: prodCategoriesState.isAddProdCategory?true:false },
@@ -185,7 +185,7 @@ export default function AddAndEditProdCategories({
               </div>
               <Form>
                 <Form.Group controlId="formBasicName">
-                  <Form.Label>Title</Form.Label>
+                  <Form.Label>Title  <span className="required-field">*</span></Form.Label>
                   <Form.Control
                     className={
                       fieldsWithError.title === true ? "border-danger" : ""
@@ -232,7 +232,7 @@ export default function AddAndEditProdCategories({
                 </Form.Group>
 
                 <Form.Group>
-                  <Form.Label>Upload New Picture</Form.Label>
+                  <Form.Label>Upload New Picture  <span className="required-field">*</span></Form.Label>
 									<Form.Control
 										 className={
                       fieldsWithError.image === true ? "border-danger form-control" : "form-control"
@@ -258,7 +258,7 @@ export default function AddAndEditProdCategories({
                 </Form.Group> */}
 
                 <Form.Group controlId="formGridState">
-                  <Form.Label>Status</Form.Label>
+                  <Form.Label>Status  <span className="required-field">*</span></Form.Label>
                   <Form.Control
                     className={
                       fieldsWithError.status === true ? "border-danger" : ""

@@ -182,7 +182,7 @@ export default function AddAndEditProdCategoryHeads({
               </div>
               <Form>
                 <Form.Group controlId="formBasicName">
-                  <Form.Label>Title</Form.Label>
+                  <Form.Label>Title <span className="required-field">*</span></Form.Label>
                   <Form.Control
                     className={
                       fieldsWithError.title === true ? "border-danger" : ""
@@ -196,7 +196,7 @@ export default function AddAndEditProdCategoryHeads({
                 </Form.Group>
 
                 <Form.Group controlId="formGridState">
-                  <Form.Label>Status</Form.Label>
+                  <Form.Label>Status <span className="required-field">*</span></Form.Label>
                   <Form.Control
                     className={
                       fieldsWithError.status === true ? "border-danger" : ""
@@ -216,7 +216,7 @@ export default function AddAndEditProdCategoryHeads({
                 </Form.Group>
 
                 <Form.Group controlId="formGridState">
-                  <Form.Label>Product Category</Form.Label>
+                  <Form.Label>Product Category <span className="required-field">*</span></Form.Label>
                   <Form.Control
                     className={
                       fieldsWithError.product_category_id === true

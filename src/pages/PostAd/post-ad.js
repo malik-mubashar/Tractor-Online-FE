@@ -457,7 +457,7 @@ const postad = () => {
     });
 	}
 	console.log('id  in sell tractor',id)
-	console.log('id  in sell tractor',postAddState)
+	console.log('postAddState',postAddState)
 
   return (
     <>

@@ -13,10 +13,10 @@ export default function AddAndEditModels({
   const fieldsMap = [
     { name: "title", required: true },
     { name: "status", required: true },
-    { name: "link", required: true },
+    { name: "link", required: false },
     { name: "description", required: false },
     { name: "image", required: true },
-    { name: "icon", required: true },
+    { name: "icon", required: false },
     { name: "product_id", required: true },
   ];
   const [fieldsWithError, setFieldsWithError] = useState({
@@ -171,7 +171,7 @@ export default function AddAndEditModels({
               </div>
               <Form>
                 <Form.Group controlId="formBasicName">
-                  <Form.Label>Title</Form.Label>
+                  <Form.Label>Title <span className="required-field">*</span></Form.Label>
 									<Form.Control
 										  className={
 												fieldsWithError.title === true ? "border-danger" : ""
@@ -185,7 +185,7 @@ export default function AddAndEditModels({
                 </Form.Group>
 
                 <Form.Group controlId="formGridState">
-                  <Form.Label>Status</Form.Label>
+                  <Form.Label>Status <span className="required-field">*</span></Form.Label>
 									<Form.Control
 										  className={
 												fieldsWithError.status === true ? "border-danger" : ""
@@ -203,7 +203,7 @@ export default function AddAndEditModels({
 								</Form.Group>
 								
 								<Form.Group controlId="formGridState">
-                  <Form.Label>Select Product</Form.Label>
+                  <Form.Label>Select Product <span className="required-field">*</span></Form.Label>
 									<Form.Control
 										  className={
 												fieldsWithError.product_id === true ? "border-danger" : ""
@@ -263,7 +263,7 @@ export default function AddAndEditModels({
                   />
                 </Form.Group>
                 <Form.Group>
-                  <Form.Label>Upload New Picture</Form.Label>
+                  <Form.Label>Upload New Picture <span className="required-field">*</span></Form.Label>
 									<Form.Control
 										  className={
 												fieldsWithError.image === true ? "border-danger form-control p-1" : "form-control p-1"
