@@ -15,13 +15,13 @@ export default function AddAndEditRole({
     });
   }
   const fieldsMap = [
-    { name: "name", required: true },
+    { name: "title", required: true },
     { name: "status", required: true },
   ];
 
   const [fieldsWithError, setFieldsWithError] = useState({
     status: false,
-    name: false,
+    title: false,
   });
   const doValidation = () => {
     var tempFieldsWithError = {};
@@ -124,13 +124,13 @@ export default function AddAndEditRole({
               </div>
               <Form>
                 <Form.Group controlId="formBasicName">
-                  <Form.Label>Name</Form.Label>
+                  <Form.Label>Name <span className="required-field">*</span></Form.Label>
 									<Form.Control
 										   className={
 												fieldsWithError.title === true ? "border-danger" : ""
 											}
                     defaultValue={rolesState.title}
-                    name="name"
+                    name="title"
                     type="text"
                     placeholder="Enter Role Name"
                     onChange={(e) => handleChange(e)}
@@ -138,7 +138,7 @@ export default function AddAndEditRole({
                 </Form.Group>
 
                 <Form.Group controlId="formGridState">
-                  <Form.Label>Status</Form.Label>
+                  <Form.Label>Status <span className="required-field">*</span></Form.Label>
 									<Form.Control
 										   className={
 												fieldsWithError.status === true ? "border-danger" : ""
@@ -170,7 +170,7 @@ export default function AddAndEditRole({
                 </Form.Group>
 
                 <Button
-                  className="mr-3"
+                  className="mr-3 mt-3"
                   variant="secondary"
                   onClick={() =>
                     setRolesState({
@@ -182,7 +182,8 @@ export default function AddAndEditRole({
                 >
                   Cancel
                 </Button>
-                <Button
+								<Button
+                  className="mt-3"				
                   onClick={() => {
                     addRole();
                   }}

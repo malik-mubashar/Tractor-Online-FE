@@ -53,8 +53,8 @@ export default function AddAndEditBrands({
     { name: "status", required: true },
     { name: "description", required: false },
     { name: "image", required: brandsState.isAddBrand?true:false },
-    { name: "link", required: true },
-    { name: "icon", required: true },
+    { name: "link", required: false },
+    { name: "icon", required: false },
   ];
   const [fieldsWithError, setFieldsWithError] = useState({
     description: false,
@@ -188,7 +188,7 @@ export default function AddAndEditBrands({
               </div>
               <Form>
                 <Form.Group controlId="formBasicName">
-                  <Form.Label>Title</Form.Label>
+                  <Form.Label>Title <span className="required-field">*</span></Form.Label>
                   <Form.Control
                     className={
                       fieldsWithError.title === true ? "border-danger" : ""
@@ -227,7 +227,7 @@ export default function AddAndEditBrands({
                   />
                 </Form.Group>
                 <Form.Group controlId="formGridState">
-                  <Form.Label>Status</Form.Label>
+                  <Form.Label>Status <span className="required-field">*</span></Form.Label>
                   <Form.Control
                     className={
                       fieldsWithError.status === true ? "border-danger" : ""
@@ -273,7 +273,7 @@ export default function AddAndEditBrands({
                   />
                 </Form.Group>
                 <Form.Group>
-                  <Form.Label>Upload New Picture</Form.Label>
+                  <Form.Label>Upload New Picture <span className="required-field">*</span></Form.Label>
                   <Form.Control
                     className={
                       fieldsWithError.image === true

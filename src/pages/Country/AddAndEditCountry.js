@@ -135,7 +135,7 @@ export default function AddAndEditCountry({
               </div>
               <Form>
                 <Form.Group controlId="formBasicName">
-                  <Form.Label>Name</Form.Label>
+                  <Form.Label>Name <span className="required-field">*</span></Form.Label>
 									<Form.Control
 										className={
                       fieldsWithError.title === true ? "border-danger" : ""
