@@ -136,16 +136,20 @@ self.__precacheManifest = [
     "url": "/static/media/LineIcons.23586afc.eot"
   },
   {
-    "revision": "6e9fb56e13ffdf56a053e86545cafe3e",
-    "url": "/static/media/LineIcons.6e9fb56e.ttf"
-  },
-  {
     "revision": "6106e3e25c6e52ebdceb846dc3f717b0",
     "url": "/static/media/LineIcons.6106e3e2.woff"
   },
   {
+    "revision": "6e9fb56e13ffdf56a053e86545cafe3e",
+    "url": "/static/media/LineIcons.6e9fb56e.ttf"
+  },
+  {
     "revision": "a0ed6adf3563db2c6d93a0f2d4d2929e",
     "url": "/static/media/LineIcons.a0ed6adf.svg"
+  },
+  {
+    "revision": "1fbfd4bcffccb94e8e8a5ea70616b296",
+    "url": "/static/media/lg.1fbfd4bc.woff"
   },
   {
     "revision": "f4292655f93dd12d9b8e4fc067ef2489",
@@ -154,10 +158,6 @@ self.__precacheManifest = [
   {
     "revision": "2ec2cb2199d4d881e6a6ad86690f6add",
     "url": "/static/media/lg.2ec2cb21.svg"
-  },
-  {
-    "revision": "1fbfd4bcffccb94e8e8a5ea70616b296",
-    "url": "/static/media/lg.1fbfd4bc.woff"
   },
   {
     "revision": "0dcade108a610c9b79a851e650938e49",
