@@ -19,7 +19,7 @@ export default function FeaturedProducts({ title, link, prodCategoryId }) {
       "nil",
       "nil",
       "nil",
-      true,
+      'nil',
       "nil",
       "nil",
       prodCategoryId,
