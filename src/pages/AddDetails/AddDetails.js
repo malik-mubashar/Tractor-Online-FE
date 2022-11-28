@@ -288,7 +288,7 @@ export default function AddDetails() {
                     {product.extra_fields &&
 											Object.entries(product.extra_fields).map((item, i) => {
 												return (
-														item[1] !== '' ?
+														item[1] && item[1] !==null && item[1].trim().length !== 0 ?
 														<div className="col-lg-6 carDetail">
 															<div className="borderTop d-flex align-items-center">
 																<b>{item[0]}:</b>
