@@ -182,11 +182,10 @@ export default function Products() {
                 <button
                   type="button"
                   className="btn btn-outline-primary col-sm-2 mb-4"
-                  onClick={() => {
+									onClick={() => {
                     setProductsState({
                       ...productsState,
                       isAddProduct: true,
-                      products: null,
                       status: "active",
                       description: "",
                       price: "",
@@ -195,7 +194,8 @@ export default function Products() {
                       city: "",
 											phone_no: "",
 											images: [],
-											title:''
+											title: '',
+											brandId:null
                     });
                   }}
                 >

@@ -286,14 +286,17 @@ export default function AddDetails() {
                       </div>
                     </div>
                     {product.extra_fields &&
-                      Object.entries(product.extra_fields).map((item, i) => {
-                        return (
-                          <div className="col-lg-6 carDetail">
-                            <div className="borderTop d-flex align-items-center">
-                              <b>{item[0]}:</b>
-                              <p className="ml-2">{item[1]}</p>
-                            </div>
-                          </div>
+											Object.entries(product.extra_fields).map((item, i) => {
+												return (
+														item[1] !== '' ?
+														<div className="col-lg-6 carDetail">
+															<div className="borderTop d-flex align-items-center">
+																<b>{item[0]}:</b>
+																<p className="ml-2">{item[1]}</p>
+															</div>
+														</div>
+														:
+														<></>
                         );
                       })}
                   </div>

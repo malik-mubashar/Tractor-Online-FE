@@ -40,7 +40,7 @@ export default function AddAndEditProduct({
     { name: "icon", required: false },
     // { name: "link", required: false },
     { name: "description", required: false },
-    { name: "price", required: false },
+    { name: "price", required: true },
     { name: "brand_id", required: true },
     { name: "phone_no", required: true },
   ];
@@ -538,7 +538,7 @@ export default function AddAndEditProduct({
                     })}
                 </div>
                 <Form.Group controlId="formBasicComments">
-                  <Form.Label>Price</Form.Label>
+                  <Form.Label>Price  <span className="required-field">*</span> </Form.Label>
                   <Form.Control
                     className={
                       fieldsWithError.price === true ? "border-danger" : ""
@@ -698,7 +698,8 @@ export default function AddAndEditProduct({
                     placeholder="description"
                     onChange={(e) => handleChange(e)}
                   />
-                </Form.Group>
+								</Form.Group>
+								<Form.Label>Pictures</Form.Label>
 								<div className="form-group preview row mt-4">
 									{
 										picturesLoader ===true && productsState.isEditProduct?'loading pictures ...':null
