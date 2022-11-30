@@ -304,7 +304,7 @@ export default function AddDetails() {
                 <h3 className="mt-3">Product Description:</h3>
                 <p>
                   {product.description ? (
-                    <p>{product.description}</p>
+                    <p><pre>{product.description}</pre></p>
                   ) : (
                     <strong className="text-danger">No Description</strong>
                   )}
