@@ -37,7 +37,7 @@ class Products {
       });
   };
 updateProduct = async (productsState, formData) => {
-	debugger;
+	const tempUser = JSON.parse(window.localStorage.getItem("currentUser")) || null;
     return axios({
       method: "put",
       url: `${process.env.REACT_APP_API_LOCAL_PATH}products/${productsState.productId}`,
@@ -45,9 +45,9 @@ updateProduct = async (productsState, formData) => {
         "Content-Type": "multipart/form-data",
         "Access-Control-Allow-Origin": "*",
         "Access-Control-Allow-Headers": "*",
-        "access-token": `${user.accessToken}`,
-        client: `${user.client}`,
-        uid: `${user.uid}`,
+        "access-token": `${tempUser.accessToken}`,
+        client: `${tempUser.client}`,
+        uid: `${tempUser.uid}`,
         mode: "no-cors",
       },
       data: formData,
