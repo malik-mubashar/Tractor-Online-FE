@@ -387,7 +387,7 @@ export default function Products() {
                                       brand: product.brand,
 																			brand_id: product.brand_id,
 																			city:product.city,
-																			price:product.price,
+																			price:product.price.toString(),
 																			phone_no:product.phone_no,
 																			location: product.location,
 																			imagesPath: product.active_images_path,

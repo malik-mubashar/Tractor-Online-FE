@@ -181,15 +181,16 @@ class City {
   };
 
 	getCities = async (page,searchString,noOfRec ) => {
-		 
+		var tempUser= JSON.parse(window.localStorage.getItem("currentUser")) || null;
+
     return axios({
       method: "get",
       url: `${process.env.REACT_APP_API_LOCAL_PATH}cities?page=${page}&q%5Btitle_or_comments_cont%5D=${searchString}&no_of_record=${noOfRec}`,
       headers: {
         "Content-Type": "application/json;",
-				"access-token": `${user.accessToken}`,
-				"client": `${user.client}`,
-				"uid":`${user.uid}`,
+				"access-token": `${tempUser.accessToken}`,
+				"client": `${tempUser.client}`,
+				"uid":`${tempUser.uid}`,
 				mode: "no-cors",
 				
 			},

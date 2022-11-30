@@ -1,7 +1,7 @@
 import axios from "axios";
 
 //no_of_record=5&page=2
-var user = JSON.parse(window.localStorage.getItem("currentUser")) || null;
+const user = JSON.parse(window.localStorage.getItem("currentUser")) || null;
 Headers = {
   ...Headers,
   "Access-Control-Allow-Origin": "*",
@@ -37,6 +37,7 @@ class Products {
       });
   };
 updateProduct = async (productsState, formData) => {
+	debugger;
     return axios({
       method: "put",
       url: `${process.env.REACT_APP_API_LOCAL_PATH}products/${productsState.productId}`,
@@ -95,15 +96,16 @@ updateProduct = async (productsState, formData) => {
       });
   };
 
-  getProducts = async (page, searchString, noOfRec) => {
+	getProducts = async (page, searchString, noOfRec) => {
+		const tempUser = JSON.parse(window.localStorage.getItem("currentUser")) || null;
     return axios({
       method: "get",
       url: `${process.env.REACT_APP_API_LOCAL_PATH}products?page=${page}&q%5Btitle_or_status_or_description_or_city_or_location_cont%5D=${searchString}&no_of_record=${noOfRec}`,
       headers: {
         "Content-Type": "application/json;",
-        "access-token": `${user.accessToken}`,
-        client: `${user.client}`,
-        uid: `${user.uid}`,
+        "access-token": `${tempUser&&tempUser.accessToken}`,
+        client: `${tempUser&&tempUser.client}`,
+        uid: `${tempUser&&tempUser.uid}`,
         mode: "no-cors",
       },
     })
