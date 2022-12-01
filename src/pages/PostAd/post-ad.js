@@ -490,7 +490,7 @@ const postad = () => {
         <b>(All fields marked with * are mandatory)</b>
         <div className="row my-2">
           <div className="col-lg-3 col-12 text-lg-right">
-            <Form.Label>Title</Form.Label>
+            <Form.Label>Title <span className="required-field">*</span></Form.Label>
           </div>
           <div className="addEditProd col-lg-4 col-12">
             <Form.Group controlId="formBasicName">
@@ -519,7 +519,7 @@ const postad = () => {
         </div>
         <div className="row my-2">
           <div className="col-lg-3 col-12 text-lg-right">
-            <Form.Label>Product Brand</Form.Label>
+            <Form.Label>Product Brand <span className="required-field">*</span></Form.Label>
           </div>
           <div className="addEditProd col-lg-4 col-12">
             <Form.Control
@@ -602,7 +602,7 @@ const postad = () => {
         </div>
         <div className="row my-2">
           <div className="col-lg-3 col-12 text-lg-right">
-            <Form.Label>Phone Number</Form.Label>
+            <Form.Label>Phone Number <span className="required-field">*</span></Form.Label>
           </div>
           <div className="addEditProd col-lg-4 col-12">
             <Form.Control
