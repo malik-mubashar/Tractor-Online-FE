@@ -392,8 +392,9 @@ export default function Products() {
 																			price:product.price.toString(),
 																			phone_no:product.phone_no,
 																			location: product.location,
-																			imagesPath: product.active_images_path,
-																			images: []
+																			imagesPath: [product.cover_photo_path,...product.active_images_path],
+																			images: [],
+																			cover_photo:null
                                     });
                                   }}
                                   className="text-success mr-2 icon wh-15 mt-minus-3 cursor-pointer"

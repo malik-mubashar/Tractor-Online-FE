@@ -136,6 +136,7 @@ export default function AddAndEditProduct({
 			//this block will run only one time
 			const input = document.getElementById("multi-img-field");
 			input.files = e.target.files;
+			document.getElementsByClassName('cover_image_select')
 		}
     let ImagesArray = Object.entries(e.target.files).map((e) =>
       URL.createObjectURL(e[1])
@@ -153,7 +154,11 @@ export default function AddAndEditProduct({
 			dataTransfer.items.add(temp[i]);
 		}
 		input.files = dataTransfer.files;
-
+		if (callFromFunction) { //to make green border the first image 
+			//this block will run only one time
+			var images_elem = document.getElementsByClassName("cover_image_select");
+			images_elem[0].classList.add('active')
+		}
 	}
 	const convertPicsUrlToFileList = async () => {
 		setPicturesLoader(true)
@@ -258,7 +263,7 @@ export default function AddAndEditProduct({
   
   }
 
-  function selectCoverPhoto(e, item, index) {
+	function selectCoverPhoto(e, item, index) {
     const input = document.getElementById("multi-img-field");
     const fileListArr = Array.from(input.files);
     var images_elem = document.getElementsByClassName("cover_image_select");
@@ -293,19 +298,26 @@ export default function AddAndEditProduct({
       const loadingToastId = toast.loading("Loading..!");
       let formData = new FormData();
 
-      if (productsState.images !== undefined) {
-        for (const key of Object.keys(productsState.images)) {
-          formData.append("active_images[]", productsState.images[key]);
-        }
-      }
-
+			var tempCoverPhoto = null; // cover photo will go only in cover_photo field
       if (productsState.cover_photo === undefined || productsState.cover_photo === null) {
-        if (productsState.images !== undefined) {
-          formData.append("cover_photo", productsState.images[0]);
+				if (productsState.images !== undefined) {
+					formData.append("cover_photo", productsState.images[0]);
+					tempCoverPhoto = productsState.images[0];
         }
       } else {
-        formData.append("cover_photo", productsState.cover_photo);
-      }
+				formData.append("cover_photo", productsState.cover_photo);
+				tempCoverPhoto = productsState.cover_photo;
+			}
+			
+			if (productsState.images !== undefined) {
+				for (const key of Object.keys(productsState.images)) {
+					if (tempCoverPhoto !== productsState.images[key]) //for excluding cover photo from active_images field
+					{
+						formData.append("active_images[]", productsState.images[key]);
+					}
+				}
+			}
+
       formData.append("title", productsState.title);
       formData.append("status", productsState.status);
       formData.append("description", productsState.description);
