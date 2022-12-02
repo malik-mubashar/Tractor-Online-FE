@@ -151,14 +151,15 @@ class ProductMapping {
 	};
 
 	getMappingForPostAd = async (id) => {
+		var tempUser = JSON.parse(window.localStorage.getItem("currentUser")) || null;
     return axios({
       method: "get",
       url: `${process.env.REACT_APP_API_LOCAL_PATH}get_mappings?product_category_id=${id}`,
       headers: {
         "Content-Type": "application/json;",
-        "access-token": `${user.accessToken}`,
-        client: `${user.client}`,
-        uid: `${user.uid}`,
+        "access-token": `${tempUser.accessToken}`,
+        client: `${tempUser.client}`,
+        uid: `${tempUser.uid}`,
         mode: "no-cors",
       },
     })

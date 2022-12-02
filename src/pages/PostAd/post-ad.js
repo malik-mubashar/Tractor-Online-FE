@@ -208,9 +208,11 @@ const postad = () => {
       const result = await productMappingApis.getMappingForPostAd(
         postAddState.product_category_id
       );
-      if (result.error == false && result.data.status == "success") {
-        setProductMappings(result.data.product_mapping);
-        getExtraFields(result.data.product_mapping.extra_fields);
+			if (result.error == false && result.data.status == "success") {
+				if (result.data.product_mapping) {
+					setProductMappings(result.data.product_mapping);
+					getExtraFields(result.data.product_mapping.extra_fields);
+				}
         setShowLoader(false);
         setShowCategoryModel(false);
       } else {

@@ -284,6 +284,7 @@ export default function Products() {
                           <th>Phone Number</th>
                           <th>Featured</th>
                           <th>Status</th>
+                          <th>User</th>
                           <th>Description</th>
                           {/*<th>Link</th>*/}
                           {/*<th>Product Type</th>*/}
@@ -324,6 +325,7 @@ export default function Products() {
                                   : ""}
                               </td>
                               <td>{product.status && product.status}</td>
+                              <td>{product.user.name && product.user.name}</td>
                               <td>
                                 {product.description && product.description}
                               </td>
