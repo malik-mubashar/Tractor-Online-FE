@@ -1,11 +1,11 @@
 self.__precacheManifest = [
   {
-    "revision": "e91cd56145494e809749",
+    "revision": "d451b96337a26cb881d5",
     "url": "/static/css/main.a92dec19.chunk.css"
   },
   {
-    "revision": "e91cd56145494e809749",
-    "url": "/static/js/main.e91cd561.chunk.js"
+    "revision": "d451b96337a26cb881d5",
+    "url": "/static/js/main.d451b963.chunk.js"
   },
   {
     "revision": "31e811852f4209fc7d9c",
@@ -116,10 +116,6 @@ self.__precacheManifest = [
     "url": "/static/media/tractorStock.8993ce3b.jpg"
   },
   {
-    "revision": "04eb8fc57f27498e5ae37523e3bfb2c7",
-    "url": "/static/media/revicons.04eb8fc5.woff"
-  },
-  {
     "revision": "17629a5dfe0d3c3946cf401e1895f091",
     "url": "/static/media/revicons.17629a5d.ttf"
   },
@@ -128,8 +124,16 @@ self.__precacheManifest = [
     "url": "/static/media/revicons.2feb69cc.eot"
   },
   {
+    "revision": "04eb8fc57f27498e5ae37523e3bfb2c7",
+    "url": "/static/media/revicons.04eb8fc5.woff"
+  },
+  {
     "revision": "4c1fc34b656e27d584954e9ec8ab47e1",
     "url": "/static/media/tractor-1.4c1fc34b.svg"
+  },
+  {
+    "revision": "6e9fb56e13ffdf56a053e86545cafe3e",
+    "url": "/static/media/LineIcons.6e9fb56e.ttf"
   },
   {
     "revision": "23586afcbed34f110de70937470877cf",
@@ -140,16 +144,8 @@ self.__precacheManifest = [
     "url": "/static/media/LineIcons.6106e3e2.woff"
   },
   {
-    "revision": "6e9fb56e13ffdf56a053e86545cafe3e",
-    "url": "/static/media/LineIcons.6e9fb56e.ttf"
-  },
-  {
     "revision": "a0ed6adf3563db2c6d93a0f2d4d2929e",
     "url": "/static/media/LineIcons.a0ed6adf.svg"
-  },
-  {
-    "revision": "f4292655f93dd12d9b8e4fc067ef2489",
-    "url": "/static/media/lg.f4292655.ttf"
   },
   {
     "revision": "2ec2cb2199d4d881e6a6ad86690f6add",
@@ -160,6 +156,10 @@ self.__precacheManifest = [
     "url": "/static/media/lg.1fbfd4bc.woff"
   },
   {
+    "revision": "f4292655f93dd12d9b8e4fc067ef2489",
+    "url": "/static/media/lg.f4292655.ttf"
+  },
+  {
     "revision": "0dcade108a610c9b79a851e650938e49",
     "url": "/static/media/price-logo.0dcade10.png"
   },
@@ -168,7 +168,7 @@ self.__precacheManifest = [
     "url": "/static/media/team.29a2723e.jpg"
   },
   {
-    "revision": "37277fe508fe6e19d45b9a499b5e44f8",
+    "revision": "e6bc6beaa2ff026ca1e5fd6257f56517",
     "url": "/index.html"
   }
 ];
