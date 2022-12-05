@@ -68,22 +68,26 @@ const LandingPage = () => {
         tempArray.push({ ...item, label: item.title, value: item.title })
       );
     setCities(tempArray);
-  };
+	};
   return (
     <>
       {!isMobile && (
         <>
           {" "}
           <DeskTopBanner cities={cities} />
-          {/* our main side bar on landing page */}
+          {/* our main side bar on landing page (3rd section) */}
           <div className="d-flex p-2 mt-2">
             <div className="col-12 ">
               <CategoriesNavBar />
             </div>
           </div>
         </>
-      )}
-      {!isMobile && <TractorSaleAd />}
+			)}
+
+			{/* add on desktop (4th section)*/}
+			{!isMobile && <TractorSaleAd />}
+			
+			{/* 5th section brands and city*/}
       <div className="overflow-x-hidden">
         <div className={`container-lg py-4 mt-2 ${isMobile ? "bg-white" : ""}`}>
           <Categories
@@ -97,6 +101,8 @@ const LandingPage = () => {
             <ExploreProducts />
           </div>
         </div> */}
+
+				{/* 6th section */}
         {productCategories &&
           productCategories.map((prodCategory, i) => {
             return (

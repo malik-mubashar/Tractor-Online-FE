@@ -300,8 +300,8 @@ export default function Products() {
                               <td>
                                 <Image
                                   src={
-                                    product.cover_photo_path &&
-                                    product.cover_photo_path
+                                    product.cover_photo_thumbnail &&
+                                    product.cover_photo_thumbnail
                                   }
                                   height="40px"
                                   width="40px"
@@ -393,6 +393,7 @@ export default function Products() {
 																			phone_no:product.phone_no,
 																			location: product.location,
 																			imagesPath: [product.cover_photo_path,...product.active_images_path],
+																			imagesPathThumbnail: [product.cover_photo_thumbnail,...product.active_images_thumbnail],
 																			images: [],
 																			cover_photo:null
                                     });
