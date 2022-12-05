@@ -15,7 +15,11 @@ export default function AddAndEditProduct({
   setProductsState,
   getProducts,
 }) {
+
   const [brands, setBrands] = useState();
+  const [managePics, setmanagePics] = useState(false);
+  const [lowResPics, setLowResPics] = useState();
+  const [isHighResPicsLoaded, setIsHighResPicsLoaded] = useState(false);
   const [picturesLoader, setPicturesLoader] = useState(false);
   const [productMappings, setProductMappings] = useState([]);
   const myRefname = useRef(null);
@@ -160,11 +164,11 @@ export default function AddAndEditProduct({
 			images_elem[0].classList.add('active')
 		}
 	}
-	const convertPicsUrlToFileList = async () => {
+	const convertPicsUrlToFileList = async (key) => {
 		setPicturesLoader(true)
 		const dataTransfer = new DataTransfer();
-		for (var i = 0; i < productsState.imagesPath.length; i++) {
-			await fetch(productsState.imagesPath[i])
+		for (var i = 0; i < productsState[`${key}`].length; i++) {
+			await fetch(productsState[`${key}`][i])
 				.then((res) => res.blob())
 				// eslint-disable-next-line no-loop-func
 				.then((myBlob) => {
@@ -175,17 +179,22 @@ export default function AddAndEditProduct({
 				});
 		}
 		setPicturesLoader(false);
-		uploadFiles({
-			target: {
-			files:dataTransfer.files
-		}},true)
+		key==="imagesPathThumbnail" && setLowResPics(Object.entries(dataTransfer.files).map((e) =>URL.createObjectURL(e[1])))
+		if (key === "imagesPath") {
+			setIsHighResPicsLoaded(true)
+			uploadFiles({
+				target: {
+				files:dataTransfer.files
+			}},true)
+		}
 	}
   useEffect(() => {
     getAllCity();
     getBrands(1, "", 100000000);
 		getProductMappings(1, "", 1000000);
 		if (productsState.isEditProduct && productsState.imagesPath.length > 0) {
-			convertPicsUrlToFileList()
+			convertPicsUrlToFileList('imagesPathThumbnail')
+			convertPicsUrlToFileList('imagesPath')
 		}
   }, []);
 
@@ -712,17 +721,26 @@ export default function AddAndEditProduct({
                   />
 								</Form.Group>
 								<Form.Label>Pictures</Form.Label>
+								{productsState && productsState.isEditProduct &&
+								<Button
+										variant='warning'
+										className={`${managePics?'d-none':''}`}
+										onClick={()=>{setmanagePics(true)}}
+										>
+										Manage Picture
+								</Button>
+								}
 								<div className="form-group preview row mt-4">
 									{
 										picturesLoader ===true && productsState.isEditProduct?'loading pictures ...':null
 									}
                   {file &&
                     file.length > 0 &&
-                    file.map((item, index) => {
-                      return (
-                        <div
-                          key={item}
-                          className="col-12 col-lg-1 cover-photo-container mt-3"
+										file.map((item, index) => {
+											return (
+												<div
+													key={item}
+													className={`col-12 col-lg-1 cover-photo-container mt-3 ${managePics?'':'d-none'}`}
                         >
                           <img
                             className="cover_image_select"
@@ -745,6 +763,27 @@ export default function AddAndEditProduct({
                               className="icofont-2x"
                             />
                           </button>
+                        </div>
+                      );
+                    })}
+								</div>
+								<div className={`form-group preview row  ${managePics?'d-none':''}`}>
+                  {lowResPics &&
+                    lowResPics.length > 0 &&
+                    lowResPics.map((item, index) => {
+                      return (
+                        <div
+                          key={item}
+                          className={`col-12 col-lg-1 mt-3 `}
+                        >
+                          <img
+                            src={item}
+                            alt=""
+                            height="100px"
+                            width="100px"
+                          />
+                          <div className="cover-photo-title">
+                          </div>
                         </div>
                       );
                     })}
@@ -791,7 +830,9 @@ export default function AddAndEditProduct({
                 >
                   Cancel
                 </Button>
-                <Button
+								<Button
+									// id='PSubmitButton'
+									disabled={(productsState.isEditProduct&& (isHighResPicsLoaded===false)) ? true : false}
                   onClick={() => {
                     addProduct();
                   }}

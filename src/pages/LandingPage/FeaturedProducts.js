@@ -47,7 +47,7 @@ export default function FeaturedProducts({ title, link, prodCategoryId }) {
       items: 1,
       slidesToSlide: 1, // optional, default to 1.
     },
-  };
+	};
 
   return (
     <div>
@@ -88,7 +88,7 @@ export default function FeaturedProducts({ title, link, prodCategoryId }) {
                 <Link to={`/ad-details/${item.id}`}>
                   <img
                     className="card-img border-radius"
-                    src={item.cover_photo_path}
+                    src={item.cover_photo_thumbnail}
                     alt=""
                   />
                   <h4
