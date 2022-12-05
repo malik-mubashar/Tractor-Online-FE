@@ -18,7 +18,7 @@ export default function AddAndEditProduct({
 
   const [brands, setBrands] = useState();
   const [managePics, setmanagePics] = useState(false);
-  const [lowResPics, setLowResPics] = useState();
+  // const [lowResPics, setLowResPics] = useState();
   const [isHighResPicsLoaded, setIsHighResPicsLoaded] = useState(false);
   const [picturesLoader, setPicturesLoader] = useState(false);
   const [productMappings, setProductMappings] = useState([]);
@@ -179,7 +179,7 @@ export default function AddAndEditProduct({
 				});
 		}
 		setPicturesLoader(false);
-		key==="imagesPathThumbnail" && setLowResPics(Object.entries(dataTransfer.files).map((e) =>URL.createObjectURL(e[1])))
+		// key==="imagesPathThumbnail" && setLowResPics(Object.entries(dataTransfer.files).map((e) =>URL.createObjectURL(e[1])))
 		if (key === "imagesPath") {
 			setIsHighResPicsLoaded(true)
 			uploadFiles({
@@ -193,7 +193,7 @@ export default function AddAndEditProduct({
     getBrands(1, "", 100000000);
 		getProductMappings(1, "", 1000000);
 		if (productsState.isEditProduct && productsState.imagesPath.length > 0) {
-			convertPicsUrlToFileList('imagesPathThumbnail')
+			// convertPicsUrlToFileList('imagesPathThumbnail')
 			convertPicsUrlToFileList('imagesPath')
 		}
   }, []);
@@ -768,9 +768,9 @@ export default function AddAndEditProduct({
                     })}
 								</div>
 								<div className={`form-group preview row  ${managePics?'d-none':''}`}>
-                  {lowResPics &&
-                    lowResPics.length > 0 &&
-                    lowResPics.map((item, index) => {
+                  {productsState &&
+                    productsState.imagesPathThumbnail.length > 0 &&
+                    productsState.imagesPathThumbnail.map((item, index) => {
                       return (
                         <div
                           key={item}
