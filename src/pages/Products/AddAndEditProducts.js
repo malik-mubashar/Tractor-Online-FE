@@ -730,7 +730,7 @@ export default function AddAndEditProduct({
 										Manage Picture
 								</Button>
 								}
-								<div className="form-group preview row mt-4">
+								<div className={`form-group preview row mt-4 ${managePics?'':'d-none'}`}>
 									{
 										picturesLoader ===true && productsState.isEditProduct?'loading pictures ...':null
 									}
@@ -740,7 +740,7 @@ export default function AddAndEditProduct({
 											return (
 												<div
 													key={item}
-													className={`col-12 col-lg-1 cover-photo-container mt-3 ${managePics?'':'d-none'}`}
+													className={`col-12 col-lg-1 cover-photo-container mt-3`}
                         >
                           <img
                             className="cover_image_select"
