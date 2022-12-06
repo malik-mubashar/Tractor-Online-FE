@@ -811,7 +811,8 @@ export default function AddAndEditProduct({
                     accept="image/x-png,image/gif,image/jpeg,image/jpg"
                     multiple
                   />
-                  <span
+									{productsState&&(productsState.isAddProduct || (productsState.isEditProduct && managePics))?
+										< span
                     className="btn btn-primary"
                     onClick={() => {
                       myRefname.current.click();
@@ -819,6 +820,7 @@ export default function AddAndEditProduct({
                   >
                     Upload Pictures{" "}
                   </span>
+									:null}
                 </div>
                 <Button
                   className="mr-3"
