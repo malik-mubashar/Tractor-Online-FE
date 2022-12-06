@@ -728,21 +728,23 @@ export default function AddAndEditProduct({
 								{productsState && productsState.isEditProduct &&
 								<Button
 										variant='warning'
-										className={`${managePics?'d-none':''}`}
-										onClick={()=>{			convertPicsUrlToFileList('imagesPath')
+										className={`managePicture`}
+										onClick={() => {
+											document.getElementsByClassName("managePicture")[0].classList.add('d-none');
+											convertPicsUrlToFileList('imagesPath')
 									}}
 										>
 										Manage Picture
 								</Button>
 								}
+								{
+									picturesLoader === true && productsState.isEditProduct ?
+										<>
+											<img src={loader} style={{ height: '50px', width:"50px"}}></img>
+										</>
+									: null
+								}
 								<div className={`form-group preview row mt-4 ${managePics?'':'d-none'}`}>
-									{
-										picturesLoader === true && productsState.isEditProduct ?
-											<>
-												<img src={loader} style={{ height: '100px', width:"100px"}}></img>
-											</>
-										: null
-									}
                   {file &&
                     file.length > 0 &&
 										file.map((item, index) => {
