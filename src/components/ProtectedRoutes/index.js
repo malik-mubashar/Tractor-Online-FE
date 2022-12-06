@@ -11,23 +11,27 @@ const ProtectedRoute = ({ children, ...routeProps }) => {
   return (
     <Route
       {...routeProps}
-      render={() => {
+			render={() => {
         if (currentUser && currentUser == null) {
           history.push("/login");
-        } else {
+				}
+				else {
           if (currentUser && currentUser.roles ) {
             if (currentUser && currentUser.roles.indexOf('admin')>-1) {
               return children;
             } else if (currentUser && currentUser.roles.indexOf('customer')>-1) {
               if (window.location.pathname.includes("/profile-settings")) {
                 return children;
-              }
+							} else {
+                history.push("/");
+							}
             } else {
               if (window.location.pathname.includes("/dashboard")) {
                 history.push("/");
               }
             }
-          } else {
+					}
+					else {
             history.push("/");
           }
         }

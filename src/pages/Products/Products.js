@@ -196,7 +196,8 @@ export default function Products() {
 											images: [],
 											title: '',
 											brandId: null,
-											imagesPathThumbnail:[]
+											imagesPathThumbnail: [],
+											cover_photo:null
                     });
                   }}
                 >
