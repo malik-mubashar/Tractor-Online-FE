@@ -151,7 +151,6 @@ export default function AddAndEditProduct({
       ...productsState,
       images: temp,
 		});
-		
 		const dataTransfer = new DataTransfer();
 		const input = document.getElementById("multi-img-field");
 		for (var i = 0; i < temp.length; i++) { 
@@ -163,6 +162,7 @@ export default function AddAndEditProduct({
 			var images_elem = document.getElementsByClassName("cover_image_select");
 			images_elem[0].classList.add('active')
 		}
+		setmanagePics(true)
 	}
 	const convertPicsUrlToFileList = async (key) => {
 		setPicturesLoader(true)

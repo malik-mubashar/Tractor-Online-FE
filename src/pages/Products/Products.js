@@ -195,7 +195,8 @@ export default function Products() {
 											phone_no: "",
 											images: [],
 											title: '',
-											brandId:null
+											brandId: null,
+											imagesPathThumbnail:[]
                     });
                   }}
                 >
