@@ -9,6 +9,7 @@ import { prodApi } from "../../API/ProdCategoriesApis";
 import { productMappingApis } from "../../API/ProductMappingApis";
 import { city } from "../../API/City/CityApis";
 import Select from "react-select";
+import loader from '../../assets/img/Spinner-2.gif'
 
 export default function AddAndEditProduct({
   productsState,
@@ -192,10 +193,10 @@ export default function AddAndEditProduct({
     getAllCity();
     getBrands(1, "", 100000000);
 		getProductMappings(1, "", 1000000);
-		if (productsState.isEditProduct && productsState.imagesPath.length > 0) {
+		// if (productsState.isEditProduct && productsState.imagesPath.length > 0) {
 			// convertPicsUrlToFileList('imagesPathThumbnail')
-			convertPicsUrlToFileList('imagesPath')
-		}
+			// convertPicsUrlToFileList('imagesPath')
+		// }
   }, []);
 
   useEffect(() => {
@@ -307,22 +308,25 @@ export default function AddAndEditProduct({
       const loadingToastId = toast.loading("Loading..!");
       let formData = new FormData();
 
-			var tempCoverPhoto = null; // cover photo will go only in cover_photo field
-      if (productsState.cover_photo === undefined || productsState.cover_photo === null) {
+			if (productsState.isAddProduct || (productsState.isEditProduct && managePics)) {
+				console.log('pictures attached')
+				var tempCoverPhoto = null; // cover photo will go only in cover_photo field
+				if (productsState.cover_photo === undefined || productsState.cover_photo === null) {
+					if (productsState.images !== undefined) {
+						formData.append("cover_photo", productsState.images[0]);
+						tempCoverPhoto = productsState.images[0];
+					}
+				} else {
+					formData.append("cover_photo", productsState.cover_photo);
+					tempCoverPhoto = productsState.cover_photo;
+				}
+				
 				if (productsState.images !== undefined) {
-					formData.append("cover_photo", productsState.images[0]);
-					tempCoverPhoto = productsState.images[0];
-        }
-      } else {
-				formData.append("cover_photo", productsState.cover_photo);
-				tempCoverPhoto = productsState.cover_photo;
-			}
-			
-			if (productsState.images !== undefined) {
-				for (const key of Object.keys(productsState.images)) {
-					if (tempCoverPhoto !== productsState.images[key]) //for excluding cover photo from active_images field
-					{
-						formData.append("active_images[]", productsState.images[key]);
+					for (const key of Object.keys(productsState.images)) {
+						if (tempCoverPhoto !== productsState.images[key]) //for excluding cover photo from active_images field
+						{
+							formData.append("active_images[]", productsState.images[key]);
+						}
 					}
 				}
 			}
@@ -725,14 +729,19 @@ export default function AddAndEditProduct({
 								<Button
 										variant='warning'
 										className={`${managePics?'d-none':''}`}
-										onClick={()=>{setmanagePics(true)}}
+										onClick={()=>{			convertPicsUrlToFileList('imagesPath')
+									}}
 										>
 										Manage Picture
 								</Button>
 								}
 								<div className={`form-group preview row mt-4 ${managePics?'':'d-none'}`}>
 									{
-										picturesLoader ===true && productsState.isEditProduct?'loading pictures ...':null
+										picturesLoader === true && productsState.isEditProduct ?
+											<>
+												<img src={loader} style={{ height: '100px', width:"100px"}}></img>
+											</>
+										: null
 									}
                   {file &&
                     file.length > 0 &&
@@ -774,7 +783,7 @@ export default function AddAndEditProduct({
                       return (
                         <div
                           key={item}
-                          className={`col-12 col-lg-1 mt-3 `}
+                          className={`col-12 col-lg-1 mt-3 ${index===0 ?'active_green':''}`}
                         >
                           <img
                             src={item}
@@ -788,7 +797,7 @@ export default function AddAndEditProduct({
                       );
                     })}
                 </div>
-                {file && file.length} selected
+								{file && file.length > 0 ? `${file.length} selected` : ''}
                 <div className="form-group">
                   <input
                     ref={myRefname}
@@ -806,7 +815,7 @@ export default function AddAndEditProduct({
                       myRefname.current.click();
                     }}
                   >
-                    choose file{" "}
+                    Upload Pictures{" "}
                   </span>
                 </div>
                 <Button
@@ -832,7 +841,7 @@ export default function AddAndEditProduct({
                 </Button>
 								<Button
 									// id='PSubmitButton'
-									disabled={(productsState.isEditProduct&& (isHighResPicsLoaded===false)) ? true : false}
+									// disabled={(productsState.isEditProduct&& (isHighResPicsLoaded===false)) ? true : false}
                   onClick={() => {
                     addProduct();
                   }}
