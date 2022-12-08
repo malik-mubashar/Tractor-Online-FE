@@ -7,13 +7,14 @@ import { RootContext } from "../../context/RootContext";
 
 import CreatableSelect from "react-select/creatable";
 
-const searchAble = ({ cities }) => {
+const searchAble = () => {
   const history = useHistory();
-  const { setLandingPageSearchOptions } = useContext(RootContext);
+  const { setLandingPageSearchOptions,cities } = useContext(RootContext);
 
   const [makeOrModel, setTractorModel] = useState("");
   const [city, setCity] = useState("");
   const [minPrice, setMinPrice] = useState();
+  const [citiesForSelect, setCitiesForSelect] = useState([]);
 
   const [maxPrice, setMaxPrice] = useState();
   const [minPriceOptions, setMinPriceOptions] = useState([
@@ -50,11 +51,45 @@ const searchAble = ({ cities }) => {
       });
       setMinPriceOptions(temp);
     }
-  }, [maxPrice]);
+	}, [maxPrice]);
+	useEffect(() => {
+		if (cities.length > 0) {
+			readyCitiesForSelect()
+		}
+	}, [cities])
+
+	const readyCitiesForSelect = async () => {
+    const tempArray = [];
+   cities.map((item) =>
+        tempArray.push({ ...item, label: item.title, value: item.title })
+      );
+    setCitiesForSelect(tempArray);
+	};
+	
+	const goToSearchDetailPage = () => {
+		setLandingPageSearchOptions({
+			city: city || "nil",
+			priceRangeTo: maxPrice || "nil",
+			priceRangeFrom: minPrice || "nil",
+			title: makeOrModel || "nil",
+		});
+		history.push(
+			`/products/search?city=${city ||
+				"nil"}&priceRangeTo=${maxPrice ||
+				"nil"}&priceRangeFrom=${minPrice ||
+				"nil"}&title=${makeOrModel || "nil"}`
+		);
+	}
 
   return (
     <>
-      <ul className="list-unstyled search-front clearfix d-flex justify-content-center d-flex mainSearch mainSearchBorderSet">
+			<ul
+				onKeyDown={(e) => { 
+					if (e.key === "Enter"){
+						goToSearchDetailPage()
+					}
+			 }} 
+			 className="list-unstyled search-front clearfix d-flex justify-content-center d-flex mainSearch mainSearchBorderSet">
         <li className="home-autocomplete-field">
           <input
             data-autocomplete-class="home-autocomplete"
@@ -73,7 +108,7 @@ const searchAble = ({ cities }) => {
         <li className="col-2 px-0">
           <Select
             // className="ui-autocomplete-input form-control searchAble border-right "
-            options={cities}
+            options={citiesForSelect}
             // setValue={setCity}
             label="Select City"
             // value={city}
@@ -137,18 +172,7 @@ const searchAble = ({ cities }) => {
             className="btn-success p-1  searchAble border-right-radius"
             type="submit"
             onClick={() => {
-              setLandingPageSearchOptions({
-                city: city || "nil",
-                priceRangeTo: maxPrice || "nil",
-                priceRangeFrom: minPrice || "nil",
-                title: makeOrModel || "nil",
-              });
-              history.push(
-                `/products/search?city=${city ||
-                  "nil"}&priceRangeTo=${maxPrice ||
-                  "nil"}&priceRangeFrom=${minPrice ||
-                  "nil"}&title=${makeOrModel || "nil"}`
-              );
+             goToSearchDetailPage()
             }}
           >
             <Icon.Search className="icon" />

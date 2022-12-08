@@ -1,14 +1,15 @@
-import React from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import { RootContext } from "../../context/RootContext";
 
-const NewTractor = ({brands}) => {
-
+const NewTractor = () => {
+	const { brands  } = useContext(RootContext)	
   return (
     <>
       <div className="container-lg mt-5 py-4">
         <h2 className="text-center">Brands</h2>
 				<div className="row mt-4" >
-        {brands.map((item) => (
+        {brands&&brands.length>0&&brands.map((item) => (
             <ul className="make-list col-sm-2 list-unstyled new-car-list" key={item.id}>
               <li className="heading text-center">
                 <Link to={`/brandDetails/${item.id}`}>

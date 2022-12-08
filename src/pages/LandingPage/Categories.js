@@ -3,30 +3,45 @@ import Carousel from "react-bootstrap/Carousel";
 import { Col, Tabs, Tab, Image } from "react-bootstrap";
 import { useHistory } from "react-router-dom";
 import { city } from "../../API/City/CityApis";
+import { RootContext } from "../../context/RootContext";
 
-export default function Categories({ brands, brandsForCategories }) {
+export default function Categories() {
+	const { prodCategories, setProdCategories, popularCities, brands } = useContext(RootContext)
+	const [brandsForCategories, setBrandsForCategories] = useState([])
+
   let history = useHistory();
-  const [cities, setCities] = useState("");
   const [citiesForCarousel, setCitiesForCarousel] = useState();
-  useEffect(() => {
-    handleGetAllCities();
-  }, []);
+	useEffect(() => {
+		if (popularCities.length > 0) {
+			readyCitiesForCarousel();
+		}
+	}, [popularCities]);
+	
+	useEffect(() => {
+		if (popularCities.length > 0) {
+			readyBrandsForCarosule();
+		}
+	}, [brands]);
+	
+	const readyBrandsForCarosule = () => {
+		let tempArr = [];
+		const chunkSize = 12;
+		for (let i = 0; i < brands.length; i += chunkSize) {
+			const chunk = brands.slice(i, i + chunkSize);
+			tempArr.push(chunk);
+		}
+		setBrandsForCategories(tempArr); 
+	}
 
-  const handleGetAllCities = async () => {
-    const result = await city.getPopularCity("popular");
-    if (result.error === false) {
-      setCities(result.data && result.data.data);
+  const readyCitiesForCarousel = async () => {
       let tempArr = [];
       const chunkSize = 12;
-       
-      for (let i = 0; i < result.data.data.length; i += chunkSize) {
-        const chunk = result.data.data.slice(i, i + chunkSize);
+      for (let i = 0; i < popularCities.length; i += chunkSize) {
+        const chunk = popularCities.slice(i, i + chunkSize);
         tempArr.push(chunk);
       }
       setCitiesForCarousel(tempArr);
-    }
   };
-
   return (
     <div>
       <h2 className="text-center">Examine Used Tractors</h2>

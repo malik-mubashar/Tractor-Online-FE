@@ -16,6 +16,11 @@ export default ({ children }) => {
 	const [landingPageSearchOptions, setLandingPageSearchOptions] = useState({});
 	const [userProfilePicture, setUserProfilePicture] = useState(prevUserProfilePicture);
 	const [websiteName, setWebsiteName] = useState('');
+	const [prodCategories, setProdCategories] = useState([]);
+	const [products, setProducts] = useState([]);
+	const [cities, setCities] = useState([]);
+	const [popularCities, setPopularCities] = useState([]);
+	const [brands, setBrands] = useState([]);
 
 	/*****************************************************************/
 
@@ -51,7 +56,17 @@ export default ({ children }) => {
 		showPasswordModel,
 		setShowPasswordModel,
 		websiteName,
-		setWebsiteName
+		setWebsiteName,
+		prodCategories,
+		setProdCategories,
+		products,
+		setProducts,
+		cities,
+		setCities,
+		popularCities,
+		setPopularCities,
+		brands,
+		setBrands
 	};
 	/*******************************************************************/
 
