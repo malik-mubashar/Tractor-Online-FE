@@ -15,9 +15,7 @@ const DeskTopBanner = ({ cities }) => {
             correct one for you.
           </p>
         </div>
-        <SearchAble 
-        cities={cities}
-        />
+        <SearchAble/>
         <Button onClick={()=>{history.push('/products/search')}} className="mt-2 mr-2 d-flex justify-content-center m-auto bg-transparent border border-white">
           {"Advanced Filter >>"}
         </Button>

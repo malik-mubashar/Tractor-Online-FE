@@ -5,31 +5,31 @@ import { Link } from "react-router-dom";
 import { productApis } from "../../API/ProductApis";
 import Alert from "react-bootstrap/Alert";
 
-export default function FeaturedProducts({ title, link, prodCategoryId }) {
-  const [products, setProducts] = useState([]);
+export default function FeaturedProducts({ title, link, prodCategoryId, products }) {
+  // const [products, setProducts] = useState([]);
 
-  useEffect(() => {
-    handleGetAllProducts();
-  }, [prodCategoryId]);
+  // useEffect(() => {
+    // handleGetAllProducts();
+  // }, [prodCategoryId]);
 
-  const handleGetAllProducts = async () => {
-    const result = await productApis.getAllProducts(
-      "1",
-      "1000000000",
-      "nil",
-      "nil",
-      "nil",
-      'nil',
-      "nil",
-      "nil",
-      prodCategoryId,
-      "active",
-      "nil"
-    );
-    if (result.error === false) {
-      setProducts(result.data && result.data.data);
-    }
-  };
+	// const handleGetAllProducts = async () => {
+  //   const result = await productApis.getAllProducts(
+  //     "1",
+  //     "1000000000",
+  //     "nil",
+  //     "nil",
+  //     "nil",
+  //     'nil',
+  //     "nil",
+  //     "nil",
+  //     prodCategoryId||"nil",
+  //     "active",
+  //     "nil"
+  //   );
+  //   if (result.error === false) {
+  //     setProducts(result.data && result.data.data);
+  //   }
+  // };
 
   const responsive = {
     desktop: {
@@ -48,6 +48,8 @@ export default function FeaturedProducts({ title, link, prodCategoryId }) {
       slidesToSlide: 1, // optional, default to 1.
     },
 	};
+
+	// console.log('products in featured products',products)
 
   return (
     <div>

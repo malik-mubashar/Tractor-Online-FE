@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import "bootstrap/dist/css/bootstrap.css";
 import Tab from "react-bootstrap/Tab";
 import * as Icon from "react-feather";
@@ -6,8 +6,21 @@ import { Button } from "react-bootstrap";
 import MainCategory from "./categoryBody";
 import SideMenue from "./SideMenue";
 import FeaturedProducts from "../LandingPage/FeaturedProducts";
+import { RootContext } from "../../context/RootContext";
 
 const CategoriesNavBar = () => {
+	const { products } = useContext(RootContext)
+	const [featuredProducts, setFeaturedProducts] = useState()
+	useEffect(() => {
+		if (products.length>0) {
+			let featuedProducts=	products.filter((prod) => {
+					return prod.featured===true
+			})
+			setFeaturedProducts(featuedProducts)
+		}
+
+	}, [products])
+	
 
   return (
     <>
@@ -49,7 +62,9 @@ const CategoriesNavBar = () => {
               </div>
             </div>
             <div className="col-lg-8 hot-slider">
-              <FeaturedProducts />
+							<FeaturedProducts
+							products={featuredProducts}
+							/>
             </div>
           </div>
         </div>

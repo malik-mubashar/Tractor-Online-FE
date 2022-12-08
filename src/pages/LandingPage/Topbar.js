@@ -29,16 +29,20 @@ const Topbar = () => {
     setUserProfilePicture,
     userProfilePicture,
     currentUser,
-    setCurrentUser,
+		setCurrentUser,
+		prodCategories,
+		setProdCategories,
+		cities,
+		setCities
   } = useContext(RootContext);
 
   const [modalShow, setModalShow] = React.useState(false);
   const history = useHistory();
-  const [productCategories, setProductCategories] = useState();
+  // const [productCategories, setProductCategories] = useState();
   const [profile, setProfile] = useState();
-  const [cities, setCities] = useState([]);
+  // const [cities, setCities] = useState([]);
   useEffect(() => {
-    handleGetAllCategories();
+    // handleGetAllCategories();
     handleGetAllCities();
   }, []);
 
@@ -51,10 +55,10 @@ const Topbar = () => {
     }
   };
 
-  const handleGetAllCategories = async () => {
-    const result = await prodApi.getAllProductCategories();
-    setProductCategories(result.data && result.data.data);
-  };
+  // const handleGetAllCategories = async () => {
+  //   const result = await prodApi.getAllProductCategories();
+  //   setProductCategories(result.data && result.data.data);
+  // };
 
   return (
     <Navbar fixed="top" className="top-menu landingTopbar">
@@ -69,8 +73,8 @@ const Topbar = () => {
         alt="Profile Image"
       />
       <Navbar.Collapse id="basic-navbar-nav" className="ml-5 pl-5">
-        {productCategories &&
-          productCategories.map((item, i) => {
+        {prodCategories &&
+          prodCategories.map((item, i) => {
             return (
               <div key={i}>
                 {i < 5 ? (
@@ -96,8 +100,8 @@ const Topbar = () => {
             className="icofont ml-1"
           />
           <div className="drop-down-items-more py-3 more-width">
-            {productCategories &&
-              productCategories.map((item, i) => {
+            {prodCategories &&
+              prodCategories.map((item, i) => {
                 return (
                   <div key={i}>
                     {i > 4 ? (
@@ -121,7 +125,7 @@ const Topbar = () => {
                   to="/product/sell/"
                   className="btn btn-danger btn-lg text-white mr-2"
                 >
-                  Post An Ad
+                  Post An Add
                 </Link>
                 <NavDropdown
                   title={
