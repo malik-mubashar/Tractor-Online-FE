@@ -1,0 +1,12 @@
+.mobile-featured-products{
+	// -ms-overflow-style: none; /* for Internet Explorer, Edge */
+  // scrollbar-width: none; /* for Firefox */
+  overflow-x: scroll;
+}
+
+.mobile-featured-products::-webkit-scrollbar {
+  // display: none; /* for Chrome, Safari, and Opera */
+}
+.border-radius{
+	border-radius: 15px !important;
+}

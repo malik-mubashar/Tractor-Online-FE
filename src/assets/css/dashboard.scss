@@ -167,6 +167,31 @@
   border-radius: 6px;
   cursor: pointer;
 }
+.browse-listing-mobile {
+  list-style: none;
+  height: 240px;
+  overflow: auto;
+}
+.browse-listing-mobile li span {
+  color: #545454;
+  padding: 4px 10px;
+  font-size: 16px;
+  display: block;
+  text-align: center;
+  transition: box-shadow 0.3s ease-in-out;
+  display: flex;
+  min-height: 80px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  background-color: #fff;
+  border-radius: 6px;
+  cursor: pointer;
+	// width: 88px;
+	overflow: hidden;
+	white-space: nowrap;
+}
 .carousel-control-prev {
   left: 0px !important;
   width: 5% !important;
@@ -496,8 +521,9 @@
   padding: 0 15px;
 }
 .mobile-tabs {
-  flex: auto;
-  margin: 0px 1%;
+	overflow: hidden;
+	white-space: nowrap;
+  margin: 2px;
 }
 .mobile-footer {
   margin-bottom: 70px;

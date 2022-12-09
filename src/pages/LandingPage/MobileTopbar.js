@@ -7,19 +7,11 @@ import { RootContext } from "../../context/RootContext";
 import { prodApi } from "../../API/ProdCategoriesApis";
 
 const MobileTopbar = () => {
+
   const history = useHistory();
   const [productCategories, setProductCategories] = useState();
   const [tractorModel, setTractorModel] = useState("");
-  const { setLandingPageSearchOptions } = useContext(RootContext);
-
-  useEffect(() => {
-    handleGetAllCategories();
-  }, []);
-
-  const handleGetAllCategories = async () => {
-    const result = await prodApi.getAllProductCategories();
-    setProductCategories(result.data && result.data.data);
-  };
+  const { setLandingPageSearchOptions,prodCategories } = useContext(RootContext);
 
   return (
     <>
@@ -32,25 +24,20 @@ const MobileTopbar = () => {
           alt="Profile Image"
           className="d-flex justify-content-center m-auto"
         />
-        <div className="d-flex mt-2 mb-2">
-          {productCategories &&
-            productCategories.map((item, i) => {
-              return (
-                <>
-                  {item.product_category_heads.length > 0 ? (
-                      <div className="col-6 p-0 mobile-tabs">
-                        <Link
-                          to={item.link}
-                          className="btn btn-info rounded p-2 w-100 "
-                        >
-                          {item.title}
-                        </Link>
-                      </div>
-                  ) : null}
-                </>
-              );
+					<div className="d-flex mobile-categories mb-1">
+						{prodCategories && prodCategories.length>0&&prodCategories.map((item) => {
+							return (
+												<div className="col-3 p-0 mobile-tabs">
+													<Link
+														to={item.link}
+														className="btn btn-info rounded p-2 w-100 "
+													>
+														{item.title}
+													</Link>
+												</div>
+							)
             })}
-          </div>
+					</div>
         <div className="nav-search-form d-sm-block relative">
           <Form.Control
             type="text"

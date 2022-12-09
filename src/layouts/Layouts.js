@@ -13,6 +13,7 @@ import { productApis } from "../API/ProductApis";
 import { city } from "../API/City/CityApis";
 import toast from "react-hot-toast";
 import { brandApis } from "../API/BrandsApis";
+import "../assets/css/layouts.scss"
 
 const Layout = (props) => {
 	const {
@@ -32,6 +33,7 @@ const Layout = (props) => {
       getWebsiteName();
 		}
 		handleGetAllProducts();
+		// handleGetProductsForLandingPage();
 		handleGetAllCategories();
 		getPopularCities();
 		getAllCities()
@@ -68,10 +70,20 @@ const Layout = (props) => {
       "nil"
     );
     if (result.error === false) {
-      setProducts(result.data && result.data.data);
+			setProducts(result.data && result.data.data);
     }
 	};
 	
+	// const handleGetProductsForLandingPage = async () => {
+  //   const result = await productApis.getProductsForLandingPage();
+	// 	if (result.error === false) {
+	// 		debugger;
+	// 		console.log('------------------>',result.data.data)
+
+  //     // setProducts(result.data && result.data.data);
+  //   }
+	// };
+
 	const getPopularCities = async () => {
 			const result = await city.getPopularCity("popular");
 	
@@ -118,7 +130,7 @@ const Layout = (props) => {
       <main>
         <div className="">
           {!isMobile ? <Topbar /> : <MobileBanner />}
-          <div style={{marginTop: "4rem"}}>
+          <div style={{marginTop: `${isMobile?'':'4rem'}`}}>
             {props.children}
           </div>
           {isMobile ? <MobileBannerFooter /> : <Footer />}

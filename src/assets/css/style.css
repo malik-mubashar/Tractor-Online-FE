@@ -1671,7 +1671,9 @@ button:focus {
 }
 
 .tabs-style-three .tab-content {
-  padding: 20px;
+  /* padding: 20px; */
+	padding-left: 4px;
+	padding-right: 4px;
   border-bottom: 1px solid #ebebee;
   border-left: 1px solid #ebebee;
   border-right: 1px solid #ebebee;

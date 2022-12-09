@@ -12,7 +12,9 @@ const CategoriesNavBar = () => {
 	const { products } = useContext(RootContext)
 	const [featuredProducts, setFeaturedProducts] = useState()
 	useEffect(() => {
-		if (products.length>0) {
+		debugger;
+		if (products.length > 0) {
+			
 			let featuedProducts=	products.filter((prod) => {
 					return prod.featured===true
 			})

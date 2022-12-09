@@ -2,6 +2,7 @@ import React, { useContext, useEffect, useState } from "react";
 import "../../components/Navigation/Navigation.css";
 import Categories from "./Categories";
 import FeaturedProducts from "./FeaturedProducts";
+import FeaturedProductsMobile from "./FeaturedProductsMobile";
 import NewTractor from "./NewTractor";
 import { isMobile } from "react-device-detect";
 import DeskTopBanner from "./DeskTopBanner";
@@ -15,7 +16,7 @@ import { RootContext } from "../../context/RootContext";
 // import ExploreProducts from "./ExploreProducts";
 
 const LandingPage = () => {
-	const { prodCategories, setProdCategories,products  } = useContext(RootContext)
+	const { prodCategories,products  } = useContext(RootContext)
   return (
 		<>
 			{/* 1st section top bar in layout */}
@@ -38,7 +39,7 @@ const LandingPage = () => {
 			
 			{/* 5th section brands and city examine used tractor wala*/}
       <div className="overflow-x-hidden">
-        <div className={`container-lg py-4 mt-2 ${isMobile ? "bg-white" : ""}`}>
+        <div className={`container-lg py-4 mt-2 ${isMobile ? "" : ""}`}>
           <Categories/>
         </div>
         {/* <div className="bg-white">
@@ -54,12 +55,20 @@ const LandingPage = () => {
               <>
                 <div className={`${i % 2 === 0 ? "bg-white" : ""}`}>
                   <div className="container-lg py-4 ">
-                    <FeaturedProducts
+										{isMobile ?
+											<FeaturedProductsMobile
+											title={`${cate.title}`}
+                      link={`View all`}
+											prodCategoryId={cate.id}
+											products={products && products.filter((prod)=>{return prod.product_category_id===cate.id})}
+											/>
+											:
+											<FeaturedProducts
                       title={`${cate.title}`}
                       link={`View all ${cate.title}.`}
 											prodCategoryId={cate.id}
 											products={products && products.filter((prod)=>{return prod.product_category_id===cate.id})}
-                    />
+                    />}
                   </div>
                 </div>
               </>
