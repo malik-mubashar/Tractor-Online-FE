@@ -1,5 +1,6 @@
 import React, { useEffect, useState, useContext } from "react";
 import Carousel from "react-bootstrap/Carousel";
+import { isMobile } from "react-device-detect";
 import { Col, Tabs, Tab, Image } from "react-bootstrap";
 import { useHistory } from "react-router-dom";
 import { city } from "../../API/City/CityApis";
@@ -25,7 +26,7 @@ export default function Categories() {
 	
 	const readyBrandsForCarosule = () => {
 		let tempArr = [];
-		const chunkSize = 12;
+		const chunkSize = isMobile?8:12;
 		for (let i = 0; i < brands.length; i += chunkSize) {
 			const chunk = brands.slice(i, i + chunkSize);
 			tempArr.push(chunk);
@@ -35,7 +36,7 @@ export default function Categories() {
 
   const readyCitiesForCarousel = async () => {
       let tempArr = [];
-      const chunkSize = 12;
+      const chunkSize = isMobile?8:12;
       for (let i = 0; i < popularCities.length; i += chunkSize) {
         const chunk = popularCities.slice(i, i + chunkSize);
         tempArr.push(chunk);
@@ -46,27 +47,27 @@ export default function Categories() {
     <div>
       <h2 className="text-center">Examine Used Tractors</h2>
       {/* Tab Demo Three */}
-      <Col lg={12}>
+      <Col lg={12} className='p-0'>
         <div className="mb-4">
           <div className="">
             <div className="tabs-style-three">
               <Tabs defaultActiveKey="Make" id="uncontrolled-tab-example">
                 <Tab eventKey="Make" title="Make">
-                  <Carousel>
+                  <Carousel slide={false}>
                     {brandsForCategories &&
                       brandsForCategories.map((item) => (
                         <Carousel.Item>
-                          <ul className="browse-listing row p-0">
+                          <ul className={`${isMobile?'browse-listing-mobile':'browse-listing'} row p-0`}>
                             {item.map((item2, i) => (
-                              <li key={i} className="col-sm-12 col-md-6 col-lg-2 mt-4">
+                              <li key={i} className={`${isMobile?'col-3 p-1':'col-2'} mt-4 `}>
                                 <span
                                   onClick={() => history.push(`/products/search?brand=${item2.id}`)}
                                  
                                 >
                                   <img
                                     alt="Brands"
-                                    height="150px"
-                                    width="150px"
+                                    height={`${isMobile?"30px":"150px"}`}
+                                    width={`${isMobile?"30px":"150px"}`}
                                     src={item2.active_image_path}
                                   />
                                   {item2.title}
@@ -84,11 +85,11 @@ export default function Categories() {
                     {citiesForCarousel &&
                       citiesForCarousel.map((item) => (
                         <Carousel.Item>
-                          <ul className="browse-listing row p-0">
-                            {item.map((item2, i) => (
+													<ul className={`${isMobile ? 'browse-listing-mobile' : 'browse-listing'} row p-0`}>
+														{item.map((item2, i) => (
                               <li
                                 key={i}
-                                className="col-4 col-lg-2 p-3 text-center"
+                                className={`${isMobile?'col-4 p-1':'col-2'} p-3 text-center`}
                               >
                                 <span
                                   className="text-dark"

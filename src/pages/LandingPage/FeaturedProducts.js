@@ -4,32 +4,10 @@ import "react-multi-carousel/lib/styles.css";
 import { Link } from "react-router-dom";
 import { productApis } from "../../API/ProductApis";
 import Alert from "react-bootstrap/Alert";
+import { isMobile } from "react-device-detect";
 
 export default function FeaturedProducts({ title, link, prodCategoryId, products }) {
-  // const [products, setProducts] = useState([]);
 
-  // useEffect(() => {
-    // handleGetAllProducts();
-  // }, [prodCategoryId]);
-
-	// const handleGetAllProducts = async () => {
-  //   const result = await productApis.getAllProducts(
-  //     "1",
-  //     "1000000000",
-  //     "nil",
-  //     "nil",
-  //     "nil",
-  //     'nil',
-  //     "nil",
-  //     "nil",
-  //     prodCategoryId||"nil",
-  //     "active",
-  //     "nil"
-  //   );
-  //   if (result.error === false) {
-  //     setProducts(result.data && result.data.data);
-  //   }
-  // };
 
   const responsive = {
     desktop: {
@@ -54,7 +32,11 @@ export default function FeaturedProducts({ title, link, prodCategoryId, products
   return (
     <div>
       <div className="d-flex justify-content-between">
-        <h2>{title}</h2>
+				{isMobile ?
+					<h6>{ title}</h6>
+				:
+				<h2>{title}</h2>
+				}
         <Link
           className="text-info text-capitalize"
           to={`products/search?category=${prodCategoryId}`}

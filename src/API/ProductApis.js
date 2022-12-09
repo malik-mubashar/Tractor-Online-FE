@@ -239,7 +239,36 @@ updateProduct = async (productsState, formData) => {
           data: error.response.data,
         };
       });
+	};
+	
+	getProductsForLandingPage = async ( ) => {
+    return axios({
+      method: "get",
+      url: `${process.env.REACT_APP_API_LOCAL_PATH}get_products_for_landing_page`,
+      headers: {
+        "Content-Type": "application/json; charset=utf-8",
+        "Access-Control-Allow-Origin": "*",
+        "Access-Control-Allow-Headers": "*",
+        "access-token": `${ user && user.accessToken}`,
+        client: `${ user &&  user.client}`,
+        uid: `${ user && user.uid}`,
+        mode: "no-cors",
+      },
+    })
+      .then((result) => {
+        return {
+          error: false,
+          data: result.data,
+        };
+      })
+      .catch((error) => {
+        return {
+          error: true,
+          data: error.response.data,
+        };
+      });
   };
+
   getNewProducts = async (newly_launched, featured) => {
     return axios({
       method: "get",

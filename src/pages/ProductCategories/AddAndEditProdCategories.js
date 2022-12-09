@@ -277,7 +277,7 @@ export default function AddAndEditProdCategories({
                   </Form.Control>
                 </Form.Group>
 
-                <Form.Group controlId="formBasicComments">
+                {/* <Form.Group controlId="formBasicComments">
                   <Form.Label>Link</Form.Label>
                   <Form.Control
                     defaultValue={prodCategoriesState.link}
@@ -286,7 +286,7 @@ export default function AddAndEditProdCategories({
                     placeholder="Link"
                     onChange={(e) => handleChange(e)}
                   />
-                </Form.Group>
+                </Form.Group> */}
 
                 <Form.Group controlId="formBasicComments" className="d-flex">
                   <Form.Label>Is Option</Form.Label>
