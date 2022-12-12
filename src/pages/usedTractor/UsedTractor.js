@@ -209,7 +209,7 @@ export default function UsedTractor() {
               onClick={() => postAdd()}
               className="btn btn-danger btn-lg text-white mr-2"
             >
-              Post An Ad
+              Post An Add
             </button>
           </div>
         </div>

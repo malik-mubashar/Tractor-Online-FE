@@ -32,8 +32,8 @@ const Layout = (props) => {
     if(websiteName !== undefined){
       getWebsiteName();
 		}
-		handleGetAllProducts();
-		// handleGetProductsForLandingPage();
+		// handleGetAllProducts();
+		handleGetProductsForLandingPage();
 		handleGetAllCategories();
 		getPopularCities();
 		getAllCities()
@@ -74,15 +74,13 @@ const Layout = (props) => {
     }
 	};
 	
-	// const handleGetProductsForLandingPage = async () => {
-  //   const result = await productApis.getProductsForLandingPage();
-	// 	if (result.error === false) {
-	// 		debugger;
-	// 		console.log('------------------>',result.data.data)
-
-  //     // setProducts(result.data && result.data.data);
-  //   }
-	// };
+	const handleGetProductsForLandingPage = async () => {
+    const result = await productApis.getProductsForLandingPage();
+		if (result.error === false) {
+			debugger;
+      setProducts(result.data && result.data.data);
+    }
+	};
 
 	const getPopularCities = async () => {
 			const result = await city.getPopularCity("popular");

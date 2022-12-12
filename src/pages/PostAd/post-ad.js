@@ -15,19 +15,16 @@ import { brandApis } from "../../API/BrandsApis";
 import { useHistory, useParams } from "react-router-dom";
 
 const postad = () => {
-	
 	const { id } = useParams();
-
   const myRefname = useRef(null);
-
-  const { setShowLoader} = useContext(RootContext);
+  const { setShowLoader,prodCategories} = useContext(RootContext);
   const [extraFieldsArr, setExtraFieldsArr] = useState([]);
 	const history = useHistory();
   const [cities, setCities] = useState([]);
   const [brands, setBrands] = useState([]);
   const [showCategoryModel, setShowCategoryModel] = useState(true);
   const [productMappings, setProductMappings] = useState([]);
-  const [prodCategories, setProdCategories] = useState([]);
+  // const [prodCategories, setProdCategories] = useState([]);
   const [file, setFile] = useState([]);
   const [showModelError, setShowModelError] = useState(false);
   const [isImgSelected, setIsImgSelected] = useState(false);
@@ -101,7 +98,7 @@ const postad = () => {
     getBrands(1, "", 100000000);
 
     getAllCity();
-    getProdCategories(1, "", 10000000000, true);
+    // getProdCategories(1, "", 10000000000, true);
   }, []);
   const getBrands = async (page, mainSearch, noOfRec) => {
     const loadingToastId = toast.loading("Loading..!");
@@ -121,23 +118,23 @@ const postad = () => {
     }
   };
 
-  const getProdCategories = async (page, mainSearch, noOfRec, isOption) => {
-    try {
-      const result = await prodApi.getProdCategories(
-        page,
-        mainSearch,
-        noOfRec,
-        isOption
-      );
-      if (result.error == false && result.data.status == "success") {
-        setProdCategories(result.data.data);
-      } else {
-        console.error(result.data);
-      }
-    } catch (error) {
-      console.error(error);
-    }
-  };
+  // const getProdCategories = async (page, mainSearch, noOfRec, isOption) => {
+  //   try {
+  //     const result = await prodApi.getProdCategories(
+  //       page,
+  //       mainSearch,
+  //       noOfRec,
+  //       isOption
+  //     );
+  //     if (result.error == false && result.data.status == "success") {
+  //       setProdCategories(result.data.data);
+  //     } else {
+  //       console.error(result.data);
+  //     }
+  //   } catch (error) {
+  //     console.error(error);
+  //   }
+  // };
 
   const handleCloseCategoryModel = () => setShowCategoryModel(false);
   const handleShowCategoryModel = () => setShowCategoryModel(true);
@@ -848,10 +845,10 @@ const postad = () => {
                         "product-cat-select-btns"
                       );
                     }}
-                    className={`px-2 d-flex align-items-center ${postAddState.product_category_id==item.id?'product-cat-select-btns-active':'product-cat-select-btns'} my-2`}
+                    className={`px-2 d-flex align-items-center ${postAddState.product_category_id===item.id?'product-cat-select-btns-active':'product-cat-select-btns'} my-2`}
                   >
                     <img
-                      src={item.active_image_path}
+                      src={item.active_image_thumbnail}
                       alt="category"
                       className="rounded"
                       height="100px"

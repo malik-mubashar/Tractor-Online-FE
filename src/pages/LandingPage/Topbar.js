@@ -209,7 +209,7 @@ const Topbar = () => {
                   onClick={() => setModalShow(true)}
                   className="btn btn-danger btn-lg text-white mr-2"
                 >
-                  Post An Ad
+                  Post An Add
                 </button>
                 <div
                   onClick={() => history.push("/login/")}

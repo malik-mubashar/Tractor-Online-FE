@@ -7,9 +7,9 @@ import { city } from "../../API/City/CityApis";
 import { RootContext } from "../../context/RootContext";
 
 export default function Categories() {
-	const { prodCategories, setProdCategories, popularCities, brands } = useContext(RootContext)
+	const { prodCategories, popularCities, brands } = useContext(RootContext)
 	const [brandsForCategories, setBrandsForCategories] = useState([])
-
+	const [prodCategoriesForCategories, setProdCategoriesForCategories] = useState([])
   let history = useHistory();
   const [citiesForCarousel, setCitiesForCarousel] = useState();
 	useEffect(() => {
@@ -19,11 +19,28 @@ export default function Categories() {
 	}, [popularCities]);
 	
 	useEffect(() => {
-		if (popularCities.length > 0) {
+		if (brands.length > 0) {
 			readyBrandsForCarosule();
 		}
 	}, [brands]);
+
+	useEffect(() => {
+		if (prodCategories.length > 0) {
+			readyProdCategoriesForCarosule();
+		}
+	}, [prodCategories]);
 	
+	const readyProdCategoriesForCarosule = () => {
+		let tempArr = [];
+		const chunkSize = isMobile?8:12;
+		for (let i = 0; i < prodCategories.length; i += chunkSize) {
+			const chunk = prodCategories.slice(i, i + chunkSize);
+			tempArr.push(chunk);
+		}
+		console.log('setProdCategoriesForCategories',tempArr)
+		setProdCategoriesForCategories(tempArr); 
+	}
+
 	const readyBrandsForCarosule = () => {
 		let tempArr = [];
 		const chunkSize = isMobile?8:12;
@@ -31,6 +48,7 @@ export default function Categories() {
 			const chunk = brands.slice(i, i + chunkSize);
 			tempArr.push(chunk);
 		}
+		console.log('setBrandsForCategories',tempArr)
 		setBrandsForCategories(tempArr); 
 	}
 
@@ -51,21 +69,21 @@ export default function Categories() {
         <div className="mb-4">
           <div className="">
             <div className="tabs-style-three">
-              <Tabs defaultActiveKey="Make" id="uncontrolled-tab-example">
-                <Tab eventKey="Make" title="Make">
+							<Tabs defaultActiveKey="Categories" id="uncontrolled-tab-example">
+                <Tab eventKey="Categories" title="Categories">
                   <Carousel slide={false}>
-                    {brandsForCategories &&
-                      brandsForCategories.map((item) => (
+                    {prodCategoriesForCategories &&
+                      prodCategoriesForCategories.map((item) => (
                         <Carousel.Item>
                           <ul className={`${isMobile?'browse-listing-mobile':'browse-listing'} row p-0`}>
                             {item.map((item2, i) => (
                               <li key={i} className={`${isMobile?'col-3 p-1':'col-2'} mt-4 `}>
                                 <span
-                                  onClick={() => history.push(`/products/search?brand=${item2.id}`)}
+                                  onClick={() => history.push(`/products/search?category=${item2.id}`)}
                                  
                                 >
                                   <img
-                                    alt="Brands"
+                                    alt="Category"
                                     height={`${isMobile?"30px":"150px"}`}
                                     width={`${isMobile?"30px":"150px"}`}
                                     src={item2.active_image_path}
@@ -78,7 +96,35 @@ export default function Categories() {
                         </Carousel.Item>
                       ))}
                   </Carousel>
-                </Tab>
+								</Tab>
+								
+								<Tab eventKey="Make" title="Make">
+										<Carousel slide={false}>
+											{brandsForCategories &&
+												brandsForCategories.map((item) => (
+													<Carousel.Item>
+														<ul className={`${isMobile?'browse-listing-mobile':'browse-listing'} row p-0`}>
+															{item.map((item2, i) => (
+																<li key={i} className={`${isMobile?'col-3 p-1':'col-2'} mt-4 `}>
+																	<span
+																		onClick={() => history.push(`/products/search?brand=${item2.id}`)}
+																	
+																	>
+																		<img
+																			alt="Brands"
+																			height={`${isMobile?"30px":"150px"}`}
+																			width={`${isMobile?"30px":"150px"}`}
+																			src={item2.active_image_path}
+																		/>
+																		{item2.title}
+																	</span>
+																</li>
+															))}
+														</ul>
+													</Carousel.Item>
+												))}
+										</Carousel>
+									</Tab>
 
                 <Tab eventKey="City" title="City">
                   <Carousel>
