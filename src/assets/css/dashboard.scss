@@ -189,8 +189,9 @@
   border-radius: 6px;
   cursor: pointer;
 	// width: 88px;
-	overflow: hidden;
-	white-space: nowrap;
+	// overflow: hidden;
+	// white-space: nowrap;
+	font-size: 10px;
 }
 .carousel-control-prev {
   left: 0px !important;
@@ -521,7 +522,6 @@
   padding: 0 15px;
 }
 .mobile-tabs {
-	overflow: hidden;
 	white-space: nowrap;
   margin: 2px;
 }

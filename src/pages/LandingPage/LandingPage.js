@@ -16,7 +16,8 @@ import { RootContext } from "../../context/RootContext";
 // import ExploreProducts from "./ExploreProducts";
 
 const LandingPage = () => {
-	const { prodCategories,products  } = useContext(RootContext)
+	const { prodCategories, products } = useContext(RootContext)
+	console.log("products in landing page",products)
   return (
 		<>
 			{/* 1st section top bar in layout */}

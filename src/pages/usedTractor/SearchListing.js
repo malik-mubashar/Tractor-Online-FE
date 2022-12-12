@@ -466,9 +466,9 @@ export default function SearchListing({
         )}
         <div className="sellAdd clearfix text-center p20 mt-70">
           <img
-            alt="Post an Ad"
+            alt="Post an Add"
             src={TractorClipart}
-            title="Post an Ad"
+            title="Post an Add"
             height="80px"
             width="80px"
           />
@@ -479,7 +479,7 @@ export default function SearchListing({
           </p>
           <div>
             <img
-              alt="Post an Ad Left"
+              alt="Post an Add Left"
               src={LeftArrow}
             />
             {localStorage.currentUser === undefined ? (
@@ -509,7 +509,7 @@ export default function SearchListing({
             )}
 
             <img
-              alt="Post an Ad Right"
+              alt="Post an Add Right"
               src={RightArrow}
             />
           </div>

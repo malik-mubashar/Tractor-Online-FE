@@ -27,7 +27,7 @@ const MobileTopbar = () => {
 					<div className="d-flex mobile-categories mb-1">
 						{prodCategories && prodCategories.length>0&&prodCategories.map((item) => {
 							return (
-												<div className="col-3 p-0 mobile-tabs">
+												<div className="p-0 mobile-tabs">
 													<Link
 														to={item.link}
 														className="btn btn-info rounded p-2 w-100 "
