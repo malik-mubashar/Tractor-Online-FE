@@ -49,7 +49,7 @@ import ProductMappings from "../pages/Product Mapping/ProductMappings";
 import Loader from "../pages/Loader";
 import SavedAds from "../pages/PostAd/saved-ads";
 import Alerts from "../pages/PostAd/myAlerts";
-import Ads from "../pages/PostAd/myAds";
+import MyAds from "../pages/PostAd/myAds";
 import UsedTractor from "../pages/usedTractor/UsedTractor";
 import BrandDetails from "../pages/LandingPage/BrandDetails/brandDetails";
 import BrowseUs from "../pages/BrowseUs";
@@ -204,7 +204,7 @@ const AppRouter = () => {
           <UnProtectedRoute exact path="/profile/my-ads">
             <Layout>
               <Users>
-              <Ads />
+              	<MyAds />
               </Users> 
             </Layout>
           </UnProtectedRoute>

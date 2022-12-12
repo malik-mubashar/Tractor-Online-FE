@@ -575,7 +575,7 @@ const postad = () => {
         </div>
         <div className="row my-2">
           <div className="col-lg-3 col-12 text-lg-right">
-            <Form.Label>Price</Form.Label>
+            <Form.Label>Price <span className="required-field">*</span></Form.Label>
           </div>
           <div className="addEditProd col-lg-4 col-12">
             <Form.Control

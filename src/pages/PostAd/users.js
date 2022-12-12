@@ -3,24 +3,27 @@ import { RootContext } from "../../context/RootContext";
 import toast from "react-hot-toast";
 import { user } from "../../API/User/index";
 import { Link, NavLink } from "react-router-dom";
+import noProfilePicture from "../../assets/svg/no-profile-picture.svg";
+
 
 const users = (props) => {
-  const { currentUser, setShowPasswordModel } = useContext(RootContext);
-  const [profile, setProfile] = useState();
+  const {setShowPasswordModel, profileInfo } = useContext(RootContext);
+  // const [profile, setProfile] = useState();
 
-  useEffect(() => {
-    handlePersonalDetail();
-  }, []);
+  // useEffect(() => {
+  //   handlePersonalDetail();
+  // }, []);
 
-  const handlePersonalDetail = async () => {
-    const loadingToastId = toast.loading("Loading..!");
+  // const handlePersonalDetail = async () => {
+  //   const loadingToastId = toast.loading("Loading..!");
 
-    const result = await user.findUser(currentUser);
-    if (result.error === false) {
-      toast.dismiss(loadingToastId);
-      setProfile(result.data);
-    }
-  };
+  //   const result = await user.findUser(currentUser);
+  //   if (result.error === false) {
+  //     toast.dismiss(loadingToastId);
+	// 		setProfile(result.data);
+	// 		setUserProfilePicture(result.data.profile_path)
+  //   }
+  // };
 
   return (
     <div className="user container">
@@ -28,13 +31,25 @@ const users = (props) => {
         <div className="user-ads mb-40">
           <div className="card my-4">
             <div className="dashboard-profile clearfix">
-              <img
-                alt="Profile"
-                className="profile-photo pull-left"
-                src={profile && profile.profile_path}
-              ></img>
-              <h1> {profile && profile.name ? profile.name : "user name"}</h1>
-              <p>Member Since {profile && profile.created_at}</p>
+							{profileInfo && profileInfo.profile_path === null ?
+								<>
+								<img
+									alt="Profile"
+									className="profile-photo pull-left"
+									src={noProfilePicture}
+								></img>									
+								</>	
+								:
+								<>
+								<img
+									alt="Profile"
+									className="profile-photo pull-left"
+									src={profileInfo && profileInfo.profile_path}
+								></img>
+								</>
+							}
+              <h1> {profileInfo && profileInfo.name ? profileInfo.name : "user name"}</h1>
+              <p>Member Since {profileInfo && profileInfo.created_at}</p>
               <p className="fs12">
                 <Link to="/profile-settings" >Edit Profile</Link>
                 &nbsp; &nbsp;| &nbsp; &nbsp;

@@ -21,6 +21,7 @@ export default ({ children }) => {
 	const [cities, setCities] = useState([]);
 	const [popularCities, setPopularCities] = useState([]);
 	const [brands, setBrands] = useState([]);
+	const [profileInfo, setProfileInfo] = useState();
 
 	/*****************************************************************/
 
@@ -66,7 +67,9 @@ export default ({ children }) => {
 		popularCities,
 		setPopularCities,
 		brands,
-		setBrands
+		setBrands,
+		profileInfo,
+		setProfileInfo
 	};
 	/*******************************************************************/
 

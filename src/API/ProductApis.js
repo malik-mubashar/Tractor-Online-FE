@@ -216,7 +216,7 @@ updateProduct = async (productsState, formData) => {
   ) => {
     return axios({
       method: "get",
-      url: `${process.env.REACT_APP_API_LOCAL_PATH}get_products?page=${page}&no_of_record=${noOfRec}&featured=${featured}&price_lt=${priceRangeTo}&price_gt=${priceRangefrom}&city=${city}&brand_id=${brand}&title=${title}&product_category_id=${productCategoryId}&status=${status}&user_id${user_id}`,
+      url: `${process.env.REACT_APP_API_LOCAL_PATH}get_products?page=${page}&no_of_record=${noOfRec}&featured=${featured}&price_lt=${priceRangeTo}&price_gt=${priceRangefrom}&city=${city}&brand_id=${brand}&title=${title}&product_category_id=${productCategoryId}&status=${status}&user_id=${user_id}`,
       headers: {
         "Content-Type": "application/json; charset=utf-8",
         "Access-Control-Allow-Origin": "*",
