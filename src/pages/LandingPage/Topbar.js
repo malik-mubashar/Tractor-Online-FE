@@ -59,7 +59,6 @@ const Topbar = () => {
   //   const result = await prodApi.getAllProductCategories();
   //   setProductCategories(result.data && result.data.data);
   // };
-
   return (
     <Navbar fixed="top" className="top-menu landingTopbar">
       <Image

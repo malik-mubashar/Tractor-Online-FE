@@ -14,20 +14,22 @@ import { city } from "../API/City/CityApis";
 import toast from "react-hot-toast";
 import { brandApis } from "../API/BrandsApis";
 import "../assets/css/layouts.scss"
+import { user } from "../API/User";
 
 const Layout = (props) => {
 	const {
 		websiteName, setWebsiteName, prodCategories,
 		setProdCategories, products,
-		setProducts, cities,
+		setProducts, cities,currentUser,setProfileInfo,
 		setCities, setShowLoader, popularCities,
 		setPopularCities,
-		brands,
+		brands,setUserProfilePicture,
 		setBrands
 	} = useContext(RootContext)
 
 	useEffect(() => {
 		setShowLoader(true)
+		
     window.scrollTo(0, 0);
     if(websiteName !== undefined){
       getWebsiteName();
@@ -38,9 +40,23 @@ const Layout = (props) => {
 		getPopularCities();
 		getAllCities()
 		getBrands(1, "", 10000000);
+		if (currentUser !== null) {
+			handlePersonalDetail();
+		}
+
 		setShowLoader(false)
 	}, []);
-	
+
+  const handlePersonalDetail = async () => {
+    const loadingToastId = toast.loading("Loading..!");
+
+    const result = await user.findUser(currentUser);
+    if (result.error === false) {
+      toast.dismiss(loadingToastId);
+			setProfileInfo(result.data);
+			setUserProfilePicture(result.data.profile_path)
+    }
+  };
   const getWebsiteName = async () => {
     const result = await websiteNameApi.getWebsiteName();
     if(result.error=== false){
