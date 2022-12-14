@@ -13,15 +13,16 @@ import toast from "react-hot-toast";
 import { productApis } from "../../API/ProductApis";
 import { brandApis } from "../../API/BrandsApis";
 import { useHistory, useParams } from "react-router-dom";
+import { isMobile } from "react-device-detect";
 
 const postad = () => {
 	const { id } = useParams();
   const myRefname = useRef(null);
-  const { setShowLoader,prodCategories} = useContext(RootContext);
+  const { setShowLoader,prodCategories,cities,brands} = useContext(RootContext);
   const [extraFieldsArr, setExtraFieldsArr] = useState([]);
 	const history = useHistory();
-  const [cities, setCities] = useState([]);
-  const [brands, setBrands] = useState([]);
+	const [citiesForSelect, setCitiesForSelect] = useState([]);
+
   const [showCategoryModel, setShowCategoryModel] = useState(true);
   const [productMappings, setProductMappings] = useState([]);
   // const [prodCategories, setProdCategories] = useState([]);
@@ -84,71 +85,29 @@ const postad = () => {
     }
 	};
 	useEffect(() => {
-		//here 
-		console.log(id)
 		if (id) {
 			getAdData()
 		}
 	}, [id])
+	useEffect(() => {
+
+		if (cities.length > 0) {
+			const tempArray = [];
+			cities.map((item) =>
+			tempArray.push({ ...item, label: item.title, value: item.title })
+		);
+	setCitiesForSelect(tempArray);
+	}},[cities])
 	const getAdData = async() => {
 		const result =await handleGetProductDetails(id)
 		convertPicsUrlToFileList(result)
 	}
-  useEffect(() => {
-    getBrands(1, "", 100000000);
 
-    getAllCity();
-    // getProdCategories(1, "", 10000000000, true);
-  }, []);
-  const getBrands = async (page, mainSearch, noOfRec) => {
-    const loadingToastId = toast.loading("Loading..!");
 
-    try {
-      const result = await brandApis.getBrands(page, mainSearch, noOfRec);
-      if (result.error == false && result.data.status == "success") {
-        toast.dismiss(loadingToastId);
-        setBrands(result.data.data);
-      } else {
-        toast.dismiss(loadingToastId);
-        console.error(result.data);
-      }
-    } catch (error) {
-      toast.dismiss(loadingToastId);
-      console.error(error);
-    }
-  };
-
-  // const getProdCategories = async (page, mainSearch, noOfRec, isOption) => {
-  //   try {
-  //     const result = await prodApi.getProdCategories(
-  //       page,
-  //       mainSearch,
-  //       noOfRec,
-  //       isOption
-  //     );
-  //     if (result.error == false && result.data.status == "success") {
-  //       setProdCategories(result.data.data);
-  //     } else {
-  //       console.error(result.data);
-  //     }
-  //   } catch (error) {
-  //     console.error(error);
-  //   }
-  // };
 
   const handleCloseCategoryModel = () => setShowCategoryModel(false);
   const handleShowCategoryModel = () => setShowCategoryModel(true);
 
-  const getAllCity = async () => {
-    const result = await city.getAllCities();
-    const tempArray = [];
-    result &&
-      result.data &&
-      result.data.data.map((item) =>
-        tempArray.push({ ...item, label: item.title, value: item.title })
-      );
-    setCities(tempArray);
-  };
 
   function handleChange(evt) {
     setPostAddState({
@@ -455,7 +414,6 @@ const postad = () => {
       images: templist,
     });
 	}
-	console.log('id  in sell tractor',id)
 	console.log('postAddState',postAddState)
 
   return (
@@ -558,7 +516,7 @@ const postad = () => {
           <div className="addEditProd col-lg-4 col-12">
             <Select
               className="ui-autocomplete-input form-control searchAble"
-              options={cities}
+              options={citiesForSelect}
               name="city"
               label="Select City"
               placeholder="Select City"
@@ -811,7 +769,7 @@ const postad = () => {
         <Modal.Header>
           <Modal.Title>Select Product Category</Modal.Title>
         </Modal.Header>
-        <Modal.Body style={{ height: "600px" }} className="overflow-auto">
+				<Modal.Body style={{ height: `${isMobile ? '500px' : '600px'}` }} className="overflow-auto">
           {showModelError ? (
             <p className="text-danger">
               Please select category first to continue.
@@ -820,7 +778,7 @@ const postad = () => {
           <div className="row">
             {prodCategories &&
               prodCategories.map((item, idx) => (
-                <div className="col-lg-6 col-12">
+                <div className={`col-lg-6 col-12`}>
                   <div
                     id={item.id}
                     onClick={(e) => {
@@ -851,8 +809,8 @@ const postad = () => {
                       src={item.active_image_thumbnail}
                       alt="category"
                       className="rounded"
-                      height="100px"
-                      width="100px"
+                      height={`${isMobile?'40px':'100px'}`}
+                      width={`${isMobile?'40px':'100px'}`}
                     />
                     <h5 className="ml-3">{item.title}</h5>
                   </div>
