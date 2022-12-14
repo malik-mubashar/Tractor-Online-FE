@@ -1,7 +1,7 @@
 .pageHeading {
   color: #233d7b;
   line-height: 20px;
-  margin-top: 40px;
+  // margin-top: 40px;
 }
 .bread {
   background-color: transparent !important;
@@ -114,4 +114,9 @@ a {
 }
 .navlink-set{
   border: 2px solid #d9d9d9;
+}
+.mobile-filter-list-element{
+	background-color: rgb(245, 245, 245);
+	padding: 7px;
+	margin: 2px
 }

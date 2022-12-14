@@ -15,6 +15,7 @@ import { productApis } from "../../API/ProductApis";
 import toast from "react-hot-toast";
 import RightArrow from '../../assets/img/right-arrow.png';
 import LeftArrow from '../../assets/img/left-arrow.png';
+import '../../assets/css/searchListing.scss'
 
 export default function SearchListing({
   products,
@@ -78,10 +79,10 @@ export default function SearchListing({
 
   return (
     <>
-      <Col sm={12} lg={12} xl={12}>
+      <Col sm={12} lg={12} xl={12} className="search-listing-container">
         <div className="topSorting">
           <div className="organize-results">
-            <div className="col-md-8 d-flex" style={{ marginTop: "10px" }}>
+            {/* <div className="col-md-8 d-flex" style={{ marginTop: "10px" }}>
               <span className="sort-by-text mt-2 mr-2">Sort By: </span>
               <select
                 className="form-control col-7 mb-2"
@@ -103,7 +104,7 @@ export default function SearchListing({
                 <option value="mileage-asc">Mileage: Low to High</option>
                 <option value="mileage-desc">Mileage: High to Low</option>
               </select>
-            </div>
+            </div> */}
 
             {!isMobile && (
               <div className="col-md-4 mt5 text-right ex">
@@ -141,14 +142,14 @@ export default function SearchListing({
                     <div
                       className={`listCard mb-3 ${
                         gridOrList === "list" ? "list relative" : "d-block relative"
-                      } ${isMobile ? "d-block relative" : null}`}
+                      } ${isMobile ? "relative" : null}`}
                     >
                       <img
                         className="cursor-pointer"
                         // className={gridOrList==='list'?'list':'grid'}
                         src={item.cover_photo_path}
                         alt="Card"
-                        style={{ width: "200px", height: "140px" }}
+                        style={{ width: `${isMobile?'160px':'200px'}`, height: `${isMobile?'120px':'140px'}` }}
                         onClick={() => {
                           history.push(`/ad-details/${item.id}`);
                         }}
@@ -157,27 +158,49 @@ export default function SearchListing({
                         <div
                           className={
                             gridOrList === "list"
-                              ? "d-flex justify-content-between"
+                              ? `${isMobile?'':'d-flex'} justify-content-between`
                               : "mt-2"
                           }
-                        >
+												>
+													<div className="d-flex justify-content-between">
+														<h5
+															className={
+																gridOrList === "list"
+																	? `cursor-pointer ${isMobile?'ml-1 mb-0 mobile-title-font':'ml-3'}`
+																	: "cursor-pointer truncate-search-page"
+															}
+															title={item.title}
+															onClick={() => {
+																history.push(`/ad-details/${item.id}`);
+															}}
+														>
+															{item.title}
+														</h5>
+														{isMobile &&
+															<span
+																className=""
+																type="submit"
+																// value={item}
+																onClick={() => handleFavouriteAd(item)}
+															>
+																{item.favourite ? (
+																	<Icofont
+																		icon="heart"
+																		className="icofont text-danger"
+																		style={{ fontSize: "16px" }}
+																	/>
+																) : (
+																	<Icon.Heart
+																		style={{ height: "16px", width: "16px" }}
+																		className="icon"
+																	/>
+																)}
+															</span>}
+													</div>
                           <h5
                             className={
                               gridOrList === "list"
-                                ? "cursor-pointer ml-3"
-                                : "cursor-pointer truncate-search-page"
-                            }
-                            title={item.title}
-                            onClick={() => {
-                              history.push(`/ad-details/${item.id}`);
-                            }}
-                          >
-                            {item.title}
-                          </h5>
-                          <h5
-                            className={
-                              gridOrList === "list"
-                                ? "cursor-pointer ml-3"
+                                ? `cursor-pointer ${isMobile?'ml-1 mb-0 mobile-price-area':'ml-3'}`
                                 : "cursor-pointer"
                             }
                             onClick={() => {
@@ -190,14 +213,14 @@ export default function SearchListing({
                             <span className="featuredBand">Featured</span>
                           ) : null}
                         </div>
-                        <p className={gridOrList === "list" ? " ml-3" : null}>
-                          <Icofont
+                        <p className={gridOrList === "list" ? `${isMobile?'ml-1 mb-0':'ml-3'}` : null}>
+                         {!isMobile&& <Icofont
                             icon="location-pin"
                             className="icofont text-primary mr-1"
-                          />
+                          />}
                           {item.city}
                         </p>
-                        <p
+                       {!isMobile&& <p
                           className={
                             gridOrList === "list"
                               ? " ml-3"
@@ -213,11 +236,11 @@ export default function SearchListing({
                             {item.product_category &&
                               item.product_category.title}
                           </span>
-                        </p>
+                        </p>}
                         <p
                           className={
                             gridOrList === "list"
-                              ? " ml-3"
+                              ?  `${isMobile?'ml-1':'ml-3'}`
                               : "truncate-search-page"
                           }
                         >
@@ -263,7 +286,8 @@ export default function SearchListing({
                           <small className="text-muted">
                             Last updated {item.updated_at.split(",")[0]} ago
                           </small>
-                          <div className="d-flex">
+													{!isMobile &&
+														<div className="d-flex">
                             <button
                               className="mr-3 btn p-2"
                               type="submit"
@@ -302,7 +326,7 @@ export default function SearchListing({
                                 <CustomPopover phoneNo={item.phone_no} />
                               </>
                             )}
-                          </div>
+                          </div>}
                         </div>
                       </div>
                     </div>

@@ -112,7 +112,8 @@ export default function AddAndEditProdCategories({
   const handlePictureUpload = (pic) => {
     setProdCategoriesState({
       ...prodCategoriesState,
-      image: pic,
+			image: pic,
+			photo:(URL.createObjectURL(pic))
     });
   };
 
@@ -243,7 +244,11 @@ export default function AddAndEditProdCategories({
                     onChange={(e) => {
                       handlePictureUpload(e.target.files[0]);
                     }}
-                  />
+									/>
+									{prodCategoriesState && prodCategoriesState.photo &&
+										<img src={prodCategoriesState.photo} style={{width:"200px", height:'200px'}} id='prodCategorylogo' alt='category'></img>
+									}
+
                 </Form.Group>
 
                 {/* <Form.Group controlId="formBasicComments">
