@@ -3,7 +3,7 @@ import React, { useContext, useEffect, useState } from "react";
 import Footer from "../LandingPage/Footer";
 import SearchListing from "./SearchListing";
 import SideSearch from "./SideSearch";
-import { Image } from "react-bootstrap";
+import { Button, Image, Modal } from "react-bootstrap";
 import tractorSVG from "../../assets/svg/tractor-1.svg";
 import { isMobile } from "react-device-detect";
 import { useHistory, useLocation } from "react-router-dom";
@@ -16,7 +16,7 @@ import { prodApi } from "../../API/ProdCategoriesApis";
 
 export default function UsedTractorSearch() {
   const history = useHistory();
-
+	const [showFilterModel, setShowFilterModel] = useState(false);
   const [products, setProducts] = useState([]);
   const [searchFilters, setSearchFilters] = useState();
   const [cities, setCities] = useState();
@@ -118,8 +118,8 @@ export default function UsedTractorSearch() {
       title,
       brand,
       category,
-      'active',
-      'nil'
+      "active",
+      "nil"
     );
     if (result.error === false) {
       setProducts(result.data && result.data.data);
@@ -145,26 +145,28 @@ export default function UsedTractorSearch() {
       );
     }
   }, [searchFilters]);
-
+	 console.log('searchFilters',searchFilters)
   return (
     <>
-      <section>
-        <div className="container">
-          {/* <img
-            style={{ width: "100%" }}
-            alt="add"
-            src={"https://tpc.googlesyndication.com/simgad/5923361064753698031"}
-            className="mt-5"
-          /> */}
-          <h3 className="pageHeading mt-5 pt-5">
-            {category && category !== "nil"
-              ? prodCategories &&
-                prodCategories.find((cate) => cate.id == category).title
-              : "Products"}{" "}
-            for sale
-          </h3>
-          <div className="searchCounterWrapper">
-            <ul className="breadcrumb bread">
+      {isMobile && (
+        <>
+          <div className="p-2 d-flex justify-content-between" style={{ backgroundColor: "white" }}>
+						<Button onClick={()=>{setShowFilterModel(true)}}>
+							Filters	
+						</Button>
+            <div className="d-flex mobile-filter-list">
+							<div className="rounded mobile-filter-list-element">Price</div>
+							<div className="rounded mobile-filter-list-element">Location</div>
+							<div className="rounded mobile-filter-list-element">Title</div>
+							<div className="rounded mobile-filter-list-element">Brand</div>
+            </div>
+          </div>
+          <div className="p-2" style={{ backgroundColor: "silver" }}>
+            {pagination && pagination.count + " Results"}
+          </div>
+          {/* for mobile breadcrumbs */}
+          <div>
+            <ul className="breadcrumb bread mb-0">
               <li>
                 <a>
                   <span
@@ -177,20 +179,27 @@ export default function UsedTractorSearch() {
                 </a>
               </li>
               <li>
-                {
-                  category && category !== "nil" ?
+                {category && category !== "nil" ? (
                   <a>
                     <span
-                      onClick={() => history.push(`/products?category=${prodCategories.find((cate) => cate.id == category).id}`)}
+                      onClick={() =>
+                        history.push(
+                          `/products?category=${
+                            prodCategories.find((cate) => cate.id == category)
+                              .id
+                          }`
+                        )
+                      }
                       className="cursor-pointer"
                       itemProp="name"
                     >
-                        {prodCategories && prodCategories.find((cate) => cate.id == category).title} {'/'}
+                      {prodCategories &&
+                        prodCategories.find((cate) => cate.id == category)
+                          .title}{" "}
+                      {"/"}
                     </span>
                   </a>
-                  :
-                  null
-                }
+                ) : null}
               </li>
               <li>
                 <span itemProp="name">
@@ -202,32 +211,112 @@ export default function UsedTractorSearch() {
                 </span>
               </li>
             </ul>
-            {pagination && (
-              <div className="search-pagi-info">
-                <span className="mx-4">
-                  <b>
-                    {pagination.from}-{pagination.to}{" "}
-                  </b>
-                  of <b>{pagination.count}</b> Results
-                </span>
-              </div>
-            )}
           </div>
-          <div className="row">
-            <div className="col-md-3">
-              <SideSearch
-                setSearchFilters={setSearchFilters}
-                searchFilters={searchFilters}
-                cities={cities}
-                priceRangeFrom={priceRangeFrom}
-                setPriceRangeFrom={setPriceRangeFrom}
-                priceRangeTo={priceRangeTo}
-                setPriceRangeTo={setPriceRangeTo}
-                brands={brands}
-                prodCategories={prodCategories}
-              />
+        </>
+      )}
+      {/* main section */}
+      <section>
+        <div className="container">
+          {/* <img
+            style={{ width: "100%" }}
+            alt="add"
+            src={"https://tpc.googlesyndication.com/simgad/5923361064753698031"}
+            className="mt-5"
+          /> */}
+          {isMobile ? (
+            <h6 className="pageHeading mt-2">
+              {category && category !== "nil"
+                ? prodCategories &&
+                  prodCategories.find((cate) => cate.id == category).title
+                : "Products"}{" "}
+              for sale
+            </h6>
+          ) : (
+            <h3 className="pageHeading mt-5 pt-5">
+              {category && category !== "nil"
+                ? prodCategories &&
+                  prodCategories.find((cate) => cate.id == category).title
+                : "Products"}{" "}
+              for sale
+            </h3>
+          )}
+          {!isMobile && (
+            <div className="searchCounterWrapper">
+              <ul className="breadcrumb bread">
+                <li>
+                  <a>
+                    <span
+                      onClick={() => history.push("/")}
+                      className="cursor-pointer"
+                      itemProp="name"
+                    >
+                      Home /
+                    </span>
+                  </a>
+                </li>
+                <li>
+                  {category && category !== "nil" ? (
+                    <a>
+                      <span
+                        onClick={() =>
+                          history.push(
+                            `/products?category=${
+                              prodCategories.find((cate) => cate.id == category)
+                                .id
+                            }`
+                          )
+                        }
+                        className="cursor-pointer"
+                        itemProp="name"
+                      >
+                        {prodCategories &&
+                          prodCategories.find((cate) => cate.id == category)
+                            .title}{" "}
+                        {"/"}
+                      </span>
+                    </a>
+                  ) : null}
+                </li>
+                <li>
+                  <span itemProp="name">
+                    {category && category !== "nil"
+                      ? prodCategories &&
+                        prodCategories.find((cate) => cate.id == category).title
+                      : "Products"}{" "}
+                    In Pakistan
+                  </span>
+                </li>
+              </ul>
+              {pagination && (
+                <div className="search-pagi-info">
+                  <span className="mx-4">
+                    <b>
+                      {pagination.from}-{pagination.to}{" "}
+                    </b>
+                    of <b>{pagination.count}</b> Results
+                  </span>
+                </div>
+              )}
             </div>
-            <div className="col-md-9">
+          )}
+          <div className="row">
+						<div className="col-md-3">
+							{
+								!isMobile &&
+								<SideSearch
+									setSearchFilters={setSearchFilters}
+									searchFilters={searchFilters}
+									cities={cities}
+									priceRangeFrom={priceRangeFrom}
+									setPriceRangeFrom={setPriceRangeFrom}
+									priceRangeTo={priceRangeTo}
+									setPriceRangeTo={setPriceRangeTo}
+									brands={brands}
+									prodCategories={prodCategories}
+								/>
+							}
+            </div>
+            <div className={`col-md-9 ${isMobile?'p-0':''}`}>
               <SearchListing
                 products={products}
                 pagination={pagination}
@@ -238,7 +327,38 @@ export default function UsedTractorSearch() {
             </div>
           </div>
         </div>
-      </section>
+			</section>
+			
+			<Modal
+        show={showFilterModel}
+        onHide={()=>{setShowFilterModel(false)}}
+        backdrop="static"
+				keyboard={false}
+				centered
+      >
+        <Modal.Header closeButton>
+          <Modal.Title>Search Filters</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+							<SideSearch
+                setSearchFilters={setSearchFilters}
+                searchFilters={searchFilters}
+                cities={cities}
+                priceRangeFrom={priceRangeFrom}
+                setPriceRangeFrom={setPriceRangeFrom}
+                priceRangeTo={priceRangeTo}
+                setPriceRangeTo={setPriceRangeTo}
+                brands={brands}
+                prodCategories={prodCategories}
+              />
+        </Modal.Body>
+        <Modal.Footer>
+          <Button variant="secondary" onClick={()=>{setShowFilterModel(false)}}>
+            Close
+          </Button>
+          <Button variant="primary">Understood</Button>
+        </Modal.Footer>
+      </Modal>
     </>
   );
 }

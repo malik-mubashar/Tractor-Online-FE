@@ -4,6 +4,7 @@ import postInspect from "../../assets/img/postInspection.png";
 import Icofont from "react-icofont";
 import { useHistory } from "react-router-dom";
 import { RootContext } from "../../context/RootContext";
+import { isMobile } from "react-device-detect";
 
 const SellTractor = () => {
   const history = useHistory();
@@ -20,13 +21,20 @@ const SellTractor = () => {
       <section>
         <div className="container">
           <div className="card my-4">
-            <div>
-              <h1 className="text-center my-4">
-                Sell Your Tractor at the Best Price
-              </h1>
+						<div>
+							{
+								isMobile ?
+								<h3  className="text-center my-4">
+									Sell Your Tractor at the Best Price
+								</h3>
+									:
+								<h1 className="text-center my-4">
+									Sell Your Tractor at the Best Price
+								</h1>
+							}
               <ul className="pitching-widgets pre-sell-select">
                 <li className="d-flex cursor-pointer">
-                  <div className="col-1">
+                  <div className="">
                     <input
                       checked="checked"
                       className="checkbox-size"
@@ -34,8 +42,14 @@ const SellTractor = () => {
                       type="radio"
                     />
                   </div>
-                  <div className="col-12 col-sm-6 col-md-4 col-lg-7">
-                    <h3 className="">Post your Ad on {websiteName}</h3>
+                  <div className="col-7">
+										{
+											isMobile ?
+											<h6 className="">Post your Ad on {websiteName}</h6>
+											:
+											<h3 className="">Post your Ad on {websiteName}</h3>
+										}
+										
                     <ul className="list-unstyled fs14">
                       <li>
                         <Icofont
@@ -74,8 +88,17 @@ const SellTractor = () => {
                         disabled="true"
                       />
                     </div>
-                    <div className="col-7">
-                      <h3>Try {websiteName} Sell It For Me</h3>
+										<div className="col-7">
+										{
+											isMobile ?
+													<h6>
+														Try {websiteName} Sell It For Me
+													</h6>
+												:
+													<h3 >
+														Try {websiteName} Sell It For Me
+													</h3>
+										}
                       <ul className="list-unstyled fs14">
                         <li>
                           <Icofont

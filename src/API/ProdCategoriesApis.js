@@ -83,7 +83,7 @@ class ProdCategories {
     formData.append("position", prodCategoriesState.position);
 		formData.append("link", prodCategoriesState.link);
 		formData.append("status", prodCategoriesState.status);
-		formData.append("description", prodCategoriesState.description);
+		formData.append("description", prodCategoriesState.description===undefined?'':prodCategoriesState.description);
 		formData.append("active_image", prodCategoriesState.image);
 		formData.append("brand_id", prodCategoriesState.brand_id);
    

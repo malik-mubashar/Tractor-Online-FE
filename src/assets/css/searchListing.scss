@@ -1,0 +1,20 @@
+.search-listing-container{
+	padding-left: 9px;
+	padding-right: 9px;
+}
+.two-liner {
+	display: -webkit-box;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	-webkit-line-clamp: 2;
+}
+.mobile-title-font{
+	font-size: 14px;
+	font-weight: 400;
+}
+.mobile-price-area {
+	color: #373737;
+	font-size: 14px;
+	font-weight: 700;
+	text-transform: capitalize;
+}
