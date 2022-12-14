@@ -43,11 +43,19 @@ const MobileTopbar = () => {
             type="text"
             placeholder="Search..."
             className="rounded"
-            onChange={(event) => setTractorModel(event.target.value)}
+						onChange={(event) => setTractorModel(event.target.value)}
+						onKeyDown={(e) => {
+							if (e.key === "Enter") {
+								setLandingPageSearchOptions({
+									title: tractorModel || "nil",
+								});
+								// history.push(`/products/search?category=${category}`);
+								history.push(`/products/search?title=${tractorModel || "nil"}`);
+							}
+						}}
           />
-
           <Button
-            className="search-success"
+						className="search-success"
             onClick={() => {
               setLandingPageSearchOptions({
                 title: tractorModel || "nil",
