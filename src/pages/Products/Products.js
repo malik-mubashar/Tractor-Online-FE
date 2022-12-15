@@ -21,6 +21,7 @@ import Icofont from "react-icofont";
 
 export default function Products() {
   const [paginationNumbers, setPaginationNumbers] = useState();
+  const [requestedProds, setRequestedProds] = useState(false);
   const [noOfRec, setNoOfRec] = useState(10);
   const [mainSearchString, setMainSearchString] = useState("");
   
@@ -28,12 +29,15 @@ export default function Products() {
     getProducts(1, "", 10);
   }, []);
 
-  const getProducts = async (page, mainSearch, noOfRec) => {
+  const getProducts = async (page, mainSearch, noOfRec,featured) => {
     const loadingToastId = toast.loading("Loading..!");
 
    
-    try {
-      const result = await productApis.getProducts(page, mainSearch, noOfRec);
+		try {
+			if (productsState.requestedProds === true && featured === undefined) {
+				featured='nil'
+			}
+      const result = await productApis.getProducts(page, mainSearch, noOfRec,featured);
 
       if (result.error == false && result.data.status == "success") {
         toast.dismiss(loadingToastId);
@@ -44,7 +48,8 @@ export default function Products() {
           pagination: result.data.pagination,
           originalProducts: result.data.data,
           isAddProduct: false,
-          isEditProduct: false,
+					isEditProduct: false,
+					requestedProds:featured==='nil'?true:false
         });
         var temp = [];
         for (var i = 1; i <= result.data.pagination.pages; i++) {
@@ -88,7 +93,8 @@ export default function Products() {
     link: "",
     city: "",
 		phone_no: "",
-		images:[]
+		images: [],
+		requestedProds:false
   });
 
   const handleSearch = (searchString) => {
@@ -197,12 +203,37 @@ export default function Products() {
 											title: '',
 											brandId: null,
 											imagesPathThumbnail: [],
-											cover_photo:null
+											cover_photo: null,
+											requestedProds:false
                     });
                   }}
                 >
                   Add Product
-                </button>
+										</button>
+										{productsState && productsState.requestedProds === false ?
+												<button
+														type="button"
+														className="ml-1 btn btn-outline-secondary col-sm-2 mb-4"
+														onClick={() => {
+															//passing nil it will give us the products with featured nil means that products are requested to featured
+															getProducts(1, "", 10,'nil');
+													}}
+													>
+													Featured Requested Products
+											</button>
+											:
+											<button
+													type="button"
+													className="ml-1 btn btn-outline-success col-sm-2 mb-4"
+													onClick={() => {
+														//passing nil it will give us the products with featured nil means that products are requested to featured
+														getProducts(1, "", 10,true);
+												}}
+												>
+												All Products
+											</button>
+										}
+										
                 <div className="d-flex ml-auto">
                   <Image
                     onClick={() => {
@@ -321,10 +352,14 @@ export default function Products() {
                               <td>{product.city && product.city}</td>
                               <td>{product.location && product.location}</td>
                               <td>{product.phone_no && product.phone_no}</td>
-                              <td>
-                                {product.featured && product.featured
-                                  ? "YES"
-                                  : ""}
+															<td>
+																
+																{product.featured === null ?
+																	'requested'
+																	:
+																	product.featured ?
+																		"YES"
+                                  : "No"}
                               </td>
                               <td>{product.status && product.status}</td>
                               <td>{product.user.name && product.user.name}</td>
