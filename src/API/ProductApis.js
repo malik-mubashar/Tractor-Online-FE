@@ -96,11 +96,12 @@ updateProduct = async (productsState, formData) => {
       });
   };
 
-	getProducts = async (page, searchString, noOfRec) => {
+	getProducts = async (page, searchString, noOfRec,featured=true) => {
 		const tempUser = JSON.parse(window.localStorage.getItem("currentUser")) || null;
+		debugger;
     return axios({
       method: "get",
-      url: `${process.env.REACT_APP_API_LOCAL_PATH}products?page=${page}&q%5Btitle_or_status_or_description_or_city_or_location_cont%5D=${searchString}&no_of_record=${noOfRec}`,
+      url: `${process.env.REACT_APP_API_LOCAL_PATH}products?page=${page}&q%5Btitle_or_status_or_description_or_city_or_location_cont%5D=${searchString}&no_of_record=${noOfRec}&featured=${featured}`,
       headers: {
         "Content-Type": "application/json;",
         "access-token": `${tempUser&&tempUser.accessToken}`,

@@ -43,8 +43,6 @@ const Layout = (props) => {
 		if (currentUser !== null) {
 			handlePersonalDetail();
 		}
-
-		setShowLoader(false)
 	}, []);
 
   const handlePersonalDetail = async () => {
@@ -55,7 +53,10 @@ const Layout = (props) => {
       toast.dismiss(loadingToastId);
 			setProfileInfo(result.data);
 			setUserProfilePicture(result.data.profile_path)
-    }
+			setShowLoader(false)
+		}
+		setShowLoader(false)
+		
   };
   const getWebsiteName = async () => {
     const result = await websiteNameApi.getWebsiteName();
@@ -121,14 +122,19 @@ const Layout = (props) => {
 
       if (result.error === false && result.data.status === "success") {
         toast.dismiss(loadingToastId);
-        setBrands(result.data.data);
+				setBrands(result.data.data);
+				setShowLoader(false)
       } else {
         toast.dismiss(loadingToastId);
-        console.error(result.data);
+				console.error(result.data);
+				setShowLoader(false)
+				
       }
     } catch (error) {
       toast.dismiss(loadingToastId);
-      console.error(error);
+			console.error(error);
+			setShowLoader(false)
+			
     }
   };
 

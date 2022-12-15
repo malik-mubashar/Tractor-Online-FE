@@ -6,21 +6,24 @@ import Icofont from "react-icofont";
 import { useHistory } from "react-router-dom";
 import toast from "react-hot-toast";
 import * as Icon from "react-feather";
+import "../../assets/css/myAds.scss"
 
 
 const myAds = () => {
   const [activeProducts, setActiveProducts] = useState([]);
   const [InactiveProducts, setInactiveProducts] = useState([]);
-  const { currentUser, setShowLoader } = useContext(RootContext);
+  const { currentUser, setShowLoader,showLoader } = useContext(RootContext);
   let history = useHistory();
 
-  useEffect(() => {
+	useEffect(() => {
+    setShowLoader(true);
+		
     handleGetActiveProducts();
-    handleGetInactiveProducts();
+		handleGetInactiveProducts();
+		
   }, []);
 
   const handleGetActiveProducts = async () => {
-    setShowLoader(true);
     const result = await productApis.getAllProducts(
       "1",
       "1000000000",
@@ -35,13 +38,11 @@ const myAds = () => {
       currentUser.id
     );
     if (result.error === false) {
-      setShowLoader(false);
       setActiveProducts(result.data && result.data.data);
     }
   };
 
   const handleGetInactiveProducts = async () => {
-    setShowLoader(true);
     const result = await productApis.getAllProducts(
       "1",
       "1000000000",
@@ -56,9 +57,14 @@ const myAds = () => {
       currentUser.id
     );
     if (result.error === false) {
-      setShowLoader(false);
-      setInactiveProducts(result.data && result.data.data);
-    }
+			setInactiveProducts(result.data && result.data.data);
+			setShowLoader(false)
+		}
+		if (result.error === true) {
+			setShowLoader(false)
+		}
+
+
   };
 
   const handleDeactivateAd = async (id, status) => {
@@ -83,16 +89,37 @@ const myAds = () => {
     } catch (error) {
       console.error(error);
     }
-  };
-
+	};
+	
+	const requestFeaturedCurrentAd =async (item) => {
+		let formData = new FormData();
+		let state={productId:item.id}
+		formData.append("featured", 'nil');
+		try {
+			const result = await productApis.updateProduct(
+				state,
+				formData
+			);
+			if (result.error === false) {
+				console.log(result)
+				toast.success('Request sent')
+			}
+			if (result.error === true) {
+				console.log(result)
+			}
+		} catch (error) {
+			console.error(error);
+		}	
+	}
+	console.log('asd',showLoader)
   return (
     <div className="mb-4">
       <div className="">
-        <div className="tabs-style-three">
+        <div className="tabs-style-three " >
           <Tabs defaultActiveKey="Active" id="uncontrolled-tab-example">
             <Tab eventKey="Active" title="Active">
               {activeProducts.length > 0 ? (
-                <div className="row">
+                <div className="row" style={{padding:'20px'}}>
                   {activeProducts &&
                     activeProducts.map((item, i) => {
                       return (
@@ -122,9 +149,29 @@ const myAds = () => {
                                 <h5 className={"cursor-pointer"}>
                                   PKR {item.price}
 																</h5>
-                                {item.featured ? (
-                    <span className="featuredBand">Featured</span>
-                  ) : null}
+																{
+																	item.featured ? (
+                    							<span className="featuredBand">Featured</span>
+																	) : item.featured === null ?
+																	(<>
+																		<p className="d-flex requested-featured">
+																					Requested
+																					<i style={{marginTop:'0.32rem'}} className="icofont-tick-mark"></i>
+																					
+																		</p>
+																		</>
+																	)
+																	: (
+																			<p
+																			onClick={() =>
+																				{
+																					if (window.confirm('Are you sure to send request?')) {
+																					requestFeaturedCurrentAd(item)
+																				}
+																			}}
+																				className="request-featured">Request Featured</p>
+																)
+																}
                               </div>
                               <p>
                                 <Icofont
@@ -153,7 +200,7 @@ const myAds = () => {
                                         (item2, i) => {
                                           return (
                                             <>
-                                              <span>
+                                              <span id={i}>
                                                 {item2[1]}
                                                 {i + 1 <
                                                 Object.keys(item.extra_fields)
