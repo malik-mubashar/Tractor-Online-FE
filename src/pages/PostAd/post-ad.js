@@ -14,6 +14,7 @@ import { productApis } from "../../API/ProductApis";
 import { brandApis } from "../../API/BrandsApis";
 import { useHistory, useParams } from "react-router-dom";
 import { isMobile } from "react-device-detect";
+import '../../assets/css/postAdd.scss'
 
 const postad = () => {
 	const { id } = useParams();
@@ -803,7 +804,7 @@ const postad = () => {
                         "product-cat-select-btns"
                       );
                     }}
-                    className={`px-2 d-flex align-items-center ${postAddState.product_category_id===item.id?'product-cat-select-btns-active':'product-cat-select-btns'} my-2`}
+										className={`${isMobile?'mobile-height':''} px-2 d-flex align-items-center ${postAddState.product_category_id === item.id ? 'product-cat-select-btns-active' : 'product-cat-select-btns'} my-2`}
                   >
                     <img
                       src={item.active_image_thumbnail}
