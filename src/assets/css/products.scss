@@ -1,0 +1,28 @@
+.ci-number {
+  position: absolute;
+  background: #f75d81;
+  color: #fff;
+  height: 25px;
+  width: 25px;
+  text-align: center;
+  border-radius: 50%;
+  line-height: 22px;
+  font-size: 15px;
+  top: -9px;
+  right: -5px;
+  z-index: 1;
+}
+.ripple {
+  background-color: #f75d81;
+  position: absolute;
+  width: 44px;
+  height: 44px;
+  z-index: -1;
+  right: -9px;
+  top: -10px;
+  opacity: 0;
+  margin: 0;
+  border-radius: 100px;
+  -webkit-animation: ripple 2.8s infinite;
+  animation: ripple 2.8s infinite;
+}

@@ -18,11 +18,13 @@ import csvSvg from "../../assets/svg/csv2.png";
 import pdfSvg from "../../assets/svg/pdf.png";
 import { brandApis } from "../../API/BrandsApis";
 import Icofont from "react-icofont";
+import '../../assets/css/products.scss'
 
 export default function Products() {
   const [paginationNumbers, setPaginationNumbers] = useState();
   const [requestedProds, setRequestedProds] = useState(false);
   const [noOfRec, setNoOfRec] = useState(10);
+  const [reqProdsNum, setReqProdsNum] = useState(0);
   const [mainSearchString, setMainSearchString] = useState("");
   
   useEffect(() => {
@@ -41,7 +43,7 @@ export default function Products() {
 
       if (result.error == false && result.data.status == "success") {
         toast.dismiss(loadingToastId);
-
+				setReqProdsNum(result.data.req_prods)
         setProductsState({
           ...productsState,
           products: result.data.data,
@@ -219,7 +221,13 @@ export default function Products() {
 															getProducts(1, "", 10,'nil');
 													}}
 													>
-													Featured Requested Products
+												Featured Requested Products
+												<span className="ci-number">
+													{ reqProdsNum}
+                      <span className="ripple"></span>
+                      <span className="ripple"></span>
+                      <span className="ripple"></span>
+                    </span>
 											</button>
 											:
 											<button
@@ -432,7 +440,8 @@ export default function Products() {
 																			imagesPath: [product.cover_photo_path,...product.active_images_path],
 																			imagesPathThumbnail: [product.cover_photo_thumbnail,...product.active_images_thumbnail],
 																			images: [],
-																			cover_photo:null
+																			cover_photo: null,
+																			user:product.user
                                     });
                                   }}
                                   className="text-success mr-2 icon wh-15 mt-minus-3 cursor-pointer"
