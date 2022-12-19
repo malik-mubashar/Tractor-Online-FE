@@ -9,6 +9,7 @@ import { RootContext } from "../context/RootContext";
 import toast from "react-hot-toast";
 import Icofont from 'react-icofont';
 import Cookies from 'universal-cookie';
+import BootstrapSwitchButton from "bootstrap-switch-button-react";
 
 
 const Login = () => {
@@ -18,8 +19,9 @@ const Login = () => {
   const [alertMessage, setAlertMessage]  = useState('Confirmation Mail mail sent to your Email Address. Kindly Confirm Your email to continue..')
   const [alertType, setAlertType] = useState('alert-success')
 
-
-  const [email, setEmail] = useState();
+	const [signInWithPhone, setSignInWithPhone] = useState(true);
+  const [email, setEmail] = useState(null);
+  const [phone, setPhone] = useState(null);
   const [password, setPassword] = useState();
   let history = useHistory();
 
@@ -42,7 +44,7 @@ const Login = () => {
 		const loadingToastId = toast.loading("Loading..!");
 
     try {
-			const result = await user.login(email, password);
+			const result = await user.login(phone,email, password);
 			debugger;
       //success
 			if (result.error === false) {
@@ -166,15 +168,48 @@ const Login = () => {
               </Col>
               <Col md={6}>
                 <div className="form-content">
-                  <h1 className="heading">Log In</h1>
-                  <Form>
-                    <Form.Group>
-                      <Form.Label>Email address</Form.Label>
-                      <Form.Control
-                        type="email"
-                        onChange={(event) => setEmail(event.target.value)}
-                      />
-                    </Form.Group>
+									<div className="d-flex justify-content-between">
+										<h1 className="heading">Sign In</h1>
+										<div className="login-form" >
+											<BootstrapSwitchButton
+											className="col-md-8 d-flex"
+											checked={false}
+											onstyle="warning"
+											offstyle="info"
+											onlabel="Phone"
+											offlabel="Email"
+												onChange={(checked) => {
+													if (checked) {
+														setSignInWithPhone(!signInWithPhone);
+														setPhone(null) 
+													} else {
+														setSignInWithPhone(!signInWithPhone);
+														setEmail(null)
+													}
+												}
+											}
+										/>
+										</div>
+									</div>
+									<Form>
+										{signInWithPhone ?
+											<Form.Group>
+												<Form.Label>Phone</Form.Label>
+												<Form.Control
+													type="phone"
+													onChange={(event) => setPhone(event.target.value)}
+												/>
+											</Form.Group>
+											:
+											<Form.Group>
+												<Form.Label>Email address</Form.Label>
+												<Form.Control
+													type="email"
+													onChange={(event) => setEmail(event.target.value)}
+												/>
+											</Form.Group>
+											
+										}
                     <Form.Group className="relative">
                       <Form.Label>Password</Form.Label>
                       <Form.Control

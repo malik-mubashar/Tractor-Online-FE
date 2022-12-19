@@ -8,14 +8,17 @@ import { user } from "../API/User/index";
 import { RootContext } from "../context/RootContext";
 import toast from "react-hot-toast";
 import Icofont from 'react-icofont';
+import BootstrapSwitchButton from "bootstrap-switch-button-react";
 
 const SignUp = () => {
   const { currentUser, setCurrentUser, setSignUpMessage,signUpMessage } = useContext(RootContext);
 	const [confirmPasswordType, setConfirmPasswordType] = useState("password");
+	const [signUpWithPhone, setSignUpWithPhone] = useState(true);
+	const [phone, setPhone] = useState(null);
 	const [alertMessage, setAlertMessage]  = useState('')
   const [alertType, setAlertType] = useState('alert-success')
   const [passwordType, setPasswordType] = useState("password");
-  const [email, setEmail] = useState();
+  const [email, setEmail] = useState(null);
   const [confirmPassword, setConfirmPassword] = useState();
   const [fullName, setFullName] = useState();
 
@@ -34,7 +37,8 @@ const SignUp = () => {
     try {
        
       const result = await user.signUp(
-        email,
+				phone,
+				email,
         password,
         confirmPassword,
         fullName
@@ -129,10 +133,44 @@ const SignUp = () => {
                 </Col>
 
                 <Col md={6}>
-                  <div className="form-content">
-                    <h1 className="heading">Sign Up</h1>
+									<div className="form-content">
+										<div className="d-flex justify-content-between">
+											<h1 className="heading">Sign Up</h1>
+											<div className="login-form" >
+												<BootstrapSwitchButton
+												className="col-md-8 d-flex"
+												checked={false}
+												onstyle="warning"
+												offstyle="info"
+												onlabel="Phone"
+												offlabel="Email"
+													onChange={(checked) => {
+																if (checked) {
+																	setSignUpWithPhone(!signUpWithPhone);
+																	setPhone(null) 
+																} else {
+																	setSignUpWithPhone(!signUpWithPhone);
+																	setEmail(null)
+																}
+															}
+														}
+													/>
+											</div>
+										</div>
                     <Form>
-                      <Form.Group>
+											{signUpWithPhone ?
+											<Form.Group>
+											<Form.Label>Phone Number</Form.Label>
+											<Form.Control
+												type="phone"
+												onChange={(event) => {
+													setPhone(event.target.value);
+												}}
+											/>
+										</Form.Group>
+											:
+												
+												<Form.Group>
                         <Form.Label>Email Address</Form.Label>
                         <Form.Control
                           type="email"
@@ -141,7 +179,7 @@ const SignUp = () => {
                           }}
                         />
                       </Form.Group>
-
+}
                       <Form.Group>
                         <Form.Label>Full Name</Form.Label>
                         <Form.Control
