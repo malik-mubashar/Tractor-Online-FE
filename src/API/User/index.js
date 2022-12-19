@@ -40,6 +40,7 @@ class User {
       data: tempData
     })
 			.then((result) => {
+				console.log('phone signup then',result);
 				 
         return {
 					error: false,
@@ -48,6 +49,7 @@ class User {
         };
       })
 			.catch((error) => {
+				console.log('phone signup catchx',error);
 				 
         return {
           error: true,
@@ -82,7 +84,6 @@ class User {
       data: tempData
     })
 			.then((result) => {
-				 
         return {
           error: false,
           data: result.data,

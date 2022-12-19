@@ -54,17 +54,19 @@ const SignUp = () => {
       //error
 			if (result.error === true) {
 
+        history.push('/login')
 				
-				setSignUpMessage(result.data.errors.full_messages)
-				setAlertMessage(result.data.errors.full_messages)
-        setAlertType('alert-danger')
-        toast.dismiss(loadingToastId);
-        toast.error("signup failed");
+				// setSignUpMessage(result.data.errors.full_messages)
+				// setAlertMessage(result.data.errors.full_messages)
+        // setAlertType('alert-danger')
+        // toast.dismiss(loadingToastId);
+        // toast.error("signup failed");
 
-        console.error('asd',result.data.errors.full_messages);
+        // console.error('asd',result.data.errors.full_messages);
       }
     } catch (error) {
       toast.dismiss(loadingToastId);
+			history.push('/login')
 
       console.error(error);
     }
