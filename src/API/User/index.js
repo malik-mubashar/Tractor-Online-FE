@@ -11,8 +11,24 @@ const currentUser = JSON.parse(window.localStorage.getItem("currentUser")) || nu
 
 
 class User {
-	 
-  signUp = async (email, password, confirmPassword, fullName) => {
+	signUp = async (phone, email, password, confirmPassword, fullName) => {
+		var tempData={}
+		if (email) {
+			 tempData = {
+				email: email,
+				password: password,
+				password_confirmation: confirmPassword,
+				name: fullName
+			}	
+		}
+		if (phone) {
+			 tempData = {
+				phone: phone,
+				password: password,
+				password_confirmation: confirmPassword,
+				name: fullName
+			}
+		}
     return axios({
       method: "post",
       url: `${process.env.REACT_APP_API_LOCAL_PATH}auth`,
@@ -21,12 +37,7 @@ class User {
         "Access-Control-Allow-Origin": "*",
         mode: "no-cors"
       },
-      data: {
-        email: email,
-        password: password,
-        password_confirmation: confirmPassword,
-        name: fullName
-      }
+      data: tempData
     })
 			.then((result) => {
 				 
@@ -45,8 +56,21 @@ class User {
       });
   };
 
-	login = async (email, password) => {
-		 
+	login = async (phone, email, password) => {
+		debugger;
+		var tempData={}
+		if (email) {
+			 tempData = {
+				email: email,
+				password: password,
+			}	
+		}
+		if (phone) {
+			 tempData = {
+				phone: phone,
+				password: password,
+			}
+		} 
     return axios({
       method: "post",
       url: `${process.env.REACT_APP_API_LOCAL_PATH}auth/sign_in`,
@@ -55,10 +79,7 @@ class User {
         "Access-Control-Allow-Origin": "*",
         mode: "no-cors"
       },
-      data: {
-        email: email,
-        password: password
-      }
+      data: tempData
     })
 			.then((result) => {
 				 
