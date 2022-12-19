@@ -53,6 +53,7 @@ const SignUp = () => {
 
       //error
 			if (result.error === true) {
+				toast.dismiss(loadingToastId);
 
         history.push('/login')
 				
