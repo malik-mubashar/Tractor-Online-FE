@@ -4,7 +4,9 @@ import axios from "axios";
 var user = JSON.parse(window.localStorage.getItem("currentUser")) || null;
 
 class ProdSubCategories {
-  deleteProdSubCategory = async (id) => {
+	deleteProdSubCategory = async (id) => {
+		var tempUser = JSON.parse(window.localStorage.getItem("currentUser")) || null;
+		
     return axios({
       method: "delete",
       url: `${process.env.REACT_APP_API_LOCAL_PATH}product_sub_categories/${id}`,
@@ -12,9 +14,9 @@ class ProdSubCategories {
         "Content-Type": "application/json; charset=utf-8",
         "Access-Control-Allow-Origin": "*",
         "Access-Control-Allow-Headers": "*",
-        "access-token": `${user.accessToken}`,
-        client: `${user.client}`,
-        uid: `${user.uid}`,
+        "access-token": `${tempUser.accessToken}`,
+        client: `${tempUser.client}`,
+        uid: `${tempUser.uid}`,
         mode: "no-cors",
       },
     })
@@ -32,6 +34,8 @@ class ProdSubCategories {
       });
   };
   updateProdSubCategory = async (prodSubCategoriesState) => {
+		var tempUser = JSON.parse(window.localStorage.getItem("currentUser")) || null;
+
     return axios({
       method: "put",
       url: `${process.env.REACT_APP_API_LOCAL_PATH}product_sub_categories/${prodSubCategoriesState.prodCategoryId}`,
@@ -39,9 +43,9 @@ class ProdSubCategories {
         "Content-Type": "application/json; charset=utf-8",
         "Access-Control-Allow-Origin": "*",
         "Access-Control-Allow-Headers": "*",
-        "access-token": `${user.accessToken}`,
-        client: `${user.client}`,
-        uid: `${user.uid}`,
+        "access-token": `${tempUser.accessToken}`,
+        client: `${tempUser.client}`,
+        uid: `${tempUser.uid}`,
         mode: "no-cors",
       },
 			data: {
@@ -66,6 +70,7 @@ class ProdSubCategories {
       });
   };
 	addProdSubCategory = async (prodSubCategoriesState) => {
+		var tempUser = JSON.parse(window.localStorage.getItem("currentUser")) || null;
 		 
     return axios({
       method: "post",
@@ -74,9 +79,9 @@ class ProdSubCategories {
         "Content-Type": "application/json; charset=utf-8",
         "Access-Control-Allow-Origin": "*",
         "Access-Control-Allow-Headers": "*",
-        "access-token": `${user.accessToken}`,
-        client: `${user.client}`,
-        uid: `${user.uid}`,
+        "access-token": `${tempUser.accessToken}`,
+        client: `${tempUser.client}`,
+        uid: `${tempUser.uid}`,
         mode: "no-cors",
       },
       data: {
@@ -130,15 +135,16 @@ class ProdSubCategories {
 	};
 	
 	getProdSubCategoriesPdf = async (searchString) => {
+		var tempUser = JSON.parse(window.localStorage.getItem("currentUser")) || null;
 		 
     return axios({
       method: "get",
       url: `${process.env.REACT_APP_API_LOCAL_PATH}product_sub_categories.pdf?q%5Btitle_or_description_or_status_or_link_cont%5D=${searchString}`,
       headers: {
         "Content-Type": "application/json;",
-        "access-token": `${user.accessToken}`,
-        client: `${user.client}`,
-        uid: `${user.uid}`,
+        "access-token": `${tempUser.accessToken}`,
+        client: `${tempUser.client}`,
+        uid: `${tempUser.uid}`,
         mode: "no-cors",
       },
     })
@@ -157,15 +163,16 @@ class ProdSubCategories {
 	};
 	
 	getProdSubCategoriesCsv = async (searchString) => {
+		var tempUser = JSON.parse(window.localStorage.getItem("currentUser")) || null;
 		 
     return axios({
       method: "get",
       url: `${process.env.REACT_APP_API_LOCAL_PATH}product_sub_categories.csv?q%5Btitle_or_description_or_status_or_link_cont%5D=${searchString}`,
       headers: {
         "Content-Type": "application/json;",
-        "access-token": `${user.accessToken}`,
-        client: `${user.client}`,
-        uid: `${user.uid}`,
+        "access-token": `${tempUser.accessToken}`,
+        client: `${tempUser.client}`,
+        uid: `${tempUser.uid}`,
         mode: "no-cors",
       },
     })
