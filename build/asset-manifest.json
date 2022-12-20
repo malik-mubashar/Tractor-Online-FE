@@ -1,7 +1,7 @@
 {
-  "main.css": "/static/css/main.c257e15d.chunk.css",
-  "main.js": "/static/js/main.a88af246.chunk.js",
-  "main.js.map": "/static/js/main.a88af246.chunk.js.map",
+  "main.css": "/static/css/main.18536403.chunk.css",
+  "main.js": "/static/js/main.c1fc87f9.chunk.js",
+  "main.js.map": "/static/js/main.c1fc87f9.chunk.js.map",
   "static/css/1.aff92a52.chunk.css": "/static/css/1.aff92a52.chunk.css",
   "static/js/1.9930c325.chunk.js": "/static/js/1.9930c325.chunk.js",
   "static/js/1.9930c325.chunk.js.map": "/static/js/1.9930c325.chunk.js.map",
@@ -15,7 +15,7 @@
   "static/media/logo.png": "/static/media/logo.7c03733c.png",
   "static/media/tractoronline.png": "/static/media/tractoronline.5675d6d2.png",
   "static/media/upload-photos-logo.png": "/static/media/upload-photos-logo.f2acd27b.png",
-  "static/media/styles.css": "/static/media/revicons.17629a5d.ttf",
+  "static/media/styles.css": "/static/media/revicons.2feb69cc.eot",
   "static/media/tractorCover2.jpg": "/static/media/tractorCover2.490e029e.jpg",
   "static/media/tractorCover3.jpg": "/static/media/tractorCover3.a3736740.jpg",
   "static/media/t1.jpg": "/static/media/t1.ad9370a8.jpg",
@@ -38,9 +38,9 @@
   "static/media/lightgallery.css": "/static/media/lg.f4292655.ttf",
   "static/media/price-logo.png": "/static/media/price-logo.0dcade10.png",
   "static/media/team.jpg": "/static/media/team.29a2723e.jpg",
-  "static/css/main.c257e15d.chunk.css.map": "/static/css/main.c257e15d.chunk.css.map",
   "static/css/1.aff92a52.chunk.css.map": "/static/css/1.aff92a52.chunk.css.map",
+  "static/css/main.18536403.chunk.css.map": "/static/css/main.18536403.chunk.css.map",
   "index.html": "/index.html",
-  "precache-manifest.03f8c1ac56ff911b9f1ddacc2200dd00.js": "/precache-manifest.03f8c1ac56ff911b9f1ddacc2200dd00.js",
+  "precache-manifest.769e19312750e4578955f0c63388e99c.js": "/precache-manifest.769e19312750e4578955f0c63388e99c.js",
   "service-worker.js": "/service-worker.js"
 }

@@ -241,6 +241,30 @@ updateProduct = async (productsState, formData) => {
         };
       });
 	};
+	searchProductsByTitle = async (searchValue) => {
+    return axios({
+      method: "get",
+      url: `${process.env.REACT_APP_API_LOCAL_PATH}search_products_by_title?search_value=${searchValue}`,
+      headers: {
+        "Content-Type": "application/json; charset=utf-8",
+        "Access-Control-Allow-Origin": "*",
+        "Access-Control-Allow-Headers": "*",
+        mode: "no-cors",
+      },
+    })
+      .then((result) => {
+        return {
+          error: false,
+          data: result.data,
+        };
+      })
+      .catch((error) => {
+        return {
+          error: true,
+          data: error.response.data,
+        };
+      });
+	};
 	
 	getProductsForLandingPage = async ( ) => {
     return axios({

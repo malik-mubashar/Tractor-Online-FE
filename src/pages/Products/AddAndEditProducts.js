@@ -341,8 +341,13 @@ export default function AddAndEditProduct({
       formData.append("extra_fields", JSON.stringify(extraFieldsData));
        
       formData.append("featured", productsState.featured);
-      formData.append("brand_id", productsState.brand_id);
-      formData.append("user_id", productsState.user.id);
+			formData.append("brand_id", productsState.brand_id);
+			if (productsState.isAddProduct) {
+				formData.append("user_id", user.id);
+			}
+			if (productsState.isEditProduct) {
+				formData.append("user_id", productsState.user.id);
+			}
       formData.append("city", productsState.city);
       if (productsState.isAddProduct) {
         formData.append(

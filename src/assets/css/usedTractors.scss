@@ -59,3 +59,12 @@
   border: 3px solid rgb(0, 102, 0);
   background-color: rgba(179, 179, 179, 0.4);
 }
+.suggestions{
+	position: absolute;
+	background-color: white;
+	width: 91%;
+	border: 1px solid black;
+	z-index: 9;
+	overflow-y: auto;
+	height: 200px;
+}
