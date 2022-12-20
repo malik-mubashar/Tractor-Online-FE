@@ -16,23 +16,35 @@ import { productApis } from "../../API/ProductApis";
 export default function UsedTractor() {
   const history = useHistory();
 
-  const { setLandingPageSearchOptions,setShowLoader } = useContext(RootContext);
+  const { setLandingPageSearchOptions, setShowLoader } = useContext(
+    RootContext
+  );
 
   const [tractorModel, setTractorModel] = useState("");
   const [citySelected, setCitySelected] = useState("");
   const [cities, setCities] = useState("");
   const [minPrice, setMinPrice] = useState();
   const [modalShow, setModalShow] = useState(false);
-  const [searchSuggestions, setSearchSuggestions] = useState('');
+  const [searchSuggestions, setSearchSuggestions] = useState("");
   const [products, setProducts] = useState([]);
   const [prodCategories, setProdCategories] = useState();
   const search = useLocation().search;
   var category = new URLSearchParams(search).get("category");
   useEffect(() => {
-		// handleGetAllProductCategories();
-		if (category !== '') {
-			handleGetAllProducts(1,30,'nil','nil','nil','nil','nil','nil',category)
-		}
+    // handleGetAllProductCategories();
+    if (category !== "") {
+      handleGetAllProducts(
+        1,
+        30,
+        "nil",
+        "nil",
+        "nil",
+        "nil",
+        "nil",
+        "nil",
+        category
+      );
+    }
   }, [category]);
 
   const getAllCity = async () => {
@@ -44,12 +56,6 @@ export default function UsedTractor() {
         tempArray.push({ ...item, label: item.title, value: item.title })
       );
     setCities(tempArray);
-  };
-  const handleGetAllProductCategories = async () => {
-    const result = await prodApi.getAllProductCategories();
-    if (result.error === false) {
-      setProdCategories(result.data && result.data.data);
-    }
   };
 
   const [maxPrice, setMaxPrice] = useState();
@@ -99,9 +105,9 @@ export default function UsedTractor() {
     } else {
       history.push("/product/sell/");
     }
-	}
-	
-	const handleGetAllProducts = async (
+  }
+
+  const handleGetAllProducts = async (
     page = "1",
     tempNoOfRec = "10",
     city = "nil",
@@ -134,8 +140,8 @@ export default function UsedTractor() {
     if (result.error === true) {
       setShowLoader(false);
     }
-	};
-	const searchProductsByTitle = async (searchValue ) => {
+  };
+  const searchProductsByTitle = async (searchValue) => {
     // setShowLoader(true);
     const result = await productApis.searchProductsByTitle(searchValue);
     if (result.error === false) {
@@ -145,8 +151,9 @@ export default function UsedTractor() {
     if (result.error === true) {
       // setShowLoader(false);
     }
-	};
-	var temp=[[1,'asd'],[2,'asd2'],[3,'asd3'],[4,'asd4'],[5,'asd5'],[6,'asd6'],[7,'asd7'],[8,'asd8'],[9,'asd9'],[10,'asd10'],[11,'asd11']]
+  };
+
+
   return (
     <div className="usedTractorMain pt-3">
       <div className="usedTractorsContainer">
@@ -163,27 +170,42 @@ export default function UsedTractor() {
       <div className="container">
         <div className="searchCard card">
           <div className="row mt-3">
-            <div  className="col-12 col-lg-4 my-2 position-relative">
+            <div className="col-12 col-lg-4 my-2 position-relative">
               <Form.Group>
-                <Form.Control
+								<Form.Control
+									value={tractorModel}
                   className="searchTitle fieldHeight"
                   placeholder="Search by Name...."
                   type="email"
-                  onChange={(event) => setTractorModel(event.target.value)}
-								/>
-								<div className="suggestions d-none">
-									<ul>
-										{
-											temp && temp.length > 0 && temp.map((item) => {
-												return (
-													<>
-														<li>{ item[1]}</li>
-													</>
-												)
-											})
+                  onChange={(event) => {
+										setTractorModel(event.target.value);
+										if (event.target.value === '') {
+											setSearchSuggestions([])
+										} else {
+											searchProductsByTitle(event.target.value);
 										}
-									</ul>
-								</div>
+                  }}
+                />
+
+                {searchSuggestions && searchSuggestions.length > 0 ? (
+                  <div className="suggestions">
+                    <ul className="suggestions-ul">
+                      {searchSuggestions.map((item) => {
+                        return (
+                          <>
+														<li onClick={(event) => {
+															debugger;
+															setTractorModel(event.target.textContent)
+															setSearchSuggestions([])
+														}}>{item}</li>
+                          </>
+                        );
+                      })}
+                    </ul>
+                  </div>
+                ) : (
+                  ""
+                )}
               </Form.Group>
             </div>
             <div className="col-12 col-lg-4 my-2">
@@ -236,13 +258,7 @@ export default function UsedTractor() {
               }}
             >
               Search
-						</button>
-						<button onClick={() => {
-		searchProductsByTitle('29')
-
-						 }}>
-asd
-						</button>
+            </button>
           </div>
         </div>
         <div className="container row ml-4">
@@ -285,17 +301,18 @@ asd
           </div>
         </div>
       </div>
-			{products && products.length > 0 &&
-				<div className="bg-white my-4">
-        <div className="container-lg py-4 ">
-          <FeaturedProducts
-            title={products[0].product_category.title}
-            link={``}
-						prodCategoryId={category}
-						products={products}
-          />
+      {products && products.length > 0 && (
+        <div className="bg-white my-4">
+          <div className="container-lg py-4 ">
+            <FeaturedProducts
+              title={products[0].product_category.title}
+              link={``}
+              prodCategoryId={category}
+              products={products}
+            />
+          </div>
         </div>
-      </div>}
+      )}
     </div>
   );
 }
