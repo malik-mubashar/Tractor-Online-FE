@@ -6,6 +6,7 @@ import Select from "react-select";
 import { RootContext } from "../../context/RootContext";
 
 import CreatableSelect from "react-select/creatable";
+import { productApis } from "../../API/ProductApis";
 
 const searchAble = () => {
   const history = useHistory();
@@ -14,7 +15,9 @@ const searchAble = () => {
   const [makeOrModel, setTractorModel] = useState("");
   const [city, setCity] = useState("");
   const [minPrice, setMinPrice] = useState();
-  const [citiesForSelect, setCitiesForSelect] = useState([]);
+	const [citiesForSelect, setCitiesForSelect] = useState([]);
+  const [searchSuggestions, setSearchSuggestions] = useState("");
+	
 
   const [maxPrice, setMaxPrice] = useState();
   const [minPriceOptions, setMinPriceOptions] = useState([
@@ -81,6 +84,22 @@ const searchAble = () => {
 		);
 	}
 
+	const searchProductsByTitle = async (searchValue) => {
+    // setShowLoader(true);
+    const result = await productApis.searchProductsByTitle(searchValue);
+    if (result.error === false) {
+      setSearchSuggestions(result.data && result.data.data);
+      // setShowLoader(false);
+    }
+    if (result.error === true) {
+      // setShowLoader(false);
+    }
+	};
+	
+
+	console.log("suggestions", searchSuggestions);
+  console.log("tractor", makeOrModel);
+
   return (
     <>
 			<ul
@@ -89,8 +108,8 @@ const searchAble = () => {
 						goToSearchDetailPage()
 					}
 			 }} 
-			 className="list-unstyled search-front clearfix d-flex justify-content-center d-flex mainSearch mainSearchBorderSet">
-        <li className="home-autocomplete-field">
+			 className="list-unstyled search-front clearfix d-flex justify-content-center d-flex mainSearch mainSearchBorderSet ">
+        <li className="home-autocomplete-field position-relative">
           <input
             data-autocomplete-class="home-autocomplete"
             data-pw-source="car"
@@ -100,10 +119,36 @@ const searchAble = () => {
             tabIndex="2"
             type="text"
             value={makeOrModel}
-            onChange={(e) => setTractorModel(e.target.value)}
+						onChange={(e) => {
+							setTractorModel(e.target.value)
+							if (e.target.value === '') {
+								setSearchSuggestions([])
+							} else {
+								searchProductsByTitle(e.target.value);
+							}
+						}}
             className="ui-autocomplete-input form-control searchAble border-left-radius border-right px-2"
             autoComplete="off"
-          />
+					/>
+					 {searchSuggestions && searchSuggestions.length > 0 ? (
+                  <div className="suggestions">
+                    <ul className="suggestions-ul">
+                      {searchSuggestions.map((item) => {
+                        return (
+                          <>
+														<li onClick={(event) => {
+															debugger;
+															setTractorModel(event.target.textContent)
+															setSearchSuggestions([])
+														}}>{item}</li>
+                          </>
+                        );
+                      })}
+                    </ul>
+                  </div>
+                ) : (
+                  ""
+                )}
         </li>
         <li className="col-2 px-0">
           <Select
