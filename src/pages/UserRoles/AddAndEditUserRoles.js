@@ -46,7 +46,6 @@ export default function AddAndEditUserRoles({
     try {
       const result = await roleApis.getRoles(1, "", 10000000);
       if (result.error === false) {
-        debugger;
         toast.dismiss(loadingToastId);
 
         setRoles(result.data.data);
@@ -158,7 +157,6 @@ console.log('all users',users)
                     as="select"
                     // value={userRolesState.user}
 										onChange={(e) => {
-											debugger;
 											setUserRolesState({
 												...userRolesState,
 												userId: e.target.value

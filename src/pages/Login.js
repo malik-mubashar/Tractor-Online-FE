@@ -9,7 +9,6 @@ import { RootContext } from "../context/RootContext";
 import toast from "react-hot-toast";
 import Icofont from 'react-icofont';
 import Cookies from 'universal-cookie';
-import BootstrapSwitchButton from "bootstrap-switch-button-react";
 
 
 const Login = () => {
@@ -45,7 +44,6 @@ const Login = () => {
 
     try {
 			const result = await user.login(phone,email, password);
-			debugger;
       //success
 			if (result.error === false) {
 				toast.dismiss(loadingToastId);
@@ -171,24 +169,25 @@ const Login = () => {
 									<div className="d-flex justify-content-between">
 										<h1 className="heading">Sign In</h1>
 										<div className="login-form" >
-											<BootstrapSwitchButton
-											className="col-md-8 d-flex"
-											checked={false}
-											onstyle="warning"
-											offstyle="info"
-											onlabel="Phone"
-											offlabel="Email"
-												onChange={(checked) => {
-													if (checked) {
-														setSignInWithPhone(!signInWithPhone);
-														setPhone(null) 
-													} else {
-														setSignInWithPhone(!signInWithPhone);
-														setEmail(null)
+											<label>
+												<input type="checkbox"
+													defaultChecked={false}
+													onChange={(checked) =>{
+														if (checked) {
+															setSignInWithPhone(!signInWithPhone);
+															setPhone(null) 
+														} else {
+															setSignInWithPhone(!signInWithPhone);
+															setEmail(null)
+														}
+													
 													}
-												}
-											}
-										/>
+													}
+												/>
+												Use Email
+											</label>
+
+											
 										</div>
 									</div>
 									<Form>

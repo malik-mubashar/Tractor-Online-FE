@@ -94,7 +94,6 @@ const Layout = (props) => {
 	const handleGetProductsForLandingPage = async () => {
     const result = await productApis.getProductsForLandingPage();
 		if (result.error === false) {
-			debugger;
       setProducts(result.data && result.data.data);
     }
 	};

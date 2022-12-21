@@ -48,6 +48,7 @@ class ProdCategories {
 			formData.append("active_image", prodCategoriesState.image);
 		}
 		formData.append("brand_id", prodCategoriesState.brand_id);
+		var tempUser = JSON.parse(window.localStorage.getItem("currentUser")) || null;
    
     return axios({
       method: "put",
@@ -56,9 +57,9 @@ class ProdCategories {
         "Content-Type": "multipart/form-data",
         "Access-Control-Allow-Origin": "*",
         "Access-Control-Allow-Headers": "*",
-        "access-token": `${user.accessToken}`,
-        client: `${user.client}`,
-        uid: `${user.uid}`,
+        "access-token": `${tempUser.accessToken}`,
+        client: `${tempUser.client}`,
+        uid: `${tempUser.uid}`,
         mode: "no-cors",
       },
 			data:formData,

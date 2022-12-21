@@ -8,7 +8,6 @@ import { user } from "../API/User/index";
 import { RootContext } from "../context/RootContext";
 import toast from "react-hot-toast";
 import Icofont from 'react-icofont';
-import BootstrapSwitchButton from "bootstrap-switch-button-react";
 
 const SignUp = () => {
   const { currentUser, setCurrentUser, setSignUpMessage,signUpMessage } = useContext(RootContext);
@@ -140,24 +139,23 @@ const SignUp = () => {
 										<div className="d-flex justify-content-between">
 											<h1 className="heading">Sign Up</h1>
 											<div className="login-form" >
-												<BootstrapSwitchButton
-												className="col-md-8 d-flex"
-												checked={false}
-												onstyle="warning"
-												offstyle="info"
-												onlabel="Phone"
-												offlabel="Email"
-													onChange={(checked) => {
-																if (checked) {
-																	setSignUpWithPhone(!signUpWithPhone);
-																	setPhone(null) 
-																} else {
-																	setSignUpWithPhone(!signUpWithPhone);
-																	setEmail(null)
-																}
-															}
+											<label>
+												<input type="checkbox"
+													defaultChecked={false}
+													onChange={(checked) =>{
+														if (checked) {
+															setSignUpWithPhone(!signUpWithPhone);
+															setPhone(null) 
+														} else {
+															setSignUpWithPhone(!signUpWithPhone);
+															setEmail(null)
 														}
-													/>
+													
+													}
+													}
+												/>
+												Use Email
+											</label>
 											</div>
 										</div>
                     <Form>

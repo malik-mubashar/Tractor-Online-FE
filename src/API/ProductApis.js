@@ -65,7 +65,9 @@ updateProduct = async (productsState, formData) => {
         };
       });
   };
-  addProduct = async (productsState, formData) => {
+	addProduct = async (productsState, formData) => {
+		const tempUser = JSON.parse(window.localStorage.getItem("currentUser")) || null;
+
     return axios({
       method: "post",
       url: `${process.env.REACT_APP_API_LOCAL_PATH}products`,
@@ -74,9 +76,9 @@ updateProduct = async (productsState, formData) => {
         "Content-Type": "multipart/form-data",
         "Access-Control-Allow-Origin": "*",
         "Access-Control-Allow-Headers": "*",
-        "access-token": `${user.accessToken}`,
-        client: `${user.client}`,
-        uid: `${user.uid}`,
+        "access-token": `${tempUser.accessToken}`,
+        client: `${tempUser.client}`,
+        uid: `${tempUser.uid}`,
         mode: "no-cors",
       },
 
@@ -98,7 +100,6 @@ updateProduct = async (productsState, formData) => {
 
 	getProducts = async (page, searchString, noOfRec,featured=true) => {
 		const tempUser = JSON.parse(window.localStorage.getItem("currentUser")) || null;
-		debugger;
     return axios({
       method: "get",
       url: `${process.env.REACT_APP_API_LOCAL_PATH}products?page=${page}&q%5Btitle_or_status_or_description_or_city_or_location_cont%5D=${searchString}&no_of_record=${noOfRec}&featured=${featured}`,
