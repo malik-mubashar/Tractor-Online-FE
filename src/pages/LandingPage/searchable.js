@@ -131,13 +131,13 @@ const searchAble = () => {
             autoComplete="off"
 					/>
 					 {searchSuggestions && searchSuggestions.length > 0 ? (
-                  <div className="suggestions">
+						<div className="suggestions mt-2 card shadow" style={{ border: 'none'}}>
                     <ul className="suggestions-ul">
                       {searchSuggestions.map((item) => {
                         return (
                           <>
-														<li onClick={(event) => {
-															debugger;
+														<li className="mt-3 p-1" onClick={(event) => {
+															
 															setTractorModel(event.target.textContent)
 															setSearchSuggestions([])
 														}}>{item}</li>

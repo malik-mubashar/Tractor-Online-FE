@@ -63,7 +63,6 @@ class UserRoles {
       });
   };
 	addUserRole = async (rolesState) => {
-		debugger;
     return axios({
       method: "post",
       url: `${process.env.REACT_APP_API_LOCAL_PATH}users_roles`,

@@ -57,6 +57,7 @@ import Privacy from "../pages/privacy";
 import Terms from "../pages/terms";
 import Users from "../pages/PostAd/users"
 import ContactUs from "../pages/contactUs";
+import CompareProducts from "../pages/CompareProducts/CompareProducts";
 
 const AppRouter = () => {
   return (
@@ -174,6 +175,11 @@ const AppRouter = () => {
           <Route exact path="/product/sell">
             <Layout>
               <SellTractor />
+            </Layout>
+					</Route>
+					<Route exact path="/products/new-tractor/compare">
+						<Layout>
+							<CompareProducts />
             </Layout>
 					</Route>
           <UnProtectedRoute exact path="/product/sell/post-ad">

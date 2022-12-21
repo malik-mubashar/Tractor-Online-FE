@@ -34,7 +34,6 @@ export default function Roles() {
   
     try {
 			const result = await roleApis.getRoles(page, mainSearch, noOfRec);
-			debugger;
       if (result.error == false && result.data.status == "success") {
         toast.dismiss(loadingToastId);
 

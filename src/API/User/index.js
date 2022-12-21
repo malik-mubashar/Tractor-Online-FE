@@ -59,7 +59,6 @@ class User {
   };
 
 	login = async (phone, email, password) => {
-		debugger;
 		var tempData={}
 		if (email) {
 			 tempData = {
@@ -279,7 +278,6 @@ class User {
 	};
 	uploadProfilePicture = async (picture) => {
 		const currentUser = JSON.parse(window.localStorage.getItem("currentUser")) || null;
-		debugger;
 		 
     return axios({
       method: "patch",
@@ -340,7 +338,6 @@ class User {
 	};
 	getAllUsers = async () => {
 		const tempCurrentUser = JSON.parse(window.localStorage.getItem("currentUser"))
-		debugger;
     return axios({
       method: "get",
       url: `${process.env.REACT_APP_API_LOCAL_PATH}app_users`,
