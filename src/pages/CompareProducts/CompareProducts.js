@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import Navigation from "../../components/Navigation/Navigation";
 import * as Icon from "react-feather";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import { isMobile } from "react-device-detect";
 import {
   Dropdown,
@@ -21,7 +21,27 @@ import Select from "react-select";
 import { productApis } from "../../API/ProductApis";
 
 export default function CompareProducts() {
-	const [products,setProducts]=useState([])
+	const search = useLocation().search;
+	var category = new URLSearchParams(search).get("category");
+	const [optionsOfSelect1, setOptionsOfselect1] = useState([])
+	const [optionsOfSelect2, setOptionsOfselect2] = useState([])
+	const [optionsOfSelect3, setOptionsOfselect3] = useState([])
+	const [selectedProd1, setSelectedProd1] = useState({})
+	const [selectedProd2, setSelectedProd2] = useState({})
+	const [selectedProd3, setSelectedProd3] = useState({})
+	// const [options, setOptions] = useState([])
+	const [products, setProducts] = useState([])
+	const options = [
+		{label: "one", value: 1, isDisabled: true},
+		{label: "two", value: 2}
+	]
+	
+	useEffect(() => {
+		if (category !== '') {
+			handleGetAllProducts()
+		}
+	}, [])
+	
 	const handleGetAllProducts = async () => {
     const result = await productApis.getAllProducts(
       "1",
@@ -32,16 +52,25 @@ export default function CompareProducts() {
       'nil',
       "nil",
       "nil",
-      "nil",
+      category,
       "active",
       "nil"
     );
     if (result.error === false) {
 			setProducts(result.data && result.data.data);
+			var temp=result.data.data.map((item) => {
+				return{label:item.title,value:item.id}
+			})
+			setOptionsOfselect1(temp)
+			setOptionsOfselect2(temp)
+			setOptionsOfselect3(temp)
     }
 	}
+	const filterOptions = () => {
+		
+	}
 
-
+	console.log("products",products)
   return (
 		<>
 			<div className="compare-new-tractor-heading">
@@ -75,30 +104,36 @@ export default function CompareProducts() {
 					<div className="col-12 col-lg-4 my-2">
               <Select
                 className="fieldHeight mainSearch"
-                // options={cities}
-                label="Select City"
-                placeholder="Select City"
-                // onChange={(e) => setCitySelected(e.label)}
+                options={optionsOfSelect1}
+                label="Select Tractor"
+                placeholder="Select Tractor"
+								onChange={(e) => {
+									setSelectedProd1(e.value)
+									debugger;
+									console.log(optionsOfSelect1)
+									console.log(optionsOfSelect1)
+									filterOptions()
+								}}
                 clearable={false}
               />
             </div>
             <div className="col-12 col-lg-4 my-2">
               <Select
                 className="fieldHeight mainSearch"
-                // options={cities}
-                label="Select City"
-                placeholder="Select City"
-                // onChange={(e) => setCitySelected(e.label)}
+                options={optionsOfSelect2}
+                label="Select Tractor"
+                placeholder="Select Tractor"
+                onChange={(e) => setSelectedProd2(e.value)}
                 clearable={false}
               />
 						</div>
 						<div className="col-12 col-lg-4 my-2">
               <Select
                 className="fieldHeight mainSearch"
-                // options={cities}
-                label="Select City"
-                placeholder="Select City"
-                // onChange={(e) => setCitySelected(e.label)}
+                options={optionsOfSelect3}
+                label="Select Tractor"
+                placeholder="Select Tractor"
+                onChange={(e) => setSelectedProd3(e.value)}
                 clearable={false}
               />
             </div>

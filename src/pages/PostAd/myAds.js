@@ -22,6 +22,8 @@ const myAds = () => {
 		inActive: false,
 		featured:false,
 	})
+	const [isHovering, setIsHovering] = useState(false);
+
 
 
 
@@ -150,6 +152,37 @@ const myAds = () => {
 			console.error(error);
 		}	
 	}
+
+	const unFeatureCurrentAd =async (item) => {
+		let formData = new FormData();
+		let state={productId:item.id}
+		formData.append("featured", false);
+		try {
+			const result = await productApis.updateProduct(
+				state,
+				formData
+			);
+			if (result.error === false) {
+				console.log(result)
+				toast.success('Request Canceled')
+				if (tabs.inActive) {
+					handleGetActiveProducts(1, mainSearchString, noOfRec,'inactive');
+				}
+				if (tabs.active) {
+					handleGetActiveProducts(1, mainSearchString, noOfRec,'active');
+				}
+				if (tabs.featured) {
+					handleGetActiveProducts(1, mainSearchString, noOfRec,'nil',true);
+				}
+			}
+			if (result.error === true) {
+				console.log(result)
+			}
+		} catch (error) {
+			console.error(error);
+		}	
+	}
+
 	const getProductCards = () => {
 		console.log('activeProducts',activeProducts)
 		return (
@@ -186,14 +219,21 @@ const myAds = () => {
 												</h5>
 												{
 													item.featured ? (
-													<span className="featuredBand">Featured</span>
+														<>
+															<span className="featuredBand">Featured</span>
+														</>
 													) : item.featured === null ?
 													(<>
-														<p className="d-flex requested-featured">
-																	Requested
-																	<i style={{marginTop:'0.32rem'}} className="icofont-tick-mark"></i>
-																	
-														</p>
+																<p
+																	onClick={() => {																		
+																			if (window.confirm('Are you sure to cancel request?')) {
+																				unFeatureCurrentAd(item)
+																		}
+																	}}
+																	className="d-flex requested-featured">
+																	Cancle Request
+																	<i style={{marginTop:'0.32rem'}} className="icofont-cross"></i>
+																</p>																
 														</>
 													)
 													: (
