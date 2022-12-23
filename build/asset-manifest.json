@@ -1,7 +1,7 @@
 {
   "main.css": "/static/css/main.dc315626.chunk.css",
-  "main.js": "/static/js/main.207bd549.chunk.js",
-  "main.js.map": "/static/js/main.207bd549.chunk.js.map",
+  "main.js": "/static/js/main.e67ac1d6.chunk.js",
+  "main.js.map": "/static/js/main.e67ac1d6.chunk.js.map",
   "static/css/1.7e3a0e45.chunk.css": "/static/css/1.7e3a0e45.chunk.css",
   "static/js/1.fd58d9ac.chunk.js": "/static/js/1.fd58d9ac.chunk.js",
   "static/js/1.fd58d9ac.chunk.js.map": "/static/js/1.fd58d9ac.chunk.js.map",
@@ -15,7 +15,7 @@
   "static/media/logo.png": "/static/media/logo.7c03733c.png",
   "static/media/tractoronline.png": "/static/media/tractoronline.5675d6d2.png",
   "static/media/upload-photos-logo.png": "/static/media/upload-photos-logo.f2acd27b.png",
-  "static/media/styles.css": "/static/media/revicons.2feb69cc.eot",
+  "static/media/styles.css": "/static/media/revicons.17629a5d.ttf",
   "static/media/tractorCover2.jpg": "/static/media/tractorCover2.490e029e.jpg",
   "static/media/tractorCover3.jpg": "/static/media/tractorCover3.a3736740.jpg",
   "static/media/t1.jpg": "/static/media/t1.ad9370a8.jpg",
@@ -41,6 +41,6 @@
   "static/css/main.dc315626.chunk.css.map": "/static/css/main.dc315626.chunk.css.map",
   "static/css/1.7e3a0e45.chunk.css.map": "/static/css/1.7e3a0e45.chunk.css.map",
   "index.html": "/index.html",
-  "precache-manifest.4bcb931f52776d329dd848dbaf46bd53.js": "/precache-manifest.4bcb931f52776d329dd848dbaf46bd53.js",
+  "precache-manifest.cb635661fd48966d5711c7a2b988fad1.js": "/precache-manifest.cb635661fd48966d5711c7a2b988fad1.js",
   "service-worker.js": "/service-worker.js"
 }
