@@ -8,6 +8,8 @@ import { user } from "../API/User/index";
 import { RootContext } from "../context/RootContext";
 import toast from "react-hot-toast";
 import Icofont from 'react-icofont';
+import ToggleButton from 'react-bootstrap/ToggleButton';
+
 
 const SignUp = () => {
   const { currentUser, setCurrentUser, setSignUpMessage,signUpMessage } = useContext(RootContext);
@@ -20,6 +22,12 @@ const SignUp = () => {
   const [email, setEmail] = useState(null);
   const [confirmPassword, setConfirmPassword] = useState();
   const [fullName, setFullName] = useState();
+  const [radioValue, setRadioValue] = useState('phone');
+
+  const radios = [
+    { name: 'Phone#', value: 'phone' },
+    { name: 'Email', value: 'email' }
+  ];
 
   const [password, setPassword] = useState();
   const [error, setError] = useState("");
@@ -138,25 +146,34 @@ const SignUp = () => {
 									<div className="form-content">
 										<div className="d-flex justify-content-between">
 											<h1 className="heading">Sign Up</h1>
-											<div className="login-form" >
-											<label>
-												<input type="checkbox"
-													defaultChecked={false}
-													onChange={(checked) =>{
-														if (checked) {
-															setSignUpWithPhone(!signUpWithPhone);
-															setPhone(null) 
-														} else {
-															setSignUpWithPhone(!signUpWithPhone);
-															setEmail(null)
-														}
-													
-													}
-													}
-												/>
-												Use Email
-											</label>
-											</div>
+											<div>
+                        {radios.map((radio, idx) => (
+                          <ToggleButton
+                            key={idx}
+                            id={`radio-${idx}`}
+                            type="radio"
+                            variant={idx % 2 ? 'outline-success' : 'outline-danger'}
+                            name="radio"
+                            value={radio.value}
+                            checked={radioValue === radio.value}
+                            onChange={(e) =>{
+                              if(e.currentTarget.value === 'email')
+                              {
+                                setSignUpWithPhone(!signUpWithPhone);
+                                setPhone(null)
+                              }
+                              else
+                              {
+                                setSignUpWithPhone(!signUpWithPhone);
+                                setEmail(null)
+                              }
+                              setRadioValue(e.currentTarget.value)
+                            }}
+                          >
+                              {radio.name}
+                          </ToggleButton>
+                        ))}
+                      </div>
 										</div>
                     <Form>
 											{signUpWithPhone ?

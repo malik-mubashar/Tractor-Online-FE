@@ -5,12 +5,19 @@ import Icofont from "react-icofont";
 import { Link, useHistory } from "react-router-dom";
 import { user } from "../API/User/index";
 import { RootContext } from "../context/RootContext";
+import ToggleButton from 'react-bootstrap/ToggleButton';
 
 const LoginModel = (props) => {
   const [password, setPassword] = useState();
   const [email, setEmail] = useState();
   const [phone, setPhone] = useState(null);
   const [passwordType, setPasswordType] = useState("password");
+  const [radioValue, setRadioValue] = useState('phone');
+
+  const radios = [
+    { name: 'Phone#', value: 'phone' },
+    { name: 'Email', value: 'email' }
+  ];
   let history = useHistory();
   const {
     currentUser,
@@ -123,22 +130,33 @@ const LoginModel = (props) => {
       </Modal.Header>
       <Modal.Body>
         <div className="form-content p-0">
-          <div className="d-flex" >
-            <label class="ml-auto">
-              <input type="checkbox"
-                defaultChecked={false}
-                onChange={(checked) =>{
-                  if (checked) {
+          <div className='d-flex justify-content-end'>
+            {radios.map((radio, idx) => (
+              <ToggleButton
+                key={idx}
+                id={`radio-${idx}`}
+                type="radio"
+                variant={idx % 2 ? 'outline-success' : 'outline-danger'}
+                name="radio"
+                value={radio.value}
+                checked={radioValue === radio.value}
+                onChange={(e) =>{
+                  if(e.currentTarget.value === 'email')
+                  {
                     setSignInWithPhone(!signInWithPhone);
                     setPhone(null)
-                  } else {
+                  }
+                  else
+                  {
                     setSignInWithPhone(!signInWithPhone);
                     setEmail(null)
                   }
+                  setRadioValue(e.currentTarget.value)
                 }}
-              />
-              Use Email
-            </label>
+              >
+                {radio.name}
+              </ToggleButton>
+            ))}
           </div>
           <Form>
             {signInWithPhone ?

@@ -9,10 +9,17 @@ import { RootContext } from "../context/RootContext";
 import toast from "react-hot-toast";
 import Icofont from 'react-icofont';
 import Cookies from 'universal-cookie';
-
+import ToggleButton from 'react-bootstrap/ToggleButton';
 
 const Login = () => {
 	const cookies = new Cookies();
+
+  const [radioValue, setRadioValue] = useState('phone');
+
+  const radios = [
+    { name: 'Phone#', value: 'phone' },
+    { name: 'Email', value: 'email' }
+  ];
 
   const { currentUser, setCurrentUser, signUpMessage, setSignUpMessage,userProfilePicture, setUserProfilePicture } = useContext(RootContext);
   const [alertMessage, setAlertMessage]  = useState('Confirmation Mail mail sent to your Email Address. Kindly Confirm Your email to continue..')
@@ -168,23 +175,34 @@ const Login = () => {
                 <div className="form-content">
 									<div className="d-flex justify-content-between">
 										<h1 className="heading">Sign In</h1>
-										<div className="login-form" >
-											<label>
-												<input type="checkbox"
-													defaultChecked={false}
-													onChange={(checked) =>{
-														if (checked) {
-															setSignInWithPhone(!signInWithPhone);
-															setPhone(null) 
-														} else {
-															setSignInWithPhone(!signInWithPhone);
+                    <div>
+                      {radios.map((radio, idx) => (
+                        <ToggleButton
+                          key={idx}
+                          id={`radio-${idx}`}
+                          type="radio"
+                          variant={idx % 2 ? 'outline-success' : 'outline-danger'}
+                          name="radio"
+                          value={radio.value}
+                          checked={radioValue === radio.value}
+                          onChange={(e) =>{
+                            if(e.currentTarget.value === 'email')
+                            {
+                              setSignInWithPhone(!signInWithPhone);
+															setPhone(null)
+                            }
+                            else
+                            {
+                              setSignInWithPhone(!signInWithPhone);
 															setEmail(null)
-														}
-													}}
-												/>
-												Use Email
-											</label>
-										</div>
+                            }
+                            setRadioValue(e.currentTarget.value)
+                          }}
+                        >
+                          {radio.name}
+                        </ToggleButton>
+                      ))}
+                    </div>
 									</div>
 									<Form>
 										{signInWithPhone ?
