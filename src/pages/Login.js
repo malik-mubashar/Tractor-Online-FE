@@ -180,14 +180,10 @@ const Login = () => {
 															setSignInWithPhone(!signInWithPhone);
 															setEmail(null)
 														}
-													
-													}
-													}
+													}}
 												/>
 												Use Email
 											</label>
-
-											
 										</div>
 									</div>
 									<Form>
@@ -207,7 +203,6 @@ const Login = () => {
 													onChange={(event) => setEmail(event.target.value)}
 												/>
 											</Form.Group>
-											
 										}
                     <Form.Group className="relative">
                       <Form.Label>Password</Form.Label>
