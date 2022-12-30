@@ -25,6 +25,7 @@ const postad = () => {
 	const [citiesForSelect, setCitiesForSelect] = useState([]);
 
   const [showCategoryModel, setShowCategoryModel] = useState(true);
+  const [showCustomBrandField, setShowCustomBrandField] = useState(false);
   const [productMappings, setProductMappings] = useState([]);
   // const [prodCategories, setProdCategories] = useState([]);
   const [file, setFile] = useState([]);
@@ -41,6 +42,7 @@ const postad = () => {
     city: "",
     images: [],
     phone_no: "",
+    custom_brand: ""
   });
   const fieldsMap = [
     { name: "title", required: true },
@@ -285,6 +287,9 @@ const postad = () => {
       formData.append("brand_id", postAddState.brand_id);
       formData.append("user_id", user.id);
       formData.append("city", postAddState.city);
+      if (postAddState.custom_brand !== undefined){
+        formData.append("custom_brand", postAddState.custom_brand);
+      }
       if (postAddState.isCreateAd) {
         formData.append(
           "product_category_id",
@@ -485,7 +490,16 @@ const postad = () => {
                 fieldsWithError.brand_id === true ? "border-danger" : ""
               }
               as="select"
-              onChange={(e) => handleChange(e)}
+              onChange={(e) => {
+                if (e.currentTarget.value === 'other'){
+                  setShowCustomBrandField(true)
+                }
+                else{
+                  setShowCustomBrandField(false)
+                  postAddState.custom_brand = undefined
+                }
+                handleChange(e)
+              }}
               name="brand_id"
             >
               <option key="blankChoice" hidden value>
@@ -499,7 +513,7 @@ const postad = () => {
                       selected={
                         postAddState &&
                         postAddState.brand &&
-                        postAddState.brand.id == item.id
+                        postAddState.brand.id === item.id
                       }
                       key={item.id}
                     >
@@ -507,9 +521,32 @@ const postad = () => {
                     </option>
                   );
                 })}
+                <option key="other" value='other'>
+                  Other
+                </option>
             </Form.Control>
           </div>
         </div>
+        {showCustomBrandField ?
+          <div className="row my-2">
+            <div className="col-lg-3 col-12 text-lg-right">
+              <Form.Label>Custom Brand</Form.Label>
+            </div>
+            <div className="addEditProd col-lg-4 col-12">
+              <Form.Group controlId="formBasicName">
+                <Form.Control
+                  defaultValue={postAddState.custom_brand}
+                  name="custom_brand"
+                  type="text"
+                  placeholder="Enter Your Custom brand"
+                  onChange={(e) => handleChange(e)}
+                />
+              </Form.Group>
+            </div>
+          </div>
+         :
+          null
+         }
         <div className="row my-2">
           <div className="col-lg-3 col-12 text-lg-right">
             <Form.Label>City</Form.Label>
