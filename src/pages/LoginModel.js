@@ -50,7 +50,7 @@ const LoginModel = (props) => {
     const loadingToastId = toast.loading("Loading..!");
 
     try {
-      const result = await user.login(null,email, password);
+      const result = await user.login(phone,email, password);
 			//success
       if (result.error === false) {
         toast.dismiss(loadingToastId);
