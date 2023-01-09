@@ -376,7 +376,7 @@ const ProfileSettings = () => {
                       }}
                     />
                   </Form.Group>
-                  <Form.Group as={Col}>
+                  {/* <Form.Group as={Col}>
                     <Form.Label>Email</Form.Label>
                     <Form.Control
                       type="text"
@@ -384,7 +384,7 @@ const ProfileSettings = () => {
                       disabled={true}
                       value={editProfile.email ? editProfile.email : ""}
                     />
-                  </Form.Group>
+                  </Form.Group> */}
                 </Form.Group>
 
                 <Form.Group>

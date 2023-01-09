@@ -78,6 +78,7 @@ const postad = () => {
 				...result.data.data,
 				productId:result.data.data.id
 			})
+			getExtraFields(result.data.data.extra_fields);
 			setShowLoader(false);
 			//because setstate is delaying
 			return {
@@ -89,6 +90,7 @@ const postad = () => {
 	};
 	useEffect(() => {
 		if (id) {
+			setShowCategoryModel(false)
 			getAdData()
 		}
 	}, [id])
@@ -420,8 +422,9 @@ const postad = () => {
       images: templist,
     });
 	}
-	console.log('postAddState',postAddState)
 
+	console.log('city',postAddState.city)
+	console.log('citiesForSelect',citiesForSelect)
   return (
     <>
       <div className="card text-center my-4 p-4">
@@ -547,12 +550,55 @@ const postad = () => {
          :
           null
          }
-        <div className="row my-2">
-          <div className="col-lg-3 col-12 text-lg-right">
+				<div className="row my-2">
+				<div className="col-lg-3 col-12 text-lg-right">
+            <Form.Label>City</Form.Label>
+					</div>
+					<div className="addEditProd col-lg-4 col-12">
+					<Form.Control
+								className={
+									fieldsWithError.city === true ? "border-danger" : ""
+								}
+								as="select"
+								onChange={(e) => {
+									if (e)
+										setPostAddState({
+											...postAddState,
+											city: e.target.value,
+										});
+								}}
+								name="city"
+							>
+								<option key="blankChoice" hidden value>
+									-- Select City--
+								</option>
+								{citiesForSelect &&
+									citiesForSelect.map((item) => {
+										return (
+											<option
+												value={item.title}
+												selected={
+													postAddState &&
+													postAddState.city &&
+													postAddState.city === item.title
+												}
+												key={item.id}
+											>
+												{item.title}
+											</option>
+										);
+									})}
+							</Form.Control>
+					</div>
+          {/* <div className="col-lg-3 col-12 text-lg-right">
             <Form.Label>City</Form.Label>
           </div>
           <div className="addEditProd col-lg-4 col-12">
-            <Select
+						<Select
+							defaultValue={{
+								value: postAddState && postAddState.city && postAddState.city,
+								label: postAddState && postAddState.city && postAddState.city,
+							}}
               className="ui-autocomplete-input form-control searchAble"
               options={citiesForSelect}
               name="city"
@@ -567,7 +613,7 @@ const postad = () => {
               }}
               clearable={false}
             />
-          </div>
+          </div> */}
         </div>
         <div className="row my-2">
           <div className="col-lg-3 col-12 text-lg-right">
@@ -816,7 +862,7 @@ const postad = () => {
           <div className="row">
             {prodCategories &&
               prodCategories.map((item, idx) => (
-                <div className={`col-lg-6 col-12`}>
+								<div key={ idx} className={`col-lg-6 col-12`}>
                   <div
                     id={item.id}
                     onClick={(e) => {
