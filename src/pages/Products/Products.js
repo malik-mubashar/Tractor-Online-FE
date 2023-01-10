@@ -441,7 +441,8 @@ export default function Products() {
 																			imagesPathThumbnail: [product.cover_photo_thumbnail,...product.active_images_thumbnail],
 																			images: [],
 																			cover_photo: null,
-																			user:product.user
+																			user: product.user,
+																			price_currency:product.price_currency
                                     });
                                   }}
                                   className="text-success mr-2 icon wh-15 mt-minus-3 cursor-pointer"
