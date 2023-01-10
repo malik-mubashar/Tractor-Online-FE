@@ -207,7 +207,7 @@ export default function SearchListing({
                               history.push(`/ad-details/${item.id}`);
                             }}
                           >
-                            PKR {item.price}
+                            {item.price_currency} {item.price}
                           </h5>
                           {item.featured ? (
                             <span className="featuredBand">Featured</span>

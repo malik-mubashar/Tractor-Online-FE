@@ -76,7 +76,6 @@ export default function CompareProducts() {
 		var third = Object.keys(selectedProd3).length === 0
 		// when three products are selected
 		if (first === false && second === false && third === false) {
-			debugger;
 			var p1=(products.find((item)=>item.id===selectedProd1.value))	
 			var p2=(products.find((item)=>item.id===selectedProd2.value))	
 			var p3=(products.find((item)=>item.id===selectedProd3.value))	
@@ -91,7 +90,6 @@ export default function CompareProducts() {
 				&& key !== 'featured'			
 				&& key !== 'active_images_path'			
 			))
-			debugger;
 			filteredKeys.forEach((key) => {
 				if (key !== 'extra_fields') {
 					temp2.push([key,p1[key],p2[key],p3[key]])

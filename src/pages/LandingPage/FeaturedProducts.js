@@ -74,7 +74,8 @@ export default function FeaturedProducts({ title, link, prodCategoryId, products
                     className="card-img border-radius"
                     src={item.cover_photo_thumbnail}
                     alt=""
-                  />
+									/>
+									{console.log('item',item.price_currency)}
                   <h4
                     className="mb-0 pl-2 border-radius productTitleTruncate"
                     title={item.title}
@@ -82,7 +83,7 @@ export default function FeaturedProducts({ title, link, prodCategoryId, products
                     {item.title}
                   </h4>
                   <p className="mb-0 pl-2 text-success border-radius">
-                    PKR {item.price}
+                    {item.price_currency} {item.price}
                   </p>
                   <p className="pl-2 border-radius">{item.city}</p>
                   {item.featured ? (

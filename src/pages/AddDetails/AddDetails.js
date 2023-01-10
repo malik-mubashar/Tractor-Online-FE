@@ -319,7 +319,7 @@ export default function AddDetails() {
                 <div className="">
                   <div className="priceBox">
                     <strong className="genericGreen">
-                      PKR {product.price}
+                      {product.price_currency} {product.price}
                     </strong>
                   </div>
 

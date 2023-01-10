@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useContext, useEffect, useRef, useState } from "react";
 import { Button, Col, Form, Row } from "react-bootstrap";
 import toast, { Toaster } from "react-hot-toast";
 import { productApis } from "../../API/ProductApis";
@@ -10,12 +10,14 @@ import { productMappingApis } from "../../API/ProductMappingApis";
 import { city } from "../../API/City/CityApis";
 import Select from "react-select";
 import loader from '../../assets/img/Spinner-2.gif'
+import { RootContext } from "../../context/RootContext";
 
 export default function AddAndEditProduct({
   productsState,
   setProductsState,
   getProducts,
 }) {
+  const { currency_list } = useContext(RootContext);
 
   const [brands, setBrands] = useState();
   const [managePics, setmanagePics] = useState(false);
@@ -45,7 +47,8 @@ export default function AddAndEditProduct({
     { name: "icon", required: false },
     // { name: "link", required: false },
     { name: "description", required: false },
-    { name: "price", required: true },
+		{ name: "price", required: true },
+    { name: "price_currency", required: true },
     { name: "brand_id", required: true },
     { name: "phone_no", required: true },
   ];
@@ -332,6 +335,7 @@ export default function AddAndEditProduct({
 			}
 
       formData.append("title", productsState.title);
+      formData.append("price_currency", productsState.price_currency);
       formData.append("status", productsState.status);
       formData.append("description", productsState.description);
       formData.append("price", productsState.price);
@@ -582,6 +586,37 @@ export default function AddAndEditProduct({
                     placeholder="price"
                     onChange={(e) => handleChange(e)}
                   />
+								</Form.Group>
+								<Form.Group controlId="formGridState">
+                  <Form.Label>Price Currency <span className="required-field">*</span></Form.Label>
+                  <Form.Control
+                    className={
+                      fieldsWithError.price_currency === true ? "border-danger" : ""
+                    }
+                    as="select"
+                    onChange={(e) => handleChange(e)}
+                    name="price_currency"
+                  >
+                    <option key="blankChoice" hidden value>
+                      -- Select Price Currency --
+                    </option>
+                    {currency_list &&
+                      currency_list.map((item,id) => {
+                        return (
+                          <option
+                            value={item.value}
+                            selected={
+                              productsState &&
+                              productsState.price_currency &&
+                              productsState.price_currency == item.value
+                            }
+                            key={id}
+                          >
+                            {item.label}
+                          </option>
+                        );
+                      })}
+                  </Form.Control>
                 </Form.Group>
                 <div className="addEditProd">
                   <Form.Label>City</Form.Label>

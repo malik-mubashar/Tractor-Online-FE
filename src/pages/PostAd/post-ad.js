@@ -19,7 +19,7 @@ import '../../assets/css/postAdd.scss'
 const postad = () => {
 	const { id } = useParams();
   const myRefname = useRef(null);
-  const { setShowLoader,prodCategories,cities,brands} = useContext(RootContext);
+  const { setShowLoader,prodCategories,cities,brands,currency_list} = useContext(RootContext);
   const [extraFieldsArr, setExtraFieldsArr] = useState([]);
 	const history = useHistory();
 	const [citiesForSelect, setCitiesForSelect] = useState([]);
@@ -57,6 +57,7 @@ const postad = () => {
     { name: "price", required: false },
     { name: "brand_id", required: true },
     { name: "phone_no", required: true },
+    { name: "price_currency", required: false },
 	];
 
 
@@ -276,11 +277,14 @@ const postad = () => {
         }
       } else {
         formData.append("cover_photo", postAddState.cover_photo);
-      }
+			}
+			
       formData.append("title", postAddState.title);
       formData.append("status", postAddState.status);
       formData.append("description", postAddState.description);
-      formData.append("price", postAddState.price);
+			formData.append("price", postAddState.price);
+			formData.append("price_currency", postAddState.price_currency);
+
       formData.append("location", postAddState.location);
       formData.append("phone_no", postAddState.phone_no);
       // formData.append("link", postAddState.link);
@@ -551,7 +555,7 @@ const postad = () => {
           null
          }
 				<div className="row my-2">
-				<div className="col-lg-3 col-12 text-lg-right">
+					<div className="col-lg-3 col-12 text-lg-right">
             <Form.Label>City</Form.Label>
 					</div>
 					<div className="addEditProd col-lg-4 col-12">
@@ -617,7 +621,7 @@ const postad = () => {
         </div>
         <div className="row my-2">
           <div className="col-lg-3 col-12 text-lg-right">
-            <Form.Label>Price <span className="required-field">*</span></Form.Label>
+            <Form.Label>Price </Form.Label>
           </div>
           <div className="addEditProd col-lg-4 col-12">
             <Form.Control
@@ -640,7 +644,43 @@ const postad = () => {
               price.
             </span>
           </div>
+				</div>
+				<div className="row my-2">
+					<div className="col-lg-3 col-12 text-lg-right">
+						<Form.Label>Price Currency </Form.Label>
+					</div>
+					<div className="addEditProd col-lg-4 col-12">
+						<Form.Control
+						className={
+							fieldsWithError.price_currency === true ? "border-danger" : ""
+						}
+						as="select"
+						onChange={(e) => handleChange(e)}
+						name="price_currency"
+					>
+						<option key="blankChoice" hidden value>
+							-- Select Price Currency --
+						</option>
+						{currency_list &&
+							currency_list.map((item,id) => {
+								return (
+									<option
+										value={item.value}
+										selected={
+											postAddState &&
+											postAddState.price_currency &&
+											postAddState.price_currency == item.value
+										}
+										key={id}
+									>
+										{item.label}
+									</option>
+								);
+							})}
+						</Form.Control>
+					</div>
         </div>
+				
         <div className="row my-2">
           <div className="col-lg-3 col-12 text-lg-right">
             <Form.Label>Phone Number <span className="required-field">*</span></Form.Label>
