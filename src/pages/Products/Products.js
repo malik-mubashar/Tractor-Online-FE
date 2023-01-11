@@ -1,14 +1,10 @@
 import React, { useEffect, useState } from "react";
-import Navigation from "../../components/Navigation/Navigation";
 import * as Icon from "react-feather";
-import { Link } from "react-router-dom";
 import { isMobile } from "react-device-detect";
 import {
   Table,
-  Button,
   FormControl,
   Form,
-  Pagination,
   Image,
 } from "react-bootstrap";
 import toast from "react-hot-toast";
@@ -16,17 +12,17 @@ import AddAndEditProduct from "./AddAndEditProducts";
 import { productApis } from "../../API/ProductApis";
 import csvSvg from "../../assets/svg/csv2.png";
 import pdfSvg from "../../assets/svg/pdf.png";
-import { brandApis } from "../../API/BrandsApis";
+import ImportImg from "../../assets/svg/import.svg";
 import Icofont from "react-icofont";
 import '../../assets/css/products.scss'
 
 export default function Products() {
-  const [paginationNumbers, setPaginationNumbers] = useState();
-  const [requestedProds, setRequestedProds] = useState(false);
+  // const [paginationNumbers, setPaginationNumbers] = useState();
+  // const [requestedProds, setRequestedProds] = useState(false);
   const [noOfRec, setNoOfRec] = useState(10);
   const [reqProdsNum, setReqProdsNum] = useState(0);
   const [mainSearchString, setMainSearchString] = useState("");
-  
+
   useEffect(() => {
     getProducts(1, "", 10);
   }, []);
@@ -34,7 +30,6 @@ export default function Products() {
   const getProducts = async (page, mainSearch, noOfRec,featured) => {
     const loadingToastId = toast.loading("Loading..!");
 
-   
 		try {
 			if (productsState.requestedProds === true && featured === undefined) {
 				featured='nil'
@@ -57,7 +52,7 @@ export default function Products() {
         for (var i = 1; i <= result.data.pagination.pages; i++) {
           temp.push(i);
         }
-        setPaginationNumbers(temp);
+        // setPaginationNumbers(temp);
       } else {
         toast.dismiss(loadingToastId);
         console.error(result.data);
@@ -77,7 +72,6 @@ export default function Products() {
         toast.success("Successfully deleted!");
         getProducts(1, "", 10);
       }
-     
     } catch (error) {
       console.error(error);
     }
@@ -143,7 +137,6 @@ export default function Products() {
         window.open(`${result.data.file_path}`, "_blank");
       } else {
         toast.dismiss(loadingToastId);
-        
       }
     } catch (e) {
       toast.dismiss(loadingToastId);
@@ -161,7 +154,6 @@ export default function Products() {
         window.open(`${result.data.file_path}`, "_blank");
       } else {
         toast.dismiss(loadingToastId);
-      
       }
     } catch (e) {
       toast.dismiss(loadingToastId);
@@ -241,8 +233,17 @@ export default function Products() {
 												All Products
 											</button>
 										}
-										
                 <div className="d-flex ml-auto">
+                  <Image
+                    onClick={() => {
+                      handleGetCsv();
+                    }}
+                    className="clickableSvg mr-2 importSvg"
+                    src={ImportImg}
+                    height="50px"
+                    width="50px"
+                    alt="Profile Image"
+                  />
                   <Image
                     onClick={() => {
                       handleGetCsv();
@@ -301,7 +302,7 @@ export default function Products() {
                 <div className="card-body">
                   <div className="card-header d-flex">
                     <h5 className="card-title w-50 float-left">Products</h5>
-                    <Form className="nav-search-form d-none d-sm-block float-right">
+                    <Form className="nav-search-form d-none d-sm-block ml-auto">
                       <FormControl
                         type="text"
                         onChange={(event) => handleSearch(event.target.value)}
@@ -361,7 +362,6 @@ export default function Products() {
                               <td>{product.location && product.location}</td>
                               <td>{product.phone_no && product.phone_no}</td>
 															<td>
-																
 																{product.featured === null ?
 																	'requested'
 																	:
@@ -420,7 +420,6 @@ export default function Products() {
                               </td>
                               <td className="text-center">
                                 <Icon.Edit2
-                                 
                                   onClick={() => {
                                     setProductsState({
                                       ...productsState,
@@ -449,8 +448,6 @@ export default function Products() {
                                 />
                                 <div className="text-danger mr-2">
                                   <Icofont icon="ui-delete"
-                               
-                                  
                                     onClick={() =>{ if (window.confirm('Are you sure you wish to delete this item?')) deleteProduct(product.id)}}
                                     className="icon wh-15 mt-minus-3 cursor-pointer"
                                   />
