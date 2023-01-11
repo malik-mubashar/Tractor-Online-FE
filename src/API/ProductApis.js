@@ -431,7 +431,7 @@ updateProduct = async (productsState, formData) => {
   getProductsPdf = async (searchString) => {
     return axios({
       method: "get",
-      url: `${process.env.REACT_APP_API_LOCAL_PATH}products.pdf?q%5Btitle_or_status_or_description_or_location_cont%5D=${searchString}`,
+      url: `${process.env.REACT_APP_API_LOCAL_PATH}products.pdf?q%5Btitle_or_status_or_description_or_location_cont%5D=${searchString}&featured=${'true'}`,
       headers: {
         "Content-Type": "application/json;",
         "access-token": `${user.accessToken}`,
@@ -457,7 +457,7 @@ updateProduct = async (productsState, formData) => {
   getProductsCsv = async (searchString) => {
     return axios({
       method: "get",
-      url: `${process.env.REACT_APP_API_LOCAL_PATH}products.csv?q%5Btitle_or_status_or_description_or_location_cont%5D=${searchString}`,
+      url: `${process.env.REACT_APP_API_LOCAL_PATH}products.csv?q%5Btitle_or_status_or_description_or_location_cont%5D=${searchString}&featured=${'true'}`,
       headers: {
         "Content-Type": "application/json;",
         "access-token": `${user.accessToken}`,
@@ -465,6 +465,37 @@ updateProduct = async (productsState, formData) => {
         uid: `${user.uid}`,
         mode: "no-cors",
       },
+    })
+      .then((result) => {
+        return {
+          error: false,
+          data: result.data,
+        };
+      })
+      .catch((error) => {
+        return {
+          error: true,
+          data: error.response.data,
+        };
+      });
+	};
+
+	importDataFormCsv = async (formData) => {
+		const tempUser = JSON.parse(window.localStorage.getItem("currentUser")) || null;
+
+    return axios({
+      method: "post",
+      url: `${process.env.REACT_APP_API_LOCAL_PATH}import_data_form_csv`,
+      headers: {
+            "Content-Type": "multipart/form-data",
+        "Access-Control-Allow-Origin": "*",
+        "Access-Control-Allow-Headers": "*",
+        "access-token": `${tempUser.accessToken}`,
+        client: `${tempUser.client}`,
+        uid: `${tempUser.uid}`,
+        mode: "no-cors",
+			},
+			data:formData,
     })
       .then((result) => {
         return {
