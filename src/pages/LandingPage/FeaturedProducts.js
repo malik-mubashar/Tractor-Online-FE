@@ -75,7 +75,6 @@ export default function FeaturedProducts({ title, link, prodCategoryId, products
                     src={item.cover_photo_thumbnail}
                     alt=""
 									/>
-									{console.log('item',item.price_currency)}
                   <h4
                     className="mb-0 pl-2 border-radius productTitleTruncate"
                     title={item.title}

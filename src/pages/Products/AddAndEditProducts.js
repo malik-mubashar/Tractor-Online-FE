@@ -220,7 +220,7 @@ export default function AddAndEditProduct({
   };
 
   const getExtraFields = (extraFieldObject) => {
-    if (Object.entries(extraFieldObject).length > 0) {
+    if (extraFieldObject && Object.entries(extraFieldObject).length > 0) {
       let tempExtraFieldsArr = [];
       Object.entries(extraFieldObject).forEach((item, i) => {
         tempExtraFieldsArr.push({

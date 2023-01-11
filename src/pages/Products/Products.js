@@ -6,6 +6,8 @@ import {
   FormControl,
   Form,
   Image,
+	Modal,
+	Button,
 } from "react-bootstrap";
 import toast from "react-hot-toast";
 import AddAndEditProduct from "./AddAndEditProducts";
@@ -17,6 +19,10 @@ import Icofont from "react-icofont";
 import '../../assets/css/products.scss'
 
 export default function Products() {
+	const [modalShow, setModalShow] = React.useState(false);
+	let formDataForCsv = new FormData();
+
+
   // const [paginationNumbers, setPaginationNumbers] = useState();
   // const [requestedProds, setRequestedProds] = useState(false);
   const [noOfRec, setNoOfRec] = useState(10);
@@ -160,6 +166,51 @@ export default function Products() {
       console.error(e);
     }
 	};
+
+	function MyVerticallyCenteredModal(props) {
+		return (
+			<Modal
+				{...props}
+				size="lg"
+				aria-labelledby="contained-modal-title-vcenter"
+				centered
+			>
+				<Modal.Header closeButton>
+					<Modal.Title id="contained-modal-title-vcenter">
+						Upload Csv
+					</Modal.Title>
+				</Modal.Header>
+				<Modal.Body>
+					<h4>Upload</h4>
+					<p>
+						<input onChange={(e) => {formDataForCsv.append('file',e.target.files[0])}} required="required" accept=".csv" type="file" name="bulk_import[file]" id="bulk_import_file"/>
+					</p>
+				</Modal.Body>
+				<Modal.Footer>
+					<Button onClick={props.onHide}>Close</Button>
+					<Button onClick={() => { handleCsvUpload()}}>Upload</Button>
+				</Modal.Footer>
+			</Modal>
+		);
+	}
+	const handleCsvUpload = async() => {
+		try {
+			const result = await productApis.importDataFormCsv(formDataForCsv)
+			if (result.error === false && result.data.status === "success") {
+				setModalShow(false)
+				toast.success('products imported successfully')
+				getProducts(1, "", 10);
+			}
+			if (result.error === false && result.data.status === "error") {
+				setModalShow(false)
+				toast.error('Import failed')
+			}
+
+		} catch (err) {
+			console.error(err)
+		}
+	}
+	
 	console.log('productsState',productsState)
 
   return (
@@ -235,14 +286,12 @@ export default function Products() {
 										}
                 <div className="d-flex ml-auto">
                   <Image
-                    onClick={() => {
-                      handleGetCsv();
-                    }}
+										onClick={() => setModalShow(true)}
                     className="clickableSvg mr-2 importSvg"
                     src={ImportImg}
                     height="50px"
                     width="50px"
-                    alt="Profile Image"
+                    alt="import Svg"
                   />
                   <Image
                     onClick={() => {
@@ -575,7 +624,11 @@ export default function Products() {
               </div>
             </>
           )}
-        </div>
+				</div>
+				<MyVerticallyCenteredModal
+        show={modalShow}
+        onHide={() => setModalShow(false)}
+      />
       </>
     </>
   );
