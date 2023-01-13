@@ -98,6 +98,7 @@ updateProduct = async (productsState, formData) => {
       });
   };
 
+	// this goes to index function of products in rails side
 	getProducts = async (page, searchString, noOfRec,featured=true) => {
 		const tempUser = JSON.parse(window.localStorage.getItem("currentUser")) || null;
     return axios({
@@ -214,11 +215,12 @@ updateProduct = async (productsState, formData) => {
     brand = "nil",
     productCategoryId = "nil",
     status,
-    user_id = 'nil'
+		user_id = 'nil',
+		format= 'nil'
   ) => {
     return axios({
       method: "get",
-      url: `${process.env.REACT_APP_API_LOCAL_PATH}get_products?page=${page}&no_of_record=${noOfRec}&featured=${featured}&price_lt=${priceRangeTo}&price_gt=${priceRangefrom}&city=${city}&brand_id=${brand}&title=${title}&product_category_id=${productCategoryId}&status=${status}&user_id=${user_id}`,
+      url: `${process.env.REACT_APP_API_LOCAL_PATH}get_products${format!=='nil'?format==='csv'?'.csv':'.pdf':''}?page=${page}&no_of_record=${noOfRec}&featured=${featured}&price_lt=${priceRangeTo}&price_gt=${priceRangefrom}&city=${city}&brand_id=${brand}&title=${title}&product_category_id=${productCategoryId}&status=${status}&user_id=${user_id}`,
       headers: {
         "Content-Type": "application/json; charset=utf-8",
         "Access-Control-Allow-Origin": "*",
@@ -428,10 +430,12 @@ updateProduct = async (productsState, formData) => {
   };
 
 	
-  getProductsPdf = async (searchString) => {
+	//  if featured is true or false.All products will be returned in response. and from that response we can check the the value of featured
+	// this goes to index function of products in rails side
+  getProductsPdf = async (searchString,userId='nil') => {
     return axios({
       method: "get",
-      url: `${process.env.REACT_APP_API_LOCAL_PATH}products.pdf?q%5Btitle_or_status_or_description_or_location_cont%5D=${searchString}&featured=${'true'}`,
+      url: `${process.env.REACT_APP_API_LOCAL_PATH}products.pdf?q%5Btitle_or_status_or_description_or_location_cont%5D=${searchString}&featured=${'true'}&user_id=${userId}`,
       headers: {
         "Content-Type": "application/json;",
         "access-token": `${user.accessToken}`,
@@ -454,10 +458,11 @@ updateProduct = async (productsState, formData) => {
       });
   };
 
-  getProductsCsv = async (searchString) => {
+	// this goes to index function of products in rails side
+  getProductsCsv = async (searchString,userId='nil') => {
     return axios({
       method: "get",
-      url: `${process.env.REACT_APP_API_LOCAL_PATH}products.csv?q%5Btitle_or_status_or_description_or_location_cont%5D=${searchString}&featured=${'true'}`,
+      url: `${process.env.REACT_APP_API_LOCAL_PATH}products.csv?q%5Btitle_or_status_or_description_or_location_cont%5D=${searchString}&featured=${'true'}&user_id${userId}`,
       headers: {
         "Content-Type": "application/json;",
         "access-token": `${user.accessToken}`,
@@ -506,7 +511,7 @@ updateProduct = async (productsState, formData) => {
       .catch((error) => {
         return {
           error: true,
-          data: error.response.data,
+          data: error.data,
         };
       });
   };

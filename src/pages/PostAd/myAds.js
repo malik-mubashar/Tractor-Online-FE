@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useContext } from "react";
-import { Tabs, Tab } from "react-bootstrap";
+import { Tabs, Tab, OverlayTrigger, Tooltip, Image, Modal, Button } from "react-bootstrap";
 import { productApis } from "../../API/ProductApis";
 import { RootContext } from "../../context/RootContext";
 import Icofont from "react-icofont";
@@ -7,10 +7,14 @@ import { useHistory } from "react-router-dom";
 import toast from "react-hot-toast";
 import * as Icon from "react-feather";
 import "../../assets/css/myAds.scss"
-import Products from "../Products/Products";
+import csvSvg from "../../assets/svg/csv2.png";
+import pdfSvg from "../../assets/svg/pdf.png";
+import ImportImg from "../../assets/svg/import.svg";
 
 
 const myAds = () => {
+	const [modalShow, setModalShow] = React.useState(false);
+	let formDataForCsv = new FormData();
   const [activeProducts, setActiveProducts] = useState([]);
   const [InactiveProducts, setInactiveProducts] = useState([]);
 	const [pagination, setPagination] = useState();
@@ -22,7 +26,6 @@ const myAds = () => {
 		inActive: false,
 		featured:false,
 	})
-	const [isHovering, setIsHovering] = useState(false);
 
 
 
@@ -184,7 +187,6 @@ const myAds = () => {
 	}
 
 	const getProductCards = () => {
-		console.log('activeProducts',activeProducts)
 		return (
 			activeProducts.length > 0 ? (
 				<div className="row" style={{padding:'20px'}}>
@@ -368,12 +370,171 @@ const myAds = () => {
 		})
 	}
 
-	console.log('asd',tabs)
-	console.log('activeProducts',activeProducts)
+	const handleGetPdf = async () => {
+    const loadingToastId = toast.loading("Loading..!");
+    try {
+      const result = await productApis.getAllProducts(
+				"1",
+				"1000000000",
+				"nil",
+				"nil",
+				"nil",
+				"nil",
+				"nil",
+				"nil",
+				"nil",
+				"nil",
+				currentUser.id,
+				'pdf'
+			);
+
+      if (result.error === false) {
+        toast.dismiss(loadingToastId);
+
+        window.open(`${result.data.file_path}`, "_blank");
+      } else {
+        toast.dismiss(loadingToastId);
+      }
+    } catch (e) {
+      toast.dismiss(loadingToastId);
+      console.error(e);
+    }
+  };
+
+  const handleGetCsv = async () => {
+    const loadingToastId = toast.loading("Loading..!");
+    try {
+			const result = await productApis.getAllProducts(
+				"1",
+				"1000000000",
+				"nil",
+				"nil",
+				"nil",
+				"nil",
+				"nil",
+				"nil",
+				"nil",
+				"nil",
+				currentUser.id,
+				'csv'
+			);
+      if (result.error === false) {
+        toast.dismiss(loadingToastId);
+
+        window.open(`${result.data.file_path}`, "_blank");
+      } else {
+        toast.dismiss(loadingToastId);
+      }
+    } catch (e) {
+      toast.dismiss(loadingToastId);
+      console.error(e);
+    }
+	};
+
+	function MyVerticallyCenteredModal(props) {
+		return (
+			<Modal
+				{...props}
+				size="lg"
+				aria-labelledby="contained-modal-title-vcenter"
+				centered
+			>
+				<Modal.Header closeButton>
+					<Modal.Title id="contained-modal-title-vcenter">
+						Upload Csv to update products
+					</Modal.Title>
+				</Modal.Header>
+				<Modal.Body>
+					<h4>Csv</h4>
+					<p>
+						<input onChange={(e) => {formDataForCsv.append('file',e.target.files[0])}} required="required" accept=".csv" type="file" name="bulk_import[file]" id="bulk_import_file"/>
+					</p>
+				</Modal.Body>
+				<Modal.Footer>
+					<Button onClick={props.onHide}>Close</Button>
+					<Button onClick={() => { handleCsvUpload()}}>Upload</Button>
+				</Modal.Footer>
+			</Modal>
+		);
+	}
+
+	const handleCsvUpload = async() => {
+		try {
+			const loadingToastId = toast.loading("Loading..!");
+			const result = await productApis.importDataFormCsv(formDataForCsv)
+			if (result.error === false && result.data.status === "success") {
+				toast.dismiss(loadingToastId);
+				setModalShow(false)
+				toast.success('products imported successfully')
+				if (result.data.data.prducts_not_updated.length > 0) {
+					toast(
+						`Products with these id not found: ${result.data.data.prducts_not_updated.length}`,
+						{
+							duration: 10000,
+						}
+					);
+				}
+				setTabs({...tabs,active:true});
+			}
+			if (result.error === false && result.data.status === "error") {
+				toast.dismiss(loadingToastId);
+				setModalShow(false)
+				toast.error('Import failed')
+
+				toast(
+					`${result.data.data.message}`,
+					{
+						duration: 10000,
+					}
+				);
+			}
+
+		} catch (err) {
+			console.error(err)
+		}
+	}
+
   return (
     <div className="mb-4">
       <div className="">
-        <div className="tabs-style-three " >
+				<div className="tabs-style-three " >
+					<div className="d-flex mb-2">
+							<OverlayTrigger overlay={<Tooltip id="button-tooltip-2">Update products through Csv</Tooltip>}>
+								<Image
+									onClick={() =>setModalShow(true)	}
+									className="ml-auto clickableSvg mr-2 importSvg"
+									src={ImportImg}
+									height="50px"
+									width="50px"
+									alt="import Svg"
+								/>
+							</OverlayTrigger>
+							<OverlayTrigger overlay={<Tooltip id="button-tooltip-2">Download Csv</Tooltip>}>
+								<Image
+									onClick={() => {
+										handleGetCsv();
+									}}
+									className="clickableSvg mr-2"
+									src={csvSvg}
+									height="50px"
+									width="50px"
+									alt="Profile Image"
+									/>
+							</OverlayTrigger>
+
+							<OverlayTrigger overlay={<Tooltip id="button-tooltip-2">Download Pdf</Tooltip>}>
+								<Image
+									onClick={() => {
+										handleGetPdf();
+									}}
+									className="clickableSvg"
+									src={pdfSvg}
+									height="50px"
+									width="50px"
+									alt="Profile Image"
+									/>
+							</OverlayTrigger>								
+						</div>
           <Tabs onSelect={(e) => { switchTab(e)}} defaultActiveKey="active" id="uncontrolled-tab-example">
             <Tab eventKey="active" title="Active">
               {getProductCards()}
@@ -384,12 +545,11 @@ const myAds = () => {
 						<Tab onClick={() => { switchTab()}} eventKey='featured' title='Featured'>
 							{getProductCards()}
 						</Tab>
-						{/* <Tab onClick={() => { switchTab()}} eventKey='requested' title='Requested'>
-							
-						</Tab> */}
+						<p>fdjsifjsdifa</p>
 					</Tabs>
+					
 					<div>
-					{pagination && pagination && (
+						{pagination && pagination && (
                     <div>
                       <span>Rows per page</span>
                       <span className="mx-4">
@@ -541,7 +701,11 @@ const myAds = () => {
                   )}
 					</div>
         </div>
-      </div>
+			</div>
+			<MyVerticallyCenteredModal
+        show={modalShow}
+        onHide={() => setModalShow(false)}
+      />
     </div>
   );
 };
