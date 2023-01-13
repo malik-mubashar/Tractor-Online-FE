@@ -8,6 +8,8 @@ import {
   Image,
 	Modal,
 	Button,
+	OverlayTrigger,
+	Tooltip,
 } from "react-bootstrap";
 import toast from "react-hot-toast";
 import AddAndEditProduct from "./AddAndEditProducts";
@@ -177,11 +179,11 @@ export default function Products() {
 			>
 				<Modal.Header closeButton>
 					<Modal.Title id="contained-modal-title-vcenter">
-						Upload Csv
+						Upload Csv to update products
 					</Modal.Title>
 				</Modal.Header>
 				<Modal.Body>
-					<h4>Upload</h4>
+					<h4>Csv</h4>
 					<p>
 						<input onChange={(e) => {formDataForCsv.append('file',e.target.files[0])}} required="required" accept=".csv" type="file" name="bulk_import[file]" id="bulk_import_file"/>
 					</p>
@@ -195,15 +197,33 @@ export default function Products() {
 	}
 	const handleCsvUpload = async() => {
 		try {
+			const loadingToastId = toast.loading("Loading..!");
 			const result = await productApis.importDataFormCsv(formDataForCsv)
 			if (result.error === false && result.data.status === "success") {
+				toast.dismiss(loadingToastId);
 				setModalShow(false)
 				toast.success('products imported successfully')
+				if (result.data.data.prducts_not_updated.length > 0) {
+					toast(
+						`Products with these id not found: ${result.data.data.prducts_not_updated.length}`,
+						{
+							duration: 10000,
+						}
+					);
+				}
 				getProducts(1, "", 10);
 			}
 			if (result.error === false && result.data.status === "error") {
+				toast.dismiss(loadingToastId);
 				setModalShow(false)
 				toast.error('Import failed')
+
+				toast(
+					`${result.data.data.message}`,
+					{
+						duration: 10000,
+					}
+				);
 			}
 
 		} catch (err) {
@@ -284,35 +304,43 @@ export default function Products() {
 												All Products
 											</button>
 										}
-                <div className="d-flex ml-auto">
-                  <Image
-										onClick={() => setModalShow(true)}
-                    className="clickableSvg mr-2 importSvg"
-                    src={ImportImg}
-                    height="50px"
-                    width="50px"
-                    alt="import Svg"
-                  />
-                  <Image
-                    onClick={() => {
-                      handleGetCsv();
-                    }}
-                    className="clickableSvg mr-2"
-                    src={csvSvg}
-                    height="50px"
-                    width="50px"
-                    alt="Profile Image"
-                  />
-                  <Image
-                    onClick={() => {
-                      handleGetPdf();
-                    }}
-                    className="clickableSvg"
-                    src={pdfSvg}
-                    height="50px"
-                    width="50px"
-                    alt="Profile Image"
-                  />
+								<div className="d-flex ml-auto">
+									<OverlayTrigger overlay={<Tooltip id="button-tooltip-2">Update products through Csv</Tooltip>}>
+										<Image
+											onClick={() => setModalShow(true)}
+											className="clickableSvg mr-2 importSvg"
+											src={ImportImg}
+											height="50px"
+											width="50px"
+											alt="import Svg"
+										/>
+									</OverlayTrigger>
+									<OverlayTrigger overlay={<Tooltip id="button-tooltip-2">Download Csv</Tooltip>}>
+										<Image
+											onClick={() => {
+												handleGetCsv();
+											}}
+											className="clickableSvg mr-2"
+											src={csvSvg}
+											height="50px"
+											width="50px"
+											alt="Profile Image"
+											/>
+									</OverlayTrigger>
+
+									<OverlayTrigger overlay={<Tooltip id="button-tooltip-2">Download Pdf</Tooltip>}>
+										<Image
+											onClick={() => {
+												handleGetPdf();
+											}}
+											className="clickableSvg"
+											src={pdfSvg}
+											height="50px"
+											width="50px"
+											alt="Profile Image"
+											/>
+									</OverlayTrigger>
+												
                 </div>
               </div>
               <div className={`${isMobile ? "" : "d-flex"}`}>
