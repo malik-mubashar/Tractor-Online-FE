@@ -67,11 +67,11 @@ const Topbar = () => {
         }}
         className="cursor-pointer"
         src={Logo}
-        height="30px"
-        width="160px"
+        height="45px"
+        width="260px"
         alt="Profile Image"
       />
-      <Navbar.Collapse id="basic-navbar-nav" className="ml-5 pl-5">
+      <Navbar.Collapse id="basic-navbar-nav" className="">
         {prodCategories &&
           prodCategories.map((item, i) => {
             return (

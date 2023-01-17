@@ -318,8 +318,13 @@ export default function AddDetails() {
               <div className="bg-white p-4">
                 <div className="">
                   <div className="priceBox">
-                    <strong className="genericGreen">
-                      {product.price_currency} {product.price}
+										<strong className="genericGreen">
+											{product.call_for_price === true ?
+												'Call for price'
+												:
+												product.price_currency + ' '+ product.price
+											}
+                      
                     </strong>
                   </div>
 
@@ -343,12 +348,22 @@ export default function AddDetails() {
                             >
                               {product.phone_no}
                             </span>
-                            <div>Show Phone Number</div>
+															<div>Show Phone Number</div>
                           </div>
                         )}
                       </div>
                     </span>
-                  </div>
+									</div>
+									<div onClick={() => { window.open(`https://wa.me/${product.phone_no}?text=Im%20interested%20in%20your%20car%20for%20sale`, '_blank');}} className='btn btn-success  btn-block btn-large buttonDiv'>
+										<span className='d-flex ' >
+											<Icofont icon="whatsapp" className="icofont-2x mt-1" />
+											<div >
+												<span className='ml-3 mt-2'>
+													Chat on whatsapp
+												</span>
+											</div>					
+										</span>
+									</div>
                 </div>
               </div>
 

@@ -21,6 +21,7 @@ export default function AddAndEditProduct({
 
   const [brands, setBrands] = useState();
   const [managePics, setmanagePics] = useState(false);
+  const [disablePriceField, setDisablePriceField] = useState(false);
   // const [lowResPics, setLowResPics] = useState();
   const [isHighResPicsLoaded, setIsHighResPicsLoaded] = useState(false);
   const [picturesLoader, setPicturesLoader] = useState(false);
@@ -47,7 +48,7 @@ export default function AddAndEditProduct({
     { name: "icon", required: false },
     // { name: "link", required: false },
     { name: "description", required: false },
-		{ name: "price", required: true },
+		{ name: "price", required: false },
     { name: "price_currency", required: true },
     { name: "brand_id", required: true },
     { name: "phone_no", required: true },
@@ -335,6 +336,7 @@ export default function AddAndEditProduct({
 			}
 
       formData.append("title", productsState.title);
+      formData.append("call_for_price", productsState.call_for_price);
       formData.append("price_currency", productsState.price_currency);
       formData.append("status", productsState.status);
       formData.append("description", productsState.description);
@@ -573,10 +575,40 @@ export default function AddAndEditProduct({
                         </div>
                       );
                     })}
-                </div>
+								</div>
+								<Form.Group className="d-flex mt-3" controlId="formGridproduct">
+                  <Form.Label>Call for price</Form.Label>
+                  <Form.Check
+                    type="checkbox"
+                    className="ml-4 mt-2"
+                    defaultChecked={
+                      productsState && productsState.call_for_price == true
+                        ? true
+                        : false
+                    }
+                    // value={productsState.product_type}
+                    onChange={(e) => {
+                      setProductsState({
+                        ...productsState,
+                        call_for_price: e.currentTarget.checked,
+											});
+											if (e.currentTarget.checked == true) {
+												setDisablePriceField(true)
+												setProductsState({
+													...productsState,
+													price: 0,
+												});
+											} else {
+												setDisablePriceField(false)
+											}
+                    }}
+                    name="featured"
+                  ></Form.Check>
+                </Form.Group>
                 <Form.Group controlId="formBasicComments">
-                  <Form.Label>Price  <span className="required-field">*</span> </Form.Label>
-                  <Form.Control
+                  <Form.Label>Price </Form.Label>
+									<Form.Control
+										disabled={disablePriceField}
                     className={
                       fieldsWithError.price === true ? "border-danger" : ""
                     }

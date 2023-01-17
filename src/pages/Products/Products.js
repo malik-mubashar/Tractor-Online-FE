@@ -497,7 +497,11 @@ export default function Products() {
                               </td>
                               <td className="text-center">
                                 <Icon.Edit2
-                                  onClick={() => {
+																	onClick={() => {
+																		var tempActiveImagesPath = product.active_images_path === undefined ? [] : product.active_images_path;
+																		var tempActiveImagesThumbnail= product.active_images_thumbnail === undefined ? [] : product.active_images_thumbnail;
+																		
+																		debugger
                                     setProductsState({
                                       ...productsState,
                                       isEditProduct: true,
@@ -513,12 +517,13 @@ export default function Products() {
 																			price:product.price.toString(),
 																			phone_no:product.phone_no,
 																			location: product.location,
-																			imagesPath: [product.cover_photo_path,...product.active_images_path],
-																			imagesPathThumbnail: [product.cover_photo_thumbnail,...product.active_images_thumbnail],
+																			imagesPath: [product.cover_photo_path,...tempActiveImagesPath],
+																			imagesPathThumbnail: [product.cover_photo_thumbnail,...tempActiveImagesThumbnail],
 																			images: [],
 																			cover_photo: null,
 																			user: product.user,
-																			price_currency:product.price_currency
+																			price_currency:product.price_currency,
+																			call_for_price:product.call_for_price,
                                     });
                                   }}
                                   className="text-success mr-2 icon wh-15 mt-minus-3 cursor-pointer"
