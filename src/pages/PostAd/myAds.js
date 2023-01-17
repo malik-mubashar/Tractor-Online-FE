@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useContext } from "react";
-import { Tabs, Tab, OverlayTrigger, Tooltip, Image, Modal, Button } from "react-bootstrap";
+import { Tabs, Tab, OverlayTrigger, Tooltip, Image, Modal, Button, FormControl } from "react-bootstrap";
 import { productApis } from "../../API/ProductApis";
 import { RootContext } from "../../context/RootContext";
 import Icofont from "react-icofont";
@@ -10,9 +10,11 @@ import "../../assets/css/myAds.scss"
 import csvSvg from "../../assets/svg/csv2.png";
 import pdfSvg from "../../assets/svg/pdf.png";
 import ImportImg from "../../assets/svg/import.svg";
+import { isMobile } from "react-device-detect";
 
 
 const myAds = () => {
+	
 	const [modalShow, setModalShow] = React.useState(false);
 	let formDataForCsv = new FormData();
   const [activeProducts, setActiveProducts] = useState([]);
@@ -54,7 +56,7 @@ const myAds = () => {
 		// handleGetInactiveProducts();
   }, [tabs]);
 
-  const handleGetActiveProducts = async (page, mainSearch, noOfRec,activeOrInActive,featured='nil') => {
+  const handleGetActiveProducts = async (page, mainSearch='', noOfRec,activeOrInActive,featured='nil') => {
     const result = await productApis.getAllProducts(
       page,
       noOfRec,
@@ -66,7 +68,9 @@ const myAds = () => {
       "nil",
       "nil",
       activeOrInActive,
-      currentUser.id
+			currentUser.id,
+			'nil',
+			mainSearch
     );
 		if (result.error === false) {
 			setActiveProducts(result.data && result.data.data);
@@ -138,15 +142,7 @@ const myAds = () => {
 			if (result.error === false) {
 				console.log(result)
 				toast.success('Request sent')
-				if (tabs.inActive) {
-					handleGetActiveProducts(1, mainSearchString, noOfRec,'inactive');
-				}
-				if (tabs.active) {
-					handleGetActiveProducts(1, mainSearchString, noOfRec,'active');
-				}
-				if (tabs.featured) {
-					handleGetActiveProducts(1, mainSearchString, noOfRec,'nil',true);
-				}
+				getProductsAsPerTabOpened()
 			}
 			if (result.error === true) {
 				console.log(result)
@@ -154,6 +150,17 @@ const myAds = () => {
 		} catch (error) {
 			console.error(error);
 		}	
+	}
+	const getProductsAsPerTabOpened=(temp='') => {
+		if (tabs.inActive) {
+			handleGetActiveProducts(1, temp, noOfRec,'inactive');
+		}
+		if (tabs.active) {
+			handleGetActiveProducts(1, temp, noOfRec,'active');
+		}
+		if (tabs.featured) {
+			handleGetActiveProducts(1, temp, noOfRec,'nil',true);
+		}
 	}
 
 	const unFeatureCurrentAd =async (item) => {
@@ -185,25 +192,49 @@ const myAds = () => {
 			console.error(error);
 		}	
 	}
-
+	const handleMainSearch = (event) => {
+    setMainSearchString(event.target.value);
+    if (event.keyCode == 13) {
+      getProductsAsPerTabOpened(event.target.value)
+    }
+		if (event.target.value == "") {
+			getProductsAsPerTabOpened(event.target.value)
+		}
+  };
+console.log('products',activeProducts)
 	const getProductCards = () => {
 		return (
-			activeProducts.length > 0 ? (
+			activeProducts&&activeProducts.length > 0 ? (
 				<div className="row" style={{padding:'20px'}}>
 					{activeProducts &&
 						activeProducts.map((item, i) => {
 							return (
 								<div className="col-lg-3 col-12" key={i}>
-									<div className="listCard mb-3 d-block relative">
-										<img
+									<div style={{height:'440px'}} className="listCard mb-3 d-block relative">
+										{
+											item.cover_photo_thumbnail !== undefined ?
+											<img
 											src={item.cover_photo_thumbnail}
 											alt="Card"
 											style={{ width: "200px", height: "140px" }}
 											className="cursor-pointer"
 											onClick={() => {
 												history.push(`/ad-details/${item.id}`);
-											}}
-										/>
+													}}
+												
+												/> :
+												<img
+												src={'https://t4.ftcdn.net/jpg/04/70/29/97/360_F_470299797_UD0eoVMMSUbHCcNJCdv2t8B2g1GVqYgs.jpg'}
+												alt="Card"
+												style={{ width: "200px", height: "140px" }}
+												className="cursor-pointer"
+												onClick={() => {
+													history.push(`/ad-details/${item.id}`);
+														}}
+													
+													/>	
+										}
+										
 										<div style={{ width: "100%" }}>
 											<div className={"mt-2"}>
 												<h5
@@ -499,6 +530,37 @@ const myAds = () => {
       <div className="">
 				<div className="tabs-style-three " >
 					<div className="d-flex mb-2">
+					<div className={`${isMobile ? "" : "d-flex mt-3"}`}>
+                <FormControl
+                  type="text"
+                  onKeyUp={(event) => handleMainSearch(event)}
+                  placeholder="Main Search..."
+                  style={{ marginTop: "-10px" }}
+                />
+                <select
+                  onChange={(e) => {
+                    setNoOfRec(e.target.value);
+                    // getProducts(1, mainSearchString, e.target.value);
+                  }}
+                  className={`${
+                    isMobile ? "mt-3" : "adjustNoOfRecSelect"
+                  } form-control col-5 mb-2`}
+                  id="sortby"
+                  name="no of rec per page"
+                >
+                  <option value="" disabled selected={true}>
+                    No of Records per page
+                  </option>
+                  <option value="15">15</option>
+                  <option value="20">20</option>
+                  <option value="30">30</option>
+                  <option value="40">40</option>
+                  <option value="50">50</option>
+                  <option value="60">60</option>
+                  <option value="70">70</option>
+                  <option value="80">80</option>
+                </select>
+              </div>
 							<OverlayTrigger overlay={<Tooltip id="button-tooltip-2">Update products through Csv</Tooltip>}>
 								<Image
 									onClick={() =>setModalShow(true)	}

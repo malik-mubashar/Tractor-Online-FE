@@ -23,6 +23,7 @@ const postad = () => {
   const [extraFieldsArr, setExtraFieldsArr] = useState([]);
 	const history = useHistory();
 	const [citiesForSelect, setCitiesForSelect] = useState([]);
+  const [disablePriceField, setDisablePriceField] = useState(false);
 
   const [showCategoryModel, setShowCategoryModel] = useState(true);
   const [showCustomBrandField, setShowCustomBrandField] = useState(false);
@@ -278,7 +279,8 @@ const postad = () => {
       } else {
         formData.append("cover_photo", postAddState.cover_photo);
 			}
-			
+
+			formData.append("call_for_price", postAddState.call_for_price);
       formData.append("title", postAddState.title);
       formData.append("status", postAddState.status);
       formData.append("description", postAddState.description);
@@ -427,9 +429,9 @@ const postad = () => {
     });
 	}
 
-	console.log('city',postAddState.city)
-	console.log('citiesForSelect',citiesForSelect)
-  return (
+	console.log('postAddState',postAddState)
+	console.log('postAddState.call_for_price',postAddState.call_for_price)
+  return postAddState.call_for_price !== undefined ? (
     <>
       <div className="card text-center my-4 p-4">
         <h2 className="post-ad-heading">
@@ -594,37 +596,51 @@ const postad = () => {
 									})}
 							</Form.Control>
 					</div>
-          {/* <div className="col-lg-3 col-12 text-lg-right">
-            <Form.Label>City</Form.Label>
-          </div>
-          <div className="addEditProd col-lg-4 col-12">
-						<Select
-							defaultValue={{
-								value: postAddState && postAddState.city && postAddState.city,
-								label: postAddState && postAddState.city && postAddState.city,
-							}}
-              className="ui-autocomplete-input form-control searchAble"
-              options={citiesForSelect}
-              name="city"
-              label="Select City"
-              placeholder="Select City"
-              onChange={(e) => {
-                if (e)
-                  setPostAddState({
-                    ...postAddState,
-                    city: e.title,
-                  });
-              }}
-              clearable={false}
-            />
-          </div> */}
-        </div>
+				</div>
+				<div className="row my-2">
+						<Form.Group className="d-flex mt-3" controlId="formGridproduct">
+							<div className="col-lg-3 col-12 text-lg-right">
+								<Form.Label>Call for price</Form.Label>
+							</div>
+							<div className="addEditProd col-lg-4 col-12">
+								<Form.Check
+									type="checkbox"
+									className="ml-4 mt-2"
+									defaultChecked={
+										postAddState && postAddState.call_for_price == true
+											? true
+											: false
+									}
+									// value={productsState.product_type}
+									onChange={(e) => {
+										setPostAddState({
+											...postAddState,
+											call_for_price: e.currentTarget.checked,
+										});
+										if (e.currentTarget.checked == true) {
+											setDisablePriceField(true)
+											setPostAddState({
+												...postAddState,
+												price: 0,
+											});
+										} else {
+											setDisablePriceField(false)
+										}
+									}}
+									name="featured"
+									>
+								</Form.Check>
+							</div>
+					</Form.Group>
+				</div>
+
         <div className="row my-2">
           <div className="col-lg-3 col-12 text-lg-right">
             <Form.Label>Price </Form.Label>
           </div>
           <div className="addEditProd col-lg-4 col-12">
-            <Form.Control
+						<Form.Control
+							disabled={disablePriceField}
               className={fieldsWithError.price === true ? "border-danger" : ""}
               defaultValue={postAddState.price}
               name="price"
@@ -955,7 +971,8 @@ const postad = () => {
         </Modal.Footer>
       </Modal>
     </>
-  );
+	)
+	:(<></>)
 };
 
 export default postad;

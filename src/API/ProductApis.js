@@ -216,11 +216,12 @@ updateProduct = async (productsState, formData) => {
     productCategoryId = "nil",
     status,
 		user_id = 'nil',
-		format= 'nil'
-  ) => {
+		format = 'nil',
+		searchString=''
+	) => {
     return axios({
       method: "get",
-      url: `${process.env.REACT_APP_API_LOCAL_PATH}get_products${format!=='nil'?format==='csv'?'.csv':'.pdf':''}?page=${page}&no_of_record=${noOfRec}&featured=${featured}&price_lt=${priceRangeTo}&price_gt=${priceRangefrom}&city=${city}&brand_id=${brand}&title=${title}&product_category_id=${productCategoryId}&status=${status}&user_id=${user_id}`,
+      url: `${process.env.REACT_APP_API_LOCAL_PATH}get_products${format!=='nil'?format==='csv'?'.csv':'.pdf':''}?page=${page}&no_of_record=${noOfRec}&featured=${featured}&price_lt=${priceRangeTo}&price_gt=${priceRangefrom}&city=${city}&brand_id=${brand}&title=${title}&product_category_id=${productCategoryId}&status=${status}&user_id=${user_id}&search_string=${searchString}`,
       headers: {
         "Content-Type": "application/json; charset=utf-8",
         "Access-Control-Allow-Origin": "*",
