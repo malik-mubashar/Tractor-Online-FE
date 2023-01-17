@@ -17,6 +17,7 @@ import { isMobile } from "react-device-detect";
 import '../../assets/css/postAdd.scss'
 
 const postad = () => {
+	var flag = false;
 	const { id } = useParams();
   const myRefname = useRef(null);
   const { setShowLoader,prodCategories,cities,brands,currency_list} = useContext(RootContext);
@@ -33,7 +34,7 @@ const postad = () => {
   const [showModelError, setShowModelError] = useState(false);
   const [isImgSelected, setIsImgSelected] = useState(false);
 	const [postAddState, setPostAddState] = useState({
-		isEditAd:false,
+		isEditAd:id===undefined?false:true,
     isCreateAd: true,
     status: "active",
     description: "",
@@ -431,7 +432,7 @@ const postad = () => {
 
 	console.log('postAddState',postAddState)
 	console.log('postAddState.call_for_price',postAddState.call_for_price)
-  return postAddState.call_for_price !== undefined ? (
+  return (postAddState.call_for_price!==undefined || postAddState.isEditAd===false) ? (
     <>
       <div className="card text-center my-4 p-4">
         <h2 className="post-ad-heading">
