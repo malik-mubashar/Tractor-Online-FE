@@ -1,7 +1,7 @@
 {
   "main.css": "/static/css/main.6ad8d51c.chunk.css",
-  "main.js": "/static/js/main.fc4b48f8.chunk.js",
-  "main.js.map": "/static/js/main.fc4b48f8.chunk.js.map",
+  "main.js": "/static/js/main.1fb91677.chunk.js",
+  "main.js.map": "/static/js/main.1fb91677.chunk.js.map",
   "static/css/1.7f97053b.chunk.css": "/static/css/1.7f97053b.chunk.css",
   "static/js/1.3bcfd68f.chunk.js": "/static/js/1.3bcfd68f.chunk.js",
   "static/js/1.3bcfd68f.chunk.js.map": "/static/js/1.3bcfd68f.chunk.js.map",
@@ -15,7 +15,7 @@
   "static/media/logo.png": "/static/media/logo.7c03733c.png",
   "static/media/import.svg": "/static/media/import.086318fc.svg",
   "static/media/upload-photos-logo.png": "/static/media/upload-photos-logo.f2acd27b.png",
-  "static/media/styles.css": "/static/media/revicons.2feb69cc.eot",
+  "static/media/styles.css": "/static/media/revicons.17629a5d.ttf",
   "static/media/tractorCover2.jpg": "/static/media/tractorCover2.490e029e.jpg",
   "static/media/tractorCover3.jpg": "/static/media/tractorCover3.a3736740.jpg",
   "static/media/t1.jpg": "/static/media/t1.ad9370a8.jpg",
@@ -38,9 +38,9 @@
   "static/media/lightgallery.css": "/static/media/lg.2ec2cb21.svg",
   "static/media/price-logo.png": "/static/media/price-logo.0dcade10.png",
   "static/media/team.jpg": "/static/media/team.29a2723e.jpg",
-  "static/css/1.7f97053b.chunk.css.map": "/static/css/1.7f97053b.chunk.css.map",
   "static/css/main.6ad8d51c.chunk.css.map": "/static/css/main.6ad8d51c.chunk.css.map",
+  "static/css/1.7f97053b.chunk.css.map": "/static/css/1.7f97053b.chunk.css.map",
   "index.html": "/index.html",
-  "precache-manifest.8cf9546b8fd8172896d4f79c5ad0083e.js": "/precache-manifest.8cf9546b8fd8172896d4f79c5ad0083e.js",
+  "precache-manifest.f315245584575f0bc19097841b235ca8.js": "/precache-manifest.f315245584575f0bc19097841b235ca8.js",
   "service-worker.js": "/service-worker.js"
 }

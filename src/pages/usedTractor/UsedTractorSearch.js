@@ -43,6 +43,7 @@ export default function UsedTractorSearch() {
     var title = new URLSearchParams(search).get("title") || "nil";
     var categoryId = new URLSearchParams(search).get("category") || "nil";
     var brandId = new URLSearchParams(search).get("brand") || "nil";
+    var userId = new URLSearchParams(search).get("userId") || "nil";
     setSearchFilters({
       ...searchFilters,
       featured: featured === "true" ? true : "nil",
@@ -52,7 +53,8 @@ export default function UsedTractorSearch() {
       title: title,
       brand: brandId,
       category: categoryId,
-      make: "nil",
+			make: "nil",
+			userId:userId
     });
   }, [search]);
 
@@ -105,7 +107,9 @@ export default function UsedTractorSearch() {
     featured = "nil",
     title = "nil",
     brand = "nil",
-    category = "nil"
+		category = "nil",
+		status = 'active',
+		userId='nil'
   ) => {
     setShowLoader(true);
     const result = await productApis.getAllProducts(
@@ -118,8 +122,8 @@ export default function UsedTractorSearch() {
       title,
       brand,
       category,
-      "active",
-      "nil"
+      'active',
+      userId
     );
     if (result.error === false) {
       setProducts(result.data && result.data.data);
@@ -141,7 +145,9 @@ export default function UsedTractorSearch() {
         searchFilters.featured,
         searchFilters.title,
         searchFilters.brand,
-        searchFilters.category
+				searchFilters.category,
+				'active',
+				searchFilters.userId
       );
     }
   }, [searchFilters]);
