@@ -380,7 +380,9 @@ export default function SearchListing({
                   searchFilters.featured,
                   searchFilters.title,
                   searchFilters.brand,
-                  searchFilters.categoryId
+									searchFilters.categoryId,
+									'active',
+									searchFilters.userId
                 );
               }}
               type="button"
@@ -410,7 +412,9 @@ export default function SearchListing({
                   searchFilters.featured,
                   searchFilters.title,
                   searchFilters.brand,
-                  searchFilters.categoryId
+									searchFilters.categoryId,
+									'active',
+									searchFilters.userId
                 );
               }}
               type="button"
@@ -442,7 +446,9 @@ export default function SearchListing({
                   searchFilters.featured,
                   searchFilters.title,
                   searchFilters.brand,
-                  searchFilters.categoryId
+									searchFilters.categoryId,
+									'active',
+									searchFilters.userId
                 );
               }}
             >
@@ -475,7 +481,9 @@ export default function SearchListing({
                   searchFilters.featured,
                   searchFilters.title,
                   searchFilters.brand,
-                  searchFilters.categoryId
+									searchFilters.categoryId,
+									'active',
+									searchFilters.userId
                 );
               }}
             >

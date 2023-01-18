@@ -154,8 +154,14 @@ export default function AddDetails() {
         setShowReportModal(true)
       }
     }
-  }
-
+	}
+	
+	const handleSeeMoreByThisUser =(tempId) => {
+		history.push(
+			`/products/search?userId=${tempId}&priceRangeTo=${"nil"}&priceRangeFrom=${"nil"}&title=${"nil"}`
+		);
+	}
+	console.log('userData',userData)
   return (
     //sidebar
     <div className="addDetails pt-3">
@@ -386,7 +392,12 @@ export default function AddDetails() {
                     <div>
                       <strong>{userData && userData.name}</strong>
                     </div>
-                    <div>Member Since {userData && userData.created_at}</div>
+										<div>
+											Member Since {userData && userData.created_at}
+										</div>
+										<div onClick={() => { handleSeeMoreByThisUser(userData.id) }} style={{ cursor: 'pointer', color: 'blue' }}>
+											More add by  {userData && userData.name}
+										</div>
                   </div>
                 </div>
               </div>

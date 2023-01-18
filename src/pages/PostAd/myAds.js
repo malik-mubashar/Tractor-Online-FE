@@ -248,7 +248,11 @@ console.log('products',activeProducts)
 													{item.title}
 												</h5>
 												<h5 className={"cursor-pointer"}>
-													PKR {item.price}
+												{item.call_for_price === true ?
+													'Call for price'
+														:
+													item.price_currency + ' '+ item.price
+												}
 												</h5>
 												{
 													item.featured ? (
