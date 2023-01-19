@@ -247,7 +247,7 @@ console.log('products',activeProducts)
 												>
 													{item.title}
 												</h5>
-												<h5 className={"cursor-pointer"}>
+												<h5 style={ {color:'greenyellow'}} className={"cursor-pointer"}>
 												{item.call_for_price === true ?
 													'Call for price'
 														:
