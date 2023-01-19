@@ -142,14 +142,14 @@ export default function SearchListing({
                     <div
                       className={`listCard mb-3 ${
                         gridOrList === "list" ? "list relative" : "d-block relative"
-                      } ${isMobile ? "relative" : null}`}
+                      } ${isMobile ? "d-block relative" : null}`}
                     >
                       <img
                         className="cursor-pointer"
                         // className={gridOrList==='list'?'list':'grid'}
                         src={item.cover_photo_path}
                         alt="Card"
-                        style={{ width: `${isMobile?'160px':'200px'}`, height: `${isMobile?'120px':'140px'}` }}
+                        style={{ width: `${isMobile?'100%':'200px'}`, height: `${isMobile?'150px':'140px'}` }}
                         onClick={() => {
                           history.push(`/ad-details/${item.id}`);
                         }}
@@ -162,7 +162,7 @@ export default function SearchListing({
                               : "mt-2"
                           }
 												>
-													<div className="d-flex justify-content-between">
+													<div className={`d-flex justify-content-between ${isMobile?'mt-3':''}`}>
 														<h5
 															className={
 																gridOrList === "list"
@@ -205,7 +205,8 @@ export default function SearchListing({
                             }
                             onClick={() => {
                               history.push(`/ad-details/${item.id}`);
-                            }}
+														}}
+														style={{color:'greenyellow'}}
                           >
 														{item.call_for_price === true ?
 														'Call for price'

@@ -5,6 +5,7 @@ import TractorCover3 from "../../assets/img/tractorCover3.jpg"
 import T1 from "../../assets/img/t1.jpg"
 import T2 from "../../assets/img/t2.jpg"
 import T3 from "../../assets/img/t3.jpg"
+import T4 from "../../assets/img/banner1.jpg"
 
 const Categories = () => {
   const [index, setIndex] = useState(0);
@@ -12,9 +13,10 @@ const Categories = () => {
     setIndex(selectedIndex);
   };
   const imgUrls = [
+		T4,
     T2,
     T1,
-    T3,
+		T3,
     TractorCover2,
     TractorCover3
   ]
