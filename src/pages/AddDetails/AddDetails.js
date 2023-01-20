@@ -44,7 +44,8 @@ export default function AddDetails() {
   const [isPhoneAgree, setIsPhoneAgree] = useState(false);
   const [showModal, setShowModal] = useState(false);
   const [showReportModal, setShowReportModal] = useState(false);
-  const [product, setProduct] = useState([]);
+	const [product, setProduct] = useState([]);
+	const [similarProducts, setSimilarProducts] = useState([]);
   const [customReport, setCustomReport] = useState(false);
   const [modalShow, setModalShow] = React.useState(false);
   const [modalShowLogin, setModalShowLogin] = React.useState(false);
@@ -82,8 +83,52 @@ export default function AddDetails() {
 
   useEffect(() => {
     setShowLoader(true);
-    handleGetProductDetails();
-  }, [id]);
+		handleGetProductDetails();
+
+	}, [id]);
+
+	useEffect(() => {
+		if (product.product_category_id) {
+			getSimilarProdutcs("1",'30',"nil","nil","nil","nil","nil","nil",product.product_category_id,"active","nil")
+		}
+	},[product])
+	
+	const getSimilarProdutcs = async (
+		page = "1",
+    tempNoOfRec = "10",
+    city = "nil",
+    tempPriceRangeTo = "nil",
+    tempPriceRangeFrom = "nil",
+    featured = "nil",
+    title = "nil",
+    brand = "nil",
+		category = "nil",
+		status = 'active',
+		userId='nil'
+  ) => {
+    // setShowLoader(true);
+    const result = await productApis.getAllProducts(
+      page,
+      tempNoOfRec,
+      city,
+      tempPriceRangeTo,
+      tempPriceRangeFrom,
+      featured,
+      title,
+      brand,
+      category,
+      'active',
+      userId
+    );
+		if (result.error === false) {
+		
+      setSimilarProducts(result.data && result.data.data);
+      setShowLoader(false);
+    }
+    if (result.error === true) {
+      setShowLoader(false);
+    }
+  };
 
   const handleGetProductDetails = async () => {
     const result = await productApis.getProductDetails(id);
@@ -571,7 +616,8 @@ export default function AddDetails() {
             <FeaturedProducts
               title={`SIMILAR ADS`}
               link={``}
-              prodCategoryId={product.product_category_id}
+							prodCategoryId={product.product_category_id}
+							products={similarProducts}
             />
           </div>
         </div>
