@@ -12,7 +12,7 @@ export default function FeaturedProducts({ title, link, prodCategoryId, products
   const responsive = {
     desktop: {
       breakpoint: { max: 3000, min: 1024 },
-      items: 3,
+      items: 5,
       slidesToSlide: 3, // optional, default to 1.
     },
     tablet: {
@@ -47,7 +47,7 @@ export default function FeaturedProducts({ title, link, prodCategoryId, products
       <Carousel
         swipeable={false}
         draggable={false}
-        showDots={true}
+        showDots={false}
         responsive={responsive}
         ssr={true} // means to render carousel on server-side.
         // infinite={true}

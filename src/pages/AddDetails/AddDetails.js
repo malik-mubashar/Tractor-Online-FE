@@ -201,9 +201,9 @@ export default function AddDetails() {
     }
 	}
 	
-	const handleSeeMoreByThisUser =(tempId) => {
+	const handleSeeMoreByThisUser =(data) => {
 		history.push(
-			`/products/search?userId=${tempId}&priceRangeTo=${"nil"}&priceRangeFrom=${"nil"}&title=${"nil"}`
+			`/products/search?userId=${data.id}&priceRangeTo=${"nil"}&userName=${data.name}&priceRangeFrom=${"nil"}&title=${"nil"}`
 		);
 	}
 	console.log('userData',userData)
@@ -440,7 +440,7 @@ export default function AddDetails() {
 										<div>
 											Member Since {userData && userData.created_at}
 										</div>
-										<div onClick={() => { handleSeeMoreByThisUser(userData.id) }} style={{ cursor: 'pointer', color: 'blue' }}>
+										<div onClick={() => { handleSeeMoreByThisUser(userData) }} style={{ cursor: 'pointer', color: 'blue' }}>
 											More add by  {userData && userData.name}
 										</div>
                   </div>
