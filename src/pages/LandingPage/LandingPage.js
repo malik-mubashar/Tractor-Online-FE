@@ -76,7 +76,7 @@ const LandingPage = () => {
             );
           })}
 				<div>
-					{/* 7th section */}
+					{/* 7th section brand wala*/}
           <NewTractor />
         </div>
       </div>

@@ -40,7 +40,7 @@ export default function SideSearch({
     { label: "500000", value: "500000" },
     { label: "600000", value: "600000" },
     { label: "700000", value: "700000" },
-  ];
+	];
 
   return (
     <>
@@ -52,7 +52,8 @@ export default function SideSearch({
                 ? Object.entries(searchFilters).map((item, i) => {
                     return (
                       <>
-                        {item[0] === "featured" ? (
+												{
+													item[0] === "featured" ? (
                           item[1] === true ? (
                             <li className="d-flex" key={i}>
                               {item[0]}
@@ -74,8 +75,8 @@ export default function SideSearch({
                                 ></i>
                               </span>
                             </li>
-                          ) : null
-                        ) : item[1] !== "nil" &&
+                       	   ) : null
+                        	) : item[1] !== "nil" &&
                           (item[0] === "priceRangeFrom" ||
                             item[0] === "priceRangeTo") ? (
                           item[0] === "priceRangeFrom" ? (
@@ -103,7 +104,7 @@ export default function SideSearch({
                               </span>
                             </li>
                           ) : null
-                        ) : item[1] !== "nil" && item[0] === "category" ? (
+                        	) : item[1] !== "nil" && item[0] === "category" ? (
                           <li className="d-flex" key={i}>
                             {prodCategories &&
                               prodCategories.find(
@@ -127,7 +128,7 @@ export default function SideSearch({
                               ></i>
                             </span>
                           </li>
-                        ) : item[1] !== "nil" && item[0] === "brand" ? (
+                       	 ) : item[1] !== "nil" && item[0] === "brand" ? (
                           <li className="d-flex" key={i}>
                             {brands &&
                               brands.find(
@@ -151,7 +152,39 @@ export default function SideSearch({
                               ></i>
                             </span>
                           </li>
-                        ) : (
+																) : item[1] !== "nil" && (item[0] === 'userId' || item[0] == 'userName') ?
+																		<>
+																			{item[0] === 'userName' ?
+																				<li className="d-flex" key={i}>
+																				{ item[0]==="userName"?item[1]:null}
+																					<span class="ml-auto">
+																						<i
+																							class="fa fa-times-circle"
+																							onClick={() => {
+																								history.push(
+																									`/products/search?${new URLSearchParams({
+																										...searchFilters,
+																										[item[0]]: "nil",
+																										userId:'nil'
+																									}).toString()}`
+																								);
+																								setSearchFilters({
+																									...searchFilters,
+																									[item[0]]: "nil",
+																									userId:'nil'
+																								});
+																							}}
+																						></i>
+																					</span>
+																				</li>
+																			: null}																			
+																			</>
+																		
+																		
+																		
+																		
+																		:
+																	(
                           item[1] !== "nil" && (
                             <li className="d-flex" key={i}>
                               {item[1]}
@@ -174,7 +207,8 @@ export default function SideSearch({
                               </span>
                             </li>
                           )
-                        )}
+													)
+												}
                       </>
                     );
                   })

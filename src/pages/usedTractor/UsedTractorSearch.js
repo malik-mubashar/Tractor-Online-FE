@@ -44,6 +44,7 @@ export default function UsedTractorSearch() {
     var categoryId = new URLSearchParams(search).get("category") || "nil";
     var brandId = new URLSearchParams(search).get("brand") || "nil";
     var userId = new URLSearchParams(search).get("userId") || "nil";
+    var userName = new URLSearchParams(search).get("userName") || "nil";
     setSearchFilters({
       ...searchFilters,
       featured: featured === "true" ? true : "nil",
@@ -54,7 +55,8 @@ export default function UsedTractorSearch() {
       brand: brandId,
       category: categoryId,
 			make: "nil",
-			userId:userId
+			userId: userId,
+			userName:userName
     });
   }, [search]);
 

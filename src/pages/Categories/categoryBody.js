@@ -6,13 +6,17 @@ import T1 from "../../assets/img/t1.jpg"
 import T2 from "../../assets/img/t2.jpg"
 import T3 from "../../assets/img/t3.jpg"
 import T4 from "../../assets/img/banner1.jpg"
+import T5 from "../../assets/img/banner2.jpg"
+import T6 from "../../assets/img/banner3.jpg"
 
 const Categories = () => {
   const [index, setIndex] = useState(0);
   const handleSelect = (selectedIndex, e) => {
     setIndex(selectedIndex);
   };
-  const imgUrls = [
+	const imgUrls = [
+		T6,
+		T5,
 		T4,
     T2,
     T1,
