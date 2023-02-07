@@ -12,7 +12,7 @@ import {
 } from "react-bootstrap";
 import { NavLink, useHistory, Link } from "react-router-dom";
 import DropDownTopbar from "./DropDownTopbar";
-import "../Categories/SideMenue.css";
+import "../Section-1/SideMenue.css";
 import Logo from "../../assets/img/tractoronline.png";
 import { city } from "../../API/City/CityApis";
 import { prodApi } from "../../API/ProdCategoriesApis";

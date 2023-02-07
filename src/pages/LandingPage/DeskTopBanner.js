@@ -7,9 +7,9 @@ const DeskTopBanner = ({ cities }) => {
 
   return (
     <>
-      <div className="dashboard-carousel">
+      <div className="dashboard-carousel border-radius">
         <div className="search-classified-text text-center generic-white">
-          <h1 className="text-white">Tractors for Sale in Pakistan</h1>
+          <h3 className="text-white">Tractors for Sale in Pakistan</h3>
           <p className="text-white">
             With thousands of tractors to choose from, we're sure to have the
             correct one for you.
