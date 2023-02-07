@@ -6,7 +6,7 @@ import Buyers from "../../assets/img/buyers.png";
 import Sell from "../../assets/img/sell.png";
 import FeaturedProducts from "../LandingPage/FeaturedProducts";
 import { useHistory, useLocation } from "react-router-dom";
-import "../Categories/SideMenue.css";
+import "../Section-1/SideMenue.css";
 import { city } from "../../API/City/CityApis";
 import { prodApi } from "../../API/ProdCategoriesApis";
 import { RootContext } from "../../context/RootContext";

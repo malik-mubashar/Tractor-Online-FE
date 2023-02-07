@@ -1,6 +1,6 @@
 // @import "~react-image-gallery/styles/scss/image-gallery.scss";
 .dashboard-carousel {
-	background: linear-gradient(to top, #00ff00 0%, #000000 100%);
+	background: linear-gradient(111.4deg, rgb(2, 255, 4) 18.4%, rgb(0, 232, 237) 100.2%);
   height: auto;
   padding: 20px 0px;
   .btn-info:hover {
@@ -196,16 +196,17 @@
 .carousel-control-prev {
   left: 0px !important;
   width: 5% !important;
-  background-color: rgba(26, 26, 26, .3);
-  border-top-right-radius: 50%;
-  border-bottom-right-radius: 50%;
+  // background-color: rgba(26, 26, 26, .3);
+  // border-top-right-radius: 50%;
+  // border-bottom-right-radius: 50%;
 }
+
 .carousel-control-next {
   right: 0px !important;
   width: 5% !important;
-  background-color: rgba(26, 26, 26, .3);
-  border-top-left-radius: 50%;
-  border-bottom-left-radius: 50%;
+  // background-color: rgba(26, 26, 26, .3);
+  // border-top-left-radius: 50%;
+  // border-bottom-left-radius: 50%;
 }
 
 .carousel-control-prev-icon,
@@ -261,6 +262,11 @@
   position: relative;
   cursor: pointer;
 }
+.dropdown-button-more-2 {
+  position: relative;
+  cursor: pointer;
+}
+
 .dropdown-button:hover {
   display: block;
   .drop-down-items {
@@ -273,6 +279,15 @@
 .dropdown-button-more:hover {
   display: block;
   .drop-down-items-more {
+    display: block;
+  }
+  background-color: white;
+  border-radius: 10px;
+  box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+}
+.dropdown-button-more-2:hover {
+  display: block;
+  .drop-down-items-more-2 {
     display: block;
   }
   background-color: white;
@@ -342,6 +357,14 @@
   background-color: white;
   display: none;
   left: 0px;
+}
+.drop-down-items-more-2 {
+  position: absolute;
+  background-color: white;
+  display: none;
+	right: -166px;
+	bottom: 0px;
+	z-index: 99;
 }
 @media screen and (max-width: 992px) {
   .category-menu {

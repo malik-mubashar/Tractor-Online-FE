@@ -96,10 +96,6 @@ const searchAble = () => {
     }
 	};
 	
-
-	console.log("suggestions", searchSuggestions);
-  console.log("tractor", makeOrModel);
-
   return (
     <>
 			<ul

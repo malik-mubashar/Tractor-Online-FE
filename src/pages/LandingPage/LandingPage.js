@@ -6,7 +6,7 @@ import FeaturedProductsMobile from "./FeaturedProductsMobile";
 import NewTractor from "./NewTractor";
 import { isMobile } from "react-device-detect";
 import DeskTopBanner from "./DeskTopBanner";
-import CategoriesNavBar from "../Categories/index";
+import Section1 from "../Section-1/section-1";
 import TractorSaleAd from "./TractorSale";
 import { city } from "../../API/City/CityApis";
 import toast from "react-hot-toast";
@@ -24,12 +24,9 @@ const LandingPage = () => {
       {!isMobile && (
         <>
 					{" "}
-					{/* 2nd section */}
-          <DeskTopBanner/>
-          {/* our main side bar on landing page (3rd section) */}
           <div className="d-flex p-2 mt-2">
             <div className="col-12 ">
-							<CategoriesNavBar productCategories={ prodCategories} />
+							<Section1 productCategories={ prodCategories} />
             </div>
           </div>
         </>
