@@ -22,6 +22,7 @@ export default ({ children }) => {
 	const [popularCities, setPopularCities] = useState([]);
 	const [brands, setBrands] = useState([]);
 	const [profileInfo, setProfileInfo] = useState();
+	const [verificationRequestedUsersCount, setVerificationRequestedUsersCount] = useState(0);
 	var currency_list = [
     {label:"Afghan Afghani (AFA)",value:"AFA"},
     {label:"Albanian Lek (ALL)",value:"ALL"},
@@ -236,6 +237,8 @@ export default ({ children }) => {
 		profileInfo,
 		setProfileInfo,
 		currency_list,
+		verificationRequestedUsersCount,
+		setVerificationRequestedUsersCount
 	};
 	/*******************************************************************/
 

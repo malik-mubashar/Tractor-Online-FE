@@ -58,6 +58,7 @@ import Terms from "../pages/terms";
 import Users from "../pages/PostAd/users"
 import ContactUs from "../pages/contactUs";
 import CompareProducts from "../pages/CompareProducts/CompareProducts";
+import AccountVerification from "../pages/AccountVerification/AccountVerification";
 
 const AppRouter = () => {
   return (
@@ -268,6 +269,12 @@ const AppRouter = () => {
           <ProtectedRoute exact path= "/dashboard/search">
             <DashboardLayout>
               <Search />
+            </DashboardLayout>
+					</ProtectedRoute>
+					
+					<ProtectedRoute exact path= "/dashboard/account-verification">
+            <DashboardLayout>
+              <AccountVerification />
             </DashboardLayout>
           </ProtectedRoute>
 

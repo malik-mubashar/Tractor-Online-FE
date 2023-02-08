@@ -12,11 +12,33 @@ import { user } from "../../API/User";
 import { RootContext } from "../../context/RootContext";
 
 const Dashboard = () => {
+	const { currentUser,setShowLoader,setVerificationRequestedUsersCount } = useContext(RootContext);
+
   const [state,setState] =useState( {
     sideMenu: true,
     loading: true
 	});
+	useEffect(() => {
+		getAllUsers(1,'',10)
+	}, [])
+	const getAllUsers = async (page,mainS,no_of_record) => {
+		setShowLoader(true)
+		const result = await user.getVerificationRequstedUsers(page,mainS,no_of_record);
+		console.log('appuserindex', result)
+		debugger;
+		if (result.error === false) {
+			setVerificationRequestedUsersCount(result.data.data.req_varified)
+			setShowLoader(false)
+		}
+		if (result.error === true) {
+			console.error(result.error)
+			setShowLoader(false)
+		}
+		// const result2 = await user.updateAppUsers()
+		// console.log('result2', result2)
 
+
+	}
   // Loading icon false after DOM loaded
   // componentDidMount() {
   //   this.myInterval = setInterval(() => {
