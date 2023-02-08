@@ -7,7 +7,8 @@ import noProfilePicture from "../../assets/svg/no-profile-picture.svg";
 
 
 const users = (props) => {
-  const {setShowPasswordModel, profileInfo } = useContext(RootContext);
+	const [reqSent,setReqSent]=useState(false)
+  const {setShowPasswordModel, profileInfo ,currentUser,setShowLoader} = useContext(RootContext);
   // const [profile, setProfile] = useState();
 
   // useEffect(() => {
@@ -24,31 +25,64 @@ const users = (props) => {
 	// 		setUserProfilePicture(result.data.profile_path)
   //   }
   // };
+	const updateAccountStatus = async(userId,status) => {
+		setShowLoader(true)
+		const result = await user.updateAppUsers(currentUser.id,status);
+		if (result.error === false) {
+			setShowLoader(false)
+			setReqSent(true)
+		}
+		if (result.error === true) {
+			console.error(result.error)
+			setShowLoader(false)
+		}
+	}
+	const handleAccountStatus = () => {
+		updateAccountStatus(currentUser.id,'nil')
+	}
+	console.log('ad',reqSent)
 
   return (
     <div className="user container">
       <div className="user-profile">
         <div className="user-ads mb-40">
           <div className="card my-4">
-            <div className="dashboard-profile clearfix">
-							{profileInfo && profileInfo.profile_path === null ?
-								<>
-								<img
-									alt="Profile"
-									className="profile-photo pull-left"
-									src={noProfilePicture}
-								></img>									
-								</>	
-								:
-								<>
-								<img
-									alt="Profile"
-									className="profile-photo pull-left"
-									src={profileInfo && profileInfo.profile_path}
-								></img>
-								</>
-							}
-              <h1> {profileInfo && profileInfo.name ? profileInfo.name : "user name"}</h1>
+						<div className="dashboard-profile clearfix">
+								{profileInfo && profileInfo.profile_path === null ?
+									<>
+									<img
+										alt="Profile"
+										className="profile-photo pull-left"
+										src={noProfilePicture}
+									></img>									
+									</>	
+									:
+									<>
+									<img
+										alt="Profile"
+										className="profile-photo pull-left"
+										src={profileInfo && profileInfo.profile_path}
+									></img>
+									</>
+								}
+							<div className="d-flex justify-content-between">
+								<h1> {profileInfo && profileInfo.name ? profileInfo.name : "user name"}</h1>
+								{
+									currentUser.varifiedUser ?
+									<div class="alert alert-success" role="alert">
+										This Account is varified
+									</div>
+									:
+									(currentUser.varifiedUser===null||reqSent) ?	
+										<div class="alert alert-warning" role="alert">
+											You have requested for account to be varified
+											</div>
+											:
+											<div onClick={()=>handleAccountStatus()} class="alert alert-danger cursor-pointer" role="alert">
+											Account not varified click to send request 
+											</div>
+									}
+							</div>
               <p>Member Since {profileInfo && profileInfo.created_at}</p>
               <p className="fs12">
                 <Link to="/profile-settings" >Edit Profile</Link>

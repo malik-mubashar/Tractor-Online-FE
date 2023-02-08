@@ -50,7 +50,7 @@ const Login = () => {
 		const loadingToastId = toast.loading("Loading..!");
 
     try {
-			const result = await user.login(phone,email, password);
+			const result = await user.login(phone, email, password);
       //success
 			if (result.error === false) {
 				toast.dismiss(loadingToastId);
@@ -64,7 +64,8 @@ const Login = () => {
           accessToken: result.headers["access-token"],
           client: result.headers["client"],
 					uid: result.headers["uid"],
-					roles:userRoles
+					roles: userRoles,
+					varifiedUser:result.varifiedUser
         });
 
         localStorage.setItem(
@@ -74,8 +75,8 @@ const Login = () => {
             accessToken: result.headers["access-token"],
             client: result.headers["client"],
 						uid: result.headers["uid"],
-						roles:userRoles
-
+						roles: userRoles,
+						varifiedUser: result.varifiedUser
           })
         );
         if (userProfilePicture == null) {
