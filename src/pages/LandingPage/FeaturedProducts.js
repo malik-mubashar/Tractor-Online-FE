@@ -6,7 +6,7 @@ import { productApis } from "../../API/ProductApis";
 import Alert from "react-bootstrap/Alert";
 import { isMobile } from "react-device-detect";
 
-export default function FeaturedProducts({ title, link, prodCategoryId, products }) {
+export default function FeaturedProducts({ title, link, prodCategoryId, products,fromSection1=false }) {
 
 
   const responsive = {
@@ -30,7 +30,7 @@ export default function FeaturedProducts({ title, link, prodCategoryId, products
 	// console.log('products in featured products',products)
 
   return (
-    <div>
+    <div className={`${fromSection1?'section-1-featuredContainer':'featuredContainer'}`}>
       <div className="d-flex justify-content-between">
 				{isMobile ?
 					<h6>{ title}</h6>
@@ -51,7 +51,7 @@ export default function FeaturedProducts({ title, link, prodCategoryId, products
         responsive={responsive}
         ssr={true} // means to render carousel on server-side.
         // infinite={true}
-        autoPlay={true}
+        autoPlay={false}
         autoPlaySpeed={3000}
         keyBoardControl={true}
         customTransition="all .5"

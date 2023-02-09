@@ -62,7 +62,8 @@ const CategoriesNavBar = () => {
 					</div>
 					<div className="col-lg-10 hot-slider">
 						<FeaturedProducts
-						products={featuredProducts}
+							products={featuredProducts}
+							fromSection1={true}
 						/>
 					</div>
 				</div>
