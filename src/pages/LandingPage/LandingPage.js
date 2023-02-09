@@ -13,6 +13,8 @@ import toast from "react-hot-toast";
 import { brandApis } from "../../API/BrandsApis";
 import { prodApi } from "../../API/ProdCategoriesApis";
 import { RootContext } from "../../context/RootContext";
+import "../LandingPage/landingPage.scss"
+
 // import ExploreProducts from "./ExploreProducts";
 
 const LandingPage = () => {
