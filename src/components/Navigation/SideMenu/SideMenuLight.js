@@ -1,20 +1,22 @@
-import React from "react";
+import React, { useContext } from "react";
 import { NavLink } from "react-router-dom";
 import { Navbar, Nav, NavDropdown } from "react-bootstrap";
 import * as Icon from "react-feather";
 import "./SideMenu.css";
 import Icofont from "react-icofont";
+import { RootContext } from "../../../context/RootContext";
 
-class SideMenuLight extends React.Component {
-  render() {
+const SideMenuLight = ({ sideMenu }) => {
+	const { verificationRequestedUsersCount } = useContext(RootContext);
+	console.log('verificationRequestedUsersCount',verificationRequestedUsersCount)
     return (
       <div
         className={`sidemenu-area sidemenu-light ${
-          this.props.sideMenu ? "sidemenu-expande-width" : "sidemenu-toggle"
+          sideMenu ? "sidemenu-expande-width" : "sidemenu-toggle"
         }`}
       >
         <Navbar
-          className={`sidemenu ${this.props.sideMenu ? "" : "hide-nav-title"}`}
+          className={`sidemenu ${sideMenu ? "" : "hide-nav-title"}`}
         >
           <Navbar.Collapse>
             <Nav>
@@ -29,9 +31,10 @@ class SideMenuLight extends React.Component {
                 title={
                   <div className="dropdown-title">
                     <Icofont icon="user" className="icon" />
+
+										
                     <span className="title">
-                      User
-                      
+                     User
                       {/* <Icofont icon="rounded-right" className="icon fr" /> */}
                     </span>
                   </div>
@@ -152,7 +155,21 @@ class SideMenuLight extends React.Component {
                   User Roles
                 </NavLink>
               </NavDropdown> */}
-
+								<NavLink to="/dashboard/account-verification/" className="nav-link">
+									<Icofont icon="verification-check" className="icon" />
+										{
+											parseInt(verificationRequestedUsersCount) > 0 ?
+											<span className="ci-number-nav-light">
+											{ verificationRequestedUsersCount}
+												<span className="ripple-nav-light"></span>
+												<span className="ripple-nav-light"></span>
+												<span className="ripple-nav-light"></span>
+											</span>	
+											:
+											null
+										}
+                <span className="title">Account Verification</span>
+              </NavLink>
               <NavLink to="/dashboard/products/" className="nav-link">
                 <Icofont icon="package" className="icon" />
                 <span className="title">Products</span>
@@ -216,7 +233,6 @@ class SideMenuLight extends React.Component {
         </Navbar>
       </div>
     );
-  }
 }
 
 export default SideMenuLight;

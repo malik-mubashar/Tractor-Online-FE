@@ -20,8 +20,9 @@ import { RootContext } from "../../context/RootContext";
 import "./accountVerification.scss"
 
 export default function AccountVerification() {
-	const { setShowLoader,verificationRequestedUsersCount } = useContext(RootContext);
+	const { setShowLoader,verificationRequestedUsersCount,setVerificationRequestedUsersCount } = useContext(RootContext);
 	const [verificationRequestedUsers, setVerificationRequestedUsers] = useState([]);
+	const [originalUsers, setOriginalUsers] = useState([]);
   const [pagination, setPagination] = useState();
   const [noOfRec, setNoOfRec] = useState(10);
   const [mainSearchString, setMainSearchString] = useState("");
@@ -29,91 +30,46 @@ export default function AccountVerification() {
 		getAllUsers(1,'',10)
   }, []);
 
-  const getCountries = async (page, mainSearch, noOfRec) => {
-    const loadingToastId = toast.loading("Loading..!");
-    try {
-      const result = await country.getCountries(page, mainSearch, noOfRec);
-      if (result.error == false && result.data.status == "success") {
-        toast.dismiss(loadingToastId);
-        setCountryState({
-          ...countryState,
-          countries: result.data.data,
-          pagination: result.data.pagination,
-          originalCountries: result.data.data,
-          isAddCountry: false,
-          isEditCountry: false,
-        });
-      } else {
-        toast.dismiss(loadingToastId);
-        console.error(result.data);
-      }
-    } catch (error) {
-      toast.dismiss(loadingToastId);
-      console.error(error);
-    }
-	};
-
 		const getAllUsers = async (page, mainSearch, noOfRec) => {
 			setShowLoader(true)
 			const result = await user.getVerificationRequstedUsers(page, mainSearch, noOfRec);
-			console.log('appuserindex', result)
-			debugger;
-			// result.data.data.pagination
 			if (result.error === false) {
 				setVerificationRequestedUsers(result.data.data.data)
-				setShowLoader(false)
+				setOriginalUsers(result.data.data.data)
+				setVerificationRequestedUsersCount(result.data.data.req_varified)
 				setPagination(result.data.data.pagination);
+				setShowLoader(false)
 			}
 			if (result.error === true) {
 				console.error(result.error)
 				setShowLoader(false)
 			}
-			// const result2 = await user.updateAppUsers()
-			// console.log('result2', result2)
-	
-	
 		}
-
-  
-
-  const [countryState, setCountryState] = useState({
-    isEditCountry: false,
-    isAddCountry: false,
-    isViewCountry: false,
-    countries: null,
-    originalCountries: null,
-  });
 
   const handleSearch = (searchString) => {
     if (searchString) {
-      const filteredCountries = countryState.countries.filter((item) => {
+      const filteredUsers = verificationRequestedUsers.filter((item) => {
         return (
           item.title.toLowerCase().includes(searchString.toLowerCase()) ||
           (item.comments &&
             item.comments.toLowerCase().includes(searchString.toLowerCase()))
         );
       });
-      setCountryState({
-        ...countryState,
-        countries: filteredCountries,
-      });
+      setVerificationRequestedUsers(filteredUsers);
     } else {
-      setCountryState({
-        ...countryState,
-        countries: countryState.originalcountries,
-      });
+      setVerificationRequestedUsers(originalUsers);
     }
   };
 
-  const handleMainSearch = (event) => {
-    setMainSearchString(event.target.value);
-    if (event.keyCode == 13) {
-      getAllUsers(1, event.target.value, noOfRec);
-    }
-    if (event.target.value == "") {
-      getAllUsers(1, event.target.value, noOfRec);
-    }
-	};
+  // const handleMainSearch = (event) => {
+  //   setMainSearchString(event.target.value);
+  //   if (event.keyCode == 13) {
+  //     getAllUsers(1, event.target.value, noOfRec);
+  //   }
+  //   if (event.target.value == "") {
+  //     getAllUsers(1, event.target.value, noOfRec);
+  //   }
+	// };
 	const updateAccountStatus = async(userId,status) => {
 		setShowLoader(true)
 		const result = await user.updateAppUsers(userId,status);
@@ -141,7 +97,7 @@ export default function AccountVerification() {
       <>
         <div className="verificationPage">
               <>
-                <div className={`${isMobile ? "" : "d-flex"}`}>
+                {/* <div className={`${isMobile ? "" : "d-flex"}`}>
                   <FormControl
                     type="text"
                     onKeyUp={(event) => handleMainSearch(event)}
@@ -171,7 +127,7 @@ export default function AccountVerification() {
                     <option value="70">70</option>
                     <option value="80">80</option>
                   </select>
-                </div>
+                </div> */}
 
                 <div className="card mb-4">
                   <div className="card-body">

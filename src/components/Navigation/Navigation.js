@@ -38,7 +38,7 @@ const Navigation = ({onClick }) => {
   } = useContext(RootContext);
 	const history=useHistory()
   const[state,setState] =useState( {
-    sideMenu: false,
+    sideMenu: true,
     term: "",
     menuColor: true
   });
@@ -46,7 +46,7 @@ const Navigation = ({onClick }) => {
   const _toggleClass = () => {
     const currentSideMenu = state.sideMenu;
     setState({ ...state,sideMenu: !currentSideMenu });
-    onClick(state.sideMenu);
+    onClick();
   };
 
   const _handleSubmit = (event) => {
