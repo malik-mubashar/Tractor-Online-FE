@@ -98,7 +98,8 @@ export default function Products() {
     city: "",
 		phone_no: "",
 		images: [],
-		requestedProds:false
+		requestedProds: false,
+		call_for_price:false
   });
 
   const handleSearch = (searchString) => {
@@ -500,8 +501,7 @@ export default function Products() {
 																	onClick={() => {
 																		var tempActiveImagesPath = product.active_images_path === undefined ? [] : product.active_images_path;
 																		var tempActiveImagesThumbnail= product.active_images_thumbnail === undefined ? [] : product.active_images_thumbnail;
-																		
-																		debugger
+																		var tempDriverPhotoThumbnail = product.driver_photo_thumbnail ? product.driver_photo_thumbnail : null;
                                     setProductsState({
                                       ...productsState,
                                       isEditProduct: true,
@@ -514,7 +514,7 @@ export default function Products() {
                                       brand: product.brand,
 																			brand_id: product.brand_id,
 																			city:product.city,
-																			price:product.price.toString(),
+																			price:product.price?product.price.toString():'',
 																			phone_no:product.phone_no,
 																			location: product.location,
 																			imagesPath: [product.cover_photo_path,...tempActiveImagesPath],
@@ -523,7 +523,9 @@ export default function Products() {
 																			cover_photo: null,
 																			user: product.user,
 																			price_currency:product.price_currency,
-																			call_for_price:product.call_for_price,
+																			call_for_price: product.call_for_price,
+																			product_category_title: product.product_category.title,
+																			driverCoverPhotoThumbnail:tempDriverPhotoThumbnail
                                     });
                                   }}
                                   className="text-success mr-2 icon wh-15 mt-minus-3 cursor-pointer"
