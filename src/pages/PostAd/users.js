@@ -8,23 +8,7 @@ import noProfilePicture from "../../assets/svg/no-profile-picture.svg";
 
 const users = (props) => {
 	const [reqSent,setReqSent]=useState(false)
-  const {setShowPasswordModel, profileInfo ,currentUser,setShowLoader} = useContext(RootContext);
-  // const [profile, setProfile] = useState();
-
-  // useEffect(() => {
-  //   handlePersonalDetail();
-  // }, []);
-
-  // const handlePersonalDetail = async () => {
-  //   const loadingToastId = toast.loading("Loading..!");
-
-  //   const result = await user.findUser(currentUser);
-  //   if (result.error === false) {
-  //     toast.dismiss(loadingToastId);
-	// 		setProfile(result.data);
-	// 		setUserProfilePicture(result.data.profile_path)
-  //   }
-  // };
+  const {setShowPasswordModel, profileInfo ,currentUser,setShowLoader,setCurrentUser} = useContext(RootContext);
 	const updateAccountStatus = async(userId,status) => {
 		setShowLoader(true)
 		const result = await user.updateAppUsers(currentUser.id,status);
@@ -40,7 +24,25 @@ const users = (props) => {
 	const handleAccountStatus = () => {
 		updateAccountStatus(currentUser.id,'nil')
 	}
-	console.log('ad',reqSent)
+	useEffect(async() => {
+		checkifVerified()
+	}, [])
+	const checkifVerified=async() => {
+		setShowLoader(true)
+		debugger;
+		const result = await user.findUser(currentUser);
+		if (result.error === false) {
+			debugger
+			setCurrentUser({
+				...currentUser,
+				varifiedUser:result.data.varified_user
+			})
+		}
+		if (result.error === true) {
+			console.error((result.data.errors[0]))
+		}
+	}
+	console.log('ad',currentUser.varifiedUser)
 
   return (
     <div className="user container">
@@ -68,7 +70,7 @@ const users = (props) => {
 							<div className="d-flex justify-content-between">
 								<h1> {profileInfo && profileInfo.name ? profileInfo.name : "user name"}</h1>
 								{
-									currentUser.varifiedUser ?
+									currentUser.varifiedUser===true ?
 									<div class="alert alert-success" role="alert">
 										This Account is varified
 									</div>

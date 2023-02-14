@@ -67,6 +67,7 @@ const Login = () => {
 					roles: userRoles,
 					varifiedUser:result.varifiedUser
         });
+				console.log('ad',result.varifiedUser)
 
         localStorage.setItem(
           "currentUser",
