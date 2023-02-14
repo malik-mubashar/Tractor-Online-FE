@@ -29,7 +29,6 @@ const MainBanners = () => {
 		showSlides(slideIndex = n);
 	}
 	function showSlides(n) {
-		debugger;
 		let i;
 		let slides = document.getElementsByClassName("mySlides");
 		let dots = document.getElementsByClassName("dot");

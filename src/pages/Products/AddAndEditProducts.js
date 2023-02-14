@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useRef, useState } from "react";
-import { Button, Col, Form, Row } from "react-bootstrap";
+import { Button, Col, Figure, Form, Row } from "react-bootstrap";
 import toast, { Toaster } from "react-hot-toast";
 import { productApis } from "../../API/ProductApis";
 import { brandApis } from "../../API/BrandsApis";
@@ -11,6 +11,8 @@ import { city } from "../../API/City/CityApis";
 import Select from "react-select";
 import loader from '../../assets/img/Spinner-2.gif'
 import { RootContext } from "../../context/RootContext";
+import img_171by180 from "../../assets/img/171by180.svg"
+
 
 export default function AddAndEditProduct({
   productsState,
@@ -18,6 +20,7 @@ export default function AddAndEditProduct({
   getProducts,
 }) {
   const { currency_list } = useContext(RootContext);
+	const driverInputRef = useRef(null);
 
   const [brands, setBrands] = useState();
   const [managePics, setmanagePics] = useState(false);
@@ -29,15 +32,9 @@ export default function AddAndEditProduct({
   const myRefname = useRef(null);
   const [file, setFile] = useState([]);
   const [cities, setCities] = useState([]);
-  const [extraFieldsArr, setExtraFieldsArr] = useState([
-    // {
-    //   id: parseInt(
-    //     new Date().getTime().toString() + Math.floor(Math.random() * 1000000)
-    //   ),
-    //   key: null,
-    //   value: null,
-    // },
-  ]);
+	const [extraFieldsArr, setExtraFieldsArr] = useState([]);
+	const [driverImg, setDriverImg] = useState(null);
+  const [driverImgForApi, setDriverImgForApi] = useState(null);
   const fieldsMap = [
     { name: "title", required: true },
     { name: "status", required: true },
@@ -205,7 +202,8 @@ export default function AddAndEditProduct({
 
   useEffect(() => {
     if (productsState.isEditProduct === true) {
-      getExtraFields(productsState.extra_fields);
+			getExtraFields(productsState.extra_fields);
+			setDriverImg(productsState.driverCoverPhotoThumbnail)
     }
   }, [productsState.extra_fields]);
 
@@ -365,6 +363,12 @@ export default function AddAndEditProduct({
         );
       }
 
+
+			if (driverImgForApi !== null) {
+        formData.append("driver_photo", driverImgForApi);
+			}
+
+
       if (productsState.isAddProduct) {
         try {
           const result = await productApis.addProduct(productsState, formData);
@@ -483,13 +487,26 @@ export default function AddAndEditProduct({
     }
   };
 
-  const handleProductCategoryChange = (e) => {
-    handleChange(e);
+	const handleProductCategoryChange = (e) => {
+		let title = productMappings.find((az) => { return az.product_category_id == e.target.value }).product_category.title
+		console.log('asd', title
+		)
+		setProductsState({...productsState,product_category_title:title,[e.target.name]: e.target.value,
+		})
     var temp = productMappings.find((item) => {
       return item.product_category.id == e.target.value;
     });
     getExtraFields(temp.extra_fields);
-  };
+	};
+	const uploadDriverPicture = (e) => {
+		let driverImage = Object.entries(e.target.files).map((e) =>
+		URL.createObjectURL(e[1])
+		);
+		setDriverImg(driverImage)
+		setDriverImgForApi(e.target.files[0])
+	}
+
+	console.log('-->',productsState)
 
   return (
     <div className="mb-4">
@@ -528,7 +545,7 @@ export default function AddAndEditProduct({
                       }
                       as="select"
                       onChange={(e) => handleProductCategoryChange(e)}
-                      name="product_category_id"
+											name="product_category_id"
                     >
                       <option key="blankChoice" hidden value>
                         -- Select Product Category --
@@ -576,6 +593,40 @@ export default function AddAndEditProduct({
                       );
                     })}
 								</div>
+								<div>
+								{
+					productsState && productsState.product_category_title &&
+					(productsState.product_category_title === 'Laser Land Leveler on Rent' ||productsState.product_category_title === ' Tractor & Machinery On Rent')
+						?
+						<div className="mt-1">
+							<div className="col-lg-12">
+								<Figure>
+									<Figure.Image
+									width={171}
+									height={180}
+									alt="171x180"
+									src={driverImg===null?img_171by180:driverImg}
+								/>
+									<Figure.Caption onClick={()=>{ driverInputRef.current.click();}}>
+										<span className="cursor-pointer btn btn-default" >
+										Upload driver picture
+									</span>
+									</Figure.Caption>
+								</Figure>
+							</div>
+						</div>
+						:
+						null
+				}
+					<input
+              ref={driverInputRef}
+              type="file"
+              id="multi-img-field"
+              className="form-control d-none"
+							onChange={(e) => { uploadDriverPicture(e) }}
+              accept="image/x-png,image/gif,image/jpeg,image/jpg"
+            />
+								</div>
 								<Form.Group className="d-flex mt-3" controlId="formGridproduct">
                   <Form.Label>Call for price</Form.Label>
                   <Form.Check
@@ -597,6 +648,8 @@ export default function AddAndEditProduct({
 												setProductsState({
 													...productsState,
 													price: 0,
+													call_for_price: e.currentTarget.checked,
+
 												});
 											} else {
 												setDisablePriceField(false)

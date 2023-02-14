@@ -414,14 +414,12 @@ class User {
       }
 		})
 			.then((result) => {
-				debugger;
 			return {
           error: false,
 					data: result
         };
       })
 			.catch((error) => {
-				debugger;
         return {
           error: true,
           data: error.response.data

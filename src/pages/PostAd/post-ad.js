@@ -3,7 +3,7 @@ import UploadPhotoLogo from "../../assets/img/upload-photos-logo.png";
 import ProductsLogo from "../../assets/img/products-logo.png";
 import PriceLogo from "../../assets/img/price-logo.png";
 import { city } from "../../API/City/CityApis";
-import { Button, Form, Modal } from "react-bootstrap";
+import { Button, Figure, Form, Modal } from "react-bootstrap";
 import Select from "react-select";
 import Icofont from "react-icofont";
 import { productMappingApis } from "../../API/ProductMappingApis";
@@ -15,11 +15,13 @@ import { brandApis } from "../../API/BrandsApis";
 import { useHistory, useParams } from "react-router-dom";
 import { isMobile } from "react-device-detect";
 import '../../assets/css/postAdd.scss'
+import img_171by180 from "../../assets/img/171by180.svg"
 
 const postad = () => {
 	var flag = false;
 	const { id } = useParams();
   const myRefname = useRef(null);
+  const driverInputRef = useRef(null);
   const { setShowLoader,prodCategories,cities,brands,currency_list} = useContext(RootContext);
   const [extraFieldsArr, setExtraFieldsArr] = useState([]);
 	const history = useHistory();
@@ -33,6 +35,8 @@ const postad = () => {
   const [file, setFile] = useState([]);
   const [showModelError, setShowModelError] = useState(false);
   const [isImgSelected, setIsImgSelected] = useState(false);
+  const [driverImg, setDriverImg] = useState(null);
+  const [driverImgForApi, setDriverImgForApi] = useState(null);
 	const [postAddState, setPostAddState] = useState({
 		isEditAd:id===undefined?false:true,
     isCreateAd: true,
@@ -179,13 +183,15 @@ const postad = () => {
 				}
         setShowLoader(false);
         setShowCategoryModel(false);
-      } else {
+			} else {
+				console.log('1')
         setShowModelError(true);
         setShowLoader(false);
         toast.error("Error");
         console.error(result.data);
       }
-    } catch (error) {
+		} catch (error) {
+			console.log('2')
       setShowModelError(true);
       setShowLoader(false);
       toast.error("Error");
@@ -279,6 +285,10 @@ const postad = () => {
         }
       } else {
         formData.append("cover_photo", postAddState.cover_photo);
+			}
+
+			if (driverImgForApi !== null) {
+        formData.append("driver_photo", driverImgForApi);
 			}
 
 			formData.append("call_for_price", postAddState.call_for_price);
@@ -428,6 +438,14 @@ const postad = () => {
       ...postAddState,
       images: templist,
     });
+	}
+
+	const uploadDriverPicture = (e) => {
+		let driverImage = Object.entries(e.target.files).map((e) =>
+		URL.createObjectURL(e[1])
+		);
+		setDriverImg(driverImage)
+		setDriverImgForApi(e.target.files[0])
 	}
 
 	console.log('postAddState',postAddState)
@@ -753,7 +771,40 @@ const postad = () => {
               );
             })}
           </div>
-        )}
+				)}
+				{
+					postAddState && postAddState.product_category_title &&
+					(postAddState.product_category_title === 'Laser Land Leveler on Rent' ||postAddState.product_category_title === ' Tractor & Machinery On Rent')
+						?
+						<div className="row my-2">
+							<div className="col-lg-3"></div>
+							<div className="col-lg-4">
+								<Figure>
+									<Figure.Image
+									width={171}
+									height={180}
+									alt="171x180"
+									src={driverImg===null?img_171by180:driverImg}
+								/>
+									<Figure.Caption onClick={()=>{ driverInputRef.current.click();}}>
+										<span className="cursor-pointer btn btn-default" >
+										Upload driver picture
+									</span>
+									</Figure.Caption>
+								</Figure>
+							</div>
+						</div>
+						:
+						null
+				}
+					<input
+              ref={driverInputRef}
+              type="file"
+              id="multi-img-field"
+              className="form-control d-none"
+							onChange={(e) => { uploadDriverPicture(e) }}
+              accept="image/x-png,image/gif,image/jpeg,image/jpg"
+            />
         <div className="row my-2">
           <div className="col-lg-3 col-12 text-lg-right">
             <Form.Label>Description</Form.Label>
@@ -905,7 +956,8 @@ const postad = () => {
         onHide={handleCloseCategoryModel}
         backdrop="static"
         keyboard={false}
-        size="lg"
+				size="lg"
+				dialogClassName={'model-height'}
       >
         <Modal.Header>
           <Modal.Title>Select Product Category</Modal.Title>
@@ -922,10 +974,11 @@ const postad = () => {
 								<div key={ idx} className={`col-lg-6 col-12`}>
                   <div
                     id={item.id}
-                    onClick={(e) => {
+										onClick={(e) => {
                       setPostAddState({
                         ...postAddState,
                         product_category_id: e.currentTarget.id,
+                        product_category_title: item.title,
                       });
                       setShowModelError(false);
                       var active_elem = document.getElementsByClassName(
