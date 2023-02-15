@@ -394,6 +394,35 @@ class User {
         };
       });
 	};
+
+	getVerifiedUsers = async (page,searchString,noOfRec) => {
+		const tempCurrentUser = JSON.parse(window.localStorage.getItem("currentUser"))
+    return axios({
+      method: "get",
+      url: `${process.env.REACT_APP_API_LOCAL_PATH}get_verified_users?page=${page}&q%5Bname_or_comments_cont%5D=${searchString}&no_of_record=${noOfRec}`,
+			headers: {
+				"Content-Type": "application/json; charset=utf-8",
+        "Access-Control-Allow-Origin": "*",
+        "Access-Control-Allow-Headers": "*",
+        "access-token": `${tempCurrentUser.accessToken}`,
+        client: `${tempCurrentUser.client}`,
+        uid: `${tempCurrentUser.uid}`,
+        mode: "no-cors",
+			}
+		})
+		.then((result) => {
+			return {
+          error: false,
+					data: result
+        };
+      })
+      .catch((error) => {
+        return {
+          error: true,
+          data: error.response.data
+        };
+      });
+	};
 	
 	updateAppUsers = async (id, status) => {
 		const tempCurrentUser = JSON.parse(window.localStorage.getItem("currentUser"))

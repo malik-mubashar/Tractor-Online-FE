@@ -63,7 +63,7 @@ export default function Categories() {
   };
   return (
     <div>
-      <h2 className="text-center">Examine Used Tractors</h2>
+      {/* <h2 className="text-center">Examine Used Tractors</h2> */}
       {/* Tab Demo Three */}
       <Col lg={12} className='p-0'>
         <div className="mb-4">
