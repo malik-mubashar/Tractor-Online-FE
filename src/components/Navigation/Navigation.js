@@ -38,7 +38,7 @@ const Navigation = ({onClick }) => {
   } = useContext(RootContext);
 	const history=useHistory()
   const[state,setState] =useState( {
-    sideMenu: true,
+    sideMenu: false,
     term: "",
     menuColor: true
   });

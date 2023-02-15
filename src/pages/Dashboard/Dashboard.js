@@ -12,6 +12,31 @@ import { user } from "../../API/User";
 import { RootContext } from "../../context/RootContext";
 
 const Dashboard = () => {
+	const { currentUser,setShowLoader,setVerificationRequestedUsersCount } = useContext(RootContext);
+
+	useEffect(() => {
+		debugger
+		getAllUsers(1,'',10)
+	}, [])
+	const getAllUsers = async (page,mainS,no_of_record) => {
+		setShowLoader(true)
+		debugger;
+		const result = await user.getVerificationRequstedUsers(page,mainS,no_of_record);
+		if (result.error === false) {
+
+			console.log('req_varified', result.data.data.req_varified)
+			setVerificationRequestedUsersCount(result.data.data.req_varified)
+			setShowLoader(false)
+		}
+		if (result.error === true) {
+			console.error(result.error)
+			setShowLoader(false)
+		}
+		// const result2 = await user.updateAppUsers()
+		// console.log('result2', result2)
+
+
+	}
 
   const [state,setState] =useState( {
     sideMenu: true,

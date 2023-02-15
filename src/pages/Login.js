@@ -5,6 +5,7 @@ import * as Icon from "react-feather";
 import { user } from "../API/User/index";
 // Logo image file path
 import Logo from "../assets/img/logo.png";
+import Logo2 from "../assets/img/tractoronline.png";
 import { RootContext } from "../context/RootContext";
 import toast from "react-hot-toast";
 import Icofont from 'react-icofont';
@@ -151,7 +152,7 @@ const Login = () => {
               <Col md={6}>
                 <div className="form-left-content">
                   <div className="auth-logo">
-                    <Image src={Logo} alt="Logo" />
+                    <Image src={Logo2} alt="Logo" />
                   </div>
                   <div className="login-links">
                     <Link to="/" className="fb">
