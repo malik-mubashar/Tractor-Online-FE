@@ -80,8 +80,8 @@ export default function SearchListing({
   return (
     <>
       <Col sm={12} lg={12} xl={12} className="search-listing-container">
-        <div className="topSorting">
-          <div className="organize-results">
+        <div className="topSorting d-flex">
+          <div className="organize-results ml-auto mb-1">
             {/* <div className="col-md-8 d-flex" style={{ marginTop: "10px" }}>
               <span className="sort-by-text mt-2 mr-2">Sort By: </span>
               <select

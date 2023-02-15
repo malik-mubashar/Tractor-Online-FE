@@ -288,7 +288,7 @@ const ProfileSettings = () => {
     <>
       <div className="page-wrapper">
         {/* Breadcrumb */}
-        <div className="main-content-header">
+        {/* <div className="main-content-header">
           <Breadcrumb>
             <h1>Edit Profile</h1>
             <Link to="/dashboard" className="breadcrumb-item">
@@ -299,7 +299,7 @@ const ProfileSettings = () => {
             </Link>
             <Breadcrumb.Item active>Profile Settings</Breadcrumb.Item>
           </Breadcrumb>
-        </div>
+        </div> */}
         {/* End Breadcrumb */}
 
         {/* Profile Settings */}

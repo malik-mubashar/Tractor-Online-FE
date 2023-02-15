@@ -261,9 +261,7 @@ const AppRouter = () => {
           </ProtectedRoute> */}
 
           <ProtectedRoute exact path="/profile-settings/">
-            <DashboardLayout>
               <ProfileSettings />
-            </DashboardLayout>
           </ProtectedRoute>
 
           <ProtectedRoute exact path= "/dashboard/search">

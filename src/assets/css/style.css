@@ -3064,4 +3064,11 @@ textarea.form-control {
 }
 
 /* End Footer Style */
+
+.verifiedIcon{
+	background: #BFE2C7;
+	border-radius: 13px;
+	border: 1px solid;
+	padding: 3px;
+}
 /*# sourceMappingURL=style.css.map */

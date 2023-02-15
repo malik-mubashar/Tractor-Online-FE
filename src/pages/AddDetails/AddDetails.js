@@ -21,6 +21,8 @@ import { Link, useHistory } from "react-router-dom";
 import toast from "react-hot-toast";
 import RightArrow from '../../assets/img/right-arrow.png';
 import LeftArrow from '../../assets/img/left-arrow.png';
+import { Check } from "react-feather";
+
 
 export default function AddDetails() {
   const { id } = useParams();
@@ -435,7 +437,8 @@ export default function AddDetails() {
                   </div>
                   <div className="col-md-8">
                     <div>
-                      <strong>{userData && userData.name}</strong>
+											<strong>{userData && userData.name}</strong>
+											{userData && userData.varified_user && <Check className="verifiedIcon ml-2" />}
                     </div>
 										<div>
 											Member Since {userData && userData.created_at}
