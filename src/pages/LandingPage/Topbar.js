@@ -33,32 +33,12 @@ const Topbar = () => {
 		prodCategories,
 		setProdCategories,
 		cities,
-		setCities
+		popularCities
   } = useContext(RootContext);
 
   const [modalShow, setModalShow] = React.useState(false);
   const history = useHistory();
-  // const [productCategories, setProductCategories] = useState();
-  const [profile, setProfile] = useState();
-  // const [cities, setCities] = useState([]);
-  useEffect(() => {
-    // handleGetAllCategories();
-    handleGetAllCities();
-  }, []);
 
-
-  const handleGetAllCities = async () => {
-    const result = await city.getPopularCity("popular");
-
-    if (result.error === false) {
-      setCities(result.data && result.data.data);
-    }
-  };
-
-  // const handleGetAllCategories = async () => {
-  //   const result = await prodApi.getAllProductCategories();
-  //   setProductCategories(result.data && result.data.data);
-  // };
   return (
     <Navbar fixed="top" className="top-menu landingTopbar">
       <Image
@@ -81,7 +61,7 @@ const Topbar = () => {
                     link={item.link}
                     title={item.title}
                     productHead={item.product_category_heads}
-                    cities={cities}
+                    cities={popularCities}
                     brands={item.category_brands}
                     productCategory={item}
                   />
