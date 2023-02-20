@@ -774,7 +774,7 @@ const postad = () => {
 				)}
 				{
 					postAddState && postAddState.product_category_title &&
-					(postAddState.product_category_title === 'Laser Land Leveler on Rent' ||postAddState.product_category_title === ' Tractor & Machinery On Rent')
+					(postAddState.product_category_title === 'Laser Land Leveler on Rent' ||postAddState.product_category_title === 'Tractor & Machinery On Rent')
 						?
 						<div className="row my-2">
 							<div className="col-lg-3"></div>
