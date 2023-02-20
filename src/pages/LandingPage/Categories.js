@@ -37,7 +37,6 @@ export default function Categories() {
 			const chunk = prodCategories.slice(i, i + chunkSize);
 			tempArr.push(chunk);
 		}
-		console.log('setProdCategoriesForCategories',tempArr)
 		setProdCategoriesForCategories(tempArr); 
 	}
 
@@ -48,7 +47,6 @@ export default function Categories() {
 			const chunk = brands.slice(i, i + chunkSize);
 			tempArr.push(chunk);
 		}
-		console.log('setBrandsForCategories',tempArr)
 		setBrandsForCategories(tempArr); 
 	}
 
@@ -71,7 +69,7 @@ export default function Categories() {
             <div className="tabs-style-three">
 							<Tabs defaultActiveKey="Categories" id="uncontrolled-tab-example">
                 <Tab eventKey="Categories" title="Categories">
-                  <Carousel slide={false}>
+									<Carousel 			showDots={false} variant={'dark'} slide={false}>
                     {prodCategoriesForCategories &&
                       prodCategoriesForCategories.map((item) => (
                         <Carousel.Item>
@@ -80,7 +78,7 @@ export default function Categories() {
                               <li key={i} className={`${isMobile?'col-3 p-1':'col-2'} mt-4 `}>
                                 <span
                                   onClick={() => history.push(`/products/search?category=${item2.id}`)}
-                                 
+                                 className={`${isMobile?'':'max-height-desktop'}`}
                                 >
                                   <img
                                     alt="Category"
@@ -99,7 +97,7 @@ export default function Categories() {
 								</Tab>
 								
 								<Tab eventKey="Make" title="Make">
-										<Carousel slide={false}>
+										<Carousel showDots={false}  variant={'dark'} slide={false}>
 											{brandsForCategories &&
 												brandsForCategories.map((item) => (
 													<Carousel.Item>
@@ -127,7 +125,7 @@ export default function Categories() {
 									</Tab>
 
                 <Tab eventKey="City" title="City">
-                  <Carousel>
+                  <Carousel showDots={false}  variant={'dark'}>
                     {citiesForCarousel &&
                       citiesForCarousel.map((item) => (
                         <Carousel.Item>

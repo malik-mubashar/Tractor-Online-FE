@@ -45,36 +45,37 @@ const MainBanners = () => {
 	}	
 	return (
 		<>
-   <Carousel
-    swipeable={false}
-    draggable={false}
-    showDots={false}
-    // responsive={responsive}
-    ssr={true} // means to render carousel on server-side.
-    // infinite={true}
-    autoPlay={true}
-    autoPlaySpeed={3000}
-    keyBoardControl={true}
-    customTransition="all .5"
-    transitionDuration={500}
-    containerClass="carousel-container"
-    // removeArrowOnDeviceType={["tablet", "mobile"]}
-    // deviceType={this.props.deviceType}
-    dotListClass="custom-dot-list-style"
-    itemClass="carousel-item-padding-40-px"
-    >
-      {imgUrls.map( (item, i) =>  {
-        return (
-          <Carousel.Item>
-            <img
-              className="d-block w-100 m-auto justify-content-center border-radius "
-              src={item}
-              alt="First slide"
-              height={"340px"}
-            />
-          </Carousel.Item>
-        )
-      })}
+		<Carousel
+			indicators={false}
+			swipeable={false}
+			draggable={false}
+			showDots={false}
+			// responsive={responsive}
+			ssr={true} // means to render carousel on server-side.
+			// infinite={true}
+			autoPlay={true}
+			autoPlaySpeed={3000}
+			keyBoardControl={true}
+			customTransition="all .5"
+			transitionDuration={500}
+			containerClass="carousel-container"
+			// removeArrowOnDeviceType={["tablet", "mobile"]}
+			// deviceType={this.props.deviceType}
+			dotListClass="custom-dot-list-style"
+			itemClass="carousel-item-padding-40-px"
+			>
+				{imgUrls.map( (item, i) =>  {
+					return (
+						<Carousel.Item>
+							<img
+								className="d-block w-100 m-auto justify-content-center border-radius "
+								src={item}
+								alt="First slide"
+								height={"340px"}
+							/>
+						</Carousel.Item>
+					)
+				})}
     </Carousel>
 			
 		{/* <img
