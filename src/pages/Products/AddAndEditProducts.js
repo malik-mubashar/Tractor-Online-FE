@@ -9,10 +9,9 @@ import { prodApi } from "../../API/ProdCategoriesApis";
 import { productMappingApis } from "../../API/ProductMappingApis";
 import { city } from "../../API/City/CityApis";
 import Select from "react-select";
-import loader from '../../assets/img/Spinner-2.gif'
+import loader from "../../assets/img/Spinner-2.gif";
 import { RootContext } from "../../context/RootContext";
-import img_171by180 from "../../assets/img/171by180.svg"
-
+import img_171by180 from "../../assets/img/171by180.svg";
 
 export default function AddAndEditProduct({
   productsState,
@@ -20,7 +19,7 @@ export default function AddAndEditProduct({
   getProducts,
 }) {
   const { currency_list } = useContext(RootContext);
-	const driverInputRef = useRef(null);
+  const driverInputRef = useRef(null);
 
   const [brands, setBrands] = useState();
   const [managePics, setmanagePics] = useState(false);
@@ -32,8 +31,8 @@ export default function AddAndEditProduct({
   const myRefname = useRef(null);
   const [file, setFile] = useState([]);
   const [cities, setCities] = useState([]);
-	const [extraFieldsArr, setExtraFieldsArr] = useState([]);
-	const [driverImg, setDriverImg] = useState(null);
+  const [extraFieldsArr, setExtraFieldsArr] = useState([]);
+  const [driverImg, setDriverImg] = useState(null);
   const [driverImgForApi, setDriverImgForApi] = useState(null);
   const fieldsMap = [
     { name: "title", required: true },
@@ -45,7 +44,7 @@ export default function AddAndEditProduct({
     { name: "icon", required: false },
     // { name: "link", required: false },
     { name: "description", required: false },
-		{ name: "price", required: false },
+    { name: "price", required: false },
     { name: "price_currency", required: true },
     { name: "brand_id", required: true },
     { name: "phone_no", required: true },
@@ -62,7 +61,6 @@ export default function AddAndEditProduct({
   const doValidation = () => {
     var tempFieldsWithError = {};
     fieldsMap.forEach((fieldDetail) => {
-     
       if (
         productsState[fieldDetail.name] == undefined ||
         productsState[fieldDetail.name] == "" ||
@@ -92,16 +90,14 @@ export default function AddAndEditProduct({
       }
     });
 
-    
     var isValidationFailed = false;
-  
+
     setFieldsWithError(tempFieldsWithError);
     Object.values(tempFieldsWithError).forEach((item) => {
       if (item === true) {
         isValidationFailed = true;
       }
     });
-   
 
     return isValidationFailed;
   };
@@ -136,74 +132,150 @@ export default function AddAndEditProduct({
       [evt.target.name]: evt.target.value,
     });
   }
+  function applyWaterMark(acceptedFiles) {
+    // Create an array to store the modified images
+    const modifiedImages = [];
+    const modifiedImagesFileList = [];
 
-	function uploadFiles(e,callFromFunction=false) {
-		if (callFromFunction) {
-			//this block will run only one time
-			const input = document.getElementById("multi-img-field");
-			input.files = e.target.files;
-			document.getElementsByClassName('cover_image_select')
-		}
+    // Loop through each file and modify it
+    // acceptedFiles.forEach((file, i) => {
+    for (let i = 0; i < acceptedFiles.length; i++) {
+      let file = acceptedFiles.item(i);
+      // Create a new image element
+      const img = new Image();
+      img.src = URL.createObjectURL(file);
+
+      // Add a watermark to the image
+      img.onload = () => {
+        const canvas = document.createElement("canvas");
+        const ctx = canvas.getContext("2d");
+        canvas.width = img.width;
+        canvas.height = img.height;
+        // console.log('img.width;',img.width)
+        // console.log('img.height;',img.height)
+        ctx.drawImage(img, 0, 0);
+        const watermarkText = "Tractoronline.com.pk";
+        let fontSize = img.width > 500 ? "50px" : "25px";
+        ctx.font = `${fontSize} Verdana`;
+        ctx.fillStyle = "white";
+
+        // Decrease the opacity of the watermark
+        ctx.globalAlpha = 0.7;
+
+        // Center the watermark on the image
+        const textWidth = ctx.measureText(watermarkText).width;
+        const x = (canvas.width - textWidth) / 2;
+        const y = canvas.height / 2;
+        ctx.fillText(watermarkText, x, y);
+
+        const modifiedFile = canvas.toDataURL(file.type);
+
+        // Add the modified image to the array
+        modifiedImages.push(modifiedFile);
+        modifiedImagesFileList.push(dataURLtoFile(modifiedFile, `${i}.jpeg`));
+
+        // If all images have been modified, update the state
+        if (modifiedImages.length === acceptedFiles.length) {
+          // setImages(modifiedImages);
+          uploadFiles(
+            {
+              target: {
+                files: modifiedImagesFileList,
+              },
+            },
+            false
+          );
+          // return modifiedImagesFileList;
+        }
+      };
+    }
+  }
+  const dataURLtoFile = (dataurl, filename) => {
+    var arr = dataurl.split(","),
+      mime = arr[0].match(/:(.*?);/)[1],
+      bstr = atob(arr[1]),
+      n = bstr.length,
+      u8arr = new Uint8Array(n);
+
+    while (n--) {
+      u8arr[n] = bstr.charCodeAt(n);
+    }
+
+    return new File([u8arr], filename, { type: mime });
+  };
+
+  function uploadFiles(e, callFromFunction = false) {
+    if (callFromFunction) {
+      //this block will run only one time
+      const input = document.getElementById("multi-img-field");
+      input.files = e.target.files;
+      document.getElementsByClassName("cover_image_select");
+    }
     let ImagesArray = Object.entries(e.target.files).map((e) =>
       URL.createObjectURL(e[1])
     );
-		setFile([...file, ...ImagesArray]);
-		let temp = [...productsState.images, ...e.target.files];
+    setFile([...file, ...ImagesArray]);
+    let temp = [...productsState.images, ...e.target.files];
     setProductsState({
       ...productsState,
       images: temp,
-		});
-		const dataTransfer = new DataTransfer();
-		const input = document.getElementById("multi-img-field");
-		for (var i = 0; i < temp.length; i++) { 
-			dataTransfer.items.add(temp[i]);
-		}
-		input.files = dataTransfer.files;
-		if (callFromFunction) { //to make green border the first image 
-			//this block will run only one time
-			var images_elem = document.getElementsByClassName("cover_image_select");
-			images_elem[0].classList.add('active')
-		}
-		setmanagePics(true)
-	}
-	const convertPicsUrlToFileList = async (key) => {
-		setPicturesLoader(true)
-		const dataTransfer = new DataTransfer();
-		for (var i = 0; i < productsState[`${key}`].length; i++) {
-			await fetch(productsState[`${key}`][i])
-				.then((res) => res.blob())
-				// eslint-disable-next-line no-loop-func
-				.then((myBlob) => {
-					const myFile = new File([myBlob], `image${i}.jpeg`, {
-						type: myBlob.type,
-					});
-					dataTransfer.items.add(myFile);
-				});
-		}
-		setPicturesLoader(false);
-		// key==="imagesPathThumbnail" && setLowResPics(Object.entries(dataTransfer.files).map((e) =>URL.createObjectURL(e[1])))
-		if (key === "imagesPath") {
-			setIsHighResPicsLoaded(true)
-			uploadFiles({
-				target: {
-				files:dataTransfer.files
-			}},true)
-		}
-	}
+    });
+    const dataTransfer = new DataTransfer();
+    const input = document.getElementById("multi-img-field");
+    for (var i = 0; i < temp.length; i++) {
+      dataTransfer.items.add(temp[i]);
+    }
+    input.files = dataTransfer.files;
+    if (callFromFunction) {
+      //to make green border the first image
+      //this block will run only one time
+      var images_elem = document.getElementsByClassName("cover_image_select");
+      images_elem[0].classList.add("active");
+    }
+    setmanagePics(true);
+  }
+  const convertPicsUrlToFileList = async (key) => {
+    setPicturesLoader(true);
+    const dataTransfer = new DataTransfer();
+    for (var i = 0; i < productsState[`${key}`].length; i++) {
+      await fetch(productsState[`${key}`][i])
+        .then((res) => res.blob())
+        // eslint-disable-next-line no-loop-func
+        .then((myBlob) => {
+          const myFile = new File([myBlob], `image${i}.jpeg`, {
+            type: myBlob.type,
+          });
+          dataTransfer.items.add(myFile);
+        });
+    }
+    setPicturesLoader(false);
+    // key==="imagesPathThumbnail" && setLowResPics(Object.entries(dataTransfer.files).map((e) =>URL.createObjectURL(e[1])))
+    if (key === "imagesPath") {
+      setIsHighResPicsLoaded(true);
+      uploadFiles(
+        {
+          target: {
+            files: dataTransfer.files,
+          },
+        },
+        true
+      );
+    }
+  };
   useEffect(() => {
     getAllCity();
     getBrands(1, "", 100000000);
-		getProductMappings(1, "", 1000000);
-		// if (productsState.isEditProduct && productsState.imagesPath.length > 0) {
-			// convertPicsUrlToFileList('imagesPathThumbnail')
-			// convertPicsUrlToFileList('imagesPath')
-		// }
+    getProductMappings(1, "", 1000000);
+    // if (productsState.isEditProduct && productsState.imagesPath.length > 0) {
+    // convertPicsUrlToFileList('imagesPathThumbnail')
+    // convertPicsUrlToFileList('imagesPath')
+    // }
   }, []);
 
   useEffect(() => {
     if (productsState.isEditProduct === true) {
-			getExtraFields(productsState.extra_fields);
-			setDriverImg(productsState.driverCoverPhotoThumbnail)
+      getExtraFields(productsState.extra_fields);
+      setDriverImg(productsState.driverCoverPhotoThumbnail);
     }
   }, [productsState.extra_fields]);
 
@@ -256,26 +328,24 @@ export default function AddAndEditProduct({
     setFile(s);
     const input = document.getElementById("multi-img-field");
     const fileListArr = Array.from(input.files);
-		const templist = fileListArr.filter((item, index) => index !== e); // here u remove the file
+    const templist = fileListArr.filter((item, index) => index !== e); // here u remove the file
 
-		//for filtering images from for input element
-		const dataTransfer = new DataTransfer();
-		for (var i = 0; i < templist.length; i++){
-			dataTransfer.items.add(templist[i]);
-		}
-		//setting filtered images to input element
-		input.files = dataTransfer.files;
-		//////
-
+    //for filtering images from for input element
+    const dataTransfer = new DataTransfer();
+    for (var i = 0; i < templist.length; i++) {
+      dataTransfer.items.add(templist[i]);
+    }
+    //setting filtered images to input element
+    input.files = dataTransfer.files;
+    //////
 
     setProductsState({
       ...productsState,
       images: templist,
     });
-  
   }
 
-	function selectCoverPhoto(e, item, index) {
+  function selectCoverPhoto(e, item, index) {
     const input = document.getElementById("multi-img-field");
     const fileListArr = Array.from(input.files);
     var images_elem = document.getElementsByClassName("cover_image_select");
@@ -298,7 +368,7 @@ export default function AddAndEditProduct({
         [item.key]: item.value,
       };
     });
-    
+
     return extraFieldsObj;
   };
 
@@ -310,28 +380,34 @@ export default function AddAndEditProduct({
       const loadingToastId = toast.loading("Loading..!");
       let formData = new FormData();
 
-			if (productsState.isAddProduct || (productsState.isEditProduct && managePics)) {
-				console.log('pictures attached')
-				var tempCoverPhoto = null; // cover photo will go only in cover_photo field
-				if (productsState.cover_photo === undefined || productsState.cover_photo === null) {
-					if (productsState.images !== undefined) {
-						formData.append("cover_photo", productsState.images[0]);
-						tempCoverPhoto = productsState.images[0];
-					}
-				} else {
-					formData.append("cover_photo", productsState.cover_photo);
-					tempCoverPhoto = productsState.cover_photo;
-				}
-				
-				if (productsState.images !== undefined) {
-					for (const key of Object.keys(productsState.images)) {
-						if (tempCoverPhoto !== productsState.images[key]) //for excluding cover photo from active_images field
-						{
-							formData.append("active_images[]", productsState.images[key]);
-						}
-					}
-				}
-			}
+      if (
+        productsState.isAddProduct ||
+        (productsState.isEditProduct && managePics)
+      ) {
+        console.log("pictures attached");
+        var tempCoverPhoto = null; // cover photo will go only in cover_photo field
+        if (
+          productsState.cover_photo === undefined ||
+          productsState.cover_photo === null
+        ) {
+          if (productsState.images !== undefined) {
+            formData.append("cover_photo", productsState.images[0]);
+            tempCoverPhoto = productsState.images[0];
+          }
+        } else {
+          formData.append("cover_photo", productsState.cover_photo);
+          tempCoverPhoto = productsState.cover_photo;
+        }
+
+        if (productsState.images !== undefined) {
+          for (const key of Object.keys(productsState.images)) {
+            if (tempCoverPhoto !== productsState.images[key]) {
+              //for excluding cover photo from active_images field
+              formData.append("active_images[]", productsState.images[key]);
+            }
+          }
+        }
+      }
 
       formData.append("title", productsState.title);
       formData.append("call_for_price", productsState.call_for_price);
@@ -343,18 +419,18 @@ export default function AddAndEditProduct({
       formData.append("phone_no", productsState.phone_no);
       // formData.append("link", productsState.link);
       formData.append("extra_fields", JSON.stringify(extraFieldsData));
-			if (productsState.featured == null && productsState.isEditProduct) {
-				formData.append("featured", 'nil');
-			} else {
-				formData.append("featured", productsState.featured);
-			}
-			formData.append("brand_id", productsState.brand_id);
-			if (productsState.isAddProduct) {
-				formData.append("user_id", user.id);
-			}
-			if (productsState.isEditProduct) {
-				formData.append("user_id", productsState.user.id);
-			}
+      if (productsState.featured == null && productsState.isEditProduct) {
+        formData.append("featured", "nil");
+      } else {
+        formData.append("featured", productsState.featured);
+      }
+      formData.append("brand_id", productsState.brand_id);
+      if (productsState.isAddProduct) {
+        formData.append("user_id", user.id);
+      }
+      if (productsState.isEditProduct) {
+        formData.append("user_id", productsState.user.id);
+      }
       formData.append("city", productsState.city);
       if (productsState.isAddProduct) {
         formData.append(
@@ -363,36 +439,33 @@ export default function AddAndEditProduct({
         );
       }
 
-
-			if (driverImgForApi !== null) {
+      if (driverImgForApi !== null) {
         formData.append("driver_photo", driverImgForApi);
-			}
-
+      }
 
       if (productsState.isAddProduct) {
         try {
           const result = await productApis.addProduct(productsState, formData);
-         
+
           if (result.error == false) {
             toast.dismiss(loadingToastId);
             toast.success("Product created!");
             setProductsState({
               ...productsState,
               isAddProduct: false,
-							isEditProduct: false,
-							products: null,
-							status: "active",
-							description: "",
-							price: "",
-							location: "",
-							link: "",
-							city: "",
-							phone_no: "",
-							images: [],
-							imagesPath: [],
-							title: '',
-							cover_photo:null
-							
+              isEditProduct: false,
+              products: null,
+              status: "active",
+              description: "",
+              price: "",
+              location: "",
+              link: "",
+              city: "",
+              phone_no: "",
+              images: [],
+              imagesPath: [],
+              title: "",
+              cover_photo: null,
             });
             getProducts(1, "", 10);
           }
@@ -410,25 +483,25 @@ export default function AddAndEditProduct({
           const result = await productApis.updateProduct(
             productsState,
             formData
-					);
+          );
           if (result.error === false) {
             toast.success("Product updated!");
             toast.dismiss(loadingToastId);
             setProductsState({
               ...productsState,
-							isEditProduct: false,
-							products: null,
-							status: "active",
-							description: "",
-							price: "",
-							location: "",
-							link: "",
-							city: "",
-							phone_no: "",
-							images: [],
-							imagesPath: [],
-							title: '',
-							cover_photo:null
+              isEditProduct: false,
+              products: null,
+              status: "active",
+              description: "",
+              price: "",
+              location: "",
+              link: "",
+              city: "",
+              phone_no: "",
+              images: [],
+              imagesPath: [],
+              title: "",
+              cover_photo: null,
             });
             getProducts(1, "", 10);
           }
@@ -487,26 +560,30 @@ export default function AddAndEditProduct({
     }
   };
 
-	const handleProductCategoryChange = (e) => {
-		let title = productMappings.find((az) => { return az.product_category_id == e.target.value }).product_category.title
-		console.log('asd', title
-		)
-		setProductsState({...productsState,product_category_title:title,[e.target.name]: e.target.value,
-		})
+  const handleProductCategoryChange = (e) => {
+    let title = productMappings.find((az) => {
+      return az.product_category_id == e.target.value;
+    }).product_category.title;
+    console.log("asd", title);
+    setProductsState({
+      ...productsState,
+      product_category_title: title,
+      [e.target.name]: e.target.value,
+    });
     var temp = productMappings.find((item) => {
       return item.product_category.id == e.target.value;
     });
     getExtraFields(temp.extra_fields);
-	};
-	const uploadDriverPicture = (e) => {
-		let driverImage = Object.entries(e.target.files).map((e) =>
-		URL.createObjectURL(e[1])
-		);
-		setDriverImg(driverImage)
-		setDriverImgForApi(e.target.files[0])
-	}
+  };
+  const uploadDriverPicture = (e) => {
+    let driverImage = Object.entries(e.target.files).map((e) =>
+      URL.createObjectURL(e[1])
+    );
+    setDriverImg(driverImage);
+    setDriverImgForApi(e.target.files[0]);
+  };
 
-	console.log('-->',productsState)
+  console.log("-->", productsState);
 
   return (
     <div className="mb-4">
@@ -522,7 +599,9 @@ export default function AddAndEditProduct({
               </div>
               <Form>
                 <Form.Group controlId="formBasicName">
-                  <Form.Label>Title <span className="required-field">*</span></Form.Label>
+                  <Form.Label>
+                    Title <span className="required-field">*</span>
+                  </Form.Label>
                   <Form.Control
                     className={
                       fieldsWithError.title === true ? "border-danger" : ""
@@ -536,7 +615,9 @@ export default function AddAndEditProduct({
                 </Form.Group>
                 {productsState && productsState.isAddProduct ? (
                   <Form.Group controlId="formGridState">
-                    <Form.Label>Product Category <span className="required-field">*</span></Form.Label>
+                    <Form.Label>
+                      Product Category <span className="required-field">*</span>
+                    </Form.Label>
                     <Form.Control
                       className={
                         fieldsWithError.product_category_id === true
@@ -545,7 +626,7 @@ export default function AddAndEditProduct({
                       }
                       as="select"
                       onChange={(e) => handleProductCategoryChange(e)}
-											name="product_category_id"
+                      name="product_category_id"
                     >
                       <option key="blankChoice" hidden value>
                         -- Select Product Category --
@@ -592,42 +673,48 @@ export default function AddAndEditProduct({
                         </div>
                       );
                     })}
-								</div>
-								<div>
-								{
-					productsState && productsState.product_category_title &&
-					(productsState.product_category_title === 'Laser Land Leveler on Rent' ||productsState.product_category_title === ' Tractor & Machinery On Rent')
-						?
-						<div className="mt-1">
-							<div className="col-lg-12">
-								<Figure>
-									<Figure.Image
-									width={171}
-									height={180}
-									alt="171x180"
-									src={driverImg===null?img_171by180:driverImg}
-								/>
-									<Figure.Caption onClick={()=>{ driverInputRef.current.click();}}>
-										<span className="cursor-pointer btn btn-default" >
-										Upload driver picture
-									</span>
-									</Figure.Caption>
-								</Figure>
-							</div>
-						</div>
-						:
-						null
-				}
-					<input
-              ref={driverInputRef}
-              type="file"
-              id="multi-img-field"
-              className="form-control d-none"
-							onChange={(e) => { uploadDriverPicture(e) }}
-              accept="image/x-png,image/gif,image/jpeg,image/jpg"
-            />
-								</div>
-								<Form.Group className="d-flex mt-3" controlId="formGridproduct">
+                </div>
+                <div>
+                  {productsState &&
+                  productsState.product_category_title &&
+                  (productsState.product_category_title ===
+                    "Laser Land Leveler on Rent" ||
+                    productsState.product_category_title ===
+                      " Tractor & Machinery On Rent") ? (
+                    <div className="mt-1">
+                      <div className="col-lg-12">
+                        <Figure>
+                          <Figure.Image
+                            width={171}
+                            height={180}
+                            alt="171x180"
+                            src={driverImg === null ? img_171by180 : driverImg}
+                          />
+                          <Figure.Caption
+                            onClick={() => {
+                              driverInputRef.current.click();
+                            }}
+                          >
+                            <span className="cursor-pointer btn btn-default">
+                              Upload driver picture
+                            </span>
+                          </Figure.Caption>
+                        </Figure>
+                      </div>
+                    </div>
+                  ) : null}
+                  <input
+                    ref={driverInputRef}
+                    type="file"
+                    id="multi-img-field"
+                    className="form-control d-none"
+                    onChange={(e) => {
+                      uploadDriverPicture(e);
+                    }}
+                    accept="image/x-png,image/gif,image/jpeg,image/jpg"
+                  />
+                </div>
+                <Form.Group className="d-flex mt-3" controlId="formGridproduct">
                   <Form.Label>Call for price</Form.Label>
                   <Form.Check
                     type="checkbox"
@@ -642,26 +729,31 @@ export default function AddAndEditProduct({
                       setProductsState({
                         ...productsState,
                         call_for_price: e.currentTarget.checked,
-											});
-											if (e.currentTarget.checked == true) {
-												setDisablePriceField(true)
-												setProductsState({
-													...productsState,
-													price: 0,
-													call_for_price: e.currentTarget.checked,
-
-												});
-											} else {
-												setDisablePriceField(false)
-											}
+                      });
+                      if (e.currentTarget.checked == true) {
+                        setDisablePriceField(true);
+                        setProductsState({
+                          ...productsState,
+                          price: 0,
+                          call_for_price: e.currentTarget.checked,
+                        });
+                      } else {
+                        setDisablePriceField(false);
+                      }
                     }}
                     name="featured"
                   ></Form.Check>
-                </Form.Group>
+								</Form.Group>
+								{productsState &&
+									productsState.product_category_title &&
+									!(productsState.product_category_title ===
+										"Laser Land Leveler on Rent" ||
+										productsState.product_category_title ===
+										"Tractor & Machinery On Rent") ?
                 <Form.Group controlId="formBasicComments">
                   <Form.Label>Price </Form.Label>
-									<Form.Control
-										disabled={disablePriceField}
+                  <Form.Control
+                    disabled={disablePriceField}
                     className={
                       fieldsWithError.price === true ? "border-danger" : ""
                     }
@@ -671,12 +763,20 @@ export default function AddAndEditProduct({
                     placeholder="price"
                     onChange={(e) => handleChange(e)}
                   />
-								</Form.Group>
-								<Form.Group controlId="formGridState">
-                  <Form.Label>Price Currency <span className="required-field">*</span></Form.Label>
+									</Form.Group>
+									:
+									<></>
+									
+									}
+                <Form.Group controlId="formGridState">
+                  <Form.Label>
+                    Price Currency <span className="required-field">*</span>
+                  </Form.Label>
                   <Form.Control
                     className={
-                      fieldsWithError.price_currency === true ? "border-danger" : ""
+                      fieldsWithError.price_currency === true
+                        ? "border-danger"
+                        : ""
                     }
                     as="select"
                     onChange={(e) => handleChange(e)}
@@ -686,7 +786,7 @@ export default function AddAndEditProduct({
                       -- Select Price Currency --
                     </option>
                     {currency_list &&
-                      currency_list.map((item,id) => {
+                      currency_list.map((item, id) => {
                         return (
                           <option
                             value={item.value}
@@ -705,12 +805,18 @@ export default function AddAndEditProduct({
                 </Form.Group>
                 <div className="addEditProd">
                   <Form.Label>City</Form.Label>
-									<Select
-										defaultValue={{
-											value: productsState && productsState.city && productsState.city,
-											label: productsState && productsState.city && productsState.city,
-										}}
-										className="ui-autocomplete-input form-control searchAble border-right "
+                  <Select
+                    defaultValue={{
+                      value:
+                        productsState &&
+                        productsState.city &&
+                        productsState.city,
+                      label:
+                        productsState &&
+                        productsState.city &&
+                        productsState.city,
+                    }}
+                    className="ui-autocomplete-input form-control searchAble border-right "
                     options={cities}
                     name="city"
                     label="Select City"
@@ -725,7 +831,9 @@ export default function AddAndEditProduct({
                   />
                 </div>
                 <Form.Group controlId="formBasicComments">
-                  <Form.Label>Phone Number <span className="required-field">*</span></Form.Label>
+                  <Form.Label>
+                    Phone Number <span className="required-field">*</span>
+                  </Form.Label>
                   <Form.Control
                     className={
                       fieldsWithError.phone_no === true ? "border-danger" : ""
@@ -751,7 +859,9 @@ export default function AddAndEditProduct({
                   />
                 </Form.Group>
                 <Form.Group controlId="formGridState">
-                  <Form.Label>Product Brand <span className="required-field">*</span></Form.Label>
+                  <Form.Label>
+                    Product Brand <span className="required-field">*</span>
+                  </Form.Label>
                   <Form.Control
                     className={
                       fieldsWithError.brand_id === true ? "border-danger" : ""
@@ -851,35 +961,42 @@ export default function AddAndEditProduct({
                     placeholder="description"
                     onChange={(e) => handleChange(e)}
                   />
-								</Form.Group>
-								<Form.Label>Pictures</Form.Label>
-								{productsState && productsState.isEditProduct &&
-								<Button
-										variant='warning'
-										className={`managePicture`}
-										onClick={() => {
-											document.getElementsByClassName("managePicture")[0].classList.add('d-none');
-											convertPicsUrlToFileList('imagesPath')
-									}}
-										>
-										Manage Picture
-								</Button>
-								}
-								{
-									picturesLoader === true && productsState.isEditProduct ?
-										<>
-											<img src={loader} style={{ height: '50px', width:"50px"}}></img>
-										</>
-									: null
-								}
-								<div className={`form-group preview row mt-4 ${managePics?'':'d-none'}`}>
+                </Form.Group>
+                <Form.Label>Pictures</Form.Label>
+                {productsState && productsState.isEditProduct && (
+                  <Button
+                    variant="warning"
+                    className={`managePicture`}
+                    onClick={() => {
+                      document
+                        .getElementsByClassName("managePicture")[0]
+                        .classList.add("d-none");
+                      convertPicsUrlToFileList("imagesPath");
+                    }}
+                  >
+                    Manage Picture
+                  </Button>
+                )}
+                {picturesLoader === true && productsState.isEditProduct ? (
+                  <>
+                    <img
+                      src={loader}
+                      style={{ height: "50px", width: "50px" }}
+                    ></img>
+                  </>
+                ) : null}
+                <div
+                  className={`form-group preview row mt-4 ${
+                    managePics ? "" : "d-none"
+                  }`}
+                >
                   {file &&
                     file.length > 0 &&
-										file.map((item, index) => {
-											return (
-												<div
-													key={item}
-													className={`col-12 col-lg-1 cover-photo-container mt-3`}
+                    file.map((item, index) => {
+                      return (
+                        <div
+                          key={item}
+                          className={`col-12 col-lg-1 cover-photo-container mt-3`}
                         >
                           <img
                             className="cover_image_select"
@@ -905,29 +1022,29 @@ export default function AddAndEditProduct({
                         </div>
                       );
                     })}
-								</div>
-								<div className={`form-group preview row  ${managePics?'d-none':''}`}>
+                </div>
+                <div
+                  className={`form-group preview row  ${
+                    managePics ? "d-none" : ""
+                  }`}
+                >
                   {productsState &&
                     productsState.imagesPathThumbnail.length > 0 &&
                     productsState.imagesPathThumbnail.map((item, index) => {
                       return (
                         <div
                           key={item}
-                          className={`col-12 col-lg-1 mt-3 ${index===0 ?'active_green':''}`}
+                          className={`col-12 col-lg-1 mt-3 ${
+                            index === 0 ? "active_green" : ""
+                          }`}
                         >
-                          <img
-                            src={item}
-                            alt=""
-                            height="100px"
-                            width="100px"
-                          />
-                          <div className="cover-photo-title">
-                          </div>
+                          <img src={item} alt="" height="100px" width="100px" />
+                          <div className="cover-photo-title"></div>
                         </div>
                       );
                     })}
                 </div>
-								{file && file.length > 0 ? `${file.length} selected` : ''}
+                {file && file.length > 0 ? `${file.length} selected` : ""}
                 <div className="form-group">
                   <input
                     ref={myRefname}
@@ -935,20 +1052,22 @@ export default function AddAndEditProduct({
                     id="multi-img-field"
                     disabled={file && file.length === 5}
                     className="form-control d-none"
-                    onChange={uploadFiles}
+										onChange={(e) => { applyWaterMark(e.target.files) }}
                     accept="image/x-png,image/gif,image/jpeg,image/jpg"
                     multiple
                   />
-									{productsState&&(productsState.isAddProduct || (productsState.isEditProduct && managePics))?
-										< span
-                    className="btn btn-primary"
-                    onClick={() => {
-                      myRefname.current.click();
-                    }}
-                  >
-                    Upload Pictures{" "}
-                  </span>
-									:null}
+                  {productsState &&
+                  (productsState.isAddProduct ||
+                    (productsState.isEditProduct && managePics)) ? (
+                    <span
+                      className="btn btn-primary"
+                      onClick={() => {
+                        myRefname.current.click();
+                      }}
+                    >
+                      Upload Pictures{" "}
+                    </span>
+                  ) : null}
                 </div>
                 <Button
                   className="mr-3"
@@ -957,23 +1076,23 @@ export default function AddAndEditProduct({
                     setProductsState({
                       ...productsState,
                       isAddProduct: false,
-											isEditProduct: false,
-											status: "active",
-											description: "",
-											price: "",
-											location: "",
-											link: "",
-											city: "",
-											phone_no: "",
-											images:[]
+                      isEditProduct: false,
+                      status: "active",
+                      description: "",
+                      price: "",
+                      location: "",
+                      link: "",
+                      city: "",
+                      phone_no: "",
+                      images: [],
                     })
                   }
                 >
                   Cancel
                 </Button>
-								<Button
-									// id='PSubmitButton'
-									// disabled={(productsState.isEditProduct&& (isHighResPicsLoaded===false)) ? true : false}
+                <Button
+                  // id='PSubmitButton'
+                  // disabled={(productsState.isEditProduct&& (isHighResPicsLoaded===false)) ? true : false}
                   onClick={() => {
                     addProduct();
                   }}

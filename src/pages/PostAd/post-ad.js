@@ -14,18 +14,24 @@ import { productApis } from "../../API/ProductApis";
 import { brandApis } from "../../API/BrandsApis";
 import { useHistory, useParams } from "react-router-dom";
 import { isMobile } from "react-device-detect";
-import '../../assets/css/postAdd.scss'
-import img_171by180 from "../../assets/img/171by180.svg"
+import "../../assets/css/postAdd.scss";
+import img_171by180 from "../../assets/img/171by180.svg";
 
 const postad = () => {
-	var flag = false;
-	const { id } = useParams();
+  var flag = false;
+  const { id } = useParams();
   const myRefname = useRef(null);
   const driverInputRef = useRef(null);
-  const { setShowLoader,prodCategories,cities,brands,currency_list} = useContext(RootContext);
+  const {
+    setShowLoader,
+    prodCategories,
+    cities,
+    brands,
+    currency_list,
+  } = useContext(RootContext);
   const [extraFieldsArr, setExtraFieldsArr] = useState([]);
-	const history = useHistory();
-	const [citiesForSelect, setCitiesForSelect] = useState([]);
+  const history = useHistory();
+  const [citiesForSelect, setCitiesForSelect] = useState([]);
   const [disablePriceField, setDisablePriceField] = useState(false);
 
   const [showCategoryModel, setShowCategoryModel] = useState(true);
@@ -37,8 +43,8 @@ const postad = () => {
   const [isImgSelected, setIsImgSelected] = useState(false);
   const [driverImg, setDriverImg] = useState(null);
   const [driverImgForApi, setDriverImgForApi] = useState(null);
-	const [postAddState, setPostAddState] = useState({
-		isEditAd:id===undefined?false:true,
+  const [postAddState, setPostAddState] = useState({
+    isEditAd: id === undefined ? false : true,
     isCreateAd: true,
     status: "active",
     description: "",
@@ -48,7 +54,8 @@ const postad = () => {
     city: "",
     images: [],
     phone_no: "",
-    custom_brand: ""
+		custom_brand: "",
+		call_for_price:false
   });
   const fieldsMap = [
     { name: "title", required: true },
@@ -64,8 +71,7 @@ const postad = () => {
     { name: "brand_id", required: true },
     { name: "phone_no", required: true },
     { name: "price_currency", required: false },
-	];
-
+  ];
 
   const [fieldsWithError, setFieldsWithError] = useState({
     description: false,
@@ -76,50 +82,47 @@ const postad = () => {
     title: false,
     phone_no: false,
   });
-	const handleGetProductDetails = async (id) => {
-		setShowLoader(true)
+  const handleGetProductDetails = async (id) => {
+    setShowLoader(true);
     const result = await productApis.getProductDetails(id);
-		if (result.error === false) {
-			setPostAddState({
-				...postAddState,
-				...result.data.data,
-				productId:result.data.data.id
-			})
-			getExtraFields(result.data.data.extra_fields);
-			setShowLoader(false);
-			//because setstate is delaying
-			return {
-				...postAddState,
-				...result.data.data,
-				productId:result.data.data.id
-			}
+    if (result.error === false) {
+      setPostAddState({
+        ...postAddState,
+        ...result.data.data,
+        productId: result.data.data.id,
+      });
+      getExtraFields(result.data.data.extra_fields);
+      setShowLoader(false);
+      //because setstate is delaying
+      return {
+        ...postAddState,
+        ...result.data.data,
+        productId: result.data.data.id,
+      };
     }
-	};
-	useEffect(() => {
-		if (id) {
-			setShowCategoryModel(false)
-			getAdData()
-		}
-	}, [id])
-	useEffect(() => {
-
-		if (cities.length > 0) {
-			const tempArray = [];
-			cities.map((item) =>
-			tempArray.push({ ...item, label: item.title, value: item.title })
-		);
-	setCitiesForSelect(tempArray);
-	}},[cities])
-	const getAdData = async() => {
-		const result =await handleGetProductDetails(id)
-		convertPicsUrlToFileList(result)
-	}
-
-
+  };
+  useEffect(() => {
+    if (id) {
+      setShowCategoryModel(false);
+      getAdData();
+    }
+  }, [id]);
+  useEffect(() => {
+    if (cities.length > 0) {
+      const tempArray = [];
+      cities.map((item) =>
+        tempArray.push({ ...item, label: item.title, value: item.title })
+      );
+      setCitiesForSelect(tempArray);
+    }
+  }, [cities]);
+  const getAdData = async () => {
+    const result = await handleGetProductDetails(id);
+    convertPicsUrlToFileList(result);
+  };
 
   const handleCloseCategoryModel = () => setShowCategoryModel(false);
   const handleShowCategoryModel = () => setShowCategoryModel(true);
-
 
   function handleChange(evt) {
     setPostAddState({
@@ -176,22 +179,20 @@ const postad = () => {
       const result = await productMappingApis.getMappingForPostAd(
         postAddState.product_category_id
       );
-			if (result.error == false && result.data.status == "success") {
-				if (result.data.product_mapping) {
-					setProductMappings(result.data.product_mapping);
-					getExtraFields(result.data.product_mapping.extra_fields);
-				}
+      if (result.error == false && result.data.status == "success") {
+        if (result.data.product_mapping) {
+          setProductMappings(result.data.product_mapping);
+          getExtraFields(result.data.product_mapping.extra_fields);
+        }
         setShowLoader(false);
         setShowCategoryModel(false);
-			} else {
-				console.log('1')
+      } else {
         setShowModelError(true);
         setShowLoader(false);
         toast.error("Error");
         console.error(result.data);
       }
-		} catch (error) {
-			console.log('2')
+    } catch (error) {
       setShowModelError(true);
       setShowLoader(false);
       toast.error("Error");
@@ -285,18 +286,18 @@ const postad = () => {
         }
       } else {
         formData.append("cover_photo", postAddState.cover_photo);
-			}
+      }
 
-			if (driverImgForApi !== null) {
+      if (driverImgForApi !== null) {
         formData.append("driver_photo", driverImgForApi);
-			}
-
-			formData.append("call_for_price", postAddState.call_for_price);
+      }
+			debugger;
+      formData.append("call_for_price", postAddState.call_for_price);
       formData.append("title", postAddState.title);
       formData.append("status", postAddState.status);
       formData.append("description", postAddState.description);
-			formData.append("price", postAddState.price);
-			formData.append("price_currency", postAddState.price_currency);
+      formData.append("price", postAddState.price);
+      formData.append("price_currency", postAddState.price_currency);
 
       formData.append("location", postAddState.location);
       formData.append("phone_no", postAddState.phone_no);
@@ -306,7 +307,7 @@ const postad = () => {
       formData.append("brand_id", postAddState.brand_id);
       formData.append("user_id", user.id);
       formData.append("city", postAddState.city);
-      if (postAddState.custom_brand !== undefined){
+      if (postAddState.custom_brand !== undefined) {
         formData.append("custom_brand", postAddState.custom_brand);
       }
       if (postAddState.isCreateAd) {
@@ -315,13 +316,13 @@ const postad = () => {
           postAddState.product_category_id
         );
       }
-      if (id===undefined) {
+      if (id === undefined) {
         try {
           const result = await productApis.addProduct(postAddState, formData);
           if (result.error == false) {
             setShowLoader(false);
-						toast.success("Add Posted!");
-						history.push('/profile/my-ads')
+            toast.success("Add Posted!");
+            history.push("/profile/my-ads");
           }
           if (result.error === true) {
             setShowLoader(false);
@@ -332,78 +333,160 @@ const postad = () => {
           toast.error("Error !");
           console.error(error);
         }
-			} else {
-				try {
+      } else {
+        try {
           const result = await productApis.updateProduct(
             postAddState,
             formData
-					);
+          );
           if (result.error === false) {
             toast.success("Ad updated!");
-						history.push('/profile/my-ads')
-         
+            history.push("/profile/my-ads");
           }
         } catch (error) {
           toast.error("error");
           console.error(error);
         }
-			}
+      }
     } else {
       toast.error("Validation Failed..!");
       toast("please enter the values in red fields");
     }
-	};
-	const convertPicsUrlToFileList = async (tempState) => {
-		const dataTransfer = new DataTransfer();
-		for (var i = 0; i < tempState.active_images_path.length; i++) {
-			await fetch(tempState.active_images_path[i])
-				.then((res) => res.blob())
-				// eslint-disable-next-line no-loop-func
-				.then((myBlob) => {
-					const myFile = new File([myBlob], `image${i}.jpeg`, {
-						type: myBlob.type,
-					});
-					dataTransfer.items.add(myFile);
-				});
-		}
-		uploadFiles({
-			target: {
-			files:dataTransfer.files
-		}},true,tempState)
-	}
-	function uploadFiles(e, callFromFunction = false, tempPostAdState = null) {
-		// i used tempPostAdState because setState was not updating the value imidatly
-		if (callFromFunction) {
-			//this block will run only one time
-			const input = document.getElementById("multi-img-field");
-			input.files = e.target.files;
-		}
+  };
+  const convertPicsUrlToFileList = async (tempState) => {
+    const dataTransfer = new DataTransfer();
+    for (var i = 0; i < tempState.active_images_path.length; i++) {
+      await fetch(tempState.active_images_path[i])
+        .then((res) => res.blob())
+        // eslint-disable-next-line no-loop-func
+        .then((myBlob) => {
+          const myFile = new File([myBlob], `image${i}.jpeg`, {
+            type: myBlob.type,
+          });
+          dataTransfer.items.add(myFile);
+        });
+    }
+    uploadFiles(
+      {
+        target: {
+          files: dataTransfer.files,
+        },
+      },
+      true,
+      tempState
+    );
+  };
+  function applyWaterMark(acceptedFiles) {
+    debugger;
+    // Create an array to store the modified images
+    const modifiedImages = [];
+    const modifiedImagesFileList = [];
+
+    // Loop through each file and modify it
+    // acceptedFiles.forEach((file, i) => {
+    for (let i = 0; i < acceptedFiles.length; i++) {
+      let file = acceptedFiles.item(i);
+      // Create a new image element
+      const img = new Image();
+      img.src = URL.createObjectURL(file);
+
+      // Add a watermark to the image
+      img.onload = () => {
+        const canvas = document.createElement("canvas");
+        const ctx = canvas.getContext("2d");
+        canvas.width = img.width;
+        canvas.height = img.height;
+        // console.log('img.width;',img.width)
+        // console.log('img.height;',img.height)
+        ctx.drawImage(img, 0, 0);
+        const watermarkText = "Tractoronline.com.pk";
+        let fontSize = img.width > 500 ? "50px" : "25px";
+        ctx.font = `${fontSize} Verdana`;
+        ctx.fillStyle = "white";
+
+        // Decrease the opacity of the watermark
+        ctx.globalAlpha = 0.7;
+
+        // Center the watermark on the image
+        const textWidth = ctx.measureText(watermarkText).width;
+        const x = (canvas.width - textWidth) / 2;
+        const y = canvas.height / 2;
+        ctx.fillText(watermarkText, x, y);
+
+        const modifiedFile = canvas.toDataURL(file.type);
+
+        // Add the modified image to the array
+        modifiedImages.push(modifiedFile);
+        modifiedImagesFileList.push(dataURLtoFile(modifiedFile, `${i}.jpeg`));
+
+        // If all images have been modified, update the state
+        if (modifiedImages.length === acceptedFiles.length) {
+          // setImages(modifiedImages);
+          debugger;
+					uploadFiles({
+						target: {
+							files: modifiedImagesFileList,
+						},
+					},
+				false,
+				null)
+					// return modifiedImagesFileList;
+					debugger;
+        }
+      };
+    }
+  }
+  const dataURLtoFile = (dataurl, filename) => {
+    var arr = dataurl.split(","),
+      mime = arr[0].match(/:(.*?);/)[1],
+      bstr = atob(arr[1]),
+      n = bstr.length,
+      u8arr = new Uint8Array(n);
+
+    while (n--) {
+      u8arr[n] = bstr.charCodeAt(n);
+    }
+
+    return new File([u8arr], filename, { type: mime });
+  };
+
+  const uploadFiles =  (
+    e,
+    callFromFunction = false,
+    tempPostAdState = null
+  ) => {
+    console.log("e.target.files", e.target.files);
+    // i used tempPostAdState because setState was not updating the value imidatly
+    if (callFromFunction) {
+      //this block will run only one time
+      const input = document.getElementById("multi-img-field");
+      input.files = e.target.files;
+    }
     let ImagesArray = Object.entries(e.target.files).map((e) =>
       URL.createObjectURL(e[1])
     );
-		setFile([...file, ...ImagesArray]);
-		let temp = [...postAddState.images, ...e.target.files];
-		if (callFromFunction) {
-			setPostAddState({
-			//this block will run only one time
-				...tempPostAdState,
-				images: temp,
-			});
-		} else {
-			setPostAddState({
-				...postAddState,
-				images: temp,
-			});
-		}
-		
-		const dataTransfer = new DataTransfer();
-		const input = document.getElementById("multi-img-field");
-		for (var i = 0; i < temp.length; i++) { 
-			dataTransfer.items.add(temp[i]);
-		}
-		input.files = dataTransfer.files;
+    setFile([...file, ...ImagesArray]);
+    let temp = [...postAddState.images, ...e.target.files];
+    if (callFromFunction) {
+      setPostAddState({
+        //this block will run only one time
+        ...tempPostAdState,
+        images: temp,
+      });
+    } else {
+      setPostAddState({
+        ...postAddState,
+        images: temp,
+      });
+    }
 
-	}
+    const dataTransfer = new DataTransfer();
+    const input = document.getElementById("multi-img-field");
+    for (var i = 0; i < temp.length; i++) {
+      dataTransfer.items.add(temp[i]);
+    }
+    input.files = dataTransfer.files;
+  };
   function selectCoverPhoto(e, item, index) {
     const input = document.getElementById("multi-img-field");
     const fileListArr = Array.from(input.files);
@@ -424,33 +507,34 @@ const postad = () => {
     setFile(s);
     const input = document.getElementById("multi-img-field");
     const fileListArr = Array.from(input.files);
-		const templist = fileListArr.filter((item, index) => index !== e); // here u remove the file
-		const dataTransfer = new DataTransfer();
-		for (var i = 0; i < templist.length; i++){
-			dataTransfer.items.add(templist[i]);
-		}
-		input.files = dataTransfer.files;
+    const templist = fileListArr.filter((item, index) => index !== e); // here u remove the file
+    const dataTransfer = new DataTransfer();
+    for (var i = 0; i < templist.length; i++) {
+      dataTransfer.items.add(templist[i]);
+    }
+    input.files = dataTransfer.files;
 
     if (file.length === 1) {
       setIsImgSelected(false);
-		}
+    }
     setPostAddState({
       ...postAddState,
       images: templist,
     });
-	}
+  }
 
-	const uploadDriverPicture = (e) => {
-		let driverImage = Object.entries(e.target.files).map((e) =>
-		URL.createObjectURL(e[1])
-		);
-		setDriverImg(driverImage)
-		setDriverImgForApi(e.target.files[0])
-	}
+  const uploadDriverPicture = (e) => {
+    let driverImage = Object.entries(e.target.files).map((e) =>
+      URL.createObjectURL(e[1])
+    );
+    setDriverImg(driverImage);
+    setDriverImgForApi(e.target.files[0]);
+  };
 
-	console.log('postAddState',postAddState)
-	console.log('postAddState.call_for_price',postAddState.call_for_price)
-  return (postAddState.call_for_price!==undefined || postAddState.isEditAd===false) ? (
+  console.log("postAddState", postAddState);
+  console.log("postAddState.call_for_price", postAddState.call_for_price);
+  return postAddState.call_for_price !== undefined ||
+    postAddState.isEditAd === false ? (
     <>
       <div className="card text-center my-4 p-4">
         <h2 className="post-ad-heading">
@@ -481,7 +565,9 @@ const postad = () => {
         <b>(All fields marked with * are mandatory)</b>
         <div className="row my-2">
           <div className="col-lg-3 col-12 text-lg-right">
-            <Form.Label>Title <span className="required-field">*</span></Form.Label>
+            <Form.Label>
+              Title <span className="required-field">*</span>
+            </Form.Label>
           </div>
           <div className="addEditProd col-lg-4 col-12">
             <Form.Group controlId="formBasicName">
@@ -510,7 +596,9 @@ const postad = () => {
         </div>
         <div className="row my-2">
           <div className="col-lg-3 col-12 text-lg-right">
-            <Form.Label>Product Brand <span className="required-field">*</span></Form.Label>
+            <Form.Label>
+              Product Brand <span className="required-field">*</span>
+            </Form.Label>
           </div>
           <div className="addEditProd col-lg-4 col-12">
             <Form.Control
@@ -519,14 +607,13 @@ const postad = () => {
               }
               as="select"
               onChange={(e) => {
-                if (e.currentTarget.value === 'other'){
-                  setShowCustomBrandField(true)
+                if (e.currentTarget.value === "other") {
+                  setShowCustomBrandField(true);
+                } else {
+                  setShowCustomBrandField(false);
+                  postAddState.custom_brand = undefined;
                 }
-                else{
-                  setShowCustomBrandField(false)
-                  postAddState.custom_brand = undefined
-                }
-                handleChange(e)
+                handleChange(e);
               }}
               name="brand_id"
             >
@@ -549,13 +636,13 @@ const postad = () => {
                     </option>
                   );
                 })}
-                <option key="other" value='other'>
-                  Other
-                </option>
+              <option key="other" value="other">
+                Other
+              </option>
             </Form.Control>
           </div>
         </div>
-        {showCustomBrandField ?
+        {showCustomBrandField ? (
           <div className="row my-2">
             <div className="col-lg-3 col-12 text-lg-right">
               <Form.Label>Custom Brand</Form.Label>
@@ -572,153 +659,160 @@ const postad = () => {
               </Form.Group>
             </div>
           </div>
-         :
-          null
-         }
-				<div className="row my-2">
-					<div className="col-lg-3 col-12 text-lg-right">
+        ) : null}
+        <div className="row my-2">
+          <div className="col-lg-3 col-12 text-lg-right">
             <Form.Label>City</Form.Label>
-					</div>
-					<div className="addEditProd col-lg-4 col-12">
-					<Form.Control
-								className={
-									fieldsWithError.city === true ? "border-danger" : ""
-								}
-								as="select"
-								onChange={(e) => {
-									if (e)
-										setPostAddState({
-											...postAddState,
-											city: e.target.value,
-										});
-								}}
-								name="city"
-							>
-								<option key="blankChoice" hidden value>
-									-- Select City--
-								</option>
-								{citiesForSelect &&
-									citiesForSelect.map((item) => {
-										return (
-											<option
-												value={item.title}
-												selected={
-													postAddState &&
-													postAddState.city &&
-													postAddState.city === item.title
-												}
-												key={item.id}
-											>
-												{item.title}
-											</option>
-										);
-									})}
-							</Form.Control>
-					</div>
-				</div>
-				<div className="row my-2">
-						<Form.Group className="d-flex mt-3" controlId="formGridproduct">
-							<div className="col-lg-3 col-12 text-lg-right">
-								<Form.Label>Call for price</Form.Label>
-							</div>
-							<div className="addEditProd col-lg-4 col-12">
-								<Form.Check
-									type="checkbox"
-									className="ml-4 mt-2"
-									defaultChecked={
-										postAddState && postAddState.call_for_price == true
-											? true
-											: false
-									}
-									// value={productsState.product_type}
-									onChange={(e) => {
-										setPostAddState({
-											...postAddState,
-											call_for_price: e.currentTarget.checked,
-										});
-										if (e.currentTarget.checked == true) {
-											setDisablePriceField(true)
-											setPostAddState({
-												...postAddState,
-												price: 0,
-											});
-										} else {
-											setDisablePriceField(false)
-										}
-									}}
-									name="featured"
-									>
-								</Form.Check>
-							</div>
-					</Form.Group>
-				</div>
+          </div>
+          <div className="addEditProd col-lg-4 col-12">
+            <Form.Control
+              className={fieldsWithError.city === true ? "border-danger" : ""}
+              as="select"
+              onChange={(e) => {
+                if (e)
+                  setPostAddState({
+                    ...postAddState,
+                    city: e.target.value,
+                  });
+              }}
+              name="city"
+            >
+              <option key="blankChoice" hidden value>
+                -- Select City--
+              </option>
+              {citiesForSelect &&
+                citiesForSelect.map((item) => {
+                  return (
+                    <option
+                      value={item.title}
+                      selected={
+                        postAddState &&
+                        postAddState.city &&
+                        postAddState.city === item.title
+                      }
+                      key={item.id}
+                    >
+                      {item.title}
+                    </option>
+                  );
+                })}
+            </Form.Control>
+          </div>
+        </div>
+        <div className="row my-2">
+          <Form.Group className="d-flex mt-3" controlId="formGridproduct">
+            <div className="col-lg-3 col-12 text-lg-right">
+              <Form.Label>Call for price</Form.Label>
+            </div>
+            <div className="addEditProd col-lg-4 col-12">
+              <Form.Check
+                type="checkbox"
+                className="ml-4 mt-2"
+                defaultChecked={
+                  postAddState && postAddState.call_for_price == true
+                    ? true
+                    : false
+                }
+                // value={postAddState.product_type}
+                onChange={(e) => {
+                  setPostAddState({
+                    ...postAddState,
+                    call_for_price: e.currentTarget.checked,
+                  });
+                  if (e.currentTarget.checked == true) {
+                    setDisablePriceField(true);
+                    setPostAddState({
+                      ...postAddState,
+                      price: 0,
+                    });
+                  } else {
+                    setDisablePriceField(false);
+                  }
+                }}
+                name="featured"
+              ></Form.Check>
+            </div>
+          </Form.Group>
+        </div>
+
+					{postAddState &&
+						postAddState.product_category_title &&
+						!(postAddState.product_category_title ===
+							"Laser Land Leveler on Rent" ||
+							postAddState.product_category_title ===
+							"Tractor & Machinery On Rent") ?
+							
+								<div className="row my-2">
+									<div className="col-lg-3 col-12 text-lg-right">
+										<Form.Label>Price </Form.Label>
+									</div>
+									<div className="addEditProd col-lg-4 col-12">
+										<Form.Control
+											disabled={disablePriceField}
+											className={fieldsWithError.price === true ? "border-danger" : ""}
+											defaultValue={postAddState.price}
+											name="price"
+											type="text"
+											placeholder="price"
+											onChange={(e) => handleChange(e)}
+										/>
+									</div>
+									<div className="col-5 d-lg-block d-none">
+										<Icofont
+											icon="light-bulb text-info"
+											className="icofont-2x col-3"
+											style={{ fontSize: "3rem" }}
+										/>
+										<span className="col-9">
+											To receive more sincere responses, please enter a reasonable
+											price.
+										</span>
+									</div>
+							
+        				</div>
+							
+							: <></>}
+        <div className="row my-2">
+          <div className="col-lg-3 col-12 text-lg-right">
+            <Form.Label>Price Currency </Form.Label>
+          </div>
+          <div className="addEditProd col-lg-4 col-12">
+            <Form.Control
+              className={
+                fieldsWithError.price_currency === true ? "border-danger" : ""
+              }
+              as="select"
+              onChange={(e) => handleChange(e)}
+              name="price_currency"
+            >
+              <option key="blankChoice" hidden value>
+                -- Select Price Currency --
+              </option>
+              {currency_list &&
+                currency_list.map((item, id) => {
+                  return (
+                    <option
+                      value={item.value}
+                      selected={
+                        postAddState &&
+                        postAddState.price_currency &&
+                        postAddState.price_currency == item.value
+                      }
+                      key={id}
+                    >
+                      {item.label}
+                    </option>
+                  );
+                })}
+            </Form.Control>
+          </div>
+        </div>
 
         <div className="row my-2">
           <div className="col-lg-3 col-12 text-lg-right">
-            <Form.Label>Price </Form.Label>
-          </div>
-          <div className="addEditProd col-lg-4 col-12">
-						<Form.Control
-							disabled={disablePriceField}
-              className={fieldsWithError.price === true ? "border-danger" : ""}
-              defaultValue={postAddState.price}
-              name="price"
-              type="text"
-              placeholder="price"
-              onChange={(e) => handleChange(e)}
-            />
-          </div>
-          <div className="col-5 d-lg-block d-none">
-            <Icofont
-              icon="light-bulb text-info"
-              className="icofont-2x col-3"
-              style={{ fontSize: "3rem" }}
-            />
-            <span className="col-9">
-              To receive more sincere responses, please enter a reasonable
-              price.
-            </span>
-          </div>
-				</div>
-				<div className="row my-2">
-					<div className="col-lg-3 col-12 text-lg-right">
-						<Form.Label>Price Currency </Form.Label>
-					</div>
-					<div className="addEditProd col-lg-4 col-12">
-						<Form.Control
-						className={
-							fieldsWithError.price_currency === true ? "border-danger" : ""
-						}
-						as="select"
-						onChange={(e) => handleChange(e)}
-						name="price_currency"
-					>
-						<option key="blankChoice" hidden value>
-							-- Select Price Currency --
-						</option>
-						{currency_list &&
-							currency_list.map((item,id) => {
-								return (
-									<option
-										value={item.value}
-										selected={
-											postAddState &&
-											postAddState.price_currency &&
-											postAddState.price_currency == item.value
-										}
-										key={id}
-									>
-										{item.label}
-									</option>
-								);
-							})}
-						</Form.Control>
-					</div>
-        </div>
-				
-        <div className="row my-2">
-          <div className="col-lg-3 col-12 text-lg-right">
-            <Form.Label>Phone Number <span className="required-field">*</span></Form.Label>
+            <Form.Label>
+              Phone Number <span className="required-field">*</span>
+            </Form.Label>
           </div>
           <div className="addEditProd col-lg-4 col-12">
             <Form.Control
@@ -771,40 +865,45 @@ const postad = () => {
               );
             })}
           </div>
-				)}
-				{
-					postAddState && postAddState.product_category_title &&
-					(postAddState.product_category_title === 'Laser Land Leveler on Rent' ||postAddState.product_category_title === 'Tractor & Machinery On Rent')
-						?
-						<div className="row my-2">
-							<div className="col-lg-3"></div>
-							<div className="col-lg-4">
-								<Figure>
-									<Figure.Image
-									width={171}
-									height={180}
-									alt="171x180"
-									src={driverImg===null?img_171by180:driverImg}
-								/>
-									<Figure.Caption onClick={()=>{ driverInputRef.current.click();}}>
-										<span className="cursor-pointer btn btn-default" >
-										Upload driver picture
-									</span>
-									</Figure.Caption>
-								</Figure>
-							</div>
-						</div>
-						:
-						null
-				}
-					<input
-              ref={driverInputRef}
-              type="file"
-              id="multi-img-field"
-              className="form-control d-none"
-							onChange={(e) => { uploadDriverPicture(e) }}
-              accept="image/x-png,image/gif,image/jpeg,image/jpg"
-            />
+        )}
+        {postAddState &&
+        postAddState.product_category_title &&
+        (postAddState.product_category_title === "Laser Land Leveler on Rent" ||
+          postAddState.product_category_title ===
+            "Tractor & Machinery On Rent") ? (
+          <div className="row my-2">
+            <div className="col-lg-3"></div>
+            <div className="col-lg-4">
+              <Figure>
+                <Figure.Image
+                  width={171}
+                  height={180}
+                  alt="171x180"
+                  src={driverImg === null ? img_171by180 : driverImg}
+                />
+                <Figure.Caption
+                  onClick={() => {
+                    driverInputRef.current.click();
+                  }}
+                >
+                  <span className="cursor-pointer btn btn-default">
+                    Upload driver picture
+                  </span>
+                </Figure.Caption>
+              </Figure>
+            </div>
+          </div>
+        ) : null}
+        <input
+          ref={driverInputRef}
+          type="file"
+          id="multi-img-field"
+          className="form-control d-none"
+          onChange={(e) => {
+            uploadDriverPicture(e);
+          }}
+          accept="image/x-png,image/gif,image/jpeg,image/jpg"
+        />
         <div className="row my-2">
           <div className="col-lg-3 col-12 text-lg-right">
             <Form.Label>Description</Form.Label>
@@ -834,7 +933,7 @@ const postad = () => {
               id="multi-img-field"
               disabled={file && file.length === 5}
               className="form-control d-none"
-              onChange={uploadFiles}
+              onChange={(e)=>applyWaterMark(e.target.files)}
               accept="image/x-png,image/gif,image/jpeg,image/jpg"
               multiple
             />
@@ -956,13 +1055,16 @@ const postad = () => {
         onHide={handleCloseCategoryModel}
         backdrop="static"
         keyboard={false}
-				size="lg"
-				dialogClassName={'model-height'}
+        size="lg"
+        dialogClassName={"model-height"}
       >
         <Modal.Header>
           <Modal.Title>Select Product Category</Modal.Title>
         </Modal.Header>
-				<Modal.Body style={{ height: `${isMobile ? '500px' : '600px'}` }} className="overflow-auto">
+        <Modal.Body
+          style={{ height: `${isMobile ? "500px" : "600px"}` }}
+          className="overflow-auto"
+        >
           {showModelError ? (
             <p className="text-danger">
               Please select category first to continue.
@@ -971,10 +1073,10 @@ const postad = () => {
           <div className="row">
             {prodCategories &&
               prodCategories.map((item, idx) => (
-								<div key={ idx} className={`col-lg-6 col-12`}>
+                <div key={idx} className={`col-lg-6 col-12`}>
                   <div
                     id={item.id}
-										onClick={(e) => {
+                    onClick={(e) => {
                       setPostAddState({
                         ...postAddState,
                         product_category_id: e.currentTarget.id,
@@ -997,14 +1099,20 @@ const postad = () => {
                         "product-cat-select-btns"
                       );
                     }}
-										className={`${isMobile?'mobile-height':''} px-2 d-flex align-items-center ${postAddState.product_category_id === item.id ? 'product-cat-select-btns-active' : 'product-cat-select-btns'} my-2`}
+                    className={`${
+                      isMobile ? "mobile-height" : ""
+                    } px-2 d-flex align-items-center ${
+                      postAddState.product_category_id === item.id
+                        ? "product-cat-select-btns-active"
+                        : "product-cat-select-btns"
+                    } my-2`}
                   >
                     <img
                       src={item.active_image_thumbnail}
                       alt="category"
                       className="rounded"
-                      height={`${isMobile?'40px':'100px'}`}
-                      width={`${isMobile?'40px':'100px'}`}
+                      height={`${isMobile ? "40px" : "100px"}`}
+                      width={`${isMobile ? "40px" : "100px"}`}
                     />
                     <h5 className="ml-3">{item.title}</h5>
                   </div>
@@ -1025,8 +1133,9 @@ const postad = () => {
         </Modal.Footer>
       </Modal>
     </>
-	)
-	:(<></>)
+  ) : (
+    <></>
+  );
 };
 
 export default postad;
