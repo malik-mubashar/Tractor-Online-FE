@@ -14,12 +14,12 @@ import { brandApis } from "../../API/BrandsApis";
 import { prodApi } from "../../API/ProdCategoriesApis";
 import { RootContext } from "../../context/RootContext";
 import "../LandingPage/landingPage.scss"
+// import UploadImages from "../UploadImages";
 
 // import ExploreProducts from "./ExploreProducts";
 
 const LandingPage = () => {
 	const { prodCategories, products } = useContext(RootContext)
-	console.log("products in landing page",products)
   return (
 		<>
 			{/* 1st section top bar in layout */}
@@ -33,7 +33,7 @@ const LandingPage = () => {
           </div>
         </>
 			)}
-
+			{/* <UploadImages/> */}
 			{/* add on desktop (4th section)*/}
 			{!isMobile && <TractorSaleAd />}
 			
@@ -47,7 +47,6 @@ const LandingPage = () => {
             <ExploreProducts />
           </div>
         </div> */}
-
 				{/* 6th section */}
         {prodCategories &&
           prodCategories.map((cate, i) => {
