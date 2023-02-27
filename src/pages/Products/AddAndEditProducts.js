@@ -155,7 +155,7 @@ export default function AddAndEditProduct({
         // console.log('img.height;',img.height)
         ctx.drawImage(img, 0, 0);
         const watermarkText = "Tractoronline.com.pk";
-        let fontSize = img.width > 500 ? "50px" : "25px";
+        let fontSize = img.width > 200 ? "50px" : "25px";
         ctx.font = `${fontSize} Verdana`;
         ctx.fillStyle = "white";
 

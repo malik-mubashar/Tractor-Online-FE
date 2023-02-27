@@ -971,7 +971,7 @@ const postad = () => {
                     return (
                       <div
                         key={item}
-                        className="col-12 col-lg-3 cover-photo-container mt-3 my-4"
+                        className="col-6 col-lg-3 cover-photo-container mt-3 my-4"
                       >
                         <img
                           className="cover_image_select"
@@ -984,7 +984,7 @@ const postad = () => {
                         <button
                           type="button"
                           className="close-btn"
-                          style={{ left: "148px" }}
+                          style={{ left: `${isMobile?"117px":"148px"}`,top:`${isMobile?"-13px":""}`}}
                           onClick={() => deleteFile(index)}
                         >
                           <Icofont
