@@ -399,7 +399,7 @@ const postad = () => {
         // console.log('img.width;',img.width)
         // console.log('img.height;',img.height)
         ctx.drawImage(img, 0, 0);
-        const watermarkText = "Tractoronline.com.pk";
+        const watermarkText = "tractoronline.com.pk";
         let fontSize = img.width > 200 ? "50px" : "25px";
         ctx.font = `${fontSize} Verdana`;
         ctx.fillStyle = "white";

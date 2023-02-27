@@ -1,7 +1,7 @@
 {
   "main.css": "/static/css/main.2979dc78.chunk.css",
-  "main.js": "/static/js/main.c2d8a0e1.chunk.js",
-  "main.js.map": "/static/js/main.c2d8a0e1.chunk.js.map",
+  "main.js": "/static/js/main.29b3df6e.chunk.js",
+  "main.js.map": "/static/js/main.29b3df6e.chunk.js.map",
   "static/css/1.113b7df4.chunk.css": "/static/css/1.113b7df4.chunk.css",
   "static/js/1.a6962b0f.chunk.js": "/static/js/1.a6962b0f.chunk.js",
   "static/js/1.a6962b0f.chunk.js.map": "/static/js/1.a6962b0f.chunk.js.map",
@@ -16,7 +16,7 @@
   "static/media/import.svg": "/static/media/import.086318fc.svg",
   "static/media/logo.png": "/static/media/logo.7c03733c.png",
   "static/media/upload-photos-logo.png": "/static/media/upload-photos-logo.f2acd27b.png",
-  "static/media/styles.css": "/static/media/revicons.04eb8fc5.woff",
+  "static/media/styles.css": "/static/media/revicons.2feb69cc.eot",
   "static/media/tractorCover2.jpg": "/static/media/tractorCover2.490e029e.jpg",
   "static/media/tractorCover3.jpg": "/static/media/tractorCover3.a3736740.jpg",
   "static/media/t1.jpg": "/static/media/t1.ad9370a8.jpg",
@@ -45,6 +45,6 @@
   "static/css/main.2979dc78.chunk.css.map": "/static/css/main.2979dc78.chunk.css.map",
   "static/css/1.113b7df4.chunk.css.map": "/static/css/1.113b7df4.chunk.css.map",
   "index.html": "/index.html",
-  "precache-manifest.c00b0505071b9c696f1b75390c3eb286.js": "/precache-manifest.c00b0505071b9c696f1b75390c3eb286.js",
+  "precache-manifest.714421243094a552f3376a24faa553b8.js": "/precache-manifest.714421243094a552f3376a24faa553b8.js",
   "service-worker.js": "/service-worker.js"
 }
