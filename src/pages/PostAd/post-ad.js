@@ -701,10 +701,10 @@ const postad = () => {
         </div>
         <div className="row my-2">
           <Form.Group className="d-flex mt-3" controlId="formGridproduct">
-            <div className="col-lg-3 col-12 text-lg-right">
+            <div className= {`${isMobile?'col-4':'col-3'} text-lg-right`}>
               <Form.Label>Call for price</Form.Label>
             </div>
-            <div className="addEditProd col-lg-4 col-12">
+            <div className="addEditProd col-12">
               <Form.Check
                 type="checkbox"
                 className="ml-4 mt-2"
