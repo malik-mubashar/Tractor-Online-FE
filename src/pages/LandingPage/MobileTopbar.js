@@ -1,6 +1,6 @@
 import React, { useState, useContext, useEffect } from "react";
 import { Link, useHistory } from "react-router-dom";
-import Logo from "../../assets/img/tractoronline.png";
+import Logo1 from "../../assets/img/tractoronline.png";
 import { Form, Button, Image } from "react-bootstrap";
 import * as Icon from "react-feather";
 import { RootContext } from "../../context/RootContext";
@@ -18,7 +18,7 @@ const MobileTopbar = () => {
       <div className={`dashboard-carousel p-3 `}>
         <Image
           onClick={() => history.push("/")}
-          src={Logo}
+          src={Logo1}
           height="20px"
           width="100px"
           alt="Profile Image"
