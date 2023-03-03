@@ -11,7 +11,6 @@ import { RootContext } from "../context/RootContext";
 import { prodApi } from "../API/ProdCategoriesApis";
 import { productApis } from "../API/ProductApis";
 import { city } from "../API/City/CityApis";
-import toast from "react-hot-toast";
 import { brandApis } from "../API/BrandsApis";
 import "../assets/css/layouts.scss"
 import { user } from "../API/User";
@@ -46,11 +45,9 @@ const Layout = (props) => {
 	}, []);
 
   const handlePersonalDetail = async () => {
-    const loadingToastId = toast.loading("Loading..!");
 
     const result = await user.findUser(currentUser);
     if (result.error === false) {
-      toast.dismiss(loadingToastId);
 			setProfileInfo(result.data);
 			setUserProfilePicture(result.data.profile_path)
 			setShowLoader(false)
@@ -114,23 +111,19 @@ const Layout = (props) => {
 	}
 
 	const getBrands = async (page, mainSearch, noOfRec) => {
-    const loadingToastId = toast.loading("Loading..!");
 
     try {
       const result = await brandApis.getBrands(page, mainSearch, noOfRec);
 
       if (result.error === false && result.data.status === "success") {
-        toast.dismiss(loadingToastId);
 				setBrands(result.data.data);
 				setShowLoader(false)
       } else {
-        toast.dismiss(loadingToastId);
 				console.error(result.data);
 				setShowLoader(false)
 				
       }
     } catch (error) {
-      toast.dismiss(loadingToastId);
 			console.error(error);
 			setShowLoader(false)
 			

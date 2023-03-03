@@ -22,6 +22,7 @@ import toast from "react-hot-toast";
 import RightArrow from '../../assets/img/right-arrow.png';
 import LeftArrow from '../../assets/img/left-arrow.png';
 import { Check } from "react-feather";
+import "../AddDetails/addDetails.scss"
 
 
 export default function AddDetails() {
@@ -208,7 +209,6 @@ export default function AddDetails() {
 			`/products/search?userId=${data.id}&priceRangeTo=${"nil"}&userName=${data.name}&priceRangeFrom=${"nil"}&title=${"nil"}`
 		);
 	}
-	console.log('userData',userData)
   return (
     //sidebar
     <div className="addDetails pt-3">
@@ -615,12 +615,13 @@ export default function AddDetails() {
           </Modal>
         </div>
         <div className="bg-white my-4">
-          <div className="container-lg py-4 ">
+          <div className="container-lg py-4 ad-details-featured-products">
             <FeaturedProducts
               title={`SIMILAR ADS`}
               link={``}
 							prodCategoryId={product.product_category_id}
 							products={similarProducts}
+							fromAdDetails={true}
             />
           </div>
         </div>
