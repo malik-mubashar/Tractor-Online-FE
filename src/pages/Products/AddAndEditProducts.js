@@ -23,7 +23,9 @@ export default function AddAndEditProduct({
 
   const [brands, setBrands] = useState();
   const [managePics, setmanagePics] = useState(false);
-  const [disablePriceField, setDisablePriceField] = useState(false);
+	const [disablePriceField, setDisablePriceField] = useState(false);
+	const [disableCurrencyField, setDisableCurrencyField] = useState(false);
+
   // const [lowResPics, setLowResPics] = useState();
   const [isHighResPicsLoaded, setIsHighResPicsLoaded] = useState(false);
   const [picturesLoader, setPicturesLoader] = useState(false);
@@ -45,7 +47,7 @@ export default function AddAndEditProduct({
     // { name: "link", required: false },
     { name: "description", required: false },
     { name: "price", required: false },
-    { name: "price_currency", required: true },
+    { name: "price_currency", required: false },
     { name: "brand_id", required: true },
     { name: "phone_no", required: true },
   ];
@@ -731,13 +733,16 @@ export default function AddAndEditProduct({
                         call_for_price: e.currentTarget.checked,
                       });
                       if (e.currentTarget.checked == true) {
-                        setDisablePriceField(true);
+												setDisablePriceField(true);
+												setDisableCurrencyField(true)
+
                         setProductsState({
                           ...productsState,
                           price: 0,
                           call_for_price: e.currentTarget.checked,
                         });
-                      } else {
+											} else {
+												setDisableCurrencyField(false)
                         setDisablePriceField(false);
                       }
                     }}
@@ -770,9 +775,10 @@ export default function AddAndEditProduct({
 									}
                 <Form.Group controlId="formGridState">
                   <Form.Label>
-                    Price Currency <span className="required-field">*</span>
+                    Price Currency
                   </Form.Label>
-                  <Form.Control
+									<Form.Control
+										disabled={disableCurrencyField}
                     className={
                       fieldsWithError.price_currency === true
                         ? "border-danger"

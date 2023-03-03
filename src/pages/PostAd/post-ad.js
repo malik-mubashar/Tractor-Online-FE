@@ -33,6 +33,7 @@ const postad = () => {
   const history = useHistory();
   const [citiesForSelect, setCitiesForSelect] = useState([]);
   const [disablePriceField, setDisablePriceField] = useState(false);
+  const [disableCurrencyField, setDisableCurrencyField] = useState(false);
 
   const [showCategoryModel, setShowCategoryModel] = useState(true);
   const [showCustomBrandField, setShowCustomBrandField] = useState(false);
@@ -720,13 +721,16 @@ const postad = () => {
                     call_for_price: e.currentTarget.checked,
                   });
                   if (e.currentTarget.checked == true) {
-                    setDisablePriceField(true);
+										setDisablePriceField(true);
+										setDisableCurrencyField(true)
                     setPostAddState({
                       ...postAddState,
-                      price: 0,
+											price: 0,
+											call_for_price: e.currentTarget.checked,
                     });
                   } else {
-                    setDisablePriceField(false);
+										setDisablePriceField(false);
+										setDisableCurrencyField(true)
                   }
                 }}
                 name="featured"
@@ -777,7 +781,8 @@ const postad = () => {
             <Form.Label>Price Currency </Form.Label>
           </div>
           <div className="addEditProd col-lg-4 col-12">
-            <Form.Control
+							<Form.Control
+								disabled={disableCurrencyField}
               className={
                 fieldsWithError.price_currency === true ? "border-danger" : ""
               }
