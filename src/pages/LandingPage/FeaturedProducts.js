@@ -6,7 +6,7 @@ import { productApis } from "../../API/ProductApis";
 import Alert from "react-bootstrap/Alert";
 import { isMobile } from "react-device-detect";
 
-export default function FeaturedProducts({ title, link, prodCategoryId, products,fromSection1=false }) {
+export default function FeaturedProducts({ title, link, prodCategoryId, products,fromSection1=false ,fromAdDetails=false}) {
 
 
   const responsive = {
