@@ -21,7 +21,7 @@ const myAds = () => {
   const [InactiveProducts, setInactiveProducts] = useState([]);
 	const [pagination, setPagination] = useState();
 	const [mainSearchString, setMainSearchString] = useState("");
-	const [noOfRec, setNoOfRec] = useState(10);
+	const [noOfRec, setNoOfRec] = useState(12);
 	const [tabs, setTabs] = useState({
 		requested: false,
 		active: true,
@@ -39,15 +39,15 @@ const myAds = () => {
 	useEffect(() => {
 		if (tabs.inActive) {
 			setShowLoader(true);
-			handleGetActiveProducts(1, "", 10,'inactive');
+			handleGetActiveProducts(1, "", 12,'inactive');
 		}
 		if (tabs.active) {
 			setShowLoader(true);
-			handleGetActiveProducts(1, "", 10,'active');
+			handleGetActiveProducts(1, "", 12,'active');
 		}
 		if (tabs.featured) {
 			setShowLoader(true);
-			handleGetActiveProducts(1, "", 10,'nil',true);
+			handleGetActiveProducts(1, "", 12,'nil',true);
 		}
 		// if (tabs.requested) {
 		// 	handleGetActiveProducts(1, "", 10,'nil','nil');
@@ -115,12 +115,12 @@ const myAds = () => {
       const result = await productApis.updateProduct(product_object, formData);
       if (result.error === false) {
         if (result.error === false) {
-          handleGetActiveProducts();
-          handleGetInactiveProducts();
+          handleGetActiveProducts(1,'',noOfRec,'active','nil');
+          handleGetInactiveProducts(1,'',noOfRec,'inactive','nil');
           if (status === "active") {
-            toast.success("Your ad Activated successfully!");
+						toast.success("Your ad Activated successfully!");
           } else {
-            toast.success("Your ad Deactivated successfully!");
+						toast.success("Your ad Deactivated successfully!");
           }
           toast.dismiss(loadingToastId);
         }
@@ -201,7 +201,6 @@ const myAds = () => {
 			getProductsAsPerTabOpened(event.target.value)
 		}
   };
-console.log('products',activeProducts)
 	const getProductCards = () => {
 		return (
 			activeProducts&&activeProducts.length > 0 ? (
