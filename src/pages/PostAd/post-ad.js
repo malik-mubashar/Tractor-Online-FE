@@ -49,14 +49,15 @@ const postad = () => {
     isCreateAd: true,
     status: "active",
     description: "",
-    price: "",
+    price: 0,
     location: "",
     link: "",
     city: "",
     images: [],
     phone_no: "",
-		custom_brand: "",
-		call_for_price:false
+    custom_brand: "",
+		call_for_price: id === undefined ? false : undefined,
+		price_currency:''
   });
   const fieldsMap = [
     { name: "title", required: true },
@@ -91,8 +92,12 @@ const postad = () => {
         ...postAddState,
         ...result.data.data,
         productId: result.data.data.id,
-      });
-      getExtraFields(result.data.data.extra_fields);
+			});
+			if (result.data.data.call_for_price) {
+				setDisableCurrencyField(true);
+				setDisablePriceField(true)	
+			}
+			getExtraFields(result.data.data.extra_fields);
       setShowLoader(false);
       //because setstate is delaying
       return {
@@ -102,7 +107,9 @@ const postad = () => {
       };
     }
   };
-  useEffect(() => {
+	useEffect(() => {
+		console.log(postAddState)
+		debugger;
     if (id) {
       setShowCategoryModel(false);
       getAdData();
@@ -123,7 +130,6 @@ const postad = () => {
   };
 
   const handleCloseCategoryModel = () => setShowCategoryModel(false);
-  const handleShowCategoryModel = () => setShowCategoryModel(true);
 
   function handleChange(evt) {
     setPostAddState({
@@ -292,7 +298,7 @@ const postad = () => {
       if (driverImgForApi !== null) {
         formData.append("driver_photo", driverImgForApi);
       }
-			debugger;
+      debugger;
       formData.append("call_for_price", postAddState.call_for_price);
       formData.append("title", postAddState.title);
       formData.append("status", postAddState.status);
@@ -424,15 +430,17 @@ const postad = () => {
         if (modifiedImages.length === acceptedFiles.length) {
           // setImages(modifiedImages);
           debugger;
-					uploadFiles({
-						target: {
-							files: modifiedImagesFileList,
-						},
-					},
-				false,
-				null)
-					// return modifiedImagesFileList;
-					debugger;
+          uploadFiles(
+            {
+              target: {
+                files: modifiedImagesFileList,
+              },
+            },
+            false,
+            null
+          );
+          // return modifiedImagesFileList;
+          debugger;
         }
       };
     }
@@ -451,11 +459,7 @@ const postad = () => {
     return new File([u8arr], filename, { type: mime });
   };
 
-  const uploadFiles =  (
-    e,
-    callFromFunction = false,
-    tempPostAdState = null
-  ) => {
+  const uploadFiles = (e, callFromFunction = false, tempPostAdState = null) => {
     console.log("e.target.files", e.target.files);
     // i used tempPostAdState because setState was not updating the value imidatly
     if (callFromFunction) {
@@ -533,7 +537,7 @@ const postad = () => {
   };
 
   console.log("postAddState", postAddState);
-  console.log("postAddState.call_for_price", postAddState.call_for_price);
+  console.log("disablePriceField", disablePriceField);
   return postAddState.call_for_price !== undefined ||
     postAddState.isEditAd === false ? (
     <>
@@ -702,7 +706,7 @@ const postad = () => {
         </div>
         <div className="row my-2">
           <Form.Group className="d-flex mt-3" controlId="formGridproduct">
-            <div className= {`${isMobile?'col-4':'col-3'} text-lg-right`}>
+            <div className={`${isMobile ? "col-4" : "col-3"} text-lg-right`}>
               <Form.Label>Call for price</Form.Label>
             </div>
             <div className="addEditProd col-12">
@@ -721,16 +725,16 @@ const postad = () => {
                     call_for_price: e.currentTarget.checked,
                   });
                   if (e.currentTarget.checked == true) {
-										setDisablePriceField(true);
-										setDisableCurrencyField(true)
+                    setDisablePriceField(true);
+                    setDisableCurrencyField(true);
                     setPostAddState({
                       ...postAddState,
-											price: 0,
-											call_for_price: e.currentTarget.checked,
+                      price: 0,
+                      call_for_price: e.currentTarget.checked,
                     });
                   } else {
-										setDisablePriceField(false);
-										setDisableCurrencyField(true)
+                    setDisablePriceField(false);
+                    setDisableCurrencyField(false);
                   }
                 }}
                 name="featured"
@@ -739,79 +743,93 @@ const postad = () => {
           </Form.Group>
         </div>
 
-					{postAddState &&
-						postAddState.product_category_title &&
-						!(postAddState.product_category_title ===
-							"Laser Land Leveler on Rent" ||
-							postAddState.product_category_title ===
-							"Tractor & Machinery On Rent") ?
-							
-								<div className="row my-2">
-									<div className="col-lg-3 col-12 text-lg-right">
-										<Form.Label>Price </Form.Label>
-									</div>
-									<div className="addEditProd col-lg-4 col-12">
-										<Form.Control
-											disabled={disablePriceField}
-											className={fieldsWithError.price === true ? "border-danger" : ""}
-											defaultValue={postAddState.price}
-											name="price"
-											type="text"
-											placeholder="price"
-											onChange={(e) => handleChange(e)}
-										/>
-									</div>
-									<div className="col-5 d-lg-block d-none">
-										<Icofont
-											icon="light-bulb text-info"
-											className="icofont-2x col-3"
-											style={{ fontSize: "3rem" }}
-										/>
-										<span className="col-9">
-											To receive more sincere responses, please enter a reasonable
-											price.
-										</span>
-									</div>
-							
-        				</div>
-							
-							: <></>}
-        <div className="row my-2">
-          <div className="col-lg-3 col-12 text-lg-right">
-            <Form.Label>Price Currency </Form.Label>
+        {postAddState &&
+        (postAddState.product_category_title ||
+          postAddState.product_category) &&
+        !(
+          postAddState.product_category_title ===
+            "Laser Land Leveler on Rent" ||
+          postAddState.product_category_title === "Tractor & Machinery On Rent"
+        ) ? (
+          <div className="row my-2">
+            <div className="col-lg-3 col-12 text-lg-right">
+              <Form.Label>Price </Form.Label>
+            </div>
+            <div className="addEditProd col-lg-4 col-12">
+              <Form.Control
+                disabled={disablePriceField}
+                className={
+                  fieldsWithError.price === true ? "border-danger" : ""
+                }
+                defaultValue={postAddState.price}
+                name="price"
+                type="text"
+                placeholder="price"
+                onChange={(e) => handleChange(e)}
+              />
+            </div>
+            <div className="col-5 d-lg-block d-none">
+              <Icofont
+                icon="light-bulb text-info"
+                className="icofont-2x col-3"
+                style={{ fontSize: "3rem" }}
+              />
+              <span className="col-9">
+                To receive more sincere responses, please enter a reasonable
+                price.
+              </span>
+            </div>
           </div>
-          <div className="addEditProd col-lg-4 col-12">
-							<Form.Control
-								disabled={disableCurrencyField}
-              className={
-                fieldsWithError.price_currency === true ? "border-danger" : ""
-              }
-              as="select"
-              onChange={(e) => handleChange(e)}
-              name="price_currency"
-            >
-              <option key="blankChoice" hidden value>
-                -- Select Price Currency --
-              </option>
-              {currency_list &&
-                currency_list.map((item, id) => {
-                  return (
-                    <option
-                      value={item.value}
-                      selected={
-                        postAddState &&
-                        postAddState.price_currency &&
-                        postAddState.price_currency == item.value
-                      }
-                      key={id}
-                    >
-                      {item.label}
-                    </option>
-                  );
-                })}
-            </Form.Control>
+        ) : (
+          <></>
+        )}
+        {postAddState &&
+        (postAddState.product_category_title ||
+          postAddState.product_category) &&
+        !(
+          postAddState.product_category_title ===
+            "Laser Land Leveler on Rent" ||
+          postAddState.product_category_title === "Tractor & Machinery On Rent"
+        ) ? (
+          <div className="row my-2">
+            <div className="col-lg-3 col-12 text-lg-right">
+              <Form.Label>Price Currency </Form.Label>
+            </div>
+            <div className="addEditProd col-lg-4 col-12">
+              <Form.Control
+                disabled={disableCurrencyField}
+                className={
+                  fieldsWithError.price_currency === true ? "border-danger" : ""
+                }
+                as="select"
+                onChange={(e) => handleChange(e)}
+                name="price_currency"
+              >
+                <option key="blankChoice" hidden value>
+                  -- Select Price Currency --
+                </option>
+                {currency_list &&
+                  currency_list.map((item, id) => {
+                    return (
+                      <option
+                        value={item.value}
+                        selected={
+                          postAddState &&
+                          postAddState.price_currency &&
+                          postAddState.price_currency == item.value
+                        }
+                        key={id}
+                      >
+                        {item.label}
+                      </option>
+                    );
+                  })}
+              </Form.Control>
+            </div>
           </div>
-        </div>
+        ) : (
+          <></>
+        )}
 
         <div className="row my-2">
           <div className="col-lg-3 col-12 text-lg-right">
@@ -872,7 +890,8 @@ const postad = () => {
           </div>
         )}
         {postAddState &&
-        postAddState.product_category_title &&
+        (postAddState.product_category_title ||
+          postAddState.product_category) &&
         (postAddState.product_category_title === "Laser Land Leveler on Rent" ||
           postAddState.product_category_title ===
             "Tractor & Machinery On Rent") ? (
@@ -938,7 +957,7 @@ const postad = () => {
               id="multi-img-field"
               disabled={file && file.length === 5}
               className="form-control d-none"
-              onChange={(e)=>applyWaterMark(e.target.files)}
+              onChange={(e) => applyWaterMark(e.target.files)}
               accept="image/x-png,image/gif,image/jpeg,image/jpg"
               multiple
             />
@@ -989,7 +1008,10 @@ const postad = () => {
                         <button
                           type="button"
                           className="close-btn"
-                          style={{ left: `${isMobile?"117px":"148px"}`,top:`${isMobile?"-13px":""}`}}
+                          style={{
+                            left: `${isMobile ? "117px" : "148px"}`,
+                            top: `${isMobile ? "-13px" : ""}`,
+                          }}
                           onClick={() => deleteFile(index)}
                         >
                           <Icofont
