@@ -15,12 +15,12 @@ const MobileTopbar = () => {
 
   return (
     <>
-      <div className={`dashboard-carousel p-3 `}>
+			<div style={{background:"none"}} className={`dashboard-carousel p-3 `}>
         <Image
           onClick={() => history.push("/")}
           src={Logo1}
-          height="20px"
-          width="100px"
+          height="45px"
+          width="260px"
           alt="Profile Image"
           className="d-flex justify-content-center m-auto"
         />
@@ -29,6 +29,7 @@ const MobileTopbar = () => {
 							return (
 												<div className="p-0 mobile-tabs">
 													<Link
+														style={{fontWeight:"700"}}
 														to={item.link}
 														className="btn btn-info rounded p-2 w-100 "
 													>
