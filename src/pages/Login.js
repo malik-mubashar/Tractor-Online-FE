@@ -11,6 +11,8 @@ import toast from "react-hot-toast";
 import Icofont from 'react-icofont';
 import Cookies from 'universal-cookie';
 import ToggleButton from 'react-bootstrap/ToggleButton';
+import { useEffect } from "react";
+import axios from "axios";
 
 const Login = () => {
 	const cookies = new Cookies();
@@ -18,7 +20,7 @@ const Login = () => {
   const [radioValue, setRadioValue] = useState('phone');
 
   const radios = [
-    { name: 'Phone#', value: 'phone' },
+    { name: 'Phone #', value: 'phone' },
     { name: 'Email', value: 'email' }
   ];
 
@@ -44,14 +46,23 @@ const Login = () => {
       );
       setUserProfilePicture(result.data.profile_path);
     }
-  };
+	};
+	useEffect(() => {
+		if (!signInWithPhone) {
+			document.getElementById("login-form").reset()
+		}
+	},[signInWithPhone])
 
   const onLoginHandler = async (e) => {
 		e.preventDefault();
 		const loadingToastId = toast.loading("Loading..!");
 
-    try {
-			const result = await user.login(phone, email, password);
+		try {
+			var tempPhoneNo = phone;
+			var tempEmail = email;
+
+			signInWithPhone ? tempEmail = null : tempPhoneNo = null
+			const result = await user.login(tempPhoneNo, tempEmail, password);
       //success
 			if (result.error === false) {
 				toast.dismiss(loadingToastId);
@@ -131,7 +142,8 @@ const Login = () => {
        return;
       }
       setPasswordType("password")
-    }
+		}
+
 
   return (
     <div className="auth-main-content auth-bg-image">
@@ -163,10 +175,10 @@ const Login = () => {
                       <Icon.Twitter className="icon" />
                       Sign Up with Twitter
                     </Link>
-                    <Link to="/" className="ema">
-                      <Icon.Mail className="icon" />
-                      Sign Up with Email
-                    </Link>
+										<Icon.Mail className="icon"
+											// onClick={() =>}
+										/>
+                      Sign Up with Google
                     <Link to="/" className="linkd">
                       <Icon.Linkedin className="icon" />
                       Sign Up with Linkedin
@@ -191,13 +203,14 @@ const Login = () => {
                           onChange={(e) =>{
                             if(e.currentTarget.value === 'email')
                             {
-                              setSignInWithPhone(!signInWithPhone);
-															setPhone(null)
+															setSignInWithPhone(!signInWithPhone);
+															// document.getElementById("email").reset();
+															// document.getElementById("phone").reset();
+
                             }
                             else
                             {
                               setSignInWithPhone(!signInWithPhone);
-															setEmail(null)
                             }
                             setRadioValue(e.currentTarget.value)
                           }}
@@ -207,12 +220,16 @@ const Login = () => {
                       ))}
                     </div>
 									</div>
-									<Form>
+									<Form id='login-form'>
+										
 										{signInWithPhone ?
 											<Form.Group>
 												<Form.Label>Phone</Form.Label>
 												<Form.Control
-													type="phone"
+													className='hideUpDownArrows'
+													id='phone'
+													value={phone}
+													type="number"
 													onChange={(event) => setPhone(event.target.value)}
 												/>
 											</Form.Group>
@@ -220,6 +237,8 @@ const Login = () => {
 											<Form.Group>
 												<Form.Label>Email address</Form.Label>
 												<Form.Control
+													id='email'
+													value={email}
 													type="email"
 													onChange={(event) => setEmail(event.target.value)}
 												/>
@@ -227,7 +246,8 @@ const Login = () => {
 										}
                     <Form.Group className="relative">
                       <Form.Label>Password</Form.Label>
-                      <Form.Control
+											<Form.Control
+												value={password}
                         type={passwordType}
                         onChange={(event) => setPassword(event.target.value)}
                       />

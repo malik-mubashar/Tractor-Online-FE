@@ -692,3 +692,15 @@
 .required-field{
 	color:red;
 }
+
+	/* Chrome, Safari, Edge, Opera */
+.hideUpDownArrows::-webkit-outer-spin-button,
+.hideUpDownArrows::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Firefox */
+.hideUpDownArrows {
+  -moz-appearance: textfield;
+}
