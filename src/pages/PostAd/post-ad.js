@@ -310,7 +310,7 @@ const postad = () => {
       formData.append("phone_no", postAddState.phone_no);
       // formData.append("link", postAddState.link);
       formData.append("extra_fields", JSON.stringify(extraFieldsData));
-      formData.append("featured", false);
+      formData.append("featured", postAddState.featured !==undefined?postAddState.featured:false);
       formData.append("brand_id", postAddState.brand_id);
       formData.append("user_id", user.id);
       formData.append("city", postAddState.city);

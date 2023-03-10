@@ -175,10 +175,12 @@ const Login = () => {
                       <Icon.Twitter className="icon" />
                       Sign Up with Twitter
                     </Link>
-										<Icon.Mail className="icon"
-											// onClick={() =>}
-										/>
+										<Link to="/" className="ema">
+											<Icon.Mail className="icon"
+												// onClick={() =>}
+												/>
                       Sign Up with Google
+										</Link>
                     <Link to="/" className="linkd">
                       <Icon.Linkedin className="icon" />
                       Sign Up with Linkedin
