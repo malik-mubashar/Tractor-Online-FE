@@ -109,7 +109,6 @@ const postad = () => {
   };
 	useEffect(() => {
 		console.log(postAddState)
-		debugger;
     if (id) {
       setShowCategoryModel(false);
       getAdData();
@@ -298,7 +297,6 @@ const postad = () => {
       if (driverImgForApi !== null) {
         formData.append("driver_photo", driverImgForApi);
       }
-      debugger;
       formData.append("call_for_price", postAddState.call_for_price);
       formData.append("title", postAddState.title);
       formData.append("status", postAddState.status);
@@ -384,7 +382,6 @@ const postad = () => {
     );
   };
   function applyWaterMark(acceptedFiles) {
-    debugger;
     // Create an array to store the modified images
     const modifiedImages = [];
     const modifiedImagesFileList = [];
@@ -429,7 +426,6 @@ const postad = () => {
         // If all images have been modified, update the state
         if (modifiedImages.length === acceptedFiles.length) {
           // setImages(modifiedImages);
-          debugger;
           uploadFiles(
             {
               target: {
@@ -440,7 +436,6 @@ const postad = () => {
             null
           );
           // return modifiedImagesFileList;
-          debugger;
         }
       };
     }
@@ -720,21 +715,22 @@ const postad = () => {
                 }
                 // value={postAddState.product_type}
                 onChange={(e) => {
-                  setPostAddState({
-                    ...postAddState,
-                    call_for_price: e.currentTarget.checked,
-                  });
+                 
                   if (e.currentTarget.checked == true) {
                     setDisablePriceField(true);
                     setDisableCurrencyField(true);
                     setPostAddState({
                       ...postAddState,
                       price: 0,
-                      call_for_price: e.currentTarget.checked,
+                      call_for_price: true
                     });
                   } else {
                     setDisablePriceField(false);
                     setDisableCurrencyField(false);
+										setPostAddState({
+											...postAddState,
+											call_for_price: false,
+										});
                   }
                 }}
                 name="featured"
