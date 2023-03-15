@@ -13,6 +13,8 @@ import { RootContext } from "../../context/RootContext";
 import toast from "react-hot-toast";
 import { brandApis } from "../../API/BrandsApis";
 import { prodApi } from "../../API/ProdCategoriesApis";
+import'./usedtractor.scss'
+
 
 export default function UsedTractorSearch() {
   const history = useHistory();

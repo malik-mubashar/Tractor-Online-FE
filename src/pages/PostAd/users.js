@@ -4,6 +4,8 @@ import toast from "react-hot-toast";
 import { user } from "../../API/User/index";
 import { Link, NavLink } from "react-router-dom";
 import noProfilePicture from "../../assets/svg/no-profile-picture.svg";
+import { isMobile } from "react-device-detect";
+
 
 import { Check } from "react-feather";
 import { AlertTriangle } from "react-feather";
@@ -50,7 +52,7 @@ const users = (props) => {
   };
 
   return (
-    <div className="user container">
+    <div className={`container ${isMobile ? "mt-0" : "user"}`}>
       <div className="user-profile">
         <div className="user-ads mb-40">
           <div className="card my-4">
@@ -72,15 +74,20 @@ const users = (props) => {
                   ></img>
                 </>
               )}
-              <div className="d-flex" style={{textTransform: "capitalize"}}>
+              <div className={`${isMobile ? "" : "d-flex"}`} style={{textTransform: "capitalize"}}>
                 <h1>
                   {" "}
                   {profileInfo && profileInfo.name
                     ? profileInfo.name
                     : "user name"}
                 </h1>
-								{currentUser.varifiedUser === true  ? <Check className="verifiedIcon mt-3" />: <AlertTriangle style={{color:"red"}} className="mt-3" />}
-                {currentUser.varifiedUser === true ? (
+								{isMobile === false ? (
+                  currentUser.varifiedUser === true ? (
+                    <Check className="verifiedIcon mt-3" />
+                  ) : (
+                    <AlertTriangle style={{ color: "red" }} className="mt-3" />
+                  )
+                ) : null}                {currentUser.varifiedUser === true ? (
                   <div class="alert alert-success ml-auto" role="alert">
                     This Account is verified
                   </div>
