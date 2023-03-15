@@ -1,14 +1,16 @@
 // @import "~react-image-gallery/styles/scss/image-gallery.scss";
 .dashboard-carousel {
-	background: linear-gradient(111.4deg, rgb(2, 255, 4) 18.4%, rgb(0, 232, 237) 100.2%);
   height: auto;
-  padding: 20px 0px;
+  padding: 15px 5px;
+  width: 30%;
+  background-color: rgba(7, 2, 29, 0.7);
   .btn-info:hover {
-    background-color: white;
+    background-color: rgb(141, 138, 138);
     color: rgb(56, 79, 134);
-    border: none;
-    outline: none;
+    border: 1px solid gray;
+    
   }
+  border-radius: 5px;
 }
 .clickableSvg{
 	cursor: pointer;
@@ -76,7 +78,7 @@
   line-height: 22px;
   position: relative;
   z-index: 6;
-  padding-bottom: 30px;
+  padding-bottom: 10px;
 
   h1 {
     font-size: 38px;
@@ -92,8 +94,6 @@
   }
 }
 .home-widgets {
-  border: 1px solid #e6e6e6;
-  padding: 30px 20px;
   margin-top: 20px;
 }
 
@@ -277,7 +277,8 @@
   .drop-down-items {
     display: flex;
   }
-  background-color: white;
+  background-color: #41a746;
+  color: black;
   box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
 }
 
@@ -385,7 +386,7 @@
     display: none;
   }
   .category-section-slider {
-    margin-top: 40px;
+    margin-top: 30px;
   }
   .category-section-slider img {
     height: 300px;

@@ -5,6 +5,7 @@ import { Form, Button, Image } from "react-bootstrap";
 import * as Icon from "react-feather";
 import { RootContext } from "../../context/RootContext";
 import { prodApi } from "../../API/ProdCategoriesApis";
+import { isMobile } from "react-device-detect";
 
 const MobileTopbar = () => {
 
@@ -15,7 +16,7 @@ const MobileTopbar = () => {
 
   return (
     <>
-			<div style={{background:"none"}} className={`dashboard-carousel p-3 `}>
+			<div style={{background:"none"}} className={`dashboard-carousel p-3 ${isMobile?"w-100":""} `}>
         <Image
           onClick={() => history.push("/")}
           src={Logo1}

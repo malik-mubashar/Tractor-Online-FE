@@ -60,7 +60,7 @@ export default function Categories() {
       setCitiesForCarousel(tempArr);
   };
   return (
-    <div>
+    <div className="">
       {/* <h2 className="text-center">Examine Used Tractors</h2> */}
       {/* Tab Demo Three */}
       <Col lg={12} className='p-0'>
@@ -69,7 +69,7 @@ export default function Categories() {
             <div className="tabs-style-three">
 							<Tabs defaultActiveKey="Categories" id="uncontrolled-tab-example">
                 <Tab eventKey="Categories" title="Categories">
-									<Carousel 			showDots={false} variant={'dark'} slide={false}>
+									<Carousel showDots={false} variant={'dark'} slide={false}>
                     {prodCategoriesForCategories &&
                       prodCategoriesForCategories.map((item) => (
                         <Carousel.Item>

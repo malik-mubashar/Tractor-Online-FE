@@ -26,36 +26,24 @@ const CategoriesNavBar = () => {
 
   return (
     <>
-			<div className="row">
-				
-        <div className=" relative bg-white category-section border-radius p-0 col-lg-2">
-          <h3 className="category-title border-bottom p-2 m-1 ">
+{/* 				
+        <div className=" relative bg-white category-section p-0 col-lg-2">
+          <h5 className="category-title border-bottom p-2 m-1 ">
             <Icon.List className="icon" /> Categories
-          </h3>
+          </h5>
 
           <SideMenue />
-				</div>
-				
-				<div className="col-lg-10">
-					
-          <div className="col-12  mb-4 category-section-slider p-0 border-radius">
-					<DeskTopBanner />
-					</div>
-
+				</div> */}
 					{/* main carusole */}
-					<div className="col-12  mb-4 category-section-slider p-0 border-radius">
-            <MainBanners />
-					</div>
-
-        </div>
-			</div>
+					<MainBanners />
+					
 			
 			<div className="row">
-				<div className="col-12 category-hot-product border-radius">
+				<div className="col-12 category-hot-product">
 					<div className="col-lg-2 text-center align-middle">
 						<div style={{paddingTop: "50px"}}>
-							<h4 className="mt-5 text-white">More Exclusive Deals</h4>
-							<span className="text-white mb-2">
+							<h4 className="mt-5 text-dark">More Exclusive Deals</h4>
+							<span className="text-dark mb-2">
 								Combine with your coupon to save even more!
 							</span>
 						</div>

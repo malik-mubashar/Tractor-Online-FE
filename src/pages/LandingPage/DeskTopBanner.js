@@ -7,11 +7,11 @@ const DeskTopBanner = ({ cities }) => {
 
   return (
     <>
-      <div className="dashboard-carousel border-radius">
-        <div className="search-classified-text text-center generic-white">
-          <h3 className="text-white">Tractors for Sale in Pakistan</h3>
-          <p className="text-white">
-            With thousands of tractors to choose from, we're sure to have the
+      <div className="dashboard-carousel ml-auto m-5 card shadow">
+        <div className="search-classified-text text-center">
+          <h4 className="text-white mb-2">Tractors for Sale in Pakistan</h4>
+          <p className="text-light" style={{fontSize:"1.1em"}}>
+            With thousands of tractors to choose from, <br/>We're sure to have the
             correct one for you.
           </p>
         </div>

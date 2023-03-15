@@ -1,0 +1,24 @@
+.searchbox-animation {
+  opacity: 0;
+  /* set initial opacity to 0 */
+  animation-name: fadeInRight;
+  /* set the animation name */
+  animation-duration: 1s;
+  /* set the animation duration */
+  animation-fill-mode: forwards;
+  /* make sure the element stays visible at the end of the animation */
+}
+
+@keyframes fadeInRight {
+  from {
+    opacity: 0;
+    transform: translateX(100%);
+    /* move the element from right to left */
+  }
+
+  to {
+    opacity: 1;
+    transform: translateX(0);
+    /* move the element to its original position */
+  }
+}

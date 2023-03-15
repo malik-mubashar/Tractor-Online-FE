@@ -66,25 +66,26 @@ export default function FeaturedProducts({ title, link, prodCategoryId, products
           products.map((item, i) => {
             return (
               <div
-                className="featured-card bg-white border-radius cursor-pointer h-100 relative"
+                className="featured-card bg-white  cursor-pointer h-100 relative"
                 key={i}
+                style={{borderRadius:"8px"}}
               >
                 <Link to={`/ad-details/${item.id}`}>
                   <img
-                    className="card-img border-radius"
+                    className="card-img "
                     src={item.cover_photo_thumbnail}
                     alt=""
 									/>
-                  <h4
-                    className="mb-0 pl-2 border-radius productTitleTruncate"
+                  <h6
+                    className="mb-0 pl-2 mt-3 productTitleTruncate"
                     title={item.title}
                   >
                     {item.title}
-                  </h4>
-                  <p className="mb-0 pl-2 text-success border-radius">
+                  </h6>
+                  <p className="mb-0 pl-2 text-success ">
 										{item.call_for_price ? 'call for price' : item.price_currency + ' ' + item.price}
 									</p>
-                  <p className="pl-2 border-radius">{item.city}</p>
+                  <p className="pl-2 ">{item.city}</p>
                   {item.featured ? (
                     <span className="featuredBand">Featured</span>
                   ) : null}

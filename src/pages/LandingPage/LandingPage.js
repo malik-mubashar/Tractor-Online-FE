@@ -26,11 +26,8 @@ const LandingPage = () => {
       {!isMobile && (
         <>
 					{" "}
-          <div className="d-flex p-2 mt-2">
-            <div className="col-12 ">
-							<Section1 productCategories={ prodCategories} />
-            </div>
-          </div>
+					<Section1 productCategories={ prodCategories} />
+            
         </>
 			)}
 			{/* <UploadImages/> */}
@@ -38,10 +35,10 @@ const LandingPage = () => {
 			{!isMobile && <TractorSaleAd />}
 			
 			{/* 5th section brands and city examine used tractor wala*/}
+      <div className={` ${isMobile ? "" : "card shadow-lg ml-4 mr-1 p-5 py-4"}`} style={{borderRadius:'8px'}}>
+        <Categories/>
+      </div>
       <div className="overflow-x-hidden">
-        <div className={`container-lg py-4 mt-2 ${isMobile ? "" : ""}`}>
-          <Categories/>
-        </div>
         {/* <div className="bg-white">
           <div className="container-lg py-4">
             <ExploreProducts />
@@ -52,8 +49,8 @@ const LandingPage = () => {
           prodCategories.map((cate, i) => {
             return (
               <>
-                <div className={`${i % 2 === 0 ? "bg-white" : ""}`}>
-                  <div className="container-lg py-4 ">
+                <div>
+                  <div className="card shadow-lg ml-2 mr-1 mt-3 px-3 py-4 " style={{borderRadius:'8px'}}>
 										{isMobile ?
 											<FeaturedProductsMobile
 											title={`${cate.title}`}
