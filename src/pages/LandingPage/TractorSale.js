@@ -10,17 +10,17 @@ const TractorSaleAd = () => {
 
   return (
     <>
-      <div className="bg-white">
-        <div className="container-lg py-3">
-          <div className="home-widgets row">
-            <div className="home-widgets-title w-full-lg">
-              <h3>
+      <div className="card shadow bg-white py-4 ml-4 mr-1 mt-4 mb-4" style={{borderRadius:'8px'}}>
+        <div className="home-widgets row mb-4">
+          <div className="mt-3 w-full-lg">
+              <h4 class="text-center mb-2">
                 {websiteName} is the best place to sell your tractor for the
                 best price.
-              </h3>
+              </h4>
             </div>
-            <div className="col-lg-6 col-12 mt-4 line or">
-              <h2>Place an ad on {websiteName}</h2>
+          <div className="col-lg-6 col-12 mt-2 px-5">
+            <div className="card px-3 py-4" style={{border:'0.5px solid lightgray', borderRadius:'6px'}}>
+              <h5>Place an ad on {websiteName}</h5>
               <ul>
                 <li>
                   <i className="fa fa-tick"></i>In three simple steps, you can
@@ -31,7 +31,7 @@ const TractorSaleAd = () => {
                   Vendors
                 </li>
                 <li>
-                  <i className="fa fa-tick"></i>Sell your car as soon as
+                  <i className="fa fa-tick"></i>Sell your tractor as soon as
                   possible for the best price
                 </li>
               </ul>
@@ -45,7 +45,7 @@ const TractorSaleAd = () => {
                   />
                   <button
                     onClick={() => setModalShow(true)}
-                    className="btn btn-danger btn-lg text-white"
+                    className="btn btn-danger btn text-white"
                   >
                     Place Your Ad Here
                   </button>
@@ -54,15 +54,17 @@ const TractorSaleAd = () => {
                 <>
                   <NavLink
                     to="/product/sell"
-                    className="btn btn-danger btn-lg text-white"
+                    className="btn btn-danger btn text-white"
                   >
                     Place Your Ad Here
                   </NavLink>
                 </>
               )}
             </div>
-            <div className="col-lg-6 col-12 mt-4">
-              <h2>Sell It For Me on {websiteName}</h2>
+          </div>
+          <div className="col-lg-6 col-12 mt-2 px-5">
+            <div className="card px-3 py-4" style={{border:'0.5px solid lightgray', borderRadius:'6px'}}>
+              <h5>Sell It For Me on {websiteName}</h5>
               <ul>
                 <li>
                   <i className="fa fa-tick"></i>Your Tractor Will Be Sold by a
@@ -77,7 +79,7 @@ const TractorSaleAd = () => {
                   transaction.
                 </li>
               </ul>
-              <span className="btn btn-info btn-lg text-white">
+              <span className="btn btn-info btn text-white">
                 Coming Soon....
               </span>
             </div>

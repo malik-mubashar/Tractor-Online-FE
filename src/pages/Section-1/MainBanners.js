@@ -8,6 +8,7 @@ import T3 from "../../assets/img/t3.jpg";
 import T4 from "../../assets/img/banner1.jpg";
 import T5 from "../../assets/img/banner2.jpg";
 import T6 from "../../assets/img/banner3.jpg";
+import DeskTopBanner from "../LandingPage/DeskTopBanner";
 import "./mainBanners.scss";
 
 const MainBanners = () => {
@@ -16,7 +17,7 @@ const MainBanners = () => {
   const handleSelect = (selectedIndex, e) => {
     setIndex(selectedIndex);
   };
-	const imgUrls = [T6, T5, T4, T2, T1, T3, TractorCover2, TractorCover3];
+	const imgUrls = [T2, T5, T4, T3, T1, TractorCover3];
 	// useEffect(() => {
 	// 	showSlides(slideIndex);
 
@@ -45,39 +46,47 @@ const MainBanners = () => {
 	}	
 	return (
 		<>
-		<Carousel
-			indicators={false}
-			swipeable={false}
-			draggable={false}
-			showDots={false}
-			// responsive={responsive}
-			ssr={true} // means to render carousel on server-side.
-			// infinite={true}
-			autoPlay={true}
-			autoPlaySpeed={3000}
-			keyBoardControl={true}
-			customTransition="all .5"
-			transitionDuration={500}
-			containerClass="carousel-container"
-			// removeArrowOnDeviceType={["tablet", "mobile"]}
-			// deviceType={this.props.deviceType}
-			dotListClass="custom-dot-list-style"
-			itemClass="carousel-item-padding-40-px"
-			>
-				{imgUrls.map( (item, i) =>  {
-					return (
-						<Carousel.Item>
-							<img
-								className="d-block w-100 m-auto justify-content-center border-radius "
-								src={item}
-								alt="First slide"
-								height={"340px"}
-							/>
-						</Carousel.Item>
-					)
-				})}
-    </Carousel>
-			
+			<Carousel
+				indicators={true}
+				swipeable={false}
+				draggable={false}
+				showDots={false}
+				// responsive={responsive}
+				ssr={true} // means to render carousel on server-side.
+				infinite={true}
+				autoPlay={true}
+				autoPlaySpeed={1000}
+				keyBoardControl={true}
+				customTransition="fade"
+				transitionDuration={500}
+				containerClass="carousel-container"
+				// removeArrowOnDeviceType={["tablet", "mobile"]}
+				// deviceType={this.props.deviceType}
+				dotListClass="custom-dot-list-style"
+				itemClass="carousel-item-padding-40-px"
+				style={{marginLeft:'-15px',marginRight:'-15px'}}
+				>
+					{imgUrls.map( (item, i) =>  {
+						return (
+							<Carousel.Item>
+								<img
+									className="d-block w-100 justify-content-center"
+									src={item}
+									alt="First slide"
+									height={"600px"}
+								/>
+							</Carousel.Item>
+
+						)
+					})}
+					<div>
+						<div className="mr-3 searchbox-animation" style={{
+							marginTop:'80px'
+						}}>
+							<DeskTopBanner />
+						</div>
+					</div>
+			</Carousel>
 		{/* <img
 			className="d-block w-100 m-auto justify-content-center border-radius "
 				src={T1}

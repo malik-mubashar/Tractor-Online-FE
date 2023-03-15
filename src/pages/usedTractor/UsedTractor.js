@@ -155,7 +155,7 @@ export default function UsedTractor() {
 
 
   return (
-    <div className="usedTractorMain pt-3">
+    <div className="usedTractorMain">
       <div className="usedTractorsContainer">
         <div className="container">
           <h1>

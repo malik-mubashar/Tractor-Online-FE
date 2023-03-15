@@ -104,8 +104,8 @@ const searchAble = () => {
 						goToSearchDetailPage()
 					}
 			 }} 
-			 className="list-unstyled search-front clearfix d-flex justify-content-center d-flex mainSearch mainSearchBorderSet ">
-        <li className="home-autocomplete-field position-relative">
+			 className="list-unstyled search-front clearfix mainSearch mainSearchBorderSet m-2">
+        <li className="home-autocomplete-field position-relative mb-2">
           <input
             data-autocomplete-class="home-autocomplete"
             data-pw-source="car"
@@ -146,7 +146,7 @@ const searchAble = () => {
                   ""
                 )}
         </li>
-        <li className="col-2 px-0">
+        <li className="mb-2 px-0">
           <Select
             // className="ui-autocomplete-input form-control searchAble border-right "
             options={citiesForSelect}
@@ -161,7 +161,7 @@ const searchAble = () => {
             clearable={false}
           />
         </li>
-        <li className="col-1 px-0">
+        <li className="mb-2 px-0">
           {/* <Select
             // className="ui-autocomplete-input form-control searchAble border-right"
             options={minPriceOptions}
@@ -186,7 +186,7 @@ const searchAble = () => {
             options={minPriceOptions}
           />
         </li>
-        <li className="col-1 px-0">
+        <li className="mb-2 px-0">
           <CreatableSelect
             isClearable
             onChange={(e) => {
@@ -210,7 +210,7 @@ const searchAble = () => {
         </li>
         <li>
           <button
-            className="btn-success p-1  searchAble border-right-radius"
+            className="btn-success col-12 searchAble"
             type="submit"
             onClick={() => {
              goToSearchDetailPage()
