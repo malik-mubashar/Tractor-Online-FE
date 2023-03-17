@@ -529,12 +529,12 @@
   border-radius: inherit;
 }
 
-.bottom-nav-sell-blue {
+.bottom-nav-sell-green {
   width: 54px !important;
   height: 54px !important;
   margin: -19px 0 10px !important;
   border-radius: 50%;
-  background-color: #1877f2;
+  background-color: rgb(65, 167, 70);
   border: none;
 }
 .search-success {
@@ -544,7 +544,7 @@
   background: transparent;
   border-color: transparent;
   border-radius: 0px 30px 30px 2px;
-  height: 36px;
+  height: 34px;
   color: #717171;
   font-size: 20px;
   line-height: 20px;
@@ -561,7 +561,7 @@
 }
 .footer-bottom {
   color: #fff;
-  background-color: #233d7a;
+  background-color: rgb(255, 191, 0);
   padding: 15px 0;
   font-size: 14px;
 }

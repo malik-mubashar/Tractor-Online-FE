@@ -41,7 +41,7 @@ const MobileFooter = () => {
 
         <div>
           <button
-            className="bottom-nav-sell-blue"
+            className="bottom-nav-sell-green"
             onClick={() => redirectHandle("/product/sell")}
           >
             <Image src={AddSell} alt="" width="100%" height="18px" />
