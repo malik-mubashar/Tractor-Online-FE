@@ -49,7 +49,7 @@ export default function Footer() {
     setBrandsForCategories(result.data && result.data.data);
   };
   return (
-    <div className="footer" style={{background: "rgba(7, 2, 29, 0.9)"}}>
+    <div className="footer" style={{background: "#41A746"}}>
       <div className="container">
         <div className="row justify-content-between">
           <div className="col-3">

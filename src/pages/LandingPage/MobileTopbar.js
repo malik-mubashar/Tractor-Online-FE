@@ -16,7 +16,7 @@ const MobileTopbar = () => {
 
   return (
     <>
-			<div style={{background:"none"}} className={`dashboard-carousel p-3 ${isMobile?"w-100":""} `}>
+			<div style={{background:"rgba(255, 191, 0)"}} className={`dashboard-carousel p-3 ${isMobile?"w-100":""} `}>
         <Image
           onClick={() => history.push("/")}
           src={Logo1}
@@ -30,9 +30,9 @@ const MobileTopbar = () => {
 							return (
 												<div className="p-0 mobile-tabs">
 													<Link
-														style={{fontWeight:"700"}}
+														style={{fontWeight:"700",backgroundColor:'#41a746',color:'white'}}
 														to={item.link}
-														className="btn btn-info rounded p-2 w-100 "
+														className="btn rounded p-2 w-100 "
 													>
 														{item.title}
 													</Link>

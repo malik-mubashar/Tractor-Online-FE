@@ -15,7 +15,6 @@ import { brandApis } from "../../API/BrandsApis";
 import { prodApi } from "../../API/ProdCategoriesApis";
 import'./usedtractor.scss'
 
-
 export default function UsedTractorSearch() {
   const history = useHistory();
 	const [showFilterModel, setShowFilterModel] = useState(false);

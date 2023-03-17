@@ -47,7 +47,7 @@ const MainBanners = () => {
 	return (
 		<>
 			<Carousel
-				indicators={true}
+				indicators={false}
 				swipeable={false}
 				draggable={false}
 				showDots={false}

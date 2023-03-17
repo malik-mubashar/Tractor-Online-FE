@@ -204,7 +204,7 @@ const Topbar = () => {
                   );
                 })}
 
-              <div className="dropdown-button-more mt-2 mb-2">
+              <div className="dropdown-button-more mt-2 mb-2 text-black">
                 <span className="">More</span>
                 <Icofont
                   icon="caret-down"
