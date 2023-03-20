@@ -298,6 +298,7 @@ const postad = () => {
         formData.append("driver_photo", driverImgForApi);
       }
       formData.append("call_for_price", postAddState.call_for_price);
+      console.log("debug..call_for_price..", postAddState.call_for_price);
       formData.append("title", postAddState.title);
       formData.append("status", postAddState.status);
       formData.append("description", postAddState.description);
