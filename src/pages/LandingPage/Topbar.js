@@ -73,9 +73,9 @@ const Topbar = () => {
                             <span className="menu-profile text-white mr-5" style={{marginRight:'12px'}}>
                               {userProfilePicture && userProfilePicture !== null ? (
                                 <span>
-                                  <span style={{width: '30px', height:'42px'}}>
+                                  <span style={{width: '40px', height:'42px'}}>
                                     <img 
-                                      style={{marginTop:'5px', borderRadius:'100%', height:'33px'}}
+                                      style={{marginTop:'5px', borderRadius:'100%', height:'42px'}}
                                       src={userProfilePicture && userProfilePicture}
                                       alt="Profile"
                                       roundedCircle

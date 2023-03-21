@@ -151,7 +151,8 @@ const searchAble = () => {
             // className="ui-autocomplete-input form-control searchAble border-right "
             options={citiesForSelect}
             // setValue={setCity}
-            label="Select City"
+						label="Select City"
+						placeholder="Select City"
             // value={city}
             onChange={(e) => {
               if (e) {
@@ -176,6 +177,8 @@ const searchAble = () => {
 					<CreatableSelect
 						isClearable
 						label="Select Min Price "
+						placeholder="Select Min Price"
+
             onChange={(e) => {
 							if ((e == null)) {
 								setMinPrice('nil')
@@ -188,7 +191,8 @@ const searchAble = () => {
         </li>
         <li className="mb-2 px-0">
           <CreatableSelect
-            isClearable
+						isClearable
+						placeholder="Select Max Price"
             onChange={(e) => {
 							if ((e == null)) {
 								setMaxPrice('nil')
