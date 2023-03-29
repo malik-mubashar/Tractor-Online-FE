@@ -40,6 +40,7 @@ const postad = () => {
   const [productMappings, setProductMappings] = useState([]);
   // const [prodCategories, setProdCategories] = useState([]);
   const [file, setFile] = useState([]);
+  const [picturesLoaded, setPicturesLoaded] = useState(false);
   const [showModelError, setShowModelError] = useState(false);
   const [isImgSelected, setIsImgSelected] = useState(false);
   const [driverImg, setDriverImg] = useState(null);
@@ -466,7 +467,8 @@ const postad = () => {
     let ImagesArray = Object.entries(e.target.files).map((e) =>
       URL.createObjectURL(e[1])
     );
-    setFile([...file, ...ImagesArray]);
+		setFile([...file, ...ImagesArray]);
+		setPicturesLoaded(true)
     let temp = [...postAddState.images, ...e.target.files];
     if (callFromFunction) {
       setPostAddState({
@@ -502,7 +504,8 @@ const postad = () => {
       ...postAddState,
       cover_photo: fileListArr[index],
     });
-  }
+	}
+	console.log("prod",prodCategories)
   function deleteFile(e) {
     const s = file.filter((item, index) => index !== e);
     setFile(s);
@@ -1060,7 +1063,8 @@ const postad = () => {
             </div>
           </div>
         </div>
-      </div>
+				</div>
+				
       <div className="container text-lg-right pr-0 mb-3">
         <Button
           onClick={() => {
@@ -1068,9 +1072,10 @@ const postad = () => {
           }}
           j
           size="lg"
-          variant="success"
+						variant="success"
+						disabled={!picturesLoaded}
         >
-          Post Add
+						{postAddState.isEditAd?"Update Ad": "Post Ad"}
         </Button>
       </div>
 
@@ -1096,7 +1101,7 @@ const postad = () => {
           ) : null}
           <div className="row">
             {prodCategories &&
-              prodCategories.map((item, idx) => (
+              prodCategories.filter((item)=>item.title !== 'Tractor Parts').map((item, idx) => (
                 <div key={idx} className={`col-lg-6 col-12`}>
                   <div
                     id={item.id}

@@ -85,17 +85,14 @@ const searchAble = () => {
 	}
 
 	const searchProductsByTitle = async (searchValue) => {
-    // setShowLoader(true);
     const result = await productApis.searchProductsByTitle(searchValue);
-    if (result.error === false) {
-      setSearchSuggestions(result.data && result.data.data);
-      // setShowLoader(false);
+		if (result.error === false) {
+      setSearchSuggestions(result.data && result.data.data.map((item)=>`${item.brand.title} ${item.title}`));
     }
-    if (result.error === true) {
-      // setShowLoader(false);
+		if (result.error === true) {
+			console.error('error getting search suggesstions')
     }
 	};
-	
   return (
     <>
 			<ul

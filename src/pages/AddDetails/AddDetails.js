@@ -23,6 +23,8 @@ import RightArrow from '../../assets/img/right-arrow.png';
 import LeftArrow from '../../assets/img/left-arrow.png';
 import { Check } from "react-feather";
 import "../AddDetails/addDetails.scss"
+import { isMobile } from "react-device-detect";
+import FeaturedProductsMobile from "../LandingPage/FeaturedProductsMobile";
 
 
 export default function AddDetails() {
@@ -615,14 +617,23 @@ export default function AddDetails() {
           </Modal>
         </div>
         <div className="bg-white my-4">
-          <div className="container-lg py-4 ad-details-featured-products">
-            <FeaturedProducts
-              title={`SIMILAR ADS`}
-              link={``}
-							prodCategoryId={product.product_category_id}
-							products={similarProducts}
-							fromAdDetails={true}
-            />
+					<div className="container-lg py-4 ad-details-featured-products">
+						{isMobile ?
+							<FeaturedProductsMobile
+								title={`SIMILAR ADS`}
+								link={``}
+								prodCategoryId={product.product_category_id}
+								products={similarProducts}
+							/>
+							:
+							<FeaturedProducts
+								title={`SIMILAR ADS`}
+								link={``}
+								prodCategoryId={product.product_category_id}
+								products={similarProducts}
+								fromAdDetails={true}
+							/>
+						}
           </div>
         </div>
       </div>
