@@ -149,7 +149,7 @@ export default function SearchListing({
                         // className={gridOrList==='list'?'list':'grid'}
                         src={item.cover_photo_path}
                         alt="Card"
-                        style={{ width: `${isMobile?'100%':'200px'}`, height: `${isMobile?'150px':'140px'}` }}
+                        style={{ width: `${isMobile?'100%':'200px'}`, height: `${isMobile?'300px':'140px'}` }}
                         onClick={() => {
                           history.push(`/ad-details/${item.id}`);
                         }}
@@ -381,7 +381,7 @@ export default function SearchListing({
                   searchFilters.featured,
                   searchFilters.title,
                   searchFilters.brand,
-									searchFilters.categoryId,
+									searchFilters.category,
 									'active',
 									searchFilters.userId
                 );
@@ -413,7 +413,7 @@ export default function SearchListing({
                   searchFilters.featured,
                   searchFilters.title,
                   searchFilters.brand,
-									searchFilters.categoryId,
+									searchFilters.category,
 									'active',
 									searchFilters.userId
                 );
@@ -447,7 +447,7 @@ export default function SearchListing({
                   searchFilters.featured,
                   searchFilters.title,
                   searchFilters.brand,
-									searchFilters.categoryId,
+									searchFilters.category,
 									'active',
 									searchFilters.userId
                 );
@@ -482,7 +482,7 @@ export default function SearchListing({
                   searchFilters.featured,
                   searchFilters.title,
                   searchFilters.brand,
-									searchFilters.categoryId,
+									searchFilters.category,
 									'active',
 									searchFilters.userId
                 );

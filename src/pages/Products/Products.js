@@ -270,7 +270,8 @@ export default function Products() {
 											brandId: null,
 											imagesPathThumbnail: [],
 											cover_photo: null,
-											requestedProds:false
+											requestedProds: false,
+											call_for_price:false
                     });
                   }}
                 >
