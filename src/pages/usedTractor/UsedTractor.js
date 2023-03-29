@@ -142,14 +142,13 @@ export default function UsedTractor() {
     }
   };
   const searchProductsByTitle = async (searchValue) => {
-    // setShowLoader(true);
     const result = await productApis.searchProductsByTitle(searchValue);
     if (result.error === false) {
-      setSearchSuggestions(result.data && result.data.data);
-      // setShowLoader(false);
+			console.log('--suggesstion--',result.data.data)
+      setSearchSuggestions(result.data && result.data.data.map((item)=>`${item.brand.title} ${item.title}`));
     }
     if (result.error === true) {
-      // setShowLoader(false);
+			console.error('error getting search suggesstions')
     }
   };
 

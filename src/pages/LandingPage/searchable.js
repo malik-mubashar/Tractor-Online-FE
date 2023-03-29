@@ -87,6 +87,7 @@ const searchAble = () => {
 	const searchProductsByTitle = async (searchValue) => {
     const result = await productApis.searchProductsByTitle(searchValue);
 		if (result.error === false) {
+			console.log('--suggesstion--',result.data.data)
       setSearchSuggestions(result.data && result.data.data.map((item)=>`${item.brand.title} ${item.title}`));
     }
 		if (result.error === true) {
