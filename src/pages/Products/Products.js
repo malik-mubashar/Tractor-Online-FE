@@ -271,7 +271,8 @@ export default function Products() {
 											imagesPathThumbnail: [],
 											cover_photo: null,
 											requestedProds: false,
-											call_for_price:false
+											call_for_price: false,
+											featured:false
                     });
                   }}
                 >
