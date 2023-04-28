@@ -254,11 +254,21 @@ const Navigation = ({onClick }) => {
                   Profile
                 </NavLink>
                 <NavLink to="/profile-settings/" className="dropdown-item">
-                  <Icon.Settings className="icon" />
+                  <Icon.Edit className="icon" />
                   Edit Profile
                 </NavLink>
 
-                <button
+								<button
+                  // to="/"
+                  className="dropdown-item"
+									onClick={()=>{history.push('/')}}
+									
+                >
+                  <Icon.Shuffle className="icon" />
+                  Landing Page
+								</button>
+
+								<button
                   // to="/"
                   className="dropdown-item"
 									onClick={() => {
@@ -275,15 +285,6 @@ const Navigation = ({onClick }) => {
                   <Icon.LogOut className="icon" />
                   Logout
 								</button>
-								<button
-                  // to="/"
-                  className="dropdown-item"
-									onClick={()=>{history.push('/')}}
-									
-                >
-                  <Icon.LogOut className="icon" />
-                  Landing Page
-								</button>
               </NavDropdown>
             </Nav>
           </Navbar.Collapse>
@@ -294,12 +295,8 @@ const Navigation = ({onClick }) => {
           <SideMenuDark sideMenu={state.sideMenu} />
         ) : (
           <SideMenuLight sideMenu={state.sideMenu} />
-        )}
-
-        {/*  */}
-
-        {/* Side Menu File Path: src/components/Common/ColorSwitch.js */}
-        {/* <ColorSwitch onClick={this.onSideMenuHandler} /> */}
+				)}
+				
       </div>
     );
 

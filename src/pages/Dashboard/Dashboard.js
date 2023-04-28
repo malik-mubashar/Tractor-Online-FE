@@ -15,12 +15,10 @@ const Dashboard = () => {
 	const { currentUser,setShowLoader,setVerificationRequestedUsersCount } = useContext(RootContext);
 
 	useEffect(() => {
-		debugger
 		getAllUsers(1,'',10)
 	}, [])
 	const getAllUsers = async (page,mainS,no_of_record) => {
 		setShowLoader(true)
-		debugger;
 		const result = await user.getVerificationRequstedUsers(page,mainS,no_of_record);
 		if (result.error === false) {
 
