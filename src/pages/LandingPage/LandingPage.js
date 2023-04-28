@@ -13,65 +13,74 @@ import toast from "react-hot-toast";
 import { brandApis } from "../../API/BrandsApis";
 import { prodApi } from "../../API/ProdCategoriesApis";
 import { RootContext } from "../../context/RootContext";
-import "../LandingPage/landingPage.scss"
-// import UploadImages from "../UploadImages";
+import "../LandingPage/landingPage.scss";
 
-// import ExploreProducts from "./ExploreProducts";
 
 const LandingPage = () => {
-	const { prodCategories, products } = useContext(RootContext)
-  return (
-		<>
-			{/* 1st section top bar in layout */}
+  const { prodCategories, products,currentUser } = useContext(RootContext);
+  console.log('currentUser',currentUser)
+	return (
+    <>
+      {/* 1st section top bar in layout */}
       {!isMobile && (
         <>
-					{" "}
-					<Section1 productCategories={ prodCategories} />
-            
+          {" "}
+          <Section1 productCategories={prodCategories} />
         </>
-			)}
-			{/* <UploadImages/> */}
-			{/* add on desktop (4th section)*/}
-			{!isMobile && <TractorSaleAd />}
-			
-			{/* 5th section brands and city examine used tractor wala*/}
-      <div className={` ${isMobile ? "" : "card shadow-lg ml-4 mr-1 p-5 py-4"}`} style={{borderRadius:'8px'}}>
-        <Categories/>
+      )}
+      {/* add on desktop (4th section)*/}
+      {!isMobile && <TractorSaleAd />}
+
+      {/* 5th section brands and city examine used tractor wala*/}
+      <div
+        className={` ${isMobile ? "" : "card shadow-lg ml-4 mr-1 p-5 py-4"}`}
+        style={{ borderRadius: "8px" }}
+      >
+        <Categories />
       </div>
       <div className="overflow-x-hidden">
-        {/* <div className="bg-white">
-          <div className="container-lg py-4">
-            <ExploreProducts />
-          </div>
-        </div> */}
-				{/* 6th section */}
+        {/* 6th section */}
         {prodCategories &&
           prodCategories.map((cate, i) => {
             return (
               <>
                 <div>
-                  <div className="card shadow-lg ml-2 mr-1 mt-3 px-3 py-4 " style={{borderRadius:'8px'}}>
-										{isMobile ?
-											<FeaturedProductsMobile
-											title={`${cate.title}`}
-                      link={`View all`}
-											prodCategoryId={cate.id}
-											products={products && products.filter((prod)=>{return prod.product_category_id===cate.id})}
-											/>
-											:
-											<FeaturedProducts
-                      title={`${cate.title}`}
-                      link={`View all ${cate.title}.`}
-											prodCategoryId={cate.id}
-											products={products && products.filter((prod)=>{return prod.product_category_id===cate.id})}
-                    />}
+                  <div
+                    className="card shadow-lg ml-2 mr-1 mt-3 px-3 py-4 "
+                    style={{ borderRadius: "8px" }}
+                  >
+                    {isMobile ? (
+                      <FeaturedProductsMobile
+                        title={`${cate.title}`}
+                        link={`View all`}
+                        prodCategoryId={cate.id}
+                        products={
+                          products &&
+                          products.filter((prod) => {
+                            return prod.product_category_id === cate.id;
+                          })
+                        }
+                      />
+                    ) : (
+                      <FeaturedProducts
+                        title={`${cate.title}`}
+                        link={`View all ${cate.title}.`}
+                        prodCategoryId={cate.id}
+                        products={
+                          products &&
+                          products.filter((prod) => {
+                            return prod.product_category_id === cate.id;
+                          })
+                        }
+                      />
+                    )}
                   </div>
                 </div>
               </>
             );
           })}
-				<div>
-					{/* 7th section brand wala*/}
+        <div>
+          {/* 7th section brand wala*/}
           <NewTractor />
         </div>
       </div>

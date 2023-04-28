@@ -33,8 +33,6 @@ const Topbar = () => {
     currentUser,
 		setCurrentUser,
 		prodCategories,
-		setProdCategories,
-		cities,
 		popularCities
   } = useContext(RootContext);
 
@@ -97,17 +95,24 @@ const Topbar = () => {
                         className="profile-nav-item text-white"
                       >
                       
-                        <NavLink to="/profile/" className="dropdown-item">
-                          <Icon.User className="icon" />
+                        <NavLink to="/profile/" className="dropdown-item px-1">
+                          <Icon.User className="icon mr-1" />
                           Profile
                         </NavLink>
-                        <NavLink to="/profile-settings/" className="dropdown-item">
-                          <Icon.Settings className="icon" />
+                        <NavLink to="/profile-settings/" className="dropdown-item px-1">
+                          <Icon.Edit className="icon mr-1" />
                           Edit Profile
                         </NavLink>
-
+												{currentUser.roles.includes('admin') ?
+												  <NavLink to="/dashboard/" className="dropdown-item px-1">
+                          	<Icon.Settings className="icon mr-1" />
+                          	Dashboard
+                        	</NavLink>
+												:
+													<></>
+											}
                         <button
-                          className="dropdown-item"
+                          className="dropdown-item px-1"
                           onClick={() => {
                             localStorage.setItem("currentUser", null);
                             localStorage.setItem("user", null);
@@ -117,7 +122,7 @@ const Topbar = () => {
                             history.push("/");
                           }}
                         >
-                          <Icon.LogOut className="icon" />
+                          <Icon.LogOut className="icon mr-1" />
                           Logout
                         </button>
                       </NavDropdown>
