@@ -1,16 +1,16 @@
 import React from 'react';
 import * as Icon from 'react-feather';
 
-const CompletedOrders = () => {
+const CompletedOrders = ({systemData}) => {
     return (
         <div className="stats-card success-card mb-4">
             <h3>
-                1297
+                {systemData && systemData.featured_requested}
                 <Icon.ArrowUpCircle 
                     className="icon"
                 />
             </h3>
-            <p>Completed Orders</p>
+            <p>Ads Requested to be Featured</p>
             <i 
                 className="lni-check-mark-circle" 
             />
