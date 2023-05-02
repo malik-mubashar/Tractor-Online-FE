@@ -1,16 +1,16 @@
 import React from 'react';
 import * as Icon from 'react-feather';
 
-const MonthlySales = () => {
+const MonthlySales = ({systemData}) => {
     return (
         <div className="stats-card purple-card mb-4">
             <h3>
-                $7,590
+                {systemData && systemData.featured_ads}
                 <Icon.ArrowUpCircle 
                     className="icon"
                 />
             </h3>
-            <p>Last Month Sales</p>
+            <p>Featured ads</p>
             <i 
                 className="lni-cart-full" 
             />

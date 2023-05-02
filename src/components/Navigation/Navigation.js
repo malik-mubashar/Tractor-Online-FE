@@ -13,7 +13,7 @@ import {
   Image
 } from "react-bootstrap";
 
-import ColorSwitch from "../Common/ColorSwitch";
+// import ColorSwitch from "../Common/ColorSwitch";
 
 // Default dark side menu
 import SideMenuDark from "./SideMenu/SideMenuDark";
@@ -30,9 +30,7 @@ import { RootContext } from "../../context/RootContext";
 
 const Navigation = ({onClick }) => {
 	const {
-    currentUser,
     setCurrentUser,
-    signUpMessage,
 		setUserProfilePicture,
 		userProfilePicture
   } = useContext(RootContext);

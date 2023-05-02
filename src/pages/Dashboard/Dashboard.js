@@ -10,12 +10,18 @@ import Loader from "../../components/Common/Loader";
 import toast from "react-hot-toast";
 import { user } from "../../API/User";
 import { RootContext } from "../../context/RootContext";
+import { productApis } from "../../API/ProductApis";
+import { dashboardApis } from "../../API/DashboardApis";
 
 const Dashboard = () => {
-	const { currentUser,setShowLoader,setVerificationRequestedUsersCount } = useContext(RootContext);
-
+	const { setShowLoader,setVerificationRequestedUsersCount,setSystemData,systemData } = useContext(RootContext);
+	const [state,setState] =useState( {
+    sideMenu: true,
+    loading: true
+	});
 	useEffect(() => {
-		getAllUsers(1,'',10)
+		getAllUsers(1, '', 10000)
+		getSystemNotifications()
 	}, [])
 	const getAllUsers = async (page,mainS,no_of_record) => {
 		setShowLoader(true)
@@ -35,11 +41,22 @@ const Dashboard = () => {
 
 
 	}
+	
+	const getSystemNotifications = async() => {
+		try {
+			const result = await dashboardApis.getAllNotification()
+			if (result.error == false && result.data.status == "success") {
+				setSystemData(result.data.data)
+			} else {
+				console.error(result.data)
+			}
 
-  const [state,setState] =useState( {
-    sideMenu: true,
-    loading: true
-	});
+			} catch (error) {
+			console.error(error)
+		} 
+	}
+
+
   // Loading icon false after DOM loaded
   // componentDidMount() {
   //   this.myInterval = setInterval(() => {
@@ -60,8 +77,6 @@ const Dashboard = () => {
     // if (this.state.loading) {
     //   loader = <Loader message="Loading..." />;
     // }
-
-
     return (
       <div className="page-wrapper">
         {/* Navigation */}
@@ -90,22 +105,22 @@ const Dashboard = () => {
           <Row>
             <Col sm={6} lg={3}>
               {/* File path: src/components/Dashboard/Sales/MonthlySales.js */}
-              <MonthlySales />
+              <MonthlySales systemData={systemData} />
             </Col>
 
             <Col sm={6} lg={3}>
               {/* File path: src/components/Dashboard/Sales/TotalOrders.js */}
-              <TotalOrders />
+              <TotalOrders systemData={systemData}/>
             </Col>
 
             <Col sm={6} lg={3}>
               {/* File path: src/components/Dashboard/Sales/CompletedOrders.js */}
-              <CompletedOrders />
+              <CompletedOrders systemData={systemData}/>
             </Col>
 
             <Col sm={6} lg={3}>
               {/* File path: src/components/Dashboard/Sales/PendingOrders.js */}
-              <PendingOrders />
+              <PendingOrders systemData={systemData}/>
 						</Col>
           </Row>
 
