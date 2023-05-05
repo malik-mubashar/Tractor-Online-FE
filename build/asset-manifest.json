@@ -1,7 +1,7 @@
 {
-  "main.css": "/static/css/main.38a2615b.chunk.css",
-  "main.js": "/static/js/main.22f250fb.chunk.js",
-  "main.js.map": "/static/js/main.22f250fb.chunk.js.map",
+  "main.css": "/static/css/main.1ee871a3.chunk.css",
+  "main.js": "/static/js/main.db7aab2f.chunk.js",
+  "main.js.map": "/static/js/main.db7aab2f.chunk.js.map",
   "static/css/1.8e802f5a.chunk.css": "/static/css/1.8e802f5a.chunk.css",
   "static/js/1.954cc90a.chunk.js": "/static/js/1.954cc90a.chunk.js",
   "static/js/1.954cc90a.chunk.js.map": "/static/js/1.954cc90a.chunk.js.map",
@@ -39,12 +39,12 @@
   "static/media/banner3.jpg": "/static/media/banner3.b6fc8962.jpg",
   "static/media/tractor-1.svg": "/static/media/tractor-1.4c1fc34b.svg",
   "static/media/style.css": "/static/media/LineIcons.a0ed6adf.svg",
-  "static/media/lightgallery.css": "/static/media/lg.2ec2cb21.svg",
+  "static/media/lightgallery.css": "/static/media/lg.1fbfd4bc.woff",
   "static/media/price-logo.png": "/static/media/price-logo.0dcade10.png",
   "static/media/team.jpg": "/static/media/team.29a2723e.jpg",
-  "static/css/main.38a2615b.chunk.css.map": "/static/css/main.38a2615b.chunk.css.map",
   "static/css/1.8e802f5a.chunk.css.map": "/static/css/1.8e802f5a.chunk.css.map",
+  "static/css/main.1ee871a3.chunk.css.map": "/static/css/main.1ee871a3.chunk.css.map",
   "index.html": "/index.html",
-  "precache-manifest.461cb4147ae15ebfdf6a1ed91598798c.js": "/precache-manifest.461cb4147ae15ebfdf6a1ed91598798c.js",
+  "precache-manifest.818b39dbc468e9e33411086f8e79987d.js": "/precache-manifest.818b39dbc468e9e33411086f8e79987d.js",
   "service-worker.js": "/service-worker.js"
 }

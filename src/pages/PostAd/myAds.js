@@ -532,7 +532,7 @@ const myAds = () => {
     <div className="mb-4">
       <div className="">
 				<div className="tabs-style-three " >
-					<div className="d-flex mb-2">
+					<div className={`${isMobile?'':'d-flex'} mb-2`}>
 					<div className={`${isMobile ? "" : "d-flex mt-3"}`}>
                 <FormControl
                   type="text"

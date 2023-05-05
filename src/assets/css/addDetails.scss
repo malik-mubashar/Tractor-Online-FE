@@ -1,6 +1,11 @@
 //@import "~react-image-gallery/styles/scss/image-gallery.scss";
 
 .addDetails {
+	.go-back-icon{
+		position: absolute;
+		top: 0px;
+		left: 13px;
+	}
   .scroll-nav {
     position: absolute;
     z-index: 10;
@@ -15,7 +20,7 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
-    margin: 15px 0px 10px;
+    // margin: 15px 0px 10px;
   }
   .bread {
     background-color: transparent !important;

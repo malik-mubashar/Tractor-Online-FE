@@ -88,7 +88,7 @@ const users = (props) => {
                     <AlertTriangle style={{ color: "red" }} className="mt-3" />
                   )
                 ) : null}                {currentUser.varifiedUser === true ? (
-                  <div class="alert alert-success ml-auto" role="alert">
+									<div class={`alert alert-success ml-auto ${isMobile?"mt-5":""}`} role="alert">
                     This Account is verified
                   </div>
                 ) : currentUser.varifiedUser === null || reqSent ? (
