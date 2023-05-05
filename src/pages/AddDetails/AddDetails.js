@@ -4,8 +4,6 @@ import PT from "prop-types";
 import {
   LightgalleryProvider,
   LightgalleryItem,
-  withLightgallery,
-  useLightgallery,
 } from "react-lightgallery";
 import "lightgallery.js/dist/css/lightgallery.css";
 import mapsBlack from "../../assets/svg/maps-black.svg";
@@ -247,8 +245,11 @@ export default function AddDetails() {
             {/* left side */}
             <div className="col-lg-8 col-md-8">
               <div className="bg-white p-4">
-                <div className="">
+								<div className="">
+								<div className="d-flex">
+								<Icofont 	style={{cursor:"pointer"}} onClick={() => history.goBack()} icon="arrow-left" className="icofont-2x mt-1 go-back-icon" />
                   <h3>{product.title} </h3>
+								</div>
                   <p className="detail-sub-heading d-flex">
                     <div className="d-flex text-primary cursor-pointer">
                       <Image
@@ -401,7 +402,6 @@ export default function AddDetails() {
                                 isPhoneAgree ? "" : "phone_no_truncate"
                               }`}
                             >
-                              {product.phone_no}
                             </span>
 															<div>Show Phone Number</div>
                           </div>
