@@ -4,7 +4,7 @@
   "private": true,
   "homepage": "https://tractoronline.com.pk/",
   "engines": {
-    "node": "14.0.0"
+    "node": "14.21.3"
   },
   "dependencies": {
     "axios": "^0.27.2",
