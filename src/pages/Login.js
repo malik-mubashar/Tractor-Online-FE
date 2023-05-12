@@ -4,7 +4,6 @@ import { Row, Col, Form, Button, Image } from "react-bootstrap";
 import * as Icon from "react-feather";
 import { user } from "../API/User/index";
 // Logo image file path
-import Logo from "../assets/img/logo.png";
 import Logo21 from "../assets/img/tractoronline.png";
 import { RootContext } from "../context/RootContext";
 import toast from "react-hot-toast";
@@ -12,7 +11,6 @@ import Icofont from "react-icofont";
 import Cookies from "universal-cookie";
 import ToggleButton from "react-bootstrap/ToggleButton";
 import { useEffect } from "react";
-import axios from "axios";
 
 const Login = () => {
   const cookies = new Cookies();
@@ -88,7 +86,6 @@ const Login = () => {
           roles: userRoles,
           varifiedUser: result.varifiedUser,
         });
-        console.log("ad", result.varifiedUser);
 
         localStorage.setItem(
           "currentUser",

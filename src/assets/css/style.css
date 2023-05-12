@@ -2151,7 +2151,7 @@ textarea.form-control {
   padding: 30px;
   text-align: center;
   -webkit-box-shadow: 2px 3px 10px 0px rgba(119, 119, 119, 0.1);
-  box-shadow: 2px 3px 10px 0px rgba(119, 119, 119, 0.1);
+  box-shadow: 2px 3px 10px 0px rgba(119, 119, 119, 1.1);
   border-radius: 4px;
 }
 

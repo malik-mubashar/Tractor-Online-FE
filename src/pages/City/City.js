@@ -1,16 +1,11 @@
 import React, { useEffect, useState } from "react";
-import Navigation from "../../components/Navigation/Navigation";
 import * as Icon from "react-feather";
 import { Link } from "react-router-dom";
 import { isMobile } from "react-device-detect";
 import {
-  Dropdown,
   Table,
-  Badge,
-  Button,
   FormControl,
   Form,
-  Pagination,
   Image,
 } from "react-bootstrap";
 import ViewCity from "./ViewCity";
@@ -22,7 +17,6 @@ import pdfSvg from "../../assets/svg/pdf.png";
 import Icofont from "react-icofont";
 
 export default function City() {
-  const [paginationNumbers, setPaginationNumbers] = useState();
   const [noOfRec, setNoOfRec] = useState(10);
   const [mainSearchString, setMainSearchString] = useState("");
   useEffect(() => {
@@ -46,11 +40,6 @@ export default function City() {
           isAddCity: false,
           isEditCity: false,
         });
-        var temp = [];
-        for (var i = 1; i <= result.data.pagination.pages; i++) {
-          temp.push(i);
-        }
-        setPaginationNumbers(temp);
       } else {
         toast.dismiss(loadingToastId);
         console.error(result.data);
