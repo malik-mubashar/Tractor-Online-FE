@@ -77,6 +77,7 @@ const Dashboard = () => {
     // if (this.state.loading) {
     //   loader = <Loader message="Loading..." />;
     // }
+	console.log('checking')
     return (
       <div className="page-wrapper">
         {/* Navigation */}
