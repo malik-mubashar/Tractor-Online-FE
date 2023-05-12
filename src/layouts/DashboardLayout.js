@@ -7,7 +7,7 @@ export default function DashboardLayout(props) {
   function onSideMenu() {
     setSideMenu(!sideMenu);
 	}
-
+console.log('deployment check')
   return (
     <>
 			<Navigation onClick={() => onSideMenu()} />

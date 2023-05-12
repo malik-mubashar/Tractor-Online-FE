@@ -53,7 +53,7 @@ const MobileDropDown = ({ show, setShow, setModalShow }) => {
                     </div>)
                   :
                     (<div className="text-center mb-4">
-                      <h2 className="">Profile</h2>
+                      {/* <h2 className="">Profile</h2> */}
                       <div>
                         <img src={userProfilePicture} alt="profile" style={{borderRadius: '50%'}} height="150px" width="150px" />
                       </div>
@@ -79,7 +79,7 @@ const MobileDropDown = ({ show, setShow, setModalShow }) => {
                     </div>)
                 }
 
-                <h3>Categories</h3>
+                <h5>Categories</h5>
                 {productCategories &&
                   productCategories.map((item, i) => {
                     return (

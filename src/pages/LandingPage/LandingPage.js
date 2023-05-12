@@ -1,24 +1,18 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext } from "react";
 import "../../components/Navigation/Navigation.css";
 import Categories from "./Categories";
 import FeaturedProducts from "./FeaturedProducts";
 import FeaturedProductsMobile from "./FeaturedProductsMobile";
 import NewTractor from "./NewTractor";
 import { isMobile } from "react-device-detect";
-import DeskTopBanner from "./DeskTopBanner";
 import Section1 from "../Section-1/section-1";
 import TractorSaleAd from "./TractorSale";
-import { city } from "../../API/City/CityApis";
-import toast from "react-hot-toast";
-import { brandApis } from "../../API/BrandsApis";
-import { prodApi } from "../../API/ProdCategoriesApis";
 import { RootContext } from "../../context/RootContext";
 import "../LandingPage/landingPage.scss";
 
 
 const LandingPage = () => {
-  const { prodCategories, products,currentUser } = useContext(RootContext);
-  console.log('currentUser',currentUser)
+  const { prodCategories, products } = useContext(RootContext);
 	return (
     <>
       {/* 1st section top bar in layout */}
