@@ -96,7 +96,7 @@ const Dashboard = () => {
           {/* Breadcrumb */}
           <div className="main-content-header">
             <Breadcrumb>
-              <h1>Dashboard</h1>
+              <h1>DashboarD</h1>
               <Breadcrumb.Item to="/dashboard">Dashboard</Breadcrumb.Item>
               <Breadcrumb.Item active>Dashboard</Breadcrumb.Item>
             </Breadcrumb>
